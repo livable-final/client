@@ -19,19 +19,19 @@ function Button({ content, variant, isDisabled, onClick }: ButtonProps) {
 
 const buttonStyles = (variantData: ButtonColorProps) => css`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
   cursor: pointer;
   font-family: inherit;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   margin-top: 1rem;
-  min-width: 10rem;
-  border-radius: 1rem;
-  padding: 1rem 0;
-  height: 25px;
+  min-width: 100px;
+  border-radius: 16px;
+  padding: 16px 0;
+  font-size: 18px;
   background: ${variantData.background};
   color: ${variantData.color};
+  border: 1px solid ${variantData.color};
 
   &:disabled {
     pointer-events: none;
