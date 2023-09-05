@@ -1,8 +1,9 @@
 const theme = {
   palette: {
     title: '#111827',
+    primary: '#2563EB',
     white: '#FFFFFF',
-    blue: {
+    bluescale: {
       blue10: '#E7EEFF',
       blue20: '#CAD9FA',
       blue30: '#A6BEF4',
