@@ -1,4 +1,4 @@
-import COMMON_BUTTON_COLORS from '@/constants/common/constant';
+import { COMMON_BUTTON_COLORS } from '@/constants/common/constant';
 import { ButtonColorProps, ButtonProps } from '@/types/common/button';
 import { css } from '@emotion/react';
 
