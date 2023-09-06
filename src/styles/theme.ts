@@ -1,4 +1,5 @@
 const theme = {
+  // 색상 팔레트
   palette: {
     title: '#111827',
     primary: '#2563EB',
@@ -35,7 +36,33 @@ const theme = {
       default: '#4A5662',
       enabled: '#162637',
     },
-    // button: {},
+  },
+  // 폰트 스케일
+  font: {
+    title: {
+      title1: `600 normal 24px 'Pretendard'`,
+      title2_600: `600 normal 20px 'Pretendard'`,
+      title2_500: `500 normal 20px 'Pretendard'`,
+    },
+    subTitle: {
+      subTitle1_600: `600 normal 18px 'Pretendard'`,
+      subTitle1_500: `500 normal 18px 'Pretendard'`,
+      subTitle1_400: `400 normal 18px 'Pretendard'`,
+      subTitle2_600: `600 normal 17px 'Pretendard'`,
+      subTitle2_500: `500 normal 17px 'Pretendard'`,
+      subTitle2_400: `400 normal 17px 'Pretendard'`,
+    },
+    body: {
+      body1_600: `600 normal 16px 'Pretendard'`,
+      body1_500: `500 normal 16px 'Pretendard'`,
+      body1_400: `400 normal 16px 'Pretendard'`,
+      body2_600: `600 normal 15px 'Pretendard'`,
+      body2_500: `500 normal 15px 'Pretendard'`,
+      body2_400: `400 normal 15px 'Pretendard'`,
+      body3_500: `500 normal 14px 'Pretendard'`,
+      body3_400: `400 normal 14px 'Pretendard'`,
+      body4: `400 normal 12px 'Pretendard'`,
+    },
   },
 };
 
