@@ -1,5 +1,6 @@
 import Button from '@/components/common/Button';
 import Head from 'next/head';
+import Header from '@/components/common/Header';
 
 function Home() {
   return (
@@ -16,6 +17,8 @@ function Home() {
       <Button content="Button" variant="grey" isDisabled />
       <Button content="Button" variant="secondaryBlue" />
       <Button content="Button" variant="secondaryGrey" />
+
+      <Header title="title" type="close" />
     </>
   );
 }
