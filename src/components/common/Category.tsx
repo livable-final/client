@@ -8,7 +8,7 @@ function Category({ icon, title, variant }: CategoryProps) {
 
   return (
     <div css={CategoryContainer(variantData)}>
-      <div css={IconContainer(variantData)}>
+      <div css={IconContainer}>
         <Icons icon={icon} color={variantData.color} />
       </div>
       <div css={CategoryTitle(variantData)}>{title}</div>
@@ -29,7 +29,7 @@ const CategoryContainer = (variantData: CategoryColorProps) => css`
   background-color: ${variantData.backgroundColor};
 `;
 
-const IconContainer = (variantData: CategoryColorProps) => css`
+const IconContainer = css`
   display: flex;
   justify-content: center;
   align-items: center;
