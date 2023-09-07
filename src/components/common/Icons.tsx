@@ -7,6 +7,7 @@ import {
   Seminar,
   As,
   Etc,
+  Info,
 } from '@/assets/icons';
 
 function Icons({ icon, color }: IconsProps) {
@@ -25,6 +26,10 @@ function Icons({ icon, color }: IconsProps) {
       return <As color={color} />;
     case invitation.etc:
       return <Etc color={color} />;
+    case invitation.info:
+      return <Info color={color} />;
+    default:
+      break;
   }
 }
 
