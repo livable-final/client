@@ -38,6 +38,14 @@ export const COMMON_CATEGORY_COLORS: CategoryColorsProps = {
   },
 };
 
+// Header
+export const COMMON_HEADER = {
+  typeCase: {
+    close: 'close',
+    text: 'text',
+  },
+};
+
 // 아이콘 이름
 export const COMMON_ICON_NAMES = {
   invitation: {
