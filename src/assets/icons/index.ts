@@ -11,6 +11,7 @@ import Meeting from '@/assets/icons/meeting.svg';
 import Right from '@/assets/icons/Right.svg';
 import Seminar from '@/assets/icons/seminar.svg';
 import Up from '@/assets/icons/Up.svg';
+import Info from '@/assets/icons/Info.svg';
 
 export {
   As,
@@ -26,4 +27,5 @@ export {
   Right,
   Seminar,
   Up,
+  Info,
 };
