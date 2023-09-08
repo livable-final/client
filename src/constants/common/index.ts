@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 import { ButtonColorsProps } from '@/types/common/button';
 import { CategoryColorsProps } from '@/types/common/category';
 
-// 공통 버튼
+// 공통 버튼 색상
 export const COMMON_BUTTON_COLORS: ButtonColorsProps = {
   blue: {
     background: `${theme.palette.bluescale.blue60}`,
@@ -24,7 +24,7 @@ export const COMMON_BUTTON_COLORS: ButtonColorsProps = {
   },
 };
 
-// 공통 카테고리
+// 공통 카테고리 색상
 export const COMMON_CATEGORY_COLORS: CategoryColorsProps = {
   blue: {
     border: `2px solid ${theme.palette.primary}`,
@@ -38,7 +38,7 @@ export const COMMON_CATEGORY_COLORS: CategoryColorsProps = {
   },
 };
 
-// 아이콘
+// 아이콘 이름
 export const COMMON_ICON_NAMES = {
   invitation: {
     meeting: 'meeting',
@@ -47,8 +47,39 @@ export const COMMON_ICON_NAMES = {
     seminar: 'seminar',
     as: 'as',
     etc: 'etc',
+    info: 'info',
   },
   home: {
     // 추후 보강 예정
+  },
+};
+
+// 카테고리 이름
+export const COMMON_CATEGORIES = {
+  invitation: {
+    meeting: {
+      icon: 'meeting',
+      title: '회의',
+    },
+    interview: {
+      icon: 'interview',
+      title: '면접',
+    },
+    fixedTermWork: {
+      icon: 'fixedTermWork',
+      title: '기간 근무',
+    },
+    seminar: {
+      icon: 'seminar',
+      title: '세미나',
+    },
+    as: {
+      icon: 'as',
+      title: 'AS/점검',
+    },
+    etc: {
+      icon: 'etc',
+      title: '기타',
+    },
   },
 };
