@@ -1,9 +1,9 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { HeaderProps } from '@/types/common/header';
-import { COMMON_HEADER } from '@/constants/common/constant';
+import { COMMON_HEADER } from '@/constants/common';
 
-function Header({ title, type = '', text = '', onClickHandler }: HeaderProps) {
+function Header({ title, type = '', text = '', onClick }: HeaderProps) {
   const { typeCase } = COMMON_HEADER;
 
   let icon;
@@ -26,7 +26,7 @@ function Header({ title, type = '', text = '', onClickHandler }: HeaderProps) {
       <div css={titleStyles}>
         <h2>{title}</h2>
       </div>
-      <div onClick={onClickHandler} css={iconStyles(type)} aria-hidden="true">
+      <div onClick={onClick} css={iconStyles(type)} aria-hidden="true">
         {icon}
       </div>
     </header>
