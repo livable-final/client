@@ -1,40 +1,60 @@
+import theme from '@/styles/theme';
 import { css } from '@emotion/react';
-import HeaderProps from '@/types/common/header';
+import { HeaderProps } from '@/types/common/header';
+import { COMMON_HEADER } from '@/constants/common/constant';
 
-function Header({ title, type }: HeaderProps) {
-  // 아이콘 추가 예정
+function Header({ title, type = '', text = '', onClickHandler }: HeaderProps) {
+  const { typeCase } = COMMON_HEADER;
+
   let icon;
 
   switch (type) {
-    case 'close':
-      icon = <p>icon</p>;
+    case typeCase.close:
+      // 아이콘 추가 예정
+      icon = 'close icon';
       break;
-    case 'text':
-      icon = <p>icon</p>;
+    case typeCase.text:
+      icon = <span>{text}</span>;
       break;
     default:
       icon = null;
   }
 
   return (
-    <header css={HeaderContainer}>
+    <header css={headerStyles}>
       <div>고정</div>
-      <h2>{title}</h2>
-      <div>{icon}</div>
+      <div css={titleStyles}>
+        <h2>{title}</h2>
+      </div>
+      <div onClick={onClickHandler} css={iconStyles(type)} aria-hidden="true">
+        {icon}
+      </div>
     </header>
   );
 }
 
 export default Header;
 
-const HeaderContainer = css`
-  display: flex;
+const headerStyles = css`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   padding: 16px;
 
-  // 임시
+  // 테스트용 스타일 (추후 사용 시 삭제 요망)
   margin-top: 30px;
   border: 1px solid #191919;
+`;
+
+const titleStyles = css`
+  font: ${theme.font.subTitle.subTitle1_600};
+  justify-self: center;
+`;
+
+const iconStyles = (type: string) => css`
+  justify-self: end;
+  cursor: pointer;
+  color: ${type === 'text' && theme.palette.primary}}
+  font: ${type === 'text' && theme.font.body.body1_500}}
 `;
