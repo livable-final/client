@@ -46,11 +46,11 @@ function InvitationPurpose() {
   };
 
   return (
-    <div css={PurposeContainer}>
+    <div css={purposeContainer}>
       <div>방문자초대</div>
-      <div css={PurposeQuestion}>{purpose}</div>
-      <div css={CategoryContainer}>
-        <div css={CategoryWrapper}>
+      <div css={purposeQuestion}>{purpose}</div>
+      <div css={categoryContainer}>
+        <div css={categoryWrapper}>
           {categories.map((value) => (
             <div
               key={value.icon}
@@ -70,8 +70,8 @@ function InvitationPurpose() {
             </div>
           ))}
         </div>
-        <div css={DescriptionWrapper}>
-          <div css={IconWrapper}>
+        <div css={descriptionWrapper}>
+          <div css={iconWrapper}>
             <Icons icon="info" color="grey" />
           </div>
           {description[selectedCategory]}
@@ -89,14 +89,14 @@ function InvitationPurpose() {
           />
         )}
       </div>
-      <div css={ButtonWrapper(btnDisplay)}>
+      <div css={buttonWrapper(btnDisplay)}>
         <Button content={button.next} variant="blue" onClick={onClickHandler} />
       </div>
     </div>
   );
 }
 
-const PurposeContainer = css`
+const purposeContainer = css`
   display: flex;
   flex-direction: column;
   border: 1px solid black;
@@ -114,7 +114,7 @@ const PurposeContainer = css`
   }
 `;
 
-const PurposeQuestion = css`
+const purposeQuestion = css`
   min-width: 280px;
   max-width: 390px;
   height: 28px;
@@ -123,7 +123,7 @@ const PurposeQuestion = css`
   line-height: 28px;
 `;
 
-const CategoryContainer = css`
+const categoryContainer = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -131,7 +131,7 @@ const CategoryContainer = css`
   gap: 16px;
 `;
 
-const CategoryWrapper = css`
+const categoryWrapper = css`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -146,7 +146,7 @@ const CategoryWrapper = css`
   }
 `;
 
-const DescriptionWrapper = css`
+const descriptionWrapper = css`
   display: flex;
   gap: 4px;
   min-width: 280px;
@@ -158,11 +158,11 @@ const DescriptionWrapper = css`
   line-height: 22px;
 `;
 
-const IconWrapper = css`
+const iconWrapper = css`
   padding-top: 4px;
 `;
 
-const ButtonWrapper = (btnDisplay: string) => css`
+const buttonWrapper = (btnDisplay: string) => css`
   display: ${btnDisplay};
   position: fixed;
   bottom: 0;
