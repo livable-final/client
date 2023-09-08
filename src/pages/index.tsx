@@ -1,7 +1,12 @@
 import Button from '@/components/common/Button';
 import Head from 'next/head';
+import Header from '@/components/common/Header';
 
 function Home() {
+  const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    alert('onClick Test');
+  };
   return (
     <>
       <Head>
@@ -16,6 +21,13 @@ function Home() {
       <Button content="Button" variant="grey" isDisabled />
       <Button content="Button" variant="secondaryBlue" />
       <Button content="Button" variant="secondaryGrey" />
+
+      {/* 우측 text가  있는 경우 */}
+      <Header title="title" type="text" onClick={onClickHandler} />
+      {/* 우측 close 아이콘이 있는 경우 */}
+      <Header title="title" type="close" onClick={onClickHandler} />
+      {/* title만 있는 경우  */}
+      <Header title="title" onClick={onClickHandler} />
     </>
   );
 }
