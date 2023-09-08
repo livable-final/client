@@ -1,5 +1,5 @@
 import { IconsProps } from '@/types/common/icon';
-import { COMMON_ICON_NAMES } from '@/constants/common/constant';
+import { COMMON_ICON_NAMES } from '@/constants/common';
 import {
   Meeting,
   Interview,

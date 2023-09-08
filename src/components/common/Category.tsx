@@ -1,4 +1,4 @@
-import { COMMON_CATEGORY_COLORS } from '@/constants/common/constant';
+import { COMMON_CATEGORY_COLORS } from '@/constants/common';
 import { CategoryProps, CategoryColorProps } from '@/types/common/category';
 import { css } from '@emotion/react';
 import Icons from '@/components/common/Icons';
