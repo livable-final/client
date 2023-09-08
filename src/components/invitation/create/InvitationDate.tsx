@@ -28,7 +28,7 @@ function InvitationDate() {
     <div>
       <div>000초대</div>
       <div>
-        <div css={InvitationQuestion}>{invitation}</div>
+        <div css={invitationQuestion}>{invitation}</div>
         <div>
           <input
             type="text"
@@ -52,7 +52,7 @@ function InvitationDate() {
         </div>
       </div>
 
-      <div css={ButtonWrapper}>
+      <div css={buttonWrapper}>
         <Button
           content={isFocused ? button.done : button.next}
           variant="blue"
@@ -63,7 +63,7 @@ function InvitationDate() {
   );
 }
 
-const InvitationQuestion = css`
+const invitationQuestion = css`
   min-width: 280px;
   max-width: 390px;
   height: 28px;
@@ -72,7 +72,7 @@ const InvitationQuestion = css`
   line-height: 28px;
 `;
 
-const ButtonWrapper = css`
+const buttonWrapper = css`
   display: block;
   position: fixed;
   bottom: 0;
