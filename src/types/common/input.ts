@@ -1,8 +1,9 @@
 export interface InputProps {
   variant: string;
   placeholder?: string;
-  isDisabled?: boolean;
   inputIcon?: boolean;
+  textarea?: boolean;
+  isDisabled?: boolean;
   isError?: boolean;
   errorType?: string | undefined;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;

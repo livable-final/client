@@ -51,11 +51,16 @@ function index() {
         </div>
       </div>
       <input type="text" placeholder="test" />
-
+      {/* input default */}
       <Input variant="default" placeholder="inputText" />
       <Input variant="disabled" placeholder="inputText" isDisabled />
-      <Input variant="default" placeholder="inputText" isError />
-
+      <Input
+        variant="default"
+        placeholder="inputText"
+        isError
+        errorType="test2"
+      />
+      {/* input icon box */}
       <Input inputIcon variant="default" placeholder="inputText" />
       <Input inputIcon variant="disabled" placeholder="inputText" isDisabled />
       <Input
@@ -64,6 +69,14 @@ function index() {
         placeholder="inputText"
         isError
         errorType="test"
+      />
+      {/* input textarea */}
+      <Input textarea variant="default" placeholder="방문목적을 입력해주세요" />
+      <Input
+        textarea
+        variant="disabled"
+        placeholder="방문목적을 입력해주세요"
+        isDisabled
       />
     </>
   );
