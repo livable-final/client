@@ -1,4 +1,5 @@
 import Category from '@/components/common/Category';
+import Input from '@/components/common/Input';
 import { css } from '@emotion/react';
 
 function index() {
@@ -50,6 +51,20 @@ function index() {
         </div>
       </div>
       <input type="text" placeholder="test" />
+
+      <Input variant="default" placeholder="inputText" />
+      <Input variant="disabled" placeholder="inputText" isDisabled />
+      <Input variant="default" placeholder="inputText" isError />
+
+      <Input inputIcon variant="default" placeholder="inputText" />
+      <Input inputIcon variant="disabled" placeholder="inputText" isDisabled />
+      <Input
+        inputIcon
+        variant="default"
+        placeholder="inputText"
+        isError
+        errorType="test"
+      />
     </>
   );
 }
