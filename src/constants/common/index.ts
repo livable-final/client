@@ -38,7 +38,8 @@ export const COMMON_CATEGORY_COLORS: CategoryColorsProps = {
     color: `${theme.palette.greyscale.grey40}`,
   },
 };
-// 공통 인풋
+
+// Input box 스타일
 export const COMMON_INPUT_COLORS: InputColorsProps = {
   default: {
     border: `${theme.palette.greyscale.grey10}`,
@@ -56,6 +57,7 @@ export const COMMON_INPUT_COLORS: InputColorsProps = {
   },
 };
 
+// 에러메세지 내용은 추후 변경
 export const COMMON_ERROR_MESSAGE: ErrorMessageProps = {
   test: '에러메세지',
   test2: '에러메세지2',
