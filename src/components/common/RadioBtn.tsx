@@ -71,6 +71,7 @@ function RadioBtn({ list, name }: RadioBtnProps) {
             <p>기타 (직접입력)</p>
             <input
               type="text"
+              placeholder="입력"
               onChange={(e) => {
                 setEtcValue(e.target.value);
               }}
