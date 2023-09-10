@@ -87,7 +87,10 @@ export default RadioBtn;
 
 const radioContainerStyles = css`
   width: 100%;
+
+  /* 표시용 border, 여백 */
   border: 1px solid;
+  margin: 30px 0;
 
   span {
     color: ${theme.palette.greyscale.grey40};
@@ -118,12 +121,19 @@ const btnImgStyles = css`
   height: 20px;
   margin: 2px;
   margin-right: 10px;
+  flex-grow: 0;
 `;
 
 const labelStyles = css`
   display: flex;
+  flex-wrap: wrap;
+
+  div {
+    flex-grow: 1;
+  }
 `;
 
 const etcInputStyles = css`
   margin-top: 10px;
+  max-width: 100%;
 `;
