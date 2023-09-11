@@ -10,6 +10,8 @@ function RadioBtn({ list, name }: RadioBtnProps) {
   const [etcValue, setEtcValue] = useState('');
   const [isCheck, setIsCheck] = useState(false);
 
+  // selectData 값이 변경되는 것을 확인하는 콘솔로그
+  console.log(selectData);
   return (
     <div css={radioContainerStyles}>
       {list.map((item) => (
@@ -47,7 +49,7 @@ function RadioBtn({ list, name }: RadioBtnProps) {
         role="presentation"
         onFocus={() => {
           setIsCheck(true);
-          setSelectData('');
+          setSelectData(etcValue);
         }}
         onBlur={() => setIsCheck(false)}
         css={itemStyles}
@@ -74,6 +76,7 @@ function RadioBtn({ list, name }: RadioBtnProps) {
               placeholder="입력"
               onChange={(e) => {
                 setEtcValue(e.target.value);
+                setSelectData(e.target.value);
               }}
               css={etcInputStyles}
             />
