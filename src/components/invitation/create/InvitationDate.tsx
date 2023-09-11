@@ -1,83 +1,63 @@
-import theme from '@/styles/theme';
+import Input from '@/components/common/Input';
+import NameTag from '@/components/common/NameTag';
+import Add from '@/components/common/Add';
 import Button from '@/components/common/Button';
 import { css } from '@emotion/react';
-import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 
 function InvitationDate() {
-  const { invitation, button } = CREATE_TEXTS;
-
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-
-  const router = useRouter();
-
-  const onClickHandler = () => {
-    router.push('/invitation/invitationInfo');
-  };
-
-  const onFocusHandler = () => {
-    setIsFocused(true);
-  };
-
-  const onBlurHandler = () => {
-    setIsFocused(false);
-  };
+  const nameTagTest = [
+    '고애신',
+    '유진초이',
+    '김희성',
+    '쿠도히나',
+    '구동매',
+    '임관수',
+    '카일',
+    '도미',
+  ];
 
   return (
-    <div>
-      <div>000초대</div>
+    <div css={dateContainerStyles}>
       <div>
-        <div css={invitationQuestion}>{invitation}</div>
+        <div>초대 정보</div>
         <div>
-          <input
-            type="text"
-            placeholder="이름 입력"
-            onFocus={onFocusHandler}
-            onBlur={onBlurHandler}
+          <Input
+            variant="default"
+            textarea
+            placeholder="방문하시는 분이 장소를 쉽게 찾을 수 있게 팁을 알려주세요."
           />
-          <input
-            type="number"
-            pattern="\d*"
-            placeholder="전화번호 입력"
-            onFocus={onFocusHandler}
-            onBlur={onBlurHandler}
-          />
-          <div>주소록에서 찾기</div>
-          <div>추가 버튼</div>
-        </div>
-        <div>
-          <div>초대 목록</div>
-          <div>김방문 김방문 김방문 김방문...</div>
         </div>
       </div>
-
-      <div css={buttonWrapper}>
-        <Button
-          content={isFocused ? button.done : button.next}
-          variant="blue"
-          onClick={onClickHandler}
-        />
+      <div css={invitationListContainerStyles}>
+        초대 목록
+        <div css={invitationListStyles}>
+          <Add isBlue onClick={() => alert('인원 초대 테스트')} />
+          {nameTagTest.map((name) => (
+            <NameTag
+              key={name}
+              name={name}
+              onClick={() => alert('삭제 기능 추가 예정')}
+            />
+          ))}
+        </div>
       </div>
+      <Button content="초대장 보내기" variant="blue" />
     </div>
   );
 }
 
-const invitationQuestion = css`
-  min-width: 280px;
-  max-width: 390px;
-  height: 28px;
-  padding-left: 4px;
-  font: ${theme.font.title.title2_500};
-  line-height: 28px;
+const dateContainerStyles = css``;
+
+const invitationListContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `;
 
-const buttonWrapper = css`
-  display: block;
-  position: fixed;
-  bottom: 0;
-  width: 358px;
-  margin-bottom: 20px;
+const invitationListStyles = css`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
 `;
 
 export default InvitationDate;
