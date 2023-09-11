@@ -75,7 +75,7 @@ const inputBoxStyle = (variantData: InputColorProps) => css`
   width: 100%;
   border: 1px solid ${variantData.border};
   border-radius: 12px;
-  font: ${variantData.font}
+  font: ${variantData.font};
   font-size: 1rem;
   color: ${variantData.color};
   background-color: ${variantData.backgroundColor};
