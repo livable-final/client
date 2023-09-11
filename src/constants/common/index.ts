@@ -1,6 +1,7 @@
 import theme from '@/styles/theme';
 import { ButtonColorsProps } from '@/types/common/button';
 import { CategoryColorsProps } from '@/types/common/category';
+import { InputColorsProps, ErrorTypeProps } from '@/types/common/input';
 
 // 공통 버튼 색상
 export const COMMON_BUTTON_COLORS: ButtonColorsProps = {
@@ -36,6 +37,30 @@ export const COMMON_CATEGORY_COLORS: CategoryColorsProps = {
     backgroundColor: `${theme.palette.white}`,
     color: `${theme.palette.greyscale.grey40}`,
   },
+};
+
+// Input box 스타일
+export const COMMON_INPUT_COLORS: InputColorsProps = {
+  default: {
+    border: `${theme.palette.greyscale.grey10}`,
+    backgroundColor: `${theme.palette.white}`,
+    color: `${theme.palette.input.unabled}`,
+    font: `${theme.font.subTitle.subTitle2_400}`,
+    isFocused: `${theme.palette.input.enabled}`,
+    isError: `${theme.palette.state.warning}`,
+  },
+  disabled: {
+    border: `${theme.palette.greyscale.grey10}`,
+    backgroundColor: `${theme.palette.greyscale.grey5}`,
+    color: `${theme.palette.input.unabled}`,
+    font: `${theme.font.subTitle.subTitle2_400}`,
+  },
+};
+
+// 에러메세지 내용은 추후 변경
+export const COMMON_ERROR_MESSAGE: ErrorTypeProps = {
+  test: '에러메세지',
+  test2: '이럴수가메세지',
 };
 
 // Header
