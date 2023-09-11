@@ -5,7 +5,7 @@ export interface InputProps {
   textarea?: boolean;
   isDisabled?: boolean;
   isError?: boolean;
-  errorType?: string | undefined;
+  errorType?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -19,7 +19,7 @@ export interface InputColorProps {
   isError?: string;
 }
 
-export interface ErrorMessageProps {
+export interface ErrorTypeProps {
   test: string;
   test2: string;
 }

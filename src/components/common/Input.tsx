@@ -21,9 +21,7 @@ function Input({
     <div css={inputContainerStyles}>
       <div css={inputBoxStyle(variantData)}>
         {/* input icon 있는 경우 icon 영역 */}
-        {inputIcon === true ? (
-          <Location css={inputIconStyle(variantData)} />
-        ) : null}
+        {inputIcon && <Location css={inputIconStyle(variantData)} />}
         {textarea === true ? (
           // input textarea
           <textarea
