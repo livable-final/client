@@ -54,12 +54,7 @@ function index() {
       {/* input default */}
       <Input variant="default" placeholder="inputText" />
       <Input variant="disabled" placeholder="inputText" isDisabled />
-      <Input
-        variant="default"
-        placeholder="inputText"
-        isError
-        errorType="test2"
-      />
+      <Input variant="default" placeholder="inputText" isError />
       {/* input icon box */}
       <Input inputIcon variant="default" placeholder="inputText" />
       <Input inputIcon variant="disabled" placeholder="inputText" isDisabled />

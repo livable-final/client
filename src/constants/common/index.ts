@@ -1,7 +1,7 @@
 import theme from '@/styles/theme';
 import { ButtonColorsProps } from '@/types/common/button';
 import { CategoryColorsProps } from '@/types/common/category';
-import { InputColorsProps, ErrorMessageProps } from '@/types/common/input';
+import { InputColorsProps, ErrorTypeProps } from '@/types/common/input';
 
 // 공통 버튼 색상
 export const COMMON_BUTTON_COLORS: ButtonColorsProps = {
@@ -58,9 +58,9 @@ export const COMMON_INPUT_COLORS: InputColorsProps = {
 };
 
 // 에러메세지 내용은 추후 변경
-export const COMMON_ERROR_MESSAGE: ErrorMessageProps = {
+export const COMMON_ERROR_MESSAGE: ErrorTypeProps = {
   test: '에러메세지',
-  test2: '에러메세지2',
+  test2: '이럴수가메세지',
 };
 
 // Header
