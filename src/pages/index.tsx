@@ -1,12 +1,16 @@
 import Button from '@/components/common/Button';
 import Head from 'next/head';
 import Header from '@/components/common/Header';
+import RadioBtn from '@/components/common/RadioBtn';
 
 function Home() {
   const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     alert('onClick Test');
   };
+
+  // RadioBtn 예시 데이터, API 확인 후 변경 예정
+  const arr = ['test1', 'test2', 'test3'];
   return (
     <>
       <Head>
@@ -28,6 +32,9 @@ function Home() {
       <Header title="title" type="close" onClick={onClickHandler} />
       {/* title만 있는 경우  */}
       <Header title="title" onClick={onClickHandler} />
+
+      {/* list-데이터 배열, name-데이터 유형) */}
+      <RadioBtn list={arr} name="초대 장소" placeholder="장소를 입력하세요" />
     </>
   );
 }
