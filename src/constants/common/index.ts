@@ -116,3 +116,5 @@ export const COMMON_CATEGORIES = {
     },
   },
 };
+
+export const COMMON_TOGGLE_TITLE = '종일';
