@@ -2,6 +2,8 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { HeaderProps } from '@/types/common/header';
 import { COMMON_HEADER } from '@/constants/common';
+import mq from '@/utils/mediaquery';
+import { Back } from '@/assets/icons';
 
 function Header({ title, type = '', text = '', onClick }: HeaderProps) {
   const { typeCase } = COMMON_HEADER;
@@ -22,7 +24,7 @@ function Header({ title, type = '', text = '', onClick }: HeaderProps) {
 
   return (
     <header css={headerStyles}>
-      <div>고정</div>
+      <Back />
       <div css={titleStyles}>
         <h2>{title}</h2>
       </div>
@@ -40,11 +42,20 @@ const headerStyles = css`
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   width: 100%;
-  padding: 16px;
+  min-width: 280px;
+  max-width: 360px;
+  height: 56px;
+  padding: 16px 0;
 
-  // 테스트용 스타일 (추후 사용 시 삭제 요망)
-  margin-top: 30px;
-  border: 1px solid #191919;
+  ${mq.md} {
+    max-width: 480px;
+  }
+  ${mq.lg} {
+    max-width: 640px;
+  }
+  ${mq.tab} {
+    max-width: 1024px;
+  }
 `;
 
 const titleStyles = css`
@@ -55,6 +66,6 @@ const titleStyles = css`
 const iconStyles = (type: string) => css`
   justify-self: end;
   cursor: pointer;
-  color: ${type === 'text' && theme.palette.primary}}
-  font: ${type === 'text' && theme.font.body.body1_500}}
+  color: ${type === 'text' && theme.palette.primary};
+  font: ${type === 'text' && theme.font.body.body1_500};
 `;

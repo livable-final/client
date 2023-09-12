@@ -13,6 +13,8 @@ function Input({
   isDisabled,
   isError,
   errorType,
+  row = 2,
+  maxLength = 7,
 }: InputProps) {
   const [value, setValue] = useState('');
   const variantData = COMMON_INPUT_COLORS[variant];
@@ -24,18 +26,24 @@ function Input({
         {inputIcon && <Location css={inputIconStyle(variantData)} />}
         {textarea === true ? (
           // input textarea
-          <textarea
-            name="content"
-            placeholder={placeholder}
-            value={value}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-              setValue(e.target.value)
-            }
-            cols={30}
-            rows={2}
-            css={inputTextareaStyles(variantData)}
-            disabled={isDisabled}
-          />
+          <div css={textareaContainerStyles}>
+            <textarea
+              name="content"
+              placeholder={placeholder}
+              value={value}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setValue(e.target.value)
+              }
+              cols={30}
+              rows={row}
+              css={inputTextareaStyles(variantData)}
+              disabled={isDisabled}
+              maxLength={maxLength}
+            />
+            <div>
+              {value.length}/{maxLength + 1}
+            </div>
+          </div>
         ) : (
           // input defalt
           <input
@@ -75,7 +83,7 @@ const inputBoxStyle = (variantData: InputColorProps) => css`
   width: 100%;
   border: 1px solid ${variantData.border};
   border-radius: 12px;
-  font: ${variantData.font}
+  font: ${variantData.font};
   font-size: 1rem;
   color: ${variantData.color};
   background-color: ${variantData.backgroundColor};
@@ -106,6 +114,18 @@ const inputIconStyle = (variantData: InputColorProps) => css`
   }
 `;
 
+const textareaContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  div {
+    position: relative;
+    bottom: 10px;
+    text-align: right;
+    padding-right: 16px;
+  }
+`;
+
 const inputStyles = () => css`
   padding: 17px 16px;
   border: none;
@@ -117,7 +137,7 @@ const inputStyles = () => css`
 
 const inputTextareaStyles = (variantData: InputColorProps) => css`
   margin: 17px 16px;
-  width: 100%;
+  /* width: 90%; */
   border: none;
   background-color: ${variantData.backgroundColor};
   font: ${variantData.font};

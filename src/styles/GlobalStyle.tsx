@@ -10,6 +10,7 @@ const globals = css`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-size: 1rem;
   }
 
   input {
@@ -28,6 +29,11 @@ const globals = css`
       outline: none;
       color: ${theme.palette.greyscale.grey90};
     }
+  }
+
+  button {
+    border: none;
+    background-color: transparent;
   }
 `;
 

@@ -45,7 +45,7 @@ export const COMMON_INPUT_COLORS: InputColorsProps = {
     border: `${theme.palette.greyscale.grey10}`,
     backgroundColor: `${theme.palette.white}`,
     color: `${theme.palette.input.unabled}`,
-    font: `${theme.font.subTitle.subTitle2_400}`,
+    font: `${theme.font.body.body1_400}`,
     isFocused: `${theme.palette.input.enabled}`,
     isError: `${theme.palette.state.warning}`,
   },
@@ -53,7 +53,7 @@ export const COMMON_INPUT_COLORS: InputColorsProps = {
     border: `${theme.palette.greyscale.grey10}`,
     backgroundColor: `${theme.palette.greyscale.grey5}`,
     color: `${theme.palette.input.unabled}`,
-    font: `${theme.font.subTitle.subTitle2_400}`,
+    font: `${theme.font.body.body1_400}`,
   },
 };
 

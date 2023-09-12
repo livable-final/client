@@ -1,6 +1,15 @@
 const CREATE_TEXTS = {
   purpose: '방문증을 만드는 이유는 무엇인가요?',
   invitation: `식스센스에\n누구를 초대할까요?`,
+  header: {
+    default: '방문자 초대',
+    meeting: '회의참여자 초대',
+    interview: '면접자 초대',
+    fixedTermWork: '기간근무자 초대',
+    seminar: '세미나 초대',
+    as: 'AS/점검 초대',
+    etc: '방문자 초대',
+  },
   description: {
     meeting:
       '예약한 회의실을 선택하거나 회의의 장소·날짜·시간을 자유롭게 선택할 수 있어요',

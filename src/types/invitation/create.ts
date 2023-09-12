@@ -11,7 +11,10 @@ export interface CommonCategory {
 
 export interface InvitationTexts {
   purpose: string;
-
+  invitation: string;
+  header: {
+    [key: string]: string;
+  };
   description: {
     [key: string]: string;
   };

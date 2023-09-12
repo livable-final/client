@@ -6,6 +6,8 @@ export interface InputProps {
   isDisabled?: boolean;
   isError?: boolean;
   errorType?: string;
+  row?: number;
+  maxLength?: number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
