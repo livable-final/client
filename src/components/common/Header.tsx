@@ -41,10 +41,11 @@ const headerStyles = css`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+  width: 100%;
   min-width: 280px;
   max-width: 360px;
   height: 56px;
-  padding: 16px;
+  padding: 16px 0;
 
   ${mq.md} {
     max-width: 480px;
