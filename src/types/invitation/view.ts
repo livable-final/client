@@ -1,5 +1,5 @@
-export interface Example {
-  example: string;
+export interface InvitationInfoCategoryProps {
+  infoLabel: string;
 }
 
 export interface InvitationHostInfoItemProps {
