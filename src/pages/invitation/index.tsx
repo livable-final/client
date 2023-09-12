@@ -1,5 +1,7 @@
+import Add from '@/components/common/Add';
 import Category from '@/components/common/Category';
 import Input from '@/components/common/Input';
+import NameTag from '@/components/common/NameTag';
 import { css } from '@emotion/react';
 
 function index() {
@@ -73,6 +75,11 @@ function index() {
         placeholder="방문목적을 입력해주세요"
         isDisabled
       />
+      <Add onClick={() => alert('클릭 테스트!')} />
+      <Add isBlue onClick={() => alert('추가버튼 테스트')} />
+      <NameTag name="히나" onClick={() => alert('삭제 테스트')} />
+      <NameTag name="고애신" onClick={() => alert('삭제 테스트')} />
+      <NameTag name="유진초이" onClick={() => alert('삭제 테스트')} />
     </>
   );
 }

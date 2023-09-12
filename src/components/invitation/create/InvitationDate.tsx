@@ -1,83 +1,94 @@
-import theme from '@/styles/theme';
-import Button from '@/components/common/Button';
+import Input from '@/components/common/Input';
 import { css } from '@emotion/react';
-import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { Location, Calendar, Clock } from '@/assets/icons';
+import theme from '@/styles/theme';
 
 function InvitationDate() {
-  const { invitation, button } = CREATE_TEXTS;
-
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-
-  const router = useRouter();
-
-  const onClickHandler = () => {
-    router.push('/invitation/invitationInfo');
-  };
-
-  const onFocusHandler = () => {
-    setIsFocused(true);
-  };
-
-  const onBlurHandler = () => {
-    setIsFocused(false);
-  };
-
   return (
     <div>
-      <div>000초대</div>
+      <div>초대 정보</div>
       <div>
-        <div css={invitationQuestion}>{invitation}</div>
-        <div>
-          <input
-            type="text"
-            placeholder="이름 입력"
-            onFocus={onFocusHandler}
-            onBlur={onBlurHandler}
-          />
-          <input
-            type="number"
-            pattern="\d*"
-            placeholder="전화번호 입력"
-            onFocus={onFocusHandler}
-            onBlur={onBlurHandler}
-          />
-          <div>주소록에서 찾기</div>
-          <div>추가 버튼</div>
+        {/* 장소 선택 */}
+        <div css={placeInputStyles}>
+          <div className="icon">
+            <Location />
+          </div>
+          <input css={inputStyles} type="text" placeholder="장소 선택" />
         </div>
-        <div>
-          <div>초대 목록</div>
-          <div>김방문 김방문 김방문 김방문...</div>
+        {/* 날짜, 시간 선택 */}
+        <div css={dateTimeInputStyles}>
+          <div className="date">
+            <div className="icon">
+              <Calendar />
+            </div>
+            <input css={inputStyles} type="text" placeholder="날짜 선택" />
+          </div>
+          <div className="time">
+            <div className="icon">
+              <Clock />
+            </div>
+            <input css={inputStyles} type="text" placeholder="시간 선택" />
+          </div>
         </div>
-      </div>
-
-      <div css={buttonWrapper}>
-        <Button
-          content={isFocused ? button.done : button.next}
-          variant="blue"
-          onClick={onClickHandler}
+        {/* 꿀팁 작성 */}
+        <Input
+          variant="default"
+          textarea
+          placeholder="방문하시는 분이 장소를 쉽게 찾을 수 있게 팁을 알려주세요."
+          row={4}
+          maxLength={100}
         />
       </div>
     </div>
   );
 }
 
-const invitationQuestion = css`
-  min-width: 280px;
-  max-width: 390px;
-  height: 28px;
-  padding-left: 4px;
-  font: ${theme.font.title.title2_500};
-  line-height: 28px;
+const placeInputStyles = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${theme.palette.greyscale.grey10};
+  border-radius: 12px;
+  padding: 0 8px 0 16px;
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+  }
 `;
 
-const buttonWrapper = css`
-  display: block;
-  position: fixed;
-  bottom: 0;
-  width: 358px;
-  margin-bottom: 20px;
+const dateTimeInputStyles = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${theme.palette.greyscale.grey10};
+  border-radius: 12px;
+  padding: 0 8px 0 16px;
+
+  .date,
+  .time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px;
+    }
+  }
+`;
+
+const inputStyles = css`
+  border: none;
+  border-radius: 12px;
 `;
 
 export default InvitationDate;

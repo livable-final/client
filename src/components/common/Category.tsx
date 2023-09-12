@@ -2,6 +2,7 @@ import { COMMON_CATEGORY_COLORS } from '@/constants/common';
 import { CategoryProps, CategoryColorProps } from '@/types/common/category';
 import { css } from '@emotion/react';
 import Icons from '@/components/common/Icons';
+import mq from '@/utils/mediaquery';
 
 function Category({ icon, title, variant }: CategoryProps) {
   const variantData = COMMON_CATEGORY_COLORS[variant];
@@ -27,6 +28,10 @@ const CategoryContainer = (variantData: CategoryColorProps) => css`
   border: ${variantData.border};
   border-radius: 16px;
   background-color: ${variantData.backgroundColor};
+
+  ${mq.tab} {
+    width: 130px;
+  }
 `;
 
 const IconContainer = css`
