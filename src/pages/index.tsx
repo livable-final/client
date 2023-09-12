@@ -1,6 +1,7 @@
 import Button from '@/components/common/Button';
 import Head from 'next/head';
 import Header from '@/components/common/Header';
+import Toggle from '@/components/common/Toggle';
 
 function Home() {
   const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -28,6 +29,7 @@ function Home() {
       <Header title="title" type="close" onClick={onClickHandler} />
       {/* title만 있는 경우  */}
       <Header title="title" onClick={onClickHandler} />
+      <Toggle />
     </>
   );
 }
