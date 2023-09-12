@@ -5,13 +5,29 @@ import { useState } from 'react';
 import RadioCheck from '@/assets/radioBtn/radioCheck.svg';
 import RadioUnCheck from '@/assets/radioBtn/radioUnCheck.svg';
 
-function RadioBtn({ list, name }: RadioBtnProps) {
+function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
   const [selectData, setSelectData] = useState(list[0]);
   const [etcValue, setEtcValue] = useState('');
   const [isCheck, setIsCheck] = useState(false);
 
   // selectData 값이 변경되는 것을 확인하는 콘솔로그
   console.log(selectData);
+
+  const onChangeRadioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectData(event.target.value);
+  };
+
+  const onFocusHandler = () => {
+    setIsCheck(true);
+    setSelectData(etcValue);
+  };
+
+  const onBlurHandler = () => setIsCheck(false);
+
+  const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEtcValue(event.target.value);
+    setSelectData(event.target.value);
+  };
   return (
     <div css={radioContainerStyles}>
       {list.map((item) => (
@@ -22,9 +38,7 @@ function RadioBtn({ list, name }: RadioBtnProps) {
             name={name}
             value={item}
             checked={selectData === item}
-            onChange={(e) => {
-              setSelectData(e.target.value);
-            }}
+            onChange={onChangeRadioHandler}
             readOnly
             css={radioInputStyles}
           />
@@ -47,11 +61,8 @@ function RadioBtn({ list, name }: RadioBtnProps) {
       {/* 직접 입력 */}
       <div
         role="presentation"
-        onFocus={() => {
-          setIsCheck(true);
-          setSelectData(etcValue);
-        }}
-        onBlur={() => setIsCheck(false)}
+        onFocus={onFocusHandler}
+        onBlur={onBlurHandler}
         css={itemStyles}
       >
         <input
@@ -73,11 +84,8 @@ function RadioBtn({ list, name }: RadioBtnProps) {
             <p>기타 (직접입력)</p>
             <input
               type="text"
-              placeholder="입력"
-              onChange={(e) => {
-                setEtcValue(e.target.value);
-                setSelectData(e.target.value);
-              }}
+              placeholder={placeholder}
+              onChange={onChangeInputHandler}
               css={etcInputStyles}
             />
           </div>
