@@ -28,6 +28,12 @@
     "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
     "no-useless-catch": "off", // 불필요한 catch 못쓰게 하는 기능 끔
     "react/jsx-props-no-spreading": "off",
-    "@typescript-eslint/no-use-before-define": "off" // 변수 선언 전에 변수가 사용되어도 허용
+    "@typescript-eslint/no-use-before-define": "off", // 변수 선언 전에 변수가 사용되어도 허용
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelAttributes": ["htmlFor"]
+      }
+    ] //label 태그 사용시 에러해결을 위한 옵션
   }
 }
