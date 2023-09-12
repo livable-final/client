@@ -3,6 +3,7 @@ import Back from '@/assets/icons/Back.svg';
 import Calendar from '@/assets/icons/Calendar.svg';
 import CheckOff from '@/assets/icons/check=off.svg';
 import CheckOn from '@/assets/icons/check=on.svg';
+import Clock from '@/assets/icons/Clock.svg';
 import Down from '@/assets/icons/Down.svg';
 import Etc from '@/assets/icons/Etc.svg';
 import FixedtermWork from '@/assets/icons/FixedtermWork.svg';
@@ -25,6 +26,7 @@ export {
   Calendar,
   CheckOff,
   CheckOn,
+  Clock,
   Down,
   Etc,
   FixedtermWork,
