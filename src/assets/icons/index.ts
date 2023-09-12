@@ -46,6 +46,7 @@ import DateDish from '@/assets/icons/DateDish.svg';
 import DateDishNoPhoto from '@/assets/icons/DateDishNoPhoto.svg';
 import Setting from '@/assets/icons/Setting.svg';
 import Coin from '@/assets/icons/Coin.svg';
+import InfoCategory from '@/assets/icons/InfoCategory.svg';
 
 export {
   As,
@@ -96,4 +97,5 @@ export {
   DateDishNoPhoto,
   Setting,
   Coin,
+  InfoCategory,
 };
