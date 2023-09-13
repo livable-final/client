@@ -64,7 +64,7 @@ const theme = {
       body4: `400 normal 12px 'Pretendard'`,
     },
     etc: {
-      findRoad: `500 normal 12px 'Pretendard`,
+      findRoad: `500 normal 12px 'Pretendard'`,
     },
   },
 };
