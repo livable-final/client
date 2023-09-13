@@ -8,6 +8,7 @@ import {
   As,
   Etc,
   Info,
+  Direction,
 } from '@/assets/icons';
 
 function Icons({ icon, color }: IconsProps) {
@@ -28,6 +29,8 @@ function Icons({ icon, color }: IconsProps) {
       return <Etc color={color} />;
     case invitation.info:
       return <Info color={color} />;
+    case invitation.direction:
+      return <Direction color={color} />;
     default:
       break;
   }
