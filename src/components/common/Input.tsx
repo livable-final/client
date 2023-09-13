@@ -4,7 +4,6 @@ import { InputColorProps, InputProps } from '@/types/common/input';
 import { COMMON_INPUT_COLORS } from '@/constants/common';
 import { Location } from '@/assets/icons';
 import ErrorMessage from '@/components/common/ErrorMessage';
-import theme from '@/styles/theme';
 
 function Input({
   inputIcon,
@@ -22,9 +21,9 @@ function Input({
 
   return (
     <div css={inputContainerStyles}>
-      <div css={inputBoxStyle(variantData)}>
+      <div css={inputBoxStyles(variantData)}>
         {/* input icon 있는 경우 icon 영역 */}
-        {inputIcon && <Location css={inputIconStyle(variantData)} />}
+        {inputIcon && <Location css={inputIconStyles(variantData)} />}
         {textarea === true ? (
           // input textarea
           <div css={textareaContainerStyles}>
@@ -41,7 +40,7 @@ function Input({
               disabled={isDisabled}
               maxLength={maxLength}
             />
-            <div css={lengthTextStyles}>
+            <div>
               {value.length}/{maxLength + 1}
             </div>
           </div>
@@ -72,10 +71,9 @@ const inputContainerStyles = () => css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 16px auto;
 `;
 
-const inputBoxStyle = (variantData: InputColorProps) => css`
+const inputBoxStyles = (variantData: InputColorProps) => css`
   display: flex;
   position: relative;
   cursor: pointer;
@@ -99,7 +97,7 @@ const inputBoxStyle = (variantData: InputColorProps) => css`
   }
 `;
 
-const inputIconStyle = (variantData: InputColorProps) => css`
+const inputIconStyles = (variantData: InputColorProps) => css`
   width: 24px;
   height: 24px;
   margin: 0 0 0 16px;
@@ -127,12 +125,6 @@ const textareaContainerStyles = css`
   }
 `;
 
-const lengthTextStyles = css`
-  font: ${theme.font.body.body3_500};
-  line-height: 21px;
-  color: ${theme.palette.greyscale.grey30};
-`;
-
 const inputStyles = () => css`
   padding: 17px 16px;
   border: none;
@@ -144,7 +136,6 @@ const inputStyles = () => css`
 
 const inputTextareaStyles = (variantData: InputColorProps) => css`
   margin: 17px 16px;
-  /* width: 90%; */
   border: none;
   background-color: ${variantData.backgroundColor};
   font: ${variantData.font};
