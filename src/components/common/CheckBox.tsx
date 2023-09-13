@@ -1,10 +1,10 @@
 import { Check, UnCheck } from '@/assets/icons';
 import theme from '@/styles/theme';
-import { RecycleCheckBoxProps } from '@/types/common/recycleCheckBox';
+import { CheckBoxProps } from '@/types/common/checkBox';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 
-function RecycleCheckBox({ text }: RecycleCheckBoxProps) {
+function CheckBox({ text }: CheckBoxProps) {
   const [selectData, setSelectData] = useState(false);
   return (
     <div css={checkBoxContainerStyles}>
@@ -28,7 +28,7 @@ function RecycleCheckBox({ text }: RecycleCheckBoxProps) {
   );
 }
 
-export default RecycleCheckBox;
+export default CheckBox;
 
 const checkBoxContainerStyles = css`
   input {

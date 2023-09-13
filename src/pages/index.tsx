@@ -4,7 +4,7 @@ import Header from '@/components/common/Header';
 import Toggle from '@/components/common/Toggle';
 import RadioBtn from '@/components/common/RadioBtn';
 import InvitationFindRoadBtn from '@/components/invitation/view/InvitationFindRoadBtn';
-import RecycleCheckBox from '@/components/common/RecycleCheckBox';
+import CheckBox from '@/components/common/CheckBox';
 
 function Home() {
   const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -38,8 +38,8 @@ function Home() {
 
       {/* list-데이터 배열, name-데이터 유형) */}
       <RadioBtn list={arr} name="초대 장소" placeholder="장소를 입력하세요" />
-      <RecycleCheckBox text="테스트 메시지" />
-      <RecycleCheckBox text="테스트 메시지2" />
+      <CheckBox text="테스트 메시지" />
+      <CheckBox text="테스트 메시지2" />
 
       <Toggle />
       <InvitationFindRoadBtn />
