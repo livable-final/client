@@ -1,6 +1,7 @@
 import As from '@/assets/icons/As.svg';
 import Back from '@/assets/icons/Back.svg';
 import Calendar from '@/assets/icons/Calendar.svg';
+import CalendarFill from '@/assets/icons/Calender-Fill.svg';
 import CheckOff from '@/assets/icons/check=off.svg';
 import CheckOn from '@/assets/icons/check=on.svg';
 import Clock from '@/assets/icons/Clock.svg';
@@ -9,6 +10,7 @@ import Etc from '@/assets/icons/Etc.svg';
 import FixedtermWork from '@/assets/icons/FixedtermWork.svg';
 import Interview from '@/assets/icons/Interview.svg';
 import Location from '@/assets/icons/Location.svg';
+import LocationFill from '@/assets/icons/Location-fill.svg';
 import Meeting from '@/assets/icons/meeting.svg';
 import Right from '@/assets/icons/Right.svg';
 import Seminar from '@/assets/icons/seminar.svg';
@@ -52,6 +54,7 @@ export {
   As,
   Back,
   Calendar,
+  CalendarFill,
   CheckOff,
   CheckOn,
   Clock,
@@ -60,6 +63,7 @@ export {
   FixedtermWork,
   Interview,
   Location,
+  LocationFill,
   Meeting,
   Right,
   Seminar,

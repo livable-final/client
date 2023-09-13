@@ -14,6 +14,7 @@ function InvitationInfoCategory({ infoLabel }: InvitationInfoCategoryProps) {
     </div>
   );
 }
+
 const InvitationInfoCategoryStyles = css`
   display: flex;
   flex-direction: column;
@@ -36,7 +37,7 @@ const CategoryContainerStyles = css`
   width: 55px;
   height: 55px;
   border-radius: 100%;
-  box-shadow: 2px 5px 20px #7d92cd57;
+  box-shadow: 2px 5px 20px #92afff56;
   margin-bottom: 16px;
 `;
 

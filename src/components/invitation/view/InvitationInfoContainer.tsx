@@ -25,6 +25,7 @@ function InvitationInfoContainer() {
   );
 }
 const ViewInfoContainerStyles = css`
+  margin-top: 23px;
   width: 100%;
   ${mq.md} {
   }
