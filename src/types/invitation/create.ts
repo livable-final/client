@@ -1,10 +1,11 @@
 // 방문자 초대장 중 초대장 생성 파트 타입 선언 //
 
 // 텍스트 상수
-export interface InvitationTexts {
-  purpose: string;
-  invitation: string;
+export interface InvitationCreateTexts {
   header: {
+    [key: string]: string;
+  };
+  title: {
     [key: string]: string;
   };
   description: {
@@ -13,7 +14,9 @@ export interface InvitationTexts {
   button: {
     [key: string]: string;
   };
-  inputPlaceholder: string;
+  placeholder: {
+    [key: string]: string;
+  };
 }
 
 // 초대 목적 선택

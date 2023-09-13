@@ -4,35 +4,27 @@ import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import Add from '@/components/common/Add';
 import { css } from '@emotion/react';
-import { RightSmall } from '@/assets/icons';
-import InvitationNameList from './InvitationNameList';
+import InvitationNameList from '@/components/invitation/create/InvitationNameList';
+import { InvitationCreateTexts } from '@/types/invitation/create';
+import AddressBook from '@/components/common/AddressBook';
 
 function InvitationInfo() {
-  const { invitation } = CREATE_TEXTS;
+  const { title, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
   const nameList = ['고애신', '유진초이', '쿠도히나', '구동매', '김희성'];
 
   return (
     <div css={infoContainerStyles}>
       <div css={invitationTextStyles}>
-        <div>{invitation}</div>
+        <div>{title.invitation}</div>
       </div>
       <div css={inputContainerStyles}>
         <div>
-          <Input variant="default" placeholder="이름 입력" />
-          <Input variant="default" placeholder="전화번호 입력" />
-          <div css={addressTextStyles}>
-            <div>주소록에서 찾기</div>
-            <button
-              type="button"
-              css={iconStyles}
-              onClick={() => alert('주소록 찾기 테스트')}
-            >
-              <RightSmall />
-            </button>
-          </div>
-          <div css={addBtnStyles}>
-            <Add onClick={() => alert('추가 버튼 테스트')} />
-          </div>
+          <Input variant="default" placeholder={placeholder.name} />
+          <Input variant="default" placeholder={placeholder.phone} />
+          <AddressBook />
+        </div>
+        <div css={addBtnStyles}>
+          <Add onClick={() => alert('추가 버튼 테스트')} />
         </div>
       </div>
       {nameList.length > 0 && <InvitationNameList nameList={nameList} />}
@@ -41,10 +33,11 @@ function InvitationInfo() {
 }
 
 const infoContainerStyles = css`
+  border: 2px solid red;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 21px;
+  gap: 32px;
   min-width: 280px;
   max-width: 360px;
 
@@ -90,38 +83,6 @@ const inputContainerStyles = css`
   flex-direction: column;
   gap: 21px;
   width: 100%;
-  max-width: 280px;
-
-  ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
-    max-width: 480px;
-  }
-  ${mq.tab} {
-    max-width: 640px;
-  }
-`;
-
-const addressTextStyles = css`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  cursor: pointer;
-  div {
-    font: ${theme.font.body.body3_500};
-    color: ${theme.palette.input.unabled};
-    line-height: 21px;
-  }
-`;
-
-const iconStyles = css`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
 `;
 
 const addBtnStyles = css`

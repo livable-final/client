@@ -1,4 +1,3 @@
-import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
@@ -8,27 +7,20 @@ import Add from '@/components/common/Add';
 import NameTag from '@/components/common/NameTag';
 import { css } from '@emotion/react';
 import { RightSmall } from '@/assets/icons';
+import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function InvitationInfo() {
-  const { invitation, button } = CREATE_TEXTS;
+  const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
   const nameTagTest = ['고애신', '유진초이', '김희성', '쿠도히나', '구동매'];
 
   return (
     <div css={infoContainerStyles}>
-      {/* <div css={headerStyles}>
-        <Header
-          title="000 초대"
-          type="text"
-          onClick={() => alert('미리보기 테스트')}
-        />
-      </div> */}
-
       <div css={invitationTextStyles}>
-        <div>{invitation}</div>
+        <div>{title.invitation}</div>
       </div>
       <div>
-        <Input variant="default" placeholder="이름 입력" />
-        <Input variant="default" placeholder="전화번호 입력" />
+        <Input variant="default" placeholder={placeholder.name} />
+        <Input variant="default" placeholder={placeholder.phone} />
         <div css={addressTextStyles}>
           <div>주소록에서 찾기</div>
           <button
@@ -45,7 +37,7 @@ function InvitationInfo() {
       </div>
       <div css={invitationListContainerStyles}>
         <div css={invitationListTextStyles}>
-          <div>초대 목록</div>
+          <div>{title.invitationList}</div>
           <div>{nameTagTest.length}/30</div>
         </div>
         <div css={invitationListStyles}>
@@ -66,8 +58,6 @@ function InvitationInfo() {
 }
 
 const infoContainerStyles = css``;
-
-const headerStyles = css``;
 
 const invitationTextStyles = css`
   display: flex;

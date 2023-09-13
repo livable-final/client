@@ -3,13 +3,19 @@ import NameTag from '@/components/common/NameTag';
 import Add from '@/components/common/Add';
 import mq from '@/utils/mediaquery';
 import theme from '@/styles/theme';
-import { InvitationNameListProps } from '@/types/invitation/create';
+import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import {
+  InvitationNameListProps,
+  InvitationCreateTexts,
+} from '@/types/invitation/create';
 
 function InvitationNameList({ nameList }: InvitationNameListProps) {
+  const { title }: InvitationCreateTexts = CREATE_TEXTS;
+
   return (
     <div css={listContainerStyles}>
       <div css={titleWrapperStyles}>
-        <div className="title">초대 목록</div>
+        <div className="title">{title.invitationList}</div>
         <div className="length">{nameList.length}/30</div>
       </div>
       <div css={listWrapperStyles}>
