@@ -6,6 +6,7 @@ import mq from '@/utils/mediaquery';
 import { useState } from 'react';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import { InvitationCreateTexts } from '@/types/invitation/create';
+import CheckBox from '@/components/common/CheckBox';
 
 function InvitationDate({ defaultPlace = '10층 회의실 A' }) {
   const { title, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
@@ -13,7 +14,7 @@ function InvitationDate({ defaultPlace = '10층 회의실 A' }) {
 
   const modalOpenHandler = () => {
     alert('클릭하면 모달이 오픈됩니다.');
-    setIsModal(true);
+    setIsModal(!isModal);
   };
 
   return (
@@ -71,11 +72,11 @@ function InvitationDate({ defaultPlace = '10층 회의실 A' }) {
               row={4}
               maxLength={99}
             />
-            {/* 이 메세지를 다음에 사용 */}
+            <CheckBox text="이 메세지를 다음에도 사용" />
           </div>
         </div>
       </div>
-      {isModal && <div>test</div>}
+      {isModal && <div>모달 on/off 테스트용</div>}
     </>
   );
 }
@@ -178,6 +179,9 @@ const inputStyles = css`
 `;
 
 const textareaStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
 `;
 
