@@ -9,14 +9,14 @@ function RecycleCheckBox({ text }: RecycleCheckBoxProps) {
   return (
     <div css={checkBoxContainerStyles}>
       <input
-        id="RecycleCheck"
+        id={text}
         type="checkbox"
         checked={selectData}
         onChange={() => {
           setSelectData(!selectData);
         }}
       />
-      <label htmlFor="RecycleCheck">
+      <label htmlFor={text}>
         {selectData === true ? (
           <Check css={btnImgStyles} />
         ) : (
