@@ -4,6 +4,7 @@ import Header from '@/components/common/Header';
 import Toggle from '@/components/common/Toggle';
 import RadioBtn from '@/components/common/RadioBtn';
 import InvitationFindRoadBtn from '@/components/invitation/view/InvitationFindRoadBtn';
+import RecycleCheckBox from '@/components/common/RecycleCheckBox';
 
 function Home() {
   const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -39,6 +40,8 @@ function Home() {
       <RadioBtn list={arr} name="초대 장소" placeholder="장소를 입력하세요" />
       <Toggle />
       <InvitationFindRoadBtn />
+
+      <RecycleCheckBox text="테스트 메시지" />
     </>
   );
 }
