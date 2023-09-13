@@ -3,10 +3,7 @@ import NameTag from '@/components/common/NameTag';
 import Add from '@/components/common/Add';
 import mq from '@/utils/mediaquery';
 import theme from '@/styles/theme';
-
-interface InvitationNameListProps {
-  nameList: string[];
-}
+import { InvitationNameListProps } from '@/types/invitation/create';
 
 function InvitationNameList({ nameList }: InvitationNameListProps) {
   return (
@@ -53,7 +50,7 @@ const titleWrapperStyles = css`
 
   .title {
     font: ${theme.font.subTitle.subTitle1_600};
-    color: ${theme.palette.greyscale.grey60};
+    color: ${theme.palette.title};
     line-height: 25px;
   }
   .length {

@@ -30,14 +30,10 @@ function InvitationPurpose() {
       <div css={categoryContainerStyles}>
         <div css={categoryWrapperStyles}>
           {categories.map((value) => (
-            <div
+            <button
               key={value.icon}
+              type="button"
               onClick={() => setSelectedCategory(value.icon)}
-              onKeyDown={(e) =>
-                e.key === 'Enter' ? setSelectedCategory(value.icon) : null
-              }
-              role="button"
-              tabIndex={0}
             >
               <Category
                 key={value.icon}
@@ -45,7 +41,7 @@ function InvitationPurpose() {
                 title={value.title}
                 variant={selectedCategory === value.icon ? 'blue' : 'grey'}
               />
-            </div>
+            </button>
           ))}
         </div>
         <div css={descriptionWrapperStyles}>

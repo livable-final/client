@@ -4,6 +4,7 @@ import { InputColorProps, InputProps } from '@/types/common/input';
 import { COMMON_INPUT_COLORS } from '@/constants/common';
 import { Location } from '@/assets/icons';
 import ErrorMessage from '@/components/common/ErrorMessage';
+import theme from '@/styles/theme';
 
 function Input({
   inputIcon,
@@ -40,7 +41,7 @@ function Input({
               disabled={isDisabled}
               maxLength={maxLength}
             />
-            <div>
+            <div css={lengthTextStyles}>
               {value.length}/{maxLength + 1}
             </div>
           </div>
@@ -124,6 +125,12 @@ const textareaContainerStyles = css`
     text-align: right;
     padding-right: 16px;
   }
+`;
+
+const lengthTextStyles = css`
+  font: ${theme.font.body.body3_500};
+  line-height: 21px;
+  color: ${theme.palette.greyscale.grey30};
 `;
 
 const inputStyles = () => css`
