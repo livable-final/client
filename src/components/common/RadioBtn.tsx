@@ -1,9 +1,8 @@
 import theme from '@/styles/theme';
-import { RadioBtnProps } from '@/types/common/RadioBtn';
+import { RadioBtnProps } from '@/types/common/radioBtn';
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import RadioCheck from '@/assets/radioBtn/radioCheck.svg';
-import RadioUnCheck from '@/assets/radioBtn/radioUnCheck.svg';
+import { Check, UnCheck } from '@/assets/icons';
 
 function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
   const [selectData, setSelectData] = useState(list[0]);
@@ -44,9 +43,9 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
           />
           <label htmlFor={item} key={item} css={labelStyles}>
             {selectData === item ? (
-              <RadioCheck css={btnImgStyles} />
+              <Check css={btnImgStyles} />
             ) : (
-              <RadioUnCheck css={btnImgStyles} />
+              <UnCheck css={btnImgStyles} />
             )}
             <div>
               <p>{item}</p>
@@ -76,9 +75,9 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
         />
         <label htmlFor={etcValue} css={labelStyles}>
           {isCheck ? (
-            <RadioCheck css={btnImgStyles} />
+            <Check css={btnImgStyles} />
           ) : (
-            <RadioUnCheck css={btnImgStyles} />
+            <UnCheck css={btnImgStyles} />
           )}
           <div>
             <p>기타 (직접입력)</p>
