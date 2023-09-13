@@ -20,6 +20,8 @@ import PlusSmall from '@/assets/icons/Plus=small.svg';
 import ExitSmall from '@/assets/icons/Exit=small.svg';
 import RightSmall from '@/assets/icons/Right=small.svg';
 import Direction from '@/assets/icons/Direction.svg';
+import Check from '@/assets/icons/Check.svg';
+import UnCheck from '@/assets/icons/UnCheck.svg';
 
 export {
   As,
@@ -44,4 +46,6 @@ export {
   ExitSmall,
   RightSmall,
   Direction,
+  Check,
+  UnCheck,
 };
