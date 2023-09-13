@@ -4,8 +4,11 @@ import { Location, Calendar, Clock } from '@/assets/icons';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { useState } from 'react';
+import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function InvitationDate({ defaultPlace = '10층 회의실 A' }) {
+  const { title, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
   const [isModal, setIsModal] = useState(false);
 
   const modalOpenHandler = () => {
@@ -16,7 +19,7 @@ function InvitationDate({ defaultPlace = '10층 회의실 A' }) {
   return (
     <>
       <div css={containerStyles}>
-        <div css={titleStyles}>초대 정보</div>
+        <div css={titleStyles}>{title.invitationInfo}</div>
         <div css={inputContainerStyles}>
           {/* 장소 선택 */}
           <div css={placeInputStyles}>
@@ -26,7 +29,7 @@ function InvitationDate({ defaultPlace = '10층 회의실 A' }) {
             <input
               css={inputStyles}
               type="text"
-              placeholder="장소 선택"
+              placeholder={placeholder.place}
               defaultValue={defaultPlace}
               onClick={modalOpenHandler}
               readOnly
@@ -38,13 +41,25 @@ function InvitationDate({ defaultPlace = '10층 회의실 A' }) {
               <div className="icon">
                 <Calendar />
               </div>
-              <input css={inputStyles} type="text" placeholder="날짜 선택" />
+              <input
+                css={inputStyles}
+                type="text"
+                placeholder={placeholder.date}
+                onClick={modalOpenHandler}
+                readOnly
+              />
             </div>
             <div className="time">
               <div className="icon">
                 <Clock />
               </div>
-              <input css={inputStyles} type="text" placeholder="시간 선택" />
+              <input
+                css={inputStyles}
+                type="text"
+                placeholder={placeholder.time}
+                onClick={modalOpenHandler}
+                readOnly
+              />
             </div>
           </div>
           {/* 꿀팁 작성 */}
@@ -52,7 +67,7 @@ function InvitationDate({ defaultPlace = '10층 회의실 A' }) {
             <Input
               variant="default"
               textarea
-              placeholder="방문하시는 분이 장소를 쉽게 찾을 수 있게 팁을 알려주세요."
+              placeholder={placeholder.tip}
               row={4}
               maxLength={99}
             />
