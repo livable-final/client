@@ -19,6 +19,7 @@ import PlusBig from '@/assets/icons/Plus=big.svg';
 import PlusSmall from '@/assets/icons/Plus=small.svg';
 import ExitSmall from '@/assets/icons/Exit=small.svg';
 import RightSmall from '@/assets/icons/Right=small.svg';
+import Direction from '@/assets/icons/Direction.svg';
 
 export {
   As,
@@ -42,4 +43,5 @@ export {
   PlusSmall,
   ExitSmall,
   RightSmall,
+  Direction,
 };
