@@ -5,6 +5,7 @@ import Toggle from '@/components/common/Toggle';
 import RadioBtn from '@/components/common/RadioBtn';
 import InvitationFindRoadBtn from '@/components/invitation/view/InvitationFindRoadBtn';
 import CheckBox from '@/components/common/CheckBox';
+import Roulette from '@/components/Roulette';
 
 function Home() {
   const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -23,6 +24,8 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Button content="Button" variant="blue" isDisabled />
+      <Roulette />
+
       <Button content="Button" variant="blue" />
       <Button content="Button" variant="grey" />
       <Button content="Button" variant="grey" isDisabled />

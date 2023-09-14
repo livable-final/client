@@ -1,46 +1,81 @@
-import theme from '@/styles/theme';
-import { css } from '@emotion/react';
-import { useState } from 'react';
-import Button from './common/Button';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 
 // 임시 더미데이터
-const response = {
-  korean: {
-    category: '한식',
-    menu: ['국밥', '뚝배기 불고기', '제육볶음', '백반', '짜글이'],
+const response = [
+  {
+    categoryName: '한식',
+    menuNames: ['국밥', '뚝배기 불고기', '제육볶음', '백반', '짜글이'],
   },
-  chinese: {
-    category: '중식',
-    menu: ['짜장면', '짬뽕', '마라탕', '도삭면'],
+  {
+    categoryName: '중식',
+    menuNames: ['짜장면', '짬뽕', '마라탕', '도삭면'],
   },
-  western: {
-    category: '양식',
-    menu: ['햄버거', '치킨', '피자', '샐러드', '스테이크'],
+  {
+    categoryName: '양식',
+    menuNames: ['햄버거', '치킨', '피자', '샐러드', '스테이크'],
   },
-  japanese: {
-    category: '일식',
-    menu: ['돈까스', '텐동', '초밥', '라멘'],
-  },
-  snacks: {
-    category: '분식',
-    menu: ['떡볶이', '김밥', '쫄면', '땡초우동'],
-  },
-  asian: {
-    category: '아시안',
-    menu: ['쌀국수', '분짜', '팟타이'],
-  },
-};
+  { categoryName: '일식', menuNames: ['돈까스', '텐동', '초밥', '라멘'] },
+  { categoryName: '분식', menuNames: ['떡볶이', '김밥', '쫄면', '땡초우동'] },
+  { categoryName: '아시안', menuNames: ['쌀국수', '분짜', '팟타이'] },
+];
+
+interface VariantProps {
+  scaleY: number;
+  y: string | number;
+  opacity: number;
+  filter?: string;
+}
 
 function Roulette() {
-  const [category, setCategory] = useState<string[]>(['카테고리']);
-  const [menu, setMenu] = useState<string[]>(['메뉴명']);
+  const [category, setCategory] = useState('카테고리');
+  const [menu, setMenu] = useState('메뉴명');
+  const [count, setCount] = useState(0);
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [lastIdx, setLastIdx] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
 
   // 카테고리 배열 string[]
-  const categories = Object.values(response).map((value) => value.category);
-  // 카테고리별 메뉴 배열 string[][]
-  const menus = Object.values(response).map((value) => value.menu);
+  const categories = Object.values(response).map((value) => value.categoryName);
+
+  // 카테고리별 메뉴 객체 string: string[]
+  const objectedMenus: Record<string, string[]> = {};
+  response.forEach((item) => {
+    objectedMenus[item.categoryName] = item.menuNames;
+  });
+
+  // 카테고리 불문 모든 메뉴 배열 string[]
+  const menus = Object.values(response)
+    .map((value) => value.menuNames)
+    .reduce((acc, cur) => acc.concat(cur));
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => {
+        setCurrentIdx((prev) => {
+          return prev < menus.length - 1 ? prev + 1 : prev;
+        });
+      },
+      getDuration(10, currentIdx),
+    );
+
+    return () => clearInterval(interval);
+  }, [currentIdx, menus.length]);
+
+  const variants: Variants = {
+    initial: { scaleY: 0.3, y: '-50%', opacity: 0 },
+    animate: ({ isLast }) => {
+      const props: VariantProps = { scaleY: 1, y: 0, opacity: 1 };
+      if (!isLast) props.filter = 'blur(1.1px)';
+
+      return props;
+    },
+    exit: { scaleY: 0.3, y: '50%', opacity: 0 },
+  };
+
+  function getDuration(base: number, Idx: number) {
+    return base * (Idx + 1) * 0.5;
+  }
 
   // length를 매개변수로 받아 length에 따른 랜덤 number 반환
   const onRandomHandler = (length: number) => {
@@ -49,50 +84,64 @@ function Roulette() {
 
   const onClickHandler = () => {
     const categoryIdx = onRandomHandler(categories.length);
-    const menuIdx = onRandomHandler(menus[categoryIdx].length);
+    const menuIdx = onRandomHandler(categories[categoryIdx].length);
+    setLastIdx(menus.length - 1 - count);
 
     if (isChecked) {
       // 업데이트된 카테고리에 따른 랜덤 메뉴 state 업데이트
-      setMenu(menus[menuIdx]);
+      setMenu(objectedMenus[menu][menuIdx]);
     } else {
       // 랜덤하게 카테고리 state 업데이트
-      setCategory(categories);
+      setCategory(categories[categoryIdx]);
 
       // 업데이트된 카테고리에 따른 랜덤 메뉴 state 업데이트
-      setMenu(menus[menuIdx]);
+      setMenu(objectedMenus[categories[categoryIdx]][menuIdx]);
     }
-    setIsClicked(true);
-    console.log(isClicked);
+    setCurrentIdx(0);
+    setCount((prev) => {
+      return prev < menus.length - 1 ? prev + 1 : 0;
+    });
   };
 
-  const onCheckHandler = () => {
-    setIsChecked((prev) => !prev);
-  };
+  // const onCheckHandler = () => {
+  //   setIsChecked((prev) => !prev);
+  // };
 
   return (
-    <>
-      <div>
-        <div>
-          <div>
-            {category.map((value) => (
-              <li key={value}>{value}</li>
-            ))}
-          </div>
-          <div>
-            {menu.map((value) => (
-              <li key={value}>{value}</li>
-            ))}
-          </div>
-        </div>
-      </div>
-      {isClicked && (
-        <div>
-          <input type="checkbox" id="checkbox" onClick={onCheckHandler} />
-          <span>{`${category} 고정`}</span>
-        </div>
-      )}
-      <Button content="버튼" onClick={onClickHandler} variant="blue" />
-    </>
+    <div css="flex justify-between">
+      <AnimatePresence mode="popLayout">
+        {menus.map((text, i) => {
+          const isLast = i === lastIdx;
+
+          return (
+            i === currentIdx && (
+              <motion.p
+                className="overflow-hidden text-7xl font-thin"
+                key={text}
+                custom={{ isLast }}
+                variants={variants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{
+                  duration: getDuration(isLast ? 0.1 : 0.01, i),
+                  ease: isLast ? 'easeInOut' : 'linear',
+                }}
+              >
+                {text}
+              </motion.p>
+            )
+          );
+        })}
+      </AnimatePresence>
+      <motion.button
+        className="mr-[650px]"
+        onClick={onClickHandler}
+        whileTap={{ scale: 0.9 }}
+      >
+        button
+      </motion.button>
+    </div>
   );
 }
 
