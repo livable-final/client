@@ -1,5 +1,7 @@
+import ViewForm from '@/components/Auth/ViewForm';
+
 function View() {
-  return <div>View</div>;
+  return <ViewForm />;
 }
 
 export default View;
