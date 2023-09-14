@@ -27,7 +27,7 @@ const dateContainerStyles = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 21px;
+  gap: 40px;
   min-width: 280px;
   max-width: 360px;
 

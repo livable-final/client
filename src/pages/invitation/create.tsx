@@ -7,12 +7,12 @@ import mq from '@/utils/mediaquery';
 import Button from '@/components/common/Button';
 import { useState } from 'react';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import { InvitationTexts } from '@/types/invitation/create';
+import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function Create() {
   const [btnDisplay, setBtnDisplay] = useState<string>('block');
 
-  const { button }: InvitationTexts = CREATE_TEXTS;
+  const { button }: InvitationCreateTexts = CREATE_TEXTS;
 
   const onFocusHandler = () => {
     setBtnDisplay('none');

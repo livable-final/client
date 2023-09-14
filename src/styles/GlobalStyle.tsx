@@ -31,6 +31,16 @@ const globals = css`
     }
   }
 
+  textarea {
+    &::placeholder {
+      color: ${theme.palette.greyscale.grey40};
+    }
+    &:focus {
+      outline: none;
+      color: ${theme.palette.greyscale.grey90};
+    }
+  }
+
   button {
     border: none;
     background-color: transparent;
