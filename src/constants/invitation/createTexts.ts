@@ -1,6 +1,4 @@
 const CREATE_TEXTS = {
-  purpose: '방문증을 만드는 이유는 무엇인가요?',
-  invitation: `식스센스에\n누구를 초대할까요?`,
   header: {
     default: '방문자 초대',
     meeting: '회의참여자 초대',
@@ -9,6 +7,15 @@ const CREATE_TEXTS = {
     seminar: '세미나 초대',
     as: 'AS/점검 초대',
     etc: '방문자 초대',
+  },
+  title: {
+    purpose: '방문증을 만드는 이유는 무엇인가요?',
+    invitation: `식스센스에\n누구를 초대할까요?`,
+    invitationList: '초대 목록',
+    invitationInfo: '초대 정보',
+    invitationPlace: '초대 장소',
+    invitationDate: '초대 날짜 선택',
+    invitationTime: '시간 선택',
   },
   description: {
     meeting:
@@ -24,7 +31,16 @@ const CREATE_TEXTS = {
     done: '완료',
     send: '초대장 보내기',
   },
-  inputPlaceholder: '방문목적을 직접 입력해 주세요.',
+  placeholder: {
+    purpose: '방문목적을 직접 입력해 주세요.',
+    place: '장소 선택',
+    placeEtc: '초대장소 입력',
+    date: '날짜 선택',
+    time: '시간 선택',
+    tip: '방문하시는 분이 장소를 쉽게 찾을 수 있게 팁을 알려주세요.',
+    name: '이름 입력',
+    contact: '전화번호 입력',
+  },
 };
 
 export default CREATE_TEXTS;

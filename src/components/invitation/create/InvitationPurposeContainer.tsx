@@ -8,14 +8,14 @@ import { COMMON_CATEGORIES } from '@/constants/common';
 import {
   CategoryInvitation,
   CommonCategory,
-  InvitationTexts,
+  InvitationCreateTexts,
 } from '@/types/invitation/create';
 import mq from '@/utils/mediaquery';
 import Input from '@/components/common/Input';
 
 function InvitationPurpose() {
   const { invitation }: CategoryInvitation = COMMON_CATEGORIES;
-  const { purpose, description, inputPlaceholder }: InvitationTexts =
+  const { title, description, placeholder }: InvitationCreateTexts =
     CREATE_TEXTS;
 
   const categories: CommonCategory[] = Object.values(invitation);
@@ -25,19 +25,15 @@ function InvitationPurpose() {
   return (
     <div css={purposeContainerStyles}>
       <div css={purposeQuestionStyles}>
-        <div>{purpose}</div>
+        <div>{title.purpose}</div>
       </div>
       <div css={categoryContainerStyles}>
         <div css={categoryWrapperStyles}>
           {categories.map((value) => (
-            <div
+            <button
               key={value.icon}
+              type="button"
               onClick={() => setSelectedCategory(value.icon)}
-              onKeyDown={(e) =>
-                e.key === 'Enter' ? setSelectedCategory(value.icon) : null
-              }
-              role="button"
-              tabIndex={0}
             >
               <Category
                 key={value.icon}
@@ -45,7 +41,7 @@ function InvitationPurpose() {
                 title={value.title}
                 variant={selectedCategory === value.icon ? 'blue' : 'grey'}
               />
-            </div>
+            </button>
           ))}
         </div>
         <div css={descriptionWrapperStyles}>
@@ -56,7 +52,11 @@ function InvitationPurpose() {
         </div>
         <div css={inputWrapperStyles}>
           {selectedCategory === 'etc' && (
-            <Input variant="default" placeholder={inputPlaceholder} textarea />
+            <Input
+              variant="default"
+              placeholder={placeholder.purpose}
+              textarea
+            />
           )}
         </div>
       </div>
@@ -175,10 +175,10 @@ const inputWrapperStyles = css`
     min-width: 360px;
   }
   ${mq.lg} {
-    min-width: 400px;
+    min-width: 360px;
   }
   ${mq.tab} {
-    min-width: 400px;
+    min-width: 440px;
     max-width: 1024px;
   }
 `;
