@@ -1,5 +1,6 @@
 import useViewStore from '@/stores/useViewStore';
-import InvitationOfficeInfo from '../invitation/view/InvitationOfficeInfo';
+import InvitationOfficeInfo from '@/components/invitation/view/InvitationOfficeInfo';
+
 
 function ViewForm() {
   const { nextComponents, setNextComponent } = useViewStore();
