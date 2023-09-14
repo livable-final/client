@@ -5,19 +5,20 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 
 function CheckBox({ text }: CheckBoxProps) {
-  const [selectData, setSelectData] = useState(false);
+  const [isSelect, setIsSelect] = useState<boolean>(false);
+
   return (
-    <div css={checkBoxContainerStyles}>
+    <div css={checkBoxContainerStyles(isSelect)}>
       <input
         id={text}
         type="checkbox"
-        checked={selectData}
+        checked={isSelect}
         onChange={() => {
-          setSelectData(!selectData);
+          setIsSelect(!isSelect);
         }}
       />
       <label htmlFor={text}>
-        {selectData === true ? (
+        {isSelect === true ? (
           <Check css={btnImgStyles} />
         ) : (
           <UnCheck css={btnImgStyles} />
@@ -30,7 +31,7 @@ function CheckBox({ text }: CheckBoxProps) {
 
 export default CheckBox;
 
-const checkBoxContainerStyles = css`
+const checkBoxContainerStyles = (isSelect: boolean) => css`
   input {
     display: none;
 
@@ -42,13 +43,21 @@ const checkBoxContainerStyles = css`
   label {
     display: flex;
     align-items: center;
+
+    p {
+      color: ${isSelect
+        ? theme.palette.primary
+        : theme.palette.greyscale.grey40};
+    }
   }
 `;
 
 const btnImgStyles = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 20px;
   height: 20px;
-  margin: 2px;
-  margin-right: 10px;
+  margin-right: 4px;
   flex-grow: 0;
 `;
