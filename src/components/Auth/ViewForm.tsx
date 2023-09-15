@@ -2,6 +2,7 @@ import useViewStore from '@/stores/useViewStore';
 import InvitationOfficeInfo from '@/components/invitation/view/InvitationOfficeInfo';
 import InvitationHostInfo from '@/components/invitation/view/InvitationHostInfo';
 
+
 function ViewForm() {
   const { nextComponents, setNextComponent } = useViewStore();
   if (nextComponents === 'InvitationOfficeInfo') {
