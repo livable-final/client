@@ -1,4 +1,4 @@
-import useViewStore from '@/stores/useViewStore';
+import usePagesStore from '@/stores/usePagesStore';
 
 function InvitationOfficeInfo() {
   const { setNextComponent } = usePagesStore();
