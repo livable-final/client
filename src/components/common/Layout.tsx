@@ -14,6 +14,7 @@ const layoutStyles = css`
   margin: 0 auto;
   min-width: 280px;
   max-width: 1024px;
+  overflow: hidden;
 `;
 
 export default Layout;
