@@ -1,7 +1,7 @@
 import useViewStore from '@/stores/useViewStore';
 
 function InvitationOfficeInfo() {
-  const { setNextComponent } = useViewStore();
+  const { setNextComponent } = usePagesStore();
   const onClickHandler = () => {
     setNextComponent('');
   };
