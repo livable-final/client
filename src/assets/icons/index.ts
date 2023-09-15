@@ -22,6 +22,8 @@ import RightSmall from '@/assets/icons/Right=small.svg';
 import Direction from '@/assets/icons/Direction.svg';
 import Check from '@/assets/icons/Check.svg';
 import UnCheck from '@/assets/icons/UnCheck.svg';
+import Profile from '@/assets/icons/profille.svg';
+import Copy from '@/assets/icons/Copy_light.svg';
 
 export {
   As,
@@ -48,4 +50,6 @@ export {
   Direction,
   Check,
   UnCheck,
+  Profile,
+  Copy,
 };
