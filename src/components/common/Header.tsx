@@ -24,7 +24,8 @@ function Header({ title, type = '', text = '', onClick }: HeaderProps) {
 
   return (
     <header css={headerStyles}>
-      <Back />
+      {/* 초대장 메인으로 돌아간다고 임시로 onclick 속성을 넣어놨습니다..! */}
+      <Back onClick={onClick} />
       <div css={titleStyles}>
         <h2>{title}</h2>
       </div>
