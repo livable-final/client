@@ -1,9 +1,8 @@
-import useViewStore from '@/stores/useViewStore';
+import usePagesStore from '@/stores/usePagesStore';
 import InvitationOfficeInfo from '@/components/invitation/view/InvitationOfficeInfo';
 
-
 function ViewForm() {
-  const { nextComponents, setNextComponent } = useViewStore();
+  const { nextComponents, setNextComponent } = usePagesStore();
   if (nextComponents === 'InvitationOfficeInfo') {
     return <InvitationOfficeInfo />;
   }
