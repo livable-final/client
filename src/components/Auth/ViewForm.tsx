@@ -7,12 +7,12 @@ function ViewForm() {
     return <InvitationOfficeInfo />;
   }
 
-  const onClickHandler = () => {
-    setNextComponent('InvitationOfficeInfo');
-  };
   return (
     <div>
-      <button type="button" onClick={onClickHandler}>
+      <button
+        type="button"
+        onClick={() => setNextComponent('InvitationOfficeInfo')}
+      >
         OfficeInfo 페이지로 이동
       </button>
     </div>
