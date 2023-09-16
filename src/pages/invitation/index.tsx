@@ -1,57 +1,51 @@
 import Add from '@/components/common/Add';
-import Category from '@/components/common/Category';
 import Input from '@/components/common/Input';
 import NameTag from '@/components/common/NameTag';
 import { css } from '@emotion/react';
+import useModalStore from '@/stores/useModalStore';
+import Modal from '@/components/common/Modal';
+import CREATE_TEXTS from '@/constants/invitation/createTexts';
 
-function index() {
+function Index() {
+  const { modalState, openModal } = useModalStore();
+  const { modal } = CREATE_TEXTS;
+
+  const sendHandler = () => {
+    openModal(modal.send.title, modal.send.content);
+  };
+
+  const resendHandler = () => {
+    openModal(modal.resend.title, modal.resend.content);
+  };
+
   return (
     <>
-      <div
+      <button
+        type="button"
+        onClick={sendHandler}
         css={css`
-          // 확인용 스타일입니다. 추후 삭제 예정입니다.
-          display: flex;
-          flex-direction: column;
-          width: 100vw;
-          min-width: 280px;
-          max-width: 1024px;
-          padding-top: 10px;
-          margin-bottom: 20px;
-          gap: 20px;
+          width: 100px;
+          border: 1px solid pink;
+          border-radius: 10px;
+          background-color: pink;
         `}
       >
-        <div
-          css={css`
-            // 확인용 스타일입니다. 추후 삭제 예정입니다.
-            display: flex;
-            flex-shrink: flex;
-            gap: 10px;
-          `}
-        >
-          <Category icon="meeting" title="회의" variant="grey" />
-          <Category icon="interview" title="면접" variant="grey" />
-          <Category icon="fixedTermWork" title="기간근무" variant="grey" />
-          <Category icon="seminar" title="세미나" variant="grey" />
-          <Category icon="as" title="AS/점검" variant="grey" />
-          <Category icon="etc" title="직접 입력" variant="grey" />
-        </div>
+        모달 테스트
+      </button>
+      <button
+        type="button"
+        onClick={resendHandler}
+        css={css`
+          width: 140px;
+          border: 1px solid pink;
+          border-radius: 10px;
+          background-color: pink;
+        `}
+      >
+        모달 재전송 테스트
+      </button>
+      {modalState.isOpen && <Modal onClick={() => alert('전송예정!')} />}
 
-        <div
-          css={css`
-            // 확인용 스타일입니다. 추후 삭제 예정입니다.
-            display: flex;
-            flex-shrink: flex;
-            gap: 10px;
-          `}
-        >
-          <Category icon="meeting" title="회의" variant="blue" />
-          <Category icon="interview" title="면접" variant="blue" />
-          <Category icon="fixedTermWork" title="기간근무" variant="blue" />
-          <Category icon="seminar" title="세미나" variant="blue" />
-          <Category icon="as" title="AS/점검" variant="blue" />
-          <Category icon="etc" title="직접 입력" variant="blue" />
-        </div>
-      </div>
       <input type="text" placeholder="test" />
       {/* input default */}
       <Input variant="default" placeholder="inputText" />
@@ -84,4 +78,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;
