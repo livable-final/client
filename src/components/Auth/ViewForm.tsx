@@ -1,10 +1,9 @@
-import useViewStore from '@/stores/useViewStore';
+import usePagesStore from '@/stores/usePagesStore';
 import InvitationOfficeInfo from '@/components/invitation/view/InvitationOfficeInfo';
 import InvitationHostInfo from '@/components/invitation/view/InvitationHostInfo';
 
-
 function ViewForm() {
-  const { nextComponents, setNextComponent } = useViewStore();
+  const { nextComponents, setNextComponent } = usePagesStore();
   if (nextComponents === 'InvitationOfficeInfo') {
     return <InvitationOfficeInfo />;
   }
@@ -25,6 +24,7 @@ function ViewForm() {
       >
         OfficeInfo 페이지로 이동
       </button>
+      <br />
       <button type="button" value="InvitationHostInfo" onClick={onClickHandler}>
         HostInfo 페이지로 이동
       </button>

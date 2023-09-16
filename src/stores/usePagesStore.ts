@@ -1,7 +1,7 @@
-import { ViewStore } from '@/types/invitation/view';
+import { PagesStore } from '@/types/common/pages';
 import { create } from 'zustand';
 
-const useViewStore = create<ViewStore>()((set) => ({
+const useViewStore = create<PagesStore>()((set) => ({
   nextComponents: '',
   setNextComponent: (page) => set({ nextComponents: page }),
 }));

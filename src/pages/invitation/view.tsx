@@ -1,4 +1,4 @@
-import ViewForm from '@/components/Auth/ViewForm';
+import ViewForm from '@/components/auth/ViewForm';
 
 function View() {
   return <ViewForm />;
