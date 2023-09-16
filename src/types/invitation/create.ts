@@ -17,6 +17,11 @@ export interface InvitationCreateTexts {
   placeholder: {
     [key: string]: string;
   };
+  modal: {
+    [key: string]: {
+      [key: string]: string;
+    };
+  };
 }
 
 // 초대 목적 선택
