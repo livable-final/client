@@ -50,10 +50,6 @@ const CREATE_TEXTS = {
       title: '초대장 재전송',
       content: '초대장을 이대로 수정하고 전송할까요?',
     },
-    button: {
-      send: '전송하기',
-      cancel: '취소',
-    },
   },
 };
 

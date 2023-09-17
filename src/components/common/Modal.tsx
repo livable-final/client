@@ -2,24 +2,41 @@ import { css } from '@emotion/react';
 import { ModalProps } from '@/types/common/modal';
 import theme from '@/styles/theme';
 import useModalStore from '@/stores/useModalStore';
-import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import { COMMON_MODAL_BUTTONS } from '@/constants/common';
 
-function Modal({ onClick }: ModalProps) {
+function Modal({ isAlert, isConfirm, onClick }: ModalProps) {
   const { modalState, closeModal } = useModalStore();
-  const { modal } = CREATE_TEXTS;
+  const { confirm, cancel, send } = COMMON_MODAL_BUTTONS;
 
   return (
     <div css={backgroundStyles}>
       <div css={modalContainerStyles}>
-        <div className="title">{modalState.title}</div>
-        <div className="content">{modalState.content}</div>
+        <div css={modalTitleStyles}>{modalState.title}</div>
+        <div css={modalContentStyles}>{modalState.content}</div>
         <div css={btnWrapperStyles}>
-          <button type="button" className="send" onClick={onClick}>
-            {modal.button.send}
-          </button>
-          <button type="button" className="cancel" onClick={closeModal}>
-            {modal.button.cancel}
-          </button>
+          {isAlert ? (
+            <button type="button" css={defaultBtnStyles} onClick={closeModal}>
+              {confirm}
+            </button>
+          ) : isConfirm ? (
+            <>
+              <button type="button" css={defaultBtnStyles} onClick={onClick}>
+                {confirm}
+              </button>
+              <button type="button" css={cancelBtnStyles} onClick={closeModal}>
+                {cancel}
+              </button>
+            </>
+          ) : (
+            <>
+              <button type="button" css={defaultBtnStyles}>
+                {send}
+              </button>
+              <button type="button" css={cancelBtnStyles} onClick={closeModal}>
+                {cancel}
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -50,20 +67,22 @@ const modalContainerStyles = css`
   border-radius: 16px;
   background-color: ${theme.palette.white};
   z-index: 1;
+`;
 
-  .title {
-    color: ${theme.palette.input.enabled};
-    font: ${theme.font.subTitle.subTitle1_600};
-    line-height: 18px;
-    padding: 20px 0 16px 20px;
-  }
-  .content {
-    height: 34px;
-    color: ${theme.palette.greyscale.grey60};
-    font: ${theme.font.body.body1_400};
-    line-height: 24px;
-    padding: 0 20px 0 20px;
-  }
+const modalTitleStyles = css`
+  padding: 20px 0 16px 20px;
+  color: ${theme.palette.input.enabled};
+  font: ${theme.font.subTitle.subTitle1_600};
+  line-height: 18px;
+`;
+
+const modalContentStyles = css`
+  height: 34px;
+  padding: 0 20px 0 20px;
+  white-space: pre-wrap;
+  color: ${theme.palette.greyscale.grey60};
+  font: ${theme.font.body.body1_400};
+  line-height: 24px;
 `;
 
 const btnWrapperStyles = css`
@@ -75,15 +94,16 @@ const btnWrapperStyles = css`
   padding-right: 30px;
   font: ${theme.font.body.body1_500};
   line-height: 24px;
+`;
 
-  .send {
-    color: ${theme.palette.primary};
-    cursor: pointer;
-  }
-  .cancel {
-    color: ${theme.palette.greyscale.grey50};
-    cursor: pointer;
-  }
+const defaultBtnStyles = css`
+  color: ${theme.palette.primary};
+  cursor: pointer;
+`;
+
+const cancelBtnStyles = css`
+  color: ${theme.palette.greyscale.grey50};
+  cursor: pointer;
 `;
 
 export default Modal;
