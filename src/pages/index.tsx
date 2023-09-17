@@ -24,7 +24,6 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Button content="Button" variant="blue" isDisabled />
-      <Roulette />
 
       <Button content="Button" variant="blue" />
       <Button content="Button" variant="grey" />
@@ -45,6 +44,7 @@ function Home() {
       <CheckBox text="테스트 메시지2" />
 
       <Toggle />
+      <Roulette />
       <InvitationFindRoadBtn />
     </>
   );
