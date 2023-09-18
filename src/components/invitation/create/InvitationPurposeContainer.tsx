@@ -13,7 +13,7 @@ import {
 import mq from '@/utils/mediaquery';
 import Input from '@/components/common/Input';
 
-function InvitationPurpose() {
+function InvitationPurposeContainer() {
   const { invitation }: CategoryInvitation = COMMON_CATEGORIES;
   const { title, description, placeholder }: InvitationCreateTexts =
     CREATE_TEXTS;
@@ -183,4 +183,4 @@ const inputWrapperStyles = css`
   }
 `;
 
-export default InvitationPurpose;
+export default InvitationPurposeContainer;

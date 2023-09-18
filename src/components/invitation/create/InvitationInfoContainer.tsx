@@ -8,7 +8,7 @@ import InvitationNameList from '@/components/invitation/create/InvitationNameLis
 import { InvitationCreateTexts } from '@/types/invitation/create';
 import AddressBook from '@/components/common/AddressBook';
 
-function InvitationInfo() {
+function InvitationInfoContainer() {
   const { title, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
   const nameList = ['고애신', '유진초이', '쿠도히나', '구동매', '김희성'];
 
@@ -91,4 +91,4 @@ const addBtnStyles = css`
   align-items: center;
 `;
 
-export default InvitationInfo;
+export default InvitationInfoContainer;
