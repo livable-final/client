@@ -33,3 +33,7 @@ export interface InvitationBuildingPublicTransportItemProps {
   platform: string;
   location: string;
 }
+
+export interface InvitationQrInfoTextProps {
+  textInfo: { palce: string; date: string; time: string };
+}

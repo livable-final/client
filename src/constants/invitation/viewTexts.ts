@@ -5,6 +5,7 @@ export const INVITATION_VEIW_INFO_TEXTS = {
     place: '초대 장소',
     host: '초대자 정보',
     parking: '주차 정보',
+    qr: '식스센스 초대장',
   },
   host: {
     name: '이름',
