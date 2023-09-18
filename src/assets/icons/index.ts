@@ -24,6 +24,7 @@ import Check from '@/assets/icons/Check.svg';
 import UnCheck from '@/assets/icons/UnCheck.svg';
 import Profile from '@/assets/icons/profille.svg';
 import Copy from '@/assets/icons/Copy_light.svg';
+import Send from '@/assets/icons/Send.svg';
 
 export {
   As,
@@ -40,6 +41,7 @@ export {
   Meeting,
   Right,
   Seminar,
+  Send,
   Up,
   Info,
   ErrorIcon,
