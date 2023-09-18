@@ -5,12 +5,12 @@ import { NameTagProps } from '@/types/common/nameTag';
 
 function NameTag({ name, onClick }: NameTagProps) {
   return (
-    <button type="button" css={nameTagContainerStyles(name)}>
+    <div css={nameTagContainerStyles(name)}>
       <div css={textStyles}>{name}</div>
       <button type="button" css={iconStyles} onClick={onClick}>
         <ExitSmall />
       </button>
-    </button>
+    </div>
   );
 }
 
