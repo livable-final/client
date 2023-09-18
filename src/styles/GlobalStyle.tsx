@@ -12,6 +12,9 @@ const globals = css`
     margin: 0;
     font-size: 1rem;
   }
+  svg {
+    cursor: pointer;
+  }
 
   li {
     list-style: none;
