@@ -2,22 +2,19 @@ import { css } from '@emotion/react';
 import { BottomSheetProps } from '@/types/common/bottomSheet';
 import theme from '@/styles/theme';
 import Button from '@/components/common/Button';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
 
-function BottomSheet({ isOpen, setIsOpen }: BottomSheetProps) {
+function BottomSheet({ onClick }: BottomSheetProps) {
+  const { bottomSheetState, closeBottomSheet } = useBottomSheetStore();
+  const { isOpen } = bottomSheetState;
+
   // 바텀시트 바깥쪽 누를 때 닫기
   const onClickBackgroundHandler = (
     e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>,
   ) => {
     if (e.target === e.currentTarget) {
-      setIsOpen(!isOpen);
-      console.log(isOpen);
+      closeBottomSheet();
     }
-  };
-
-  // 바텀시트 내부 버튼 클릭했을 때 닫기
-  const onClickInsideBtnHandler = () => {
-    setIsOpen(!isOpen);
-    console.log(isOpen);
   };
 
   return (
@@ -29,20 +26,9 @@ function BottomSheet({ isOpen, setIsOpen }: BottomSheetProps) {
       tabIndex={0}
     >
       <div css={containerStyles(isOpen)}>
-        <div
-          css={css`
-            width: 100%;
-            padding: 0 16px;
-          `}
-        >
-          <input type="text" placeholder="바텀시트 테스트입니다." />
-        </div>
+        {bottomSheetState.content}
         <div css={buttonWrapperStyles}>
-          <Button
-            content="저장"
-            variant="blue"
-            onClick={onClickInsideBtnHandler}
-          />
+          <Button content="저장" variant="blue" onClick={onClick} />
         </div>
       </div>
     </div>
@@ -72,6 +58,7 @@ const containerStyles = (isOpen: boolean) => css`
   border-radius: 20px 20px 0 0;
   width: 100%;
   min-height: 400px;
+  height: auto;
   background-color: ${theme.palette.white};
   animation: ${isOpen
     ? `bottomSheetUp 800ms ease-out`
