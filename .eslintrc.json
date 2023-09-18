@@ -45,7 +45,6 @@
       }
     ],
     "react/require-default-props": "off", //default props 설정 off
-    "no-param-reassign": "off", // 함수 매개변수 no-param-resign 속성에 할당 off
-    "@typescript-eslint/no-explicit-any": "off" // any 사용 금지 off (임시)
+    "no-param-reassign": "off" // 함수 매개변수 no-param-resign 속성에 할당 off
   }
 }
