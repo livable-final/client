@@ -13,6 +13,10 @@ const globals = css`
     font-size: 1rem;
   }
 
+  li {
+    list-style: none;
+  }
+
   input {
     width: 100%;
     min-width: 280px;
