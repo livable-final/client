@@ -126,7 +126,7 @@ const textareaContainerStyles = css`
 `;
 
 const inputStyles = () => css`
-  padding: 17px 16px;
+  padding: 16px;
   border: none;
   border-radius: 12px;
   height: 58px;
@@ -135,7 +135,7 @@ const inputStyles = () => css`
 `;
 
 const inputTextareaStyles = (variantData: InputColorProps) => css`
-  margin: 17px 16px;
+  margin: 16px;
   border: none;
   background-color: ${variantData.backgroundColor};
   font: ${variantData.font};
