@@ -10,7 +10,7 @@ import useIsScrollYTop from '@/hooks/useIsScrollYTop';
 function Fnb() {
   // 스크롤 위치 상태
   const router = useRouter();
-  const { isTop, scrollY } = useIsScrollYTop(34);
+  const { isTop, scrollY } = useIsScrollYTop(HOME_TEXTS.indicator.height);
   const { greyscale } = theme.palette;
   const { gnb } = HOME_TEXTS;
 
@@ -21,21 +21,21 @@ function Fnb() {
   // TOFIXED: 아이콘이 확정되지 않아서 임시로 넣어두었습니다.
   const renderIcon = (icon: string, isActive: boolean) => {
     switch (icon) {
-      case gnb.home.name:
+      case gnb.home.icon:
+        return (
+          <Icons
+            icon={gnb.home.icon}
+            color={isActive ? greyscale.grey60 : greyscale.grey30}
+          />
+        );
+      case gnb.lunch.icon:
         return (
           <Icons
             color={isActive ? greyscale.grey60 : greyscale.grey30}
             icon={gnb.home.icon}
           />
         );
-      case gnb.lunch.name:
-        return (
-          <Icons
-            color={isActive ? greyscale.grey60 : greyscale.grey30}
-            icon={gnb.home.icon}
-          />
-        );
-      case gnb.user.name:
+      case gnb.user.icon:
         return (
           <Icons
             color={isActive ? greyscale.grey60 : greyscale.grey30}
