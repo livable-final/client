@@ -29,6 +29,7 @@ const CREATE_TEXTS = {
   button: {
     next: '다음',
     done: '완료',
+    confirm: '확인',
     send: '초대장 보내기',
   },
   placeholder: {
