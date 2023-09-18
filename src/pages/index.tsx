@@ -41,7 +41,7 @@ function Home() {
       <Button content="Button" variant="secondaryBlue" />
       <Button content="Button" variant="secondaryGrey" />
 
-      {/* 우측 text가  있는 경우 */}
+      {/* 우측 text가 있는 경우 */}
       <Header title="title" type="text" onClick={onClickHandler} />
       {/* 우측 close 아이콘이 있는 경우 */}
       <Header title="title" type="close" onClick={onClickHandler} />
