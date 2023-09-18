@@ -36,8 +36,6 @@ function Header({ title, type = '', text = '', onClick }: HeaderProps) {
   );
 }
 
-export default Header;
-
 const headerStyles = css`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -70,3 +68,5 @@ const iconStyles = (type: string) => css`
   color: ${type === 'text' && theme.palette.primary};
   font: ${type === 'text' && theme.font.body.body1_500};
 `;
+
+export default Header;
