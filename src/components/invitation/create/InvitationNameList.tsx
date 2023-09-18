@@ -15,8 +15,8 @@ function InvitationNameList({ nameList }: InvitationNameListProps) {
   return (
     <div css={listContainerStyles}>
       <div css={titleWrapperStyles}>
-        <div className="title">{title.invitationList}</div>
-        <div className="length">{nameList.length}/30</div>
+        <div css={titleStyles}>{title.invitationList}</div>
+        <div css={lengthStyles}>{nameList.length}/30</div>
       </div>
       <div css={listWrapperStyles}>
         <Add isBlue onClick={() => alert('추가 버튼 테스트')} />
@@ -53,17 +53,18 @@ const listContainerStyles = css`
 const titleWrapperStyles = css`
   display: flex;
   justify-content: space-between;
+`;
 
-  .title {
-    font: ${theme.font.subTitle.subTitle1_600};
-    color: ${theme.palette.title};
-    line-height: 25px;
-  }
-  .length {
-    font: ${theme.font.body.body1_400};
-    color: ${theme.palette.greyscale.grey40};
-    line-height: 24px;
-  }
+const titleStyles = css`
+  font: ${theme.font.subTitle.subTitle1_600};
+  color: ${theme.palette.title};
+  line-height: 25px;
+`;
+
+const lengthStyles = css`
+  font: ${theme.font.body.body1_400};
+  color: ${theme.palette.greyscale.grey40};
+  line-height: 24px;
 `;
 
 const listWrapperStyles = css`

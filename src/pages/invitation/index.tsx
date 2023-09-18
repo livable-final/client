@@ -10,11 +10,11 @@ function Index() {
   const { modalState, openModal } = useModalStore();
   const { modal } = CREATE_TEXTS;
 
-  const sendHandler = () => {
+  const onClickSendHandler = () => {
     openModal(modal.send.title, modal.send.content);
   };
 
-  const resendHandler = () => {
+  const onClickResendHandler = () => {
     openModal(modal.resend.title, modal.resend.content);
   };
 
@@ -22,7 +22,7 @@ function Index() {
     <>
       <button
         type="button"
-        onClick={sendHandler}
+        onClick={onClickSendHandler}
         css={css`
           width: 100px;
           border: 1px solid pink;
@@ -34,7 +34,7 @@ function Index() {
       </button>
       <button
         type="button"
-        onClick={resendHandler}
+        onClick={onClickResendHandler}
         css={css`
           width: 140px;
           border: 1px solid pink;
