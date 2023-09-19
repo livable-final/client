@@ -9,6 +9,7 @@ import {
   Etc,
   Info,
   Direction,
+  CopyBlue,
   Home,
   Back,
 } from '@/assets/icons';
@@ -33,6 +34,8 @@ function Icons({ icon, color }: IconsProps) {
       return <Info color={color} />;
     case invitation.direction:
       return <Direction color={color} />;
+    case invitation.copy:
+      return <CopyBlue color={color} />;
     case home.home:
       return <Home color={color} />;
     case invitation.list:

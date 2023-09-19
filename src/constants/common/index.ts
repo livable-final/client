@@ -88,6 +88,7 @@ export const COMMON_ICON_NAMES = {
     etc: 'etc',
     info: 'info',
     direction: 'direction',
+    copy: 'copy',
     list: 'list',
   },
   home: {
