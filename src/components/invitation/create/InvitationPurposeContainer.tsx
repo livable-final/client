@@ -1,7 +1,12 @@
 import theme from '@/styles/theme';
-import Category from '@/components/common/Category';
+import mq from '@/utils/mediaquery';
+import Input from '@/components/common/Input';
 import Icons from '@/components/common/Icons';
+import Category from '@/components/common/Category';
+import Button from '@/components/common/Button';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import useViewStore from '@/stores/usePagesStore';
+import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
 import { useState } from 'react';
 import { css } from '@emotion/react';
 import { COMMON_CATEGORIES } from '@/constants/common';
@@ -10,17 +15,29 @@ import {
   CommonCategory,
   InvitationCreateTexts,
 } from '@/types/invitation/create';
-import mq from '@/utils/mediaquery';
-import Input from '@/components/common/Input';
 
 function InvitationPurposeContainer() {
+  const { setNextComponent } = useViewStore();
+  const { setHeaderTitle } = useInvitationHeaderTitleStore();
   const { invitation }: CategoryInvitation = COMMON_CATEGORIES;
-  const { title, description, placeholder }: InvitationCreateTexts =
-    CREATE_TEXTS;
-
+  const {
+    header,
+    title,
+    description,
+    placeholder,
+    button,
+  }: InvitationCreateTexts = CREATE_TEXTS;
   const categories: CommonCategory[] = Object.values(invitation);
-
   const [selectedCategory, setSelectedCategory] = useState<string>('meeting');
+
+  const onClickCategoryHandler = (item: CommonCategory) => {
+    setSelectedCategory(item.icon);
+  };
+
+  const onClickBtnHandler = () => {
+    setNextComponent('InvitationVisitorsContainer');
+    setHeaderTitle(header[selectedCategory]);
+  };
 
   return (
     <div css={purposeContainerStyles}>
@@ -33,7 +50,7 @@ function InvitationPurposeContainer() {
             <button
               key={item.icon}
               type="button"
-              onClick={() => setSelectedCategory(item.icon)}
+              onClick={() => onClickCategoryHandler(item)}
             >
               <Category
                 key={item.icon}
@@ -59,6 +76,13 @@ function InvitationPurposeContainer() {
             />
           )}
         </div>
+      </div>
+      <div css={buttonWrapperStyles}>
+        <Button
+          content={button.next}
+          variant="blue"
+          onClick={onClickBtnHandler}
+        />
       </div>
     </div>
   );
@@ -90,6 +114,7 @@ const purposeQuestionStyles = css`
   max-width: 360px;
   height: 28px;
   padding-left: 4px;
+
   div {
     display: flex;
     font: ${theme.font.title.title2_500};
@@ -145,6 +170,7 @@ const descriptionWrapperStyles = css`
   max-width: 280px;
   height: 44px;
   padding: 0 20px 0;
+
   div {
     display: flex;
     color: ${theme.palette.greyscale.grey50};
@@ -180,6 +206,27 @@ const inputWrapperStyles = css`
   ${mq.tab} {
     min-width: 440px;
     max-width: 1024px;
+  }
+`;
+
+const buttonWrapperStyles = css`
+  position: fixed;
+  bottom: 0;
+  min-width: 280px;
+  max-width: 360px;
+  height: 100px;
+
+  ${mq.md} {
+    min-width: 361px;
+    max-width: 480px;
+  }
+  ${mq.lg} {
+    min-width: 481px;
+    max-width: 640px;
+  }
+  ${mq.tab} {
+    min-width: 641px;
+    max-width: 800px;
   }
 `;
 
