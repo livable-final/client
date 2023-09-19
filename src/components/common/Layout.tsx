@@ -1,9 +1,12 @@
 import { css } from '@emotion/react';
-import pretendard from '@/styles/font';
+import { pretendard, godo } from '@/styles/font';
 
 function Layout({ children }: React.PropsWithChildren) {
   return (
-    <div className={pretendard.className} css={layoutStyles}>
+    <div
+      className={`${pretendard.className} ${godo.variable}`}
+      css={layoutStyles}
+    >
       {children}
     </div>
   );
