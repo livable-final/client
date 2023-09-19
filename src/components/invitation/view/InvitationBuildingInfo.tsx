@@ -95,7 +95,7 @@ const ContainerStyles = css`
 const BuildingImgStyles = css`
   background-color: #b4b4b4;
   height: 500px;
-  /* width: 100%; */
+
   margin: 0 -16px;
 `;
 
