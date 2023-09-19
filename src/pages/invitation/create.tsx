@@ -1,29 +1,12 @@
 import InvitationPurposeContainer from '@/components/invitation/create/InvitationPurposeContainer';
 import InvitationInfoContainer from '@/components/invitation/create/InvitationInfoContainer';
 import InvitationDateContainer from '@/components/invitation/create/InvitationDateContainer';
+import InvitationDoneContainer from '@/components/invitation/create/InvitationDoneContainer';
 import Header from '@/components/common/Header';
 import { css } from '@emotion/react';
 import mq from '@/utils/mediaquery';
-import Button from '@/components/common/Button';
-import { useState } from 'react';
-import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function Create() {
-  const [btnDisplay, setBtnDisplay] = useState<string>('block');
-
-  const { button }: InvitationCreateTexts = CREATE_TEXTS;
-
-  const onFocusHandler = () => {
-    setBtnDisplay('none');
-  };
-
-  const onBlurHandler = () => {
-    setTimeout(() => {
-      setBtnDisplay('block');
-    }, 250);
-  };
-
   return (
     <div css={createContainerStyles}>
       <div css={headerContainerStyles}>
@@ -34,14 +17,7 @@ function Create() {
           onClick={() => alert('미리보기 테스트')}
         />
       </div>
-      <InvitationDateContainer />
-      <div
-        css={buttonWrapperStyles(btnDisplay)}
-        onFocus={onFocusHandler}
-        onBlur={onBlurHandler}
-      >
-        <Button content={button.next} variant="blue" />
-      </div>
+      <InvitationDoneContainer />
     </div>
   );
 }

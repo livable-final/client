@@ -82,6 +82,7 @@ export const COMMON_ICON_NAMES = {
     etc: 'etc',
     info: 'info',
     direction: 'direction',
+    list: 'list',
   },
   home: {
     // 추후 보강 예정
