@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { css } from '@emotion/react';
 import { InputColorProps, InputProps } from '@/types/common/input';
 import { COMMON_INPUT_COLORS } from '@/constants/common';
@@ -15,9 +15,16 @@ function Input({
   errorType,
   row = 2,
   maxLength = 7,
+  setValue,
+  value,
 }: InputProps) {
-  const [value, setValue] = useState('');
   const variantData = COMMON_INPUT_COLORS[variant];
+
+  const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setValue(e.target.value);
+
+  const onChangeTextAreaHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setValue(e.target.value);
 
   return (
     <div css={inputContainerStyles}>
@@ -31,9 +38,7 @@ function Input({
               name="content"
               placeholder={placeholder}
               value={value}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                setValue(e.target.value)
-              }
+              onChange={onChangeTextAreaHandler}
               cols={30}
               rows={row}
               css={inputTextareaStyles(variantData)}
@@ -50,9 +55,7 @@ function Input({
             type="text"
             placeholder={placeholder}
             value={value}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setValue(e.target.value)
-            }
+            onChange={onChangeInputHandler}
             css={inputStyles}
             disabled={isDisabled}
           />
@@ -126,7 +129,7 @@ const textareaContainerStyles = css`
 `;
 
 const inputStyles = () => css`
-  padding: 16px;
+  padding: 17px 16px;
   border: none;
   border-radius: 12px;
   height: 58px;
@@ -135,7 +138,7 @@ const inputStyles = () => css`
 `;
 
 const inputTextareaStyles = (variantData: InputColorProps) => css`
-  margin: 16px;
+  margin: 17px 16px;
   border: none;
   background-color: ${variantData.backgroundColor};
   font: ${variantData.font};
