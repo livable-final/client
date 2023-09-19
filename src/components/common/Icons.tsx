@@ -10,6 +10,7 @@ import {
   Info,
   Direction,
   Home,
+  Back,
 } from '@/assets/icons';
 
 function Icons({ icon, color }: IconsProps) {
@@ -34,6 +35,8 @@ function Icons({ icon, color }: IconsProps) {
       return <Direction color={color} />;
     case home.home:
       return <Home color={color} />;
+    case invitation.list:
+      return <Back color={color} />;
     default:
       break;
   }

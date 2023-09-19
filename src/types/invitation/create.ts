@@ -37,6 +37,6 @@ export interface CommonCategory {
 }
 
 // 방문자 리스트
-export interface InvitationNameListProps {
-  nameList: string[];
+export interface InvitationVisitorListProps {
+  visitorList: string[];
 }
