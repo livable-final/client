@@ -1,6 +1,6 @@
 import Fnb from '@/components/common/Fnb';
 
-function Index() {
+function LunchHome() {
   return (
     <div>
       <div>오점완 홈</div>
@@ -9,4 +9,5 @@ function Index() {
   );
 }
 
-export default Index;
+export default LunchHome;
+

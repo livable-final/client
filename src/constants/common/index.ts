@@ -55,6 +55,12 @@ export const COMMON_INPUT_COLORS: InputColorsProps = {
     color: `${theme.palette.input.unabled}`,
     font: `${theme.font.body.body1_400}`,
   },
+  search: {
+    border: `${theme.palette.greyscale.grey20}`,
+    backgroundColor: `${theme.palette.white}`,
+    color: `${theme.palette.input.unabled}`,
+    font: `${theme.font.body.body1_400}`,
+  },
 };
 
 // 에러메세지 내용은 추후 변경

@@ -22,6 +22,18 @@ import RightSmall from '@/assets/icons/Right=small.svg';
 import Direction from '@/assets/icons/Direction.svg';
 import Check from '@/assets/icons/Check.svg';
 import UnCheck from '@/assets/icons/UnCheck.svg';
+import SearchIcon from '@/assets/icons/Search.svg';
+import XIcon from '@/assets/icons/XS_1.5.svg';
+import Gift from '@/assets/icons/Gift.svg';
+import Plate from '@/assets/icons/Plate.svg';
+import Bento from '@/assets/icons/Bento.svg';
+import Smile from '@/assets/icons/Smile.svg';
+import Confused from '@/assets/icons/Confused.svg';
+import Chef from '@/assets/icons/Chef.svg';
+import Rice from '@/assets/icons/Rice.svg';
+import ThumbsUp from '@/assets/icons/ThumbsUp.svg';
+import Camera from '@/assets/icons/Camera.svg';
+import XSBlack from '@/assets/icons/XS_black.svg';
 import Profile from '@/assets/icons/profille.svg';
 import Copy from '@/assets/icons/Copy_light.svg';
 import Home from '@/assets/icons/Home.svg';
@@ -54,6 +66,18 @@ export {
   Direction,
   Check,
   UnCheck,
+  SearchIcon,
+  XIcon,
+  Gift,
+  Plate,
+  Chef,
+  Bento,
+  Smile,
+  Confused,
+  Rice,
+  ThumbsUp,
+  Camera,
+  XSBlack,
   Profile,
   Copy,
   Home,
