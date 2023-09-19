@@ -1,7 +1,7 @@
 import theme from '@/styles/theme';
-import { TestBuildingImg } from '@/assets/testImg';
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import mq from '@/utils/mediaquery';
 import InvitationBuildingInfoItem from './InvitationBuildingInfoItem';
 import InvitationBuildingMap from './InvitationBuildingMap';
 import InvitationBuildingTitle from './InvitationBuildingTitle';
@@ -33,13 +33,11 @@ function InvitationBuildingInfo() {
     },
   ];
   return (
-    <div>
-      <div css={BuildingImgStyles}>
-        <TestBuildingImg />
-      </div>
+    <div css={ContainerStyles}>
+      <div css={BuildingImgStyles} />
 
       <div
-        css={BuildingInfoContainer({ isScrollBottom })}
+        css={BuildingInfoStyles({ isScrollBottom })}
         onScroll={(e) => onScrollHandler(e)}
       >
         <InvitationBuildingTitle
@@ -78,24 +76,48 @@ function InvitationBuildingInfo() {
   );
 }
 
-const BuildingImgStyles = css`
-  margin: -16px;
+const ContainerStyles = css`
+  height: 100vh;
+  position: relative;
+
+  margin: 0 auto;
+  ${mq.md} {
+    max-width: 360px;
+  }
+  ${mq.lg} {
+    max-width: 480px;
+  }
+  ${mq.tab} {
+    max-width: 640px;
+  }
 `;
 
-const BuildingInfoContainer = (props: { isScrollBottom: boolean }) => css`
+const BuildingImgStyles = css`
+  background-color: #b4b4b4;
+  height: 500px;
+  /* width: 100%; */
+  margin: 0 -16px;
+`;
+
+const BuildingInfoStyles = (props: { isScrollBottom: boolean }) => css`
+  width: calc(100% + 32px);
   border-radius: 36px 36px 0 0;
   padding: 24px 16px;
-  margin: 0 0 0 -16px;
+  margin: 0 -16px;
   background-color: white;
-  position: fixed;
+  position: absolute;
   top: 238px;
   height: calc(100vh - 238px);
   overflow: auto;
 
-  transition: 0.5s;
+  transition: box-shadow 0.5s;
   box-shadow: ${props.isScrollBottom
     ? null
     : 'rgba(0, 0, 0, 0.2) 0px -50px 36px -28px inset'};
+
+  &::-webkit-scrollbar {
+    display: none; // 스크롤바 숨기기
+  }
 `;
 
 const UnderLineStyles = css`
