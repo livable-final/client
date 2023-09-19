@@ -1,10 +1,18 @@
-import Fnb from '@/components/common/Fnb';
+import UserTitle from '@/components/user/UserTitle';
+import UserInfo from '@/components/user/UserInfo';
+import UserNavigator from '@/components/user/UserNavigator';
+import Bnb from '@/components/common/Bnb';
+import { USER_TEXTS } from '@/constants/user/userTexts';
 
 function User() {
   return (
     <div>
-      <div>마이페이지</div>
-      <Fnb />
+      <UserTitle />
+      <UserInfo />
+      {USER_TEXTS.navigator.map((item) => (
+        <UserNavigator key={item.title} title={item.title} href={item.href} />
+      ))}
+      <Bnb />
     </div>
   );
 }
