@@ -13,8 +13,7 @@ function InvitationDoneBtn() {
   const router = useRouter();
 
   const onClickToMypageHandler = () => {
-    // 추후 마이 페이지 링크로 변경 필요
-    router.push('/');
+    router.push('/user');
   };
 
   const onClickToHomeHandler = () => {
