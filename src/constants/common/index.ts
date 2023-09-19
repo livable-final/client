@@ -94,6 +94,9 @@ export const COMMON_ICON_NAMES = {
   home: {
     home: 'home',
   },
+  user: {
+    coin: 'coin',
+  },
 };
 
 // 카테고리 이름

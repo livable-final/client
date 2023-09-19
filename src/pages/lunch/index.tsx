@@ -1,13 +1,12 @@
-import Fnb from '@/components/common/Fnb';
+import Bnb from '@/components/common/Bnb';
 
 function LunchHome() {
   return (
     <div>
       <div>오점완 홈</div>
-      <Fnb />
+      <Bnb />
     </div>
   );
 }
 
 export default LunchHome;
-
