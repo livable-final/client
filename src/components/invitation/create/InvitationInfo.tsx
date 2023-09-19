@@ -1,14 +1,14 @@
 import Input from '@/components/common/Input';
-import { css } from '@emotion/react';
-import { Location, Calendar, Clock } from '@/assets/icons';
+import CheckBox from '@/components/common/CheckBox';
+import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
+import { css } from '@emotion/react';
+import { Location, Calendar, Clock } from '@/assets/icons';
 import { useState } from 'react';
-import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import { InvitationCreateTexts } from '@/types/invitation/create';
-import CheckBox from '@/components/common/CheckBox';
 
-function InvitationDate({ defaultPlace = '10층 회의실 A' }) {
+function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
   const { title, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
   const [isModal, setIsModal] = useState(false);
 
@@ -185,4 +185,4 @@ const textareaStyles = css`
   width: 100%;
 `;
 
-export default InvitationDate;
+export default InvitationInfo;
