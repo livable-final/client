@@ -28,6 +28,7 @@ const CategoryContainer = (variantData: CategoryColorProps) => css`
   border: ${variantData.border};
   border-radius: 16px;
   background-color: ${variantData.backgroundColor};
+  cursor: pointer;
 
   ${mq.tab} {
     width: 130px;
