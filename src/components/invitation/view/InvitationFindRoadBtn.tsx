@@ -20,7 +20,7 @@ const mapStyles = css`
   align-items: center;
   position: relative;
   height: 268px;
-  margin: 64px 0;
+  margin: 25px 0;
   background-color: ${theme.palette.greyscale.grey30};
 `;
 
