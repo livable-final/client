@@ -29,6 +29,7 @@ function InvitationPurposeContainer() {
   }: InvitationCreateTexts = CREATE_TEXTS;
   const categories: CommonCategory[] = Object.values(invitation);
   const [selectedCategory, setSelectedCategory] = useState<string>('meeting');
+  const [etcPurpose, setEtcPurpose] = useState<string>('');
 
   const onClickCategoryHandler = (item: CommonCategory) => {
     setSelectedCategory(item.icon);
@@ -70,6 +71,8 @@ function InvitationPurposeContainer() {
         <div css={inputWrapperStyles}>
           {selectedCategory === 'etc' && (
             <Input
+              value={etcPurpose}
+              setValue={setEtcPurpose}
               variant="default"
               placeholder={placeholder.purpose}
               textarea
