@@ -1,17 +1,17 @@
+import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { Send } from '@/assets/icons';
-import { InvitationVisitorListProps } from '@/types/invitation/create';
-import theme from '@/styles/theme';
+import { InvitationVisitorsListProps } from '@/types/invitation/create';
 
-function InvitationDoneMessage({ visitorList }: InvitationVisitorListProps) {
+function InvitationDoneMessage({ visitorsList }: InvitationVisitorsListProps) {
   return (
     <div css={containerStyles}>
       <Send />
       <div css={messageStyles}>
-        {visitorList.length === 1
-          ? `${visitorList[0]}님께\n초대장을 보냈어요`
-          : `${visitorList[0]}님 외 ${
-              visitorList.length - 1
+        {visitorsList.length === 1
+          ? `${visitorsList[0]}님께\n초대장을 보냈어요`
+          : `${visitorsList[0]}님 외 ${
+              visitorsList.length - 1
             }명에게\n초대장을 보냈어요`}
       </div>
     </div>
