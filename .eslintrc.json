@@ -35,6 +35,16 @@
       {
         "labelAttributes": ["htmlFor"]
       }
-    ] //label 태그 사용시 에러해결을 위한 옵션
+    ], //label 태그 사용시 에러해결을 위한 옵션
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true, // 개발 종속성은 무시
+        "optionalDependencies": true, // optional 종속성은 무시
+        "peerDependencies": true // peer 종속성은 무시
+      }
+    ],
+    "react/require-default-props": "off", //default props 설정 off
+    "no-param-reassign": "off" // 함수 매개변수 no-param-resign 속성에 할당 off
   }
 }
