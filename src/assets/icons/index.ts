@@ -36,6 +36,9 @@ import Camera from '@/assets/icons/Camera.svg';
 import XSBlack from '@/assets/icons/XS_black.svg';
 import Profile from '@/assets/icons/profille.svg';
 import Copy from '@/assets/icons/Copy_light.svg';
+import Home from '@/assets/icons/Home.svg';
+import Send from '@/assets/icons/Send.svg';
+
 
 export {
   As,
@@ -52,6 +55,7 @@ export {
   Meeting,
   Right,
   Seminar,
+  Send,
   Up,
   Info,
   ErrorIcon,
@@ -76,4 +80,5 @@ export {
   XSBlack,
   Profile,
   Copy,
+  Home,
 };
