@@ -90,6 +90,7 @@ export const COMMON_ICON_NAMES = {
     direction: 'direction',
     copy: 'copy',
     list: 'list',
+    plusSmall: 'plusSmall',
   },
   home: {
     home: 'home',

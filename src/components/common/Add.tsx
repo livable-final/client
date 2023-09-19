@@ -1,10 +1,13 @@
 import theme from '@/styles/theme';
+import Icons from '@/components/common/Icons';
 import PlusBig from '@/assets/icons/Plus=big.svg';
-import PlusSmall from '@/assets/icons/Plus=small.svg';
 import { css } from '@emotion/react';
 import { AddBtnProps } from '@/types/common/add';
+import { COMMON_ICON_NAMES } from '@/constants/common';
 
 function Add({ isBlue = false, onClick }: AddBtnProps) {
+  const { invitation } = COMMON_ICON_NAMES;
+
   return (
     <button
       type="button"
@@ -15,7 +18,7 @@ function Add({ isBlue = false, onClick }: AddBtnProps) {
         <div css={textWrapperStyles}>
           <div>추가</div>
           <div css={iconStyles}>
-            <PlusSmall />
+            <Icons icon={invitation.plusSmall} color={theme.palette.primary} />
           </div>
         </div>
       ) : (
