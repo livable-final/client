@@ -1,9 +1,9 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { Send } from '@/assets/icons';
-import { InvitationVisitorsListProps } from '@/types/invitation/create';
+import { InvitationDoneMessageProps } from '@/types/invitation/create';
 
-function InvitationDoneMessage({ visitorsList }: InvitationVisitorsListProps) {
+function InvitationDoneMessage({ visitorsList }: InvitationDoneMessageProps) {
   return (
     <div css={containerStyles}>
       <Send />

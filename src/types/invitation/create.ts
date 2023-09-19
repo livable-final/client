@@ -42,3 +42,7 @@ export interface InvitationVisitorsListProps {
   visitorsList: string[];
   onClick: () => void;
 }
+
+export interface InvitationDoneMessageProps {
+  visitorsList: string[];
+}
