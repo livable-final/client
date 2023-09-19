@@ -7,7 +7,7 @@ import mq from '@/utils/mediaquery';
 import Icons from '@/components/common/Icons';
 import useIsScrollYTop from '@/hooks/useIsScrollYTop';
 
-function Fnb() {
+function Bnb() {
   // 스크롤 위치 상태
   const router = useRouter();
   const { isTop, scrollY } = useIsScrollYTop(HOME_TEXTS.indicator.height);
@@ -75,12 +75,9 @@ const containerStlyes = (target: number) => css`
   width: 100%;
   background-color: ${theme.palette.white};
   max-width: 1024px;
-  padding: 10px 34px 6px;
+  padding: 7px 40px;
 
   // Media Query
-  ${mq.md} {
-    padding: 10px 68px 6px;
-  }
   ${mq.tab} {
     bottom: 0;
     padding: 4px 184px;
@@ -109,7 +106,7 @@ const spanStyles = css`
 `;
 
 const indicatorStyles = (isTop: boolean) => css`
-  display: flex;
+  display: ${isTop ? 'none' : 'flex'};
   height: 34px;
   justify-content: center;
   align-items: center;
@@ -132,4 +129,4 @@ const indicatorStyles = (isTop: boolean) => css`
   }
 `;
 
-export default Fnb;
+export default Bnb;

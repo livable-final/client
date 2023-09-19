@@ -8,7 +8,7 @@ import CheckBox from '@/components/common/CheckBox';
 import Roulette from '@/components/Roulette';
 import BottomSheet from '@/components/common/BottomSheet';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import Fnb from '@/components/common/Fnb';
+import Bnb from '@/components/common/Bnb';
 
 function Home() {
   const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -62,7 +62,7 @@ function Home() {
         누르면 바텀시트가 열립니다.
       </button>
       {bottomSheetState.isOpen && <BottomSheet />}
-      <Fnb />
+      <Bnb />
     </>
   );
 }
