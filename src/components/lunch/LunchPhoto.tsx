@@ -10,7 +10,7 @@ function LunchPhoto() {
   const fileInput = useRef<HTMLInputElement>(null);
 
   // ref 클릭
-  const pickImageHandler = () => {
+  const onClickBtnHandler = () => {
     if (fileInput.current) {
       fileInput.current.click();
     }
@@ -43,7 +43,7 @@ function LunchPhoto() {
   };
 
   // 이미지 삭제
-  const deleteImagehandler = (e: React.MouseEvent, index: number) => {
+  const onClickDeleteHandler = (e: React.MouseEvent, index: number) => {
     e.preventDefault();
     const newImages = [...files];
     const newPreviews = [...previews];
@@ -57,7 +57,7 @@ function LunchPhoto() {
 
   return (
     <section css={photoListStyles}>
-      <button type="button" onClick={pickImageHandler} css={photoStyles}>
+      <button type="button" onClick={onClickBtnHandler} css={photoStyles}>
         <Camera />
         <p>0/5</p>
       </button>
@@ -81,7 +81,7 @@ function LunchPhoto() {
             />
             <button
               type="button"
-              onClick={(e: React.MouseEvent) => deleteImagehandler(e, idx)}
+              onClick={(e: React.MouseEvent) => onClickDeleteHandler(e, idx)}
             >
               <XSBlack />
             </button>
