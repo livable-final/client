@@ -41,6 +41,8 @@ import Subway from '@/assets/icons/Subway.svg';
 import Bus from '@/assets/icons/Bus.svg';
 import Home from '@/assets/icons/Home.svg';
 import Send from '@/assets/icons/Send.svg';
+import Setting from '@/assets/icons/Setting.svg';
+import Coin from '@/assets/icons/Coin.svg';
 
 export {
   As,
@@ -86,4 +88,6 @@ export {
   Subway,
   Bus,
   Home,
+  Setting,
+  Coin,
 };
