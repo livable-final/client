@@ -13,7 +13,7 @@ import {
 import mq from '@/utils/mediaquery';
 import Input from '@/components/common/Input';
 
-function InvitationPurpose() {
+function InvitationPurposeContainer() {
   const { invitation }: CategoryInvitation = COMMON_CATEGORIES;
   const { title, description, placeholder }: InvitationCreateTexts =
     CREATE_TEXTS;
@@ -29,17 +29,17 @@ function InvitationPurpose() {
       </div>
       <div css={categoryContainerStyles}>
         <div css={categoryWrapperStyles}>
-          {categories.map((value) => (
+          {categories.map((item) => (
             <button
-              key={value.icon}
+              key={item.icon}
               type="button"
-              onClick={() => setSelectedCategory(value.icon)}
+              onClick={() => setSelectedCategory(item.icon)}
             >
               <Category
-                key={value.icon}
-                icon={value.icon}
-                title={value.title}
-                variant={selectedCategory === value.icon ? 'blue' : 'grey'}
+                key={item.icon}
+                icon={item.icon}
+                title={item.title}
+                variant={selectedCategory === item.icon ? 'blue' : 'grey'}
               />
             </button>
           ))}
@@ -183,4 +183,4 @@ const inputWrapperStyles = css`
   }
 `;
 
-export default InvitationPurpose;
+export default InvitationPurposeContainer;

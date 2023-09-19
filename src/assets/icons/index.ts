@@ -27,6 +27,8 @@ import Copy from '@/assets/icons/Copy_light.svg';
 import CopyBlue from '@/assets/icons/Copy.svg';
 import Subway from '@/assets/icons/Subway.svg';
 import Bus from '@/assets/icons/Bus.svg';
+import Home from '@/assets/icons/Home.svg';
+import Send from '@/assets/icons/Send.svg';
 
 export {
   As,
@@ -43,6 +45,7 @@ export {
   Meeting,
   Right,
   Seminar,
+  Send,
   Up,
   Info,
   ErrorIcon,
@@ -58,4 +61,5 @@ export {
   CopyBlue,
   Subway,
   Bus,
+  Home,
 };

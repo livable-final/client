@@ -5,6 +5,10 @@ import Toggle from '@/components/common/Toggle';
 import RadioBtn from '@/components/common/RadioBtn';
 import InvitationFindRoadBtn from '@/components/invitation/view/InvitationFindRoadBtn';
 import CheckBox from '@/components/common/CheckBox';
+import Roulette from '@/components/Roulette';
+import BottomSheet from '@/components/common/BottomSheet';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import Fnb from '@/components/common/Fnb';
 
 function Home() {
   const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -14,6 +18,14 @@ function Home() {
 
   // RadioBtn 예시 데이터, API 확인 후 변경 예정
   const arr = ['test1', 'test2', 'test3'];
+
+  // BottomSheet 테스트
+  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+
+  const onClickBottomSheetHandler = () => {
+    openBottomSheet(<div>테스트입니다.</div>);
+  };
+
   return (
     <>
       <Head>
@@ -23,6 +35,7 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Button content="Button" variant="blue" isDisabled />
+
       <Button content="Button" variant="blue" />
       <Button content="Button" variant="grey" />
       <Button content="Button" variant="grey" isDisabled />
@@ -42,7 +55,14 @@ function Home() {
       <CheckBox text="테스트 메시지2" />
 
       <Toggle />
+      <Roulette />
       <InvitationFindRoadBtn />
+
+      <button type="button" onClick={onClickBottomSheetHandler}>
+        누르면 바텀시트가 열립니다.
+      </button>
+      {bottomSheetState.isOpen && <BottomSheet />}
+      <Fnb />
     </>
   );
 }

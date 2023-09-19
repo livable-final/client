@@ -29,6 +29,7 @@ const CREATE_TEXTS = {
   button: {
     next: '다음',
     done: '완료',
+    confirm: '확인',
     send: '초대장 보내기',
   },
   placeholder: {
@@ -40,6 +41,16 @@ const CREATE_TEXTS = {
     tip: '방문하시는 분이 장소를 쉽게 찾을 수 있게 팁을 알려주세요.',
     name: '이름 입력',
     contact: '전화번호 입력',
+  },
+  modal: {
+    send: {
+      title: '초대장 전송',
+      content: '초대장을 전송할까요?',
+    },
+    resend: {
+      title: '초대장 재전송',
+      content: '초대장을 이대로 수정하고 전송할까요?',
+    },
   },
 };
 

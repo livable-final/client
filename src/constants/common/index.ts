@@ -83,9 +83,10 @@ export const COMMON_ICON_NAMES = {
     info: 'info',
     direction: 'direction',
     copy: 'copy',
+    list: 'list',
   },
   home: {
-    // 추후 보강 예정
+    home: 'home',
   },
 };
 
@@ -119,4 +120,12 @@ export const COMMON_CATEGORIES = {
   },
 };
 
+// 토글 버튼
 export const COMMON_TOGGLE_TITLE = '종일';
+
+// 모달 내부 버튼
+export const COMMON_MODAL_BUTTONS = {
+  confirm: '확인',
+  cancel: '취소',
+  send: '전송하기',
+};

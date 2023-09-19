@@ -17,6 +17,11 @@ export interface InvitationCreateTexts {
   placeholder: {
     [key: string]: string;
   };
+  modal: {
+    [key: string]: {
+      [key: string]: string;
+    };
+  };
 }
 
 // 초대 목적 선택
@@ -32,6 +37,6 @@ export interface CommonCategory {
 }
 
 // 방문자 리스트
-export interface InvitationNameListProps {
-  nameList: string[];
+export interface InvitationVisitorListProps {
+  visitorList: string[];
 }

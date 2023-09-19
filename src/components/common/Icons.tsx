@@ -10,10 +10,12 @@ import {
   Info,
   Direction,
   CopyBlue,
+  Home,
+  Back,
 } from '@/assets/icons';
 
 function Icons({ icon, color }: IconsProps) {
-  const { invitation } = COMMON_ICON_NAMES;
+  const { invitation, home } = COMMON_ICON_NAMES;
 
   switch (icon) {
     case invitation.meeting:
@@ -34,6 +36,10 @@ function Icons({ icon, color }: IconsProps) {
       return <Direction color={color} />;
     case invitation.copy:
       return <CopyBlue color={color} />;
+    case home.home:
+      return <Home color={color} />;
+    case invitation.list:
+      return <Back color={color} />;
     default:
       break;
   }
