@@ -95,7 +95,6 @@ const ContainerStyles = css`
 const BuildingImgStyles = css`
   background-color: #b4b4b4;
   height: 500px;
-
   margin: 0 -16px;
 `;
 
@@ -109,7 +108,6 @@ const BuildingInfoStyles = (props: { isScrollBottom: boolean }) => css`
   top: 238px;
   height: calc(100vh - 238px);
   overflow: auto;
-
   transition: box-shadow 0.5s;
   box-shadow: ${props.isScrollBottom
     ? null

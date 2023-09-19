@@ -20,7 +20,6 @@ const InfoItemStyles = css`
   display: flex;
   gap: 16px;
   margin-bottom: 10px;
-
   font: ${theme.font.body.body1_400};
   span {
     color: ${theme.palette.greyscale.grey50};

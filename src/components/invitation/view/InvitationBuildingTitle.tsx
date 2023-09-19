@@ -41,6 +41,7 @@ const CopyStyles = css`
   display: flex;
   align-items: center;
   padding: 4px 0;
+
   p {
     white-space: nowrap;
     margin-right: 4px;
