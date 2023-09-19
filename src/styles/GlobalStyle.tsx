@@ -13,6 +13,15 @@ const globals = css`
     font-size: 1rem;
   }
 
+  body {
+    -ms-overflow-style: none; /* IE */
+    scrollbar-width: none; /* 파이어폭스 */
+  }
+
+  ::-webkit-scrollbar {
+    display: none; /* 웹킷 기반 브라우저 (Chrome, Safari...) */
+  }
+
   li {
     list-style: none;
   }
