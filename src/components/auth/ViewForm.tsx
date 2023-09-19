@@ -1,11 +1,15 @@
 import usePagesStore from '@/stores/usePagesStore';
 import InvitationOfficeInfo from '@/components/invitation/view/InvitationOfficeInfo';
 import InvitationHostInfo from '@/components/invitation/view/InvitationHostInfo';
+import InvitationBuildingInfo from '../invitation/view/InvitationBuildingInfo';
 
 function ViewForm() {
   const { nextComponents, setNextComponent } = usePagesStore();
   if (nextComponents === 'InvitationOfficeInfo') {
     return <InvitationOfficeInfo />;
+  }
+  if (nextComponents === 'InvitationBuildingInfo') {
+    return <InvitationBuildingInfo />;
   }
   if (nextComponents === 'InvitationHostInfo') {
     return <InvitationHostInfo />;
@@ -23,6 +27,14 @@ function ViewForm() {
         onClick={onClickHandler}
       >
         OfficeInfo 페이지로 이동
+      </button>
+      <br />
+      <button
+        type="button"
+        value="InvitationBuildingInfo"
+        onClick={onClickHandler}
+      >
+        BuildingInfo 페이지로 이동
       </button>
       <br />
       <button type="button" value="InvitationHostInfo" onClick={onClickHandler}>

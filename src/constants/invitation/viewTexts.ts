@@ -18,3 +18,10 @@ export const INVITATION_VEIW_INFO_TEXTS = {
 export const INVITATION_INFO_TEXTS = {
   test: 'test',
 };
+
+// 오피스 정보 상수(수정 예정)
+export const INVITATION_VIEW_TEXTS = {
+  header: {
+    office: '오피스 정보',
+  },
+};
