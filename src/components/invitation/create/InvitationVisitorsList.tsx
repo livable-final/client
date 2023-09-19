@@ -9,7 +9,10 @@ import {
   InvitationCreateTexts,
 } from '@/types/invitation/create';
 
-function InvitationVisitorsList({ visitorsList }: InvitationVisitorsListProps) {
+function InvitationVisitorsList({
+  visitorsList,
+  onClick,
+}: InvitationVisitorsListProps) {
   const { title }: InvitationCreateTexts = CREATE_TEXTS;
 
   return (
@@ -21,11 +24,7 @@ function InvitationVisitorsList({ visitorsList }: InvitationVisitorsListProps) {
       <div css={listWrapperStyles}>
         <Add isBlue onClick={() => alert('추가 버튼 테스트')} />
         {visitorsList.map((name: string) => (
-          <NameTag
-            key={name}
-            name={name}
-            onClick={() => alert('삭제 기능 추가 예정')}
-          />
+          <NameTag key={name} name={name} onClick={onClick} />
         ))}
       </div>
     </div>

@@ -11,6 +11,7 @@ import { InvitationCreateTexts } from '@/types/invitation/create';
 function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
   const { title, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
   const [isModal, setIsModal] = useState(false);
+  const [tip, setTip] = useState('');
 
   const modalOpenHandler = () => {
     alert('클릭하면 모달이 오픈됩니다.');
@@ -66,6 +67,8 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
           {/* 꿀팁 작성 */}
           <div css={textareaStyles}>
             <Input
+              value={tip}
+              setValue={setTip}
               variant="default"
               textarea
               placeholder={placeholder.tip}

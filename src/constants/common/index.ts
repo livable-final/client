@@ -67,6 +67,8 @@ export const COMMON_INPUT_COLORS: InputColorsProps = {
 export const COMMON_ERROR_MESSAGE: ErrorTypeProps = {
   test: '에러메세지',
   test2: '이럴수가메세지',
+  name: '이름은 2자 이상입니다.',
+  contact: '연락처는 10자 이상입니다.',
 };
 
 // Header

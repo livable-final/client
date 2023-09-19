@@ -44,7 +44,10 @@ function InvitationInfoContainer() {
     <div css={containerStyles}>
       <InvitationInfo />
       {visitorsList.length > 0 && (
-        <InvitationVisitorsList visitorsList={visitorsList} />
+        <InvitationVisitorsList
+          visitorsList={visitorsList}
+          onClick={() => console.log('test')}
+        />
       )}
       {modalState.isOpen && <Modal onClick={onClickModalHandler} />}
       <div css={buttonWrapperStyles}>
