@@ -24,6 +24,9 @@ import Check from '@/assets/icons/Check.svg';
 import UnCheck from '@/assets/icons/UnCheck.svg';
 import Profile from '@/assets/icons/profille.svg';
 import Copy from '@/assets/icons/Copy_light.svg';
+import CopyBlue from '@/assets/icons/Copy.svg';
+import Subway from '@/assets/icons/Subway.svg';
+import Bus from '@/assets/icons/Bus.svg';
 
 export {
   As,
@@ -52,4 +55,7 @@ export {
   UnCheck,
   Profile,
   Copy,
+  CopyBlue,
+  Subway,
+  Bus,
 };
