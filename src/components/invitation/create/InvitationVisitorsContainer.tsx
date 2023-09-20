@@ -26,10 +26,12 @@ function InvitationVisitorsContainer() {
   };
 
   const onClickAddVisitorHandler = () => {
+    // 눌렀을 때 추가 로직 필요
     visitorsList.push(visitorName);
   };
 
   const onClickDeleteVisitorHandler = () => {
+    // 눌렀을 때 삭제 로직 필요
     visitorsList.pop();
   };
 

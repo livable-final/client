@@ -23,6 +23,10 @@ function InvitationInfoContainer() {
     setIsConfirmed(!isConfirmed);
   };
 
+  const onClickAddHandler = () => {
+    openModal('테스트', '삭제 기능이 구현될 예정이에요!');
+  };
+
   useEffect(() => {
     if (isConfirmed) {
       setNextComponent('InvitationDoneContainer');
@@ -46,7 +50,7 @@ function InvitationInfoContainer() {
       {visitorsList.length > 0 && (
         <InvitationVisitorsList
           visitorsList={visitorsList}
-          onClick={() => console.log('test')}
+          onClick={onClickAddHandler}
         />
       )}
       {modalState.isOpen && <Modal onClick={onClickModalHandler} />}

@@ -2,21 +2,15 @@ import Header from '@/components/common/Header';
 import InvitationCreateForm from '@/components/invitation/InvitationCreateForm';
 import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
 import useViewStore from '@/stores/usePagesStore';
+import useModalStore from '@/stores/useModalStore';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
-
-/**
- * 방문자 초대장 생성 흐름
- * (1) 방문자 초대 목적 - InvitationPurposeContainer
- * (2) 방문자 성함/연락처 입력 - InvitationVisitorsContainer
- * (3) 방문자 초대 장소/일시 - InvitationInfoContainer
- * (4) 방문자 초대장 전송 전 최종 확인 - Modal
- * (5) 방문자 초대장 전송 완료 - InvitationDoneContainer
- */
+import Modal from '@/components/common/Modal';
 
 function Create() {
   const { nextComponents } = useViewStore();
   const { headerTitle } = useInvitationHeaderTitleStore();
+  const { modalState, openModal } = useModalStore();
 
   return (
     <div css={createContainerStyles}>
@@ -25,9 +19,12 @@ function Create() {
           title={headerTitle}
           type={nextComponents === '' ? 'text' : ''}
           text="예시"
-          onClick={() => alert('미리보기 테스트')}
+          onClick={() =>
+            openModal('test', '방문증 미리보기가 구현될 예정이에요!')
+          }
         />
       </div>
+      {modalState.isOpen && <Modal isAlert />}
       <InvitationCreateForm />
     </div>
   );

@@ -36,13 +36,11 @@ function InvitationPlace() {
 const containerStyles = css`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   width: 100%;
 `;
 
 const radioBtnWrapperStyles = css`
-  /* width: 356px; */
-  /* overflow: scroll; */
+  overflow: scroll;
 `;
 
 const titleStyles = css`

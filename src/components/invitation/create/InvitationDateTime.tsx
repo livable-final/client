@@ -27,9 +27,13 @@ const containerStyles = css`
   flex-direction: column;
 `;
 
-const dateContainerStyles = css``;
+const dateContainerStyles = css`
+  display: flex;
+`;
 
-const timeContainerStyles = css``;
+const timeContainerStyles = css`
+  display: flex;
+`;
 
 const titleStyles = css`
   color: ${theme.palette.title};
