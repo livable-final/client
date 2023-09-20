@@ -1,5 +1,5 @@
 export interface InvitationInfoCategoryProps {
-  infoLabel: string;
+  value: string;
 }
 
 export interface InvitationHostInfoItemProps {
