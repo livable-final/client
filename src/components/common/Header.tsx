@@ -67,6 +67,7 @@ const iconStyles = (type: string) => css`
   cursor: pointer;
   color: ${type === 'text' && theme.palette.primary};
   font: ${type === 'text' && theme.font.body.body1_500};
+  line-height: 24px;
 `;
 
 export default Header;

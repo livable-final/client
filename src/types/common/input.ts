@@ -23,8 +23,7 @@ export interface InputColorProps {
 }
 
 export interface ErrorTypeProps {
-  test: string;
-  test2: string;
+  [key: string]: string;
 }
 
 export interface InputColorsProps {

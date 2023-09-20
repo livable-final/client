@@ -29,7 +29,7 @@ function Modal({ isAlert, isConfirm, onClick }: ModalProps) {
             </>
           ) : (
             <>
-              <button type="button" css={defaultBtnStyles}>
+              <button type="button" css={defaultBtnStyles} onClick={onClick}>
                 {send}
               </button>
               <button type="button" css={cancelBtnStyles} onClick={closeModal}>
@@ -66,7 +66,7 @@ const modalContainerStyles = css`
   height: 176px;
   border-radius: 16px;
   background-color: ${theme.palette.white};
-  z-index: 1;
+  z-index: 2;
 `;
 
 const modalTitleStyles = css`
