@@ -20,6 +20,7 @@ function InvitationBuildingPublicTransportItem({
     </div>
   );
 }
+
 const BuildingPublicTransportItemStyle = css`
   display: flex;
   gap: 8px;

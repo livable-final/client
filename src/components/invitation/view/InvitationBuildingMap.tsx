@@ -10,6 +10,6 @@ function InvitationBuildingMap() {
 }
 
 const BuildingMapStyles = css`
-  margin: 0 -16px 0 -16px;
+  margin: 0 -16px;
 `;
 export default InvitationBuildingMap;
