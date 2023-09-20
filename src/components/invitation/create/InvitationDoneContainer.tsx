@@ -1,15 +1,15 @@
+import InvitationDoneMessage from '@/components/invitation/create/InvitationDoneMessage';
+import InvitationDoneBtn from '@/components/invitation/create/InvitationDoneBtn';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
-import InvitationDoneMessage from '@/components/invitation/create/InvitationDoneMessage';
 import { css } from '@emotion/react';
-import InvitationDoneBtn from './InvitationDoneBtn';
 
 function InvitationDoneContainer() {
-  const visitorList = ['고애신'];
+  const visitorsList = ['고애신'];
 
   return (
     <div css={containerStyles}>
-      <InvitationDoneMessage visitorList={visitorList} />
+      <InvitationDoneMessage visitorsList={visitorsList} />
       <InvitationDoneBtn />
     </div>
   );

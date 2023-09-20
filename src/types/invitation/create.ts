@@ -22,6 +22,7 @@ export interface InvitationCreateTexts {
       [key: string]: string;
     };
   };
+  checkbox: string;
 }
 
 // 초대 목적 선택
@@ -37,6 +38,11 @@ export interface CommonCategory {
 }
 
 // 방문자 리스트
-export interface InvitationVisitorListProps {
-  visitorList: string[];
+export interface InvitationVisitorsListProps {
+  visitorsList: string[];
+  onClick: () => void;
+}
+
+export interface InvitationDoneMessageProps {
+  visitorsList: string[];
 }
