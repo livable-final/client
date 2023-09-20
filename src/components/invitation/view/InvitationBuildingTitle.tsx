@@ -30,7 +30,6 @@ const AddressStyles = css`
   display: flex;
   gap: 16px;
   align-items: start;
-
   p {
     color: ${theme.palette.greyscale.grey50};
     line-height: 24px;
