@@ -41,6 +41,9 @@ import Subway from '@/assets/icons/Subway.svg';
 import Bus from '@/assets/icons/Bus.svg';
 import Home from '@/assets/icons/Home.svg';
 import Send from '@/assets/icons/Send.svg';
+import LeftSmall from '@/assets/icons/LeftSmall.svg';
+import DateDish from '@/assets/icons/DateDish.svg';
+import DateDishNoPhoto from '@/assets/icons/DateDishNoPhoto.svg';
 import Setting from '@/assets/icons/Setting.svg';
 import Coin from '@/assets/icons/Coin.svg';
 
@@ -88,6 +91,9 @@ export {
   Subway,
   Bus,
   Home,
+  LeftSmall,
+  DateDish,
+  DateDishNoPhoto,
   Setting,
   Coin,
 };
