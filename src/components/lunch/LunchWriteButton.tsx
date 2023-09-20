@@ -27,9 +27,7 @@ function LunchWriteButton({ isCompleted }: LunchWriteButtonProps) {
         {icon}
         <span css={textStyles}>{text}</span>
       </div>
-      <div>
-        <RightSmall />
-      </div>
+      <RightSmall />
     </button>
   );
 }

@@ -1,3 +1,16 @@
+// 달력 리뷰 데이터
+export interface DateDishPhotoProps {
+  reviewData: ReviewData[];
+}
+
+export interface ReviewData {
+  reviewId: number;
+  type: string;
+  reviewImageUrl: string;
+  reviewDate: string;
+}
+
+//
 export interface LunchListItemProps {
   type: string;
   content: string;
