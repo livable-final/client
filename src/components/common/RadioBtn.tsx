@@ -97,23 +97,27 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
 export default RadioBtn;
 
 const radioContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
-
-  /* 표시용 border, 여백 */
-  border: 1px solid;
   margin: 30px 0;
 
   span {
+    font: ${theme.font.body.body1_400};
     color: ${theme.palette.greyscale.grey40};
+    line-height: 24px;
   }
 
   p {
-    line-height: 1.4em;
+    font: ${theme.font.subTitle.subTitle1_400};
+    color: ${theme.palette.greyscale.grey90};
+    line-height: 25px;
   }
 `;
 
 const itemStyles = css`
-  margin: 10px;
+  cursor: pointer;
 `;
 
 const radioInputStyles = css`
