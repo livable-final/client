@@ -97,27 +97,19 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
 export default RadioBtn;
 
 const radioContainerStyles = css`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
   width: 100%;
-  margin: 30px 0;
 
   span {
-    font: ${theme.font.body.body1_400};
     color: ${theme.palette.greyscale.grey40};
-    line-height: 24px;
   }
 
   p {
-    font: ${theme.font.subTitle.subTitle1_400};
-    color: ${theme.palette.greyscale.grey90};
-    line-height: 25px;
+    line-height: 1.4em;
   }
 `;
 
 const itemStyles = css`
-  cursor: pointer;
+  margin: 10px;
 `;
 
 const radioInputStyles = css`
