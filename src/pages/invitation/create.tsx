@@ -34,6 +34,7 @@ function Create() {
 }
 
 const createContainerStyles = css`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,8 +54,11 @@ const createContainerStyles = css`
 `;
 
 const headerContainerStyles = css`
+  position: sticky;
+  top: 0;
   min-width: 280px;
   max-width: 360px;
+  z-index: 1;
 
   ${mq.md} {
     min-width: 361px;

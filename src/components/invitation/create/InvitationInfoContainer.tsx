@@ -63,6 +63,7 @@ function InvitationInfoContainer() {
 
 const containerStyles = css`
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   gap: 40px;
@@ -81,11 +82,10 @@ const containerStyles = css`
 `;
 
 const buttonWrapperStyles = css`
-  position: fixed;
-  bottom: 0;
   min-width: 280px;
   max-width: 360px;
-  height: 100px;
+  padding-bottom: 20px;
+  background-image: linear-gradient(to top, white 70%, transparent 30%);
 
   ${mq.md} {
     min-width: 361px;

@@ -19,7 +19,7 @@ function InvitationVisitorsContainer() {
   const { name, contact }: ErrorTypeProps = COMMON_ERROR_MESSAGE;
   const [visitorName, setVisitorName] = useState<string>('');
   const [visitorContact, setVisitorContact] = useState<string>('');
-  const [visitorsList] = useState<string[]>(['고애신']);
+  const [visitorsList] = useState<string[]>(['김준희']);
 
   const onClickBtnHandler = () => {
     setNextComponent('InvitationInfoContainer');
@@ -45,7 +45,7 @@ function InvitationVisitorsContainer() {
             setValue={setVisitorName}
             variant="default"
             placeholder={placeholder.name}
-            isError={visitorName.length !== 0 && visitorName.length < 2}
+            isError={visitorName.length > 1}
             errorType={name}
           />
           <Input
@@ -53,7 +53,7 @@ function InvitationVisitorsContainer() {
             setValue={setVisitorContact}
             variant="default"
             placeholder={placeholder.contact}
-            isError={visitorContact.length !== 0 && visitorContact.length < 9}
+            isError={visitorContact.length < 9}
             errorType={contact}
           />
           <AddressBook />
@@ -84,9 +84,10 @@ const containerStyles = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 80px;
+  gap: 30px;
   min-width: 280px;
   max-width: 360px;
+  overflow: scroll;
 
   ${mq.md} {
     min-width: 361px;
@@ -151,7 +152,7 @@ const buttonWrapperStyles = css`
   bottom: 0;
   min-width: 280px;
   max-width: 360px;
-  height: 100px;
+  padding-bottom: 20px;
 
   ${mq.md} {
     min-width: 361px;

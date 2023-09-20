@@ -1,5 +1,8 @@
 import Add from '@/components/common/Add';
 import NameTag from '@/components/common/NameTag';
+import BottomSheet from '@/components/common/BottomSheet';
+import useViewStore from '@/stores/usePagesStore';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import mq from '@/utils/mediaquery';
 import theme from '@/styles/theme';
@@ -14,6 +17,12 @@ function InvitationVisitorsList({
   onClick,
 }: InvitationVisitorsListProps) {
   const { title }: InvitationCreateTexts = CREATE_TEXTS;
+  const { nextComponents } = useViewStore();
+  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+
+  const onClickHandler = () => {
+    openBottomSheet('방문자 추가 컴포넌트');
+  };
 
   return (
     <div css={containerStyles}>
@@ -22,10 +31,13 @@ function InvitationVisitorsList({
         <div css={lengthStyles}>{visitorsList.length}/30</div>
       </div>
       <div css={listWrapperStyles}>
-        <Add isBlue onClick={() => alert('추가 버튼 테스트')} />
+        {nextComponents !== 'InvitationVisitorsContainer' && (
+          <Add isBlue onClick={onClickHandler} />
+        )}
         {visitorsList.map((name: string) => (
           <NameTag key={name} name={name} onClick={onClick} />
         ))}
+        {bottomSheetState.isOpen && <BottomSheet />}
       </div>
     </div>
   );
