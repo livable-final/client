@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
-import { BottomSheetProps } from '@/types/common/bottomSheet';
 import theme from '@/styles/theme';
-import Button from '@/components/common/Button';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 
-function BottomSheet({ onClick }: BottomSheetProps) {
+function BottomSheet() {
   const { bottomSheetState, closeBottomSheet } = useBottomSheetStore();
   const { isOpen } = bottomSheetState;
 
@@ -25,18 +23,14 @@ function BottomSheet({ onClick }: BottomSheetProps) {
       role="button"
       tabIndex={0}
     >
-      <div css={containerStyles(isOpen)}>
-        {bottomSheetState.content}
-        <div css={buttonWrapperStyles}>
-          <Button content="저장" variant="blue" onClick={onClick} />
-        </div>
-      </div>
+      <div css={containerStyles(isOpen)}>{bottomSheetState.content}</div>
     </div>
   );
 }
 
 const backgroundStyles = (isOpen: boolean) => css`
-  display: ${isOpen ? 'block' : 'none'};
+  display: ${isOpen ? 'flex' : 'none'};
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -44,26 +38,26 @@ const backgroundStyles = (isOpen: boolean) => css`
   bottom: 0;
   width: 100%;
   background-color: ${isOpen ? `rgba(0, 0, 0, 0.3)` : `none`};
+  z-index: 9;
 `;
 
 const containerStyles = (isOpen: boolean) => css`
-  position: fixed;
+  position: absolute;
   bottom: 0;
-  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 28px;
+  padding: 28px 16px 0;
   border: 1px solid ${theme.palette.greyscale.grey20};
   border-radius: 20px 20px 0 0;
   width: 100%;
+  max-width: 1024px;
   min-height: 400px;
   height: auto;
   background-color: ${theme.palette.white};
   animation: ${isOpen
     ? `bottomSheetUp 800ms ease-out`
     : `bottomSheetDown 800ms ease-out`};
-  z-index: 1;
 
   @keyframes bottomSheetUp {
     0% {
@@ -84,11 +78,11 @@ const containerStyles = (isOpen: boolean) => css`
   }
 `;
 
-const buttonWrapperStyles = css`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 0 16px;
-  margin-bottom: 30px;
-`;
+// const buttonWrapperStyles = css`
+//   position: absolute;
+//   bottom: 0;
+//   width: 100%;
+//   padding: 0 16px;
+//   margin-bottom: 30px;
+// `;
 export default BottomSheet;

@@ -23,6 +23,10 @@ function InvitationInfoContainer() {
     setIsConfirmed(!isConfirmed);
   };
 
+  const onClickAddHandler = () => {
+    openModal('테스트', '삭제 기능이 구현될 예정이에요!');
+  };
+
   useEffect(() => {
     if (isConfirmed) {
       setNextComponent('InvitationDoneContainer');
@@ -46,7 +50,7 @@ function InvitationInfoContainer() {
       {visitorsList.length > 0 && (
         <InvitationVisitorsList
           visitorsList={visitorsList}
-          onClick={() => console.log('test')}
+          onClick={onClickAddHandler}
         />
       )}
       {modalState.isOpen && <Modal onClick={onClickModalHandler} />}
@@ -63,6 +67,7 @@ function InvitationInfoContainer() {
 
 const containerStyles = css`
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   gap: 40px;
@@ -81,11 +86,10 @@ const containerStyles = css`
 `;
 
 const buttonWrapperStyles = css`
-  position: fixed;
-  bottom: 0;
   min-width: 280px;
   max-width: 360px;
-  height: 100px;
+  padding-bottom: 20px;
+  background-image: linear-gradient(to top, white 70%, transparent 30%);
 
   ${mq.md} {
     min-width: 361px;

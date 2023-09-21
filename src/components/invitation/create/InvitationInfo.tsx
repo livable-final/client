@@ -1,6 +1,10 @@
 import Input from '@/components/common/Input';
 import CheckBox from '@/components/common/CheckBox';
+import BottomSheet from '@/components/common/BottomSheet';
+import InvitationPlace from '@/components/invitation/create/InvitationPlace';
+import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
@@ -9,13 +13,16 @@ import { useState } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
+  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { title, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
-  const [isModal, setIsModal] = useState(false);
   const [tip, setTip] = useState('');
 
-  const modalOpenHandler = () => {
-    alert('클릭하면 모달이 오픈됩니다.');
-    setIsModal(!isModal);
+  const onClickPlaceHandler = () => {
+    openBottomSheet(<InvitationPlace />);
+  };
+
+  const onClickDateTimeHandler = () => {
+    openBottomSheet(<InvitationDateTime />);
   };
 
   return (
@@ -33,7 +40,7 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
               type="text"
               placeholder={placeholder.place}
               defaultValue={defaultPlace}
-              onClick={modalOpenHandler}
+              onClick={onClickPlaceHandler}
               readOnly
             />
           </div>
@@ -47,7 +54,7 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
                 css={inputStyles}
                 type="text"
                 placeholder={placeholder.date}
-                onClick={modalOpenHandler}
+                onClick={onClickDateTimeHandler}
                 readOnly
               />
             </div>
@@ -59,7 +66,7 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
                 css={inputStyles}
                 type="text"
                 placeholder={placeholder.time}
-                onClick={modalOpenHandler}
+                onClick={onClickDateTimeHandler}
                 readOnly
               />
             </div>
@@ -79,7 +86,7 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
           </div>
         </div>
       </div>
-      {isModal && <div>모달 on/off 테스트용</div>}
+      {bottomSheetState.isOpen && <BottomSheet />}
     </>
   );
 }

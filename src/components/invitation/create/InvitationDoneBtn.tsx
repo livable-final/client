@@ -56,7 +56,7 @@ const btnContainerStyles = css`
   align-items: center;
   gap: 32px;
   width: 100%;
-  padding: 0 16px 20px;
+  padding-bottom: 20px;
 `;
 
 const textWrapperStyles = css`

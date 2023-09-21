@@ -30,6 +30,7 @@ const CREATE_TEXTS = {
     next: '다음',
     done: '완료',
     confirm: '확인',
+    save: '저장',
     send: '초대장 보내기',
   },
   placeholder: {

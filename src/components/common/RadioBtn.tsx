@@ -99,10 +99,6 @@ export default RadioBtn;
 const radioContainerStyles = css`
   width: 100%;
 
-  /* 표시용 border, 여백 */
-  border: 1px solid;
-  margin: 30px 0;
-
   span {
     color: ${theme.palette.greyscale.grey40};
   }
