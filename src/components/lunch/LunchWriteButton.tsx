@@ -39,7 +39,7 @@ const buttonStyles = css`
   width: 100%;
   padding: 28px 0;
   white-space: pre-line;
-  backgorund-color: ${theme.palette.white}
+  background-color: ${theme.palette.white};
   font: ${theme.font.body.body1_600};
   cursor: pointer;
 `;

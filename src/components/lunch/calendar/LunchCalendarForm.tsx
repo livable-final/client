@@ -73,13 +73,13 @@ function CalendarTileContent({ date, view }: { date: Date; view: string }) {
       {
         reviewId: 2,
         type: 'RESTAURANT',
-        reviewImageUrl: '/ruppy.png',
+        reviewImageUrl: '../../../assets/ruppy.png',
         reviewDate: '2023-10-09',
       },
       {
         reviewId: 3,
         type: 'LUNCHBOX',
-        reviewImageUrl: '/ruppy.png',
+        reviewImageUrl: '../../../assets/ruppy.png',
         reviewDate: '2023-10-11',
       },
       {
@@ -91,13 +91,13 @@ function CalendarTileContent({ date, view }: { date: Date; view: string }) {
       {
         reviewId: 9,
         type: 'RESTAURANT',
-        reviewImageUrl: '/ruppy.png',
+        reviewImageUrl: '../../../assets/ruppy.png',
         reviewDate: '2023-10-21',
       },
       {
         reviewId: 11,
         type: 'CAFETERIA',
-        reviewImageUrl: '/ruppy.png',
+        reviewImageUrl: '../../../assets/ruppy.png',
         reviewDate: '2023-10-25',
       },
       {
@@ -156,7 +156,6 @@ const CalendarStyles = css`
     border: 1px solid #a0a096;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
-
   }
 
   .react-calendar--doubleView {
@@ -212,16 +211,15 @@ const CalendarStyles = css`
     background-color: #e6e6e6;
   }
 
-  // 요일 section 
+  // 요일 section
   .react-calendar__month-view__weekdays {
     text-align: center;
 
     abbr {
       text-decoration: none;
-      font ${theme.font.body.body2_500};
+      font: ${theme.font.body.body2_500};
       color: ${theme.palette.greyscale.grey50};
     }
-
   }
 
   .react-calendar__month-view__weekdays__weekday {
@@ -238,11 +236,10 @@ const CalendarStyles = css`
 
   // 토, 일 day 색상
   .react-calendar__month-view__days__day--weekend {
-
   }
 
   .react-calendar__month-view__days__day--neighboringMonth {
-    color: #red;
+    color: red;
   }
 
   .react-calendar__year-view .react-calendar__tile,
@@ -250,7 +247,7 @@ const CalendarStyles = css`
   .react-calendar__century-view .react-calendar__tile {
     padding: 2em 0.5em;
   }
-  
+
   // day-tile
   .react-calendar__tile {
     position: relative;
@@ -266,16 +263,15 @@ const CalendarStyles = css`
     abbr {
       position: absolute;
       top: 50%;
-      left: 50%; 
-      transform: translate(-50%, -50%); 
+      left: 50%;
+      transform: translate(-50%, -50%);
 
       @media (max-width: 320px) {
         //사진이 없을 때만 설정하기
         margin-left: 4px;
-
-      };
-    };
-  };
+      }
+    }
+  }
 
   .react-calendar__tile:disabled {
     background-color: #f0f0f0;
@@ -285,9 +281,8 @@ const CalendarStyles = css`
   .react-calendar__tile:enabled:focus {
     background-color: #e6e6e6;
   }
-// 오늘 날짜
+  // 오늘 날짜
   .react-calendar__tile--now {
-
   }
 
   .react-calendar__tile--now:enabled:hover,
@@ -297,17 +292,14 @@ const CalendarStyles = css`
 
   .react-calendar__tile--hasActive {
     background: #76baff;
-
   }
 
   .react-calendar__tile--hasActive:enabled:hover,
   .react-calendar__tile--hasActive:enabled:focus {
     background: #a9d4ff;
   }
-// 선택한 날짜
+  // 선택한 날짜
   .react-calendar__tile--active {
-
-
   }
 
   .react-calendar__tile--active:enabled:hover,

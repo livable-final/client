@@ -87,7 +87,7 @@ const textReviewStyles = css`
   margin: 20px 0 16px;
   p {
     margin-bottom: 12px;
-    font: ${theme.font.subTitle.subTitle2_500}
+    font: ${theme.font.subTitle.subTitle2_500};
     color: ${theme.palette.greyscale.grey90};
   }
 `;
