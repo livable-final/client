@@ -1,8 +1,9 @@
+import Image from 'next/image';
+import theme from '@/styles/theme';
+import usePagesStore from '@/stores/usePagesStore';
 import { css } from '@emotion/react';
 import { Clock, XIcon, CheckOn, CheckOff } from '@/assets/icons';
-import theme from '@/styles/theme';
 import { CALENDAR_CASE } from '@/constants/lunch';
-import Image from 'next/image';
 import { LunchListItemProps } from '@/types/lunch/calendar';
 
 function LunchListItem({
@@ -13,28 +14,30 @@ function LunchListItem({
   imageUrl,
   isChecked,
 }: LunchListItemProps) {
+  const { setNextComponent } = usePagesStore();
   const { listItem } = CALENDAR_CASE;
+
+  const onClickHandler = () => {
+    setNextComponent('LunchCalendarMenu');
+  };
+
   let fontStyle;
 
   switch (type) {
     case listItem.type1:
       fontStyle = theme.palette.greyscale.grey60;
       return (
-        <li css={listStyles(type)}>
+        <button type="button" css={listStyles(type)} onClick={onClickHandler}>
           <div css={contentStyles(fontStyle)}>
-            <Clock
-              css={css`
-                cursor: auto;
-              `}
-            />
+            <Clock css={iconStles} />
             <p>{content}</p>
           </div>
           <XIcon />
-        </li>
+        </button>
       );
     case listItem.type2:
       return (
-        <li css={listStyles(type)}>
+        <button type="button" css={listStyles(type)}>
           <div css={searchingContentStyles}>
             <div>
               <strong>{content}</strong>
@@ -50,7 +53,7 @@ function LunchListItem({
               alt={content}
             />
           </div>
-        </li>
+        </button>
       );
     case listItem.type3:
       fontStyle = theme.palette.greyscale.grey70;
@@ -69,7 +72,9 @@ function LunchListItem({
 
 const listStyles = (type: string) => css`
   display: flex;
+  width: 100%;
   justify-content: space-between;
+  cursor: pointer;
   border-bottom: 1px solid ${theme.palette.greyscale.grey10};
   padding: ${type === 'searched' ? `16px 4px` : `20px 4px`};
 `;
@@ -98,6 +103,7 @@ const searchingContentStyles = css`
     color: ${theme.palette.greyscale.grey40};
   }
   p {
+    text-align: start;
     font: ${theme.font.body.body3_400};
     color: ${theme.palette.greyscale.grey50};
   }
@@ -108,5 +114,9 @@ const ImageStyles = css`
   height: 56px;
   border-radius: 8px;
   overflow: hidden;
+`;
+
+const iconStles = css`
+  cursor: auto;
 `;
 export default LunchListItem;
