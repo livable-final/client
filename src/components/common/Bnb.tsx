@@ -1,4 +1,4 @@
-import HOME_TEXTS from '@/constants/home/homeTexts';
+import { COMMON_BNB_CONSTANTS } from '@/constants/common';
 import theme from '@/styles/theme';
 import Link from 'next/link';
 import { css } from '@emotion/react';
@@ -10,9 +10,11 @@ import useIsScrollYTop from '@/hooks/useIsScrollYTop';
 function Bnb() {
   // 스크롤 위치 상태
   const router = useRouter();
-  const { isTop, scrollY } = useIsScrollYTop(HOME_TEXTS.indicator.height);
+  const { isTop, scrollY } = useIsScrollYTop(
+    COMMON_BNB_CONSTANTS.indicator.height,
+  );
   const { greyscale } = theme.palette;
-  const { gnb } = HOME_TEXTS;
+  const { bnb } = COMMON_BNB_CONSTANTS;
 
   // 현재 URL과 비교하는 함수
   const isCurrent = (url: string) => router.pathname === url;
@@ -21,25 +23,25 @@ function Bnb() {
   // TOFIXED: 아이콘이 확정되지 않아서 임시로 넣어두었습니다.
   const renderIcon = (icon: string, isActive: boolean) => {
     switch (icon) {
-      case gnb.home.icon:
+      case bnb.home.icon:
         return (
           <Icons
-            icon={gnb.home.icon}
+            icon={bnb.home.icon}
             color={isActive ? greyscale.grey60 : greyscale.grey30}
           />
         );
-      case gnb.lunch.icon:
+      case bnb.lunch.icon:
         return (
           <Icons
             color={isActive ? greyscale.grey60 : greyscale.grey30}
-            icon={gnb.home.icon}
+            icon={bnb.home.icon}
           />
         );
-      case gnb.user.icon:
+      case bnb.user.icon:
         return (
           <Icons
             color={isActive ? greyscale.grey60 : greyscale.grey30}
-            icon={gnb.home.icon}
+            icon={bnb.home.icon}
           />
         );
       default:
@@ -50,7 +52,7 @@ function Bnb() {
   return (
     <>
       <ul css={containerStlyes(scrollY)}>
-        {Object.values(gnb).map((item) => (
+        {Object.values(bnb).map((item) => (
           <li key={item.name} css={wrapperStyles}>
             <Link href={item.url}>
               {renderIcon(item.icon, isCurrent(item.url))}
@@ -71,11 +73,14 @@ const containerStlyes = (target: number) => css`
   justify-content: space-between;
   align-items: flex-start;
   position: fixed;
-  bottom: ${target}px;
+  /* bottom: ${target}px; */
+  bottom: 34px;
   width: 100%;
   background-color: ${theme.palette.white};
   max-width: 1024px;
   padding: 7px 40px;
+  gap: 32px;
+  align-self: stretch;
 
   // Media Query
   ${mq.tab} {
@@ -101,12 +106,12 @@ const wrapperStyles = css`
 const spanStyles = css`
   font: ${theme.font.input.default};
   line-height: 16px;
-  width: 26px;
   text-align: center;
 `;
 
 const indicatorStyles = (isTop: boolean) => css`
-  display: ${isTop ? 'none' : 'flex'};
+  /* display: ${isTop ? 'flex' : 'none'}; */
+  display: flex;
   height: 34px;
   justify-content: center;
   align-items: center;
@@ -122,11 +127,11 @@ const indicatorStyles = (isTop: boolean) => css`
   }
 
   /* Safari에서만 적용. */
-  @media not all and (min-resolution: 0.001dpcm) {
+  /* @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) {
       display: ${isTop ? 'none' : 'flex'};
     }
-  }
+  } */
 `;
 
 export default Bnb;
