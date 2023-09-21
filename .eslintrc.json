@@ -45,6 +45,7 @@
       }
     ],
     "react/require-default-props": "off", //default props 설정 off
-    "no-param-reassign": "off" // 함수 매개변수 no-param-resign 속성에 할당 off
+    "no-param-reassign": "off", // 함수 매개변수 no-param-resign 속성에 할당 off
+    "import/no-named-as-default": 0
   }
 }
