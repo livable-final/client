@@ -4,7 +4,7 @@ import { pretendard, godo } from '@/styles/font';
 function Layout({ children }: React.PropsWithChildren) {
   return (
     <div
-      className={`${pretendard.className} ${godo.variable}`}
+      className={`${pretendard.variable} ${godo.variable}`}
       css={layoutStyles}
     >
       {children}
