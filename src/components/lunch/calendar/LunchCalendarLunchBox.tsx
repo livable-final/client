@@ -1,15 +1,21 @@
+import { useState } from 'react';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
+import Button from '@/components/common/Button';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchPhoto from '@/components/lunch/LunchPhoto';
+import usePagesStore from '@/stores/usePagesStore';
 
 function LunchCalendarLunchBox() {
-  const { category, subTitle } = CALENDAR_CONTENT;
+  const [searchText, setSearchText] = useState('');
+  const { setNextComponent } = usePagesStore();
+  const { category, subTitle, button } = CALENDAR_CONTENT;
 
-  const onClickHeaderHandler = () => {};
-
+  const onClickHeaderHandler = () => {
+    setNextComponent('LunchCalendarReview');
+  };
   return (
     <section>
       <Header title={category.cafeteria.text} onClick={onClickHeaderHandler} />
@@ -20,9 +26,12 @@ function LunchCalendarLunchBox() {
           textarea
           placeholder={category.eatOut.placeholder}
           maxLength={299}
+          value={searchText}
+          setValue={setSearchText}
         />
       </div>
       <LunchPhoto />
+      <Button variant="blue" content={button.button4.text2} />
     </section>
   );
 }

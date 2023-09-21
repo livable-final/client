@@ -3,9 +3,22 @@ import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { Plate, Chef, Bento } from '@/assets/icons';
 import { LunchSelectButtonProps } from '@/types/lunch/calendar';
+import usePagesStore from '@/stores/usePagesStore';
 
-function LunchSelectButton({ text, onClick }: LunchSelectButtonProps) {
+function LunchSelectButton({ text }: LunchSelectButtonProps) {
+  const { setNextComponent } = usePagesStore();
   const { category } = CALENDAR_CONTENT;
+
+  const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (text === category.eatOut.text) {
+      setNextComponent('LunchCalendarSearch');
+    } else if (text === category.cafeteria.text) {
+      setNextComponent('LunchCalendarCafeteria');
+    } else if (text === category.lunchBox.text) {
+      setNextComponent('LunchCalendarLunchBox');
+    }
+  };
 
   let icon;
 
@@ -23,7 +36,7 @@ function LunchSelectButton({ text, onClick }: LunchSelectButtonProps) {
       break;
   }
   return (
-    <button type="button" css={buttonStyles} onClick={onClick}>
+    <button type="button" css={buttonStyles} onClick={onClickHandler}>
       <div css={iconStyles}>{icon}</div>
       <p>{text}</p>
     </button>
