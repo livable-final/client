@@ -43,6 +43,12 @@ import Home from '@/assets/icons/Home.svg';
 import Send from '@/assets/icons/Send.svg';
 import Setting from '@/assets/icons/Setting.svg';
 import Coin from '@/assets/icons/Coin.svg';
+import TearOffCalendar from '@/assets/icons/TearOffCalendar.svg';
+import Barcode from '@/assets/icons/Barcode.svg';
+import Bell from '@/assets/icons/Bell.svg';
+import Line from '@/assets/icons/Line.svg';
+import Roulette from '@/assets/icons/Roulette.svg';
+import Rights from '@/assets/icons/Rights.svg';
 
 export {
   As,
@@ -90,4 +96,10 @@ export {
   Home,
   Setting,
   Coin,
+  TearOffCalendar,
+  Barcode,
+  Bell,
+  Line,
+  Roulette,
+  Rights,
 };
