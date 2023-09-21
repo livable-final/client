@@ -13,6 +13,7 @@ import {
   Home,
   Back,
   Coin,
+  Down,
   PlusSmall,
 } from '@/assets/icons';
 
@@ -46,6 +47,8 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Home color={color} />;
     case user.coin:
       return <Coin width={size} height={size} />;
+    case home.down:
+      return <Down color={color} />;
     default:
       break;
   }
