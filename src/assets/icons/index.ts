@@ -49,6 +49,7 @@ import Bell from '@/assets/icons/Bell.svg';
 import Line from '@/assets/icons/Line.svg';
 import Roulette from '@/assets/icons/Roulette.svg';
 import Rights from '@/assets/icons/Rights.svg';
+import Sunny from '@/assets/icons/Sunny.svg';
 
 export {
   As,
@@ -102,4 +103,5 @@ export {
   Line,
   Roulette,
   Rights,
+  Sunny,
 };
