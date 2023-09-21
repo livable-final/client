@@ -13,7 +13,6 @@ import Bnb from '@/components/common/Bnb';
 function Temp() {
   const onClickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    alert('onClick Test');
   };
 
   // RadioBtn 예시 데이터, API 확인 후 변경 예정

@@ -6,13 +6,14 @@ import { css } from '@emotion/react';
 
 function InvitationDateTime() {
   const { title } = CREATE_TEXTS;
+  const onChange = () => {};
 
   return (
     <div css={containerStyles}>
       <div css={dateContainerStyles}>
         <div css={titleStyles}>{title.invitationDate}</div>
         <div>
-          <DatePicker />
+          <DatePicker onChange={onChange} />
         </div>
       </div>
       <div css={timeContainerStyles}>
