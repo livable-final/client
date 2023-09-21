@@ -79,7 +79,6 @@ function InvitationBuildingInfo() {
 const ContainerStyles = css`
   height: 100vh;
   position: relative;
-
   margin: 0 auto;
   ${mq.md} {
     max-width: 360px;

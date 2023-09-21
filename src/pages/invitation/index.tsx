@@ -5,10 +5,16 @@ import { css } from '@emotion/react';
 import useModalStore from '@/stores/useModalStore';
 import Modal from '@/components/common/Modal';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import { useState } from 'react';
 
 function Index() {
   const { modalState, openModal } = useModalStore();
   const { modal } = CREATE_TEXTS;
+  // input 사용시 value, setValue state 지정후 props로 전달
+  const [value, setValue] = useState('');
+  // 적용 예시
+  const [placeValue, setPlaceValue] = useState('');
+  const [purposeValue, setPurposeValue] = useState('');
 
   const onClickSendHandler = () => {
     openModal(modal.send.title, modal.send.content);
@@ -48,24 +54,66 @@ function Index() {
 
       <input type="text" placeholder="test" />
       {/* input default */}
-      <Input variant="default" placeholder="inputText" />
-      <Input variant="disabled" placeholder="inputText" isDisabled />
-      <Input variant="default" placeholder="inputText" isError />
+      <Input
+        variant="default"
+        setValue={setValue}
+        value={value}
+        placeholder="inputText"
+      />
+      <Input
+        variant="disabled"
+        setValue={setValue}
+        value={value}
+        placeholder="inputText"
+        isDisabled
+      />
+      <Input
+        variant="default"
+        // 적용 예시
+        setValue={setPlaceValue}
+        value={placeValue}
+        placeholder="inputText"
+        isError
+      />
       {/* input icon box */}
-      <Input inputIcon variant="default" placeholder="inputText" />
-      <Input inputIcon variant="disabled" placeholder="inputText" isDisabled />
       <Input
         inputIcon
         variant="default"
+        // 적용예시
+        setValue={setPurposeValue}
+        value={purposeValue}
+        placeholder="inputText"
+      />
+      <Input
+        inputIcon
+        variant="disabled"
+        setValue={setValue}
+        value={value}
+        placeholder="inputText"
+        isDisabled
+      />
+      <Input
+        inputIcon
+        variant="default"
+        setValue={setValue}
+        value={value}
         placeholder="inputText"
         isError
         errorType="test"
       />
       {/* input textarea */}
-      <Input textarea variant="default" placeholder="방문목적을 입력해주세요" />
+      <Input
+        textarea
+        variant="default"
+        setValue={setValue}
+        value={value}
+        placeholder="방문목적을 입력해주세요"
+      />
       <Input
         textarea
         variant="disabled"
+        setValue={setValue}
+        value={value}
         placeholder="방문목적을 입력해주세요"
         isDisabled
       />
