@@ -48,6 +48,13 @@ import DateDish from '@/assets/icons/DateDish.svg';
 import DateDishNoPhoto from '@/assets/icons/DateDishNoPhoto.svg';
 import Setting from '@/assets/icons/Setting.svg';
 import Coin from '@/assets/icons/Coin.svg';
+import TearOffCalendar from '@/assets/icons/TearOffCalendar.svg';
+import Barcode from '@/assets/icons/Barcode.svg';
+import Bell from '@/assets/icons/Bell.svg';
+import Line from '@/assets/icons/Line.svg';
+import Roulette from '@/assets/icons/Roulette.svg';
+import Rights from '@/assets/icons/Rights.svg';
+import Sunny from '@/assets/icons/Sunny.svg';
 import InfoCategory from '@/assets/icons/InfoCategory.svg';
 
 export {
@@ -101,5 +108,12 @@ export {
   DateDishNoPhoto,
   Setting,
   Coin,
+  TearOffCalendar,
+  Barcode,
+  Bell,
+  Line,
+  Roulette,
+  Rights,
+  Sunny,
   InfoCategory,
 };
