@@ -1,6 +1,7 @@
 import As from '@/assets/icons/As.svg';
 import Back from '@/assets/icons/Back.svg';
 import Calendar from '@/assets/icons/Calendar.svg';
+import CalendarFill from '@/assets/icons/Calender-Fill.svg';
 import CheckOff from '@/assets/icons/check=off.svg';
 import CheckOn from '@/assets/icons/check=on.svg';
 import Clock from '@/assets/icons/Clock.svg';
@@ -9,6 +10,7 @@ import Etc from '@/assets/icons/Etc.svg';
 import FixedtermWork from '@/assets/icons/FixedtermWork.svg';
 import Interview from '@/assets/icons/Interview.svg';
 import Location from '@/assets/icons/Location.svg';
+import LocationFill from '@/assets/icons/Location-fill.svg';
 import Meeting from '@/assets/icons/meeting.svg';
 import Right from '@/assets/icons/Right.svg';
 import Seminar from '@/assets/icons/seminar.svg';
@@ -46,11 +48,22 @@ import DateDish from '@/assets/icons/DateDish.svg';
 import DateDishNoPhoto from '@/assets/icons/DateDishNoPhoto.svg';
 import Setting from '@/assets/icons/Setting.svg';
 import Coin from '@/assets/icons/Coin.svg';
+import TearOffCalendar from '@/assets/icons/TearOffCalendar.svg';
+import Barcode from '@/assets/icons/Barcode.svg';
+import Bell from '@/assets/icons/Bell.svg';
+import Line from '@/assets/icons/Line.svg';
+import Roulette from '@/assets/icons/Roulette.svg';
+import Rights from '@/assets/icons/Rights.svg';
+import Sunny from '@/assets/icons/Sunny.svg';
+import InfoCategory from '@/assets/icons/InfoCategory.svg';
+import Location20 from '@/assets/icons/Location20.svg';
+import Delicious from '@/assets/icons/Delicious.svg';
 
 export {
   As,
   Back,
   Calendar,
+  CalendarFill,
   CheckOff,
   CheckOn,
   Clock,
@@ -59,6 +72,7 @@ export {
   FixedtermWork,
   Interview,
   Location,
+  LocationFill,
   Meeting,
   Right,
   Seminar,
@@ -96,4 +110,14 @@ export {
   DateDishNoPhoto,
   Setting,
   Coin,
+  TearOffCalendar,
+  Barcode,
+  Bell,
+  Line,
+  Roulette,
+  Rights,
+  Sunny,
+  InfoCategory,
+  Location20,
+  Delicious,
 };

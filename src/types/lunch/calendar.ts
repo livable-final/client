@@ -22,8 +22,6 @@ export interface LunchListItemProps {
 
 export interface LunchRatingButtonProps {
   title: string;
-  isChecked: boolean;
-  onClick: (e: React.MouseEvent) => void;
 }
 
 export interface LunchReviewCategoryProps {
@@ -31,7 +29,6 @@ export interface LunchReviewCategoryProps {
 }
 export interface LunchSelectButtonProps {
   text: string;
-  onClick: (e: React.MouseEvent) => void;
 }
 
 export interface LunchSubTitleProps {
@@ -42,4 +39,5 @@ export interface LunchSubTitleProps {
 
 export interface LunchWriteButtonProps {
   isCompleted: boolean;
+  onClick: (e: React.MouseEvent) => void;
 }

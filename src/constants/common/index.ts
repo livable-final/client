@@ -96,6 +96,7 @@ export const COMMON_ICON_NAMES = {
   },
   home: {
     home: 'home',
+    down: 'down',
   },
   user: {
     coin: 'coin',
@@ -140,4 +141,41 @@ export const COMMON_MODAL_BUTTONS = {
   confirm: '확인',
   cancel: '취소',
   send: '전송하기',
+};
+
+export const COMMON_BNB_CONSTANTS = {
+  bnb: {
+    home: { name: '홈', url: '/', icon: 'home' },
+    lunch: { name: '오점완', url: '/lunch', icon: 'home' },
+    user: { name: 'MY', url: '/user', icon: 'home' },
+  },
+  indicator: {
+    height: 34,
+  },
+};
+
+export const COMMON_DATES = {
+  daysOfWeek: [
+    '일요일',
+    '월요일',
+    '화요일',
+    '수요일',
+    '목요일',
+    '금요일',
+    '토요일',
+  ],
+  months: [
+    '1월',
+    '2월',
+    '3월',
+    '4월',
+    '5월',
+    '6월',
+    '7월',
+    '8월',
+    '9월',
+    '10월',
+    '11월',
+    '12월',
+  ],
 };

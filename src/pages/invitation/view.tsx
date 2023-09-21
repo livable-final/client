@@ -1,7 +1,7 @@
-import ViewForm from '@/components/auth/ViewForm';
+import InvitationViewForm from '@/components/invitation/InvitationViewForm';
 
 function View() {
-  return <ViewForm />;
+  return <InvitationViewForm />;
 }
 
 export default View;

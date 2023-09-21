@@ -9,7 +9,7 @@ import Button from '@/components/common/Button';
 import LunchListItem from '@/components/lunch/LunchListItem';
 
 function LunchCalendarMenu() {
-  const [showInput, setShowInput] = useState(true);
+  const [showInput] = useState(false);
   const { subTitle, button } = CALENDAR_CONTENT;
   const inputRef = useRef<HTMLInputElement | null>(null);
 

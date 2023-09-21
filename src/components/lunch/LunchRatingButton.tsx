@@ -3,14 +3,15 @@ import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { Smile, Confused } from '@/assets/icons';
 import { LunchRatingButtonProps } from '@/types/lunch/calendar';
+import { useState } from 'react';
 
-function LunchRatingButton({
-  title,
-  isChecked,
-  onClick,
-}: LunchRatingButtonProps) {
+function LunchRatingButton({ title }: LunchRatingButtonProps) {
   const { button } = CALENDAR_CONTENT;
+  const [isChecked, setIsChecked] = useState(false);
 
+  const onClickHandler = () => {
+    setIsChecked(!isChecked);
+  };
   let icon;
 
   switch (title) {
@@ -24,7 +25,7 @@ function LunchRatingButton({
       break;
   }
   return (
-    <button type="button" css={buttonStyles} onClick={onClick}>
+    <button type="button" css={buttonStyles} onClick={onClickHandler}>
       <div css={iconStyles(isChecked)}>{icon}</div>
       <p>{title}</p>
     </button>
@@ -45,7 +46,7 @@ const buttonStyles = css`
   color: ${theme.palette.greyscale.grey50};
   font: ${theme.font.body.body1_500};
 
-  &:active {
+  &:hover {
     border: 2px solid ${theme.palette.orange};
     background-color: ${theme.palette.white};
     color: ${theme.palette.orange};

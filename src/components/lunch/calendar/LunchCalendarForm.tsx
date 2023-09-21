@@ -10,10 +10,41 @@ import {
   DateDishNoPhoto,
 } from '@/assets/icons';
 import { DateDishPhotoProps } from '@/types/lunch/calendar';
+import { useEffect, useState } from 'react';
+import usePagesStore from '@/stores/usePagesStore';
 
 function LunchCalendarForm() {
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const { setNextComponent } = usePagesStore();
+
+  useEffect(() => {
+    /// api/reviews/members?year=${year}&month=${month} 호출
+    // 응답데이터를 전역 상태 관리해야 할 듯
+    // 만약 상세데이터를 한번에 못 받는다면, 날짜 클릭 시 해당 id와 type를 받아서 전역 상태 관리한 후에 캐러셀 클릭 시 api 호출하도록 해야 한다.
+  }, [year, month]);
+
+  const onActiveStartDateChangeHandler = (activeStartDate: Date | null) => {
+    if (!activeStartDate) return;
+
+    const activeYear = new Date(activeStartDate).getFullYear();
+    const activeMonth = new Date(activeStartDate).getMonth() + 1;
+    setYear(activeYear);
+    setMonth(activeMonth);
+  };
+
+  const onClickDayHandler = () => {
+    setNextComponent('Slide');
+  };
+
   return (
     <Calendar
+      onActiveStartDateChange={({
+        activeStartDate,
+      }: {
+        activeStartDate: Date | null;
+      }) => onActiveStartDateChangeHandler(activeStartDate)}
+      onClickDay={onClickDayHandler}
       css={CalendarStyles}
       tileContent={CalendarTileContent}
       locale="ko-KR"
@@ -112,11 +143,12 @@ function DateDishPhoto({ reviewData }: DateDishPhotoProps) {
 const ImageStyles = css`
   object-fit: cover;
   border-radius: 100px;
-  border: 2px solid #e2e2e2;
+  border: 2.4px solid #e2e2e2;
   box-sizing: border-box;
 `;
 
 const CalendarStyles = css`
+  margin: 12px 0 20px;
   .react-calendar {
     width: 350px;
     max-width: 100%;
@@ -124,6 +156,7 @@ const CalendarStyles = css`
     border: 1px solid #a0a096;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
+
   }
 
   .react-calendar--doubleView {
@@ -230,7 +263,6 @@ const CalendarStyles = css`
     font: ${theme.font.body.body3_400};
     // 사진이 있을 때 글자색 white로 설정하기
     color: ${theme.palette.greyscale.grey50};
-
     abbr {
       position: absolute;
       top: 50%;
