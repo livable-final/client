@@ -1,20 +1,23 @@
-import { css } from '@emotion/react';
-import { COMMON_ICON_NAMES } from '@/constants/common';
+import Icons from '@/components/common/Icons';
 import Button from '@/components/common/Button';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
-import Icons from '@/components/common/Icons';
+import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
+import { COMMON_ICON_NAMES } from '@/constants/common';
 
 function InvitationDoneBtn() {
   const { button } = CREATE_TEXTS;
   const { invitation } = COMMON_ICON_NAMES;
 
+  const router = useRouter();
+
   const onClickToMypageHandler = () => {
-    alert('마이페이지 방문자 목록으로 연결됩니다.');
+    router.push('/user');
   };
 
   const onClickToHomeHandler = () => {
-    alert('홈 화면으로 연결됩니다.');
+    router.push('/');
   };
 
   return (
@@ -53,7 +56,7 @@ const btnContainerStyles = css`
   align-items: center;
   gap: 32px;
   width: 100%;
-  padding: 0 16px 20px;
+  padding-bottom: 20px;
 `;
 
 const textWrapperStyles = css`

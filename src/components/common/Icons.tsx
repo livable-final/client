@@ -14,6 +14,7 @@ import {
   Back,
   Coin,
   Down,
+  PlusSmall,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -38,10 +39,12 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Direction color={color} />;
     case invitation.copy:
       return <CopyBlue color={color} />;
-    case home.home:
-      return <Home color={color} />;
     case invitation.list:
       return <Back color={color} />;
+    case invitation.plusSmall:
+      return <PlusSmall color={color} />;
+    case home.home:
+      return <Home color={color} />;
     case user.coin:
       return <Coin width={size} height={size} />;
     case home.down:

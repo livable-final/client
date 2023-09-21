@@ -13,11 +13,11 @@ function Layout({ children }: React.PropsWithChildren) {
 }
 
 const layoutStyles = css`
+  position: relative;
   padding: 0 16px;
   margin: 0 auto;
   min-width: 280px;
   max-width: 1024px;
-  overflow: hidden;
 `;
 
 export default Layout;

@@ -1,43 +1,76 @@
-import Input from '@/components/common/Input';
+import Button from '@/components/common/Button';
+import Modal from '@/components/common/Modal';
+import InvitationInfo from '@/components/invitation/create/InvitationInfo';
+import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import theme from '@/styles/theme';
+import useViewStore from '@/stores/usePagesStore';
+import useModalStore from '@/stores/useModalStore';
 import mq from '@/utils/mediaquery';
-import Add from '@/components/common/Add';
 import { css } from '@emotion/react';
-import InvitationNameList from '@/components/invitation/create/InvitationNameList';
-import { InvitationCreateTexts } from '@/types/invitation/create';
-import AddressBook from '@/components/common/AddressBook';
+import { useState, useEffect } from 'react';
 
 function InvitationInfoContainer() {
-  const { title, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
-  const nameList = ['고애신', '유진초이', '쿠도히나', '구동매', '김희성'];
+  const { setNextComponent } = useViewStore();
+  const { modalState, openModal } = useModalStore();
+  const { button, modal } = CREATE_TEXTS;
+  const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
+
+  const onClickBtnHandler = () => {
+    openModal(modal.send.title, modal.send.content);
+  };
+
+  const onClickModalHandler = () => {
+    setIsConfirmed(!isConfirmed);
+  };
+
+  const onClickAddHandler = () => {
+    openModal('테스트', '삭제 기능이 구현될 예정이에요!');
+  };
+
+  useEffect(() => {
+    if (isConfirmed) {
+      setNextComponent('InvitationDoneContainer');
+    }
+  }, [isConfirmed, setNextComponent]);
+
+  const visitorsList = [
+    '고애신',
+    '유진초이',
+    '김희성',
+    '쿠도히나',
+    '구동매',
+    '임관수',
+    '카일',
+    '도미',
+  ];
 
   return (
-    <div css={infoContainerStyles}>
-      <div css={invitationTextStyles}>
-        <div>{title.invitation}</div>
+    <div css={containerStyles}>
+      <InvitationInfo />
+      {visitorsList.length > 0 && (
+        <InvitationVisitorsList
+          visitorsList={visitorsList}
+          onClick={onClickAddHandler}
+        />
+      )}
+      {modalState.isOpen && <Modal onClick={onClickModalHandler} />}
+      <div css={buttonWrapperStyles}>
+        <Button
+          content={button.send}
+          variant="blue"
+          onClick={onClickBtnHandler}
+        />
       </div>
-      <div css={inputContainerStyles}>
-        <div>
-          <Input variant="default" placeholder={placeholder.name} />
-          <Input variant="default" placeholder={placeholder.phone} />
-          <AddressBook />
-        </div>
-        <div css={addBtnStyles}>
-          <Add onClick={() => alert('추가 버튼 테스트')} />
-        </div>
-      </div>
-      {nameList.length > 0 && <InvitationNameList nameList={nameList} />}
     </div>
   );
 }
 
-const infoContainerStyles = css`
-  border: 2px solid red;
+const containerStyles = css`
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 40px;
   min-width: 280px;
   max-width: 360px;
 
@@ -52,43 +85,24 @@ const infoContainerStyles = css`
   }
 `;
 
-const invitationTextStyles = css`
-  display: flex;
-  width: 100%;
-  max-width: 280px;
-  height: 28px;
-  padding-left: 4px;
-  text-align: left;
-  white-space: pre-line;
-  div {
-    width: 100%;
-    font: ${theme.font.title.title2_500};
-    line-height: 28px;
-    text-align: left;
-  }
+const buttonWrapperStyles = css`
+  min-width: 280px;
+  max-width: 360px;
+  padding-bottom: 20px;
+  background-image: linear-gradient(to top, white 70%, transparent 30%);
 
   ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
+    min-width: 361px;
     max-width: 480px;
   }
-  ${mq.tab} {
+  ${mq.lg} {
+    min-width: 481px;
     max-width: 640px;
   }
-`;
-
-const inputContainerStyles = css`
-  display: flex;
-  flex-direction: column;
-  gap: 21px;
-  width: 100%;
-`;
-
-const addBtnStyles = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${mq.tab} {
+    min-width: 641px;
+    max-width: 800px;
+  }
 `;
 
 export default InvitationInfoContainer;

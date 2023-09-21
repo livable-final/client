@@ -24,7 +24,6 @@ const buttonStyles = (variantData: ButtonColorProps) => css`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 1rem;
   min-width: 100px;
   border-radius: 16px;
   padding: 16px 0;

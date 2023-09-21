@@ -1,28 +1,37 @@
-import InvitationPurposeContainer from '@/components/invitation/create/InvitationPurposeContainer';
-import InvitationInfoContainer from '@/components/invitation/create/InvitationInfoContainer';
-import InvitationDateContainer from '@/components/invitation/create/InvitationDateContainer';
-import InvitationDoneContainer from '@/components/invitation/create/InvitationDoneContainer';
 import Header from '@/components/common/Header';
-import { css } from '@emotion/react';
+import InvitationCreateForm from '@/components/invitation/InvitationCreateForm';
+import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
+import useViewStore from '@/stores/usePagesStore';
+import useModalStore from '@/stores/useModalStore';
 import mq from '@/utils/mediaquery';
+import { css } from '@emotion/react';
+import Modal from '@/components/common/Modal';
 
 function Create() {
+  const { nextComponents } = useViewStore();
+  const { headerTitle } = useInvitationHeaderTitleStore();
+  const { modalState, openModal } = useModalStore();
+
   return (
     <div css={createContainerStyles}>
       <div css={headerContainerStyles}>
         <Header
-          title="테스트"
-          type="text"
+          title={headerTitle}
+          type={nextComponents === '' ? 'text' : ''}
           text="예시"
-          onClick={() => alert('미리보기 테스트')}
+          onClick={() =>
+            openModal('test', '방문증 미리보기가 구현될 예정이에요!')
+          }
         />
       </div>
-      <InvitationDoneContainer />
+      {modalState.isOpen && <Modal isAlert />}
+      <InvitationCreateForm />
     </div>
   );
 }
 
 const createContainerStyles = css`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,8 +51,11 @@ const createContainerStyles = css`
 `;
 
 const headerContainerStyles = css`
+  position: sticky;
+  top: 0;
   min-width: 280px;
   max-width: 360px;
+  z-index: 1;
 
   ${mq.md} {
     min-width: 361px;
@@ -56,28 +68,6 @@ const headerContainerStyles = css`
   ${mq.tab} {
     min-width: 641px;
     max-width: 1024px;
-  }
-`;
-
-const buttonWrapperStyles = (btnDisplay: string) => css`
-  display: ${btnDisplay};
-  position: fixed;
-  bottom: 0;
-  min-width: 280px;
-  max-width: 360px;
-  margin-bottom: 20px;
-
-  ${mq.md} {
-    min-width: 361px;
-    max-width: 480px;
-  }
-  ${mq.lg} {
-    min-width: 481px;
-    max-width: 640px;
-  }
-  ${mq.tab} {
-    min-width: 641px;
-    max-width: 800px;
   }
 `;
 

@@ -30,6 +30,7 @@ const CREATE_TEXTS = {
     next: '다음',
     done: '완료',
     confirm: '확인',
+    save: '저장',
     send: '초대장 보내기',
   },
   placeholder: {
@@ -52,6 +53,7 @@ const CREATE_TEXTS = {
       content: '초대장을 이대로 수정하고 전송할까요?',
     },
   },
+  checkbox: '이 메세지를 다음에도 사용',
 };
 
 export default CREATE_TEXTS;
