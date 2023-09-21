@@ -300,7 +300,6 @@ const CalendarStyles = css`
   }
   // 선택한 날짜
   .react-calendar__tile--active {
-  }
 
   .react-calendar__tile--active:enabled:hover,
   .react-calendar__tile--active:enabled:focus {
