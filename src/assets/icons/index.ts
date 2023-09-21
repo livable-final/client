@@ -56,6 +56,8 @@ import Roulette from '@/assets/icons/Roulette.svg';
 import Rights from '@/assets/icons/Rights.svg';
 import Sunny from '@/assets/icons/Sunny.svg';
 import InfoCategory from '@/assets/icons/InfoCategory.svg';
+import Location20 from '@/assets/icons/Location20.svg';
+import Delicious from '@/assets/icons/Delicious.svg';
 
 export {
   As,
@@ -116,4 +118,6 @@ export {
   Rights,
   Sunny,
   InfoCategory,
+  Location20,
+  Delicious,
 };

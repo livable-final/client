@@ -1,9 +1,9 @@
 import { PagesStore } from '@/types/common/pages';
 import { create } from 'zustand';
 
-const useViewStore = create<PagesStore>()((set) => ({
-  nextComponents: '',
-  setNextComponent: (page) => set({ nextComponents: page }),
+const usePagesStore = create<PagesStore>()((set) => ({
+  nextComponent: '',
+  setNextComponent: (page) => set({ nextComponent: page }),
 }));
 
-export default useViewStore;
+export default usePagesStore;

@@ -4,7 +4,7 @@ import { RightSmall, Gift, Plate } from '@/assets/icons';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { LunchWriteButtonProps } from '@/types/lunch/calendar';
 
-function LunchWriteButton({ isCompleted }: LunchWriteButtonProps) {
+function LunchWriteButton({ isCompleted, onClick }: LunchWriteButtonProps) {
   const { button } = CALENDAR_CONTENT;
 
   let icon;
@@ -22,7 +22,7 @@ function LunchWriteButton({ isCompleted }: LunchWriteButtonProps) {
       break;
   }
   return (
-    <button type="button" css={buttonStyles}>
+    <button type="button" css={buttonStyles} onClick={onClick}>
       <div css={contentStyles}>
         {icon}
         <span css={textStyles}>{text}</span>
@@ -41,6 +41,7 @@ const buttonStyles = css`
   white-space: pre-line;
   backgorund-color: ${theme.palette.white}
   font: ${theme.font.body.body1_600};
+  cursor: pointer;
 `;
 const contentStyles = css`
   display: flex;

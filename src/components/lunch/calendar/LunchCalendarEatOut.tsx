@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
@@ -9,17 +9,20 @@ import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchRatingButton from '@/components/lunch/LunchRatingButton';
 import LunchReviewCategory from '@/components/lunch/LunchReviewCategory';
 import LunchPhoto from '@/components/lunch/LunchPhoto';
+import usePagesStore from '@/stores/usePagesStore';
 
 function LunchCalenderEatOut() {
-  const [isChecked, setIsChecked] = useState(false);
-  const checkboxRef = useRef<HTMLInputElement | null>(null);
+  const [searchText, setSearchText] = useState('');
+  const { setNextComponent } = usePagesStore();
   const { subTitle, category, button } = CALENDAR_CONTENT;
-  const onClickHandler = () => {
-    console.log('onClickHandler');
+
+  const onClickHeaderHandler = () => {
+    setNextComponent('LunchCalendarReview');
   };
+
   return (
     <section>
-      <Header title={category.eatOut.text} onClick={onClickHandler} />
+      <Header title={category.eatOut.text} onClick={onClickHeaderHandler} />
       <LunchSubTitle title={subTitle.todayLunch} type="title" />
       <div css={reviewStyles}>
         <div css={textStyles}>
@@ -27,16 +30,8 @@ function LunchCalenderEatOut() {
           <p>식당 메뉴</p>
         </div>
         <div css={ratingStyles}>
-          <LunchRatingButton
-            title={button.button5.good}
-            onClick={onClickHandler}
-            isChecked={isChecked}
-          />
-          <LunchRatingButton
-            title={button.button5.bad}
-            onClick={onClickHandler}
-            isChecked={isChecked}
-          />
+          <LunchRatingButton title={button.button5.good} />
+          <LunchRatingButton title={button.button5.bad} />
         </div>
         <div>
           <LunchReviewCategory title={category.eatOut.subCategory.amount} />
@@ -51,6 +46,8 @@ function LunchCalenderEatOut() {
           textarea
           placeholder={category.eatOut.placeholder}
           maxLength={299}
+          value={searchText}
+          setValue={setSearchText}
         />
       </div>
       <LunchPhoto />
