@@ -61,7 +61,7 @@ const InvitationHostInfoBackGroundStyles = css`
   z-index: -1;
   left: -16px;
   right: -16px;
-  width: 120%;
+  max-width: 1024px;
   height: 258px;
   background-clip: border-box;
   background-image: linear-gradient(
@@ -90,7 +90,7 @@ const InvitationInfoItemContinerStyles = css`
 const InvitationHostInfoCardSyles = css`
   min-width: 350px;
   min-height: 158px;
-  margin: 63px 4px 39px;
+  margin: 62px 4px 38px;
   display: flex;
   justify-content: center;
   border-radius: 16px;
