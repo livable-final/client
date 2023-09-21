@@ -1,11 +1,17 @@
-import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { HeaderProps } from '@/types/common/header';
 import { COMMON_HEADER } from '@/constants/common';
-import mq from '@/utils/mediaquery';
 import { Back } from '@/assets/icons';
+import mq from '@/utils/mediaquery';
+import theme from '@/styles/theme';
 
-function Header({ title, type = '', text = '', onClick }: HeaderProps) {
+function Header({
+  title,
+  type = '',
+  text = '',
+  isBg = false,
+  onClick,
+}: HeaderProps) {
   const { typeCase } = COMMON_HEADER;
 
   let icon;
@@ -23,11 +29,11 @@ function Header({ title, type = '', text = '', onClick }: HeaderProps) {
   }
 
   return (
-    <header css={headerStyles}>
+    <header css={headerStyles(isBg)}>
       {/* 초대장 메인으로 돌아간다고 임시로 onclick 속성을 넣어놨습니다..! */}
       <Back onClick={onClick} />
       <div css={titleStyles}>
-        <h2>{title}</h2>
+        <span>{title}</span>
       </div>
       <div onClick={onClick} css={iconStyles(type)} aria-hidden="true">
         {icon}
@@ -36,7 +42,7 @@ function Header({ title, type = '', text = '', onClick }: HeaderProps) {
   );
 }
 
-const headerStyles = css`
+const headerStyles = (isBg: boolean) => css`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
@@ -45,6 +51,7 @@ const headerStyles = css`
   max-width: 360px;
   height: 56px;
   padding: 16px 0;
+  background-color: ${isBg ? 'transparent' : theme.palette.white};
 
   ${mq.md} {
     max-width: 480px;

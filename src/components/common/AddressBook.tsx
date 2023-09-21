@@ -1,16 +1,12 @@
+import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { RightSmall } from '@/assets/icons';
-import theme from '@/styles/theme';
 
 function AddressBook() {
   return (
     <div css={addressTextStyles}>
       <div>주소록에서 찾기</div>
-      <button
-        type="button"
-        css={iconStyles}
-        onClick={() => alert('주소록 찾기 테스트')}
-      >
+      <button type="button" css={iconStyles}>
         <RightSmall />
       </button>
     </div>

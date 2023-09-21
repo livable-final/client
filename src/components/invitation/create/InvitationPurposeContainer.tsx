@@ -217,7 +217,7 @@ const buttonWrapperStyles = css`
   bottom: 0;
   min-width: 280px;
   max-width: 360px;
-  height: 100px;
+  padding-bottom: 20px;
 
   ${mq.md} {
     min-width: 361px;
