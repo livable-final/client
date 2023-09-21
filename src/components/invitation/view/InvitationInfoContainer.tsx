@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import mq from '@/utils/mediaquery';
-import { INVITATION_INFO_CATEGORIES } from '@/constants/invitation/viewTexts';
+import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 import InvitationInfo from '@/components/invitation/view/InvitationInfo';
 import InvitationInfoCategory from '@/components/invitation/view/InvitationInfoCategory';
 
@@ -13,21 +13,27 @@ function InvitationInfoContainer() {
       </div>
       <div css={InfoCategoryContainerStyles}>
         <InvitationInfoCategory
-          infoLabel={INVITATION_INFO_CATEGORIES.bilding}
+          value={INVITATION_VEIW_INFO_TEXTS.category.building}
         />
-        <InvitationInfoCategory infoLabel={INVITATION_INFO_CATEGORIES.palce} />
-        <InvitationInfoCategory infoLabel={INVITATION_INFO_CATEGORIES.iviter} />
         <InvitationInfoCategory
-          infoLabel={INVITATION_INFO_CATEGORIES.parking}
+          value={INVITATION_VEIW_INFO_TEXTS.category.place}
+        />
+        <InvitationInfoCategory
+          value={INVITATION_VEIW_INFO_TEXTS.category.host}
+        />
+        <InvitationInfoCategory
+          value={INVITATION_VEIW_INFO_TEXTS.category.parking}
         />
       </div>
     </div>
   );
 }
 const ViewInfoContainerStyles = css`
-  margin-top: 23px;
-  width: 100%;
+  margin: 40px auto 52px;
   ${mq.md} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   ${mq.lg} {
   }
@@ -36,22 +42,30 @@ const ViewInfoContainerStyles = css`
 `;
 
 const ViewInfoStyles = css`
+  overflow-x: scroll;
   width: 100%;
-  ${mq.md} {
-  }
-  ${mq.lg} {
-  }
-  ${mq.tab} {
+  ::-webkit-scrollbar {
+    display: none;
   }
 `;
 
 const InfoCategoryContainerStyles = css`
   display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  margin: 0 32px;
   ${mq.md} {
+    display: flex;
+    margin: 0 16px;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: nowrap;
   }
   ${mq.lg} {
-  }
-  ${mq.tab} {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto;
   }
 `;
 

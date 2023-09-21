@@ -7,32 +7,34 @@ const test = {
   date: '2023.08.21~ 08.23',
   time: '14:30 ~ 16:30',
 };
+
 function InvitationInfo() {
   return (
     <div css={infoContainerStyles}>
-      <div css={design} />
+      <div css={infoContainerDesignStyles} />
       <div css={infoLineStyles}>
         <div css={placeInfoStyles}>
-          <div className="icon">
+          <div css={iconContainerStyles}>
             <LocationFill />
           </div>
-          <div className="info">{test.place}</div>
+          <div css={textInfoStyles}>{test.place}</div>
         </div>
         <div css={placeInfoStyles}>
-          <div className="icon">
+          <div css={iconContainerStyles}>
             <CalendarFill />
           </div>
           <div>
-            <div className="info">{test.date}</div>
-            <div className="info">{test.time}</div>
+            <div css={textInfoStyles}>{test.date}</div>
+            <div css={textInfoStyles}>{test.time}</div>
           </div>
         </div>
       </div>
-      <div css={infoQRContainerStyles}>
+      <button type="button" css={infoQRContainerStyles}>
+        {/* 상수화예정입니다 */}
         <div>임시출입증</div>
         <div className="test">큐알</div>
         <div>크게보기</div>
-      </div>
+      </button>
     </div>
   );
 }
@@ -42,46 +44,42 @@ const infoContainerStyles = css`
   justify-content: space-between;
   position: relative;
   padding: 30px 0 30px 40px;
-  margin-bottom: 37px;
-  overflow: hidden;
-  width: 100%;
+  margin: 0 auto 26px;
+  width: 358px;
   color: ${theme.palette.white};
   background-image: linear-gradient(
-    28deg,
-    rgba(37, 99, 235, 1) 30%,
-    rgba(37, 99, 235, 0.77) 80%,
-    rgba(37, 99, 235, 0.87) 100%
+    108deg,
+    #2563eb 13.2%,
+    #457ffe 22.74%,
+    #2563eb 37.05%,
+    #5c8fff 56.65%,
+    #2563eb 82.62%
   );
-  box-shadow: 2px 5px 20px #92afffb2;
+  box-shadow: 0px 25px 20px -15px #becfffb0;
   border-radius: 12px;
 `;
-// 임시로
-const design = css`
+const infoContainerDesignStyles = css`
   position: absolute;
   top: 36%;
-  left: -24px;
-  width: 48px;
+  left: -2px;
+  width: 26px;
   height: 48px;
-  border-radius: 50%;
-  background-color: aliceblue;
-  box-shadow: inset 0px 3px 6px #92afffb2;
+  border-radius: 0 100px 100px 0;
+  background-image: linear-gradient(to left, #cae4ff, #ffffff);
 `;
 const placeInfoStyles = css`
   display: flex;
   flex-direction: row;
-  padding-right: 17px;
+  padding-right: 16px;
   font: ${theme.font.body.body1_400};
   line-height: 24px;
-  .icon {
-    width: 24px;
-    height: 24px;
-  }
-  .info {
-    margin-left: 15px;
-  }
-  :nth-child(1) {
-    margin-bottom: 21px;
-  }
+`;
+const iconContainerStyles = css`
+  width: 24px;
+  height: 24px;
+`;
+const textInfoStyles = css`
+  margin-left: 2px;
 `;
 const infoLineStyles = css`
   display: flex;
@@ -90,7 +88,6 @@ const infoLineStyles = css`
   align-content: space-between;
   border-right: 2px dashed rgba(255, 255, 255, 0.2);
 `;
-
 const infoQRContainerStyles = css`
   display: flex;
   flex-direction: column;
@@ -99,6 +96,8 @@ const infoQRContainerStyles = css`
   min-width: 70px;
   margin: 0 21px;
   font: ${theme.font.body.body1_500};
+  color: ${theme.palette.white};
+  //삭제예정입니다
   .test {
     margin: 15px auto;
     width: 40px;

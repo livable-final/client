@@ -27,22 +27,23 @@ function InvitationInfoCategory({ value }: InvitationInfoCategoryProps) {
 const InvitationInfoCategoryStyles = css`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: relative;
-  width: 100%;
+  padding: 14px 0;
+  width: 75px;
   height: 100%;
   color: ${theme.palette.greyscale.grey50};
   font: ${theme.font.body.body3_500};
   button: {
-    width: 100%;
     height: 100%;
   }
 
   ${mq.md} {
-    border: 1px soid rightbrown;
-  }
-  ${mq.lg} {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 75px;
   }
   ${mq.tab} {
   }
