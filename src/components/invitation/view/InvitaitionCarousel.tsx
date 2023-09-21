@@ -1,6 +1,6 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import theme from '@/styles/theme';
-import cafeImg from '@/assets/cafe.png';
+// import cafeImg from '@/assets/cafe.png';
 import { css } from '@emotion/react';
 import { INVITATION_CAROUSEL_TEXTS } from '@/constants/invitation/viewTexts';
 import { InvitationCarouselProps } from '@/types/invitation/view';
@@ -22,8 +22,14 @@ function InvitaitionCarousel({ datas }: InvitationCarouselProps) {
       <div css={carouselStyles}>
         {datas.map((data) => (
           <div key={data.restaurantName} css={carouselItemStyles}>
-            <div className="imge">
-              <Image src={cafeImg} alt="대체 텍스트" layout="fill" />
+            <div css={itemImageStyles}>
+              {/* 이미지 태그에서.. 오류가 발생하는 이슈로 잠깐 주석처리 해두었습니다 */}
+              {/* <Image
+                src={cafeImg}
+                alt="대체 텍스트"
+                layout="fill"
+                sizes="135px"
+              /> */}
             </div>
             <div css={carouselItemInfoStyles}>
               <div css={itemInfoNameStyles}>{data.restaurantName}</div>
@@ -75,11 +81,13 @@ const carouselItemStyles = css`
   width: 135px;
   height: 120px;
   border-radius: 8px;
-  .imge {
-    width: 135px;
-    height: 80px;
-    position: relative;
-  }
+`;
+const itemImageStyles = css`
+  border-radius: 8px;
+  width: 135px;
+  height: 80px;
+  position: relative;
+  background-color: aliceblue;
 `;
 const carouselItemInfoStyles = css`
   display: flex;
