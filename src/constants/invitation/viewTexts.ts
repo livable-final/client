@@ -14,9 +14,15 @@ export const INVITATION_VEIW_INFO_TEXTS = {
   },
 };
 
-// 삭제예정
-export const INVITATION_INFO_TEXTS = {
-  test: 'test',
+export const INVITATION_CAROUSEL_TEXTS = {
+  restaurant: {
+    title: '식당',
+    subtitle: '점심메뉴 고민,',
+  },
+  cafe: {
+    title: '카페',
+    subtitle: '조금 빨리 도착하셨나요?',
+  },
 };
 
 // 오피스 정보 상수(수정 예정)
