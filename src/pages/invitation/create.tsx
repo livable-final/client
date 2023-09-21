@@ -8,7 +8,7 @@ import { css } from '@emotion/react';
 import Modal from '@/components/common/Modal';
 
 function Create() {
-  const { nextComponents } = useViewStore();
+  const { nextComponent } = useViewStore();
   const { headerTitle } = useInvitationHeaderTitleStore();
   const { modalState, openModal } = useModalStore();
 
@@ -17,7 +17,7 @@ function Create() {
       <div css={headerContainerStyles}>
         <Header
           title={headerTitle}
-          type={nextComponents === '' ? 'text' : ''}
+          type={nextComponent === '' ? 'text' : ''}
           text="예시"
           onClick={() =>
             openModal('test', '방문증 미리보기가 구현될 예정이에요!')

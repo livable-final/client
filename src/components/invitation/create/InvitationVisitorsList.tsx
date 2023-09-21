@@ -17,7 +17,7 @@ function InvitationVisitorsList({
   onClick,
 }: InvitationVisitorsListProps) {
   const { title }: InvitationCreateTexts = CREATE_TEXTS;
-  const { nextComponents } = useViewStore();
+  const { nextComponent } = useViewStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
 
   const onClickHandler = () => {
@@ -31,7 +31,7 @@ function InvitationVisitorsList({
         <div css={lengthStyles}>{visitorsList.length}/30</div>
       </div>
       <div css={listWrapperStyles}>
-        {nextComponents !== 'InvitationVisitorsContainer' && (
+        {nextComponent !== 'InvitationVisitorsContainer' && (
           <Add isBlue onClick={onClickHandler} />
         )}
         {visitorsList.map((name: string) => (

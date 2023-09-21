@@ -10,7 +10,6 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
   const [isCheck, setIsCheck] = useState(false);
 
   // selectData 값이 변경되는 것을 확인하는 콘솔로그
-  console.log(selectData);
 
   const onChangeRadioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectData(event.target.value);

@@ -9,14 +9,14 @@ import { css } from '@emotion/react';
 import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 
 function InvitationViewForm() {
-  const { nextComponents, setNextComponent } = usePagesStore();
-  if (nextComponents === '식스센스 초대장') {
+  const { nextComponent, setNextComponent } = usePagesStore();
+  if (nextComponent === '식스센스 초대장') {
     return <InvitationViewForm />;
   }
-  if (nextComponents === `${INVITATION_VEIW_INFO_TEXTS.category.building}`) {
+  if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.building}`) {
     return <InvitationOfficeInfo />;
   }
-  if (nextComponents === `${INVITATION_VEIW_INFO_TEXTS.category.host}`) {
+  if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.host}`) {
     return <InvitationHostInfo />;
   }
 
