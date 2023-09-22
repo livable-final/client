@@ -1,12 +1,30 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-import { Sunny } from '@/assets/icons';
+import getWeather from '@/pages/api/home/getWeather';
+import Icons from '@/components/common/Icons';
+import getWeatherIcon from '@/utils/getWeatherIcon';
+import { useQuery } from '@tanstack/react-query';
+import getCelsius from '@/utils/getCelsius';
 
 function HomeBulletinWeather() {
+  const { data, isError, error } = useQuery(['weather'], () => getWeather(), {
+    refetchInterval: 1800000, // 30분마다 자동 리프레시
+    staleTime: 1800000, // 1시간 동안 데이터가 fresh 상태로 유지됨
+  });
+
+  // TOFIXED: 에러용 단순 모달 필요
+  if (isError) return <div>{error?.toString()}</div>;
+
+  const weatherId = data?.weather[0].icon;
+  const weatherTemp = data?.main.temp;
+
+  const icon = getWeatherIcon(weatherId);
+  const temp = getCelsius(weatherTemp);
+
   return (
     <div css={containerStyles}>
-      <p css={celsiusStyles}>21˚c</p>
-      <Sunny />
+      <p css={celsiusStyles}>{temp}</p>
+      <Icons icon={icon} />
     </div>
   );
 }

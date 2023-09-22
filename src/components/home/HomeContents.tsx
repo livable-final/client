@@ -12,10 +12,10 @@ function HomeContents() {
 
   return (
     <div css={containerStyles}>
-      <HomeBanner hasCafeteria={hasCafeteria} />
       <HomeBulletin />
       {hasCafeteria && <HomeCafeteria />}
       <HomeService />
+      <HomeBanner hasCafeteria={hasCafeteria} />
       <HomeReception />
       <HomeServey />
     </div>

@@ -28,9 +28,9 @@ export const HOME_TEXTS = {
   service: {
     title: '오피스너 서비스',
     menu: [
-      { icon: 'coin', title: '불편접수', href: '' },
-      { icon: 'coin', title: '시설예약', href: '' },
-      { icon: 'coin', title: '방문자 초대', href: '/invitation' },
+      { icon: 'coin', title: '오점완 달력', href: '/lunch/calendar' },
+      { icon: 'coin', title: '방문증 뷰', href: '/invitation/view' },
+      { icon: 'coin', title: '방문자 초대', href: '/invitation/create' },
       { icon: 'coin', title: '온도조절', href: '' },
       { icon: 'coin', title: '구내식당', href: '' },
       { icon: 'coin', title: '주차 정산', href: '' },
