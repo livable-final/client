@@ -50,7 +50,7 @@ const titleStyles = css`
   display: flex;
   justify-content: center;
   margin: 16px 0 12px;
-  font: ${theme.font.subTitle.subTitle1_600}
+  font: ${theme.font.subTitle.subTitle1_600};
   color: ${theme.palette.title};
 `;
 

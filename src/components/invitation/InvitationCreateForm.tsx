@@ -5,15 +5,15 @@ import InvitationInfoContainer from '@/components/invitation/create/InvitationIn
 import InvitationDoneContainer from '@/components/invitation/create/InvitationDoneContainer';
 
 function InvitationCreateForm() {
-  const { nextComponents } = usePagesStore();
+  const { nextComponent } = usePagesStore();
 
-  if (nextComponents === 'InvitationVisitorsContainer') {
+  if (nextComponent === 'InvitationVisitorsContainer') {
     return <InvitationVisitorsContainer />;
   }
-  if (nextComponents === 'InvitationInfoContainer') {
+  if (nextComponent === 'InvitationInfoContainer') {
     return <InvitationInfoContainer />;
   }
-  if (nextComponents === 'InvitationDoneContainer') {
+  if (nextComponent === 'InvitationDoneContainer') {
     return <InvitationDoneContainer />;
   }
 
