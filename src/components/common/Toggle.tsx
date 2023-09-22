@@ -26,7 +26,6 @@ function Toggle() {
 
 const toggleSwitchStyles = css`
   width: 72px;
-  margin: 32px 32px;
   padding: 3px;
   height: 32px;
   display: block;
