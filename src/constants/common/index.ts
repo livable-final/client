@@ -97,6 +97,18 @@ export const COMMON_ICON_NAMES = {
   home: {
     home: 'home',
     down: 'down',
+    weather: {
+      clearDay: 'clearDay',
+      clearNight: 'clearNight',
+      fewClouds: 'fewClouds',
+      clouds: 'clouds',
+      brokenClouds: 'brokenClouds',
+      showerRain: 'showerRain',
+      rain: 'rain',
+      thunderStorm: 'thunderStorm',
+      snow: 'snow',
+      mist: 'mist',
+    },
   },
   user: {
     coin: 'coin',

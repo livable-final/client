@@ -15,6 +15,16 @@ import {
   Coin,
   Down,
   PlusSmall,
+  ClearDay,
+  ClearNight,
+  FewClouds,
+  Clouds,
+  BrokenClouds,
+  ShowerRain,
+  Rain,
+  ThunderStorm,
+  Snow,
+  Mist,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -49,6 +59,26 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Coin width={size} height={size} />;
     case home.down:
       return <Down color={color} />;
+    case home.weather.clearDay:
+      return <ClearDay />;
+    case home.weather.clearNight:
+      return <ClearNight />;
+    case home.weather.fewClouds:
+      return <FewClouds />;
+    case home.weather.clouds:
+      return <Clouds />;
+    case home.weather.brokenClouds:
+      return <BrokenClouds />;
+    case home.weather.showerRain:
+      return <ShowerRain />;
+    case home.weather.rain:
+      return <Rain />;
+    case home.weather.thunderStorm:
+      return <ThunderStorm />;
+    case home.weather.snow:
+      return <Snow />;
+    case home.weather.mist:
+      return <Mist />;
     default:
       break;
   }

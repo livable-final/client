@@ -58,6 +58,16 @@ import Sunny from '@/assets/icons/Sunny.svg';
 import InfoCategory from '@/assets/icons/InfoCategory.svg';
 import Location20 from '@/assets/icons/Location20.svg';
 import Delicious from '@/assets/icons/Delicious.svg';
+import ClearDay from '@/assets/icons/weather/ClearDay.svg';
+import ClearNight from '@/assets/icons/weather/ClearNight.svg';
+import FewClouds from '@/assets/icons/weather/FewClouds.svg';
+import Clouds from '@/assets/icons/weather/Clouds.svg';
+import BrokenClouds from '@/assets/icons/weather/BrokenClouds.svg';
+import ShowerRain from '@/assets/icons/weather/ShowerRain.svg';
+import Rain from '@/assets/icons/weather/Rain.svg';
+import ThunderStorm from '@/assets/icons/weather/ThunderStorm.svg';
+import Snow from '@/assets/icons/weather/Snow.svg';
+import Mist from '@/assets/icons/weather/Mist.svg';
 
 export {
   As,
@@ -120,4 +130,14 @@ export {
   InfoCategory,
   Location20,
   Delicious,
+  ClearDay,
+  ClearNight,
+  FewClouds,
+  Clouds,
+  BrokenClouds,
+  ShowerRain,
+  Rain,
+  ThunderStorm,
+  Snow,
+  Mist,
 };
