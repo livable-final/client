@@ -25,6 +25,7 @@ function InvitationHostInfo() {
       <Header
         title={INVITATION_VEIW_INFO_TEXTS.category.host}
         onClick={onClickHandler}
+        isBg
       />
       <div css={InvitationHostInfoProfileStyles}>
         <Profile />
