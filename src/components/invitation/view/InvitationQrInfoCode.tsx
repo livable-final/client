@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
+import React from 'react';
 
 function InvitationQrInfoCode() {
   return (
@@ -7,7 +8,7 @@ function InvitationQrInfoCode() {
       <div css={codeLabelStyles}>임시출입증</div>
       {/* 큐알 코드  임시 css 적용 */}
       <div css={qrStyles} />
-      <div css={alretStyles}>
+      <div css={alertStyles}>
         초대 시간 전후로 <br /> 1시간 사용할수 있습니다
       </div>
     </div>
@@ -31,7 +32,7 @@ const qrStyles = css`
   height: 163px;
   background-color: #fff;
 `;
-const alretStyles = css`
+const alertStyles = css`
   width: 182px;
   text-align: center;
   font: ${theme.font.body.body2_400};
