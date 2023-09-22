@@ -1,6 +1,9 @@
 export interface InvitationInfoCategoryProps {
   value: string;
 }
+export interface InvitationInfoProps {
+  value: string;
+}
 
 export interface InvitationCarouselProps {
   datas: {
@@ -35,5 +38,5 @@ export interface InvitationBuildingPublicTransportItemProps {
 }
 
 export interface InvitationQrInfoTextProps {
-  textInfo: { palce: string; date: string; time: string };
+  textInfo: { place: string; date: string; time: string };
 }
