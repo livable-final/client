@@ -37,8 +37,8 @@ function InvitationVisitorsList({
         {visitorsList.map((name: string) => (
           <NameTag key={name} name={name} onClick={onClick} />
         ))}
-        {bottomSheetState.isOpen && <BottomSheet />}
       </div>
+      {bottomSheetState.isOpen && <BottomSheet />}
     </div>
   );
 }

@@ -42,6 +42,14 @@ function InvitationInfoContainer() {
     '임관수',
     '카일',
     '도미',
+    '고애신',
+    '유진초이',
+    '김희성',
+    '쿠도히나',
+    '구동매',
+    '임관수',
+    '카일',
+    '도미',
   ];
 
   return (
@@ -89,7 +97,6 @@ const buttonWrapperStyles = css`
   min-width: 280px;
   max-width: 360px;
   padding-bottom: 20px;
-  background-image: linear-gradient(to top, white 70%, transparent 30%);
 
   ${mq.md} {
     min-width: 361px;

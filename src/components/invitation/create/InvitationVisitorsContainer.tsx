@@ -19,7 +19,7 @@ function InvitationVisitorsContainer() {
   const { name, contact }: ErrorTypeProps = COMMON_ERROR_MESSAGE;
   const [visitorName, setVisitorName] = useState<string>('');
   const [visitorContact, setVisitorContact] = useState<string>('');
-  const [visitorsList] = useState<string[]>(['김준희']);
+  const [visitorsList] = useState<string[]>(['고애신']);
 
   const onClickBtnHandler = () => {
     setNextComponent('InvitationInfoContainer');
@@ -83,6 +83,7 @@ function InvitationVisitorsContainer() {
 }
 
 const containerStyles = css`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,7 +156,11 @@ const buttonWrapperStyles = css`
   min-width: 280px;
   max-width: 360px;
   padding-bottom: 20px;
-
+  background-image: linear-gradient(
+    to top,
+    ${theme.palette.white} 70%,
+    transparent 30%
+  );
   ${mq.md} {
     min-width: 361px;
     max-width: 480px;
