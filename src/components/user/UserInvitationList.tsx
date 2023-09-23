@@ -143,6 +143,7 @@ const userInvitationListStyles = css`
   display: flex;
   flex-direction: column;
   gap: 28px 0;
+  margin-bottom: 66px;
   Header {
     margin-bottom: -12px;
   }
