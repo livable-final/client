@@ -1,4 +1,4 @@
-import HomeCard from '@/components/home/HomeCard';
+import Card from '@/components/common/Card';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import { css } from '@emotion/react';
 import Icons from '@/components/common/Icons';
@@ -7,7 +7,7 @@ import theme from '@/styles/theme';
 function HomeServey() {
   const { servey } = HOME_TEXTS;
   return (
-    <HomeCard>
+    <Card>
       <div css={containerStyles}>
         <Icons icon="coin" size="70" />
         <div css={wrapperStyles}>
@@ -15,7 +15,7 @@ function HomeServey() {
           <span css={bodyStyles}>{servey.body}</span>
         </div>
       </div>
-    </HomeCard>
+    </Card>
   );
 }
 
