@@ -2,18 +2,18 @@ import React from 'react';
 import Banner from '@/components/common/Banner';
 import { DUMMY_RESPONSE } from '@/constants/home/homeTexts';
 import { css } from '@emotion/react';
-import LunchRanking from '@/components/lunch/ranking/LunchRanking';
-import LunchRecentReviews from '@/components/lunch/LunchRecentReviews';
+import LunchMainRanking from '@/components/lunch/main/LunchMainRanking';
+import LunchMainReviews from '@/components/lunch/main/LunchMainReviews';
 
-function LunchContents() {
+function LunchMainContents() {
   // TOFIXED: 메인 홈에서 받아온 API RESPONSE DATA를 이용
   const { hasCafeteria } = DUMMY_RESPONSE;
 
   return (
     <div css={containerStyles}>
       <Banner hasCafeteria={hasCafeteria} />
-      <LunchRanking />
-      <LunchRecentReviews />
+      <LunchMainRanking />
+      <LunchMainReviews />
     </div>
   );
 }
@@ -27,4 +27,4 @@ const containerStyles = css`
   align-self: stretch;
 `;
 
-export default LunchContents;
+export default LunchMainContents;
