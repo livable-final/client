@@ -5,7 +5,7 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import LunchReview from '@/components/lunch/review/LunchReview';
 
-function LunchRecentReviews() {
+function LunchMainReviews() {
   return (
     <Card col>
       <span css={titleStyles}>{LUNCH_MAIN_CONSTANTS.reviews.title}</span>
@@ -24,4 +24,4 @@ const titleStyles = css`
   padding-top: 16px;
 `;
 
-export default LunchRecentReviews;
+export default LunchMainReviews;
