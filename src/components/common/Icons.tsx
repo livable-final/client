@@ -25,10 +25,14 @@ import {
   ThunderStorm,
   Snow,
   Mist,
+  Lunch,
+  Smile,
+  ThumbsUp,
+  Confused,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
-  const { invitation, home, user } = COMMON_ICON_NAMES;
+  const { invitation, home, user, lunch } = COMMON_ICON_NAMES;
 
   switch (icon) {
     case invitation.meeting:
@@ -79,6 +83,14 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Snow />;
     case home.weather.mist:
       return <Mist />;
+    case home.lunch:
+      return <Lunch color={color} />;
+    case lunch.smile:
+      return <Smile width={size} height={size} />;
+    case lunch.confused:
+      return <Confused width={size} height={size} />;
+    case lunch.thumbsUp:
+      return <ThumbsUp color={color} width={size} height={size} />;
     default:
       break;
   }
