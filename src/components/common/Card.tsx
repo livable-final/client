@@ -1,14 +1,15 @@
 import theme from '@/styles/theme';
-import { HomeCardProps } from '@/types/home';
+import { CardProps } from '@/types/common/card';
 import { css } from '@emotion/react';
 import React from 'react';
 
-function HomeCard({ children }: HomeCardProps) {
-  return <div css={cardStyles}>{children}</div>;
+function Card({ children, col }: CardProps) {
+  return <div css={cardStyles(col)}>{children}</div>;
 }
 
-const cardStyles = css`
+const cardStyles = (col?: boolean) => css`
   display: flex;
+  flex-direction: ${col ? 'column' : 'row'};
   padding: 0px 16px;
   align-self: stretch;
   border-radius: 16px;
@@ -16,4 +17,4 @@ const cardStyles = css`
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.03);
 `;
 
-export default HomeCard;
+export default Card;
