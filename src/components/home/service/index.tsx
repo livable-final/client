@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeCard from '@/components/home/HomeCard';
+import HomeCard from '@/components/common/Card';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';

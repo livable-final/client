@@ -1,4 +1,4 @@
-import HomeCard from '@/components/home/HomeCard';
+import Card from '@/components/common/Card';
 import HomeReceptionProgress from '@/components/home/reception/HomeReceptionProgress';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import theme from '@/styles/theme';
@@ -33,12 +33,12 @@ function HomeReception() {
   }
 
   return (
-    <HomeCard>
+    <Card>
       <div css={containerStyles}>
         <span css={titleStyles}>{reception.title}</span>
         <div css={progressStyles}>{progressArray}</div>
       </div>
-    </HomeCard>
+    </Card>
   );
 }
 
