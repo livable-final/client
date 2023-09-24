@@ -1,4 +1,4 @@
-const ROULETTE_CONSTANTS = {
+export const ROULETTE_CONSTANTS = {
   time: {
     interval: 100,
     duration: {
@@ -15,7 +15,7 @@ const ROULETTE_CONSTANTS = {
   },
 };
 
-const DUMMY_RESPONSE = [
+export const DUMMY_RESPONSE = [
   {
     categoryName: '한식',
     menus: [
@@ -70,5 +70,3 @@ const DUMMY_RESPONSE = [
     ],
   },
 ];
-
-export { ROULETTE_CONSTANTS, DUMMY_RESPONSE };
