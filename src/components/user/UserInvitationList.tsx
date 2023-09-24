@@ -1,6 +1,7 @@
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import UserInvitatioListItem from '@/components/user/UserInvitationListItem';
+import getTodayDate from '@/utils/getTodayDate';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 
@@ -110,11 +111,12 @@ function UserInvitationList() {
   // 오늘 날짜 가져오는 로직
   const currentDate = new Date();
   // 데이터상 날짜 비교를 위한 포켓 변환
-  const year = currentDate.getFullYear();
-  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-  const day = String(currentDate.getDate()).padStart(2, '0');
+  const formattedDate = getTodayDate(currentDate);
+  // const year = currentDate.getFullYear();
+  // const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+  // const day = String(currentDate.getDate()).padStart(2, '0');
 
-  const formattedDate = `${year}-${month}-${day}`;
+  // const formattedDate = `${year}-${month}-${day}`;
 
   return (
     <div css={userInvitationListStyles}>

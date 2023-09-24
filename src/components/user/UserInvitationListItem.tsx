@@ -33,8 +33,8 @@ const itemConstainerStyles = css`
   align-items: center;
   align-self: stretch;
   border-radius: 16px;
-  border: 1px solid var(--greyscale-10, #f0f1f3);
-  background: var(--primary-officener-white, #fff);
+  border: 1px solid ${theme.palette.greyscale.grey10};
+  background: ${theme.palette.white};
   line-height: 24px;
 `;
 const textInfoStyles = css`
