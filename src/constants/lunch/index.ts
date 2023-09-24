@@ -72,3 +72,13 @@ export const CALENDAR_CASE = {
     type3: 'menu',
   },
 };
+
+export const LUNCH_MAIN_CONSTANTS = {
+  ranking: {
+    title: '지난주 점심 메뉴 TOP 10',
+    heights: [32, 47, 25],
+  },
+  reviews: {
+    title: '최근 테라타워 입주자들의 리뷰',
+  },
+};
