@@ -75,6 +75,8 @@ const theme = {
     etc: {
       findRoad: '500 normal 12px var(--pretendard)',
       userPoint: '500 normal 13px var(--pretendard)',
+      rankingNumber: '400 normal 14px var(--gwPower)',
+      reviewDesc: '400 normal 15px var(--yeongdeok)',
     },
   },
 };

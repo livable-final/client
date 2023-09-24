@@ -10,4 +10,14 @@ const godo = localFont({
   variable: '--godoM',
 });
 
-export { pretendard, godo };
+const gwPower = localFont({
+  src: '../assets/fonts/GangwonPower.otf',
+  variable: '--gwPower',
+});
+
+const yeongdeok = localFont({
+  src: '../assets/fonts/Yeongdeok.ttf',
+  variable: '--yeongdeok',
+});
+
+export { pretendard, godo, gwPower, yeongdeok };
