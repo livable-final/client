@@ -1,9 +1,3 @@
-import { ReactNode } from 'react';
-
-export interface HomeCardProps {
-  children: ReactNode;
-}
-
 export interface HomeHasCafeteriaProps {
   hasCafeteria: boolean;
 }
