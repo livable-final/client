@@ -22,6 +22,7 @@ const theme = {
       grey20: '#D7DCE3',
       grey30: '#C3C6CC',
       grey40: '#96A2AC',
+      grey45: '#D3D3D3',
       grey50: '#747C84',
       grey60: '#4A5662',
       grey70: '#33404E',

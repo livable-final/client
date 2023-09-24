@@ -1,3 +1,4 @@
+import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 
@@ -32,7 +33,7 @@ const wrapperStyles = css`
 
   > img {
     border-radius: 8px;
-    background: lightgray 50% / cover no-repeat;
+    background: ${theme.palette.greyscale.grey45} 50% / cover no-repeat;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
   }
 `;

@@ -39,7 +39,8 @@ const containerStyles = css`
 
 const menuImageStyles = css`
   border-radius: 100px;
-  background: lightgray 1px 3.663px / 97.727% 83.35% no-repeat;
+  background: ${theme.palette.greyscale.grey45} 1px 3.663px / 97.727% 83.35%
+    no-repeat;
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
 `;
 
