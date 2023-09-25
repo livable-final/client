@@ -14,7 +14,6 @@ function LunchMainRankingTitle() {
 
 const containerStyles = css`
   display: flex;
-  padding: 16px 0px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;

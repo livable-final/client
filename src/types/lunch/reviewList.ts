@@ -12,3 +12,8 @@ export interface ReviewList {
   reviewImageUrl: string[];
   reviewDescription: string;
 }
+
+export interface ReviewListStore {
+  reviewList: ReviewList;
+  setReviewList: (item: ReviewList) => void;
+}

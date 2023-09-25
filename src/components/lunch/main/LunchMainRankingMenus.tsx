@@ -64,7 +64,7 @@ function LunchMainRankingMenus() {
 
 const containerStyles = css`
   display: flex;
-  padding: 12px 42.5px 20px;
+  padding: 28px 42.5px 0;
   justify-content: center;
   align-items: flex-end;
   gap: 20px;

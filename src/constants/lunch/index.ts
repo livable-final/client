@@ -71,6 +71,10 @@ export const CALENDAR_CASE = {
     type2: 'searching',
     type3: 'menu',
   },
+  review: {
+    type1: 'recent',
+    type2: 'more',
+  },
 };
 
 export const LUNCH_MAIN_CONSTANTS = {
@@ -80,5 +84,8 @@ export const LUNCH_MAIN_CONSTANTS = {
   },
   reviews: {
     title: '최근 테라타워 입주자들의 리뷰',
+  },
+  detail: {
+    title: '의 더 많은 리뷰',
   },
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import Card from '@/components/common/Card';
+import LunchCardProps from '@/components/lunch/LunchCard';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import theme from '@/styles/theme';
 import { TearOffCalendar, Roulette } from '@/assets/icons';
@@ -16,7 +16,7 @@ function Banner({ hasCafeteria }: HomeHasCafeteriaProps) {
   const bannerText = getBannerText();
 
   return (
-    <Card padding={10}>
+    <LunchCardProps padding={10}>
       <div css={containerStyles}>
         <div css={wrapperStyles}>
           <p css={bodyStyles}>{bannerText.body}</p>
@@ -24,7 +24,7 @@ function Banner({ hasCafeteria }: HomeHasCafeteriaProps) {
         </div>
         {hasCafeteria ? <TearOffCalendar /> : <Roulette />}
       </div>
-    </Card>
+    </LunchCardProps>
   );
 }
 

@@ -3,13 +3,13 @@ import HomeBulletinDate from '@/components/home/bulletin/HomeBulletinDate';
 import HomeBulletinWeather from '@/components/home/bulletin/HomeBulletinWeather';
 import HomeBulletinNotice from '@/components/home/bulletin/HomeBulletinNotice';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
-import Card from '@/components/common/Card';
+import LunchCardProps from '@/components/lunch/LunchCard';
 
 function HomeBulletin() {
   const { bulletin } = HOME_TEXTS;
 
   return (
-    <Card padding={16}>
+    <LunchCardProps padding={16}>
       <div css={containerStyles}>
         <div css={wrapperStyles}>
           <HomeBulletinDate />
@@ -25,7 +25,7 @@ function HomeBulletin() {
           ))}
         </div>
       </div>
-    </Card>
+    </LunchCardProps>
   );
 }
 

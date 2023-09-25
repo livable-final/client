@@ -19,7 +19,7 @@ const containerStyles = css`
   justify-content: space-between;
   align-items: center;
   flex: 1 0 0;
-  gap: 12px;
+  gap: 8px;
 `;
 
 const eclipseStyles = (idx: number) => css`
@@ -45,6 +45,7 @@ const quantityStyles = (idx: number) => css`
 const stateStyles = css`
   font: ${theme.font.body.body3_400};
   color: ${theme.palette.greyscale.grey70};
+  line-height: 21px;
 `;
 
 export default HomeReceptionProgress;
