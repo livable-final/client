@@ -48,6 +48,7 @@ const firstLineStyles = css`
 `;
 const visitorInfoStyles = css`
   font: ${theme.font.subTitle.subTitle1_400};
+  color: ${theme.palette.title};
   margin-right: 8px;
 `;
 const purposeStyles = css`
