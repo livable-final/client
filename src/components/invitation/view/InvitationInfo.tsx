@@ -1,14 +1,20 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { LocationFill, CalendarFill } from '@/assets/icons';
+import { InvitationInfoProps } from '@/types/invitation/view';
+import usePagesStore from '@/stores/usePagesStore';
 
-const test = {
+export const test = {
   place: '그랑서울 10층 1004호 식스센스 사무실',
   date: '2023.08.21~ 08.23',
   time: '14:30 ~ 16:30',
 };
 
-function InvitationInfo() {
+function InvitationInfo({ value }: InvitationInfoProps) {
+  const { setNextComponent } = usePagesStore();
+  const onClickHandler = (event: React.MouseEvent) => {
+    setNextComponent((event.target as HTMLButtonElement).id);
+  };
   return (
     <div css={infoContainerStyles}>
       <div css={infoContainerDesignStyles} />
@@ -29,12 +35,16 @@ function InvitationInfo() {
           </div>
         </div>
       </div>
-      <button type="button" css={infoQRContainerStyles}>
+      <div css={infoQRContainerStyles}>
         {/* 상수화예정입니다 */}
-        <div>임시출입증</div>
-        <div className="test">큐알</div>
-        <div>크게보기</div>
-      </button>
+        <button type="button" id={value} onClick={onClickHandler}>
+          <div id={value}>임시출입증</div>
+          <div className="test" id={value}>
+            큐알
+          </div>
+          크게보기
+        </button>
+      </div>
     </div>
   );
 }
@@ -95,8 +105,11 @@ const infoQRContainerStyles = css`
   align-items: center;
   min-width: 70px;
   margin: 0 21px;
-  font: ${theme.font.body.body1_500};
-  color: ${theme.palette.white};
+  button {
+    font: ${theme.font.body.body1_500};
+    color: ${theme.palette.white};
+    cursor: pointer;
+  }
   //삭제예정입니다
   .test {
     margin: 15px auto;

@@ -9,7 +9,7 @@ function InvitationInfoContainer() {
   return (
     <div css={ViewInfoContainerStyles}>
       <div css={ViewInfoStyles}>
-        <InvitationInfo />
+        <InvitationInfo value={INVITATION_VEIW_INFO_TEXTS.category.code} />
       </div>
       <div css={InfoCategoryContainerStyles}>
         <InvitationInfoCategory

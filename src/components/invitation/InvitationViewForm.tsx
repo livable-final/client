@@ -1,5 +1,7 @@
 import Header from '@/components/common/Header';
 import usePagesStore from '@/stores/usePagesStore';
+import InvitationQrInfo from '@/components/invitation/view/InvitationQrInfo';
+import InvitationBuildingInfo from '@/components/invitation/view/InvitationBuildingInfo';
 import InvitationHostInfo from '@/components/invitation/view/InvitationHostInfo';
 import InvitationOfficeInfo from '@/components/invitation/view/InvitationOfficeInfo';
 import InvitationViewFooter from '@/components/invitation/view/InvitationViewFooter';
@@ -10,24 +12,33 @@ import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 
 function InvitationViewForm() {
   const { nextComponent, setNextComponent } = usePagesStore();
-  if (nextComponent === '식스센스 초대장') {
+  if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.main}`) {
     return <InvitationViewForm />;
   }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.building}`) {
-    return <InvitationOfficeInfo />;
+    return <InvitationBuildingInfo />;
   }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.host}`) {
     return <InvitationHostInfo />;
   }
+  if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.place}`) {
+    return <InvitationOfficeInfo />;
+  }
+  if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.code}`) {
+    return <InvitationQrInfo />;
+  }
 
   const onClickHandler = () => {
-    setNextComponent('');
+    setNextComponent(`${INVITATION_VEIW_INFO_TEXTS.category.main}`);
   };
 
   return (
     <div>
       <div css={invitationViewFormStyles}>
-        <Header title="식스센스 초대장" onClick={onClickHandler} />
+        <Header
+          title={INVITATION_VEIW_INFO_TEXTS.category.main}
+          onClick={onClickHandler}
+        />
         <InvitationInfoContainer />
         <InvitationCarouselContainer />
         <InvitationViewFooter />

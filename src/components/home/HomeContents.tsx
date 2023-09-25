@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import HomeBanner from '@/components/home/banner';
+import Banner from '@/components/common/Banner';
 import HomeBulletin from '@/components/home/bulletin';
 import { DUMMY_RESPONSE } from '@/constants/home/homeTexts';
 import HomeCafeteria from '@/components/home/cafeteria';
@@ -12,10 +12,10 @@ function HomeContents() {
 
   return (
     <div css={containerStyles}>
-      <HomeBanner hasCafeteria={hasCafeteria} />
       <HomeBulletin />
       {hasCafeteria && <HomeCafeteria />}
       <HomeService />
+      <Banner hasCafeteria={hasCafeteria} />
       <HomeReception />
       <HomeServey />
     </div>

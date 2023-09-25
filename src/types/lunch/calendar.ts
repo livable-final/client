@@ -33,7 +33,7 @@ export interface LunchSelectButtonProps {
 
 export interface LunchSubTitleProps {
   title: string;
-  type: 'title' | 'subTitle';
+  type: 'title' | 'subTitle' | 'recent' | 'more';
   userName?: string;
 }
 

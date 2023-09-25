@@ -1,4 +1,4 @@
-import HomeCard from '@/components/home/HomeCard';
+import LunchCardProps from '@/components/lunch/LunchCard';
 import HomeReceptionProgress from '@/components/home/reception/HomeReceptionProgress';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import theme from '@/styles/theme';
@@ -33,18 +33,17 @@ function HomeReception() {
   }
 
   return (
-    <HomeCard>
+    <LunchCardProps padding={16}>
       <div css={containerStyles}>
         <span css={titleStyles}>{reception.title}</span>
         <div css={progressStyles}>{progressArray}</div>
       </div>
-    </HomeCard>
+    </LunchCardProps>
   );
 }
 
 const containerStyles = css`
   display: flex;
-  padding: 16px 0;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;

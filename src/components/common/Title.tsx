@@ -2,7 +2,8 @@ import theme from '@/styles/theme';
 import { TitleProps } from '@/types/common/title';
 import { css } from '@emotion/react';
 import Icons from '@/components/common/Icons';
-import { Barcode, Bell } from '@/assets/icons';
+import { Barcode, Bell, LunchCalendar } from '@/assets/icons';
+import Link from 'next/link';
 
 function Title({ title, isMain, part }: TitleProps) {
   const renderIcons = (type: string) => {
@@ -15,7 +16,11 @@ function Title({ title, isMain, part }: TitleProps) {
           </>
         );
       case 'lunch':
-        return <Icons icon="down" />;
+        return (
+          <Link href="/lunch/calendar">
+            <LunchCalendar />
+          </Link>
+        );
       default:
         return <Icons icon="down" />;
     }
@@ -53,7 +58,6 @@ const spanStyles = css`
   text-align: center;
   font: ${theme.font.title.title1_godo};
   line-height: 25px;
-  min-width: 66px;
 `;
 
 const iconStyles = css`

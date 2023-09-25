@@ -149,6 +149,7 @@ const ImageStyles = css`
 
 const CalendarStyles = css`
   margin: 12px 0 20px;
+
   .react-calendar {
     width: 350px;
     max-width: 100%;

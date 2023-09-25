@@ -3,7 +3,7 @@ const USER_TEXTS = {
     { title: '내 정보', href: '/user' },
     { title: '오피스 관리', href: '/user' },
     { title: '오피스 멤버 보기', href: '/user' },
-    { title: '내 초대목록', href: '/user' },
+    { title: '내 초대목록', href: '/user/invitation-list' },
   ],
 };
 

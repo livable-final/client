@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 
 function InvitationInfoContainer() {
   const { setNextComponent } = useViewStore();
-  const { modalState, openModal } = useModalStore();
+  const { modalState, openModal, closeModal } = useModalStore();
   const { button, modal } = CREATE_TEXTS;
   const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
 
@@ -21,6 +21,7 @@ function InvitationInfoContainer() {
 
   const onClickModalHandler = () => {
     setIsConfirmed(!isConfirmed);
+    closeModal();
   };
 
   const onClickAddHandler = () => {
@@ -34,6 +35,14 @@ function InvitationInfoContainer() {
   }, [isConfirmed, setNextComponent]);
 
   const visitorsList = [
+    '고애신',
+    '유진초이',
+    '김희성',
+    '쿠도히나',
+    '구동매',
+    '임관수',
+    '카일',
+    '도미',
     '고애신',
     '유진초이',
     '김희성',
@@ -66,11 +75,12 @@ function InvitationInfoContainer() {
 }
 
 const containerStyles = css`
-  display: flex;
   position: relative;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  width: 100%;
   min-width: 280px;
   max-width: 360px;
 
@@ -86,10 +96,11 @@ const containerStyles = css`
 `;
 
 const buttonWrapperStyles = css`
+  position: relative;
+  width: 100%;
   min-width: 280px;
   max-width: 360px;
   padding-bottom: 20px;
-  background-image: linear-gradient(to top, white 70%, transparent 30%);
 
   ${mq.md} {
     min-width: 361px;
@@ -100,8 +111,10 @@ const buttonWrapperStyles = css`
     max-width: 640px;
   }
   ${mq.tab} {
+    position: fixed;
+    bottom: 0;
     min-width: 641px;
-    max-width: 800px;
+    max-width: 1024px;
   }
 `;
 

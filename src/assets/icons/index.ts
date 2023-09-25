@@ -36,7 +36,7 @@ import Rice from '@/assets/icons/Rice.svg';
 import ThumbsUp from '@/assets/icons/ThumbsUp.svg';
 import Camera from '@/assets/icons/Camera.svg';
 import XSBlack from '@/assets/icons/XS_black.svg';
-import Profile from '@/assets/icons/profille.svg';
+import Profile from '@/assets/icons/profile.svg';
 import Copy from '@/assets/icons/Copy_light.svg';
 import CopyBlue from '@/assets/icons/Copy.svg';
 import Subway from '@/assets/icons/Subway.svg';
@@ -58,6 +58,22 @@ import Sunny from '@/assets/icons/Sunny.svg';
 import InfoCategory from '@/assets/icons/InfoCategory.svg';
 import Location20 from '@/assets/icons/Location20.svg';
 import Delicious from '@/assets/icons/Delicious.svg';
+import ClearDay from '@/assets/icons/weather/ClearDay.svg';
+import ClearNight from '@/assets/icons/weather/ClearNight.svg';
+import FewClouds from '@/assets/icons/weather/FewClouds.svg';
+import Clouds from '@/assets/icons/weather/Clouds.svg';
+import BrokenClouds from '@/assets/icons/weather/BrokenClouds.svg';
+import ShowerRain from '@/assets/icons/weather/ShowerRain.svg';
+import Rain from '@/assets/icons/weather/Rain.svg';
+import ThunderStorm from '@/assets/icons/weather/ThunderStorm.svg';
+import Snow from '@/assets/icons/weather/Snow.svg';
+import Mist from '@/assets/icons/weather/Mist.svg';
+import LunchCalendar from '@/assets/icons/LunchCalendar.svg';
+import Lunch from '@/assets/icons/Lunch.svg';
+import Rank1 from '@/assets/icons/Rank1.svg';
+import Rank2 from '@/assets/icons/Rank2.svg';
+import Rank3 from '@/assets/icons/Rank3.svg';
+import Reviewer from '@/assets/icons/Reviewer.svg';
 
 export {
   As,
@@ -120,4 +136,20 @@ export {
   InfoCategory,
   Location20,
   Delicious,
+  ClearDay,
+  ClearNight,
+  FewClouds,
+  Clouds,
+  BrokenClouds,
+  ShowerRain,
+  Rain,
+  ThunderStorm,
+  Snow,
+  Mist,
+  LunchCalendar,
+  Lunch,
+  Rank1,
+  Rank2,
+  Rank3,
+  Reviewer,
 };

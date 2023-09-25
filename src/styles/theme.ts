@@ -22,6 +22,7 @@ const theme = {
       grey20: '#D7DCE3',
       grey30: '#C3C6CC',
       grey40: '#96A2AC',
+      grey45: '#D3D3D3',
       grey50: '#747C84',
       grey60: '#4A5662',
       grey70: '#33404E',
@@ -75,6 +76,8 @@ const theme = {
     etc: {
       findRoad: '500 normal 12px var(--pretendard)',
       userPoint: '500 normal 13px var(--pretendard)',
+      rankingNumber: '400 normal 14px var(--gwPower)',
+      reviewDesc: '400 normal 15px var(--yeongdeok)',
     },
   },
 };

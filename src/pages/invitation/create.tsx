@@ -53,22 +53,8 @@ const createContainerStyles = css`
 const headerContainerStyles = css`
   position: sticky;
   top: 0;
-  min-width: 280px;
-  max-width: 360px;
+  width: 100%;
   z-index: 1;
-
-  ${mq.md} {
-    min-width: 361px;
-    max-width: 480px;
-  }
-  ${mq.lg} {
-    min-width: 481px;
-    max-width: 640px;
-  }
-  ${mq.tab} {
-    min-width: 641px;
-    max-width: 1024px;
-  }
 `;
 
 export default Create;

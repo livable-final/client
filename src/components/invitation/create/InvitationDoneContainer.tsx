@@ -24,6 +24,7 @@ const containerStyles = css`
   align-items: center;
   width: 100%;
   height: 100%;
+  margin: 0 -16px;
   background-color: ${theme.palette.white};
   z-index: 1;
 
