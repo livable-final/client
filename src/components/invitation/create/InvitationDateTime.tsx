@@ -9,6 +9,7 @@ import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import InvitationSelectTime from './InvitationSelectTime';
 
 function InvitationDateTime() {
   const { title, button } = CREATE_TEXTS;
@@ -51,6 +52,7 @@ function InvitationDateTime() {
           {title.invitationTime}
           <Toggle />
         </div>
+        <InvitationSelectTime />
       </div>
       <div css={buttonWrapperStyles}>
         <Button
@@ -141,7 +143,7 @@ const calendarStyles = css`
           .react-datepicker__year-text--in-range,
 
         ) {
-        // startDate 선택 후 endDate까지의 randge 스타일
+        // startDate 선택 후 endDate까지의 range 스타일
         border-radius: 45%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
@@ -182,7 +184,7 @@ const titleStyles = css`
 `;
 
 const buttonWrapperStyles = css`
-  position: sticky;
+  position: fixed;
   bottom: 0;
   min-width: 280px;
   max-width: 360px;

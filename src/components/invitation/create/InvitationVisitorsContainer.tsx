@@ -19,7 +19,16 @@ function InvitationVisitorsContainer() {
   const { name, contact }: ErrorTypeProps = COMMON_ERROR_MESSAGE;
   const [visitorName, setVisitorName] = useState<string>('');
   const [visitorContact, setVisitorContact] = useState<string>('');
-  const [visitorsList] = useState<string[]>(['고애신']);
+  const [visitorsList] = useState<string[]>([
+    '고애신',
+    '유진초이',
+    '김희성',
+    '구동매',
+    '쿠도히나',
+    '수미',
+    '도미',
+    '임관수',
+  ]);
 
   const onClickBtnHandler = () => {
     setNextComponent('InvitationInfoContainer');
@@ -64,12 +73,14 @@ function InvitationVisitorsContainer() {
           <Add onClick={onClickAddVisitorHandler} />
         </div>
       </div>
-      {visitorsList.length > 0 && (
-        <InvitationVisitorsList
-          visitorsList={visitorsList}
-          onClick={onClickDeleteVisitorHandler}
-        />
-      )}
+      <div css={visitorsListWrapper(visitorsList)}>
+        {visitorsList.length > 0 && (
+          <InvitationVisitorsList
+            visitorsList={visitorsList}
+            onClick={onClickDeleteVisitorHandler}
+          />
+        )}
+      </div>
       <div css={buttonWrapperStyles}>
         <Button
           content={button.next}
@@ -150,17 +161,27 @@ const inputWrapperStyles = css`
   gap: 12px;
 `;
 
+const visitorsListWrapper = (visitorsList: string[]) => css`
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  width: 100%;
+  margin-bottom: ${visitorsList.length > 3 ? '100px;' : '0'};
+`;
+
 const buttonWrapperStyles = css`
   position: fixed;
   bottom: 0;
+  width: 100%;
   min-width: 280px;
   max-width: 360px;
-  padding-bottom: 20px;
+  padding: 0 16px 20px;
   background-image: linear-gradient(
     to top,
     ${theme.palette.white} 70%,
     transparent 30%
   );
+
   ${mq.md} {
     min-width: 361px;
     max-width: 480px;
@@ -171,7 +192,7 @@ const buttonWrapperStyles = css`
   }
   ${mq.tab} {
     min-width: 641px;
-    max-width: 800px;
+    max-width: 1024px;
   }
 `;
 
