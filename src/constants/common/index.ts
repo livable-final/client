@@ -99,6 +99,7 @@ export const COMMON_ICON_NAMES = {
     home: 'home',
     lunch: 'lunch',
     down: 'down',
+    check: 'check',
     weather: {
       clearDay: 'clearDay',
       clearNight: 'clearNight',

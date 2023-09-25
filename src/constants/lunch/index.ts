@@ -12,6 +12,7 @@ export const CALENDAR_CONTENT = {
     recentSearches: '최근검색',
     searchResults: '검색결과',
     review: '후기 작성',
+    bottomSheet: '사진을 등록하면 포인트를 받을 수 있어요',
   },
   category: {
     eatOut: {
@@ -57,6 +58,13 @@ export const CALENDAR_CONTENT = {
     },
     button6: {
       text: '만족',
+    },
+    button7: {
+      text: '다음부터 이 메세지 보지 않기',
+    },
+    button8: {
+      text1: '작성 완료하기',
+      text2: '사진 등록하기',
     },
   },
 };
