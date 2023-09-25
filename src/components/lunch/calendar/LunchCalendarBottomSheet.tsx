@@ -113,6 +113,9 @@ const btnBoxStyles = css`
 
 const btnStyles = css`
   padding: 16px 0;
+  &:active {
+    color: ${theme.palette.primary};
+  }
 `;
 
 export default LunchCalendarBottomSheet;
