@@ -31,9 +31,8 @@ function InvitationVisitorsList({
         <div css={lengthStyles}>{visitorsList.length}/30</div>
       </div>
       <div css={listWrapperStyles}>
-        {nextComponent !== 'InvitationVisitorsContainer' && (
-          <Add isBlue onClick={onClickHandler} />
-        )}
+        {nextComponent !== 'InvitationVisitorsContainer' &&
+          visitorsList.length !== 30 && <Add isBlue onClick={onClickHandler} />}
         {visitorsList.map((name: string) => (
           <NameTag key={name} name={name} onClick={onClick} />
         ))}
