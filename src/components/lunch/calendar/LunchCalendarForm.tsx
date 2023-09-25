@@ -149,6 +149,7 @@ const ImageStyles = css`
 
 const CalendarStyles = css`
   margin: 12px 0 20px;
+
   .react-calendar {
     width: 350px;
     max-width: 100%;
@@ -156,6 +157,7 @@ const CalendarStyles = css`
     border: 1px solid #a0a096;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
+
   }
 
   .react-calendar--doubleView {

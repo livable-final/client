@@ -46,7 +46,8 @@ const buttonStyles = css`
   color: ${theme.palette.greyscale.grey50};
   font: ${theme.font.body.body1_500};
 
-  &:hover {
+  // 추후 애니메이션 수정
+  &:active {
     border: 2px solid ${theme.palette.orange};
     background-color: ${theme.palette.white};
     color: ${theme.palette.orange};
