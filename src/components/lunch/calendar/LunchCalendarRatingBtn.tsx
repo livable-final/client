@@ -1,12 +1,14 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
-import { Smile, Confused } from '@/assets/icons';
-import { LunchRatingButtonProps } from '@/types/lunch/calendar';
+import { COMMON_ICON_NAMES } from '@/constants/common';
+import { LunchCalendarRatingBtnProps } from '@/types/lunch/calendar';
 import { useState } from 'react';
+import Icons from '@/components/common/Icons';
 
-function LunchRatingButton({ title }: LunchRatingButtonProps) {
+function LunchCalendarRatingBtn({ title }: LunchCalendarRatingBtnProps) {
   const { button } = CALENDAR_CONTENT;
+  const { lunch } = COMMON_ICON_NAMES;
   const [isChecked, setIsChecked] = useState(false);
 
   const onClickHandler = () => {
@@ -16,10 +18,10 @@ function LunchRatingButton({ title }: LunchRatingButtonProps) {
 
   switch (title) {
     case button.button5.good:
-      icon = <Smile />;
+      icon = <Icons icon={lunch.smile} size="44px" />;
       break;
     case button.button5.bad:
-      icon = <Confused />;
+      icon = <Icons icon={lunch.confused} size="44px" />;
       break;
     default:
       break;
@@ -68,4 +70,4 @@ const iconStyles = (isChecked: boolean) => css`
   }
 `;
 
-export default LunchRatingButton;
+export default LunchCalendarRatingBtn;

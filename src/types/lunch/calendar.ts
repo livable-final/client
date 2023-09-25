@@ -11,7 +11,7 @@ export interface ReviewData {
 }
 
 //
-export interface LunchListItemProps {
+export interface LunchCalendarListItemProps {
   type: string;
   content: string;
   category?: string;
@@ -20,14 +20,14 @@ export interface LunchListItemProps {
   isChecked?: boolean;
 }
 
-export interface LunchRatingButtonProps {
+export interface LunchCalendarRatingBtnProps {
   title: string;
 }
 
-export interface LunchReviewCategoryProps {
+export interface LunchCalendarReviewCategoryProps {
   title: string;
 }
-export interface LunchSelectButtonProps {
+export interface LunchCalendarSelectBtnProps {
   text: string;
 }
 
@@ -37,7 +37,7 @@ export interface LunchSubTitleProps {
   userName?: string;
 }
 
-export interface LunchWriteButtonProps {
+export interface LunchCalendarWriteBtnProps {
   isCompleted: boolean;
   onClick: (e: React.MouseEvent) => void;
 }
