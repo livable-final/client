@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import HomeCard from '@/components/common/Card';
+import Card from '@/components/common/Card';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import theme from '@/styles/theme';
 import { TearOffCalendar, Roulette } from '@/assets/icons';
@@ -16,7 +16,7 @@ function Banner({ hasCafeteria }: HomeHasCafeteriaProps) {
   const bannerText = getBannerText();
 
   return (
-    <HomeCard>
+    <Card padding={10}>
       <div css={containerStyles}>
         <div css={wrapperStyles}>
           <p css={bodyStyles}>{bannerText.body}</p>
@@ -24,13 +24,12 @@ function Banner({ hasCafeteria }: HomeHasCafeteriaProps) {
         </div>
         {hasCafeteria ? <TearOffCalendar /> : <Roulette />}
       </div>
-    </HomeCard>
+    </Card>
   );
 }
 
 const containerStyles = css`
   display: flex;
-  padding: 10px 0px;
   justify-content: space-between;
   align-items: center;
   flex: 1 0 0;
@@ -51,8 +50,8 @@ const bodyStyles = css`
 const titleStyles = css`
   color: ${theme.palette.greyscale.grey90};
   font: ${theme.font.body.body1_600};
-  line-height: 25px;
-  max-height: 25px;
+  line-height: 24px;
+  max-height: 24px;
   overflow: hidden;
 
   // toRoulette의 text 특성 상 특정한 min-width 지정이 필요

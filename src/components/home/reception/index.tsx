@@ -33,7 +33,7 @@ function HomeReception() {
   }
 
   return (
-    <Card>
+    <Card padding={16}>
       <div css={containerStyles}>
         <span css={titleStyles}>{reception.title}</span>
         <div css={progressStyles}>{progressArray}</div>
@@ -44,7 +44,6 @@ function HomeReception() {
 
 const containerStyles = css`
   display: flex;
-  padding: 16px 0;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;

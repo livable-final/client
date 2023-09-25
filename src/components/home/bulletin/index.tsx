@@ -9,19 +9,21 @@ function HomeBulletin() {
   const { bulletin } = HOME_TEXTS;
 
   return (
-    <Card>
+    <Card padding={16}>
       <div css={containerStyles}>
         <div css={wrapperStyles}>
           <HomeBulletinDate />
           <HomeBulletinWeather />
         </div>
-        {bulletin.map((item) => (
-          <HomeBulletinNotice
-            key={item.title}
-            title={item.title}
-            content={item.content}
-          />
-        ))}
+        <div css={spanStyles}>
+          {bulletin.map((item) => (
+            <HomeBulletinNotice
+              key={item.title}
+              title={item.title}
+              content={item.content}
+            />
+          ))}
+        </div>
       </div>
     </Card>
   );
@@ -31,7 +33,6 @@ const containerStyles = css`
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
-  padding: 16px 0;
   gap: 12px;
 `;
 
@@ -39,6 +40,14 @@ const wrapperStyles = css`
   display: flex;
   justify-content: space-between;
   flex: 1 0 0;
+`;
+
+const spanStyles = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
 `;
 
 export default HomeBulletin;
