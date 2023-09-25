@@ -96,6 +96,7 @@ export const COMMON_ICON_NAMES = {
   },
   home: {
     home: 'home',
+    lunch: 'lunch',
     down: 'down',
     weather: {
       clearDay: 'clearDay',
@@ -112,6 +113,11 @@ export const COMMON_ICON_NAMES = {
   },
   user: {
     coin: 'coin',
+  },
+  lunch: {
+    smile: 'smile',
+    confused: 'confused',
+    thumbsUp: 'thumbsUp',
   },
 };
 
@@ -158,7 +164,7 @@ export const COMMON_MODAL_BUTTONS = {
 export const COMMON_BNB_CONSTANTS = {
   bnb: {
     home: { name: '홈', url: '/', icon: 'home' },
-    lunch: { name: '오점완', url: '/lunch', icon: 'home' },
+    lunch: { name: '오점완', url: '/lunch', icon: 'lunch' },
     user: { name: 'MY', url: '/user', icon: 'home' },
   },
   indicator: {

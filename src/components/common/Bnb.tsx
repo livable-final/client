@@ -34,7 +34,7 @@ function Bnb() {
         return (
           <Icons
             color={isActive ? greyscale.grey60 : greyscale.grey30}
-            icon={bnb.home.icon}
+            icon={bnb.lunch.icon}
           />
         );
       case bnb.user.icon:
@@ -54,7 +54,7 @@ function Bnb() {
       <ul css={containerStlyes(scrollY)}>
         {Object.values(bnb).map((item) => (
           <li key={item.name} css={wrapperStyles}>
-            <Link href={item.url}>
+            <Link css={iconStyles} href={item.url}>
               {renderIcon(item.icon, isCurrent(item.url))}
             </Link>
             <span css={spanStyles}>{item.name}</span>
@@ -101,12 +101,21 @@ const wrapperStyles = css`
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  flex: 1 0 0;
+`;
+
+const iconStyles = css`
+  width: 100%;
+  justify-content: center;
+  display: flex;
 `;
 
 const spanStyles = css`
   font: ${theme.font.input.default};
   line-height: 16px;
   text-align: center;
+  display: flex;
+  flex-wrap: nowrap;
 `;
 
 const indicatorStyles = (isTop: boolean) => css`

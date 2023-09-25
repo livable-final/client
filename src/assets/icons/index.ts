@@ -36,7 +36,7 @@ import Rice from '@/assets/icons/Rice.svg';
 import ThumbsUp from '@/assets/icons/ThumbsUp.svg';
 import Camera from '@/assets/icons/Camera.svg';
 import XSBlack from '@/assets/icons/XS_black.svg';
-import Profile from '@/assets/icons/profille.svg';
+import Profile from '@/assets/icons/profile.svg';
 import Copy from '@/assets/icons/Copy_light.svg';
 import CopyBlue from '@/assets/icons/Copy.svg';
 import Subway from '@/assets/icons/Subway.svg';
@@ -68,6 +68,12 @@ import Rain from '@/assets/icons/weather/Rain.svg';
 import ThunderStorm from '@/assets/icons/weather/ThunderStorm.svg';
 import Snow from '@/assets/icons/weather/Snow.svg';
 import Mist from '@/assets/icons/weather/Mist.svg';
+import LunchCalendar from '@/assets/icons/LunchCalendar.svg';
+import Lunch from '@/assets/icons/Lunch.svg';
+import Rank1 from '@/assets/icons/Rank1.svg';
+import Rank2 from '@/assets/icons/Rank2.svg';
+import Rank3 from '@/assets/icons/Rank3.svg';
+import Reviewer from '@/assets/icons/Reviewer.svg';
 
 export {
   As,
@@ -140,4 +146,10 @@ export {
   ThunderStorm,
   Snow,
   Mist,
+  LunchCalendar,
+  Lunch,
+  Rank1,
+  Rank2,
+  Rank3,
+  Reviewer,
 };

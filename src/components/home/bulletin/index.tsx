@@ -1,15 +1,15 @@
-import HomeCard from '@/components/home/HomeCard';
 import { css } from '@emotion/react';
 import HomeBulletinDate from '@/components/home/bulletin/HomeBulletinDate';
 import HomeBulletinWeather from '@/components/home/bulletin/HomeBulletinWeather';
 import HomeBulletinNotice from '@/components/home/bulletin/HomeBulletinNotice';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
+import Card from '@/components/common/Card';
 
 function HomeBulletin() {
   const { bulletin } = HOME_TEXTS;
 
   return (
-    <HomeCard>
+    <Card>
       <div css={containerStyles}>
         <div css={wrapperStyles}>
           <HomeBulletinDate />
@@ -23,7 +23,7 @@ function HomeBulletin() {
           />
         ))}
       </div>
-    </HomeCard>
+    </Card>
   );
 }
 

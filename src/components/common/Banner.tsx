@@ -1,12 +1,12 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import HomeCard from '@/components/home/HomeCard';
+import HomeCard from '@/components/common/Card';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import theme from '@/styles/theme';
 import { TearOffCalendar, Roulette } from '@/assets/icons';
 import { HomeHasCafeteriaProps } from '@/types/home';
 
-function HomeBanner({ hasCafeteria }: HomeHasCafeteriaProps) {
+function Banner({ hasCafeteria }: HomeHasCafeteriaProps) {
   // response 'hasCafeteria' boolean value에 따라 text 변경
   const getBannerText = () => {
     const key = hasCafeteria ? 'toCalendar' : 'toRoulette';
@@ -61,4 +61,4 @@ const titleStyles = css`
   }
 `;
 
-export default HomeBanner;
+export default Banner;
