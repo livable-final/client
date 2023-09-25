@@ -1,16 +1,16 @@
-import Card from '@/components/common/Card';
+import LunchCard from '@/components/lunch/LunchCard';
 import LunchMainRankingTitle from '@/components/lunch/main/LunchMainRankingTitle';
 import LunchMainRankingMenus from '@/components/lunch/main/LunchMainRankingMenus';
 import { css } from '@emotion/react';
 
 function LunchMainRanking() {
   return (
-    <Card>
+    <LunchCard>
       <div css={wrapperStyles}>
         <LunchMainRankingTitle />
         <LunchMainRankingMenus />
       </div>
-    </Card>
+    </LunchCard>
   );
 }
 

@@ -1,9 +1,9 @@
 import theme from '@/styles/theme';
-import { CardProps } from '@/types/common/card';
+import { LunchCardProps } from '@/types/lunch/card';
 import { css } from '@emotion/react';
 import React from 'react';
 
-function Card({ children, col, padding }: CardProps) {
+function LunchCard({ children, col, padding }: LunchCardProps) {
   return <div css={cardStyles(col, padding)}>{children}</div>;
 }
 
@@ -17,4 +17,4 @@ const cardStyles = (col?: boolean, padding?: number) => css`
   padding: ${padding ? `${padding}px 16px` : '16px 16px 20px'};
 `;
 
-export default Card;
+export default LunchCard;

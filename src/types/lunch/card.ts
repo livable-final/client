@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface CardProps {
+export interface LunchCardProps {
   children: ReactNode;
   col?: boolean;
   padding?: number;

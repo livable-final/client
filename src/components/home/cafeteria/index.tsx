@@ -1,4 +1,4 @@
-import Card from '@/components/common/Card';
+import LunchCardProps from '@/components/lunch/LunchCard';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import HomeCafeteriaToggle from '@/components/home/cafeteria/HomeCafeteriaToggle';
 import { css } from '@emotion/react';
@@ -7,7 +7,7 @@ import theme from '@/styles/theme';
 function HomeCafeteria() {
   const { cafeteria } = HOME_TEXTS;
   return (
-    <Card padding={16}>
+    <LunchCardProps padding={16}>
       <div css={containerStyles}>
         <div css={wrapperStyles}>
           <span css={titleStyles}>{cafeteria.title}</span>
@@ -19,7 +19,7 @@ function HomeCafeteria() {
         </div>
         <div css={menusStyles}>{cafeteria.menu.breakfast}</div>
       </div>
-    </Card>
+    </LunchCardProps>
   );
 }
 
