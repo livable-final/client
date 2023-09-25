@@ -28,7 +28,7 @@ function InvitationDoneBtn() {
         onClick={onClickToMypageHandler}
       >
         <div>
-          <span>방문자 목록</span>에서
+          <span>초대 목록</span>에서
           <br />
           초대 내역을 확인할 수 있어요
         </div>

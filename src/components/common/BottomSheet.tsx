@@ -52,7 +52,7 @@ const containerStyles = (isOpen: boolean) => css`
   border-radius: 20px 20px 0 0;
   width: 100%;
   max-width: 1024px;
-  min-height: 400px;
+  max-height: 100vh;
   height: auto;
   background-color: ${theme.palette.white};
   animation: ${isOpen
@@ -78,11 +78,4 @@ const containerStyles = (isOpen: boolean) => css`
   }
 `;
 
-// const buttonWrapperStyles = css`
-//   position: absolute;
-//   bottom: 0;
-//   width: 100%;
-//   padding: 0 16px;
-//   margin-bottom: 30px;
-// `;
 export default BottomSheet;
