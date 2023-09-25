@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import theme from '@/styles/theme';
 import usePagesStore from '@/stores/usePagesStore';
+import Icons from '@/components/common/Icons';
 import { css } from '@emotion/react';
-import { Clock, XIcon, CheckOn, CheckOff } from '@/assets/icons';
+import { Clock, XIcon } from '@/assets/icons';
 import { CALENDAR_CASE } from '@/constants/lunch';
+import { COMMON_ICON_NAMES } from '@/constants/common';
 import { LunchCalendarListItemProps } from '@/types/lunch/calendar';
 
 function LunchCalendarListItem({
@@ -16,6 +18,7 @@ function LunchCalendarListItem({
 }: LunchCalendarListItemProps) {
   const { setNextComponent } = usePagesStore();
   const { listItem } = CALENDAR_CASE;
+  const { home } = COMMON_ICON_NAMES;
 
   const onClickHandler = () => {
     setNextComponent('LunchCalendarMenu');
@@ -62,7 +65,15 @@ function LunchCalendarListItem({
           <div css={contentStyles(fontStyle)}>
             <p>{content}</p>
           </div>
-          {!isChecked ? <CheckOff /> : <CheckOn />}
+          <Icons
+            icon={home.check}
+            size="24px"
+            color={
+              !isChecked
+                ? `${theme.palette.greyscale.grey20}`
+                : `${theme.palette.bluescale.blue60}`
+            }
+          />
         </li>
       );
     default:
