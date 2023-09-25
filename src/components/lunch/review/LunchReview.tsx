@@ -34,7 +34,7 @@ function LunchReview({ ...props }: ReviewList) {
 
 const containerStyles = css`
   display: flex;
-  padding: 20px 0px;
+  padding: 20px 16px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
@@ -46,6 +46,7 @@ const profileStyles = css`
   align-items: center;
   gap: 8px;
   align-self: stretch;
+  text-align: left;
 `;
 
 const profileImageStyles = css`
@@ -84,5 +85,6 @@ const descStyles = css`
   line-height: 21px;
   letter-spacing: -0.3px;
   padding-right: calc(13%);
+  text-align: left;
 `;
 export default LunchReview;
