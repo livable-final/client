@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeCard from '@/components/common/Card';
+import Card from '@/components/common/Card';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
@@ -8,7 +8,7 @@ import mq from '@/utils/mediaquery';
 
 function HomeService() {
   return (
-    <HomeCard>
+    <Card padding={16}>
       <div css={containerStyles}>
         <span css={titleStyles}>{HOME_TEXTS.service.title}</span>
         <div css={menusStyles}>
@@ -22,13 +22,12 @@ function HomeService() {
           ))}
         </div>
       </div>
-    </HomeCard>
+    </Card>
   );
 }
 
 const containerStyles = css`
   display: flex;
-  padding: 16px 0;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;

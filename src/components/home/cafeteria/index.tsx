@@ -7,7 +7,7 @@ import theme from '@/styles/theme';
 function HomeCafeteria() {
   const { cafeteria } = HOME_TEXTS;
   return (
-    <Card>
+    <Card padding={16}>
       <div css={containerStyles}>
         <div css={wrapperStyles}>
           <span css={titleStyles}>{cafeteria.title}</span>
@@ -25,7 +25,6 @@ function HomeCafeteria() {
 
 const containerStyles = css`
   display: flex;
-  padding: 16px 0;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
@@ -53,9 +52,9 @@ const togglesStyles = css`
 `;
 
 const menusStyles = css`
-  align-self: stretch;
   font: ${theme.font.body.body3_400};
   color: ${theme.palette.greyscale.grey70};
+  line-height: 21px;
 `;
 
 export default HomeCafeteria;

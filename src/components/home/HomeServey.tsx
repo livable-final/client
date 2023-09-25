@@ -7,9 +7,9 @@ import theme from '@/styles/theme';
 function HomeServey() {
   const { servey } = HOME_TEXTS;
   return (
-    <Card>
+    <Card padding={20}>
       <div css={containerStyles}>
-        <Icons icon="coin" size="70" />
+        <Icons icon="coin" size="36" />
         <div css={wrapperStyles}>
           <span css={titleStyles}>{servey.title}</span>
           <span css={bodyStyles}>{servey.body}</span>
@@ -21,7 +21,6 @@ function HomeServey() {
 
 const containerStyles = css`
   display: flex;
-  padding: 20px 0;
   align-items: center;
   gap: 16px;
   align-self: stretch;
