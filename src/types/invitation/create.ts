@@ -46,3 +46,18 @@ export interface InvitationVisitorsListProps {
 export interface InvitationDoneMessageProps {
   visitorsList: string[];
 }
+
+// Time Selector
+export interface TimeSelectorProps {
+  content: string | JSX.Element;
+  status: string;
+}
+export interface TimeSelectorColorProps {
+  status: string;
+  background: string;
+  color: string;
+  border?: string;
+}
+export interface TimeSelectorsColorProps {
+  [key: string]: TimeSelectorColorProps;
+}

@@ -2,6 +2,7 @@ import theme from '@/styles/theme';
 import { ButtonColorsProps } from '@/types/common/button';
 import { CategoryColorsProps } from '@/types/common/category';
 import { InputColorsProps, ErrorTypeProps } from '@/types/common/input';
+import { TimeSelectorsColorProps } from '@/types/invitation/create';
 
 // 공통 버튼 색상
 export const COMMON_BUTTON_COLORS: ButtonColorsProps = {
@@ -196,4 +197,24 @@ export const COMMON_DATES = {
     '11월',
     '12월',
   ],
+};
+
+// 공통 타임 셀렉터
+export const COMMON_TIME_SELECTOR: TimeSelectorsColorProps = {
+  abled: {
+    status: 'abled',
+    background: `${theme.palette.white}`,
+    color: `${theme.palette.greyscale.grey40}`,
+    border: `${theme.palette.greyscale.grey20}`,
+  },
+  disabled: {
+    status: 'disabled',
+    background: `${theme.palette.greyscale.grey10}`,
+    color: `${theme.palette.greyscale.grey30}`,
+  },
+  enabled: {
+    status: 'enabled',
+    background: `${theme.palette.primary}`,
+    color: `${theme.palette.white}`,
+  },
 };
