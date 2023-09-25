@@ -5,19 +5,32 @@ import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
+import BottomSheet from '@/components/common/BottomSheet';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchCalendarPhoto from '@/components/lunch/calendar/LunchCalendarPhoto';
 import LunchCalendarRatingBtn from '@/components/lunch/calendar/LunchCalendarRatingBtn';
+import LunchCalendarBottomSheet from '@/components/lunch/calendar/LunchCalendarBottomSheet';
 import usePagesStore from '@/stores/usePagesStore';
-import LunchCalendarBottom from './LunchCalendarBottom';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useSaveStore from '@/stores/useSaveStore';
 
 function LunchCalendarCafeteria() {
   const [searchText, setSearchText] = useState('');
   const { setNextComponent } = usePagesStore();
+  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const { isSave } = useSaveStore();
+
   const { category, subTitle, button } = CALENDAR_CONTENT;
 
   const onClickHeaderHandler = () => {
     setNextComponent('LunchCalendarReview');
+  };
+  const onClickBtnHandler = () => {
+    if (!isSave.PhotoMsg) {
+      openBottomSheet(<LunchCalendarBottomSheet />);
+    } else {
+      // isSave.PhotoMsg가 참일 때, 바로 작성완료 로직
+    }
   };
 
   return (
@@ -43,8 +56,12 @@ function LunchCalendarCafeteria() {
         />
       </div>
       <LunchCalendarPhoto />
-      <LunchCalendarBottom />
-      <Button variant="blue" content={button.button4.text2} />
+      <Button
+        variant="blue"
+        content={button.button4.text2}
+        onClick={onClickBtnHandler}
+      />
+      {bottomSheetState.isOpen && !isSave.PhotoMsg && <BottomSheet />}
     </section>
   );
 }
