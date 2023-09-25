@@ -2,7 +2,7 @@ import As from '@/assets/icons/As.svg';
 import Back from '@/assets/icons/Back.svg';
 import Calendar from '@/assets/icons/Calendar.svg';
 import CalendarFill from '@/assets/icons/Calender-Fill.svg';
-import CheckOff from '@/assets/icons/check=off.svg';
+import Check from '@/assets/icons/Check.svg';
 import CheckOn from '@/assets/icons/check=on.svg';
 import Clock from '@/assets/icons/Clock.svg';
 import Down from '@/assets/icons/Down.svg';
@@ -22,7 +22,6 @@ import PlusSmall from '@/assets/icons/Plus=small.svg';
 import ExitSmall from '@/assets/icons/Exit=small.svg';
 import RightSmall from '@/assets/icons/Right=small.svg';
 import Direction from '@/assets/icons/Direction.svg';
-import Check from '@/assets/icons/Check.svg';
 import UnCheck from '@/assets/icons/UnCheck.svg';
 import SearchIcon from '@/assets/icons/Search.svg';
 import XIcon from '@/assets/icons/XS_1.5.svg';
@@ -74,13 +73,13 @@ import Rank1 from '@/assets/icons/Rank1.svg';
 import Rank2 from '@/assets/icons/Rank2.svg';
 import Rank3 from '@/assets/icons/Rank3.svg';
 import Reviewer from '@/assets/icons/Reviewer.svg';
+import CameraFlash from '@/assets/icons/CameraFlash.svg';
 
 export {
   As,
   Back,
   Calendar,
   CalendarFill,
-  CheckOff,
   CheckOn,
   Clock,
   Down,
@@ -152,4 +151,5 @@ export {
   Rank2,
   Rank3,
   Reviewer,
+  CameraFlash,
 };

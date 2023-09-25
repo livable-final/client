@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import { Camera, XSBlack } from '@/assets/icons';
 
-function LunchPhoto() {
+function LunchCalendarPhoto() {
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
   const fileInput = useRef<HTMLInputElement>(null);
@@ -74,8 +74,8 @@ function LunchPhoto() {
           <li key={value} css={photoStyles}>
             <Image
               css={ImageStyles}
-              width={66}
-              height={66}
+              width={64}
+              height={64}
               src={value}
               alt={`이미지${idx}`}
             />
@@ -95,6 +95,7 @@ function LunchPhoto() {
 const photoListStyles = css`
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 
   li {
     position: relative;
@@ -108,8 +109,8 @@ const photoListStyles = css`
 
 const photoStyles = css`
   text-align: center;
-  height: 66px;
-  width: 66px;
+  height: 64px;
+  width: 64px;
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid ${theme.palette.greyscale.grey20};
@@ -120,4 +121,4 @@ const photoStyles = css`
 const ImageStyles = css`
   object-fit: cover;
 `;
-export default LunchPhoto;
+export default LunchCalendarPhoto;

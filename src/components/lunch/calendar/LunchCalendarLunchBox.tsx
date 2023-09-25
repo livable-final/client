@@ -4,17 +4,31 @@ import { CALENDAR_CONTENT } from '@/constants/lunch';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
+import BottomSheet from '@/components/common/BottomSheet';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
-import LunchPhoto from '@/components/lunch/LunchPhoto';
+import LunchCalendarPhoto from '@/components/lunch/calendar/LunchCalendarPhoto';
+import LunchCalendarBottomSheet from '@/components/lunch/calendar/LunchCalendarBottomSheet';
 import usePagesStore from '@/stores/usePagesStore';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useSaveStore from '@/stores/useSaveStore';
 
 function LunchCalendarLunchBox() {
   const [searchText, setSearchText] = useState('');
   const { setNextComponent } = usePagesStore();
+  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const { isSave } = useSaveStore();
   const { category, subTitle, button } = CALENDAR_CONTENT;
 
   const onClickHeaderHandler = () => {
     setNextComponent('LunchCalendarReview');
+  };
+
+  const onClickBtnHandler = () => {
+    if (!isSave.PhotoMsg) {
+      openBottomSheet(<LunchCalendarBottomSheet />);
+    } else {
+      // isSave.PhotoMsg가 참일 때
+    }
   };
   return (
     <section>
@@ -30,8 +44,13 @@ function LunchCalendarLunchBox() {
           setValue={setSearchText}
         />
       </div>
-      <LunchPhoto />
-      <Button variant="blue" content={button.button4.text2} />
+      <LunchCalendarPhoto />
+      <Button
+        variant="blue"
+        content={button.button4.text2}
+        onClick={onClickBtnHandler}
+      />
+      {bottomSheetState.isOpen && !isSave.PhotoMsg && <BottomSheet />}
     </section>
   );
 }

@@ -5,18 +5,32 @@ import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
+import BottomSheet from '@/components/common/BottomSheet';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
-import LunchPhoto from '@/components/lunch/LunchPhoto';
-import LunchRatingButton from '@/components/lunch/LunchRatingButton';
+import LunchCalendarPhoto from '@/components/lunch/calendar/LunchCalendarPhoto';
+import LunchCalendarRatingBtn from '@/components/lunch/calendar/LunchCalendarRatingBtn';
+import LunchCalendarBottomSheet from '@/components/lunch/calendar/LunchCalendarBottomSheet';
 import usePagesStore from '@/stores/usePagesStore';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useSaveStore from '@/stores/useSaveStore';
 
 function LunchCalendarCafeteria() {
   const [searchText, setSearchText] = useState('');
   const { setNextComponent } = usePagesStore();
+  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const { isSave } = useSaveStore();
+
   const { category, subTitle, button } = CALENDAR_CONTENT;
 
   const onClickHeaderHandler = () => {
     setNextComponent('LunchCalendarReview');
+  };
+  const onClickBtnHandler = () => {
+    if (!isSave.PhotoMsg) {
+      openBottomSheet(<LunchCalendarBottomSheet />);
+    } else {
+      // isSave.PhotoMsg가 참일 때, 바로 작성완료 로직
+    }
   };
 
   return (
@@ -27,8 +41,8 @@ function LunchCalendarCafeteria() {
         <p>테라타워</p>
       </div>
       <div css={buttonStyles}>
-        <LunchRatingButton title={button.button5.good} />
-        <LunchRatingButton title={button.button5.bad} />
+        <LunchCalendarRatingBtn title={button.button5.good} />
+        <LunchCalendarRatingBtn title={button.button5.bad} />
       </div>
       <div css={inputBoxStyles}>
         <p>{subTitle.review}</p>
@@ -41,8 +55,13 @@ function LunchCalendarCafeteria() {
           setValue={setSearchText}
         />
       </div>
-      <LunchPhoto />
-      <Button variant="blue" content={button.button4.text2} />
+      <LunchCalendarPhoto />
+      <Button
+        variant="blue"
+        content={button.button4.text2}
+        onClick={onClickBtnHandler}
+      />
+      {bottomSheetState.isOpen && !isSave.PhotoMsg && <BottomSheet />}
     </section>
   );
 }

@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { Rice } from '@/assets/icons';
 import Header from '@/components/common/Header';
-import LunchWriteButton from '@/components/lunch/LunchWriteButton';
+import LunchCalendarWriteBtn from '@/components/lunch/calendar/LunchCalendarWriteBtn';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchCalendarForm from '@/components/lunch/calendar/LunchCalendarForm';
 import LunchCalendarDetailsSlide from '@/components/lunch/calendar/LunchCalendarDetailsSlide';
@@ -50,7 +50,7 @@ function LunchCalendarMain() {
         <LunchSubTitle userName="현수" title={subTitle.calendar} type="title" />
       </div>
       <LunchCalendarForm />
-      <LunchWriteButton
+      <LunchCalendarWriteBtn
         isCompleted={isCompleted}
         onClick={onClickButtonHandler}
       />

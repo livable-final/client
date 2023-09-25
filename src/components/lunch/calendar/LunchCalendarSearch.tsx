@@ -5,7 +5,7 @@ import { CALENDAR_CONTENT, CALENDAR_CASE } from '@/constants/lunch';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
-import LunchListItem from '@/components/lunch/LunchListItem';
+import LunchCalendarListItem from '@/components/lunch/calendar/LunchCalendarListItem';
 import LunchCalendarMenu from '@/components/lunch/calendar/LunchCalendarMenu';
 import usePagesStore from '@/stores/usePagesStore';
 
@@ -31,7 +31,7 @@ function LunchCalendarSearch() {
       <div css={textStyles}>
         <span>{subTitle.recentSearches}</span>
         <div>
-          <LunchListItem
+          <LunchCalendarListItem
             type={listItem.type1}
             content="최근 검색한 결과 (테스트용)"
           />
@@ -43,14 +43,14 @@ function LunchCalendarSearch() {
           <span css={colorTextStyles}>3건</span>
         </div>
         <div>
-          <LunchListItem
+          <LunchCalendarListItem
             type={listItem.type2}
             content="검색한 결과 (테스트용)"
             category="한식 (테스트용)"
             time={3}
             imageUrl="/gift.png"
           />
-          <LunchListItem
+          <LunchCalendarListItem
             type={listItem.type2}
             content="검색한 결과 (테스트용)"
             category="한식 (테스트용)"

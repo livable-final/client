@@ -2,9 +2,12 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { RightSmall, Gift, Plate } from '@/assets/icons';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
-import { LunchWriteButtonProps } from '@/types/lunch/calendar';
+import { LunchCalendarWriteBtnProps } from '@/types/lunch/calendar';
 
-function LunchWriteButton({ isCompleted, onClick }: LunchWriteButtonProps) {
+function LunchCalendarWriteBtn({
+  isCompleted,
+  onClick,
+}: LunchCalendarWriteBtnProps) {
   const { button } = CALENDAR_CONTENT;
 
   let icon;
@@ -53,4 +56,4 @@ const textStyles = css`
   text-align: left;
 `;
 
-export default LunchWriteButton;
+export default LunchCalendarWriteBtn;
