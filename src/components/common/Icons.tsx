@@ -29,6 +29,7 @@ import {
   Smile,
   ThumbsUp,
   Confused,
+  Check,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -85,6 +86,8 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Mist />;
     case home.lunch:
       return <Lunch color={color} />;
+    case home.check:
+      return <Check width={size} height={size} color={color} />;
     case lunch.smile:
       return <Smile width={size} height={size} />;
     case lunch.confused:
