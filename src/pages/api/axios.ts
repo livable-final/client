@@ -1,6 +1,7 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import axios, { AxiosError } from 'axios';
 
-const API_BASE_URL = process.env.NEXT_API_BASE_URL as string;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL as string;
 const WEATHER_API_BASE_URL = process.env.WEATHER_BASE_URL as string;
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY as string;
 
