@@ -5,7 +5,7 @@ import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
-import LunchPhoto from '@/components/lunch/LunchPhoto';
+import LunchCalendarPhoto from '@/components/lunch/calendar/LunchCalendarPhoto';
 import usePagesStore from '@/stores/usePagesStore';
 
 function LunchCalendarLunchBox() {
@@ -30,7 +30,7 @@ function LunchCalendarLunchBox() {
           setValue={setSearchText}
         />
       </div>
-      <LunchPhoto />
+      <LunchCalendarPhoto />
       <Button variant="blue" content={button.button4.text2} />
     </section>
   );

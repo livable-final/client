@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import Header from '@/components/common/Header';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
-import LunchSelectButton from '@/components/lunch/LunchSelectButton';
 import usePagesStore from '@/stores/usePagesStore';
+import LunchCalendarSelectBtn from '@/components/lunch/calendar/LunchCalendarSelectBtn';
 
 function LunchCalendarReview() {
   const { setNextComponent } = usePagesStore();
@@ -18,9 +18,9 @@ function LunchCalendarReview() {
       <Header title={title.review} onClick={onClickHeaderHandler} />
       <LunchSubTitle title={subTitle.mealStyle} type="subTitle" />
       <div css={buttonListStyles}>
-        <LunchSelectButton text={category.eatOut.text} />
-        <LunchSelectButton text={category.cafeteria.text} />
-        <LunchSelectButton text={category.lunchBox.text} />
+        <LunchCalendarSelectBtn text={category.eatOut.text} />
+        <LunchCalendarSelectBtn text={category.cafeteria.text} />
+        <LunchCalendarSelectBtn text={category.lunchBox.text} />
       </div>
     </section>
   );

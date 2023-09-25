@@ -2,10 +2,10 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { Plate, Chef, Bento } from '@/assets/icons';
-import { LunchSelectButtonProps } from '@/types/lunch/calendar';
+import { LunchCalendarSelectBtnProps } from '@/types/lunch/calendar';
 import usePagesStore from '@/stores/usePagesStore';
 
-function LunchSelectButton({ text }: LunchSelectButtonProps) {
+function LunchCalendarSelectBtn({ text }: LunchCalendarSelectBtnProps) {
   const { setNextComponent } = usePagesStore();
   const { category } = CALENDAR_CONTENT;
 
@@ -71,4 +71,4 @@ const iconStyles = css`
   background-color: ${theme.palette.greyscale.grey10};
 `;
 
-export default LunchSelectButton;
+export default LunchCalendarSelectBtn;

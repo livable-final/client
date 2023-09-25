@@ -6,7 +6,7 @@ import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import { PlusSmall } from '@/assets/icons';
 import theme from '@/styles/theme';
 import Button from '@/components/common/Button';
-import LunchListItem from '@/components/lunch/LunchListItem';
+import LunchCalendarListItem from '@/components/lunch/calendar/LunchCalendarListItem';
 
 function LunchCalendarMenu() {
   const [showInput] = useState(false);
@@ -25,8 +25,8 @@ function LunchCalendarMenu() {
       <div css={{ paddingTop: '24px', paddingBottom: '24px' }}>
         <LunchSubTitle title={subTitle.menu} type="subTitle" />
       </div>
-      <LunchListItem type="menu" content="김치찌개" />
-      <LunchListItem type="menu" content="김치찌개" />
+      <LunchCalendarListItem type="menu" content="김치찌개" />
+      <LunchCalendarListItem type="menu" content="김치찌개" />
       <div css={PlusStyles}>
         {!showInput ? (
           <>

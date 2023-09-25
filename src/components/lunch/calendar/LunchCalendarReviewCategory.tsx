@@ -1,13 +1,17 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
-import { ThumbsUp } from '@/assets/icons';
+import { COMMON_ICON_NAMES } from '@/constants/common';
 import { useState } from 'react';
-import { LunchReviewCategoryProps } from '@/types/lunch/calendar';
+import { LunchCalendarReviewCategoryProps } from '@/types/lunch/calendar';
+import Icons from '@/components/common/Icons';
 
-function LunchReviewCategory({ title }: LunchReviewCategoryProps) {
+function LunchCalendarReviewCategory({
+  title,
+}: LunchCalendarReviewCategoryProps) {
   const [isChecked, setIsChecked] = useState(false);
   const { button } = CALENDAR_CONTENT;
+  const { lunch } = COMMON_ICON_NAMES;
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -23,7 +27,9 @@ function LunchReviewCategory({ title }: LunchReviewCategoryProps) {
         onClick={onClickHandler}
       >
         <span>{button.button6.text}</span>
-        <ThumbsUp css={iconStyles} />
+        <div css={iconStyles}>
+          <Icons icon={lunch.thumbsUp} size="18" />
+        </div>
       </button>
     </div>
   );
@@ -69,4 +75,4 @@ const iconStyles = css`
   margin-bottom: 4px;
 `;
 
-export default LunchReviewCategory;
+export default LunchCalendarReviewCategory;

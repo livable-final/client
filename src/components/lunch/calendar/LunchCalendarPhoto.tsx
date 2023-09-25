@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import { Camera, XSBlack } from '@/assets/icons';
 
-function LunchPhoto() {
+function LunchCalendarPhoto() {
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
   const fileInput = useRef<HTMLInputElement>(null);
@@ -120,4 +120,4 @@ const photoStyles = css`
 const ImageStyles = css`
   object-fit: cover;
 `;
-export default LunchPhoto;
+export default LunchCalendarPhoto;

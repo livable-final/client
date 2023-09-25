@@ -6,9 +6,10 @@ import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
-import LunchPhoto from '@/components/lunch/LunchPhoto';
-import LunchRatingButton from '@/components/lunch/LunchRatingButton';
+import LunchCalendarPhoto from '@/components/lunch/calendar/LunchCalendarPhoto';
+import LunchCalendarRatingBtn from '@/components/lunch/calendar/LunchCalendarRatingBtn';
 import usePagesStore from '@/stores/usePagesStore';
+import LunchCalendarBottom from './LunchCalendarBottom';
 
 function LunchCalendarCafeteria() {
   const [searchText, setSearchText] = useState('');
@@ -27,8 +28,8 @@ function LunchCalendarCafeteria() {
         <p>테라타워</p>
       </div>
       <div css={buttonStyles}>
-        <LunchRatingButton title={button.button5.good} />
-        <LunchRatingButton title={button.button5.bad} />
+        <LunchCalendarRatingBtn title={button.button5.good} />
+        <LunchCalendarRatingBtn title={button.button5.bad} />
       </div>
       <div css={inputBoxStyles}>
         <p>{subTitle.review}</p>
@@ -41,7 +42,8 @@ function LunchCalendarCafeteria() {
           setValue={setSearchText}
         />
       </div>
-      <LunchPhoto />
+      <LunchCalendarPhoto />
+      <LunchCalendarBottom />
       <Button variant="blue" content={button.button4.text2} />
     </section>
   );

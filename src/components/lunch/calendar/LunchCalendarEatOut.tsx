@@ -6,10 +6,10 @@ import { CALENDAR_CONTENT } from '@/constants/lunch';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
-import LunchRatingButton from '@/components/lunch/LunchRatingButton';
-import LunchReviewCategory from '@/components/lunch/LunchReviewCategory';
-import LunchPhoto from '@/components/lunch/LunchPhoto';
+import LunchCalendarReviewCategory from '@/components/lunch/calendar/LunchCalendarReviewCategory';
+import LunchCalendarPhoto from '@/components/lunch/calendar/LunchCalendarPhoto';
 import usePagesStore from '@/stores/usePagesStore';
+import LunchCalendarRatingBtn from '@/components/lunch/calendar/LunchCalendarRatingBtn';
 
 function LunchCalenderEatOut() {
   const [searchText, setSearchText] = useState('');
@@ -30,13 +30,19 @@ function LunchCalenderEatOut() {
           <p>식당 메뉴</p>
         </div>
         <div css={ratingStyles}>
-          <LunchRatingButton title={button.button5.good} />
-          <LunchRatingButton title={button.button5.bad} />
+          <LunchCalendarRatingBtn title={button.button5.good} />
+          <LunchCalendarRatingBtn title={button.button5.bad} />
         </div>
         <div>
-          <LunchReviewCategory title={category.eatOut.subCategory.amount} />
-          <LunchReviewCategory title={category.eatOut.subCategory.speed} />
-          <LunchReviewCategory title={category.eatOut.subCategory.service} />
+          <LunchCalendarReviewCategory
+            title={category.eatOut.subCategory.amount}
+          />
+          <LunchCalendarReviewCategory
+            title={category.eatOut.subCategory.speed}
+          />
+          <LunchCalendarReviewCategory
+            title={category.eatOut.subCategory.service}
+          />
         </div>
       </div>
       <div css={textReviewStyles}>
@@ -50,7 +56,7 @@ function LunchCalenderEatOut() {
           setValue={setSearchText}
         />
       </div>
-      <LunchPhoto />
+      <LunchCalendarPhoto />
       <Button content={button.button4.text2} variant="blue" />
     </section>
   );

@@ -4,16 +4,16 @@ import usePagesStore from '@/stores/usePagesStore';
 import { css } from '@emotion/react';
 import { Clock, XIcon, CheckOn, CheckOff } from '@/assets/icons';
 import { CALENDAR_CASE } from '@/constants/lunch';
-import { LunchListItemProps } from '@/types/lunch/calendar';
+import { LunchCalendarListItemProps } from '@/types/lunch/calendar';
 
-function LunchListItem({
+function LunchCalendarListItem({
   type,
   content,
   category,
   time,
   imageUrl,
   isChecked,
-}: LunchListItemProps) {
+}: LunchCalendarListItemProps) {
   const { setNextComponent } = usePagesStore();
   const { listItem } = CALENDAR_CASE;
 
@@ -119,4 +119,4 @@ const ImageStyles = css`
 const iconStles = css`
   cursor: auto;
 `;
-export default LunchListItem;
+export default LunchCalendarListItem;
