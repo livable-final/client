@@ -4,6 +4,10 @@ import UserInvitatioListItem from '@/components/user/UserInvitationListItem';
 import getTodayDate from '@/utils/getTodayDate';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+import { USER_INVITATIONLIST_TEXT } from '@/constants/user/userInvitationTexts';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import UserInvitationListEdit from '@/components/user/UserInvitationListEdit';
+import BottomSheet from '../common/BottomSheet';
 
 // 더미데이터
 export const dataList = {
@@ -100,9 +104,13 @@ export const dataList = {
 };
 
 function UserInvitationList() {
+  const { openBottomSheet } = useBottomSheetStore();
   const router = useRouter();
   const onClickHandler = () => {
     router.push('/user');
+  };
+  const onClickEditHandler = () => {
+    openBottomSheet(<UserInvitationListEdit />);
   };
 
   // 빋어온 데이터 객체를 다중 배열로 변환
@@ -112,15 +120,10 @@ function UserInvitationList() {
   const currentDate = new Date();
   // 데이터상 날짜 비교를 위한 포켓 변환
   const formattedDate = getTodayDate(currentDate);
-  // const year = currentDate.getFullYear();
-  // const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-  // const day = String(currentDate.getDate()).padStart(2, '0');
-
-  // const formattedDate = `${year}-${month}-${day}`;
 
   return (
     <div css={userInvitationListStyles}>
-      <Header title="초대 목록" onClick={onClickHandler} />
+      <Header title={USER_INVITATIONLIST_TEXT.title} onClick={onClickHandler} />
       {invitationList.map((item) => (
         <div
           key={`${item[0].startDate}`}
@@ -132,12 +135,19 @@ function UserInvitationList() {
               : item[0].startDate}
           </div>
           {item.map((value) => (
-            <div key={value.invitationId} css={invitationListItemStyles}>
-              <UserInvitatioListItem data={value} />
-            </div>
+            <button
+              type="button"
+              key={value.invitationId}
+              onClick={onClickEditHandler}
+            >
+              <div css={invitationListItemStyles}>
+                <UserInvitatioListItem data={value} />
+              </div>
+            </button>
           ))}
         </div>
       ))}
+      <BottomSheet />
     </div>
   );
 }
