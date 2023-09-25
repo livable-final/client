@@ -3,7 +3,7 @@ import Banner from '@/components/common/Banner';
 import { DUMMY_RESPONSE } from '@/constants/home/homeTexts';
 import { css } from '@emotion/react';
 import LunchMainRanking from '@/components/lunch/main/LunchMainRanking';
-import LunchMainReviews from '@/components/lunch/main/LunchMainReviews';
+import LunchReviews from '@/components/lunch/review/LunchReviews';
 
 function LunchMainContents() {
   // TOFIXED: 메인 홈에서 받아온 API RESPONSE DATA를 이용
@@ -13,7 +13,7 @@ function LunchMainContents() {
     <div css={containerStyles}>
       <Banner hasCafeteria={hasCafeteria} />
       <LunchMainRanking />
-      <LunchMainReviews />
+      <LunchReviews />
     </div>
   );
 }
