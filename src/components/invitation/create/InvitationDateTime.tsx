@@ -9,17 +9,17 @@ import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import InvitationSelectTime from './InvitationSelectTime';
+import InvitationSelectTime from '@/components/invitation/create/InvitationSelectTime';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
 
 function InvitationDateTime() {
   const { title, button } = CREATE_TEXTS;
+  const { closeBottomSheet } = useBottomSheetStore();
 
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(startDate);
+  const [endDate, setEndDate] = useState(new Date());
 
-  console.log(startDate.toLocaleString(), endDate);
-
-  const onChange = (dates: any) => {
+  const onChange = (dates: [Date, Date]) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
@@ -58,7 +58,7 @@ function InvitationDateTime() {
         <Button
           content={button.next}
           variant="blue"
-          onClick={() => alert('test')}
+          onClick={() => closeBottomSheet()}
         />
       </div>
     </div>
@@ -186,6 +186,7 @@ const titleStyles = css`
 const buttonWrapperStyles = css`
   position: fixed;
   bottom: 0;
+  width: 100%;
   min-width: 280px;
   max-width: 360px;
   padding-bottom: 20px;
