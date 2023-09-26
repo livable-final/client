@@ -86,14 +86,40 @@ export const CALENDAR_CASE = {
 };
 
 export const LUNCH_MAIN_CONSTANTS = {
+  main: {
+    ranking: {
+      title: '지난주 점심 메뉴 TOP 10',
+      heights: [32, 47, 25],
+    },
+    reviews: {
+      title: '최근 테라타워 입주자들의 리뷰',
+    },
+    detail: {
+      title: '의 더 많은 리뷰',
+    },
+  },
+  review: {
+    title: '리뷰',
+    photoWidth: 115,
+    photoHeight: 90,
+  },
   ranking: {
-    title: '지난주 점심 메뉴 TOP 10',
-    heights: [32, 47, 25],
-  },
-  reviews: {
-    title: '최근 테라타워 입주자들의 리뷰',
-  },
-  detail: {
-    title: '의 더 많은 리뷰',
+    title: '랭킹별 리뷰',
+    rank: '위',
+    count: '명이 선택했어요',
+    palette: [
+      '#FFC46D',
+      '#B0B6EE',
+      '#D58167',
+      '#C3C6CC',
+      '#C3C6CC',
+      '#C3C6CC',
+      '#C3C6CC',
+      '#C3C6CC',
+      '#C3C6CC',
+      '#C3C6CC',
+    ],
+    photoWidth: 80,
+    photoHeight: 80,
   },
 };
