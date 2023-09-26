@@ -1,44 +1,60 @@
 import { Reviewer } from '@/assets/icons';
 import theme from '@/styles/theme';
-import { ReviewList } from '@/types/lunch/reviewList';
+import { LunchReviewProps } from '@/types/lunch/reviewList';
 import getTimeDiff from '@/utils/getTimeDiff';
 import { css } from '@emotion/react';
 import LunchReviewRatings from '@/components/lunch/review/LunchReviewRatings';
 import LunchReviewPhotos from '@/components/lunch/review/LunchReviewPhotos';
+import mq from '@/utils/mediaquery';
 
-function LunchReview({ ...props }: ReviewList) {
+function LunchReview({ ...props }: LunchReviewProps) {
   return (
-    <div css={containerStyles}>
-      <div css={profileStyles}>
-        <div css={profileImageStyles}>
-          <Reviewer />
+    <div css={containerStyles(props?.isRow)}>
+      <div css={wrapperStyles}>
+        <div css={profileStyles}>
+          <div css={profileImageStyles}>
+            <Reviewer />
+          </div>
+          <div css={profileDetailStyles}>
+            <span>{props.memberName}</span>
+            <span>
+              {props.restaurantName} · {getTimeDiff(props.reviewCreatedAt)}
+            </span>
+          </div>
         </div>
-        <div css={profileDetailStyles}>
-          <span>{props.memberName}</span>
-          <span>
-            {props.restaurantName} · {getTimeDiff(props.reviewCreatedAt)}
-          </span>
-        </div>
+        <div css={descStyles}>{props.reviewDescription}</div>
+        <LunchReviewRatings
+          taste={props.reviewTaste}
+          amount={props.reviewAmount}
+          service={props.reviewService}
+          speed={props.reviewSpeed}
+        />
       </div>
-      <div css={descStyles}>{props.reviewDescription}</div>
-      <LunchReviewRatings
-        taste={props.reviewTaste}
-        amount={props.reviewAmount}
-        service={props.reviewService}
-        speed={props.reviewSpeed}
-      />
-      <LunchReviewPhotos photos={props.reviewImageUrl} />
+      <LunchReviewPhotos photos={props.reviewImageUrl} isRow={props.isRow} />
     </div>
   );
 }
 
-const containerStyles = css`
+const containerStyles = (isRow?: boolean) => css`
   display: flex;
   padding: 20px 16px;
-  flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
   align-self: stretch;
+  flex-direction: ${isRow ? 'row' : 'column'};
+  align-items: ${isRow && 'center'};
+  border-bottom: 1px solid ${theme.palette.greyscale.grey5};
+  gap: 16px;
+
+  ${mq.lg} {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+`;
+
+const wrapperStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `;
 
 const profileStyles = css`
