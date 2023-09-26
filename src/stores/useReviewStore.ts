@@ -7,7 +7,7 @@ const initialState: ReviewList = {
   restaurantId: '',
   memberName: '',
   profileImageUrl: '',
-  reveiwId: 0,
+  reviewId: 0,
   reviewTaste: '',
   reviewAmount: '',
   reviewService: '',

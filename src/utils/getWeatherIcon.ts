@@ -2,7 +2,6 @@ import { COMMON_ICON_NAMES } from '@/constants/common';
 
 // 서버에서 건내주는 iconId에 해당하는 날씨 정보 반환
 const getWeatherIcon = (iconId: string) => {
-  console.log(iconId);
   const { home } = COMMON_ICON_NAMES;
 
   switch (iconId) {
