@@ -1,7 +1,8 @@
 import Bnb from '@/components/common/Bnb';
 import Title from '@/components/common/Title';
 import LunchDetail from '@/components/lunch/detail';
-import LunchMainContents from '@/components/lunch/main/LunchMainContents';
+import LunchMainContents from '@/components/lunch/LunchMainContents';
+import LunchReviewsByRanking from '@/components/lunch/review/LunchReviewsByRanking';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import usePagesStore from '@/stores/usePagesStore';
 import theme from '@/styles/theme';
@@ -12,17 +13,23 @@ function LunchHome() {
   const { nextComponent } = usePagesStore();
 
   // 오점완 홈 -> 리뷰 상세
-  if (nextComponent === 'LunchDetail') return <LunchDetail />;
-
-  return (
-    <>
-      <div css={containerStyles}>
-        <Title title={title.main} part="lunch" />
-        <LunchMainContents />
-      </div>
-      <Bnb />
-    </>
-  );
+  switch (nextComponent) {
+    case 'LunchDetail':
+      return <LunchDetail />;
+    // 오점완 홈 -> 랭킹별 리뷰
+    case 'LunchReviewsByRanking':
+      return <LunchReviewsByRanking />;
+    default:
+      return (
+        <>
+          <div css={containerStyles}>
+            <Title title={title.main} part="lunch" />
+            <LunchMainContents />
+          </div>
+          <Bnb />
+        </>
+      );
+  }
 }
 
 const containerStyles = css`
