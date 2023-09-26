@@ -9,8 +9,8 @@ import React from 'react';
 function Home() {
   return (
     <>
+      <Title title={DUMMY_RESPONSE.buildingName} part="main" isMain />
       <div css={containerStyles}>
-        <Title title={DUMMY_RESPONSE.buildingName} part="main" isMain />
         <HomeContents />
       </div>
       <Bnb />
