@@ -30,8 +30,7 @@ function Header({
       icon = null;
   }
 
-  const onBackClick = () => {
-    console.log(backComponents);
+  const onBackClickHandler = () => {
     if (backComponents.length === 0) {
       window.location.assign('/');
     } else {
@@ -41,7 +40,7 @@ function Header({
 
   return (
     <header css={headerStyles(isBg)}>
-      <Back onClick={onBackClick} />
+      <Back onClick={onBackClickHandler} />
       <div css={titleStyles}>
         <span>{title}</span>
       </div>

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import Header from '@/components/common/Header';
-import usePagesStore from '@/stores/usePagesStore';
 import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 import InvitationQrInfoText from '@/components/invitation/view/InvitationQrInfoText';
 import InvitationQrInfoCode from '@/components/invitation/view/InvitationQrInfoCode';
@@ -8,14 +7,10 @@ import { test } from '@/components/invitation/view/InvitationInfo';
 
 function InvitationQrInfo() {
   const { category } = INVITATION_VEIW_INFO_TEXTS;
-  const { setNextComponent } = usePagesStore();
-  const onClickHandler = () => {
-    setNextComponent('');
-  };
 
   return (
     <div>
-      <Header title={category.code} onClick={onClickHandler} />
+      <Header title={category.code} />
       <div css={queryStyles}>
         <div css={invitationQrContainer}>
           <InvitationQrInfoText textInfo={test} />

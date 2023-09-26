@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import InvitationHostInfoItem from '@/components/invitation/view/InvitationHostInfoItem';
-import usePagesStore from '@/stores/usePagesStore';
 import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 import { Profile } from '@/assets/icons';
 
@@ -15,18 +14,9 @@ const host = {
 };
 
 function InvitationHostInfo() {
-  const { setNextComponent } = usePagesStore();
-  const onClickHandler = () => {
-    setNextComponent('');
-  };
-
   return (
     <div css={InvitationHostInfoStyles}>
-      <Header
-        title={INVITATION_VEIW_INFO_TEXTS.category.host}
-        onClick={onClickHandler}
-        isBg
-      />
+      <Header title={INVITATION_VEIW_INFO_TEXTS.category.host} isBg />
       <div css={InvitationHostInfoProfileStyles}>
         <Profile />
       </div>
