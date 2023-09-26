@@ -1,12 +1,11 @@
 // 임시용
-
-const DUMMY_DATA = [
+export const DUMMY_DATA = [
   {
     restaurantName: '새마을식당',
     restaurantId: '1',
     memberName: '백종원',
     profileImageUrl: '/defaultImage.jpg',
-    reveiwId: 1,
+    reviewId: 1,
     reviewTaste: 'GOOD',
     reviewAmount: 'GOOD',
     reviewService: 'GOOD',
@@ -24,7 +23,7 @@ const DUMMY_DATA = [
     restaurantId: '2',
     memberName: '정용진',
     profileImageUrl: '/defaultImage.jpg',
-    reveiwId: 2,
+    reviewId: 2,
     reviewTaste: 'BAD',
     reviewAmount: 'BAD',
     reviewService: 'GOOD',
@@ -45,7 +44,7 @@ const DUMMY_DATA = [
     restaurantId: '3',
     memberName: '집게사장',
     profileImageUrl: '/defaultImage.jpg',
-    reveiwId: 3,
+    reviewId: 3,
     reviewTaste: 'BAD',
     reviewAmount: 'BAD',
     reviewService: 'GOOD',
@@ -64,16 +63,109 @@ const DUMMY_DATA = [
     restaurantId: '4',
     memberName: '플랑크톤',
     profileImageUrl: '/defaultImage.jpg',
-    reveiwId: 4,
+    reviewId: 4,
     reviewTaste: 'GOOD',
     reviewAmount: 'GOOD',
     reviewService: 'BAD',
     reviewSpeed: 'GOOD',
     reviewCreatedAt: '2023-09-12T09:10:00',
-    reviewImageUrl: [],
+    reviewImageUrl: [
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+    ],
     reviewDescription:
       '여기 집게리아 게살버거보다 맛있네요. 광고같아 보이지만 광고 맞습니다.',
   },
 ];
 
-export default DUMMY_DATA;
+export const DUMMMY_MENU_TOP_TEN = [
+  {
+    date: '2023-09-11',
+    count: 194,
+    rank: 1,
+    menuId: 36,
+    menuName: '부대찌개',
+    menuImage:
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+  },
+  {
+    date: '2023-09-11',
+    count: 152,
+    rank: 2,
+    menuId: 12,
+    menuName: '제육볶음',
+    menuImage:
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+  },
+  {
+    date: '2023-09-11',
+    count: 121,
+    rank: 3,
+    menuId: 74,
+    menuName: '돈까스',
+    menuImage:
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+  },
+  {
+    date: '2023-09-11',
+    count: 95,
+    rank: 4,
+    menuId: 14,
+    menuName: '메밀국수',
+    menuImage:
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+  },
+  {
+    date: '2023-09-11',
+    count: 95,
+    rank: 5,
+    menuId: 14,
+    menuName: '치킨',
+    menuImage:
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+  },
+  {
+    date: '2023-09-11',
+    count: 95,
+    rank: 6,
+    menuId: 14,
+    menuName: '피자',
+    menuImage:
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+  },
+  {
+    date: '2023-09-11',
+    count: 95,
+    rank: 7,
+    menuId: 14,
+    menuName: '햄버거',
+    menuImage:
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+  },
+  {
+    date: '2023-09-11',
+    count: 95,
+    rank: 8,
+    menuId: 14,
+    menuName: '양갈비',
+    menuImage:
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+  },
+  {
+    date: '2023-09-11',
+    count: 95,
+    rank: 9,
+    menuId: 14,
+    menuName: '소갈비',
+    menuImage:
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+  },
+  {
+    date: '2023-09-11',
+    count: 95,
+    rank: 10,
+    menuId: 14,
+    menuName: '돼지갈비',
+    menuImage:
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+  },
+];

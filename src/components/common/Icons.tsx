@@ -29,11 +29,12 @@ import {
   Smile,
   ThumbsUp,
   Confused,
+  Close,
   Check,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
-  const { invitation, home, user, lunch } = COMMON_ICON_NAMES;
+  const { invitation, home, user, lunch, common } = COMMON_ICON_NAMES;
 
   switch (icon) {
     case invitation.meeting:
@@ -94,6 +95,8 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Confused width={size} height={size} />;
     case lunch.thumbsUp:
       return <ThumbsUp color={color} width={size} height={size} />;
+    case common.close:
+      return <Close />;
     default:
       break;
   }
