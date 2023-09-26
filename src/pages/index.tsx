@@ -9,8 +9,8 @@ import React from 'react';
 function Home() {
   return (
     <>
+      <Title title={DUMMY_RESPONSE.buildingName} part="main" isMain />
       <div css={containerStyles}>
-        <Title title={DUMMY_RESPONSE.buildingName} part="main" isMain />
         <HomeContents />
       </div>
       <Bnb />
@@ -19,7 +19,7 @@ function Home() {
 }
 
 const containerStyles = css`
-  margin: 0 -16px 90px;
+  margin: 0 -16px;
   background: ${theme.palette.background.home};
 `;
 

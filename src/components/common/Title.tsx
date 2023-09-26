@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 import { TitleProps } from '@/types/common/title';
 import { css } from '@emotion/react';
 import Icons from '@/components/common/Icons';
-import { Barcode, Bell, LunchCalendar } from '@/assets/icons';
+import { Barcode, Bell, LunchCalendar, Setting } from '@/assets/icons';
 import Link from 'next/link';
 
 function Title({ title, isMain, part }: TitleProps) {
@@ -21,6 +21,8 @@ function Title({ title, isMain, part }: TitleProps) {
             <LunchCalendar />
           </Link>
         );
+      case 'user':
+        return <Setting />;
       default:
         return <Icons icon="down" />;
     }
@@ -40,7 +42,6 @@ function Title({ title, isMain, part }: TitleProps) {
 const containerStyles = css`
   display: flex;
   height: 56px;
-  padding: 0px 16px;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;

@@ -2,13 +2,14 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import Icons from '@/components/common/Icons';
 import { UserPointProps } from '@/types/user';
+import Link from 'next/link';
 
 function UserPoint({ point }: UserPointProps) {
   return (
-    <div css={containerStyles}>
+    <Link href="/lunch/point" css={containerStyles}>
       <span css={spanStyles}>{point}</span>
       <Icons icon="coin" size="20" />
-    </div>
+    </Link>
   );
 }
 

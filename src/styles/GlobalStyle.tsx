@@ -66,6 +66,7 @@ const globals = css`
     color: #fff;
     text-decoration: none;
     outline: none;
+    cursor: pointer;
   }
   a:hover,
   a:active {

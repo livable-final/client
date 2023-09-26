@@ -31,6 +31,12 @@ import {
   Confused,
   Close,
   Check,
+  ServiceCafeteria,
+  ServiceCalendar,
+  ServiceInvitation,
+  ServiceParking,
+  ServiceReception,
+  ServiceTemp,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -85,6 +91,18 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Snow />;
     case home.weather.mist:
       return <Mist />;
+    case home.service.serviceCafeteria:
+      return <ServiceCafeteria />;
+    case home.service.serviceCalendar:
+      return <ServiceCalendar />;
+    case home.service.serviceInvitation:
+      return <ServiceInvitation />;
+    case home.service.serviceParking:
+      return <ServiceParking />;
+    case home.service.serviceReception:
+      return <ServiceReception />;
+    case home.service.serviceTemp:
+      return <ServiceTemp />;
     case home.lunch:
       return <Lunch color={color} />;
     case home.check:
