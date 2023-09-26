@@ -5,6 +5,7 @@ import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import theme from '@/styles/theme';
 import { TearOffCalendar, Roulette } from '@/assets/icons';
 import { HomeHasCafeteriaProps } from '@/types/home';
+import Link from 'next/link';
 
 function Banner({ hasCafeteria }: HomeHasCafeteriaProps) {
   // response 'hasCafeteria' boolean value에 따라 text 변경
@@ -17,13 +18,13 @@ function Banner({ hasCafeteria }: HomeHasCafeteriaProps) {
 
   return (
     <LunchCardProps padding={10}>
-      <div css={containerStyles}>
+      <Link href={bannerText.href} css={containerStyles}>
         <div css={wrapperStyles}>
           <p css={bodyStyles}>{bannerText.body}</p>
           <p css={titleStyles}>{bannerText.title}</p>
         </div>
         {hasCafeteria ? <TearOffCalendar /> : <Roulette />}
-      </div>
+      </Link>
     </LunchCardProps>
   );
 }

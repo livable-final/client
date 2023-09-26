@@ -5,22 +5,15 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import mq from '@/utils/mediaquery';
 import Icons from '@/components/common/Icons';
-import useIsScrollYTop from '@/hooks/useIsScrollYTop';
 
 function Bnb() {
-  // 스크롤 위치 상태
   const router = useRouter();
-  const { isTop, scrollY } = useIsScrollYTop(
-    COMMON_BNB_CONSTANTS.indicator.height,
-  );
   const { greyscale } = theme.palette;
   const { bnb } = COMMON_BNB_CONSTANTS;
 
   // 현재 URL과 비교하는 함수
   const isCurrent = (url: string) => router.pathname === url;
 
-  // 아이콘 렌더링 함수
-  // TOFIXED: 아이콘이 확정되지 않아서 임시로 넣어두었습니다.
   const renderIcon = (icon: string, isActive: boolean) => {
     switch (icon) {
       case bnb.home.icon:
@@ -50,49 +43,37 @@ function Bnb() {
   };
 
   return (
-    <>
-      <ul css={containerStlyes(scrollY)}>
-        {Object.values(bnb).map((item) => (
-          <li key={item.name} css={wrapperStyles}>
-            <Link css={iconStyles} href={item.url}>
-              {renderIcon(item.icon, isCurrent(item.url))}
-            </Link>
-            <span css={spanStyles}>{item.name}</span>
-          </li>
-        ))}
-      </ul>
-      <div css={indicatorStyles(isTop)} />
-    </>
+    <ul css={containerStlyes}>
+      {Object.values(bnb).map((item) => (
+        <li key={item.name} css={wrapperStyles}>
+          <Link css={linkStyles} href={item.url}>
+            {renderIcon(item.icon, isCurrent(item.url))}
+            <span css={spanStyles(isCurrent(item.url))}>{item.name}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
 
-const containerStlyes = (target: number) => css`
-  margin: 0 -16px;
+const containerStlyes = css`
   display: flex;
   height: 56px;
   justify-content: space-between;
   align-items: flex-start;
-  position: fixed;
-  /* bottom: ${target}px; */
-  bottom: 34px;
-  width: 100%;
+  position: sticky;
+  bottom: 0;
   background-color: ${theme.palette.white};
   max-width: 1024px;
   padding: 7px 40px;
   gap: 32px;
   align-self: stretch;
+  margin: 0 -16px;
 
   // Media Query
   ${mq.tab} {
     bottom: 0;
     padding: 4px 184px;
-  }
-
-  /* Safari에서만 적용. */
-  @media not all and (min-resolution: 0.001dpcm) {
-    @supports (-webkit-appearance: none) {
-      bottom: ${target}px;
-    }
   }
 `;
 
@@ -104,43 +85,21 @@ const wrapperStyles = css`
   flex: 1 0 0;
 `;
 
-const iconStyles = css`
+const linkStyles = css`
   width: 100%;
-  justify-content: center;
+  align-items: center;
   display: flex;
+  flex-direction: column;
 `;
 
-const spanStyles = css`
+const spanStyles = (isCurrent: boolean) => css`
   font: ${theme.font.input.default};
+  color: ${isCurrent
+    ? theme.palette.greyscale.grey60
+    : theme.palette.greyscale.grey30};
   line-height: 16px;
   text-align: center;
   display: flex;
-  flex-wrap: nowrap;
-`;
-
-const indicatorStyles = (isTop: boolean) => css`
-  /* display: ${isTop ? 'flex' : 'none'}; */
-  display: flex;
-  height: 34px;
-  justify-content: center;
-  align-items: center;
-  align-self: stretch;
-  margin: 0 -16px;
-  position: fixed;
-  bottom: 0;
-  background-color: ${theme.palette.white};
-  width: 100%;
-
-  ${mq.tab} {
-    display: none;
-  }
-
-  /* Safari에서만 적용. */
-  /* @media not all and (min-resolution: 0.001dpcm) {
-    @supports (-webkit-appearance: none) {
-      display: ${isTop ? 'none' : 'flex'};
-    }
-  } */
 `;
 
 export default Bnb;

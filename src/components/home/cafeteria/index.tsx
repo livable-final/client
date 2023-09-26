@@ -1,25 +1,37 @@
-import LunchCardProps from '@/components/lunch/LunchCard';
+import LunchCard from '@/components/lunch/LunchCard';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import HomeCafeteriaToggle from '@/components/home/cafeteria/HomeCafeteriaToggle';
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
+import { useCallback, useState } from 'react';
 
 function HomeCafeteria() {
   const { cafeteria } = HOME_TEXTS;
+  const [menuIdx, setMenuIdx] = useState(1);
+
+  const onToggleHandler = useCallback((idx: number) => {
+    setMenuIdx(idx);
+  }, []);
+
   return (
-    <LunchCardProps padding={16}>
+    <LunchCard padding={16}>
       <div css={containerStyles}>
         <div css={wrapperStyles}>
           <span css={titleStyles}>{cafeteria.title}</span>
           <div css={togglesStyles}>
-            {cafeteria.type.map((item) => (
-              <HomeCafeteriaToggle key={item} type={item} />
+            {cafeteria.type.map((item, idx) => (
+              <HomeCafeteriaToggle
+                key={item}
+                type={item}
+                onToggle={() => onToggleHandler(idx)}
+                isActive={menuIdx === idx}
+              />
             ))}
           </div>
         </div>
-        <div css={menusStyles}>{cafeteria.menu.breakfast}</div>
+        <div css={menusStyles}>{cafeteria.menu[menuIdx]}</div>
       </div>
-    </LunchCardProps>
+    </LunchCard>
   );
 }
 

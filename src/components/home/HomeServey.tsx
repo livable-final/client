@@ -1,15 +1,15 @@
 import LunchCardProps from '@/components/lunch/LunchCard';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import { css } from '@emotion/react';
-import Icons from '@/components/common/Icons';
 import theme from '@/styles/theme';
+import { Servey } from '@/assets/icons';
 
 function HomeServey() {
   const { servey } = HOME_TEXTS;
   return (
     <LunchCardProps padding={20}>
       <div css={containerStyles}>
-        <Icons icon="coin" size="36" />
+        <Servey />
         <div css={wrapperStyles}>
           <span css={titleStyles}>{servey.title}</span>
           <span css={bodyStyles}>{servey.body}</span>
@@ -22,7 +22,7 @@ function HomeServey() {
 const containerStyles = css`
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   align-self: stretch;
 `;
 
@@ -39,7 +39,7 @@ const titleStyles = css`
 
 const bodyStyles = css`
   font: ${theme.font.body.body2_600};
-  line-height: 21px;
+  line-height: 22px;
 `;
 
 export default HomeServey;

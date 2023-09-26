@@ -1,6 +1,6 @@
 export const CALENDAR_CONTENT = {
   title: {
-    main: '오점완',
+    main: '오늘 점심',
     review: '리뷰 작성',
     search: '식당 검색',
   },

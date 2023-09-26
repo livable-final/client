@@ -112,6 +112,14 @@ export const COMMON_ICON_NAMES = {
       snow: 'snow',
       mist: 'mist',
     },
+    service: {
+      serviceCafeteria: 'serviceCafeteria',
+      serviceCalendar: 'serviceCalendar',
+      serviceInvitation: 'serviceInvitation',
+      serviceParking: 'serviceParking',
+      serviceReception: 'serviceReception',
+      serviceTemp: 'serviceTemp',
+    },
   },
   user: {
     coin: 'coin',
@@ -169,7 +177,7 @@ export const COMMON_MODAL_BUTTONS = {
 export const COMMON_BNB_CONSTANTS = {
   bnb: {
     home: { name: '홈', url: '/', icon: 'home' },
-    lunch: { name: '오점완', url: '/lunch', icon: 'lunch' },
+    lunch: { name: '오늘 점심', url: '/lunch', icon: 'lunch' },
     user: { name: 'MY', url: '/user', icon: 'home' },
   },
   indicator: {
