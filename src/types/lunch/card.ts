@@ -4,4 +4,5 @@ export interface LunchCardProps {
   children: ReactNode;
   col?: boolean;
   padding?: number;
+  nopad?: boolean;
 }

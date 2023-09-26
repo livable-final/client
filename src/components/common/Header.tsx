@@ -4,6 +4,7 @@ import { COMMON_HEADER } from '@/constants/common';
 import { Back } from '@/assets/icons';
 import mq from '@/utils/mediaquery';
 import theme from '@/styles/theme';
+import Icons from '@/components/common/Icons';
 import usePagesStore from '@/stores/usePagesStore';
 
 function Header({
@@ -11,6 +12,7 @@ function Header({
   type = '',
   text = '',
   isBg = false,
+  isCloseOnly = false,
   onClick,
 }: HeaderProps) {
   const { goBack, backComponents } = usePagesStore();
@@ -21,7 +23,7 @@ function Header({
   switch (type) {
     case typeCase.close:
       // 아이콘 추가 예정
-      icon = 'close icon';
+      icon = <Icons icon="close" />;
       break;
     case typeCase.text:
       icon = <span>{text}</span>;
@@ -39,8 +41,8 @@ function Header({
   };
 
   return (
-    <header css={headerStyles(isBg)}>
-      <Back onClick={onBackClickHandler} />
+    <header css={headerStyles(isBg, isCloseOnly)}>
+      {isCloseOnly ? null : <Back onClick={onBackClickHandler} />}
       <div css={titleStyles}>
         <span>{title}</span>
       </div>
@@ -51,9 +53,9 @@ function Header({
   );
 }
 
-const headerStyles = (isBg: boolean) => css`
+const headerStyles = (isBg: boolean, isCloseOnly: boolean) => css`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: ${isCloseOnly ? '1fr auto auto' : '1fr auto 1fr'};
   align-items: center;
   width: 100%;
   min-width: 280px;
@@ -84,6 +86,7 @@ const iconStyles = (type: string) => css`
   color: ${type === 'text' && theme.palette.primary};
   font: ${type === 'text' && theme.font.body.body1_500};
   line-height: 24px;
+  height: 24px;
 `;
 
 export default Header;

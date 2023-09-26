@@ -3,12 +3,12 @@ import LunchReview from '@/components/lunch/review/LunchReview';
 import useReviewStore from '@/stores/useReviewStore';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import DUMMY_DATA from '@/constants/lunch/dummy';
+import { DUMMY_DATA } from '@/constants/lunch/dummy';
 import theme from '@/styles/theme';
 
 function LunchDetailContents() {
   const { reviewList } = useReviewStore();
-  const { detail } = LUNCH_MAIN_CONSTANTS;
+  const { detail } = LUNCH_MAIN_CONSTANTS.main;
 
   return (
     <div css={wrapperStyles}>
@@ -18,7 +18,7 @@ function LunchDetailContents() {
       />
       <div css={reviewStyles}>
         {DUMMY_DATA.map((item) => (
-          <LunchReview key={item.reveiwId} {...item} />
+          <LunchReview key={item.reviewId} {...item} />
         ))}
       </div>
     </div>

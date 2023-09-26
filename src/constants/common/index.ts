@@ -121,6 +121,9 @@ export const COMMON_ICON_NAMES = {
     confused: 'confused',
     thumbsUp: 'thumbsUp',
   },
+  common: {
+    close: 'close',
+  },
 };
 
 // 카테고리 이름
