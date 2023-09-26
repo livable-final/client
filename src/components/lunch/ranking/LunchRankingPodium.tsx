@@ -1,15 +1,15 @@
 import theme from '@/styles/theme';
-import { LunchMainRankingCardProps } from '@/types/lunch/ranking';
+import { RankingPodiumProps } from '@/types/lunch/ranking';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 
-function LunchMainRankingCard({
+function LunchRankingPodium({
   menuImage,
   menuName,
   count,
   rank,
   height,
-}: LunchMainRankingCardProps) {
+}: RankingPodiumProps) {
   return (
     <div css={containerStyles}>
       <Image
@@ -79,4 +79,4 @@ const spanStyles = css`
   line-height: 21px;
 `;
 
-export default LunchMainRankingCard;
+export default LunchRankingPodium;

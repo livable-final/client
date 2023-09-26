@@ -2,7 +2,7 @@ import React from 'react';
 import Banner from '@/components/common/Banner';
 import { DUMMY_RESPONSE } from '@/constants/home/homeTexts';
 import { css } from '@emotion/react';
-import LunchMainRanking from '@/components/lunch/main/LunchMainRanking';
+import LunchRanking from '@/components/lunch/ranking';
 import LunchReviews from '@/components/lunch/review/LunchReviews';
 
 function LunchMainContents() {
@@ -12,7 +12,7 @@ function LunchMainContents() {
   return (
     <div css={containerStyles}>
       <Banner hasCafeteria={hasCafeteria} />
-      <LunchMainRanking />
+      <LunchRanking />
       <LunchReviews />
     </div>
   );
