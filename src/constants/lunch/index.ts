@@ -12,6 +12,7 @@ export const CALENDAR_CONTENT = {
     recentSearches: '최근검색',
     searchResults: '검색결과',
     review: '후기 작성',
+    bottomSheet: '사진을 등록하면 포인트를 받을 수 있어요',
   },
   category: {
     eatOut: {
@@ -58,6 +59,13 @@ export const CALENDAR_CONTENT = {
     button6: {
       text: '만족',
     },
+    button7: {
+      text: '다음부터 이 메세지 보지 않기',
+    },
+    button8: {
+      text1: '작성 완료하기',
+      text2: '사진 등록하기',
+    },
   },
 };
 
@@ -70,5 +78,22 @@ export const CALENDAR_CASE = {
     type1: 'searched',
     type2: 'searching',
     type3: 'menu',
+  },
+  review: {
+    type1: 'recent',
+    type2: 'more',
+  },
+};
+
+export const LUNCH_MAIN_CONSTANTS = {
+  ranking: {
+    title: '지난주 점심 메뉴 TOP 10',
+    heights: [32, 47, 25],
+  },
+  reviews: {
+    title: '최근 테라타워 입주자들의 리뷰',
+  },
+  detail: {
+    title: '의 더 많은 리뷰',
   },
 };

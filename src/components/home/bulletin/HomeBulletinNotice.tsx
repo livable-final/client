@@ -16,17 +16,19 @@ function HomeBulletinNotice({ title, content }: HomeBulletinNoticeProps) {
 const containerStyles = css`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 4px;
   align-self: stretch;
 `;
 
 const titleStyles = css`
   font: ${theme.font.body.body3_400};
   color: ${theme.palette.greyscale.grey50};
+  line-height: 21px;
 `;
 
 const contentStyles = css`
   font: ${theme.font.body.body3_400};
   color: ${theme.palette.greyscale.grey70};
+  line-height: 21px;
 `;
 export default HomeBulletinNotice;

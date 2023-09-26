@@ -54,6 +54,11 @@ const CREATE_TEXTS = {
     },
   },
   checkbox: '이 메세지를 다음에도 사용',
+  timeSelector: {
+    startHour: 9,
+    endHour: 18,
+    interval: 30,
+  },
 };
 
 export default CREATE_TEXTS;

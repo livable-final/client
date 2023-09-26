@@ -31,7 +31,7 @@ const CategoryContainer = (variantData: CategoryColorProps) => css`
   cursor: pointer;
 
   ${mq.tab} {
-    width: 130px;
+    width: 140px;
   }
 `;
 

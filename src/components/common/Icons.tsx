@@ -15,10 +15,25 @@ import {
   Coin,
   Down,
   PlusSmall,
+  ClearDay,
+  ClearNight,
+  FewClouds,
+  Clouds,
+  BrokenClouds,
+  ShowerRain,
+  Rain,
+  ThunderStorm,
+  Snow,
+  Mist,
+  Lunch,
+  Smile,
+  ThumbsUp,
+  Confused,
+  Check,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
-  const { invitation, home, user } = COMMON_ICON_NAMES;
+  const { invitation, home, user, lunch } = COMMON_ICON_NAMES;
 
   switch (icon) {
     case invitation.meeting:
@@ -49,6 +64,36 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Coin width={size} height={size} />;
     case home.down:
       return <Down color={color} />;
+    case home.weather.clearDay:
+      return <ClearDay />;
+    case home.weather.clearNight:
+      return <ClearNight />;
+    case home.weather.fewClouds:
+      return <FewClouds />;
+    case home.weather.clouds:
+      return <Clouds />;
+    case home.weather.brokenClouds:
+      return <BrokenClouds />;
+    case home.weather.showerRain:
+      return <ShowerRain />;
+    case home.weather.rain:
+      return <Rain />;
+    case home.weather.thunderStorm:
+      return <ThunderStorm />;
+    case home.weather.snow:
+      return <Snow />;
+    case home.weather.mist:
+      return <Mist />;
+    case home.lunch:
+      return <Lunch color={color} />;
+    case home.check:
+      return <Check width={size} height={size} color={color} />;
+    case lunch.smile:
+      return <Smile width={size} height={size} />;
+    case lunch.confused:
+      return <Confused width={size} height={size} />;
+    case lunch.thumbsUp:
+      return <ThumbsUp color={color} width={size} height={size} />;
     default:
       break;
   }

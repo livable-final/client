@@ -1,4 +1,4 @@
-import HomeCard from '@/components/home/HomeCard';
+import LunchCardProps from '@/components/lunch/LunchCard';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import HomeCafeteriaToggle from '@/components/home/cafeteria/HomeCafeteriaToggle';
 import { css } from '@emotion/react';
@@ -7,7 +7,7 @@ import theme from '@/styles/theme';
 function HomeCafeteria() {
   const { cafeteria } = HOME_TEXTS;
   return (
-    <HomeCard>
+    <LunchCardProps padding={16}>
       <div css={containerStyles}>
         <div css={wrapperStyles}>
           <span css={titleStyles}>{cafeteria.title}</span>
@@ -19,13 +19,12 @@ function HomeCafeteria() {
         </div>
         <div css={menusStyles}>{cafeteria.menu.breakfast}</div>
       </div>
-    </HomeCard>
+    </LunchCardProps>
   );
 }
 
 const containerStyles = css`
   display: flex;
-  padding: 16px 0;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
@@ -53,9 +52,9 @@ const togglesStyles = css`
 `;
 
 const menusStyles = css`
-  align-self: stretch;
   font: ${theme.font.body.body3_400};
   color: ${theme.palette.greyscale.grey70};
+  line-height: 21px;
 `;
 
 export default HomeCafeteria;

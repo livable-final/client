@@ -79,19 +79,20 @@ function InvitationPurposeContainer() {
             />
           )}
         </div>
-      </div>
-      <div css={buttonWrapperStyles}>
-        <Button
-          content={button.next}
-          variant="blue"
-          onClick={onClickBtnHandler}
-        />
+        <div css={buttonWrapperStyles}>
+          <Button
+            content={button.next}
+            variant="blue"
+            onClick={onClickBtnHandler}
+          />
+        </div>
       </div>
     </div>
   );
 }
 
 const purposeContainerStyles = css`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,6 +138,7 @@ const purposeQuestionStyles = css`
 `;
 
 const categoryContainerStyles = css`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -167,12 +169,13 @@ const categoryWrapperStyles = css`
 
 const descriptionWrapperStyles = css`
   display: flex;
+  justify-content: flex-start;
   gap: 4px;
   width: 100%;
   min-width: 260px;
   max-width: 280px;
   height: 44px;
-  padding: 0 20px 0;
+  padding: 0 4px 0;
 
   div {
     display: flex;
@@ -215,9 +218,10 @@ const inputWrapperStyles = css`
 const buttonWrapperStyles = css`
   position: fixed;
   bottom: 0;
+  width: 100%;
   min-width: 280px;
   max-width: 360px;
-  padding-bottom: 20px;
+  padding: 0 16px 20px;
 
   ${mq.md} {
     min-width: 361px;
@@ -229,7 +233,7 @@ const buttonWrapperStyles = css`
   }
   ${mq.tab} {
     min-width: 641px;
-    max-width: 800px;
+    max-width: 1024px;
   }
 `;
 
