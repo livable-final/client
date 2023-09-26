@@ -4,6 +4,7 @@ import { COMMON_HEADER } from '@/constants/common';
 import { Back } from '@/assets/icons';
 import mq from '@/utils/mediaquery';
 import theme from '@/styles/theme';
+import usePagesStore from '@/stores/usePagesStore';
 
 function Header({
   title,
@@ -12,6 +13,7 @@ function Header({
   isBg = false,
   onClick,
 }: HeaderProps) {
+  const { goBack, backComponents } = usePagesStore();
   const { typeCase } = COMMON_HEADER;
 
   let icon;
@@ -28,10 +30,18 @@ function Header({
       icon = null;
   }
 
+  const onBackClick = () => {
+    console.log(backComponents);
+    if (backComponents.length === 0) {
+      window.location.assign('/');
+    } else {
+      goBack();
+    }
+  };
+
   return (
     <header css={headerStyles(isBg)}>
-      {/* 초대장 메인으로 돌아간다고 임시로 onclick 속성을 넣어놨습니다..! */}
-      <Back onClick={onClick} />
+      <Back onClick={onBackClick} />
       <div css={titleStyles}>
         <span>{title}</span>
       </div>
