@@ -13,11 +13,6 @@ function LunchRankings({ ...props }: MenuTopTen) {
     setIsOpen((prev) => !prev);
   }, []);
 
-  // const renderReview = useCallback(() => {
-  //   if (isOpen) {
-  //   }
-  // }, []);
-
   return (
     <div css={containerStyles}>
       <div css={greyBlockStyles} />
