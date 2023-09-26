@@ -14,6 +14,7 @@ function App({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Layout>
+          <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>
