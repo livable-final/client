@@ -34,7 +34,6 @@ const wrapperStyles = css`
   align-items: center;
   align-self: stretch;
   background: ${theme.palette.white};
-  padding-right: 16px;
 `;
 
 const dividerStyles = css`

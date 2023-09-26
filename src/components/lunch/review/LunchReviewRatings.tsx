@@ -55,9 +55,13 @@ const thumbsUpStyles = css`
   justify-content: center;
   align-items: center;
   padding: 4.5px 10px;
-  gap: 5px;
+  gap: 2px;
   border-radius: 100px;
   background: ${theme.palette.greyscale.grey10};
+
+  > svg {
+    padding: 2px;
+  }
 `;
 
 const countStyles = css`
