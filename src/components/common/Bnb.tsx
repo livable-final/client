@@ -58,17 +58,21 @@ function Bnb() {
 
 const containerStlyes = css`
   display: flex;
-  height: 56px;
   justify-content: space-between;
   align-items: flex-start;
-  position: sticky;
+  position: fixed;
   bottom: 0;
   background-color: ${theme.palette.white};
   max-width: 1024px;
-  padding: 7px 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 7px;
+  padding-bottom: calc(0.6em + env(safe-area-inset-bottom));
+
   gap: 32px;
   align-self: stretch;
   margin: 0 -16px;
+  width: 100%;
 
   // Media Query
   ${mq.tab} {
