@@ -3,13 +3,13 @@ import Title from '@/components/common/Title';
 import LunchDetail from '@/components/lunch/detail';
 import LunchMainContents from '@/components/lunch/LunchMainContents';
 import LunchReviewsByRanking from '@/components/lunch/review/LunchReviewsByRanking';
-import { CALENDAR_CONTENT } from '@/constants/lunch';
+import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import usePagesStore from '@/stores/usePagesStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
 function LunchHome() {
-  const { title } = CALENDAR_CONTENT;
+  const { lunch } = HOME_TEXTS.title;
   const { nextComponent } = usePagesStore();
 
   // 오점완 홈 -> 리뷰 상세
@@ -22,8 +22,8 @@ function LunchHome() {
     default:
       return (
         <>
+          <Title title={lunch} part="lunch" />
           <div css={containerStyles}>
-            <Title title={title.main} part="lunch" />
             <LunchMainContents />
           </div>
           <Bnb />
@@ -33,7 +33,7 @@ function LunchHome() {
 }
 
 const containerStyles = css`
-  margin: 0 -16px 90px;
+  margin: 0 -16px;
   background: ${theme.palette.background.home};
 `;
 
