@@ -37,7 +37,7 @@ function LunchReview({ ...props }: LunchReviewProps) {
 
 const containerStyles = (isRow?: boolean) => css`
   display: flex;
-  padding: 20px 16px;
+  padding: 20px 0px 20px 16px;
   align-items: flex-start;
   align-self: stretch;
   flex-direction: ${isRow ? 'row' : 'column'};
@@ -100,7 +100,19 @@ const descStyles = css`
   color: ${theme.palette.greyscale.grey70};
   line-height: 21px;
   letter-spacing: -0.3px;
-  padding-right: calc(13%);
   text-align: left;
+  width: 220px;
+
+  ${mq.md} {
+    width: 286px;
+  }
+
+  ${mq.lg} {
+    width: 350px;
+  }
+
+  ${mq.tab} {
+    width: auto;
+  }
 `;
 export default LunchReview;
