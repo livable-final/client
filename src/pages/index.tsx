@@ -19,7 +19,7 @@ function Home() {
 }
 
 const containerStyles = css`
-  margin: 0 -16px 90px;
+  margin: 0 -16px;
   background: ${theme.palette.background.home};
 `;
 
