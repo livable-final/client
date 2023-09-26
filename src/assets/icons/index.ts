@@ -73,6 +73,8 @@ import Rank1 from '@/assets/icons/Rank1.svg';
 import Rank2 from '@/assets/icons/Rank2.svg';
 import Rank3 from '@/assets/icons/Rank3.svg';
 import Reviewer from '@/assets/icons/Reviewer.svg';
+import Close from '@/assets/icons/Close.svg';
+import Top from '@/assets/icons/Top.svg';
 import CameraFlash from '@/assets/icons/CameraFlash.svg';
 
 export {
@@ -151,5 +153,7 @@ export {
   Rank2,
   Rank3,
   Reviewer,
+  Close,
+  Top,
   CameraFlash,
 };
