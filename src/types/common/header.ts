@@ -4,5 +4,5 @@ export interface HeaderProps {
   text?: string;
   isBg?: boolean;
   isCloseOnly?: boolean;
-  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
