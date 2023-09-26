@@ -12,9 +12,6 @@ import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 
 function InvitationViewForm() {
   const { nextComponent, setNextComponent } = usePagesStore();
-  if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.main}`) {
-    return <InvitationViewForm />;
-  }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.building}`) {
     return <InvitationBuildingInfo />;
   }
