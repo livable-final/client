@@ -70,6 +70,9 @@ export const COMMON_ERROR_MESSAGE: ErrorTypeProps = {
   test2: '이럴수가메세지',
   name: '이름은 2자 이상입니다.',
   contact: '연락처는 10자 이상입니다.',
+  noPage: '페이지를 찾을 수 없어요',
+  noServer: '네트워크 연결상태를 확인해주세요',
+  back: '이전으로 돌아가기',
 };
 
 // Header
