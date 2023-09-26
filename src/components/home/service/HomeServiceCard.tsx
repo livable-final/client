@@ -25,6 +25,11 @@ const containerStyles = css`
   gap: 8px;
   border-radius: 12px;
 
+  &:active {
+    border-radius: 12px;
+    background: ${theme.palette.greyscale.grey5};
+  }
+
   ${mq.md} {
     width: 91px;
   }
