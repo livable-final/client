@@ -6,20 +6,20 @@ const checkValidationName = (name: string) => {
   const nameRegExp = /^[가-힣]{2,}$/;
 
   if (nameRegExp.test(name) && name.length >= 2) {
-    return name;
+    return true;
   }
 
-  return '이름 형식이 올바르지 않아요';
+  return false;
 };
 
 const checkValidationContact = (contact: string) => {
   const contactRegExp = /^[0-9]{10,}$/;
 
   if (contactRegExp.test(contact) && contact.length >= 10) {
-    return contact;
+    return true;
   }
 
-  return '전화번호 형식이 올바르지 않아요';
+  return false;
 };
 
 export { checkValidationName, checkValidationContact };
