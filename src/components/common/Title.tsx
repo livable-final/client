@@ -24,7 +24,7 @@ function Title({ title, isMain, part }: TitleProps) {
       case 'user':
         return <Setting />;
       default:
-        return <Icons icon="down" />;
+        return null;
     }
   };
 
