@@ -8,27 +8,52 @@ import useViewStore from '@/stores/usePagesStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { InvitationCreateTexts } from '@/types/invitation/create';
-import { ErrorTypeProps } from '@/types/common/input';
+import {
+  checkValidationName,
+  checkValidationContact,
+} from '@/utils/checkValidation';
 
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
-  const { name, contact }: ErrorTypeProps = COMMON_ERROR_MESSAGE;
-  const [visitorName, setVisitorName] = useState<string>('');
-  const [visitorContact, setVisitorContact] = useState<string>('');
-  const [visitorsList] = useState<string[]>([
-    '고애신',
-    '유진초이',
-    '김희성',
-    '구동매',
-    '쿠도히나',
-    '수미',
-    '도미',
-    '임관수',
-  ]);
+  // const { name, contact } = COMMON_ERROR_MESSAGE;
+
+  // const [visitorName, setVisitorName] = useState<string>('');
+  // const [visitorContact, setVisitorContact] = useState<string>('');
+  const [visitorInput, setVisitorInput] = useState({ name: '', contact: '' });
+  // const [isNameError, setIsNameError] = useState<boolean>(false);
+  // const [isContactError, setIsContactError] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  // API 연동 후 삭제
+  const [visitorsList, setVisitorList] = useState<string[]>([]);
+
+  console.log(visitorInput);
+
+  const onChangeNameHandler = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    const { name: inputName, value } = e.target;
+
+    setVisitorInput({
+      ...visitorInput,
+      [inputName]: value,
+    });
+  };
+
+  const onChangeContactHandler = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    const { name: inputName, value } = e.target;
+
+    setVisitorInput({
+      ...visitorInput,
+      [inputName]: value,
+    });
+  };
 
   const onClickBtnHandler = () => {
     setNextComponent('InvitationInfoContainer');
@@ -36,12 +61,21 @@ function InvitationVisitorsContainer() {
 
   const onClickAddVisitorHandler = () => {
     // 눌렀을 때 추가 로직 필요
-    visitorsList.push(visitorName);
+    setVisitorList([...visitorsList, visitorInput.name]);
   };
 
   const onClickDeleteVisitorHandler = () => {
     // 눌렀을 때 삭제 로직 필요
     visitorsList.pop();
+  };
+
+  // input 활성화 시 버튼 숨김 처리
+  const onFocusInputHandler = () => {
+    setIsFocused(true);
+  };
+
+  const onBlurInputHandler = () => {
+    setTimeout(() => setIsFocused(false), 300);
   };
 
   return (
@@ -51,22 +85,30 @@ function InvitationVisitorsContainer() {
           <div>{title.invitation}</div>
         </div>
         <div css={inputWrapperStyles}>
-          <Input
-            value={visitorName}
-            setValue={setVisitorName}
-            variant="default"
-            placeholder={placeholder.name}
-            isError={visitorName.length > 1}
-            errorType={name}
-          />
-          <Input
-            value={visitorContact}
-            setValue={setVisitorContact}
-            variant="default"
-            placeholder={placeholder.contact}
-            isError={visitorContact.length < 9}
-            errorType={contact}
-          />
+          <div onFocus={onFocusInputHandler} onBlur={onBlurInputHandler}>
+            <Input
+              value={visitorInput.name}
+              onChange={onChangeNameHandler}
+              variant="default"
+              placeholder={placeholder.name}
+              isError
+              errorType="테스트입니다1111"
+              name="name"
+            />
+          </div>
+          <div onFocus={onFocusInputHandler} onBlur={onBlurInputHandler}>
+            <Input
+              value={visitorInput.contact}
+              onChange={onChangeContactHandler}
+              variant="default"
+              placeholder={placeholder.contact}
+              maxLength={11}
+              isError
+              errorType="테스트입니다2222"
+              name="contact"
+            />
+          </div>
+
           <AddressBook />
         </div>
         <div css={addBtnStyles}>
@@ -81,7 +123,7 @@ function InvitationVisitorsContainer() {
           />
         )}
       </div>
-      <div css={buttonWrapperStyles}>
+      <div css={buttonWrapperStyles(isFocused)}>
         <Button
           content={button.next}
           variant="blue"
@@ -169,9 +211,10 @@ const visitorsListWrapper = (visitorsList: string[]) => css`
   margin-bottom: ${visitorsList.length > 3 ? '100px;' : '0'};
 `;
 
-const buttonWrapperStyles = css`
+const buttonWrapperStyles = (isFocused: boolean) => css`
   position: fixed;
   bottom: 0;
+  display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
   max-width: 360px;
