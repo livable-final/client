@@ -48,10 +48,6 @@ const containerStyles = css`
   align-items: flex-start;
   gap: 20px;
   align-self: stretch;
-  padding: 0 4px;
-  margin-top: 16px; // 임시
-
-  border: 1px solid red;
 `;
 
 const wrapperStyles = css`
@@ -70,7 +66,7 @@ const selectorStyles = css`
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
-  gap: 3px;
+  gap: 4px;
   align-self: stretch;
   flex-wrap: wrap;
 `;
