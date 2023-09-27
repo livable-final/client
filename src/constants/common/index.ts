@@ -38,6 +38,11 @@ export const COMMON_CATEGORY_COLORS: CategoryColorsProps = {
     backgroundColor: `${theme.palette.white}`,
     color: `${theme.palette.greyscale.grey40}`,
   },
+  hoveredBlue: {
+    border: `2px solid ${theme.palette.bluescale.blue30}`,
+    backgroundColor: `${theme.palette.white}`,
+    color: `${theme.palette.bluescale.blue30}`,
+  },
 };
 
 // Input box 스타일
@@ -166,6 +171,14 @@ export const COMMON_CATEGORIES = {
     },
   },
 };
+
+export const COMMON_USER_NAME = [
+  '유희태',
+  '이시우',
+  '김진우',
+  '김준희',
+  '조은상',
+];
 
 // 토글 버튼
 export const COMMON_TOGGLE_TITLE = '종일';
