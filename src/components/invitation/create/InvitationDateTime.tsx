@@ -39,8 +39,6 @@ function InvitationDateTime() {
             maxDate={addMonths(new Date(), 5)}
             startDate={startDate}
             endDate={endDate}
-            // 이미 예약된 날짜 비활성화 (사용여부 판단 필요)
-            // excludeDateIntervals={}
             selectsRange
             inline
             showDisabledMonthNavigation
