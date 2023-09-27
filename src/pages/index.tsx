@@ -1,5 +1,5 @@
 import AuthForm from '@/components/auth/AuthForm';
-import useViewStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/usePagesStore';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import Home from '@/components/home';
@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import Title from '@/components/common/Title';
 
 function Main() {
-  const { nextComponent } = useViewStore();
+  const { nextComponent } = usePagesStore();
   const { home } = COMPONENT_NAME.common;
   const [userToken, setUserToken] = useState<string | null>(null);
 
