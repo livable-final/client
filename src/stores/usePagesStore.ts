@@ -15,6 +15,12 @@ const usePagesStore = create<PagesStore>()((set) => ({
       backComponents: state.backComponents.slice(0, -1),
     }));
   },
+  reset: () => {
+    set(() => ({
+      nextComponent: '',
+      backComponents: [],
+    }));
+  },
 }));
 
 export default usePagesStore;
