@@ -9,7 +9,6 @@ import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { ChangeEvent, useState } from 'react';
-import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 import {
   checkValidationName,
@@ -19,49 +18,28 @@ import {
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
-  // const { name, contact } = COMMON_ERROR_MESSAGE;
 
-  // const [visitorName, setVisitorName] = useState<string>('');
-  // const [visitorContact, setVisitorContact] = useState<string>('');
-  const [visitorInput, setVisitorInput] = useState({ name: '', contact: '' });
-  // const [isNameError, setIsNameError] = useState<boolean>(false);
-  // const [isContactError, setIsContactError] = useState<boolean>(false);
+  const [visitorInfo, setVisitorInfo] = useState({ name: '', contact: '' });
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   // API 연동 후 삭제
   const [visitorsList, setVisitorList] = useState<string[]>([]);
 
-  console.log(visitorInput);
-
-  const onChangeNameHandler = (
+  // 이름/연락처 입력 받기
+  const onChangeInfoHandler = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => {
     const { name: inputName, value } = e.target;
 
-    setVisitorInput({
-      ...visitorInput,
+    setVisitorInfo({
+      ...visitorInfo,
       [inputName]: value,
     });
-  };
-
-  const onChangeContactHandler = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-  ) => {
-    const { name: inputName, value } = e.target;
-
-    setVisitorInput({
-      ...visitorInput,
-      [inputName]: value,
-    });
-  };
-
-  const onClickBtnHandler = () => {
-    setNextComponent('InvitationInfoContainer');
   };
 
   const onClickAddVisitorHandler = () => {
     // 눌렀을 때 추가 로직 필요
-    setVisitorList([...visitorsList, visitorInput.name]);
+    setVisitorList([...visitorsList, visitorInfo.name]);
   };
 
   const onClickDeleteVisitorHandler = () => {
@@ -78,6 +56,10 @@ function InvitationVisitorsContainer() {
     setTimeout(() => setIsFocused(false), 300);
   };
 
+  const onClickBtnHandler = () => {
+    setNextComponent('InvitationInfoContainer');
+  };
+
   return (
     <div css={containerStyles}>
       <div css={inputContainerStyles}>
@@ -87,24 +69,24 @@ function InvitationVisitorsContainer() {
         <div css={inputWrapperStyles}>
           <div onFocus={onFocusInputHandler} onBlur={onBlurInputHandler}>
             <Input
-              value={visitorInput.name}
-              onChange={onChangeNameHandler}
+              value={visitorInfo.name}
+              onChange={onChangeInfoHandler}
               variant="default"
               placeholder={placeholder.name}
-              isError
-              errorType="테스트입니다1111"
+              isError={!checkValidationName(visitorInfo.name)}
+              errorType="name"
               name="name"
             />
           </div>
           <div onFocus={onFocusInputHandler} onBlur={onBlurInputHandler}>
             <Input
-              value={visitorInput.contact}
-              onChange={onChangeContactHandler}
+              value={visitorInfo.contact}
+              onChange={onChangeInfoHandler}
               variant="default"
               placeholder={placeholder.contact}
               maxLength={11}
-              isError
-              errorType="테스트입니다2222"
+              isError={!checkValidationContact(visitorInfo.contact)}
+              errorType="contact"
               name="contact"
             />
           </div>
