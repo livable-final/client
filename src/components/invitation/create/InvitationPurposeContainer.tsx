@@ -7,7 +7,7 @@ import Button from '@/components/common/Button';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useViewStore from '@/stores/usePagesStore';
 import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { css } from '@emotion/react';
 import { COMMON_CATEGORIES } from '@/constants/common';
 import {
@@ -36,17 +36,24 @@ function InvitationPurposeContainer() {
     setSelectedCategory(item.icon);
   };
 
-  const onClickBtnHandler = () => {
-    setNextComponent('InvitationVisitorsContainer');
-    setHeaderTitle(header[selectedCategory]);
+  const onChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setEtcPurpose(e.target.value);
   };
 
+  // input 활성화 시 버튼 숨김 처리
   const onFocusInputHandler = () => {
     setIsFocused(true);
   };
 
   const onBlurInputHandler = () => {
     setTimeout(() => setIsFocused(false), 300);
+  };
+
+  const onClickBtnHandler = () => {
+    setNextComponent('InvitationVisitorsContainer');
+    setHeaderTitle(header[selectedCategory]);
   };
 
   return (
@@ -85,7 +92,7 @@ function InvitationPurposeContainer() {
           {selectedCategory === 'etc' && (
             <Input
               value={etcPurpose}
-              setValue={setEtcPurpose}
+              onChange={onChange}
               variant="default"
               placeholder={placeholder.purpose}
               textarea
