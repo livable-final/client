@@ -73,7 +73,18 @@ import Rank1 from '@/assets/icons/Rank1.svg';
 import Rank2 from '@/assets/icons/Rank2.svg';
 import Rank3 from '@/assets/icons/Rank3.svg';
 import Reviewer from '@/assets/icons/Reviewer.svg';
+import Close from '@/assets/icons/Close.svg';
+import Top from '@/assets/icons/Top.svg';
 import CameraFlash from '@/assets/icons/CameraFlash.svg';
+import Servey from '@/assets/icons/Servey.svg';
+import ServiceCafeteria from '@/assets/icons/ServiceCafeteria.svg';
+import ServiceCalendar from '@/assets/icons/ServiceCalendar.svg';
+import ServiceInvitation from '@/assets/icons/ServiceInvitation.svg';
+import ServiceParking from '@/assets/icons/ServiceParking.svg';
+import ServiceReception from '@/assets/icons/ServiceReception.svg';
+import ServiceTemp from '@/assets/icons/ServiceTemp.svg';
+import ProfileWithBg from '@/assets/icons/ProfileWithBg.svg';
+import Error from '@/assets/icons/Error.svg';
 
 export {
   As,
@@ -151,5 +162,16 @@ export {
   Rank2,
   Rank3,
   Reviewer,
+  Close,
+  Top,
   CameraFlash,
+  Servey,
+  ServiceCafeteria,
+  ServiceCalendar,
+  ServiceInvitation,
+  ServiceParking,
+  ServiceReception,
+  ServiceTemp,
+  ProfileWithBg,
+  Error,
 };

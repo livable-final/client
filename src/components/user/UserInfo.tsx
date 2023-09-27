@@ -2,17 +2,16 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import { DUMMY_RESPONSE } from '@/constants/user/userTexts';
-import UserPoint from './UserPoint';
-import Icons from '../common/Icons';
+import UserPoint from '@/components/user/UserPoint';
+import { ProfileWithBg } from '@/assets/icons';
 
 function UserInfo() {
   const response = DUMMY_RESPONSE;
 
-  // TOFIXED: 프로필(더미)이미지 icon을 전달받지 못한 상태 -> svg를 전달받으면 수정 예정
   // 서버로부터 프로필이미지를 전달받으면 그대로 이미지 출력, 존재하지 않는다면 더미이미지를 출력하는 함수
   const renderProfileImg = (item: string) => {
     if (item === '') {
-      return <Icons icon="coin" size="32" />;
+      return <ProfileWithBg />;
     }
     return <Image src={response.profileImage} alt="프로필" />;
   };
@@ -54,7 +53,6 @@ const profileImgStyles = css`
   align-items: center;
   gap: 10px;
   border-radius: 100px;
-  background: ${theme.palette.greyscale.grey10};
 `;
 
 const wrapperStyles = css`

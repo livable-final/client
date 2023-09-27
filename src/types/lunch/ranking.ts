@@ -1,7 +1,7 @@
-export interface LunchMainRankingCardProps {
+export interface RankingPodiumProps {
   menuImage: string;
   menuName: string;
-  count: string;
-  rank: string;
+  count: number;
+  rank: number;
   height: number;
 }

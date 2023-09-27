@@ -62,7 +62,9 @@ function InvitationInfoContainer() {
           onClick={onClickAddHandler}
         />
       )}
-      {modalState.isOpen && <Modal onClick={onClickModalHandler} />}
+      {modalState.isOpen && (
+        <Modal isAlert content={modal.btn} onClick={onClickModalHandler} />
+      )}
       <div css={buttonWrapperStyles}>
         <Button
           content={button.send}

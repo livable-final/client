@@ -1,6 +1,6 @@
 import LunchCard from '@/components/lunch/LunchCard';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import DUMMY_DATA from '@/constants/lunch/dummy';
+import { DUMMY_DATA } from '@/constants/lunch/dummy';
 import LunchReview from '@/components/lunch/review/LunchReview';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import { css } from '@emotion/react';
@@ -9,9 +9,10 @@ import useReviewStore from '@/stores/useReviewStore';
 import { ReviewList } from '@/types/lunch/reviewList';
 import theme from '@/styles/theme';
 
-function LunchMainReviews() {
+function LunchReviews() {
   const { setNextComponent } = usePagesStore();
   const { setReviewList } = useReviewStore();
+  const { reviews } = LUNCH_MAIN_CONSTANTS.main;
 
   const onClickHandler = (item: ReviewList) => {
     setNextComponent('LunchDetail'); // LunchDetail.tsx로 이동
@@ -21,15 +22,15 @@ function LunchMainReviews() {
 
   return (
     <LunchCard col>
-      <LunchSubTitle title={LUNCH_MAIN_CONSTANTS.reviews.title} type="recent" />
+      <LunchSubTitle title={reviews.title} type="recent" />
       {DUMMY_DATA.map((item) => (
         <button
           css={buttonStyles}
           type="button"
-          key={item.reveiwId}
+          key={item.reviewId}
           onClick={() => onClickHandler(item)}
         >
-          <LunchReview {...item} />
+          <LunchReview {...item} noPad />
         </button>
       ))}
     </LunchCard>
@@ -49,4 +50,4 @@ const buttonStyles = css`
   }
 `;
 
-export default LunchMainReviews;
+export default LunchReviews;

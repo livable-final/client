@@ -1,5 +1,6 @@
 import Icons from '@/components/common/Icons';
 import Button from '@/components/common/Button';
+import usePagesStore from '@/stores/usePagesStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
@@ -9,15 +10,18 @@ import { COMMON_ICON_NAMES } from '@/constants/common';
 function InvitationDoneBtn() {
   const { button } = CREATE_TEXTS;
   const { invitation } = COMMON_ICON_NAMES;
+  const { setNextComponent } = usePagesStore();
 
   const router = useRouter();
 
   const onClickToMypageHandler = () => {
     router.push('/user');
+    setNextComponent('InvitationPurposeContainer');
   };
 
   const onClickToHomeHandler = () => {
     router.push('/');
+    setNextComponent('InvitationPurposeContainer');
   };
 
   return (

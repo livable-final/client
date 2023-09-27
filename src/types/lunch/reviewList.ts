@@ -3,7 +3,7 @@ export interface ReviewList {
   restaurantId: string;
   memberName: string;
   profileImageUrl: string;
-  reveiwId: number;
+  reviewId: number;
   reviewTaste: string;
   reviewAmount: string;
   reviewService: string;
@@ -16,4 +16,9 @@ export interface ReviewList {
 export interface ReviewListStore {
   reviewList: ReviewList;
   setReviewList: (item: ReviewList) => void;
+}
+
+export interface LunchReviewProps extends ReviewList {
+  isRow?: boolean;
+  noPad?: boolean;
 }

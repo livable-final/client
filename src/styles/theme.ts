@@ -4,6 +4,7 @@ const theme = {
     title: '#162637',
     primary: '#2563EB',
     white: '#FFFFFF',
+    black: '#000000',
     orange: '#FF9141',
     bluescale: {
       blue10: '#E7EEFF',

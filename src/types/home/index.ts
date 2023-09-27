@@ -18,3 +18,9 @@ export interface HomeReceptionProps {
   quantity: number;
   idx: number;
 }
+
+export interface HomeCafeteriaToggleProps {
+  type: string;
+  isActive: boolean;
+  onToggle: (type: number) => void;
+}
