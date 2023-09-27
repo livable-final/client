@@ -71,8 +71,7 @@ export const COMMON_INPUT_COLORS: InputColorsProps = {
 
 // 에러메세지 내용은 추후 변경
 export const COMMON_ERROR_MESSAGE = {
-  test: '에러메세지',
-  test2: '이럴수가메세지',
+  default: '오류가 발생했습니다',
   name: '이름 형식이 올바르지 않아요',
   contact: '전화번호 형식이 올바르지 않아요',
   noPage: '페이지를 찾을 수 없어요',
