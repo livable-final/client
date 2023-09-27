@@ -10,7 +10,7 @@ import usePagesStore from '@/stores/usePagesStore';
 function Home() {
   const { reset } = usePagesStore();
 
-  useEffect(() => reset(), []);
+  useEffect(() => reset(), [reset]);
 
   return (
     <>
