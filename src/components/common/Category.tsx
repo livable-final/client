@@ -30,6 +30,17 @@ const CategoryContainer = (variantData: CategoryColorProps) => css`
   background-color: ${variantData.backgroundColor};
   cursor: pointer;
 
+  &:hover {
+    border: ${COMMON_CATEGORY_COLORS.hoveredBlue.border};
+
+    > div {
+      color: ${COMMON_CATEGORY_COLORS.hoveredBlue.color};
+    }
+    > div > svg {
+      color: ${COMMON_CATEGORY_COLORS.hoveredBlue.color};
+    }
+  }
+
   ${mq.tab} {
     width: 140px;
   }
