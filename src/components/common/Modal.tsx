@@ -4,9 +4,9 @@ import theme from '@/styles/theme';
 import useModalStore from '@/stores/useModalStore';
 import { COMMON_MODAL_BUTTONS } from '@/constants/common';
 
-function Modal({ isAlert, isConfirm, onClick }: ModalProps) {
+function Modal({ isAlert, content, onClick }: ModalProps) {
   const { modalState, closeModal } = useModalStore();
-  const { confirm, cancel, send } = COMMON_MODAL_BUTTONS;
+  const { confirm, cancel } = COMMON_MODAL_BUTTONS;
 
   return (
     <div css={backgroundStyles}>
@@ -18,22 +18,13 @@ function Modal({ isAlert, isConfirm, onClick }: ModalProps) {
             <button type="button" css={defaultBtnStyles} onClick={closeModal}>
               {confirm}
             </button>
-          ) : isConfirm ? (
-            <>
-              <button type="button" css={defaultBtnStyles} onClick={onClick}>
-                {confirm}
-              </button>
-              <button type="button" css={cancelBtnStyles} onClick={closeModal}>
-                {cancel}
-              </button>
-            </>
           ) : (
             <>
-              <button type="button" css={defaultBtnStyles} onClick={onClick}>
-                {send}
-              </button>
               <button type="button" css={cancelBtnStyles} onClick={closeModal}>
                 {cancel}
+              </button>
+              <button type="button" css={defaultBtnStyles} onClick={onClick}>
+                {content}
               </button>
             </>
           )}

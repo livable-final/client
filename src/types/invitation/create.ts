@@ -23,6 +23,9 @@ export interface InvitationCreateTexts {
     };
   };
   checkbox: string;
+  timeSelector: {
+    [key: string]: number;
+  };
 }
 
 // 초대 목적 선택
