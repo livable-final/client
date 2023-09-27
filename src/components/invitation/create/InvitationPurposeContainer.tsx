@@ -30,6 +30,7 @@ function InvitationPurposeContainer() {
   const categories: CommonCategory[] = Object.values(invitation);
   const [selectedCategory, setSelectedCategory] = useState<string>('meeting');
   const [etcPurpose, setEtcPurpose] = useState<string>('');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const onClickCategoryHandler = (item: CommonCategory) => {
     setSelectedCategory(item.icon);
@@ -38,6 +39,14 @@ function InvitationPurposeContainer() {
   const onClickBtnHandler = () => {
     setNextComponent('InvitationVisitorsContainer');
     setHeaderTitle(header[selectedCategory]);
+  };
+
+  const onFocusInputHandler = () => {
+    setIsFocused(true);
+  };
+
+  const onBlurInputHandler = () => {
+    setTimeout(() => setIsFocused(false), 300);
   };
 
   return (
@@ -68,7 +77,11 @@ function InvitationPurposeContainer() {
           </div>
           <div>{description[selectedCategory]}</div>
         </div>
-        <div css={inputWrapperStyles}>
+        <div
+          css={inputWrapperStyles}
+          onFocus={onFocusInputHandler}
+          onBlur={onBlurInputHandler}
+        >
           {selectedCategory === 'etc' && (
             <Input
               value={etcPurpose}
@@ -79,11 +92,12 @@ function InvitationPurposeContainer() {
             />
           )}
         </div>
-        <div css={buttonWrapperStyles}>
+        <div css={buttonWrapperStyles(isFocused)}>
           <Button
             content={button.next}
             variant="blue"
             onClick={onClickBtnHandler}
+            isDisabled={selectedCategory === 'etc' && !etcPurpose.length}
           />
         </div>
       </div>
@@ -215,9 +229,10 @@ const inputWrapperStyles = css`
   }
 `;
 
-const buttonWrapperStyles = css`
+const buttonWrapperStyles = (isFocused: boolean) => css`
   position: fixed;
   bottom: 0;
+  display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
   max-width: 360px;
