@@ -59,7 +59,7 @@ function Input({
         )}
       </div>
       {/* error meassage 필요한 경우 */}
-      {isError && value.length <= 0 && <ErrorMessage errorType={errorType} />}
+      {isError && value !== '' && <ErrorMessage errorType={errorType} />}
     </div>
   );
 }
