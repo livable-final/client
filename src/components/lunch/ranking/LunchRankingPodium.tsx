@@ -52,6 +52,7 @@ const wrapperStyles = css`
 
 const menuNameStyles = css`
   font: ${theme.font.body.body3_500};
+  color: ${theme.palette.black};
   line-height: 21px;
 `;
 

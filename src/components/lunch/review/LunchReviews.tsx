@@ -30,7 +30,7 @@ function LunchReviews() {
           key={item.reviewId}
           onClick={() => onClickHandler(item)}
         >
-          <LunchReview {...item} />
+          <LunchReview {...item} noPad />
         </button>
       ))}
     </LunchCard>

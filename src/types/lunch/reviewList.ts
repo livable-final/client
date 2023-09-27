@@ -20,4 +20,5 @@ export interface ReviewListStore {
 
 export interface LunchReviewProps extends ReviewList {
   isRow?: boolean;
+  noPad?: boolean;
 }

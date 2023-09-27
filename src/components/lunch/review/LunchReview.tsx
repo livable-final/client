@@ -9,7 +9,7 @@ import mq from '@/utils/mediaquery';
 
 function LunchReview({ ...props }: LunchReviewProps) {
   return (
-    <div css={containerStyles(props?.isRow)}>
+    <div css={containerStyles(props?.isRow, props?.noPad)}>
       <div css={wrapperStyles}>
         <div css={profileStyles}>
           <div css={profileImageStyles}>
@@ -35,9 +35,9 @@ function LunchReview({ ...props }: LunchReviewProps) {
   );
 }
 
-const containerStyles = (isRow?: boolean) => css`
+const containerStyles = (isRow?: boolean, noPad?: boolean) => css`
   display: flex;
-  padding: 20px 0px 20px 16px;
+  padding: ${noPad ? '20px 0px 20px 16px' : ' 20px 20px 16px'};
   align-items: flex-start;
   align-self: stretch;
   flex-direction: ${isRow ? 'row' : 'column'};
@@ -104,7 +104,7 @@ const descStyles = css`
   width: 220px;
 
   ${mq.md} {
-    width: 286px;
+    width: 262px;
   }
 
   ${mq.lg} {

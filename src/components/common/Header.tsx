@@ -41,8 +41,8 @@ function Header({
   };
 
   return (
-    <header css={headerStyles(isBg, isCloseOnly)}>
-      {isCloseOnly ? null : <Back onClick={onBackClickHandler} />}
+    <header css={headerStyles(isBg)}>
+      {isCloseOnly ? <div /> : <Back onClick={onBackClickHandler} />}
       <div css={titleStyles}>
         <span>{title}</span>
       </div>
@@ -53,9 +53,9 @@ function Header({
   );
 }
 
-const headerStyles = (isBg: boolean, isCloseOnly: boolean) => css`
+const headerStyles = (isBg: boolean) => css`
   display: grid;
-  grid-template-columns: ${isCloseOnly ? '1fr auto auto' : '1fr auto 1fr'};
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   width: 100%;
   min-width: 280px;
