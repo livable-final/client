@@ -14,6 +14,6 @@ export interface ModalStateTypes {
 // Modal.tsx
 export interface ModalProps {
   isAlert?: boolean;
-  isConfirm?: boolean;
+  content?: string;
   onClick?: () => void;
 }

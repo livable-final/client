@@ -174,7 +174,6 @@ export const COMMON_TOGGLE_TITLE = '종일';
 export const COMMON_MODAL_BUTTONS = {
   confirm: '확인',
   cancel: '취소',
-  send: '전송하기',
 };
 
 export const COMMON_BNB_CONSTANTS = {
