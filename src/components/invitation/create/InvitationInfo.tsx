@@ -9,12 +9,12 @@ import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { Location, Calendar, Clock } from '@/assets/icons';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
-  const { title, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
+  const { title, placeholder, checkbox }: InvitationCreateTexts = CREATE_TEXTS;
   const [tip, setTip] = useState('');
 
   const onClickPlaceHandler = () => {
@@ -23,6 +23,12 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
 
   const onClickDateTimeHandler = () => {
     openBottomSheet(<InvitationDateTime />);
+  };
+
+  const onChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setTip(e.target.value);
   };
 
   return (
@@ -75,14 +81,14 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
           <div css={textareaStyles}>
             <Input
               value={tip}
-              setValue={setTip}
+              onChange={onChange}
               variant="default"
               textarea
               placeholder={placeholder.tip}
               row={4}
               maxLength={99}
             />
-            <CheckBox text="이 메세지를 다음에도 사용" />
+            <CheckBox text={checkbox} />
           </div>
         </div>
       </div>
