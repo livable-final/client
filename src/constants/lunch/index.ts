@@ -3,6 +3,8 @@ export const CALENDAR_CONTENT = {
     main: '오늘 점심',
     review: '리뷰 작성',
     search: '식당 검색',
+    photoReview: '리뷰 작성 완료',
+    point: '내 포인트',
   },
   subTitle: {
     calendar: `님의 점심 달력이에요`,
@@ -13,6 +15,8 @@ export const CALENDAR_CONTENT = {
     searchResults: '검색결과',
     review: '후기 작성',
     bottomSheet: '사진을 등록하면 포인트를 받을 수 있어요',
+    photoReview: '10포인트가 적립되었어요',
+    point: '월에 받은 포인트',
   },
   category: {
     eatOut: {
@@ -51,6 +55,7 @@ export const CALENDAR_CONTENT = {
     button4: {
       text1: '추가',
       text2: '작성완료',
+      text3: '확인',
     },
     button5: {
       good: '맛있오',
@@ -65,6 +70,9 @@ export const CALENDAR_CONTENT = {
     button8: {
       text1: '작성 완료하기',
       text2: '사진 등록하기',
+    },
+    button9: {
+      text: '내 포인트 지도 보기',
     },
   },
 };
