@@ -9,9 +9,8 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
   const [etcValue, setEtcValue] = useState('');
   const [isCheck, setIsCheck] = useState(false);
 
-  // selectData 값이 변경되는 것을 확인하는 콘솔로그
-
   const onChangeRadioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
     setSelectData(event.target.value);
   };
 
@@ -23,6 +22,7 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
   const onBlurHandler = () => setIsCheck(false);
 
   const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
     setEtcValue(event.target.value);
     setSelectData(event.target.value);
   };
@@ -41,18 +41,15 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
             css={radioInputStyles}
           />
           <label htmlFor={item} key={item} css={labelStyles}>
-            {selectData === item ? (
-              <Check css={btnImgStyles} />
-            ) : (
-              <UnCheck css={btnImgStyles} />
-            )}
+            <div css={btnImgStyles}>
+              {selectData === item ? <Check /> : <UnCheck />}
+            </div>
             <div>
               <p>{item}</p>
             </div>
           </label>
         </div>
       ))}
-
       {/* 직접 입력 */}
       <div
         role="presentation"
@@ -70,12 +67,18 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
           css={radioInputStyles}
         />
         <label htmlFor={etcValue} css={labelStyles}>
-          {isCheck ? (
-            <Check css={btnImgStyles} />
-          ) : (
-            <UnCheck css={btnImgStyles} />
-          )}
-          <div>
+          <div css={btnImgStyles}>
+            {isCheck ? (
+              <div css={icon}>
+                <Check />
+              </div>
+            ) : (
+              <div css={icon}>
+                <UnCheck />
+              </div>
+            )}
+          </div>
+          <div css={inputWrapper}>
             <p>기타 (직접입력)</p>
             <input
               type="text"
@@ -93,19 +96,21 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
 export default RadioBtn;
 
 const radioContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
 
   span {
     color: ${theme.palette.greyscale.grey40};
   }
-
   p {
     line-height: 1.4em;
   }
 `;
 
 const itemStyles = css`
-  margin: 10px;
+  width: 100%;
 `;
 
 const radioInputStyles = css`
@@ -113,30 +118,37 @@ const radioInputStyles = css`
 
   &:checked + label {
     color: ${theme.palette.primary};
-    span {
+    p {
       color: ${theme.palette.primary};
     }
   }
 `;
 
 const btnImgStyles = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 20px;
   height: 20px;
-  margin: 2px;
-  margin-right: 10px;
   flex-grow: 0;
+`;
+
+const icon = css`
+  width: 100%;
+  height: 100%;
 `;
 
 const labelStyles = css`
   display: flex;
   flex-wrap: wrap;
-
-  div {
-    flex-grow: 1;
-  }
+  gap: 8px;
 `;
 
+const inputWrapper = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 const etcInputStyles = css`
-  margin-top: 10px;
-  max-width: 100%;
+  width: 100%;
 `;
