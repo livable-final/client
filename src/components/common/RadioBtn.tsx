@@ -48,9 +48,6 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
             )}
             <div>
               <p>{item}</p>
-              <p>
-                <span>{item}</span>
-              </p>
             </div>
           </label>
         </div>
