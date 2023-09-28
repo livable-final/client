@@ -1,5 +1,7 @@
+import { OfficeData, CommonPlaceData } from '@/types/invitation/api';
+
 export interface RadioBtnProps {
-  list: string[];
+  list: (OfficeData | CommonPlaceData)[];
   name: string;
   placeholder: string;
 }

@@ -1,36 +1,74 @@
 import theme from '@/styles/theme';
-import { RadioBtnProps } from '@/types/common/radioBtn';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { CheckOn, UnCheck } from '@/assets/icons';
 
-function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
+interface RadioBtnProps {
+  list: ArrayElementType[];
+  name: string;
+  placeholder: string;
+  onInputChange: () => void;
+}
+
+interface ArrayElementType {
+  officeName?: string;
+  commonPlaceId?: number;
+  commonPlaceName?: string;
+}
+
+function RadioBtn({
+  list,
+  name,
+  placeholder,
+  onInputChange,
+  onRadioChange,
+}: RadioBtnProps) {
   const [selectData, setSelectData] = useState(list[0]);
   const [etcValue, setEtcValue] = useState('');
   const [isCheck, setIsCheck] = useState(false);
+
+  console.log('라디오버튼 리스트 프롭 확인', list);
+
+  // 데이터의 offices/commonPlaces 구분
+  const isCommonData = (item: ArrayElementType) => {
+    const key = Object.keys(item)[0];
+    if (key.includes('common')) {
+      return true;
+    }
+    return false;
+  };
+
   const onChangeRadioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectData(event.target.value);
   };
+
   const onFocusHandler = () => {
     setIsCheck(true);
     setSelectData(etcValue);
   };
+
   const onBlurHandler = () => setIsCheck(false);
+
   const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEtcValue(event.target.value);
     setSelectData(event.target.value);
   };
+
   return (
     <div css={radioContainerStyles}>
       {list.map((item) => {
-        // console.log(selectData === item);
         return (
-          <div key={item} css={itemStyles}>
+          <div
+            key={isCommonData(item) ? item.commonPlaceName : item.officeName}
+            css={itemStyles}
+          >
             <label css={labelStyles}>
               <input
                 type="radio"
                 name={name}
-                value={item}
+                value={
+                  isCommonData(item) ? item.commonPlaceName : item.officeName
+                }
                 onChange={onChangeRadioHandler}
                 css={radioInputStyles}
               />
@@ -38,7 +76,9 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
                 {selectData === item ? <CheckOn /> : <UnCheck />}
               </div>
               <div>
-                <p>{item}</p>
+                <p>
+                  {isCommonData(item) ? item.commonPlaceName : item.officeName}
+                </p>
               </div>
             </label>
           </div>
@@ -85,7 +125,9 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
     </div>
   );
 }
+
 export default RadioBtn;
+
 const radioContainerStyles = css`
   display: flex;
   flex-direction: column;
@@ -98,11 +140,14 @@ const radioContainerStyles = css`
     line-height: 1.4em;
   }
 `;
+
 const itemStyles = css`
   width: 100%;
 `;
+
 const radioInputStyles = css`
   display: none;
+
   &:checked + label {
     color: ${theme.palette.primary};
     p {
@@ -110,6 +155,7 @@ const radioInputStyles = css`
     }
   }
 `;
+
 const btnImgStyles = css`
   display: flex;
   justify-content: center;
@@ -118,20 +164,24 @@ const btnImgStyles = css`
   height: 24px;
   flex-grow: 0;
 `;
+
 const icon = css`
   width: 24px;
   height: 24px;
 `;
+
 const labelStyles = css`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 `;
+
 const inputWrapper = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
 `;
+
 const etcInputStyles = css`
   width: 100%;
 `;

@@ -1,33 +1,60 @@
 import Button from '@/components/common/Button';
 import RadioBtn from '@/components/common/RadioBtn';
+import BottomSheet from '@/components/common/BottomSheet';
+import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
+import { GetInvitationPlaceData } from '@/types/invitation/api';
+import { useEffect, useState } from 'react';
 
-function InvitationPlace() {
+interface InvitationPlaceProps {
+  placeList?: GetInvitationPlaceData;
+}
+
+interface ArrayElementType {
+  officeName?: string;
+  commonPlaceId?: number;
+  commonPlaceName?: string;
+}
+
+function InvitationPlace(placeList: InvitationPlaceProps) {
+  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { title, button, placeholder } = CREATE_TEXTS;
+  const { placeList: list } = placeList;
+  const { offices, commonPlaces } = list || {
+    offices: [],
+    commonPlaces: [],
+  };
+  const [allPlaceList, setallPlaceList] = useState<ArrayElementType[]>([]);
 
-  const test2 = [
-    '식스센스 사무실 (10층 1004호)',
-    '공용라운지 (A동 1001호)',
-    '10층 회의실 A',
-    '10층 회의실 B',
-  ];
+  useEffect(() => {
+    setPlaceList([...offices, ...commonPlaces]);
+  }, [offices, commonPlaces]);
+
+  // 날짜/시간 선택 컴포넌트
+  const onClickDateTimeHandler = () => {
+    openBottomSheet(<InvitationDateTime />);
+  };
+
+  const onChangeRadioHandler = () => {};
 
   return (
     <div css={containerStyles}>
       <div css={titleStyles}>{title.invitationPlace}</div>
       <div css={radioBtnWrapperStyles}>
         <RadioBtn
-          list={test2}
+          list={allPlaceList}
           name="초대 장소"
           placeholder={placeholder.placeEtc}
         />
       </div>
       <div css={buttonWrapperStyles}>
-        <Button variant="blue" content={button.save} />
+        <Button variant="blue" content={button.next} />
       </div>
+      {bottomSheetState.isOpen && <BottomSheet />}
     </div>
   );
 }
