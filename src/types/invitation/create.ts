@@ -18,9 +18,11 @@ export interface InvitationCreateTexts {
     [key: string]: string;
   };
   modal: {
-    [key: string]: {
-      [key: string]: string;
-    };
+    [key: string]:
+      | {
+          [key: string]: string;
+        }
+      | string;
   };
   checkbox: string;
   timeSelector: {

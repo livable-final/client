@@ -1,7 +1,6 @@
 export interface InputProps {
   variant: string;
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
   placeholder?: string;
   inputIcon?: boolean;
   textarea?: boolean;
@@ -10,6 +9,12 @@ export interface InputProps {
   errorType?: string;
   row?: number;
   maxLength?: number;
+  onChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => void;
+  name?: string;
 }
 
 export interface InputColorProps {

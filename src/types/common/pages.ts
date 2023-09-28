@@ -3,4 +3,5 @@ export interface PagesStore {
   backComponents: string[];
   setNextComponent: (page: string) => void;
   goBack: () => void;
+  reset: () => void;
 }

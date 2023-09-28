@@ -8,7 +8,6 @@ import { css } from '@emotion/react';
 function InvitationPlace() {
   const { title, button, placeholder } = CREATE_TEXTS;
 
-  // const test = [{ main: '식스센스 사무실', sub: '2023.08.29' }];
   const test2 = [
     '식스센스 사무실 (10층 1004호)',
     '공용라운지 (A동 1001호)',
@@ -36,10 +35,14 @@ function InvitationPlace() {
 const containerStyles = css`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 24px;
   width: 100%;
+  padding: 0 6px 0;
 `;
 
 const radioBtnWrapperStyles = css`
+  width: 100%;
   overflow: scroll;
 `;
 
@@ -52,9 +55,11 @@ const titleStyles = css`
 `;
 
 const buttonWrapperStyles = css`
+  width: 100%;
   min-width: 280px;
   max-width: 360px;
   padding-bottom: 20px;
+  margin: 0 -4px 0;
 
   ${mq.md} {
     min-width: 361px;
@@ -66,7 +71,7 @@ const buttonWrapperStyles = css`
   }
   ${mq.tab} {
     min-width: 641px;
-    max-width: 800px;
+    max-width: 1024px;
   }
 `;
 

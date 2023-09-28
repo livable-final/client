@@ -63,7 +63,7 @@ function InvitationInfoContainer() {
         />
       )}
       {modalState.isOpen && (
-        <Modal isAlert content={modal.btn} onClick={onClickModalHandler} />
+        <Modal content={modal.btn} onClick={onClickModalHandler} />
       )}
       <div css={buttonWrapperStyles}>
         <Button

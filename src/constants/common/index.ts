@@ -1,7 +1,7 @@
 import theme from '@/styles/theme';
 import { ButtonColorsProps } from '@/types/common/button';
 import { CategoryColorsProps } from '@/types/common/category';
-import { InputColorsProps, ErrorTypeProps } from '@/types/common/input';
+import { InputColorsProps } from '@/types/common/input';
 import { TimeSelectorsColorProps } from '@/types/invitation/create';
 
 // 공통 버튼 색상
@@ -70,11 +70,10 @@ export const COMMON_INPUT_COLORS: InputColorsProps = {
 };
 
 // 에러메세지 내용은 추후 변경
-export const COMMON_ERROR_MESSAGE: ErrorTypeProps = {
-  test: '에러메세지',
-  test2: '이럴수가메세지',
-  name: '이름은 2자 이상입니다.',
-  contact: '연락처는 10자 이상입니다.',
+export const COMMON_ERROR_MESSAGE = {
+  default: '오류가 발생했습니다',
+  name: '이름 형식이 올바르지 않아요',
+  contact: '전화번호 형식이 올바르지 않아요',
   noPage: '페이지를 찾을 수 없어요',
   noServer: '네트워크 연결상태를 확인해주세요',
   back: '이전으로 돌아가기',

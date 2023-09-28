@@ -7,7 +7,7 @@ import Button from '@/components/common/Button';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useViewStore from '@/stores/usePagesStore';
 import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { css } from '@emotion/react';
 import { COMMON_CATEGORIES } from '@/constants/common';
 import {
@@ -30,9 +30,25 @@ function InvitationPurposeContainer() {
   const categories: CommonCategory[] = Object.values(invitation);
   const [selectedCategory, setSelectedCategory] = useState<string>('meeting');
   const [etcPurpose, setEtcPurpose] = useState<string>('');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const onClickCategoryHandler = (item: CommonCategory) => {
     setSelectedCategory(item.icon);
+  };
+
+  const onChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setEtcPurpose(e.target.value);
+  };
+
+  // input 활성화 시 버튼 숨김 처리
+  const onFocusInputHandler = () => {
+    setIsFocused(true);
+  };
+
+  const onBlurInputHandler = () => {
+    setTimeout(() => setIsFocused(false), 300);
   };
 
   const onClickBtnHandler = () => {
@@ -68,22 +84,27 @@ function InvitationPurposeContainer() {
           </div>
           <div>{description[selectedCategory]}</div>
         </div>
-        <div css={inputWrapperStyles}>
+        <div
+          css={inputWrapperStyles}
+          onFocus={onFocusInputHandler}
+          onBlur={onBlurInputHandler}
+        >
           {selectedCategory === 'etc' && (
             <Input
               value={etcPurpose}
-              setValue={setEtcPurpose}
+              onChange={onChange}
               variant="default"
               placeholder={placeholder.purpose}
               textarea
             />
           )}
         </div>
-        <div css={buttonWrapperStyles}>
+        <div css={buttonWrapperStyles(isFocused)}>
           <Button
             content={button.next}
             variant="blue"
             onClick={onClickBtnHandler}
+            isDisabled={selectedCategory === 'etc' && !etcPurpose.length}
           />
         </div>
       </div>
@@ -215,9 +236,10 @@ const inputWrapperStyles = css`
   }
 `;
 
-const buttonWrapperStyles = css`
+const buttonWrapperStyles = (isFocused: boolean) => css`
   position: fixed;
   bottom: 0;
+  display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
   max-width: 360px;

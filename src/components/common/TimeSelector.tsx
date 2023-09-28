@@ -40,7 +40,7 @@ const timeSelectorStyles = (variantData: TimeSelectorColorProps) => css`
   font-family: inherit;
   justify-content: center;
   align-items: center;
-  width: 85px;
+  width: 84px;
   height: 48px;
   border-radius: 12px;
   padding: 12px 18px;
