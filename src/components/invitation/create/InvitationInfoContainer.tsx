@@ -5,53 +5,48 @@ import InvitationVisitorsList from '@/components/invitation/create/InvitationVis
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useViewStore from '@/stores/usePagesStore';
 import useModalStore from '@/stores/useModalStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
+import { VisitorInfo } from '@/types/invitation/api';
 
 function InvitationInfoContainer() {
   const { setNextComponent } = useViewStore();
   const { modalState, openModal, closeModal } = useModalStore();
+  const { createContents, setCreateContents } = useInvitationCreateStore();
   const { button, modal } = CREATE_TEXTS;
+
   const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
+  const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([]);
 
-  const onClickBtnHandler = () => {
-    openModal(modal.send.title, modal.send.content);
-  };
+  // 이전 컴포넌트에서 등록한 방문자 정보 가져오기
+  useEffect(() => {
+    setVisitorsList(createContents.visitors);
+  }, [createContents.visitors]);
 
-  const onClickModalHandler = () => {
-    setIsConfirmed(!isConfirmed);
-    closeModal();
-  };
-
-  const onClickAddHandler = () => {
-    openModal('테스트', '삭제 기능이 구현될 예정이에요!');
-  };
-
+  // 모달에서 전송을 눌렀을 때 다음 컴포넌트 렌더링
   useEffect(() => {
     if (isConfirmed) {
       setNextComponent('InvitationDoneContainer');
     }
   }, [isConfirmed, setNextComponent]);
 
-  const visitorsList = [
-    '고애신',
-    '유진초이',
-    '김희성',
-    '쿠도히나',
-    '구동매',
-    '임관수',
-    '카일',
-    '도미',
-    '고애신',
-    '유진초이',
-    '김희성',
-    '쿠도히나',
-    '구동매',
-    '임관수',
-    '카일',
-    '도미',
-  ];
+  // 최종 전송 확인 모달 핸들러
+  const onClickModalHandler = () => {
+    setIsConfirmed(!isConfirmed);
+    closeModal();
+  };
+
+  // 초대 목록에서 특정 방문자 삭제
+  const onClickDeleteHandler = () => {
+    openModal('테스트', '삭제 기능이 구현될 예정이에요!');
+  };
+
+  // 하단 버튼 핸들러
+  const onClickBtnHandler = () => {
+    openModal(modal.send.title, modal.send.content);
+  };
 
   return (
     <div css={containerStyles}>
@@ -59,7 +54,7 @@ function InvitationInfoContainer() {
       {visitorsList.length > 0 && (
         <InvitationVisitorsList
           visitorsList={visitorsList}
-          onClick={onClickAddHandler}
+          onClick={onClickDeleteHandler}
         />
       )}
       {modalState.isOpen && (
@@ -98,11 +93,12 @@ const containerStyles = css`
 `;
 
 const buttonWrapperStyles = css`
-  position: relative;
+  position: fixed;
+  bottom: 0;
   width: 100%;
   min-width: 280px;
   max-width: 360px;
-  padding-bottom: 20px;
+  padding: 0 16px 20px;
 
   ${mq.md} {
     min-width: 361px;
@@ -113,8 +109,6 @@ const buttonWrapperStyles = css`
     max-width: 640px;
   }
   ${mq.tab} {
-    position: fixed;
-    bottom: 0;
     min-width: 641px;
     max-width: 1024px;
   }
