@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { css } from '@emotion/react';
+import { useState } from 'react';
 import { Clock, Calendar, Location } from '@/assets/icons';
 import { INVITATION_EDIT_TEXTS } from '@/constants/invitation/editTexts';
 import theme from '@/styles/theme';
@@ -59,6 +59,13 @@ function InvitationEdit() {
   )} ~ ${data.endTime.substring(0, 5)}`;
   const visitorname = data.visitors;
   const onClickHandler = () => {};
+  const onClickEditTextHandler = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setEditValue(e.target.value);
+  };
   const onClickVisitorAddHandler = () => {
     openBottomSheet(<InvitationEditvisitorAdd />);
   };
@@ -96,7 +103,7 @@ function InvitationEdit() {
           textarea
           variant="default"
           value={editValue}
-          setValue={setEditValue}
+          onChange={onClickEditTextHandler}
         />
         <CheckBox text="이 메세지를 다음에도 사용" />
       </div>
