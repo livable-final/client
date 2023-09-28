@@ -1,5 +1,11 @@
+import LunchRoulette from '@/components/lunch/LunchRoulette';
+
 function Roulette() {
-  return <div>Roulette</div>;
+  return (
+    <div>
+      <LunchRoulette />
+    </div>
+  );
 }
 
 export default Roulette;
