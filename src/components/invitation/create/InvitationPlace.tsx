@@ -1,60 +1,73 @@
 import Button from '@/components/common/Button';
 import RadioBtn from '@/components/common/RadioBtn';
-import BottomSheet from '@/components/common/BottomSheet';
-import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
+import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-import { GetInvitationPlaceData } from '@/types/invitation/api';
-import { useEffect, useState } from 'react';
 
-interface InvitationPlaceProps {
-  placeList?: GetInvitationPlaceData;
-}
+function InvitationPlace(placeList) {
+  const { closeBottomSheet } = useBottomSheetStore();
+  const { title, button } = CREATE_TEXTS;
 
-interface ArrayElementType {
-  officeName?: string;
-  commonPlaceId?: number;
-  commonPlaceName?: string;
-}
-
-function InvitationPlace(placeList: InvitationPlaceProps) {
-  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
-  const { title, button, placeholder } = CREATE_TEXTS;
   const { placeList: list } = placeList;
   const { offices, commonPlaces } = list || {
     offices: [],
     commonPlaces: [],
   };
-  const [allPlaceList, setallPlaceList] = useState<ArrayElementType[]>([]);
 
+  const [test, setTest] = useState([]);
+  const [selectedPlace, setSelectedPlace] = useState('');
+  const [place, setPlace] = useState('');
+  const [etcPlace, setEtcPlace] = useState('');
+
+  console.log('바텀시트 프롭 확인', placeList);
+
+  // 초대 가능한 장소 응답 데이터 배열
   useEffect(() => {
-    setPlaceList([...offices, ...commonPlaces]);
-  }, [offices, commonPlaces]);
+    setTest([...offices, ...commonPlaces]);
+  }, []);
 
-  // 날짜/시간 선택 컴포넌트
-  const onClickDateTimeHandler = () => {
-    openBottomSheet(<InvitationDateTime />);
+  console.log(test);
+
+  // 초대 장소 선택
+  const onChangeRadioHandler = (e) => {
+    console.log(e.target.value);
+    setPlace(e.target.value);
+    setIsCheck(!isCheck);
   };
 
-  const onChangeRadioHandler = () => {};
+  // 초대 장소 직접 입력
+  const onChangeInputHandler = (e) => {
+    console.log(e.target.value);
+    setEtcPlace(e.target.value);
+  };
+
+  // 하단 버튼 핸들러
+  const onClickBtnHandler = () => {
+    closeBottomSheet();
+  };
 
   return (
     <div css={containerStyles}>
       <div css={titleStyles}>{title.invitationPlace}</div>
       <div css={radioBtnWrapperStyles}>
         <RadioBtn
-          list={allPlaceList}
-          name="초대 장소"
-          placeholder={placeholder.placeEtc}
+          list={test}
+          place={place}
+          etcPlace={etcPlace}
+          onChangeRadio={onChangeRadioHandler}
+          onChangeInput={onChangeInputHandler}
         />
       </div>
       <div css={buttonWrapperStyles}>
-        <Button variant="blue" content={button.next} />
+        <Button
+          variant="blue"
+          content={button.next}
+          onClick={onClickBtnHandler}
+        />
       </div>
-      {bottomSheetState.isOpen && <BottomSheet />}
     </div>
   );
 }
