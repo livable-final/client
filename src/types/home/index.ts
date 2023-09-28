@@ -1,5 +1,5 @@
 export interface HomeHasCafeteriaProps {
-  hasCafeteria: boolean;
+  hasCafeteria?: boolean;
 }
 
 export interface HomeBulletinNoticeProps {

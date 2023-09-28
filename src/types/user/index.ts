@@ -1,8 +1,8 @@
 export interface UserPointProps {
-  point: number;
+  point?: number;
 }
 
 export interface UserNavigatorProps {
-  title: string;
-  href: string;
+  title?: string;
+  href?: string;
 }
