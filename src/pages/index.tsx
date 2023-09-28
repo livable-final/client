@@ -13,14 +13,24 @@ function Main() {
   const [userToken, setUserToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('user');
-    setUserToken(token);
+    // 로컬 스토리지 'user-storage'에 접근
+    const storage = localStorage.getItem('user-storage');
+
+    // storage key-value가 존재한다면
+    if (storage) {
+      // value 파싱
+      const userKey = JSON.parse(storage);
+      const token = userKey?.state?.user;
+      setUserToken(token);
+    }
   }, []);
 
+  // store nextComponent가 home이거나 유효한 토큰값이 있을 때, Home 컴포넌트 렌더
   if (nextComponent === home || userToken) {
     return <Home />;
   }
 
+  // 로그인 컴포넌트 렌더
   return (
     <div css={containerStyles}>
       <Title title="로그인" part="login" />
