@@ -4,5 +4,5 @@ export interface UserPointProps {
 
 export interface UserNavigatorProps {
   title?: string;
-  href?: string;
+  href: string;
 }
