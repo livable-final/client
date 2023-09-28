@@ -1,36 +1,14 @@
-import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { CheckOn, UnCheck } from '@/assets/icons';
 
-interface RadioBtnProps {
-  list: ArrayElementType[];
-  name: string;
-  placeholder: string;
-  onInputChange: () => void;
-}
+function RadioBtn({ list, place, etcPlace, onChangeInput, onChangeRadio }) {
+  console.log('라디오버튼 프롭 확인', list);
 
-interface ArrayElementType {
-  officeName?: string;
-  commonPlaceId?: number;
-  commonPlaceName?: string;
-}
-
-function RadioBtn({
-  list,
-  name,
-  placeholder,
-  onInputChange,
-  onRadioChange,
-}: RadioBtnProps) {
-  const [selectData, setSelectData] = useState(list[0]);
-  const [etcValue, setEtcValue] = useState('');
   const [isCheck, setIsCheck] = useState(false);
 
-  console.log('라디오버튼 리스트 프롭 확인', list);
-
-  // 데이터의 offices/commonPlaces 구분
-  const isCommonData = (item: ArrayElementType) => {
+  // 출력할 장소 데이터에 common 유무 체크
+  const isCommonData = (item) => {
     const key = Object.keys(item)[0];
     if (key.includes('common')) {
       return true;
@@ -38,69 +16,42 @@ function RadioBtn({
     return false;
   };
 
-  const onChangeRadioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectData(event.target.value);
-  };
-
-  const onFocusHandler = () => {
-    setIsCheck(true);
-    setSelectData(etcValue);
-  };
-
-  const onBlurHandler = () => setIsCheck(false);
-
-  const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEtcValue(event.target.value);
-    setSelectData(event.target.value);
-  };
-
   return (
-    <div css={radioContainerStyles}>
+    <div css={containerStyles}>
       {list.map((item) => {
         return (
           <div
             key={isCommonData(item) ? item.commonPlaceName : item.officeName}
-            css={itemStyles}
+            css={listStyles}
           >
             <label css={labelStyles}>
               <input
                 type="radio"
-                name={name}
-                value={
-                  isCommonData(item) ? item.commonPlaceName : item.officeName
-                }
-                onChange={onChangeRadioHandler}
-                css={radioInputStyles}
+                value={place}
+                css={defaultRadioStyles}
+                onChange={onChangeRadio}
               />
-              <div css={btnImgStyles}>
-                {selectData === item ? <CheckOn /> : <UnCheck />}
+              <div css={iconWrapperStyles}>
+                {isCheck ? <CheckOn /> : <UnCheck />}
               </div>
-              <div>
-                <p>
-                  {isCommonData(item) ? item.commonPlaceName : item.officeName}
-                </p>
+              <div css={listContentStyles}>
+                {isCommonData(item) ? item.commonPlaceName : item.officeName}
               </div>
             </label>
           </div>
         );
       })}
       {/* 직접 입력 */}
-      <div
-        role="presentation"
-        onFocus={onFocusHandler}
-        onBlur={onBlurHandler}
-        css={itemStyles}
-      >
+      <div css={listStyles}>
         <label css={labelStyles}>
           <input
             type="radio"
-            name={name}
-            value={etcValue}
+            value={place}
             checked={isCheck}
-            readOnly
-            css={radioInputStyles}
+            css={defaultRadioStyles}
+            onChange={onChangeRadio}
           />
-          <div css={btnImgStyles}>
+          <div css={iconWrapperStyles}>
             {isCheck ? (
               <div css={icon}>
                 <CheckOn />
@@ -111,13 +62,13 @@ function RadioBtn({
               </div>
             )}
           </div>
-          <div css={inputWrapper}>
-            <p>기타 (직접입력)</p>
+          <div css={listContentStyles}>
+            <div>기타 (직접입력)</div>
             <input
               type="text"
-              placeholder={placeholder}
-              onChange={onChangeInputHandler}
-              css={etcInputStyles}
+              placeholder="초대장소 입력"
+              value={etcPlace}
+              onChange={onChangeInput}
             />
           </div>
         </label>
@@ -126,62 +77,46 @@ function RadioBtn({
   );
 }
 
-export default RadioBtn;
-
-const radioContainerStyles = css`
+const containerStyles = css`
   display: flex;
   flex-direction: column;
+
   gap: 20px;
-  width: 100%;
-  span {
-    color: ${theme.palette.greyscale.grey40};
-  }
-  p {
-    line-height: 1.4em;
-  }
 `;
 
-const itemStyles = css`
-  width: 100%;
-`;
-
-const radioInputStyles = css`
-  display: none;
-
-  &:checked + label {
-    color: ${theme.palette.primary};
-    p {
-      color: ${theme.palette.primary};
-    }
-  }
-`;
-
-const btnImgStyles = css`
+const listStyles = css`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  flex-grow: 0;
-`;
-
-const icon = css`
-  width: 24px;
-  height: 24px;
+  gap: 8px;
+  border: 1px solid blue;
 `;
 
 const labelStyles = css`
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
 `;
 
-const inputWrapper = css`
+const defaultRadioStyles = css`
+  display: none;
+`;
+
+const iconWrapperStyles = css`
+  display: flex;
+  justify-content: center;
+  max-width: 20px;
+  max-height: 20px;
+`;
+
+const icon = css`
+  width: 20px;
+  height: 20px;
+`;
+
+const listContentStyles = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
+  border: 1px solid pink;
 `;
 
-const etcInputStyles = css`
-  width: 100%;
-`;
+export default RadioBtn;
