@@ -4,6 +4,7 @@ import BottomSheet from '@/components/common/BottomSheet';
 import InvitationPlace from '@/components/invitation/create/InvitationPlace';
 import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import useFetch from '@/hooks/useFetch';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
@@ -11,31 +12,42 @@ import { css } from '@emotion/react';
 import { Location, Calendar, Clock } from '@/assets/icons';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
+import { GetInvitationPlaceData } from '@/types/invitation/api';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 
 function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { title, placeholder, checkbox }: InvitationCreateTexts = CREATE_TEXTS;
-  const [tip, setTip] = useState('');
+  const [tip, setTip] = useState<string>('');
+  const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
 
+  // 초대 가능한 장소 호출
+  const { response } = useFetch({
+    fetchFn: getInvitationPlaceList,
+  });
+
+  useEffect(() => {
+    // 초대 가능한 장소 응답 데이터 저장
+    console.log('초대장소 응답 데이터 확인', response?.data);
+    setPlaceList(response?.data);
+  }, [response]);
+
+  // 장소 선택 컴포넌트
   const onClickPlaceHandler = () => {
-    openBottomSheet(<InvitationPlace />);
+    openBottomSheet(<InvitationPlace placeList={placeList} />);
   };
 
+  // 날짜/시간 선택 컴포넌트
   const onClickDateTimeHandler = () => {
     openBottomSheet(<InvitationDateTime />);
   };
 
+  // 방문 팁 작성
   const onChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setTip(e.target.value);
   };
-
-  useEffect(() => {
-    const res = getInvitationPlaceList();
-    console.log(res);
-  }, []);
 
   return (
     <>
