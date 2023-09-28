@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 import {
   USER_INVITATIONLIST_TEXT,
   USER_INVITATIONLIST_BUTTON_TEXT,
@@ -6,19 +7,32 @@ import {
 import theme from '@/styles/theme';
 import Modal from '@/components/common/Modal';
 import useModalStore from '@/stores/useModalStore';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
 
 function UserInvitationListEdit() {
   const { title, confirm } = USER_INVITATIONLIST_BUTTON_TEXT;
   const { modalState, openModal } = useModalStore();
+  const { closeBottomSheet } = useBottomSheetStore();
+  const router = useRouter();
+
   const onclickdeleteHandler = () => {
     openModal(`${confirm.title}`, `${confirm.message}`);
+  };
+
+  const onCliskEditHandler = () => {
+    router.push('/invitation/edit');
+    closeBottomSheet();
   };
 
   return (
     <div css={userInvitationListEditStyles}>
       <div css={titleStyles}>{USER_INVITATIONLIST_TEXT.edit}</div>
       <div css={editSheetStyles}>
-        <button type="button" css={editButtonStyles}>
+        <button
+          type="button"
+          css={editButtonStyles}
+          onClick={onCliskEditHandler}
+        >
           {title.edit}
         </button>
         <button
@@ -29,8 +43,9 @@ function UserInvitationListEdit() {
           {title.delete}
         </button>
       </div>
-      {/* 상수처리 하세요 */}
-      {modalState.isOpen && <Modal content="삭제하기" />}
+      {modalState.isOpen && (
+        <Modal content={USER_INVITATIONLIST_BUTTON_TEXT.title.delete} />
+      )}
     </div>
   );
 }
