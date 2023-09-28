@@ -46,10 +46,12 @@ function InvitationPurposeContainer() {
     setEtcPurpose(e.target.value);
   };
 
-  // input 활성화 시 버튼 처리
+  // input 포커스될 때 버튼 숨김
   const onFocusInputHandler = () => {
     setIsFocused(true);
   };
+
+  // input 블러될 때 버튼 활성
   const onBlurInputHandler = () => {
     setTimeout(() => setIsFocused(false), 300);
   };
