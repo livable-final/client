@@ -27,7 +27,6 @@ const containerStyles = (isRow?: boolean) => css`
   display: flex;
   overflow-x: ${isRow ? 'visible' : 'auto'};
   max-width: 100%;
-  padding-right: -16px;
   object-fit: cover;
 `;
 

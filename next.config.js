@@ -29,6 +29,8 @@ const nextConfig = {
     API_BASE_URL: process.env.NEXT_PUBLIC_API_URL,
     WEATHER_API_KEY: process.env.WEATHER_API_KEY,
     WEATHER_BASE_URL: process.env.WEATHER_BASE_URL,
+    MEMBER_TOKEN: process.env.NEXT_MEMBER_TOKEN,
+    VISITOR_TOKEN: process.env.NEXT_VISITOR_TOKEN,
   },
 };
 

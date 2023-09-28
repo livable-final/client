@@ -41,8 +41,8 @@ function Header({
   };
 
   return (
-    <header css={headerStyles(isBg, isCloseOnly)}>
-      {isCloseOnly ? null : <Back onClick={onBackClickHandler} />}
+    <header css={headerStyles(isBg)}>
+      {isCloseOnly ? <div /> : <Back onClick={onBackClickHandler} />}
       <div css={titleStyles}>
         <span>{title}</span>
       </div>

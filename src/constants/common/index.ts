@@ -38,6 +38,11 @@ export const COMMON_CATEGORY_COLORS: CategoryColorsProps = {
     backgroundColor: `${theme.palette.white}`,
     color: `${theme.palette.greyscale.grey40}`,
   },
+  hoveredBlue: {
+    border: `2px solid ${theme.palette.bluescale.blue30}`,
+    backgroundColor: `${theme.palette.white}`,
+    color: `${theme.palette.bluescale.blue30}`,
+  },
 };
 
 // Input box 스타일
@@ -70,6 +75,9 @@ export const COMMON_ERROR_MESSAGE: ErrorTypeProps = {
   test2: '이럴수가메세지',
   name: '이름은 2자 이상입니다.',
   contact: '연락처는 10자 이상입니다.',
+  noPage: '페이지를 찾을 수 없어요',
+  noServer: '네트워크 연결상태를 확인해주세요',
+  back: '이전으로 돌아가기',
 };
 
 // Header
@@ -164,6 +172,14 @@ export const COMMON_CATEGORIES = {
   },
 };
 
+export const COMMON_USER_NAME = [
+  '유희태',
+  '이시우',
+  '김진우',
+  '김준희',
+  '조은상',
+];
+
 // 토글 버튼
 export const COMMON_TOGGLE_TITLE = '종일';
 
@@ -171,7 +187,6 @@ export const COMMON_TOGGLE_TITLE = '종일';
 export const COMMON_MODAL_BUTTONS = {
   confirm: '확인',
   cancel: '취소',
-  send: '전송하기',
 };
 
 export const COMMON_BNB_CONSTANTS = {

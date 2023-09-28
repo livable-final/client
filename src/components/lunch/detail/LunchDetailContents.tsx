@@ -18,7 +18,7 @@ function LunchDetailContents() {
       />
       <div css={reviewStyles}>
         {DUMMY_DATA.map((item) => (
-          <LunchReview key={item.reviewId} {...item} />
+          <LunchReview key={item.reviewId} {...item} noPad />
         ))}
       </div>
     </div>
@@ -42,7 +42,6 @@ const reviewStyles = css`
   align-items: center;
   align-self: stretch;
   background: ${theme.palette.white};
-  padding-right: 16px;
 `;
 
 export default LunchDetailContents;

@@ -84,6 +84,8 @@ import ServiceParking from '@/assets/icons/ServiceParking.svg';
 import ServiceReception from '@/assets/icons/ServiceReception.svg';
 import ServiceTemp from '@/assets/icons/ServiceTemp.svg';
 import ProfileWithBg from '@/assets/icons/ProfileWithBg.svg';
+import Error from '@/assets/icons/Error.svg';
+
 
 export {
   As,
@@ -172,4 +174,5 @@ export {
   ServiceReception,
   ServiceTemp,
   ProfileWithBg,
+  Error,
 };
