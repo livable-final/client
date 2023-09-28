@@ -34,10 +34,12 @@ function InvitationPurposeContainer() {
   const [etcPurpose, setEtcPurpose] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
+  // 방문 목적 카테고리 선택
   const onClickCategoryHandler = (item: CommonCategory) => {
     setSelectedCategory(item.icon);
   };
 
+  // 기타 선택 시 방문 목적 작성
   const onChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => {
@@ -52,7 +54,7 @@ function InvitationPurposeContainer() {
     setTimeout(() => setIsFocused(false), 300);
   };
 
-  // 하단 버튼 클릭 시
+  // 하단 버튼 클릭 핸들러
   const onClickBtnHandler = () => {
     setNextComponent('InvitationVisitorsContainer');
     setHeaderTitle(header[selectedCategory]);

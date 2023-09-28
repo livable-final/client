@@ -32,7 +32,6 @@ function InvitationVisitorsContainer() {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   // 이전 컴포넌트에서 선택한 방문목적 확인
-
   console.log('방문목적 확인 :', createContents.purpose);
 
   // 이름/연락처 입력 받기
