@@ -20,10 +20,16 @@ function HomeServey() {
 }
 
 const containerStyles = css`
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 12px;
   align-self: stretch;
+
+  > svg {
+    width: 36px;
+    height: 36px;
+  }
 `;
 
 const wrapperStyles = css`
