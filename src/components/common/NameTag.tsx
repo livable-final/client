@@ -3,9 +3,9 @@ import { ExitSmall } from '@/assets/icons';
 import { css } from '@emotion/react';
 import { NameTagProps } from '@/types/common/nameTag';
 
-function NameTag({ name, onClick }: NameTagProps) {
+function NameTag({ isInvited = false, name, onClick }: NameTagProps) {
   return (
-    <div css={nameTagContainerStyles(name)}>
+    <div css={nameTagContainerStyles(name, isInvited)}>
       <div css={textStyles}>{name}</div>
       <button type="button" css={iconStyles} onClick={onClick}>
         <ExitSmall />
@@ -14,7 +14,7 @@ function NameTag({ name, onClick }: NameTagProps) {
   );
 }
 
-const nameTagContainerStyles = (name: string) => css`
+const nameTagContainerStyles = (name: string, isInvited: boolean) => css`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +22,9 @@ const nameTagContainerStyles = (name: string) => css`
   width: ${name.length < 3 ? `90px` : name.length > 3 ? `116px` : `103px`};
   height: 42px;
   border-radius: 100px;
-  background-color: ${theme.palette.greyscale.grey5};
+  background-color: ${isInvited
+    ? theme.palette.greyscale.grey10
+    : theme.palette.greyscale.grey5};
 `;
 
 const textStyles = css`
