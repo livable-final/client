@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from 'react';
 const useFetch = <T>({ fetchFn, arg }: FetchProps<T>) => {
   const [response, setResponse] = useState<T>(null as T);
   const [loading, setLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState(false);
 
   const fetchData = useCallback(async () => {
     try {
@@ -14,7 +15,7 @@ const useFetch = <T>({ fetchFn, arg }: FetchProps<T>) => {
       setResponse(data);
       // TODO: 에러 처리 정의 해야함
     } catch (error) {
-      throw new Error();
+      setErrors(true);
     } finally {
       setLoading(false);
     }
@@ -24,7 +25,7 @@ const useFetch = <T>({ fetchFn, arg }: FetchProps<T>) => {
     fetchData();
   }, [fetchData]);
 
-  return { response, loading };
+  return { response, loading, errors };
 };
 
 export default useFetch;
