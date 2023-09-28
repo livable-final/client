@@ -21,6 +21,8 @@ function InvitationVisitorsList({
   const { nextComponent } = useViewStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
 
+  console.log('방문자 리스트 확인', visitorsList);
+
   const onClickHandler = () => {
     openBottomSheet(
       <InvitationAddVisitorList
@@ -38,8 +40,8 @@ function InvitationVisitorsList({
       <div css={listWrapperStyles}>
         {nextComponent !== 'InvitationVisitorsContainer' &&
           visitorsList.length !== 30 && <Add isBlue onClick={onClickHandler} />}
-        {visitorsList.map((name: string) => (
-          <NameTag key={name} name={name} onClick={onClick} />
+        {visitorsList.map((list) => (
+          <NameTag key={list.name} name={list.name} onClick={onClick} />
         ))}
       </div>
       {bottomSheetState.isOpen && <BottomSheet />}
@@ -53,6 +55,7 @@ const containerStyles = css`
   gap: 16px;
   width: 100%;
   max-width: 280px;
+  margin-bottom: 100px;
 
   ${mq.md} {
     max-width: 360px;
