@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Bnb from '@/components/common/Bnb';
 import Title from '@/components/common/Title';
 import HomeContents from '@/components/home/HomeContents';
-import { DUMMY_RESPONSE } from '@/constants/home/homeTexts';
+import useFetch from '@/hooks/useFetch';
+import { getHome } from '@/pages/api/home/homeRequests';
+import useIdStore from '@/stores/useIdStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
@@ -9,14 +12,23 @@ import usePagesStore from '@/stores/usePagesStore';
 
 function Home() {
   const { reset } = usePagesStore();
+  const { idList, setIdList } = useIdStore();
+  const { response } = useFetch({
+    fetchFn: getHome,
+  });
 
-  useEffect(() => reset(), [reset]);
+  useEffect(() => {
+    reset();
+    if (response?.data.buildingId) {
+      setIdList({ ...idList, buildingId: response?.data.buildingId });
+    }
+  }, [response?.data.buildingId, setIdList, reset]);
 
   return (
     <>
-      <Title title={DUMMY_RESPONSE.buildingName} part="main" isMain />
+      <Title title={response?.data.buildingName} part="main" isMain />
       <div css={containerStyles}>
-        <HomeContents />
+        <HomeContents hasCafeteria={response?.data.hasCafeteria} />
       </div>
       <Bnb />
     </>
