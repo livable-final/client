@@ -1,33 +1,27 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
-import Image from 'next/image';
-import { DUMMY_RESPONSE } from '@/constants/user/userTexts';
 import UserPoint from '@/components/user/UserPoint';
 import { ProfileWithBg } from '@/assets/icons';
+import useFetch from '@/hooks/useFetch';
+import { getMyData } from '@/pages/api/home/homeRequests';
 
 function UserInfo() {
-  const response = DUMMY_RESPONSE;
-
-  // 서버로부터 프로필이미지를 전달받으면 그대로 이미지 출력, 존재하지 않는다면 더미이미지를 출력하는 함수
-  const renderProfileImg = (item: string) => {
-    if (item === '') {
-      return <ProfileWithBg />;
-    }
-    return <Image src={response.profileImage} alt="프로필" />;
-  };
+  const { response } = useFetch({
+    fetchFn: getMyData,
+  });
 
   return (
     <div css={containerStyles}>
       <div css={profileStyles}>
         <div css={profileImgStyles}>
-          {renderProfileImg(response.profileImage)}
+          <ProfileWithBg />
         </div>
         <div css={wrapperStyles}>
-          <span css={nameStyles}>{response.employeeName}님</span>
-          <span css={companyStyles}>{response.companyName}</span>
+          <span css={nameStyles}>{response?.data.memberName}님</span>
+          <span css={companyStyles}>{response?.data.companyName}</span>
         </div>
       </div>
-      <UserPoint point={response.point} />
+      <UserPoint point={response?.data.pointValance} />
     </div>
   );
 }
