@@ -87,7 +87,6 @@ import ProfileWithBg from '@/assets/icons/ProfileWithBg.svg';
 import Error from '@/assets/icons/Error.svg';
 import My from '@/assets/icons/My.svg';
 
-
 export {
   As,
   Back,

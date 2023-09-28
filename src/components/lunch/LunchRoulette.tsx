@@ -18,6 +18,7 @@ function LunchRoulette() {
   const [isChecked, setIsChecked] = useState(false);
   const [isShown, setIsShown] = useState(false);
   const { time, content } = ROULETTE_CONSTANTS;
+
   const { response } = useFetch({
     fetchFn: getMenus,
   });

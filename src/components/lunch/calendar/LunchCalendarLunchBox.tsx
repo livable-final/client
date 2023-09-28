@@ -30,6 +30,15 @@ function LunchCalendarLunchBox() {
       // isSave.PhotoMsg가 참일 때
     }
   };
+
+  const onChangeHandler = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setSearchText(e.target.value);
+  };
+
   return (
     <section>
       <Header title={category.cafeteria.text} onClick={onClickHeaderHandler} />
@@ -41,7 +50,7 @@ function LunchCalendarLunchBox() {
           placeholder={category.eatOut.placeholder}
           maxLength={299}
           value={searchText}
-          setValue={setSearchText}
+          onChange={onChangeHandler}
         />
       </div>
       <LunchCalendarPhoto />
