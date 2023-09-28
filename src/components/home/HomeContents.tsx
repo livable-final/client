@@ -1,15 +1,13 @@
 import { css } from '@emotion/react';
 import Banner from '@/components/common/Banner';
 import HomeBulletin from '@/components/home/bulletin';
-import { DUMMY_RESPONSE } from '@/constants/home/homeTexts';
 import HomeCafeteria from '@/components/home/cafeteria';
 import HomeService from '@/components/home/service';
 import HomeReception from '@/components/home/reception';
 import HomeServey from '@/components/home/HomeServey';
+import { HomeHasCafeteriaProps } from '@/types/home';
 
-function HomeContents() {
-  const { hasCafeteria } = DUMMY_RESPONSE;
-
+function HomeContents({ hasCafeteria }: HomeHasCafeteriaProps) {
   return (
     <div css={containerStyles}>
       <HomeBulletin />

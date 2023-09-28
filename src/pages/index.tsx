@@ -6,6 +6,7 @@ import Home from '@/components/home';
 import COMPONENT_NAME from '@/constants/common/pages';
 import { useEffect, useState } from 'react';
 import Title from '@/components/common/Title';
+import useSaveStore from '@/stores/useSaveStore';
 
 function Main() {
   const { nextComponent } = usePagesStore();
@@ -13,14 +14,17 @@ function Main() {
   const [userToken, setUserToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('user');
+    const token = useSaveStore.getState().user;
+
     setUserToken(token);
   }, []);
 
+  // store nextComponent가 home이거나 유효한 토큰값이 있을 때, Home 컴포넌트 렌더
   if (nextComponent === home || userToken) {
     return <Home />;
   }
 
+  // 로그인 컴포넌트 렌더
   return (
     <div css={containerStyles}>
       <Title title="로그인" part="login" />

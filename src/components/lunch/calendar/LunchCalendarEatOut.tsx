@@ -34,6 +34,14 @@ function LunchCalenderEatOut() {
     }
   };
 
+  const onChangeHandler = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setSearchText(e.target.value);
+  };
+
   return (
     <section>
       <Header title={category.eatOut.text} onClick={onClickHeaderHandler} />
@@ -67,7 +75,7 @@ function LunchCalenderEatOut() {
           placeholder={category.eatOut.placeholder}
           maxLength={299}
           value={searchText}
-          setValue={setSearchText}
+          onChange={onChangeHandler}
         />
       </div>
       <LunchCalendarPhoto />

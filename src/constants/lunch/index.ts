@@ -123,3 +123,21 @@ export const LUNCH_MAIN_CONSTANTS = {
     photoHeight: 80,
   },
 };
+
+// 오늘 점심 룰렛 상수
+export const ROULETTE_CONSTANTS = {
+  time: {
+    interval: 100,
+    duration: {
+      category: 3500,
+      menu: 500,
+      fixed: 3000,
+    },
+  },
+  content: {
+    button: '돌려돌려 돌림판',
+  },
+  error: {
+    response: { menuId: 0, name: '결과가 없습니다.' },
+  },
+};

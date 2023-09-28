@@ -2,54 +2,48 @@ import theme from '@/styles/theme';
 import { RadioBtnProps } from '@/types/common/radioBtn';
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { Check, UnCheck } from '@/assets/icons';
+import { CheckOn, UnCheck } from '@/assets/icons';
 
 function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
   const [selectData, setSelectData] = useState(list[0]);
   const [etcValue, setEtcValue] = useState('');
   const [isCheck, setIsCheck] = useState(false);
-
   const onChangeRadioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     setSelectData(event.target.value);
   };
-
   const onFocusHandler = () => {
     setIsCheck(true);
     setSelectData(etcValue);
   };
-
   const onBlurHandler = () => setIsCheck(false);
-
   const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     setEtcValue(event.target.value);
     setSelectData(event.target.value);
   };
   return (
     <div css={radioContainerStyles}>
-      {list.map((item) => (
-        <div key={item} css={itemStyles}>
-          <input
-            id={item}
-            type="radio"
-            name={name}
-            value={item}
-            checked={selectData === item}
-            onChange={onChangeRadioHandler}
-            readOnly
-            css={radioInputStyles}
-          />
-          <label htmlFor={item} key={item} css={labelStyles}>
-            <div css={btnImgStyles}>
-              {selectData === item ? <Check /> : <UnCheck />}
-            </div>
-            <div>
-              <p>{item}</p>
-            </div>
-          </label>
-        </div>
-      ))}
+      {list.map((item) => {
+        // console.log(selectData === item);
+        return (
+          <div key={item} css={itemStyles}>
+            <label css={labelStyles}>
+              <input
+                type="radio"
+                name={name}
+                value={item}
+                onChange={onChangeRadioHandler}
+                css={radioInputStyles}
+              />
+              <div css={btnImgStyles}>
+                {selectData === item ? <CheckOn /> : <UnCheck />}
+              </div>
+              <div>
+                <p>{item}</p>
+              </div>
+            </label>
+          </div>
+        );
+      })}
       {/* 직접 입력 */}
       <div
         role="presentation"
@@ -57,20 +51,19 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
         onBlur={onBlurHandler}
         css={itemStyles}
       >
-        <input
-          id={etcValue}
-          type="radio"
-          name={name}
-          value={etcValue}
-          checked={isCheck}
-          readOnly
-          css={radioInputStyles}
-        />
-        <label htmlFor={etcValue} css={labelStyles}>
+        <label css={labelStyles}>
+          <input
+            type="radio"
+            name={name}
+            value={etcValue}
+            checked={isCheck}
+            readOnly
+            css={radioInputStyles}
+          />
           <div css={btnImgStyles}>
             {isCheck ? (
               <div css={icon}>
-                <Check />
+                <CheckOn />
               </div>
             ) : (
               <div css={icon}>
@@ -92,15 +85,12 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
     </div>
   );
 }
-
 export default RadioBtn;
-
 const radioContainerStyles = css`
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 100%;
-
   span {
     color: ${theme.palette.greyscale.grey40};
   }
@@ -108,14 +98,11 @@ const radioContainerStyles = css`
     line-height: 1.4em;
   }
 `;
-
 const itemStyles = css`
   width: 100%;
 `;
-
 const radioInputStyles = css`
   display: none;
-
   &:checked + label {
     color: ${theme.palette.primary};
     p {
@@ -123,27 +110,23 @@ const radioInputStyles = css`
     }
   }
 `;
-
 const btnImgStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   flex-grow: 0;
 `;
-
 const icon = css`
-  width: 100%;
-  height: 100%;
+  width: 24px;
+  height: 24px;
 `;
-
 const labelStyles = css`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 `;
-
 const inputWrapper = css`
   display: flex;
   flex-direction: column;

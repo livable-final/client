@@ -1,9 +1,6 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import {
-  ROULETTE_CONSTANTS,
-  DUMMY_RESPONSE,
-} from '@/constants/lunch/rouletteTexts';
+import { ROULETTE_CONSTANTS } from '@/constants/lunch';
 import Button from '@/components/common/Button';
 import {
   findRandomMenus,
@@ -11,14 +8,20 @@ import {
   selectRandomMenus,
 } from '@/utils/selectRandomItem';
 import theme from '@/styles/theme';
+import useFetch from '@/hooks/useFetch';
+import { getMenus } from '@/pages/api/lunch/lunchRequests';
 
-function Roulette() {
+function LunchRoulette() {
   const [categoryState, setCategoryState] = useState('카테고리'); // 랜덤 카테고리명
   const [menuState, setMenuState] = useState('메뉴'); // 랜덤 메뉴명
   const [menuIdState, setMenuIdState] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
   const [isShown, setIsShown] = useState(false);
   const { time, content } = ROULETTE_CONSTANTS;
+
+  const { response } = useFetch({
+    fetchFn: getMenus,
+  });
 
   // 버튼 클릭 시 카테고리와 메뉴를 셔플하는 함수
   const onClickHandler = () => {
@@ -27,7 +30,7 @@ function Roulette() {
     if (isChecked) {
       // 메뉴만 랜덤하게 변경
       const menuInterval = setInterval(() => {
-        const menus = findRandomMenus(DUMMY_RESPONSE, categoryState);
+        const menus = findRandomMenus(categoryState, response.data);
         const { name, menuId } = menus; // 랜덤 메뉴의 ID
         setMenuState(name);
         setMenuIdState(menuId);
@@ -43,7 +46,7 @@ function Roulette() {
     } else {
       // 체크박스가 체크되지 않았을 때
       const categoryInterval = setInterval(() => {
-        const category = selectRandomCategory(DUMMY_RESPONSE);
+        const category = selectRandomCategory(response.data);
         const { categoryName } = category;
         setCategoryState(categoryName);
 
@@ -129,4 +132,4 @@ const inputStyles = css`
   max-width: 40px;
 `;
 
-export default Roulette;
+export default LunchRoulette;

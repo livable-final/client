@@ -34,7 +34,7 @@ function Bnb() {
         return (
           <Icons
             color={isActive ? greyscale.grey60 : greyscale.grey30}
-            icon={bnb.home.icon}
+            icon={bnb.user.icon}
           />
         );
       default:

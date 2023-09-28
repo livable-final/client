@@ -25,12 +25,20 @@ function LunchCalendarCafeteria() {
   const onClickHeaderHandler = () => {
     setNextComponent('LunchCalendarReview');
   };
+
   const onClickBtnHandler = () => {
     if (!isSave.PhotoMsg) {
       openBottomSheet(<LunchCalendarBottomSheet />);
     } else {
       // isSave.PhotoMsg가 참일 때, 바로 작성완료 로직
     }
+  };
+  const onChangeHandler = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setSearchText(e.target.value);
   };
 
   return (
@@ -52,7 +60,7 @@ function LunchCalendarCafeteria() {
           placeholder={category.eatOut.placeholder}
           maxLength={299}
           value={searchText}
-          setValue={setSearchText}
+          onChange={onChangeHandler}
         />
       </div>
       <LunchCalendarPhoto />

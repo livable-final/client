@@ -29,7 +29,8 @@ function UserInvitationListEdit() {
           {title.delete}
         </button>
       </div>
-      {modalState.isOpen && <Modal isConfirm />}
+      {/* 상수처리 하세요 */}
+      {modalState.isOpen && <Modal content="삭제하기" />}
     </div>
   );
 }
