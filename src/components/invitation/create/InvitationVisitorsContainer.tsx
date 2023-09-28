@@ -22,6 +22,7 @@ function InvitationVisitorsContainer() {
   const { createContents, setCreateContents } = useInvitationCreateStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
 
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [visitorInfo, setVisitorInfo] = useState({ name: '', contact: '' });
   const [visitorsList, setVisitorList] = useState<VisitorInfo[]>([
     {
@@ -29,12 +30,11 @@ function InvitationVisitorsContainer() {
       contact: '01012345678',
     },
   ]);
-  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   // 이전 컴포넌트에서 선택한 방문목적 확인
   console.log('방문목적 확인 :', createContents.purpose);
 
-  // 이름/연락처 입력 받기
+  // 이름/연락처 입력
   const onChangeInfoHandler = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => {
