@@ -11,7 +11,9 @@ import {
 } from '@/types/invitation/edit';
 
 function InvitationAddVisitorList({
+  setVisitorList,
   visitorsList,
+  isEdit,
 }: InvitationAddVisitorListProps) {
   const [addVisitorName, setAddVisitorName] = useState('');
   const [addVisitorContact, setAddVisitorContact] = useState('');
@@ -23,10 +25,15 @@ function InvitationAddVisitorList({
       name,
       contact,
     };
-    setAddVisitorList([...addVisitorList, newVistorName]);
+    if (isEdit) {
+      setAddVisitorList([...addVisitorList, newVistorName]);
+    } else if (setVisitorList && visitorsList) {
+      setVisitorList([...visitorsList, newVistorName]);
+    }
     setAddVisitorName('');
     setAddVisitorContact('');
   };
+
   // 추가 사용자 입력값
   const onChangeInputNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddVisitorName(e.target.value);
