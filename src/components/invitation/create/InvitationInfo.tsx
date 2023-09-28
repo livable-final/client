@@ -3,20 +3,8 @@ import CheckBox from '@/components/common/CheckBox';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationPlace from '@/components/invitation/create/InvitationPlace';
 import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
-import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import useFetch from '@/hooks/useFetch';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import theme from '@/styles/theme';
-import mq from '@/utils/mediaquery';
-import { css } from '@emotion/react';
-import { Location, Calendar, Clock } from '@/assets/icons';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { InvitationCreateTexts } from '@/types/invitation/create';
-import { GetInvitationPlaceData } from '@/types/invitation/api';
-import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 
 function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
-  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { title, placeholder, checkbox }: InvitationCreateTexts = CREATE_TEXTS;
   const [tip, setTip] = useState<string>('');
   const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
@@ -32,12 +20,12 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
     setPlaceList(response?.data);
   }, [response]);
 
-  // 장소 선택 컴포넌트
+  // 장소 선택 바텀시트 오픈
   const onClickPlaceHandler = () => {
     openBottomSheet(<InvitationPlace placeList={placeList} />);
   };
 
-  // 날짜/시간 선택 컴포넌트
+  // 날짜/시간 선택 바텀시트 오픈
   const onClickDateTimeHandler = () => {
     openBottomSheet(<InvitationDateTime />);
   };
@@ -51,7 +39,7 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
 
   return (
     <>
-      <div css={containerStyles}>
+      <div css={infoContainerStyles}>
         <div css={titleStyles}>{title.invitationInfo}</div>
         <div css={inputContainerStyles}>
           {/* 장소 선택 */}
@@ -115,7 +103,7 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
   );
 }
 
-const containerStyles = css`
+const infoContainerStyles = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
