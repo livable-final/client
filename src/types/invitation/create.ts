@@ -1,19 +1,4 @@
-// 방문자 초대장 중 초대장 생성 파트 타입 선언 //
-
-// 초대장 저장(생성) API 요청
-export interface PostInvitationAPI {
-  purpose: string;
-  commonPlaceId: number | null;
-  officeName: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  visitors: InvitationVisitorsAPI[];
-}
-
-export interface InvitationVisitorsAPI {
-  [key: string]: string;
-}
+import { VisitorInfo } from '@/types/invitation/api';
 
 // 텍스트 상수
 export interface InvitationCreateTexts {
@@ -60,7 +45,7 @@ export interface CommonCategory {
 
 // 방문자 리스트
 export interface InvitationVisitorsListProps {
-  visitorsList: string[];
+  visitorsList: VisitorInfo[];
   onClick: () => void;
 }
 
