@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import { NewVisitorsList } from '@/types/invitation/edit';
 import { Clock, Calendar, Location } from '@/assets/icons';
 import { INVITATION_EDIT_TEXTS } from '@/constants/invitation/editTexts';
 import theme from '@/styles/theme';
@@ -11,6 +12,7 @@ import CheckBox from '@/components/common/CheckBox';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import InvitationEditvisitorAdd from '@/components/invitation/edit/InvitationAddVisitorList';
 import BottomSheet from '@/components/common/BottomSheet';
+import Button from '@/components/common/Button';
 
 const data = {
   commonPlaceId: null,
@@ -47,10 +49,41 @@ const data = {
       name: '김길동',
       contact: '01012345678',
     },
+    {
+      visitorId: 6,
+      name: '김길동',
+      contact: '01012345678',
+    },
+    {
+      visitorId: 7,
+      name: '김길동',
+      contact: '01012345678',
+    },
+    {
+      visitorId: 8,
+      name: '김길동',
+      contact: '01012345678',
+    },
+    {
+      visitorId: 9,
+      name: '김길동',
+      contact: '01012345678',
+    },
+    {
+      visitorId: 10,
+      name: '김길동',
+      contact: '01012345678',
+    },
+    {
+      visitorId: 11,
+      name: '김길동',
+      contact: '01012345678',
+    },
   ],
 };
 function InvitationEdit() {
   const [editValue, setEditValue] = useState('');
+  const [addVisitorList, setAddVisitorList] = useState<NewVisitorsList[]>([]);
   const { openBottomSheet } = useBottomSheetStore();
   const dateValue = `${data.startDate} ~ ${data.endDate}`;
   const timeValue = `${data.startTime.substring(
@@ -67,62 +100,91 @@ function InvitationEdit() {
     setEditValue(e.target.value);
   };
   const onClickVisitorAddHandler = () => {
-    openBottomSheet(<InvitationEditvisitorAdd />);
+    openBottomSheet(
+      <InvitationEditvisitorAdd
+        isEdit
+        visitorsList={addVisitorList}
+        setVisitorList={setAddVisitorList}
+      />,
+    );
   };
   return (
-    <div>
+    <div css={invitationEditStyles}>
       <Header
         title={INVITATION_EDIT_TEXTS.title}
         onClick={onClickHandler}
         type="text"
         text="회의"
       />
-      <div css={subTitleStyles}>{INVITATION_EDIT_TEXTS.subTitle}</div>
-      <div css={inputContainerStyles}>
-        <div css={officeInfoContainerStyles}>
-          <div css={iconStyles}>
-            <Location />
-          </div>
-          <input type="text" value={data.officeName} readOnly />
-        </div>
-        <div css={dateTimeContainerStyles}>
-          <div css={dateTimeStyles}>
+      <div css={invitationEditContantsContainerStyles}>
+        <div css={subTitleStyles}>{INVITATION_EDIT_TEXTS.subTitle}</div>
+        <div css={inputContainerStyles}>
+          <div css={officeInfoContainerStyles}>
             <div css={iconStyles}>
-              <Calendar />
+              <Location />
             </div>
-            <input type="text" value={dateValue} readOnly />
+            <input type="text" value={data.officeName} readOnly />
           </div>
-          <div css={dateTimeStyles}>
-            <div css={iconStyles}>
-              <Clock />
+          <div css={dateTimeContainerStyles}>
+            <div css={dateTimeStyles}>
+              <div css={iconStyles}>
+                <Calendar />
+              </div>
+              <input type="text" value={dateValue} readOnly />
             </div>
-            <input type="text" value={timeValue} readOnly />
+            <div css={dateTimeStyles}>
+              <div css={iconStyles}>
+                <Clock />
+              </div>
+              <input type="text" value={timeValue} readOnly />
+            </div>
           </div>
+          <Input
+            textarea
+            variant="default"
+            value={editValue}
+            onChange={onClickEditTextHandler}
+          />
+          <CheckBox text="이 메세지를 다음에도 사용" />
         </div>
-        <Input
-          textarea
-          variant="default"
-          value={editValue}
-          onChange={onClickEditTextHandler}
-        />
-        <CheckBox text="이 메세지를 다음에도 사용" />
-      </div>
-      <div css={visitorListContainerStyles}>
-        <Add isBlue onClick={onClickVisitorAddHandler} />
-        <div css={ivitedVisitorListContainerStyles}>
-          {visitorname.map((item) => (
-            <NameTag
-              key={item.visitorId}
-              name={item.name}
-              onClick={onClickHandler}
-            />
-          ))}
+        <div css={visitorListContainerStyles}>
+          <div css={addVisitorListstyleStyle}>
+            <Add isBlue onClick={onClickVisitorAddHandler} />
+            {addVisitorList.map((item) => (
+              <NameTag
+                key={item.contact}
+                name={item.name}
+                onClick={onClickHandler}
+              />
+            ))}
+          </div>
+          <div css={ivitedVisitorListContainerStyles}>
+            {visitorname.map((item) => (
+              <NameTag
+                key={item.visitorId}
+                name={item.name}
+                onClick={onClickHandler}
+                isInvited
+              />
+            ))}
+          </div>
         </div>
       </div>
       <BottomSheet />
+      <div css={invitationEditSubmitBtnStlyes}>
+        <Button content="초대장 다시보내기" variant="blue" />
+      </div>
     </div>
   );
 }
+const invitationEditStyles = css`
+  position: relative;
+  height: 100vh;
+`;
+const invitationEditContantsContainerStyles = css`
+  height: 82vh;
+  overflow: scroll;
+`;
 const subTitleStyles = css`
   color: ${theme.palette.title};
   font: ${theme.font.subTitle.subTitle1_600};
@@ -172,11 +234,22 @@ const iconStyles = css`
 const visitorListContainerStyles = css`
   margin-top: 40px;
 `;
+const addVisitorListstyleStyle = css`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 0 8px;
+`;
 const ivitedVisitorListContainerStyles = css`
   display: flex;
   flex-direction: row;
   gap: 8px 8px;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin: 20px 0 54px;
 `;
+const invitationEditSubmitBtnStlyes = css`
+  position: sticky;
+  bottom: 0;
+`;
+
 export default InvitationEdit;

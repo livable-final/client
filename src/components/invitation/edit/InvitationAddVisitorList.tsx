@@ -3,8 +3,10 @@ import { INVITATION_EDIT_TEXTS } from '@/constants/invitation/editTexts';
 import { useState } from 'react';
 import theme from '@/styles/theme';
 import Add from '@/components/common/Add';
+import Button from '@/components/common/Button';
 import NameTag from '@/components/common/NameTag';
 import AddressBook from '@/components/common/AddressBook';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import {
   NewVisitorsList,
   InvitationAddVisitorListProps,
@@ -13,28 +15,17 @@ import {
 function InvitationAddVisitorList({
   setVisitorList,
   visitorsList,
-  isEdit,
+  isEdit = true,
 }: InvitationAddVisitorListProps) {
   const [addVisitorName, setAddVisitorName] = useState('');
   const [addVisitorContact, setAddVisitorContact] = useState('');
   const [addVisitorList, setAddVisitorList] = useState<NewVisitorsList[]>([]);
+  const { closeBottomSheet } = useBottomSheetStore();
 
+  // 삭제로직 추가 예정
   const onClickHandler = () => {};
-  const onClickAddHandler = (name: string, contact: string): void => {
-    const newVistorName = {
-      name,
-      contact,
-    };
-    if (isEdit) {
-      setAddVisitorList([...addVisitorList, newVistorName]);
-    } else if (setVisitorList && visitorsList) {
-      setVisitorList([...visitorsList, newVistorName]);
-    }
-    setAddVisitorName('');
-    setAddVisitorContact('');
-  };
 
-  // 추가 사용자 입력값
+  // 추가 사용자 inupt handler
   const onChangeInputNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddVisitorName(e.target.value);
   };
@@ -43,6 +34,42 @@ function InvitationAddVisitorList({
   ) => {
     setAddVisitorContact(e.target.value);
   };
+
+  // 바텀시트에서 추가한 새로운 visitorLsit
+  const newVistorList = (name: string, contact: string): void => {
+    // 새로 추가할 visitor 객체
+    const newVistorName = {
+      name,
+      contact,
+    };
+    // 수정에서 바텀시트로 들어왔을때 로직
+    if (isEdit) {
+      setAddVisitorList([...addVisitorList, newVistorName]);
+    } else if (setVisitorList && visitorsList) {
+      setVisitorList([...visitorsList, newVistorName]);
+    }
+    // input창 clear
+    setAddVisitorName('');
+    setAddVisitorContact('');
+  };
+
+  const onClickAddHandler = () => {
+    newVistorList(addVisitorName, addVisitorContact);
+  };
+
+  const addVisitorLsit = (
+    setNewList: React.Dispatch<React.SetStateAction<NewVisitorsList[]>>,
+    newList: NewVisitorsList[],
+  ) => {
+    // props로 받아온 기존 visitorList에 새로운 visitor 추가
+    setNewList(newList);
+    // 바텀시트 clsoe
+    closeBottomSheet();
+  };
+  const onclickDoneBtnHandler = () => {
+    if (setVisitorList) addVisitorLsit(setVisitorList, addVisitorList);
+  };
+
   return (
     <div css={invitationEditVisitorAddStyles}>
       <div css={titleStyles}>{INVITATION_EDIT_TEXTS.bottomSheet.title}</div>
@@ -66,13 +93,10 @@ function InvitationAddVisitorList({
         </div>
         <div css={visitorListContainerStyles}>
           <div css={newVisitorAddBtnStyles}>
-            <Add
-              onClick={() => {
-                onClickAddHandler(addVisitorName, addVisitorContact);
-              }}
-            />
+            <Add onClick={onClickAddHandler} />
           </div>
           <div css={newVisitorListStyles}>
+            {/* props로 가져온 기존 visitorLsit */}
             {visitorsList &&
               visitorsList.map((item) => (
                 <NameTag
@@ -81,6 +105,7 @@ function InvitationAddVisitorList({
                   onClick={onClickHandler}
                 />
               ))}
+            {/* 새롭게 추가한 visitorLsit */}
             {addVisitorList &&
               addVisitorList.map((item) => (
                 <NameTag
@@ -92,6 +117,11 @@ function InvitationAddVisitorList({
           </div>
         </div>
       </div>
+      <Button
+        content={INVITATION_EDIT_TEXTS.bottomSheet.contact}
+        variant="blue"
+        onClick={onclickDoneBtnHandler}
+      />
     </div>
   );
 }
@@ -101,6 +131,7 @@ const invitationEditVisitorAddStyles = css`
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding-bottom: 54px;
 `;
 const titleStyles = css`
   margin: 4px auto 44px;
