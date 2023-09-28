@@ -189,6 +189,9 @@ const calendarStyles = css`
         color: ${theme.palette.white};
         opacity: 0.8;
       }
+      .react-datepicker__day--disabled {
+        color: ${theme.palette.greyscale.grey30};
+      }
     }
     .react-datepicker__day {
       display: flex;
