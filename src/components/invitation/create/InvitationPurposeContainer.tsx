@@ -7,6 +7,7 @@ import Button from '@/components/common/Button';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useViewStore from '@/stores/usePagesStore';
 import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import { ChangeEvent, useState } from 'react';
 import { css } from '@emotion/react';
 import { COMMON_CATEGORIES } from '@/constants/common';
@@ -19,6 +20,7 @@ import {
 function InvitationPurposeContainer() {
   const { setNextComponent } = useViewStore();
   const { setHeaderTitle } = useInvitationHeaderTitleStore();
+  const { setCreateContents } = useInvitationCreateStore();
   const { invitation }: CategoryInvitation = COMMON_CATEGORIES;
   const {
     header,
@@ -42,18 +44,22 @@ function InvitationPurposeContainer() {
     setEtcPurpose(e.target.value);
   };
 
-  // input 활성화 시 버튼 숨김 처리
+  // input 활성화 시 버튼 처리
   const onFocusInputHandler = () => {
     setIsFocused(true);
   };
-
   const onBlurInputHandler = () => {
     setTimeout(() => setIsFocused(false), 300);
   };
 
+  // 하단 버튼 클릭 시
   const onClickBtnHandler = () => {
     setNextComponent('InvitationVisitorsContainer');
     setHeaderTitle(header[selectedCategory]);
+    setCreateContents(
+      'purpose',
+      selectedCategory === 'etc' ? etcPurpose : selectedCategory,
+    );
   };
 
   return (
