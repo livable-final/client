@@ -1,23 +1,23 @@
-import { ROULETTE_CONSTANTS } from '@/constants/lunch';
-import { GetMenusProps } from '@/types/lunch/response';
+import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
+import { GetMenusData } from '@/types/lunch/api';
 import getRandomNumber from '@/utils/getRandomNumber';
 
-const selectRandomCategory = (response: GetMenusProps[]) => {
+const selectRandomCategory = (response: GetMenusData[]) => {
   const categoryIdx = getRandomNumber(response.length);
   return response[categoryIdx];
 };
 
-const selectRandomMenus = (category: GetMenusProps) => {
+const selectRandomMenus = (category: GetMenusData) => {
   const randomIdx = getRandomNumber(category.menus.length);
   return category.menus[randomIdx];
 };
 
-const findRandomMenus = (categoryName: string, response?: GetMenusProps[]) => {
+const findRandomMenus = (categoryName: string, response?: GetMenusData[]) => {
   const result = response?.find((item) => item.categoryName === categoryName);
   if (result) {
     return selectRandomMenus(result);
   }
-  return ROULETTE_CONSTANTS.error.response;
+  return LUNCH_ROULETTE_CONSTANTS.error.response;
 };
 
 export { selectRandomCategory, selectRandomMenus, findRandomMenus };
