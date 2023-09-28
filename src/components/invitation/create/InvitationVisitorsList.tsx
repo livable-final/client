@@ -4,6 +4,7 @@ import BottomSheet from '@/components/common/BottomSheet';
 import useViewStore from '@/stores/usePagesStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import InvitationAddVisitorList from '@/components/invitation/edit/InvitationAddVisitorList';
 import mq from '@/utils/mediaquery';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
@@ -21,7 +22,11 @@ function InvitationVisitorsList({
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
 
   const onClickHandler = () => {
-    openBottomSheet('방문자 추가 컴포넌트');
+    openBottomSheet(
+      <InvitationAddVisitorList
+      // visitorsList={visitorsList} type이 달라서 지금 오류나는 상태라 주석 처리합니다!
+      />,
+    );
   };
 
   return (
