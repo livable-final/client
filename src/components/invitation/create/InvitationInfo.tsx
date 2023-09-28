@@ -9,8 +9,9 @@ import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { Location, Calendar, Clock } from '@/assets/icons';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
+import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 
 function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
@@ -30,6 +31,11 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
   ) => {
     setTip(e.target.value);
   };
+
+  useEffect(() => {
+    const res = getInvitationPlaceList();
+    console.log(res);
+  }, []);
 
   return (
     <>
