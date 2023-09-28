@@ -1,11 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-hooks/exhaustive-deps */
 import Bnb from '@/components/common/Bnb';
 import Title from '@/components/common/Title';
 import HomeContents from '@/components/home/HomeContents';
-import useFetch from '@/hooks/useFetch';
-import { getHome } from '@/pages/api/home/homeRequests';
-import useIdStore from '@/stores/useIdStore';
 import useFetch from '@/hooks/useFetch';
 import { getHome } from '@/pages/api/home/homeRequests';
 import useIdStore from '@/stores/useIdStore';
@@ -31,9 +27,7 @@ function Home() {
   return (
     <>
       <Title title={response?.data.buildingName} part="main" isMain />
-      <Title title={response?.data.buildingName} part="main" isMain />
       <div css={containerStyles}>
-        <HomeContents hasCafeteria={response?.data.hasCafeteria} />
         <HomeContents hasCafeteria={response?.data.hasCafeteria} />
       </div>
       <Bnb />
