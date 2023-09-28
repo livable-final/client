@@ -157,7 +157,6 @@ const CalendarStyles = css`
     border: 1px solid #a0a096;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
-
   }
 
   .react-calendar--doubleView {

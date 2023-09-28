@@ -15,16 +15,11 @@ function Input({
   errorType,
   row = 2,
   maxLength = 7,
-  setValue,
   value,
+  onChange,
+  name,
 }: InputProps) {
   const variantData = COMMON_INPUT_COLORS[variant];
-
-  const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setValue(e.target.value);
-
-  const onChangeTextAreaHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setValue(e.target.value);
 
   return (
     <div css={inputContainerStyles}>
@@ -38,7 +33,7 @@ function Input({
               name="content"
               placeholder={placeholder}
               value={value}
-              onChange={onChangeTextAreaHandler}
+              onChange={onChange}
               cols={30}
               rows={row}
               css={inputTextareaStyles(variantData)}
@@ -50,21 +45,21 @@ function Input({
             </div>
           </div>
         ) : (
-          // input defalt
+          // input default
           <input
+            name={name}
             type="text"
             placeholder={placeholder}
             value={value}
-            onChange={onChangeInputHandler}
+            onChange={onChange}
             css={inputStyles}
             disabled={isDisabled}
+            maxLength={maxLength}
           />
         )}
       </div>
       {/* error meassage 필요한 경우 */}
-      {isError && value.length <= 0 ? (
-        <ErrorMessage errorType={errorType} />
-      ) : null}
+      {isError && value !== '' && <ErrorMessage errorType={errorType} />}
     </div>
   );
 }

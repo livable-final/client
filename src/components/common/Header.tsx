@@ -53,9 +53,9 @@ function Header({
   );
 }
 
-const headerStyles = (isBg: boolean) => css`
+const headerStyles = (isBg: boolean, isCloseOnly: boolean) => css`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: ${isCloseOnly ? '1fr auto auto' : '1fr auto 1fr'};
   align-items: center;
   width: 100%;
   min-width: 280px;
