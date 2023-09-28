@@ -5,11 +5,13 @@ import AddressBook from '@/components/common/AddressBook';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useViewStore from '@/stores/usePagesStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { ChangeEvent, useState } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
+import { VisitorInfo } from '@/types/invitation/api';
 import {
   checkValidationName,
   checkValidationContact,
@@ -17,47 +19,58 @@ import {
 
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
+  const { createContents, setCreateContents } = useInvitationCreateStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
 
   const [visitorInfo, setVisitorInfo] = useState({ name: '', contact: '' });
+  const [visitorsList, setVisitorList] = useState<VisitorInfo[]>([
+    {
+      name: '김방문',
+      contact: '01012345678',
+    },
+  ]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  // API 연동 후 삭제
-  const [visitorsList, setVisitorList] = useState<string[]>([]);
+  // 이전 컴포넌트에서 선택한 방문목적 확인
+
+  console.log('방문목적 확인 :', createContents.purpose);
 
   // 이름/연락처 입력 받기
   const onChangeInfoHandler = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    const { name: inputName, value } = e.target;
+    const { name: infoType, value } = e.target;
 
     setVisitorInfo({
       ...visitorInfo,
-      [inputName]: value,
+      [infoType]: value,
     });
   };
 
+  // 방문자 추가 버튼 핸들러
   const onClickAddVisitorHandler = () => {
-    // 눌렀을 때 추가 로직 필요
-    setVisitorList([...visitorsList, visitorInfo.name]);
+    setVisitorList([...visitorsList, visitorInfo]);
   };
 
+  // 방문자 삭제 버튼 핸들러
   const onClickDeleteVisitorHandler = () => {
-    // 눌렀을 때 삭제 로직 필요
     visitorsList.pop();
   };
 
-  // input 활성화 시 버튼 숨김 처리
+  // input 포커스될 때 버튼 숨김
   const onFocusInputHandler = () => {
     setIsFocused(true);
   };
 
+  // input 블러될 때 버튼 활성
   const onBlurInputHandler = () => {
     setTimeout(() => setIsFocused(false), 300);
   };
 
+  // 하단 버튼 클릭 핸들러
   const onClickBtnHandler = () => {
     setNextComponent('InvitationInfoContainer');
+    setCreateContents('visitors', visitorsList);
   };
 
   return (
