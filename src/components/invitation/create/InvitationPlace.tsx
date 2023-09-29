@@ -1,5 +1,4 @@
 import Button from '@/components/common/Button';
-import RadioBtn from '@/components/common/RadioBtn';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import theme from '@/styles/theme';
@@ -29,7 +28,7 @@ function InvitationPlace(placeList) {
     setTest([...offices, ...commonPlaces]);
   }, []);
 
-  console.log(test);
+  console.log('바텀시트 합친 데이터', test);
 
   // 초대 장소 선택
   const onChangeRadioHandler = (e) => {
@@ -53,13 +52,13 @@ function InvitationPlace(placeList) {
     <div css={containerStyles}>
       <div css={titleStyles}>{title.invitationPlace}</div>
       <div css={radioBtnWrapperStyles}>
-        <RadioBtn
+        {/* <RadioBtn
           list={test}
           place={place}
           etcPlace={etcPlace}
           onChangeRadio={onChangeRadioHandler}
           onChangeInput={onChangeInputHandler}
-        />
+        /> */}
       </div>
       <div css={buttonWrapperStyles}>
         <Button

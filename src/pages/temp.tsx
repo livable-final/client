@@ -2,7 +2,7 @@ import Button from '@/components/common/Button';
 import Head from 'next/head';
 import Header from '@/components/common/Header';
 import Toggle from '@/components/common/Toggle';
-import RadioBtn from '@/components/common/RadioBtn';
+import RadioBtn from '@/components/common/RadioBtnBox';
 import InvitationFindRoadBtn from '@/components/invitation/view/InvitationFindRoadBtn';
 import CheckBox from '@/components/common/CheckBox';
 import BottomSheet from '@/components/common/BottomSheet';

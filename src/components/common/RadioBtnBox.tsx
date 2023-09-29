@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import { CheckOn, UnCheck } from '@/assets/icons';
 
-function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
+function RadioBtnBox({ list, name, placeholder }: RadioBtnProps) {
   const [selectData, setSelectData] = useState(list[0]);
   const [etcValue, setEtcValue] = useState('');
   const [isCheck, setIsCheck] = useState(false);
@@ -91,7 +91,7 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
   );
 }
 
-export default RadioBtn;
+export default RadioBtnBox;
 
 const radioContainerStyles = css`
   display: flex;
