@@ -27,8 +27,14 @@ function InvitationInfoContainer() {
 
   // 이전 컴포넌트에서 등록한 방문자 정보 가져오기
   useEffect(() => {
-    console.log(createContents.description);
-    setVisitorsList(createContents.visitors);
+    const convertedVisitors: VisitorInfo[] = createContents.visitors.map(
+      (visitor) => ({
+        name: visitor.name,
+        contact: visitor.contact,
+      }),
+    );
+
+    setVisitorsList(convertedVisitors);
   }, [createContents]);
 
   // 모달에서 전송을 눌렀을 때 다음 컴포넌트 렌더링
@@ -54,7 +60,6 @@ function InvitationInfoContainer() {
   const onChangeTipHandler = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    console.log(e.target.value);
     setTip(e.target.value);
   };
 
