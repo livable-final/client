@@ -1,12 +1,5 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { CheckOn, UnCheck } from '@/assets/icons';
-// import { RadioBtnProps } from '@/types/common/radioBtn';
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 
