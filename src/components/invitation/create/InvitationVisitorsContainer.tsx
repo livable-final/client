@@ -28,7 +28,6 @@ function InvitationVisitorsContainer() {
     contact: '',
   });
 
-  // 임시 데이터
   const [visitorsList, setVisitorList] = useState<VisitorInfo[]>([
     {
       name: '김방문',
@@ -51,6 +50,11 @@ function InvitationVisitorsContainer() {
   // 방문자 추가 버튼 핸들러
   const onClickAddVisitorHandler = () => {
     setVisitorList([...visitorsList, visitorInfo]);
+    // input 초기화
+    setVisitorInfo({
+      name: '',
+      contact: '',
+    });
   };
 
   // 방문자 삭제 버튼 핸들러
@@ -104,7 +108,6 @@ function InvitationVisitorsContainer() {
               name="contact"
             />
           </div>
-
           <AddressBook />
         </div>
         <div css={addBtnStyles}>

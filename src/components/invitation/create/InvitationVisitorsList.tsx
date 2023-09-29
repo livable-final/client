@@ -21,14 +21,9 @@ function InvitationVisitorsList({
   const { nextComponent } = useViewStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
 
-  console.log('방문자 리스트 확인', visitorsList);
-
+  // 방문자 추가 버튼
   const onClickHandler = () => {
-    openBottomSheet(
-      <InvitationAddVisitorList
-      // visitorsList={visitorsList} type이 달라서 지금 오류나는 상태라 주석 처리합니다!
-      />,
-    );
+    openBottomSheet(<InvitationAddVisitorList visitorsList={visitorsList} />);
   };
 
   return (
