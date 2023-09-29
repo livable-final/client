@@ -33,7 +33,7 @@ export interface LunchCalendarSelectBtnProps {
 
 export interface LunchSubTitleProps {
   title: string;
-  type: 'title' | 'subTitle' | 'recent' | 'more';
+  type: 'title' | 'subTitle' | 'recent' | 'more' | 'roulette';
   userName?: string;
 }
 

@@ -83,6 +83,9 @@ export const CALENDAR_CASE = {
     type1: 'recent',
     type2: 'more',
   },
+  roulette: {
+    type: 'roulette',
+  },
 };
 
 export const LUNCH_MAIN_CONSTANTS = {
@@ -125,7 +128,7 @@ export const LUNCH_MAIN_CONSTANTS = {
 };
 
 // 오늘 점심 룰렛 상수
-export const ROULETTE_CONSTANTS = {
+export const LUNCH_ROULETTE_CONSTANTS = {
   time: {
     interval: 100,
     duration: {
@@ -134,9 +137,7 @@ export const ROULETTE_CONSTANTS = {
       fixed: 3000,
     },
   },
-  content: {
-    button: '돌려돌려 돌림판',
-  },
+  title: { roulette: '점심룰렛', review: '맛집을 알려드릴게요!' },
   error: {
     response: { menuId: 0, name: '결과가 없습니다.' },
   },

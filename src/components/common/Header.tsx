@@ -13,6 +13,7 @@ function Header({
   text = '',
   isBg = false,
   isCloseOnly = false,
+  isSticky = false,
   onClick,
 }: HeaderProps) {
   const { goBack, backComponents } = usePagesStore();
@@ -41,7 +42,7 @@ function Header({
   };
 
   return (
-    <header css={headerStyles(isBg, isCloseOnly)}>
+    <header css={headerStyles(isBg, isCloseOnly, isSticky)}>
       {isCloseOnly ? <div /> : <Back onClick={onBackClickHandler} />}
       <div css={titleStyles}>
         <span>{title}</span>
@@ -53,9 +54,15 @@ function Header({
   );
 }
 
-const headerStyles = (isBg: boolean, isCloseOnly: boolean) => css`
+const headerStyles = (
+  isBg: boolean,
+  isCloseOnly: boolean,
+  isSticky: boolean,
+) => css`
+  position: ${isSticky ? 'sticky' : 'static'};
+  top: 0;
   display: grid;
-  grid-template-columns: ${isCloseOnly ? '1fr auto auto' : '1fr auto 1fr'};
+  grid-template-columns: ${isCloseOnly ? '1fr auto 1fr' : '1fr auto 1fr'};
   align-items: center;
   width: 100%;
   min-width: 280px;

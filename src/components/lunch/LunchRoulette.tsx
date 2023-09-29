@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { ROULETTE_CONSTANTS } from '@/constants/lunch';
+import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
 import Button from '@/components/common/Button';
 import {
   findRandomMenus,
@@ -17,7 +17,7 @@ function LunchRoulette() {
   const [menuIdState, setMenuIdState] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
   const [isShown, setIsShown] = useState(false);
-  const { time, content } = ROULETTE_CONSTANTS;
+  const { time, title } = LUNCH_ROULETTE_CONSTANTS;
 
   const { response } = useFetch({
     fetchFn: getMenus,
@@ -81,14 +81,14 @@ function LunchRoulette() {
   };
 
   return (
-    <>
+    <section css={temp}>
       <div css={WrapperStyles}>
         <span css={spanStyles}>{categoryState}</span>
         <span css={spanStyles}>{menuState}</span>
       </div>
       <Button
         onClick={onClickHandler}
-        content={content.button}
+        content={title.roulette}
         isDisabled={!isShown && menuIdState > 0}
         variant="blue"
       />
@@ -102,15 +102,24 @@ function LunchRoulette() {
         <label>{`'${categoryState}' 고정`}</label>
       </div>
       {`이 음식의 ID값입니다 :> ${menuIdState}`}
-    </>
+    </section>
   );
 }
 
+const temp = css`
+  display: flex;
+  height: 318px;
+  padding: 20px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const WrapperStyles = css`
   display: flex;
-  width: 320px;
-  justify-content: space-around;
-  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const spanStyles = css`

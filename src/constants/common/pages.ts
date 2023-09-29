@@ -23,7 +23,7 @@ const COMPONENT_NAME = {
   },
   common: {
     signIn: 'SignIn',
-    home: 'Home',
+    home: 'Main',
   },
 };
 
