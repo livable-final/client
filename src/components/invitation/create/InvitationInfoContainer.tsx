@@ -1,7 +1,6 @@
 // 컴포넌트
 import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
-import InvitationInfo from '@/components/invitation/create/InvitationInfo';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import Input from '@/components/common/Input';
@@ -60,6 +59,8 @@ function InvitationInfoContainer() {
     setPlaceList(response?.data);
   }, [response]);
 
+  console.log(placeList);
+
   // 장소 선택 바텀시트 오픈
   const onClickPlaceHandler = () => {
     openBottomSheet(<InvitationPlace placeList={placeList} />);
@@ -107,6 +108,7 @@ function InvitationInfoContainer() {
             <input
               css={inputStyles}
               type="text"
+              defaultValue={placeList?.offices[0].officeName}
               value={createContents.officeName}
               placeholder={placeholder.place}
               onClick={onClickPlaceHandler}

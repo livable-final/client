@@ -25,6 +25,7 @@ export interface InvitationCreateTexts {
       | string;
   };
   checkbox: string;
+  radioBtn: string;
   timeSelector: {
     [key: string]: number;
   };
@@ -47,10 +48,6 @@ export interface CommonCategory {
 export interface InvitationVisitorsListProps {
   visitorsList: VisitorInfo[];
   onClick: () => void;
-}
-
-export interface InvitationDoneMessageProps {
-  visitorsList: string[];
 }
 
 // Time Selector
