@@ -3,11 +3,24 @@ import CheckBox from '@/components/common/CheckBox';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationPlace from '@/components/invitation/create/InvitationPlace';
 import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useFetch from '@/hooks/useFetch';
+import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import theme from '@/styles/theme';
+import mq from '@/utils/mediaquery';
+import { useState, useEffect, ChangeEvent } from 'react';
+import { Location, Calendar, Clock } from '@/assets/icons';
+import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
+import { css } from '@emotion/react';
 
-function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
-  const { title, placeholder, checkbox }: InvitationCreateTexts = CREATE_TEXTS;
+function InvitationInfo() {
+  const { createContents } = useInvitationCreateStore();
+  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const { title, placeholder, checkbox } = CREATE_TEXTS;
+
+  const [placeList, setPlaceList] = useState();
   const [tip, setTip] = useState<string>('');
-  const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
 
   // 초대 가능한 장소 호출
   const { response } = useFetch({
@@ -20,6 +33,8 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
     setPlaceList(response?.data);
   }, [response]);
 
+  console.log(placeList);
+
   // 장소 선택 바텀시트 오픈
   const onClickPlaceHandler = () => {
     openBottomSheet(<InvitationPlace placeList={placeList} />);
@@ -31,7 +46,7 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
   };
 
   // 방문 팁 작성
-  const onChange = (
+  const onChangeTipHandler = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setTip(e.target.value);
@@ -44,39 +59,42 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
         <div css={inputContainerStyles}>
           {/* 장소 선택 */}
           <div css={placeInputStyles}>
-            <div className="icon">
+            <div css={icon}>
               <Location />
             </div>
             <input
               css={inputStyles}
               type="text"
+              defaultValue={placeList?.offices[0].officeName}
+              value={createContents.officeName}
               placeholder={placeholder.place}
-              defaultValue={defaultPlace}
               onClick={onClickPlaceHandler}
               readOnly
             />
           </div>
           {/* 날짜, 시간 선택 */}
           <div css={dateTimeInputStyles}>
-            <div className="date">
-              <div className="icon">
+            <div css={dateTime}>
+              <div css={icon}>
                 <Calendar />
               </div>
               <input
                 css={inputStyles}
                 type="text"
+                value={createContents.startDate}
                 placeholder={placeholder.date}
                 onClick={onClickDateTimeHandler}
                 readOnly
               />
             </div>
-            <div className="time">
-              <div className="icon">
+            <div css={dateTime}>
+              <div css={icon}>
                 <Clock />
               </div>
               <input
                 css={inputStyles}
                 type="text"
+                value={createContents.endDate}
                 placeholder={placeholder.time}
                 onClick={onClickDateTimeHandler}
                 readOnly
@@ -87,7 +105,7 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
           <div css={textareaStyles}>
             <Input
               value={tip}
-              onChange={onChange}
+              onChange={onChangeTipHandler}
               variant="default"
               textarea
               placeholder={placeholder.tip}
@@ -162,23 +180,22 @@ const dateTimeInputStyles = css`
   border-radius: 12px;
   padding: 0 8px 0 16px;
   width: 100%;
+`;
 
-  .date,
-  .time {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
+const dateTime = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+`;
 
-    .icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 24px;
-      height: 24px;
-    }
-  }
+const icon = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 24px;
+  height: 24px;
 `;
 
 const inputStyles = css`
