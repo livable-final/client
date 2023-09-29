@@ -7,27 +7,32 @@ import getIsCommonData from '@/utils/getIsCommonData';
 import getPlaceId from '@/utils/getPlaceId';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
-import { useState, useEffect, ChangeEvent } from 'react';
-import { InvitationCreateTexts } from '@/types/invitation/create';
 import { css } from '@emotion/react';
+import { useState, useEffect, ChangeEvent } from 'react';
+import {
+  InvitationCreateTexts,
+  InvitationPlaceProps,
+  PlaceList,
+} from '@/types/invitation/create';
 
-function InvitationPlace(placeList) {
+function InvitationPlace({ placeList }: InvitationPlaceProps) {
   const { closeBottomSheet } = useBottomSheetStore();
   const { setCreateContents } = useInvitationCreateStore();
   const { title, button, placeholder, radioBtn }: InvitationCreateTexts =
     CREATE_TEXTS;
 
   // 받아온 props 가공
-  const { placeList: list } = placeList;
-  const { offices, commonPlaces } = list || {
+  const { offices, commonPlaces } = placeList || {
     offices: [],
     commonPlaces: [],
   };
 
   // 전체 장소 리스트 / 선택 장소명 / 선택 장소ID
-  const [allPlaceList, setAllPlaceList] = useState([]);
-  const [selectPlaceName, setSelectPlaceName] = useState('');
-  const [selectPlaceId, setSelectPlaceId] = useState<number | null>(null);
+  const [allPlaceList, setAllPlaceList] = useState<PlaceList[]>([]);
+  const [selectPlaceName, setSelectPlaceName] = useState<string>('');
+  const [selectPlaceId, setSelectPlaceId] = useState<number | null | undefined>(
+    null,
+  );
 
   // 초대 가능한 장소 응답 데이터 배열화
   useEffect(() => {
@@ -36,12 +41,12 @@ function InvitationPlace(placeList) {
 
   // 장소 선택 시 해당하는 장소의 ID값 저장
   useEffect(() => {
-    setSelectPlaceId(getPlaceId(allPlaceList, selectPlaceName));
+    const id = getPlaceId(allPlaceList, selectPlaceName);
+    setSelectPlaceId(id);
   }, [allPlaceList, selectPlaceName]);
 
   // 라디오버튼 선택
   const onChangeRadioHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log('현재 선택한 라디오 : ', e.target.value);
     setSelectPlaceName(e.target.value);
   };
 
@@ -52,8 +57,6 @@ function InvitationPlace(placeList) {
 
   // 하단 버튼 핸들러
   const onClickBtnHandler = () => {
-    console.log('최종선택장소', selectPlaceName);
-    console.log('최종선택ID', selectPlaceId);
     setCreateContents('officeName', selectPlaceName);
     setCreateContents('commonPlaceId', selectPlaceId);
     closeBottomSheet();
