@@ -14,7 +14,7 @@ import { Location, Calendar, Clock } from '@/assets/icons';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 import { css } from '@emotion/react';
 
-function InvitationInfo({ tip, onChange }) {
+function InvitationInfo({ tip, onChange, onFocus, onBlur }) {
   const { createContents, setCreateContents } = useInvitationCreateStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { title, placeholder, checkbox } = CREATE_TEXTS;
@@ -31,8 +31,6 @@ function InvitationInfo({ tip, onChange }) {
     console.log('초대장소 응답 데이터 확인', response?.data);
     setPlaceList(response?.data);
   }, [response]);
-
-  console.log(placeList);
 
   // 장소 선택 바텀시트 오픈
   const onClickPlaceHandler = () => {
@@ -94,7 +92,7 @@ function InvitationInfo({ tip, onChange }) {
             </div>
           </div>
           {/* 꿀팁 작성 */}
-          <div css={textareaStyles}>
+          <div css={textareaStyles} onFocus={onFocus} onBlur={onBlur}>
             <Input
               value={tip}
               onChange={onChange}

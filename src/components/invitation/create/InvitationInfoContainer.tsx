@@ -1,10 +1,8 @@
-// 컴포넌트
 import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationInfo from '@/components/invitation/create/InvitationInfo';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
-// 스토어
 import useViewStore from '@/stores/usePagesStore';
 import useModalStore from '@/stores/useModalStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
@@ -25,6 +23,7 @@ function InvitationInfoContainer() {
   const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
   const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([]);
   const [tip, setTip] = useState<string>('');
+  const [isFocused, setIsFocused] = useState(false);
 
   // 이전 컴포넌트에서 등록한 방문자 정보 가져오기
   useEffect(() => {
@@ -41,6 +40,7 @@ function InvitationInfoContainer() {
 
   // 최종 전송 확인 모달 핸들러
   const onClickModalHandler = () => {
+    setCreateContents('description', tip);
     setIsConfirmed(!isConfirmed);
     closeModal();
   };
@@ -58,31 +58,42 @@ function InvitationInfoContainer() {
     setTip(e.target.value);
   };
 
+  // input 포커스될 때 버튼 숨김
+  const onFocusInputHandler = () => {
+    setIsFocused(true);
+  };
+
+  // input 블러될 때 버튼 활성
+  const onBlurInputHandler = () => {
+    setTimeout(() => setIsFocused(false), 300);
+  };
+
   // 하단 버튼 핸들러
   const onClickBtnHandler = () => {
-    setCreateContents('description', tip);
     openModal(modal.send.title, modal.send.content);
   };
 
   return (
     <div css={containerStyles}>
-      <InvitationInfo tip={tip} onChange={onChangeTipHandler} />
-
+      <InvitationInfo
+        tip={tip}
+        onChange={onChangeTipHandler}
+        onFocus={onFocusInputHandler}
+        onBlur={onBlurInputHandler}
+      />
       {visitorsList.length > 0 && (
         <InvitationVisitorsList
           visitorsList={visitorsList}
           onClick={onClickDeleteHandler}
         />
       )}
-
-      <div css={buttonWrapperStyles}>
+      <div css={buttonWrapperStyles(isFocused)}>
         <Button
           content={button.send}
           variant="blue"
           onClick={onClickBtnHandler}
         />
       </div>
-
       {modalState.isOpen && (
         <Modal content={modal.btn} onClick={onClickModalHandler} />
       )}
@@ -112,9 +123,10 @@ const containerStyles = css`
   }
 `;
 
-const buttonWrapperStyles = css`
+const buttonWrapperStyles = (isFocused: boolean) => css`
   position: fixed;
   bottom: 0;
+  display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
   max-width: 360px;
