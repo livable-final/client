@@ -4,6 +4,7 @@ import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import getIsCommonData from '@/utils/getIsCommonData';
+import getPlaceId from '@/utils/getPlaceId';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { useState, useEffect, ChangeEvent } from 'react';
@@ -13,7 +14,6 @@ import { css } from '@emotion/react';
 function InvitationPlace(placeList) {
   const { closeBottomSheet } = useBottomSheetStore();
   const { setCreateContents } = useInvitationCreateStore();
-
   const { title, button, placeholder, radioBtn }: InvitationCreateTexts =
     CREATE_TEXTS;
 
@@ -24,34 +24,38 @@ function InvitationPlace(placeList) {
     commonPlaces: [],
   };
 
+  // 전체 장소 리스트 / 선택 장소명 / 선택 장소ID
   const [allPlaceList, setAllPlaceList] = useState([]);
-  // 선택한 값
-  const [select, setSelect] = useState('');
-
-  // console.log('바텀시트 프롭 확인', placeList);
+  const [selectPlaceName, setSelectPlaceName] = useState('');
+  const [selectPlaceId, setSelectPlaceId] = useState<number | null>(null);
 
   // 초대 가능한 장소 응답 데이터 배열화
   useEffect(() => {
     setAllPlaceList([...offices, ...commonPlaces]);
   }, [commonPlaces, offices]);
 
-  // console.log('바텀시트 합친 데이터', allPlaceList);
+  // 장소 선택 시 해당하는 장소의 ID값 저장
+  useEffect(() => {
+    setSelectPlaceId(getPlaceId(allPlaceList, selectPlaceName));
+  }, [allPlaceList, selectPlaceName]);
 
   // 라디오버튼 선택
   const onChangeRadioHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    setSelect(e.target.value);
+    console.log('현재 선택한 라디오 : ', e.target.value);
+    setSelectPlaceName(e.target.value);
   };
 
   // 직접입력
   const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setSelect(e.target.value);
+    setSelectPlaceName(e.target.value);
   };
 
   // 하단 버튼 핸들러
   const onClickBtnHandler = () => {
-    console.log('최종선택값', select);
-    setCreateContents('officeName', select);
+    console.log('최종선택장소', selectPlaceName);
+    console.log('최종선택ID', selectPlaceId);
+    setCreateContents('officeName', selectPlaceName);
+    setCreateContents('commonPlaceId', selectPlaceId);
     closeBottomSheet();
   };
 
@@ -75,14 +79,14 @@ function InvitationPlace(placeList) {
                   ? listEl.commonPlaceName
                   : listEl.officeName
               }
-              select={select}
+              select={selectPlaceName}
             />
           </div>
         ))}
         <div css={radioBtnStyles} onChange={onChangeRadioHandler}>
           <RadioBtn
             content={radioBtn}
-            select={select}
+            select={selectPlaceName}
             isEtc
             placeholder={placeholder.placeEtc}
             onChange={onChangeInputHandler}
