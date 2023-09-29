@@ -12,7 +12,7 @@ import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 import { VisitorInfo } from '@/types/invitation/api';
 
 function InvitationInfoContainer() {
@@ -24,6 +24,7 @@ function InvitationInfoContainer() {
 
   const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
   const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([]);
+  const [tip, setTip] = useState<string>('');
 
   // 이전 컴포넌트에서 등록한 방문자 정보 가져오기
   useEffect(() => {
@@ -49,14 +50,23 @@ function InvitationInfoContainer() {
     openModal('테스트', '삭제 기능이 구현될 예정이에요!');
   };
 
+  // 방문 팁 작성
+  const onChangeTipHandler = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    console.log(e.target.value);
+    setTip(e.target.value);
+  };
+
   // 하단 버튼 핸들러
   const onClickBtnHandler = () => {
+    setCreateContents('description', tip);
     openModal(modal.send.title, modal.send.content);
   };
 
   return (
     <div css={containerStyles}>
-      <InvitationInfo />
+      <InvitationInfo tip={tip} onChange={onChangeTipHandler} />
 
       {visitorsList.length > 0 && (
         <InvitationVisitorsList

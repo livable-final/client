@@ -14,13 +14,12 @@ import { Location, Calendar, Clock } from '@/assets/icons';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 import { css } from '@emotion/react';
 
-function InvitationInfo() {
-  const { createContents } = useInvitationCreateStore();
+function InvitationInfo({ tip, onChange }) {
+  const { createContents, setCreateContents } = useInvitationCreateStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { title, placeholder, checkbox } = CREATE_TEXTS;
 
   const [placeList, setPlaceList] = useState();
-  const [tip, setTip] = useState<string>('');
 
   // 초대 가능한 장소 호출
   const { response } = useFetch({
@@ -43,13 +42,6 @@ function InvitationInfo() {
   // 날짜/시간 선택 바텀시트 오픈
   const onClickDateTimeHandler = () => {
     openBottomSheet(<InvitationDateTime />);
-  };
-
-  // 방문 팁 작성
-  const onChangeTipHandler = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-  ) => {
-    setTip(e.target.value);
   };
 
   return (
@@ -105,7 +97,7 @@ function InvitationInfo() {
           <div css={textareaStyles}>
             <Input
               value={tip}
-              onChange={onChangeTipHandler}
+              onChange={onChange}
               variant="default"
               textarea
               placeholder={placeholder.tip}
