@@ -7,6 +7,7 @@ import Button from '@/components/common/Button';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useViewStore from '@/stores/usePagesStore';
 import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import { ChangeEvent, useState } from 'react';
 import { css } from '@emotion/react';
 import { COMMON_CATEGORIES } from '@/constants/common';
@@ -19,6 +20,7 @@ import {
 function InvitationPurposeContainer() {
   const { setNextComponent } = useViewStore();
   const { setHeaderTitle } = useInvitationHeaderTitleStore();
+  const { setCreateContents } = useInvitationCreateStore();
   const { invitation }: CategoryInvitation = COMMON_CATEGORIES;
   const {
     header,
@@ -32,28 +34,36 @@ function InvitationPurposeContainer() {
   const [etcPurpose, setEtcPurpose] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
+  // 방문 목적 카테고리 선택
   const onClickCategoryHandler = (item: CommonCategory) => {
     setSelectedCategory(item.icon);
   };
 
+  // 기타 선택 시 방문 목적 작성
   const onChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setEtcPurpose(e.target.value);
   };
 
-  // input 활성화 시 버튼 숨김 처리
+  // input 포커스될 때 버튼 숨김
   const onFocusInputHandler = () => {
     setIsFocused(true);
   };
 
+  // input 블러될 때 버튼 활성
   const onBlurInputHandler = () => {
     setTimeout(() => setIsFocused(false), 300);
   };
 
+  // 하단 버튼 클릭 핸들러
   const onClickBtnHandler = () => {
     setNextComponent('InvitationVisitorsContainer');
     setHeaderTitle(header[selectedCategory]);
+    setCreateContents(
+      'purpose',
+      selectedCategory === 'etc' ? etcPurpose : selectedCategory,
+    );
   };
 
   return (

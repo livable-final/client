@@ -1,4 +1,4 @@
-// 방문자 초대장 중 초대장 생성 파트 타입 선언 //
+import { VisitorInfo } from '@/types/invitation/api';
 
 // 텍스트 상수
 export interface InvitationCreateTexts {
@@ -25,6 +25,7 @@ export interface InvitationCreateTexts {
       | string;
   };
   checkbox: string;
+  radioBtn: string;
   timeSelector: {
     [key: string]: number;
   };
@@ -37,6 +38,7 @@ export interface CategoryInvitation {
   };
 }
 
+// 카테고리
 export interface CommonCategory {
   icon: string;
   title: string;
@@ -44,12 +46,8 @@ export interface CommonCategory {
 
 // 방문자 리스트
 export interface InvitationVisitorsListProps {
-  visitorsList: string[];
+  visitorsList: VisitorInfo[];
   onClick: () => void;
-}
-
-export interface InvitationDoneMessageProps {
-  visitorsList: string[];
 }
 
 // Time Selector

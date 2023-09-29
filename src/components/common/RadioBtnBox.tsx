@@ -2,15 +2,12 @@ import theme from '@/styles/theme';
 import { RadioBtnProps } from '@/types/common/radioBtn';
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { Check, UnCheck } from '@/assets/icons';
+import { CheckOn, UnCheck } from '@/assets/icons';
 
-function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
+function RadioBtnBox({ list, name, placeholder }: RadioBtnProps) {
   const [selectData, setSelectData] = useState(list[0]);
   const [etcValue, setEtcValue] = useState('');
   const [isCheck, setIsCheck] = useState(false);
-
-  // selectData 값이 변경되는 것을 확인하는 콘솔로그
-  console.log(selectData);
 
   const onChangeRadioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectData(event.target.value);
@@ -27,36 +24,31 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
     setEtcValue(event.target.value);
     setSelectData(event.target.value);
   };
+
   return (
     <div css={radioContainerStyles}>
-      {list.map((item) => (
-        <div key={item} css={itemStyles}>
-          <input
-            id={item}
-            type="radio"
-            name={name}
-            value={item}
-            checked={selectData === item}
-            onChange={onChangeRadioHandler}
-            readOnly
-            css={radioInputStyles}
-          />
-          <label htmlFor={item} key={item} css={labelStyles}>
-            {selectData === item ? (
-              <Check css={btnImgStyles} />
-            ) : (
-              <UnCheck css={btnImgStyles} />
-            )}
-            <div>
-              <p>{item}</p>
-              <p>
-                <span>{item}</span>
-              </p>
-            </div>
-          </label>
-        </div>
-      ))}
-
+      {list.map((item) => {
+        // console.log(selectData === item);
+        return (
+          <div key={item} css={itemStyles}>
+            <label css={labelStyles}>
+              <input
+                type="radio"
+                name={name}
+                value={item}
+                onChange={onChangeRadioHandler}
+                css={radioInputStyles}
+              />
+              <div css={btnImgStyles}>
+                {selectData === item ? <CheckOn /> : <UnCheck />}
+              </div>
+              <div>
+                <p>{item}</p>
+              </div>
+            </label>
+          </div>
+        );
+      })}
       {/* 직접 입력 */}
       <div
         role="presentation"
@@ -64,22 +56,27 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
         onBlur={onBlurHandler}
         css={itemStyles}
       >
-        <input
-          id={etcValue}
-          type="radio"
-          name={name}
-          value={etcValue}
-          checked={isCheck}
-          readOnly
-          css={radioInputStyles}
-        />
-        <label htmlFor={etcValue} css={labelStyles}>
-          {isCheck ? (
-            <Check css={btnImgStyles} />
-          ) : (
-            <UnCheck css={btnImgStyles} />
-          )}
-          <div>
+        <label css={labelStyles}>
+          <input
+            type="radio"
+            name={name}
+            value={etcValue}
+            checked={isCheck}
+            readOnly
+            css={radioInputStyles}
+          />
+          <div css={btnImgStyles}>
+            {isCheck ? (
+              <div css={icon}>
+                <CheckOn />
+              </div>
+            ) : (
+              <div css={icon}>
+                <UnCheck />
+              </div>
+            )}
+          </div>
+          <div css={inputWrapper}>
             <p>기타 (직접입력)</p>
             <input
               type="text"
@@ -94,26 +91,24 @@ function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
   );
 }
 
-export default RadioBtn;
+export default RadioBtnBox;
 
 const radioContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
-
-  /* 표시용 border, 여백 */
-  border: 1px solid;
-  margin: 30px 0;
 
   span {
     color: ${theme.palette.greyscale.grey40};
   }
-
   p {
     line-height: 1.4em;
   }
 `;
 
 const itemStyles = css`
-  margin: 10px;
+  width: 100%;
 `;
 
 const radioInputStyles = css`
@@ -121,30 +116,39 @@ const radioInputStyles = css`
 
   &:checked + label {
     color: ${theme.palette.primary};
-    span {
+
+    p {
       color: ${theme.palette.primary};
     }
   }
 `;
 
 const btnImgStyles = css`
-  width: 20px;
-  height: 20px;
-  margin: 2px;
-  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
   flex-grow: 0;
+`;
+
+const icon = css`
+  width: 24px;
+  height: 24px;
 `;
 
 const labelStyles = css`
   display: flex;
   flex-wrap: wrap;
+  gap: 8px;
+`;
 
-  div {
-    flex-grow: 1;
-  }
+const inputWrapper = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `;
 
 const etcInputStyles = css`
-  margin-top: 10px;
-  max-width: 100%;
+  width: 100%;
 `;
