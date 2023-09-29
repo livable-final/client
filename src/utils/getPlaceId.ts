@@ -1,14 +1,16 @@
-// obj : value가 포함된 객체
+import { PlaceList } from '@/types/invitation/create';
+
+// arr : value가 포함된 객체로 이루어진 배열
 // value : 찾으려는 ID를 가지고 있는 값
 
-const getPlaceId = (arr, value) => {
+const getPlaceId = (arr: PlaceList[], value: string) => {
   const found = arr.find((obj) => obj.commonPlaceName === value);
 
   if (found) {
     return found.commonPlaceId;
-  } else {
-    return '찾으려는 ID가 없습니다.';
   }
+
+  return null;
 };
 
 export default getPlaceId;

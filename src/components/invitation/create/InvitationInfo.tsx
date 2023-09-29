@@ -9,17 +9,24 @@ import useFetch from '@/hooks/useFetch';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { Location, Calendar, Clock } from '@/assets/icons';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
+import { GetInvitationPlaceData } from '@/types/invitation/api';
+import { InvitationInfoProps } from '@/types/invitation/create';
 import { css } from '@emotion/react';
 
-function InvitationInfo({ tip, onChange, onFocus, onBlur }) {
-  const { createContents, setCreateContents } = useInvitationCreateStore();
+function InvitationInfo({
+  tip,
+  onChange,
+  onFocus,
+  onBlur,
+}: InvitationInfoProps) {
+  const { createContents } = useInvitationCreateStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { title, placeholder, checkbox } = CREATE_TEXTS;
 
-  const [placeList, setPlaceList] = useState();
+  const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
 
   // 초대 가능한 장소 호출
   const { response } = useFetch({
@@ -28,13 +35,16 @@ function InvitationInfo({ tip, onChange, onFocus, onBlur }) {
 
   useEffect(() => {
     // 초대 가능한 장소 응답 데이터 저장
-    console.log('초대장소 응답 데이터 확인', response?.data);
-    setPlaceList(response?.data);
+    if (response?.data) {
+      setPlaceList(response.data);
+    }
   }, [response]);
 
   // 장소 선택 바텀시트 오픈
   const onClickPlaceHandler = () => {
-    openBottomSheet(<InvitationPlace placeList={placeList} />);
+    if (placeList) {
+      openBottomSheet(<InvitationPlace placeList={placeList} />);
+    }
   };
 
   // 날짜/시간 선택 바텀시트 오픈

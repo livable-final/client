@@ -1,6 +1,7 @@
 import { VisitorInfo } from '@/types/invitation/api';
 
-// 텍스트 상수
+// ****************** 텍스트 상수 ****************** //
+// ****************** constants ****************** //
 export interface InvitationCreateTexts {
   header: {
     [key: string]: string;
@@ -31,7 +32,9 @@ export interface InvitationCreateTexts {
   };
 }
 
-// 초대 목적 선택
+// ****************** 초대 목적 ****************** //
+// ****************** Purpose ****************** //
+// Invitation Purpose
 export interface CategoryInvitation {
   [key: string]: {
     [key: string]: CommonCategory;
@@ -44,13 +47,52 @@ export interface CommonCategory {
   title: string;
 }
 
-// 방문자 리스트
+// ****************** 방문자 ********************* //
+// ****************** Visitor ****************** //
+// Invitation Visitors
 export interface InvitationVisitorsListProps {
   visitorsList: VisitorInfo[];
   onClick: () => void;
 }
 
-// Time Selector
+// ****************** 초대 장소 ****************** //
+// ****************** Place ******************** //
+// Invitation Place
+export interface InvitationPlaceProps {
+  placeList: {
+    commonPlaces: CommonPlaces[];
+    offices: Offices[];
+  };
+}
+export interface CommonPlaces {
+  commonPlaceId: number;
+  commonPlaceName: string;
+}
+export interface Offices {
+  officeName: string;
+}
+
+export interface PlaceList {
+  officeName?: string;
+  commonPlaceName?: string;
+  commonPlaceId?: number;
+}
+
+// ****************** 초대 정보 ********************** //
+// ****************** Information ****************** //
+// Invitation Info
+export interface InvitationInfoProps {
+  tip: string;
+  onChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => void;
+  onFocus: () => void;
+  onBlur: () => void;
+}
+
+// 타임 셀렉터
 export interface TimeSelectorProps {
   content: string | JSX.Element;
   status: string;
@@ -64,3 +106,6 @@ export interface TimeSelectorColorProps {
 export interface TimeSelectorsColorProps {
   [key: string]: TimeSelectorColorProps;
 }
+
+// ****************** 기타 ********************** //
+// ****************** Etc ********************** //

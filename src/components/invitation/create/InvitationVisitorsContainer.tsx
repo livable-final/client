@@ -19,20 +19,21 @@ import {
 
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
-  const { createContents, setCreateContents } = useInvitationCreateStore();
+  const { setCreateContents } = useInvitationCreateStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [visitorInfo, setVisitorInfo] = useState({ name: '', contact: '' });
+  const [visitorInfo, setVisitorInfo] = useState<VisitorInfo>({
+    name: '',
+    contact: '',
+  });
+
   const [visitorsList, setVisitorList] = useState<VisitorInfo[]>([
     {
       name: '김방문',
       contact: '01012345678',
     },
   ]);
-
-  // 이전 컴포넌트에서 선택한 방문목적 확인
-  console.log('방문목적 확인 :', createContents.purpose);
 
   // 이름/연락처 입력
   const onChangeInfoHandler = (
@@ -49,6 +50,11 @@ function InvitationVisitorsContainer() {
   // 방문자 추가 버튼 핸들러
   const onClickAddVisitorHandler = () => {
     setVisitorList([...visitorsList, visitorInfo]);
+    // input 초기화
+    setVisitorInfo({
+      name: '',
+      contact: '',
+    });
   };
 
   // 방문자 삭제 버튼 핸들러
@@ -102,7 +108,6 @@ function InvitationVisitorsContainer() {
               name="contact"
             />
           </div>
-
           <AddressBook />
         </div>
         <div css={addBtnStyles}>
@@ -197,7 +202,7 @@ const inputWrapperStyles = css`
   gap: 12px;
 `;
 
-const visitorsListWrapper = (visitorsList: string[]) => css`
+const visitorsListWrapper = (visitorsList: VisitorInfo[]) => css`
   display: flex;
   flex-direction: column;
   gap: 21px;

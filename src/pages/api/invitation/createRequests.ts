@@ -13,6 +13,17 @@ export const getInvitationPlaceList = async (): Promise<
   return response.data;
 };
 
+// 예약 가능한 시간 리스트 응답
+export const getInvitationTimeList = async (
+  commonPlaceId: number,
+  date: string, // yyyy-MM-dd
+) => {
+  const response = await apiInstance.get(
+    `reservation/places/${commonPlaceId}?date=${date}`,
+  );
+  return response.data;
+};
+
 // 초대장 저장 (생성)
 export const postInvitation = async (
   invitationContents: PostInvitationContents,
