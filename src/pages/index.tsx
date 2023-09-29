@@ -1,53 +1,50 @@
-import AuthForm from '@/components/auth/AuthForm';
-import usePagesStore from '@/stores/usePagesStore';
-import mq from '@/utils/mediaquery';
-import { css } from '@emotion/react';
-import Home from '@/components/home';
-import COMPONENT_NAME from '@/constants/common/pages';
-import { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import Bnb from '@/components/common/Bnb';
 import Title from '@/components/common/Title';
+import HomeContents from '@/components/home/HomeContents';
+import useFetch from '@/hooks/useFetch';
+import { getHome } from '@/pages/api/home/homeRequests';
+import useIdStore from '@/stores/useIdStore';
+import theme from '@/styles/theme';
+import { css } from '@emotion/react';
+import { useEffect } from 'react';
+import usePagesStore from '@/stores/usePagesStore';
+import useSaveStore from '@/stores/useSaveStore';
+import { useRouter } from 'next/router';
 
-function Main() {
-  const { nextComponent } = usePagesStore();
-  const { home } = COMPONENT_NAME.common;
-  const [userToken, setUserToken] = useState<string | null>(null);
+function Home() {
+  const router = useRouter();
+  const { reset } = usePagesStore();
+  const { idList, setIdList } = useIdStore();
+
+  const { response } = useFetch({
+    fetchFn: getHome,
+  });
 
   useEffect(() => {
-    const token = localStorage.getItem('user');
-    setUserToken(token);
-  }, []);
-
-  if (nextComponent === home || userToken) {
-    return <Home />;
-  }
+    if (!useSaveStore.getState().user) {
+      router.push('/login');
+    }
+    reset();
+    if (response?.data.buildingId) {
+      setIdList({ ...idList, buildingId: response?.data.buildingId });
+    }
+  }, [response?.data.buildingId, setIdList, reset]);
 
   return (
-    <div css={containerStyles}>
-      <Title title="로그인" part="login" />
-      <AuthForm />
-    </div>
+    <>
+      <Title title={response?.data.buildingName} part="main" isMain />
+      <div css={containerStyles}>
+        <HomeContents hasCafeteria={response?.data.hasCafeteria} />
+      </div>
+      <Bnb />
+    </>
   );
 }
 
 const containerStyles = css`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  gap: 96px;
-  min-width: 280px;
-  max-width: 360px;
-
-  ${mq.md} {
-    max-width: 480px;
-  }
-  ${mq.lg} {
-    max-width: 640px;
-  }
-  ${mq.tab} {
-    max-width: 1024px;
-  }
+  margin: 0 -16px 90px;
+  background: ${theme.palette.background.home};
 `;
 
-export default Main;
+export default Home;

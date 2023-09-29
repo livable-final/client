@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import axios, { AxiosError } from 'axios';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL as string;
@@ -17,11 +16,12 @@ const weatherInstance = axios.create({
 // Request 인터셉터
 apiInstance.interceptors.request.use(
   async (config) => {
-    const userJson = localStorage.getItem('user');
-    const user = userJson ? JSON.parse(userJson) : null;
+    const storage = localStorage.getItem('user-storage');
+    const userKey = storage ? JSON.parse(storage) : null;
+    const token = userKey?.state?.user;
 
-    if (user?.accessToken) {
-      config.headers.Authorization = `Bearer ${user.accessToken}`;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
 
     return Promise.resolve(config);

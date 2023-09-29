@@ -7,7 +7,8 @@ import Button from '@/components/common/Button';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useViewStore from '@/stores/usePagesStore';
 import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
-import { useState } from 'react';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import { ChangeEvent, useState } from 'react';
 import { css } from '@emotion/react';
 import { COMMON_CATEGORIES } from '@/constants/common';
 import {
@@ -19,6 +20,7 @@ import {
 function InvitationPurposeContainer() {
   const { setNextComponent } = useViewStore();
   const { setHeaderTitle } = useInvitationHeaderTitleStore();
+  const { setCreateContents } = useInvitationCreateStore();
   const { invitation }: CategoryInvitation = COMMON_CATEGORIES;
   const {
     header,
@@ -30,14 +32,38 @@ function InvitationPurposeContainer() {
   const categories: CommonCategory[] = Object.values(invitation);
   const [selectedCategory, setSelectedCategory] = useState<string>('meeting');
   const [etcPurpose, setEtcPurpose] = useState<string>('');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
+  // 방문 목적 카테고리 선택
   const onClickCategoryHandler = (item: CommonCategory) => {
     setSelectedCategory(item.icon);
   };
 
+  // 기타 선택 시 방문 목적 작성
+  const onChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setEtcPurpose(e.target.value);
+  };
+
+  // input 포커스될 때 버튼 숨김
+  const onFocusInputHandler = () => {
+    setIsFocused(true);
+  };
+
+  // input 블러될 때 버튼 활성
+  const onBlurInputHandler = () => {
+    setTimeout(() => setIsFocused(false), 300);
+  };
+
+  // 하단 버튼 클릭 핸들러
   const onClickBtnHandler = () => {
     setNextComponent('InvitationVisitorsContainer');
     setHeaderTitle(header[selectedCategory]);
+    setCreateContents(
+      'purpose',
+      selectedCategory === 'etc' ? etcPurpose : selectedCategory,
+    );
   };
 
   return (
@@ -68,22 +94,27 @@ function InvitationPurposeContainer() {
           </div>
           <div>{description[selectedCategory]}</div>
         </div>
-        <div css={inputWrapperStyles}>
+        <div
+          css={inputWrapperStyles}
+          onFocus={onFocusInputHandler}
+          onBlur={onBlurInputHandler}
+        >
           {selectedCategory === 'etc' && (
             <Input
               value={etcPurpose}
-              setValue={setEtcPurpose}
+              onChange={onChange}
               variant="default"
               placeholder={placeholder.purpose}
               textarea
             />
           )}
         </div>
-        <div css={buttonWrapperStyles}>
+        <div css={buttonWrapperStyles(isFocused)}>
           <Button
             content={button.next}
             variant="blue"
             onClick={onClickBtnHandler}
+            isDisabled={selectedCategory === 'etc' && !etcPurpose.length}
           />
         </div>
       </div>
@@ -215,9 +246,10 @@ const inputWrapperStyles = css`
   }
 `;
 
-const buttonWrapperStyles = css`
+const buttonWrapperStyles = (isFocused: boolean) => css`
   position: fixed;
   bottom: 0;
+  display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
   max-width: 360px;

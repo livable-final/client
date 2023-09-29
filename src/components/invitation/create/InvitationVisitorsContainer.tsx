@@ -5,43 +5,77 @@ import AddressBook from '@/components/common/AddressBook';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useViewStore from '@/stores/usePagesStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
-import { useState } from 'react';
-import { COMMON_ERROR_MESSAGE } from '@/constants/common';
+import { ChangeEvent, useState } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
-import { ErrorTypeProps } from '@/types/common/input';
+import { VisitorInfo } from '@/types/invitation/api';
+import {
+  checkValidationName,
+  checkValidationContact,
+} from '@/utils/checkValidation';
 
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
+  const { setCreateContents } = useInvitationCreateStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
-  const { name, contact }: ErrorTypeProps = COMMON_ERROR_MESSAGE;
-  const [visitorName, setVisitorName] = useState<string>('');
-  const [visitorContact, setVisitorContact] = useState<string>('');
-  const [visitorsList] = useState<string[]>([
-    '고애신',
-    '유진초이',
-    '김희성',
-    '구동매',
-    '쿠도히나',
-    '수미',
-    '도미',
-    '임관수',
+
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [visitorInfo, setVisitorInfo] = useState<VisitorInfo>({
+    name: '',
+    contact: '',
+  });
+
+  const [visitorsList, setVisitorList] = useState<VisitorInfo[]>([
+    {
+      name: '김방문',
+      contact: '01012345678',
+    },
   ]);
 
+  // 이름/연락처 입력
+  const onChangeInfoHandler = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    const { name: infoType, value } = e.target;
+
+    setVisitorInfo({
+      ...visitorInfo,
+      [infoType]: value,
+    });
+  };
+
+  // 방문자 추가 버튼 핸들러
+  const onClickAddVisitorHandler = () => {
+    setVisitorList([...visitorsList, visitorInfo]);
+    // input 초기화
+    setVisitorInfo({
+      name: '',
+      contact: '',
+    });
+  };
+
+  // 방문자 삭제 버튼 핸들러
+  const onClickDeleteVisitorHandler = () => {
+    visitorsList.pop();
+  };
+
+  // input 포커스될 때 버튼 숨김
+  const onFocusInputHandler = () => {
+    setIsFocused(true);
+  };
+
+  // input 블러될 때 버튼 활성
+  const onBlurInputHandler = () => {
+    setTimeout(() => setIsFocused(false), 300);
+  };
+
+  // 하단 버튼 클릭 핸들러
   const onClickBtnHandler = () => {
     setNextComponent('InvitationInfoContainer');
-  };
-
-  const onClickAddVisitorHandler = () => {
-    // 눌렀을 때 추가 로직 필요
-    visitorsList.push(visitorName);
-  };
-
-  const onClickDeleteVisitorHandler = () => {
-    // 눌렀을 때 삭제 로직 필요
-    visitorsList.pop();
+    setCreateContents('visitors', visitorsList);
   };
 
   return (
@@ -51,22 +85,29 @@ function InvitationVisitorsContainer() {
           <div>{title.invitation}</div>
         </div>
         <div css={inputWrapperStyles}>
-          <Input
-            value={visitorName}
-            setValue={setVisitorName}
-            variant="default"
-            placeholder={placeholder.name}
-            isError={visitorName.length > 1}
-            errorType={name}
-          />
-          <Input
-            value={visitorContact}
-            setValue={setVisitorContact}
-            variant="default"
-            placeholder={placeholder.contact}
-            isError={visitorContact.length < 9}
-            errorType={contact}
-          />
+          <div onFocus={onFocusInputHandler} onBlur={onBlurInputHandler}>
+            <Input
+              value={visitorInfo.name}
+              onChange={onChangeInfoHandler}
+              variant="default"
+              placeholder={placeholder.name}
+              isError={!checkValidationName(visitorInfo.name)}
+              errorType="name"
+              name="name"
+            />
+          </div>
+          <div onFocus={onFocusInputHandler} onBlur={onBlurInputHandler}>
+            <Input
+              value={visitorInfo.contact}
+              onChange={onChangeInfoHandler}
+              variant="default"
+              placeholder={placeholder.contact}
+              maxLength={11}
+              isError={!checkValidationContact(visitorInfo.contact)}
+              errorType="contact"
+              name="contact"
+            />
+          </div>
           <AddressBook />
         </div>
         <div css={addBtnStyles}>
@@ -81,7 +122,7 @@ function InvitationVisitorsContainer() {
           />
         )}
       </div>
-      <div css={buttonWrapperStyles}>
+      <div css={buttonWrapperStyles(isFocused)}>
         <Button
           content={button.next}
           variant="blue"
@@ -161,7 +202,7 @@ const inputWrapperStyles = css`
   gap: 12px;
 `;
 
-const visitorsListWrapper = (visitorsList: string[]) => css`
+const visitorsListWrapper = (visitorsList: VisitorInfo[]) => css`
   display: flex;
   flex-direction: column;
   gap: 21px;
@@ -169,9 +210,10 @@ const visitorsListWrapper = (visitorsList: string[]) => css`
   margin-bottom: ${visitorsList.length > 3 ? '100px;' : '0'};
 `;
 
-const buttonWrapperStyles = css`
+const buttonWrapperStyles = (isFocused: boolean) => css`
   position: fixed;
   bottom: 0;
+  display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
   max-width: 360px;

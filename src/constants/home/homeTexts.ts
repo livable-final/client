@@ -15,7 +15,7 @@ export const HOME_TEXTS = {
     subtitle: '메뉴 추천! 점심 룰렛',
     body: '오늘 뭐 먹지?',
     icon: 'Roulette',
-    href: '/lunch/calendar',
+    href: '/lunch/roulette',
   },
   bulletin: [
     { title: '공지', content: '엘리베이터 정기 점검 안내(8/23)' },

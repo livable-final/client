@@ -169,3 +169,128 @@ export const DUMMMY_MENU_TOP_TEN = [
       'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
   },
 ];
+
+export const DUMMY_RESPONSE = {
+  data: [
+    {
+      restaurantId: 1,
+      name: '현수네 기사식당',
+      tastePercentage: 34,
+      representativeImageUrl:
+        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+      address: '테라타워 11층',
+      floor: 11,
+      isBuilding: true,
+      estimatedTime: 0,
+      review: '맛나용!',
+    },
+    {
+      restaurantId: 2,
+      name: '현수네 백반집',
+      tastePercentage: 55,
+      representativeImageUrl:
+        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+      address: '테라타워 10층',
+      floor: 10,
+      isBuilding: true,
+      estimatedTime: 0,
+      review: '맛나용!',
+    },
+    {
+      restaurantId: 3,
+      name: '현수네 한식왕',
+      tastePercentage: 77,
+      representativeImageUrl:
+        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+      address: '마미상가 3층',
+      floor: 0,
+      isBuilding: false,
+      estimatedTime: 3,
+      review: '맛나용!',
+    },
+    {
+      restaurantId: 4,
+      name: '현수네 기사식당',
+      tastePercentage: 34,
+      representativeImageUrl:
+        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+      address: '테라타워 11층',
+      floor: 11,
+      isBuilding: true,
+      estimatedTime: 0,
+      review: '맛나용!',
+    },
+    {
+      restaurantId: 5,
+      name: '현수네 백반집',
+      tastePercentage: 55,
+      representativeImageUrl:
+        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+      address: '테라타워 10층',
+      floor: 10,
+      isBuilding: true,
+      estimatedTime: 0,
+      review: '맛나용!',
+    },
+    {
+      restaurantId: 6,
+      name: '현수네 한식왕',
+      tastePercentage: 77,
+      representativeImageUrl:
+        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+      address: '마미상가 지하 1층',
+      floor: 0,
+      isBuilding: false,
+      estimatedTime: 3,
+      review: '맛나용!',
+    },
+    {
+      restaurantId: 7,
+      name: '현수네 기사식당',
+      tastePercentage: 34,
+      representativeImageUrl:
+        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+      address: '테라타워 11층',
+      floor: 11,
+      isBuilding: true,
+      estimatedTime: 0,
+      review: '맛나용!',
+    },
+    {
+      restaurantId: 8,
+      name: '현수네 백반집',
+      tastePercentage: 55,
+      representativeImageUrl:
+        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+      address: '테라타워 10층',
+      floor: 10,
+      isBuilding: true,
+      estimatedTime: 0,
+      review: '맛나용!',
+    },
+    {
+      restaurantId: 9,
+      name: '현수네 한식왕',
+      tastePercentage: 77,
+      representativeImageUrl:
+        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+      address: '마미상가 3층',
+      floor: 0,
+      isBuilding: false,
+      estimatedTime: 3,
+      review: '맛나용!',
+    },
+    {
+      restaurantId: 10,
+      name: '현수네 한식왕',
+      tastePercentage: 77,
+      representativeImageUrl:
+        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
+      address: '마미상가 3층',
+      floor: 0,
+      isBuilding: false,
+      estimatedTime: 3,
+      review: '맛나용!',
+    },
+  ],
+};

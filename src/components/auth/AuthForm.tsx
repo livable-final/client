@@ -1,19 +1,18 @@
 import mq from '@/utils/mediaquery';
 import Category from '@/components/common/Category';
-import useViewStore from '@/stores/usePagesStore';
 import { css } from '@emotion/react';
 import { COMMON_USER_NAME } from '@/constants/common';
-import COMPONENT_NAME from '@/constants/common/pages';
 import useSaveStore from '@/stores/useSaveStore';
+import { useRouter } from 'next/router';
 
 function AuthForm() {
+  const router = useRouter();
   const MEMBER_TOKEN = process.env.MEMBER_TOKEN as string;
-  const { setNextComponent } = useViewStore();
   const { setUserToken } = useSaveStore();
 
   const onClickCategoryHandler = () => {
-    setNextComponent(COMPONENT_NAME.common.home);
     setUserToken(MEMBER_TOKEN);
+    router.push('/');
   };
 
   return (

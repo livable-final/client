@@ -4,6 +4,7 @@ function Document() {
   return (
     <Html lang="ko">
       <Head />
+      <title>Livable</title>
       <body>
         <Main />
         <NextScript />

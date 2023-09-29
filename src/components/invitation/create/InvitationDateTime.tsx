@@ -3,17 +3,18 @@ import ko from 'date-fns/locale/ko';
 import 'react-datepicker/dist/react-datepicker.css';
 import Toggle from '@/components/common/Toggle';
 import Button from '@/components/common/Button';
+import InvitationSelectTime from '@/components/invitation/create/InvitationSelectTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import InvitationSelectTime from '@/components/invitation/create/InvitationSelectTime';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function InvitationDateTime() {
-  const { title, button } = CREATE_TEXTS;
+  const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
   const { closeBottomSheet } = useBottomSheetStore();
 
   const [startDate, setStartDate] = useState(new Date());
@@ -39,8 +40,6 @@ function InvitationDateTime() {
             maxDate={addMonths(new Date(), 5)}
             startDate={startDate}
             endDate={endDate}
-            // 이미 예약된 날짜 비활성화 (사용여부 판단 필요)
-            // excludeDateIntervals={}
             selectsRange
             inline
             showDisabledMonthNavigation
@@ -68,19 +67,61 @@ function InvitationDateTime() {
 const containerStyles = css`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 30px;
   width: 100%;
-  height: 500px;
+  padding: 0 4px 0;
   overflow: scroll;
 `;
 
 const dateContainerStyles = css`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
+const timeContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+`;
+
+const titleStyles = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding-bottom: 20px;
+  color: ${theme.palette.title};
+  font: ${theme.font.title.title2_500};
+  line-height: 29px;
+`;
+
+const buttonWrapperStyles = css`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  min-width: 280px;
+  max-width: 360px;
+  padding: 0 20px 20px;
+  margin: 0 -6px 0;
+
+  ${mq.md} {
+    min-width: 361px;
+    max-width: 480px;
+  }
+  ${mq.lg} {
+    min-width: 481px;
+    max-width: 640px;
+  }
+  ${mq.tab} {
+    min-width: 641px;
+    max-width: 1024px;
+  }
+`;
+
+// 기본 캘린더 디자인 커스텀
 const calendarStyles = css`
-  // 기본 캘린더 디자인 커스텀
   .calendar {
     width: 100%;
     border: transparent;
@@ -149,6 +190,9 @@ const calendarStyles = css`
         color: ${theme.palette.white};
         opacity: 0.8;
       }
+      .react-datepicker__day--disabled {
+        color: ${theme.palette.greyscale.grey30};
+      }
     }
     .react-datepicker__day {
       display: flex;
@@ -167,42 +211,4 @@ const calendarStyles = css`
     }
   }
 `;
-
-const timeContainerStyles = css`
-  display: flex;
-  flex-direction: column;
-  height: 300px;
-`;
-
-const titleStyles = css`
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 20px;
-  color: ${theme.palette.title};
-  font: ${theme.font.title.title2_500};
-  line-height: 29px;
-`;
-
-const buttonWrapperStyles = css`
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  min-width: 280px;
-  max-width: 360px;
-  padding-bottom: 20px;
-
-  ${mq.md} {
-    min-width: 361px;
-    max-width: 480px;
-  }
-  ${mq.lg} {
-    min-width: 481px;
-    max-width: 640px;
-  }
-  ${mq.tab} {
-    min-width: 641px;
-    max-width: 800px;
-  }
-`;
-
 export default InvitationDateTime;

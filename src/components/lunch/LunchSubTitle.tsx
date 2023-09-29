@@ -4,7 +4,7 @@ import { CALENDAR_CASE } from '@/constants/lunch';
 import { LunchSubTitleProps } from '@/types/lunch/calendar';
 
 function LunchSubTitle({ title, type, userName }: LunchSubTitleProps) {
-  const { subTitle, review } = CALENDAR_CASE;
+  const { subTitle, review, roulette } = CALENDAR_CASE;
   let fontStyle;
   let fontSize;
   let lineHeight;
@@ -26,6 +26,11 @@ function LunchSubTitle({ title, type, userName }: LunchSubTitleProps) {
       break;
     case review.type2:
       fontStyle = `${theme.font.subTitle.subTitle2_600}`;
+      fontSize = `17px`;
+      lineHeight = `24px`;
+      break;
+    case roulette.type:
+      fontStyle = `${theme.font.subTitle.subTitle2_500}`;
       fontSize = `17px`;
       lineHeight = `24px`;
       break;

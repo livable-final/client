@@ -1,3 +1,3 @@
 export interface ErrorMessageProps {
-  errorType: string | undefined;
+  [key: string]: string | undefined;
 }

@@ -19,13 +19,21 @@ function LunchCalendarSearch() {
     setNextComponent('LunchCalendarReview');
   };
 
+  const onChangeHandler = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setSearchText(e.target.value);
+  };
+
   if (nextComponent === 'LunchCalendarMenu') return <LunchCalendarMenu />;
 
   return (
     <section>
       <Header title={title.search} onClick={onClickHeaderHandler} />
       <div css={inputStyles}>
-        <Input variant="search" value={searchText} setValue={setSearchText} />
+        <Input variant="search" value={searchText} onChange={onChangeHandler} />
         <SearchIcon css={iconStyles} />
       </div>
       <div css={textStyles}>

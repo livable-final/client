@@ -1,27 +1,26 @@
 import Icons from '@/components/common/Icons';
 import Button from '@/components/common/Button';
-import usePagesStore from '@/stores/usePagesStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { COMMON_ICON_NAMES } from '@/constants/common';
+import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function InvitationDoneBtn() {
-  const { button } = CREATE_TEXTS;
+  const { button }: InvitationCreateTexts = CREATE_TEXTS;
   const { invitation } = COMMON_ICON_NAMES;
-  const { setNextComponent } = usePagesStore();
 
   const router = useRouter();
 
+  // 마이 페이지 이동
   const onClickToMypageHandler = () => {
-    router.push('/user');
-    setNextComponent('InvitationPurposeContainer');
+    router.push(`/user/invitation-list`);
   };
 
+  // 메인 홈 이동
   const onClickToHomeHandler = () => {
-    router.push('/');
-    setNextComponent('InvitationPurposeContainer');
+    router.push(`/`);
   };
 
   return (
