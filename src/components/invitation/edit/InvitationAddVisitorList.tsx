@@ -118,7 +118,7 @@ function InvitationAddVisitorList({
         </div>
       </div>
       <Button
-        content={INVITATION_EDIT_TEXTS.bottomSheet.contact}
+        content={INVITATION_EDIT_TEXTS.bottomSheet.btn}
         variant="blue"
         onClick={onclickDoneBtnHandler}
       />
