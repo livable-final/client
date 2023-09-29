@@ -39,7 +39,7 @@ export interface InvitationCreateStore {
   createContents: PostInvitationContents;
   setCreateContents: (
     key: string,
-    content: string | number | VisitorInfo[],
+    content: string | number | null | undefined | VisitorInfo[],
   ) => void;
 }
 
