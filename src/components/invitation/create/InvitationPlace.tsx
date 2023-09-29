@@ -12,7 +12,7 @@ import { css } from '@emotion/react';
 
 function InvitationPlace(placeList) {
   const { closeBottomSheet } = useBottomSheetStore();
-  const { createContents, setCreateContents } = useInvitationCreateStore();
+  const { setCreateContents } = useInvitationCreateStore();
 
   const { title, button, placeholder, radioBtn }: InvitationCreateTexts =
     CREATE_TEXTS;
