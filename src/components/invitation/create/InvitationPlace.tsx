@@ -1,50 +1,57 @@
 import Button from '@/components/common/Button';
+import RadioBtn from '@/components/common/RadioBtn';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import getIsCommonData from '@/utils/getIsCommonData';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
+import { InvitationCreateTexts } from '@/types/invitation/create';
 import { css } from '@emotion/react';
 
 function InvitationPlace(placeList) {
   const { closeBottomSheet } = useBottomSheetStore();
-  const { title, button } = CREATE_TEXTS;
+  const { createContents, setCreateContents } = useInvitationCreateStore();
 
+  const { title, button, placeholder, radioBtn }: InvitationCreateTexts =
+    CREATE_TEXTS;
+
+  // 받아온 props 가공
   const { placeList: list } = placeList;
   const { offices, commonPlaces } = list || {
     offices: [],
     commonPlaces: [],
   };
 
-  const [test, setTest] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState('');
-  const [place, setPlace] = useState('');
-  const [etcPlace, setEtcPlace] = useState('');
+  const [allPlaceList, setAllPlaceList] = useState([]);
+  // 선택한 값
+  const [select, setSelect] = useState('');
 
-  console.log('바텀시트 프롭 확인', placeList);
+  // console.log('바텀시트 프롭 확인', placeList);
 
-  // 초대 가능한 장소 응답 데이터 배열
+  // 초대 가능한 장소 응답 데이터 배열화
   useEffect(() => {
-    setTest([...offices, ...commonPlaces]);
-  }, []);
+    setAllPlaceList([...offices, ...commonPlaces]);
+  }, [commonPlaces, offices]);
 
-  console.log('바텀시트 합친 데이터', test);
+  // console.log('바텀시트 합친 데이터', allPlaceList);
 
-  // 초대 장소 선택
-  const onChangeRadioHandler = (e) => {
+  // 라디오버튼 선택
+  const onChangeRadioHandler = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
-    setPlace(e.target.value);
-    setIsCheck(!isCheck);
+    setSelect(e.target.value);
   };
 
-  // 초대 장소 직접 입력
-  const onChangeInputHandler = (e) => {
-    console.log(e.target.value);
-    setEtcPlace(e.target.value);
+  // 직접입력
+  const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setSelect(e.target.value);
   };
 
   // 하단 버튼 핸들러
   const onClickBtnHandler = () => {
+    console.log('최종선택값', select);
+    setCreateContents('officeName', select);
     closeBottomSheet();
   };
 
@@ -52,13 +59,35 @@ function InvitationPlace(placeList) {
     <div css={containerStyles}>
       <div css={titleStyles}>{title.invitationPlace}</div>
       <div css={radioBtnWrapperStyles}>
-        {/* <RadioBtn
-          list={test}
-          place={place}
-          etcPlace={etcPlace}
-          onChangeRadio={onChangeRadioHandler}
-          onChangeInput={onChangeInputHandler}
-        /> */}
+        {allPlaceList.map((listEl) => (
+          <div
+            css={radioBtnStyles}
+            onChange={onChangeRadioHandler}
+            key={
+              getIsCommonData(listEl)
+                ? listEl.commonPlaceName
+                : listEl.officeName
+            }
+          >
+            <RadioBtn
+              content={
+                getIsCommonData(listEl)
+                  ? listEl.commonPlaceName
+                  : listEl.officeName
+              }
+              select={select}
+            />
+          </div>
+        ))}
+        <div css={radioBtnStyles} onChange={onChangeRadioHandler}>
+          <RadioBtn
+            content={radioBtn}
+            select={select}
+            isEtc
+            placeholder={placeholder.placeEtc}
+            onChange={onChangeInputHandler}
+          />
+        </div>
       </div>
       <div css={buttonWrapperStyles}>
         <Button
@@ -81,8 +110,15 @@ const containerStyles = css`
 `;
 
 const radioBtnWrapperStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
   overflow: scroll;
+`;
+
+const radioBtnStyles = css`
+  display: flex;
 `;
 
 const titleStyles = css`
