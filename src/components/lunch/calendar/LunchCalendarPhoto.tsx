@@ -3,10 +3,12 @@ import theme from '@/styles/theme';
 import { useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import { Camera, XSBlack } from '@/assets/icons';
+import useWriteStore from '@/stores/useWriteStore';
 
 function LunchCalendarPhoto() {
-  const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
+  const imageFiles = useWriteStore((state) => state.imageFiles);
+  const setImagefiles = useWriteStore((state) => state.setImageFiles);
   const fileInput = useRef<HTMLInputElement>(null);
 
   // ref 클릭
@@ -18,7 +20,7 @@ function LunchCalendarPhoto() {
 
   // onChange
   const onChangehandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newImages = [...files];
+    const newImages = [...imageFiles];
     const newPreviews = [...previews];
 
     for (let i = 0; i < e.target.files!.length; i += 1) {
@@ -39,19 +41,19 @@ function LunchCalendarPhoto() {
         reader.readAsDataURL(file);
       }
     }
-    setFiles(newImages);
+    setImagefiles(newImages);
   };
 
   // 이미지 삭제
   const onClickDeleteHandler = (e: React.MouseEvent, index: number) => {
     e.preventDefault();
-    const newImages = [...files];
+    const newImages = [...imageFiles];
     const newPreviews = [...previews];
 
     newImages.splice(index, 1);
     newPreviews.splice(index, 1);
 
-    setFiles(newImages);
+    setImagefiles(newImages);
     setPreviews(newPreviews);
   };
 
