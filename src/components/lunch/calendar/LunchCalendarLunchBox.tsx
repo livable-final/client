@@ -41,13 +41,13 @@ function LunchCalendarLunchBox() {
 
   return (
     <section>
-      <Header title={category.cafeteria.text} onClick={onClickHeaderHandler} />
+      <Header title={category[2].placeholder} onClick={onClickHeaderHandler} />
       <LunchSubTitle title={subTitle.todayLunch} type="title" />
       <div css={inputBoxStyles}>
         <Input
           variant="search"
           textarea
-          placeholder={category.eatOut.placeholder}
+          placeholder={category[2].placeholder}
           maxLength={299}
           value={searchText}
           onChange={onChangeHandler}

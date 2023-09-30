@@ -9,14 +9,10 @@ import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchCalendarForm from '@/components/lunch/calendar/LunchCalendarForm';
 import LunchCalendarDetailsSlide from '@/components/lunch/calendar/LunchCalendarDetailsSlide';
 import usePagesStore from '@/stores/usePagesStore';
-import LunchCalendarReview from '@/components/lunch/calendar/LunchCalendarReview';
-import LunchCalendarSearch from '@/components/lunch/calendar/LunchCalendarSearch';
-import LunchCalendarLunchBox from '@/components/lunch/calendar/LunchCalendarLunchBox';
-import LunchCalendarCafeteria from '@/components/lunch/calendar/LunchCalendarCafeteria';
 
 function LunchCalendarMain() {
   const [isCompleted] = useState(false);
-  const { nextComponent, setNextComponent } = usePagesStore();
+  const { nextComponent } = usePagesStore();
   const router = useRouter();
   const { title, subTitle } = CALENDAR_CONTENT;
 
@@ -25,21 +21,8 @@ function LunchCalendarMain() {
   };
 
   const onClickButtonHandler = () => {
-    setNextComponent('LunchCalendarReview');
+    router.push('/lunch/write');
   };
-
-  if (nextComponent === 'LunchCalendarReview') {
-    return <LunchCalendarReview />;
-  }
-  if (nextComponent === 'LunchCalendarSearch') {
-    return <LunchCalendarSearch />;
-  }
-  if (nextComponent === 'LunchCalendarCafeteria') {
-    return <LunchCalendarCafeteria />;
-  }
-  if (nextComponent === 'LunchCalendarLunchBox') {
-    return <LunchCalendarLunchBox />;
-  }
 
   return (
     <section>

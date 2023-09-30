@@ -43,21 +43,22 @@ function LunchCalendarCafeteria() {
 
   return (
     <section>
-      <Header title={category.cafeteria.text} onClick={onClickHeaderHandler} />
+      <Header title={category[1].category} onClick={onClickHeaderHandler} />
       <LunchSubTitle title={subTitle.todayLunch} type="title" />
       <div css={titleStyles}>
         <p>테라타워</p>
       </div>
       <div css={buttonStyles}>
-        <LunchCalendarRatingBtn title={button.button5.good} />
-        <LunchCalendarRatingBtn title={button.button5.bad} />
+        {button.button5.map((value) => (
+          <LunchCalendarRatingBtn key={value} title={value} />
+        ))}
       </div>
       <div css={inputBoxStyles}>
         <p>{subTitle.review}</p>
         <Input
           variant="search"
           textarea
-          placeholder={category.eatOut.placeholder}
+          placeholder={category[1].placeholder}
           maxLength={299}
           value={searchText}
           onChange={onChangeHandler}
@@ -92,7 +93,7 @@ const buttonStyles = css`
 const inputBoxStyles = css`
   margin-bottom: 16px;
   p {
-    margin-top: 12px;
+    margin-bottom: 12px;
     font: ${theme.font.subTitle.subTitle2_500};
     color: ${theme.palette.greyscale.grey90};
   }

@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
+import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
+import { postRestaurantReview } from '@/pages/api/lunch/calendarRequests';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Button from '@/components/common/Button';
@@ -14,26 +16,29 @@ import LunchCalendarBottomSheet from '@/components/lunch/calendar/LunchCalendarB
 import usePagesStore from '@/stores/usePagesStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useSaveStore from '@/stores/useSaveStore';
+import useWriteStore from '@/stores/useWriteStore';
 
 function LunchCalenderEatOut() {
   const [searchText, setSearchText] = useState('');
-  const { setNextComponent } = usePagesStore();
+  const { goBack } = usePagesStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const {
+    restaurant,
+    selectedMenu,
+    resetSelectedMenu,
+    ratingState,
+    description,
+    imageFiles,
+  } = useWriteStore();
   const { isSave } = useSaveStore();
-  const { subTitle, category, button } = CALENDAR_CONTENT;
+  const { subTitle, category, subCategory, button } = CALENDAR_CONTENT;
+
+  const router = useRouter();
 
   const onClickHeaderHandler = () => {
-    setNextComponent('LunchCalendarReview');
+    goBack();
+    resetSelectedMenu();
   };
-
-  const onClickBtnHandler = () => {
-    if (!isSave.PhotoMsg) {
-      openBottomSheet(<LunchCalendarBottomSheet />);
-    } else {
-      // isSave.PhotoMsg가 참일 때
-    }
-  };
-
   const onChangeHandler = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -42,52 +47,106 @@ function LunchCalenderEatOut() {
     setSearchText(e.target.value);
   };
 
+  const onClickMsgBtnHandler = () => {
+    openBottomSheet(<LunchCalendarBottomSheet />);
+  };
+
+  const onClickBtnHandler = async () => {
+    try {
+      const formData = new FormData();
+
+      const userData = {
+        restaurantId: restaurant.restaurantId,
+        taste: ratingState.taste,
+        amount: ratingState.amount,
+        speed: ratingState.speed,
+        service: ratingState.service,
+        description,
+        menus: selectedMenu,
+      };
+
+      const blob = new Blob([JSON.stringify(userData)], {
+        type: 'application/json',
+      });
+      formData.append('data', blob);
+      for (let i = 0; i < imageFiles.length; i + 1) {
+        formData.append('imageFiles', imageFiles[i]);
+      }
+      await postRestaurantReview(formData);
+      router.replace('/lunch/calendar');
+    } catch (err) {
+      router.replace('/lunch/calendar');
+    }
+  };
+
   return (
-    <section>
-      <Header title={category.eatOut.text} onClick={onClickHeaderHandler} />
-      <LunchSubTitle title={subTitle.todayLunch} type="title" />
-      <div css={reviewStyles}>
-        <div css={textStyles}>
-          <strong>식당 이름</strong>
-          <p>식당 메뉴</p>
+    <section css={pageStyles}>
+      <div>
+        <Header title={category[0].category} onClick={onClickHeaderHandler} />
+        <LunchSubTitle title={subTitle.todayLunch} type="title" />
+        <div css={reviewStyles}>
+          <div css={textStyles}>
+            <strong>{restaurant.restaurantName}</strong>
+            <div>
+              {selectedMenu.map((value, i) => (
+                <span key={`메뉴${i * 12}`}>{value.menuName}</span>
+              ))}
+            </div>
+          </div>
+          <div css={ratingStyles}>
+            {button.button5.map((value) => (
+              <Fragment key={value}>
+                <LunchCalendarRatingBtn title={value} />
+                <input type="radio" name="rating" value={value} hidden />
+              </Fragment>
+            ))}
+          </div>
+          <div>
+            {subCategory.map((item) => {
+              if (item.type === 'taste') {
+                return null;
+              }
+              return (
+                <LunchCalendarReviewCategory
+                  key={item.type}
+                  type={item.type}
+                  title={item.title}
+                />
+              );
+            })}
+          </div>
         </div>
-        <div css={ratingStyles}>
-          <LunchCalendarRatingBtn title={button.button5.good} />
-          <LunchCalendarRatingBtn title={button.button5.bad} />
-        </div>
-        <div>
-          <LunchCalendarReviewCategory
-            title={category.eatOut.subCategory.amount}
-          />
-          <LunchCalendarReviewCategory
-            title={category.eatOut.subCategory.speed}
-          />
-          <LunchCalendarReviewCategory
-            title={category.eatOut.subCategory.service}
+        <div css={textReviewStyles}>
+          <p>{subTitle.review}</p>
+          <Input
+            variant="search"
+            textarea
+            placeholder={category[0].placeholder}
+            maxLength={299}
+            value={searchText}
+            onChange={onChangeHandler}
           />
         </div>
+        <LunchCalendarPhoto />
       </div>
-      <div css={textReviewStyles}>
-        <p>{subTitle.review}</p>
-        <Input
-          variant="search"
-          textarea
-          placeholder={category.eatOut.placeholder}
-          maxLength={299}
-          value={searchText}
-          onChange={onChangeHandler}
+      <div css={btnBoxStyles}>
+        <Button
+          content={button.button4.text2}
+          variant="blue"
+          onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
         />
       </div>
-      <LunchCalendarPhoto />
-      <Button
-        content={button.button4.text2}
-        variant="blue"
-        onClick={onClickBtnHandler}
-      />
       {bottomSheetState.isOpen && !isSave.PhotoMsg && <BottomSheet />}
     </section>
   );
 }
+
+const pageStyles = css`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 const reviewStyles = css`
   margin: 16px 0 20px;
@@ -123,6 +182,10 @@ const textReviewStyles = css`
     font: ${theme.font.subTitle.subTitle2_500};
     color: ${theme.palette.greyscale.grey90};
   }
+`;
+
+const btnBoxStyles = css`
+  margin-bottom: 20px;
 `;
 
 export default LunchCalenderEatOut;
