@@ -1,31 +1,46 @@
 import { css } from '@emotion/react';
 import { INVITATION_EDIT_TEXTS } from '@/constants/invitation/editTexts';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import theme from '@/styles/theme';
 import Add from '@/components/common/Add';
 import Button from '@/components/common/Button';
 import NameTag from '@/components/common/NameTag';
 import AddressBook from '@/components/common/AddressBook';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import {
-  NewVisitorsList,
-  InvitationAddVisitorListProps,
-} from '@/types/invitation/edit';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import { InvitationAddVisitorListProps } from '@/types/invitation/edit';
+import { VisitorInfo } from '@/types/invitation/api';
 
 function InvitationAddVisitorList({
   setVisitorList,
   visitorsList,
-  isEdit = true,
+  isEdit = false,
 }: InvitationAddVisitorListProps) {
   const [addVisitorName, setAddVisitorName] = useState('');
   const [addVisitorContact, setAddVisitorContact] = useState('');
-  const [addVisitorList, setAddVisitorList] = useState<NewVisitorsList[]>([]);
+  const [addVisitorList, setAddVisitorList] = useState<VisitorInfo[]>([]);
   const { closeBottomSheet } = useBottomSheetStore();
+  const { createContents, setCreateContents } = useInvitationCreateStore();
 
-  // 삭제로직 추가 예정
-  const onClickHandler = () => {};
+  // 스토어에서 가져온 방문자 정보
+  const [storeVisitorList, setStoreVisitorList] = useState<VisitorInfo[]>(
+    createContents.visitors,
+  );
 
-  // 추가 사용자 inupt handler
+  // 스토어 방문자 정보가 바뀌면 상태 업데이트
+  // useEffect(() => {
+  //   setStoreVisitorList(createContents.visitors);
+  // }, [createContents.visitors]);
+
+  // 방문자 삭제 버튼 핸들러
+  const onClickDeleteVisitorHandler = (name: string) => {
+    const deletedVisitors = createContents.visitors?.filter(
+      (visitor) => visitor.name !== name,
+    );
+    setCreateContents('visitors', deletedVisitors);
+  };
+
+  // 추가 사용자 input handler
   const onChangeInputNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddVisitorName(e.target.value);
   };
@@ -35,39 +50,49 @@ function InvitationAddVisitorList({
     setAddVisitorContact(e.target.value);
   };
 
-  // 바텀시트에서 추가한 새로운 visitorLsit
-  const newVistorList = (name: string, contact: string): void => {
+  // 바텀시트에서 추가한 새로운 visitorList
+  const newVisitorList = (name: string, contact: string): void => {
     // 새로 추가할 visitor 객체
-    const newVistorName = {
+    const newVisitorInfo = {
       name,
       contact,
     };
     // 수정에서 바텀시트로 들어왔을때 로직
     if (isEdit) {
-      setAddVisitorList([...addVisitorList, newVistorName]);
-    } else if (setVisitorList && visitorsList) {
-      setVisitorList([...visitorsList, newVistorName]);
+      setAddVisitorList([...addVisitorList, newVisitorInfo]);
+    }
+    if (visitorsList) {
+      // setAddVisitorList([...addVisitorList, newVisitorInfo]);
+      setCreateContents('visitors', [
+        ...createContents.visitors,
+        newVisitorInfo,
+      ]);
     }
     // input창 clear
     setAddVisitorName('');
     setAddVisitorContact('');
   };
 
+  // 방문자 추가 버튼
   const onClickAddHandler = () => {
-    newVistorList(addVisitorName, addVisitorContact);
+    newVisitorList(addVisitorName, addVisitorContact);
   };
 
-  const addVisitorLsit = (
-    setNewList: React.Dispatch<React.SetStateAction<NewVisitorsList[]>>,
-    newList: NewVisitorsList[],
+  const addVisitorListHandler = (
+    setNewList: React.Dispatch<React.SetStateAction<VisitorInfo[]>>,
+    newList: VisitorInfo[],
   ) => {
     // props로 받아온 기존 visitorList에 새로운 visitor 추가
     setNewList(newList);
-    // 바텀시트 clsoe
+    // 바텀시트 close
     closeBottomSheet();
   };
+
+  // 완료 버튼
   const onclickDoneBtnHandler = () => {
-    if (setVisitorList) addVisitorLsit(setVisitorList, addVisitorList);
+    if (setVisitorList) {
+      addVisitorListHandler(setVisitorList, addVisitorList);
+    } else closeBottomSheet();
   };
 
   return (
@@ -96,22 +121,22 @@ function InvitationAddVisitorList({
             <Add onClick={onClickAddHandler} />
           </div>
           <div css={newVisitorListStyles}>
-            {/* props로 가져온 기존 visitorLsit */}
-            {visitorsList &&
-              visitorsList.map((item) => (
+            {/* props로 가져온 기존 visitorList */}
+            {createContents.visitors &&
+              createContents.visitors?.map((item) => (
                 <NameTag
-                  key={item.contact}
+                  key={item.name}
                   name={item.name}
-                  onClick={onClickHandler}
+                  onClick={onClickDeleteVisitorHandler}
                 />
               ))}
-            {/* 새롭게 추가한 visitorLsit */}
-            {addVisitorList &&
+            {/* 새롭게 추가한 visitorList */}
+            {isEdit &&
               addVisitorList.map((item) => (
                 <NameTag
-                  key={item.contact}
+                  key={item.name}
                   name={item.name}
-                  onClick={onClickHandler}
+                  onClick={onClickDeleteVisitorHandler}
                 />
               ))}
           </div>
