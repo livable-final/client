@@ -1,4 +1,4 @@
-import { Response } from '@/types/common/response';
+import { ArgType, Response } from '@/types/common/response';
 import { apiInstance } from '@/pages/api/axios';
 import {
   GetMenuReviewsData,
@@ -20,17 +20,39 @@ export const getRanking = async ({ buildingId }: GetRankingData) => {
 };
 
 // * GET 특정 메뉴에 대한 리뷰 리스트 응답
-export const getMenuReviews = async ({ menuId, page }: GetMenuReviewsData) => {
-  const response = await apiInstance.get(
-    `reviews/menus/${menuId}?page=${page}&size=10`,
-  );
+export const getMenuReviews = async (
+  menuId?: ArgType,
+): Promise<Response<GetMenuReviewsData[]>> => {
+  const response = await apiInstance.get(`reviews/menus/${menuId}`);
   return response.data;
 };
 
 // * GET 특정 메뉴를 판매하는 식당 목록 응답
 export const getRestList = async (
-  menuId?: number | string | Date,
+  menuId?: ArgType,
 ): Promise<Response<GetRestListData[]>> => {
   const response = await apiInstance.get(`restaurants/menus/${menuId}`);
+  return response.data;
+};
+
+// * GET 최신 리뷰 리스트 응답
+export const getReviewList = async (
+  buildingId?: ArgType,
+  page?: ArgType,
+): Promise<Response<GetMenuReviewsData[]>> => {
+  const response = await apiInstance.get(
+    `reviews/buildings/${buildingId}?page=${page}`,
+  );
+  return response.data;
+};
+
+// * GET 특정 음식점 리뷰 리스트 응답
+export const getRestReviewList = async (
+  restaurantId?: ArgType,
+  page?: ArgType,
+): Promise<Response<GetMenuReviewsData[]>> => {
+  const response = await apiInstance.get(
+    `reviews/restaurants/${restaurantId}?page=${page}`,
+  );
   return response.data;
 };
