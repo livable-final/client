@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-import { useState } from 'react';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
-import Button from '@/components/common/Button';
 import {
   findRandomMenus,
   selectRandomCategory,
@@ -10,135 +8,150 @@ import {
 import theme from '@/styles/theme';
 import useFetch from '@/hooks/useFetch';
 import { getMenus } from '@/pages/api/lunch/lunchRequests';
+import mq from '@/utils/mediaquery';
+import LunchRoulettePushBtn from '@/components/lunch/roulette/LunchRoulettePushBtn';
+import LunchRouletteLockBtn from '@/components/lunch/roulette/LunchRouletteLockBtn';
+import LunchRouletteBg from '@/components/lunch/roulette/LunchRouletteBg';
+import useRouletteStore from '@/stores/useRouletteStore';
 
 function LunchRoulette() {
-  const [categoryState, setCategoryState] = useState('카테고리'); // 랜덤 카테고리명
-  const [menuState, setMenuState] = useState('메뉴'); // 랜덤 메뉴명
-  const [menuIdState, setMenuIdState] = useState(0);
-  const [isChecked, setIsChecked] = useState(false);
-  const [isShown, setIsShown] = useState(false);
-  const { time, title } = LUNCH_ROULETTE_CONSTANTS;
+  const { time } = LUNCH_ROULETTE_CONSTANTS;
+  const { categoryState, menuState, isLocked, isOperated, isPressed, isAgain } =
+    useRouletteStore();
+  const { setState } = useRouletteStore;
 
   const { response } = useFetch({
     fetchFn: getMenus,
   });
 
-  // 버튼 클릭 시 카테고리와 메뉴를 셔플하는 함수
-  const onClickHandler = () => {
-    setIsShown(false);
-    // 체크박스가 체크되었을 때
-    if (isChecked) {
-      // 메뉴만 랜덤하게 변경
+  // Push or Again  클릭 시 카테고리와 메뉴를 셔플하는 함수
+  const onClickBtnHandler = () => {
+    setState({ isOperated: !isOperated }); // 가동 중!
+    setState({ isPressed: !isPressed }); // 버튼 눌림!
+
+    // *** 카테고리 고정 시! ***
+    if (isLocked && isAgain) {
       const menuInterval = setInterval(() => {
-        const menus = findRandomMenus(categoryState, response.data);
-        const { name, menuId } = menus; // 랜덤 메뉴의 ID
-        setMenuState(name);
-        setMenuIdState(menuId);
+        const menus = findRandomMenus(categoryState, response.data); // 랜덤하게 메뉴를 선정
+        const { name, menuId } = menus; // 랜덤 메뉴의 ID와 메뉴명
+        setState({ menuState: name });
+        setState({ menuIdState: menuId });
+      }, time.interval); // 메뉴 셔플 속도 (100ms)
 
-        // 메뉴 셔플 속도 (100ms)
-      }, time.interval);
-
-      // 모든 선택이 완료되는 시간 인터벌 (500ms)
       setTimeout(() => {
         clearInterval(menuInterval);
-        setIsShown(true);
-      }, time.duration.fixed);
+        setState({ isOperated: true }); // 가동 완료!
+        setState({ isPressed: false }); // 버튼 원상 복귀!
+      }, time.duration.fixed); // 모든 선택이 완료되는 시간 인터벌 (3000ms)
+
+      // *** 카테고리 미 고정 시! ***
     } else {
-      // 체크박스가 체크되지 않았을 때
       const categoryInterval = setInterval(() => {
-        const category = selectRandomCategory(response.data);
-        const { categoryName } = category;
-        setCategoryState(categoryName);
+        const category = selectRandomCategory(response?.data); // 랜덤하게 카테고리를 먼저 선정
+        const { categoryName } = category; // 카테고리 명
+        setState({ categoryState: categoryName });
 
         // 카테고리에 따른 메뉴 선택 인터벌 함수
         const menuInterval = setInterval(() => {
           const menus = selectRandomMenus(category);
           const { name, menuId } = menus; // 랜덤 메뉴의 ID
-          setMenuState(name);
-          setMenuIdState(menuId);
+          setState({ menuState: name });
+          setState({ menuIdState: menuId });
 
           // 메뉴 셔플 속도 (100ms)
         }, time.interval);
 
-        // 카테고리 선택 완료 후 메뉴 선택까지의 시간 인터벌 (500ms)
         setTimeout(() => {
           clearInterval(menuInterval);
-        }, time.duration.menu);
+        }, time.duration.menu); // 카테고리 선택 완료 후 메뉴 선택까지의 시간 인터벌 (500ms)
+      }, time.interval); // 카테고리 셔플 속도 (100ms)
 
-        // 카테고리 셔플 속도 (100ms)
-      }, time.interval);
-
-      // 카테고리 선택 완료까지의 시간 인터벌 (3500ms)
       setTimeout(() => {
         clearInterval(categoryInterval);
-      }, time.duration.category);
+      }, time.duration.category); // 카테고리 선택 완료까지의 시간 인터벌 (3500ms)
 
-      // 모든 선택이 완료되는 시간 인터벌 (500ms + 3500ms = 4000ms)
       setTimeout(() => {
-        setIsShown(true);
-      }, time.duration.category + time.duration.menu);
+        setState({ isAgain: true }); // 반복 선택 !
+        setState({ isOperated: true }); // 가동 완료!
+        setState({ isPressed: false }); // 버튼 원상 복귀!
+      }, time.duration.category + time.duration.menu); // 모든 선택이 완료되는 시간 인터벌 (500ms + 3500ms = 4000ms)
     }
   };
 
   return (
-    <section css={temp}>
-      <div css={WrapperStyles}>
+    <>
+      <div css={layoutStyles}>
+        <div css={bgStyles}>
+          <LunchRouletteBg isOperated={isOperated} />
+          <LunchRoulettePushBtn
+            isPressed={isPressed}
+            isAgain={isAgain}
+            onClick={onClickBtnHandler}
+          />
+          <LunchRouletteLockBtn
+            isAgain={isAgain}
+            isLocked={isLocked}
+            onClick={() => setState({ isLocked: !isLocked })}
+          />
+        </div>
+      </div>
+      <div css={wrapperStyles}>
         <span css={spanStyles}>{categoryState}</span>
         <span css={spanStyles}>{menuState}</span>
       </div>
-      <Button
-        onClick={onClickHandler}
-        content={title.roulette}
-        isDisabled={!isShown && menuIdState > 0}
-        variant="blue"
-      />
-      <div css={checkboxStyles(isShown)}>
-        <input
-          css={inputStyles}
-          type="checkbox"
-          checked={isChecked}
-          onChange={() => setIsChecked(!isChecked)}
-        />
-        <label>{`'${categoryState}' 고정`}</label>
-      </div>
-      {`이 음식의 ID값입니다 :> ${menuIdState}`}
-    </section>
+    </>
   );
 }
 
-const temp = css`
+const layoutStyles = css`
   display: flex;
-  height: 318px;
-  padding: 20px 0;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  width: 100%;
 `;
 
-const WrapperStyles = css`
+const bgStyles = css`
+  position: relative;
+  width: 242px;
+  height: 218px;
+
+  ${mq.md} {
+    width: 358px;
+    height: 338px;
+  }
+`;
+
+const wrapperStyles = css`
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 2;
+  height: 218px;
+  gap: 10px;
+  left: calc((100% - 150px) / 2);
+
+  ${mq.md} {
+    height: 318px;
+    gap: 48px;
+    left: calc((100% - 230px) / 2);
+  }
 `;
 
 const spanStyles = css`
-  min-width: 100px;
-  text-align: center;
-  font: ${theme.font.body.body1_600};
-`;
-
-const checkboxStyles = (isShown: boolean) => css`
-  display: ${isShown ? 'flex' : 'none'};
   justify-content: center;
-  gap: 16px;
-`;
+  align-items: center;
+  color: ${theme.palette.black};
+  font: ${theme.font.etc.rouletteContent};
+  margin-bottom: 15px;
+  width: 150px;
+  text-align: center;
 
-const inputStyles = css`
-  width: 16px;
-  height: auto;
-  min-width: 0;
-  max-width: 40px;
+  ${mq.md} {
+    font: ${theme.font.etc.rouletteTitle};
+    margin-bottom: 0px;
+    width: 230px;
+  }
 `;
 
 export default LunchRoulette;

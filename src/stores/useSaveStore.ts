@@ -13,6 +13,7 @@ type Visit = {
 type SaveStore = {
   isSave: Save;
   user: string;
+  visitor: string;
   keyword: string[];
   visit: Visit;
   setIsSavePhotoMsg: () => void;
@@ -20,6 +21,7 @@ type SaveStore = {
   deleteKeyword: (data: string) => void;
   clearIsSave: () => void;
   setUserToken: (value: string) => void;
+  setVisitorToken: (value: string) => void;
   setIsSaveVisitMsg: (state: boolean) => void;
   setVisitMsgText: (text: string) => void;
   clearVisitMsg: () => void;
@@ -30,6 +32,10 @@ const initialSaveState = {
   PhotoMsg: false,
 };
 
+const initialTokenState = {
+  user: '',
+  visitor: '',
+};
 // 사용자 토큰 초기값
 const initialUserState = '';
 
@@ -43,6 +49,9 @@ const useSaveStore = create<SaveStore>()(
   persist(
     (set) => ({
       isSave: initialSaveState,
+      user: initialTokenState.user,
+      visitor: initialTokenState.visitor,
+
       user: initialUserState,
       keyword: [],
       visit: initialVisitMsg,
@@ -64,6 +73,10 @@ const useSaveStore = create<SaveStore>()(
       setUserToken: (value: string) =>
         set({
           user: value,
+        }),
+      setVisitorToken: (value: string) =>
+        set({
+          visitor: value,
         }),
       setIsSaveVisitMsg: (state: boolean) =>
         set((pre) => ({

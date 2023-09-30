@@ -3,8 +3,18 @@ export interface GetRankingData {
 }
 
 export interface GetMenuReviewsData {
-  menuId: number;
-  page: number;
+  memberName: string;
+  memberProfileImage: string;
+  restaurantId: number;
+  restaurantName: string;
+  reviewId: number;
+  reviewCreatedAt: string;
+  reviewDescription: string;
+  reviewTaste: string;
+  reviewAmount: string;
+  reviewService: string;
+  reviewSpeed: string;
+  reviewImages: string[];
 }
 
 export interface GetMenusData {

@@ -4,16 +4,16 @@ import { create } from 'zustand';
 
 const initialState: ReviewList = {
   restaurantName: '',
-  restaurantId: '',
+  restaurantId: 0,
   memberName: '',
-  profileImageUrl: '',
+  memberProfileImage: '',
   reviewId: 0,
   reviewTaste: '',
   reviewAmount: '',
   reviewService: '',
   reviewSpeed: '',
   reviewCreatedAt: '',
-  reviewImageUrl: [],
+  reviewImages: [],
   reviewDescription: '',
 };
 
