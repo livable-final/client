@@ -2,7 +2,10 @@ import { Fragment, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
-import { postRestaurantReview } from '@/pages/api/lunch/calendarRequests';
+import {
+  postRestaurantReview,
+  postPoint,
+} from '@/pages/api/lunch/calendarRequests';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Button from '@/components/common/Button';

@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
-import { postLunchBoxReview } from '@/pages/api/lunch/calendarRequests';
+import {
+  postLunchBoxReview,
+  postPoint,
+} from '@/pages/api/lunch/calendarRequests';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
