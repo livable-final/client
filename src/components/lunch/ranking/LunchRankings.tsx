@@ -3,15 +3,26 @@ import theme from '@/styles/theme';
 import { MenuTopTen } from '@/types/lunch/menuTopTen';
 import { css } from '@emotion/react';
 import LunchRankingReviews from '@/components/lunch/ranking/LunchRankingReviews';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+// import LunchReview from '@/components/lunch/review/LunchReview';
 
 function LunchRankings({ ...props }: MenuTopTen) {
   const { rank, count } = LUNCH_MAIN_CONSTANTS.ranking;
   const [isOpen, setIsOpen] = useState(false);
+  const [menuId, setMenuId] = useState(props.menuId);
 
+  // 클릭 시 <LunchRankingReviews /> 컴포넌트 토글
   const onClickHandler = useCallback(() => {
     setIsOpen((prev) => !prev);
-  }, []);
+    setMenuId(props.menuId);
+  }, [props.menuId]);
+
+  // 최초 렌딩 시 1위 음식에 대한 리뷰 목록을 open합니다.
+  useEffect(() => {
+    if (props.rank === 1) {
+      setIsOpen(true);
+    }
+  }, [props.rank]);
 
   return (
     <div css={containerStyles}>
@@ -29,7 +40,7 @@ function LunchRankings({ ...props }: MenuTopTen) {
           </span>
         </div>
       </button>
-      {isOpen && <LunchRankingReviews />}
+      {isOpen && <LunchRankingReviews menuId={menuId} />}
     </div>
   );
 }
