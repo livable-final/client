@@ -11,5 +11,5 @@ export interface RadioBtnProps {
   select?: string;
   isEtc?: boolean;
   placeholder?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
