@@ -1,6 +1,4 @@
 import LunchCard from '@/components/lunch/LunchCard';
-import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import { DUMMY_DATA } from '@/constants/lunch/dummy';
 import LunchReview from '@/components/lunch/review/LunchReview';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import { css } from '@emotion/react';
@@ -8,11 +6,20 @@ import usePagesStore from '@/stores/usePagesStore';
 import useReviewStore from '@/stores/useReviewStore';
 import { ReviewList } from '@/types/lunch/reviewList';
 import theme from '@/styles/theme';
+import useFetch from '@/hooks/useFetch';
+import { getReviewList } from '@/pages/api/lunch/lunchRequests';
+import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
+import useBuildingStore from '@/stores/useBuildingStore';
 
 function LunchReviews() {
   const { setNextComponent } = usePagesStore();
   const { setReviewList } = useReviewStore();
-  const { reviews } = LUNCH_MAIN_CONSTANTS.main;
+  const { buildingName } = useBuildingStore();
+  const { prefix, suffix } = LUNCH_MAIN_CONSTANTS.main.reviews;
+  const { response } = useFetch({
+    fetchFn: getReviewList,
+    arg: 1,
+  });
 
   const onClickHandler = (item: ReviewList) => {
     setNextComponent('LunchDetail'); // LunchDetail.tsx로 이동
@@ -22,8 +29,11 @@ function LunchReviews() {
 
   return (
     <LunchCard col>
-      <LunchSubTitle title={reviews.title} type="recent" />
-      {DUMMY_DATA.map((item) => (
+      <LunchSubTitle
+        title={`${prefix} ${buildingName} ${suffix}`}
+        type="recent"
+      />
+      {response?.data.map((item) => (
         <button
           css={buttonStyles}
           type="button"
