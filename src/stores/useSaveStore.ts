@@ -8,7 +8,10 @@ type Save = {
 type SaveStore = {
   isSave: Save;
   user: string;
+  keyword: string[];
   setIsSavePhotoMsg: () => void;
+  setKeyword: (data: string) => void;
+  deleteKeyword: (data: string) => void;
   clearIsSave: () => void;
   setUserToken: (value: string) => void;
 };
@@ -24,9 +27,18 @@ const useSaveStore = create<SaveStore>()(
     (set) => ({
       isSave: initialSaveState,
       user: initialUserState,
+      keyword: [],
       setIsSavePhotoMsg: () =>
         set((pre) => ({
           isSave: { ...pre.isSave, PhotoMsg: true },
+        })),
+      setKeyword: (data) =>
+        set((pre) => ({
+          keyword: [...pre.keyword, data],
+        })),
+      deleteKeyword: (data) =>
+        set((pre) => ({
+          keyword: [...pre.keyword.filter((value) => value !== data)],
         })),
       clearIsSave: () => {
         set({ isSave: initialSaveState });
