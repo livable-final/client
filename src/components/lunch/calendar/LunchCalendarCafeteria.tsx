@@ -1,8 +1,11 @@
 import { useState } from 'react';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
-import { postCafeteriaReview } from '@/pages/api/lunch/calendarRequests';
+import {
+  postCafeteriaReview,
+  postPoint,
+} from '@/pages/api/lunch/calendarRequests';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
@@ -25,7 +28,7 @@ function LunchCalendarCafeteria() {
   const { ratingState, imageFiles } = useWriteStore();
   const { category, subTitle, button } = CALENDAR_CONTENT;
 
-  // const router = useRouter();
+  const router = useRouter();
 
   const onClickHeaderHandler = () => {
     setNextComponent('LunchCalendarReview');
@@ -52,7 +55,12 @@ function LunchCalendarCafeteria() {
         formData.append('imageFiles', imageFiles[i]);
       }
       await postCafeteriaReview(formData);
-      // router.replace('/lunch/calendar');
+
+      if (imageFiles.length === 0) {
+        router.replace('/lunch/calendar');
+      }
+      await postPoint();
+      router.replace('/lunch/point');
     } catch (err) {
       // router.replace('/lunch/calendar');
     }

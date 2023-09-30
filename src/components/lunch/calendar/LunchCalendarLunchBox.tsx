@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
-import { postLunchBoxReview } from '@/pages/api/lunch/calendarRequests';
+import {
+  postLunchBoxReview,
+  postPoint,
+} from '@/pages/api/lunch/calendarRequests';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
@@ -21,6 +25,7 @@ function LunchCalendarLunchBox() {
   const { isSave } = useSaveStore();
   const { imageFiles } = useWriteStore();
   const { category, subTitle, button } = CALENDAR_CONTENT;
+  const router = useRouter();
 
   const onClickHeaderHandler = () => {
     setNextComponent('LunchCalendarReview');
@@ -46,6 +51,11 @@ function LunchCalendarLunchBox() {
         formData.append('imageFiles', imageFiles[i]);
       }
       await postLunchBoxReview(formData);
+      if (imageFiles.length === 0) {
+        router.replace('/lunch/calendar');
+      }
+      await postPoint();
+      router.replace('/lunch/point');
       // router.replace('/lunch/calendar');
     } catch (err) {
       // router.replace('/lunch/calendar');
