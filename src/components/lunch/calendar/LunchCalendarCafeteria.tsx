@@ -2,10 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
-import {
-  postCafeteriaReview,
-  postPoint,
-} from '@/pages/api/lunch/calendarRequests';
+import { postCafeteriaReview } from '@/pages/api/lunch/calendarRequests';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
@@ -59,7 +56,6 @@ function LunchCalendarCafeteria() {
       if (imageFiles.length === 0) {
         router.replace('/lunch/calendar');
       }
-      await postPoint();
       router.replace('/lunch/point');
     } catch (err) {
       // router.replace('/lunch/calendar');
