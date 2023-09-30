@@ -113,7 +113,7 @@ function LunchCalendarSearch() {
 
 const inputStyles = css`
   position: relative;
-  margin-bottom: 24px;
+  margin: 16px 0 24px;
 `;
 
 const iconStyles = css`
