@@ -1,24 +1,33 @@
-import { Check, UnCheck } from '@/assets/icons';
 import theme from '@/styles/theme';
+import useSaveStore from '@/stores/useSaveStore';
+import { Check, UnCheck } from '@/assets/icons';
 import { CheckBoxProps } from '@/types/common/checkBox';
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function CheckBox({ text }: CheckBoxProps) {
-  const [isSelect, setIsSelect] = useState<boolean>(false);
+  const { visit, setIsSaveVisitMsg } = useSaveStore();
+  const [isSelect, setIsSelect] = useState<boolean>(visit.visitMsg);
+
+  // 체크 상태 변경
+  const onChange = () => {
+    setIsSelect(!isSelect);
+  };
+
+  // 체크 상태에 따른 스토어 변경
+  useEffect(() => {
+    if (isSelect) {
+      setIsSaveVisitMsg(true);
+    } else {
+      setIsSaveVisitMsg(false);
+    }
+  }, [isSelect, setIsSaveVisitMsg]);
 
   return (
     <div css={checkBoxContainerStyles(isSelect)}>
-      <input
-        id={text}
-        type="checkbox"
-        checked={isSelect}
-        onChange={() => {
-          setIsSelect(!isSelect);
-        }}
-      />
+      <input id={text} type="checkbox" checked={isSelect} onChange={onChange} />
       <label htmlFor={text}>
-        {isSelect === true ? (
+        {isSelect ? (
           <Check css={btnImgStyles} />
         ) : (
           <UnCheck css={btnImgStyles} />
