@@ -120,12 +120,10 @@ function InvitationVisitorsContainer() {
         </div>
       </div>
       <div css={visitorsListWrapper(visitorsList)}>
-        {visitorsList.length > 0 && (
-          <InvitationVisitorsList
-            visitorsList={visitorsList}
-            onClick={onClickDeleteVisitorHandler}
-          />
-        )}
+        <InvitationVisitorsList
+          visitorsList={visitorsList}
+          onClick={onClickDeleteVisitorHandler}
+        />
       </div>
       <div css={buttonWrapperStyles(isFocused)}>
         <Button

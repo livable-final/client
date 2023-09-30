@@ -96,12 +96,10 @@ function InvitationInfoContainer() {
         onFocus={onFocusInputHandler}
         onBlur={onBlurInputHandler}
       />
-      {visitorsList.length > 0 && (
-        <InvitationVisitorsList
-          visitorsList={visitorsList}
-          onClick={onClickDeleteVisitorHandler}
-        />
-      )}
+      <InvitationVisitorsList
+        visitorsList={visitorsList}
+        onClick={onClickDeleteVisitorHandler}
+      />
       <div css={buttonWrapperStyles(isFocused)}>
         <Button
           content={button.send}
