@@ -6,6 +6,7 @@ import Button from '@/components/common/Button';
 import InvitationSelectTime from '@/components/invitation/create/InvitationSelectTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
@@ -16,15 +17,36 @@ import { InvitationCreateTexts } from '@/types/invitation/create';
 function InvitationDateTime() {
   const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
   const { closeBottomSheet } = useBottomSheetStore();
+  const { createContents } = useInvitationCreateStore();
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  console.log('선택장소 ID :', createContents.commonPlaceId);
+
   const onChange = (dates: [Date, Date]) => {
     const [start, end] = dates;
+
     setStartDate(start);
     setEndDate(end);
   };
+
+  // 날짜 포맷팅 함수 (추후 유틸 폴더로 빼기)
+  const formatDate = (originDate) => {
+    const date = new Date(originDate);
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    // yyyy-MM-dd (ex. 2023-01-06)
+    return `${year}-${month < 10 ? `0${month}` : `${month}`}-${
+      day < 10 ? `0${day}` : `${day}`
+    }`;
+  };
+
+  console.log('시작일 :', formatDate(startDate));
+  console.log('종료일 :', formatDate(endDate));
 
   return (
     <div css={containerStyles}>
@@ -34,10 +56,11 @@ function InvitationDateTime() {
           <DatePicker
             locale={ko}
             dateFormat="yyyy-mm-dd"
+            dateFormatCalendar="yyyy.MM"
             calendarClassName="calendar"
             onChange={onChange}
             minDate={new Date()}
-            maxDate={addMonths(new Date(), 5)}
+            maxDate={addMonths(new Date(), 2)} // 현재일부터 두달 뒤까지 선택 가능
             startDate={startDate}
             endDate={endDate}
             selectsRange
@@ -55,7 +78,7 @@ function InvitationDateTime() {
       </div>
       <div css={buttonWrapperStyles}>
         <Button
-          content={button.next}
+          content={button.done}
           variant="blue"
           onClick={() => closeBottomSheet()}
         />
@@ -122,8 +145,11 @@ const buttonWrapperStyles = css`
 
 // 기본 캘린더 디자인 커스텀
 const calendarStyles = css`
+  display: flex;
+  justify-content: center;
+
   .calendar {
-    width: 100%;
+    width: 90vw;
     border: transparent;
     font-family: var(--pretendard);
     color: ${theme.palette.greyscale.grey70};
@@ -137,6 +163,7 @@ const calendarStyles = css`
     .react-datepicker__header {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       gap: 10px;
       width: 100%;
       padding-bottom: 16px;
@@ -145,6 +172,9 @@ const calendarStyles = css`
       background-color: ${theme.palette.white};
 
       .react-datepicker__current-month {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: ${theme.palette.greyscale.grey90};
         font: ${theme.font.title.title2_600};
         line-height: 29px;
@@ -154,6 +184,13 @@ const calendarStyles = css`
         justify-content: space-around;
       }
     }
+
+    // 좌우 화살표
+    .react-datepicker__navigation {
+      position: absolute;
+      top: 8px;
+    }
+
     // 날짜 선택 컨테이너
     .react-datepicker__month {
       display: flex;
@@ -166,16 +203,21 @@ const calendarStyles = css`
       justify-content: space-around;
       gap: 12px;
 
+      .react-datepicker__day--keyboard-selected {
+        // endDate + 각 달의 같은 날짜
+        border-radius: 45%;
+        background-color: ${theme.palette.primary};
+        color: ${theme.palette.white};
+      }
       .react-datepicker__day--in-range {
         border-radius: 45%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
       }
-      .react-datepicker__day--keyboard-selected {
-        // 현재일 기준으로 각 달의 같은 날짜 스타일
+      .react-datepicker__day--in-selecting-range {
+        background-color: ${theme.palette.primary};
+        color: ${theme.palette.white};
         border-radius: 45%;
-        /* background-color: ${theme.palette.white};
-        color: ${theme.palette.greyscale.grey70}; */
       }
       .react-datepicker__day--in-selecting-range:not(
           .react-datepicker__day--in-range,
@@ -206,8 +248,15 @@ const calendarStyles = css`
         border-radius: 45%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
-        opacity: 0.3;
+        /* opacity: 0.3; */
       }
+    }
+    // 날짜를 선택했을 때 현재일 스타일 (선택 전에는 적용X)
+    .react-datepicker__day--today {
+      color: ${theme.palette.primary};
+    }
+    .react-datepicker__month-text--today {
+      color: ${theme.palette.primary};
     }
   }
 `;
