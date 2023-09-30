@@ -60,11 +60,10 @@ function LunchCalendarBottomSheet() {
       for (let i = 0; i < imageFiles.length; i + 1) {
         formData.append('imageFiles', imageFiles[i]);
       }
-      const res = await postRestaurantReview(formData);
-      console.log('게시글 등록 성공', res);
+      await postRestaurantReview(formData);
       router.replace('/lunch/calendar');
     } catch (err) {
-      console.log('게시글 등록 성공', err);
+      router.replace('/lunch/calendar');
     }
   };
 
