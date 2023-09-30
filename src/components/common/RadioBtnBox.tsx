@@ -1,10 +1,10 @@
 import theme from '@/styles/theme';
-import { RadioBtnBoxProps } from '@/types/common/radioBtn';
+import { RadioBtnProps } from '@/types/common/radioBtn';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { CheckOn, UnCheck } from '@/assets/icons';
 
-function RadioBtnBox({ list, name, placeholder }: RadioBtnBoxProps) {
+function RadioBtnBox({ list, name, placeholder }: RadioBtnProps) {
   const [selectData, setSelectData] = useState(list[0]);
   const [etcValue, setEtcValue] = useState('');
   const [isCheck, setIsCheck] = useState(false);
