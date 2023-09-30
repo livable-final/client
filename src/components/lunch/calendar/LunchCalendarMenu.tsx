@@ -27,19 +27,18 @@ function LunchCalendarMenu() {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    getMenuData();
-  }, []);
-
-  const getMenuData = async () => {
-    if (restaurant.restaurantId) {
-      try {
-        const res = await getRestaurantMenu(restaurant.restaurantId);
-        setMenuData(res);
-      } catch (err) {
-        goBack();
+    const getMenuData = async () => {
+      if (restaurant.restaurantId) {
+        try {
+          const res = await getRestaurantMenu(restaurant.restaurantId);
+          setMenuData(res);
+        } catch (err) {
+          goBack();
+        }
       }
-    }
-  };
+    };
+    getMenuData();
+  }, [goBack, restaurant.restaurantId]);
 
   const onClickHaederHandler = () => {
     goBack();
@@ -78,8 +77,6 @@ function LunchCalendarMenu() {
       openModal('메뉴 선택', '메뉴 1개 이상 선택해 주세요!');
     }
   };
-
-  console.log('매뉴확인', selectedMenu);
 
   return (
     <section css={pageStyles}>
