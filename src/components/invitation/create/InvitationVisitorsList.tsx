@@ -30,17 +30,34 @@ function InvitationVisitorsList({
 
   return (
     <div css={containerStyles}>
-      <div css={titleWrapperStyles}>
-        <div css={titleStyles}>{title.invitationList}</div>
-        <div css={lengthStyles}>
-          {visitorsList.length}/
-          {createContents.purpose === 'interview' ? '1' : '30'}
+      {/* 방문자 등록(VisitorsContainer)파트에서 등록된 방문자가 0일 때는 타이틀 미노출 */}
+      {nextComponent === 'InvitationVisitorsContainer' &&
+        visitorsList.length > 0 && (
+          <div css={titleWrapperStyles}>
+            <div css={titleStyles}>{title.invitationList}</div>
+            <div css={lengthStyles}>
+              {visitorsList.length}/
+              {createContents.purpose === 'interview' ? '1' : '30'}
+            </div>
+          </div>
+        )}
+      {/* 초대 정보(InvitationInfoContainer)파트에서 방문자 모두 삭제 시에도 타이틀 유지 */}
+      {nextComponent === 'InvitationInfoContainer' && (
+        <div css={titleWrapperStyles}>
+          <div css={titleStyles}>{title.invitationList}</div>
+          <div css={lengthStyles}>
+            {visitorsList.length}/
+            {createContents.purpose === 'interview' ? '1' : '30'}
+          </div>
         </div>
-      </div>
+      )}
       <div css={listWrapperStyles}>
-        {nextComponent !== 'InvitationVisitorsContainer' &&
-          createContents.purpose !== 'interview' &&
-          visitorsList.length !== 30 && <Add isBlue onClick={onClickHandler} />}
+        {/* 초대 목적이 면접일 때, 방문자가 1명 등록되면 리스트의 추가 버튼 숨김 */}
+        {/* 초대 정보(InvitationInfoContainer)파트에서 방문자 모두 삭제 시에도 리스트에서 추가 버튼 활성화 */}
+        {createContents.purpose === 'interview' && visitorsList.length === 1
+          ? null
+          : nextComponent !== 'InvitationVisitorsContainer' &&
+            visitorsList.length < 30 && <Add isBlue onClick={onClickHandler} />}
         {visitorsList.map((list) => (
           <NameTag key={list.name} name={list.name} onClick={onClick} />
         ))}
