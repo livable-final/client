@@ -28,13 +28,9 @@ function InvitationVisitorsContainer() {
     contact: '',
   });
   // 흐름 확인을 위한 예비 데이터 (최종 배포시 삭제)
-  const [visitorsList, setVisitorList] = useState<VisitorInfo[]>([
+  const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([
     {
       name: '김방문',
-      contact: '01012345678',
-    },
-    {
-      name: '이방문',
       contact: '01012345678',
     },
   ]);
@@ -53,7 +49,7 @@ function InvitationVisitorsContainer() {
 
   // 방문자 추가 버튼 핸들러
   const onClickAddVisitorHandler = () => {
-    setVisitorList([...visitorsList, visitorInfo]);
+    setVisitorsList([...visitorsList, visitorInfo]);
     // input 초기화
     setVisitorInfo({
       name: '',
@@ -63,7 +59,7 @@ function InvitationVisitorsContainer() {
 
   // 방문자 삭제 버튼 핸들러
   const onClickDeleteVisitorHandler = (name: string) => {
-    setVisitorList((visitorList) =>
+    setVisitorsList((visitorList) =>
       visitorList.filter((visitor) => visitor.name !== name),
     );
   };
