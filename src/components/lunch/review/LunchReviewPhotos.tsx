@@ -6,6 +6,9 @@ import Image from 'next/image';
 
 function LunchReviewPhotos({ photos, isRow }: ReviewPhotosProps) {
   const { review, ranking } = LUNCH_MAIN_CONSTANTS;
+  if (!photos) {
+    return <div>photo 빈배열 테스트중</div>;
+  }
   return (
     <div css={containerStyles(isRow)}>
       <div css={wrapperStyles}>
