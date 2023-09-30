@@ -7,12 +7,15 @@ import InvitationSelectTime from '@/components/invitation/create/InvitationSelec
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import useFetch from '@/hooks/useFetch';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
+import { getInvitationTimeList } from '@/pages/api/invitation/createRequests';
+import { GetInvitationTimeListData } from '@/types/invitation/api';
 
 function InvitationDateTime() {
   const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
@@ -22,8 +25,28 @@ function InvitationDateTime() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  console.log('선택장소 ID :', createContents.commonPlaceId);
+  const [timeList, setTimeList] = useState<GetInvitationTimeListData>();
+  const [placeId, setPlaceId] = useState<number | null>(null);
 
+  const { response } = useFetch({
+    fetchFn: () =>
+      getInvitationTimeList({ commonPlaceId: placeId, date: '2023-10-13' }),
+  });
+
+  useEffect(() => {
+    setPlaceId(createContents.commonPlaceId);
+  }, [createContents]);
+
+  // useEffect(() => {
+  //   if (response.data) {
+  //     setTimeList(response.data);
+  //   }
+  // }, [placeId, response.data]);
+
+  console.log(placeId);
+  console.log(response);
+
+  // 달력 선택 핸들러
   const onChange = (dates: [Date, Date]) => {
     const [start, end] = dates;
 
@@ -49,41 +72,44 @@ function InvitationDateTime() {
   console.log('종료일 :', formatDate(endDate));
 
   return (
-    <div css={containerStyles}>
-      <div css={dateContainerStyles}>
-        <div css={titleStyles}>{title.invitationDate}</div>
-        <div css={calendarStyles}>
-          <DatePicker
-            locale={ko}
-            dateFormat="yyyy-mm-dd"
-            dateFormatCalendar="yyyy.MM"
-            calendarClassName="calendar"
-            onChange={onChange}
-            minDate={new Date()}
-            maxDate={addMonths(new Date(), 2)} // 현재일부터 두달 뒤까지 선택 가능
-            startDate={startDate}
-            endDate={endDate}
-            selectsRange
-            inline
-            showDisabledMonthNavigation
+    <>
+      {/* <Toggle /> */}
+      <div css={containerStyles}>
+        <div css={dateContainerStyles}>
+          <div css={titleStyles}>{title.invitationDate}</div>
+          <div css={calendarStyles}>
+            <DatePicker
+              locale={ko}
+              dateFormat="yyyy-mm-dd"
+              dateFormatCalendar="yyyy.MM"
+              calendarClassName="calendar"
+              onChange={onChange}
+              minDate={new Date()}
+              maxDate={addMonths(new Date(), 2)} // 현재일부터 두달 뒤까지 선택 가능
+              startDate={startDate}
+              endDate={endDate}
+              selectsRange
+              inline
+              showDisabledMonthNavigation
+            />
+          </div>
+        </div>
+        <div css={timeContainerStyles}>
+          <div css={titleStyles}>
+            {title.invitationTime}
+            <Toggle />
+          </div>
+          <InvitationSelectTime timeList={timeList} />
+        </div>
+        <div css={buttonWrapperStyles}>
+          <Button
+            content={button.done}
+            variant="blue"
+            onClick={() => closeBottomSheet()}
           />
         </div>
       </div>
-      <div css={timeContainerStyles}>
-        <div css={titleStyles}>
-          {title.invitationTime}
-          <Toggle />
-        </div>
-        <InvitationSelectTime />
-      </div>
-      <div css={buttonWrapperStyles}>
-        <Button
-          content={button.done}
-          variant="blue"
-          onClick={() => closeBottomSheet()}
-        />
-      </div>
-    </div>
+    </>
   );
 }
 
