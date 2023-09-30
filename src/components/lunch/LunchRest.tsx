@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 
 function LunchRest({ ...item }: GetRestListData) {
-  const { good } = CALENDAR_CONTENT.button.button5;
+  const { button5 } = CALENDAR_CONTENT.button;
   return (
     <section css={sectionStyles}>
       <Image
@@ -21,7 +21,7 @@ function LunchRest({ ...item }: GetRestListData) {
           <p css={addressStyles}>{item.address}</p>
         </div>
         <div css={badgeStyles}>
-          {good}
+          {button5[0]}
           &nbsp;
           {item.tastePercentage}%
         </div>

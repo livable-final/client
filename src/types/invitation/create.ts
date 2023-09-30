@@ -52,7 +52,7 @@ export interface CommonCategory {
 // Invitation Visitors
 export interface InvitationVisitorsListProps {
   visitorsList: VisitorInfo[];
-  onClick: () => void;
+  onClick: (name: string) => void;
 }
 
 // ****************** 초대 장소 ****************** //

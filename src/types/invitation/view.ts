@@ -1,21 +1,23 @@
+import { GetVisitationInfoData } from '@/types/invitation/api';
+
 export interface InvitationInfoCategoryProps {
   value: string;
 }
 export interface InvitationInfoProps {
   value: string;
+  data: GetVisitationInfoData;
+}
+export interface InvitationHostInfoProps {
+  data: GetVisitationInfoData;
+}
+export interface InvitationInfoContainerProps {
+  data?: GetVisitationInfoData;
 }
 
 export interface InvitationCarouselProps {
-  datas: {
-    restaurantCategory: string;
-    restaurantName: string;
-    restaurantImageUrl: string;
-    inBuilding: boolean;
-    takenTime: number;
-    floor: number;
-    url: string;
-  }[];
+  type: string;
 }
+
 export interface InvitationHostInfoItemProps {
   label: string;
   content: string;

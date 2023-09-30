@@ -19,7 +19,7 @@ import {
 
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
-  const { setCreateContents } = useInvitationCreateStore();
+  const { createContents, setCreateContents } = useInvitationCreateStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -27,8 +27,8 @@ function InvitationVisitorsContainer() {
     name: '',
     contact: '',
   });
-
-  const [visitorsList, setVisitorList] = useState<VisitorInfo[]>([
+  // 흐름 확인을 위한 예비 데이터 (최종 배포시 삭제)
+  const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([
     {
       name: '김방문',
       contact: '01012345678',
@@ -49,7 +49,7 @@ function InvitationVisitorsContainer() {
 
   // 방문자 추가 버튼 핸들러
   const onClickAddVisitorHandler = () => {
-    setVisitorList([...visitorsList, visitorInfo]);
+    setVisitorsList([...visitorsList, visitorInfo]);
     // input 초기화
     setVisitorInfo({
       name: '',
@@ -58,8 +58,10 @@ function InvitationVisitorsContainer() {
   };
 
   // 방문자 삭제 버튼 핸들러
-  const onClickDeleteVisitorHandler = () => {
-    visitorsList.pop();
+  const onClickDeleteVisitorHandler = (name: string) => {
+    setVisitorsList((visitorList) =>
+      visitorList.filter((visitor) => visitor.name !== name),
+    );
   };
 
   // input 포커스될 때 버튼 숨김
@@ -111,16 +113,17 @@ function InvitationVisitorsContainer() {
           <AddressBook />
         </div>
         <div css={addBtnStyles}>
-          <Add onClick={onClickAddVisitorHandler} />
+          {createContents.purpose === 'interview' &&
+          visitorsList.length === 1 ? null : (
+            <Add onClick={onClickAddVisitorHandler} />
+          )}
         </div>
       </div>
       <div css={visitorsListWrapper(visitorsList)}>
-        {visitorsList.length > 0 && (
-          <InvitationVisitorsList
-            visitorsList={visitorsList}
-            onClick={onClickDeleteVisitorHandler}
-          />
-        )}
+        <InvitationVisitorsList
+          visitorsList={visitorsList}
+          onClick={onClickDeleteVisitorHandler}
+        />
       </div>
       <div css={buttonWrapperStyles(isFocused)}>
         <Button

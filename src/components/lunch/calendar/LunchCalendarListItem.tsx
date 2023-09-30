@@ -1,46 +1,70 @@
+import { useState } from 'react';
 import Image from 'next/image';
 import theme from '@/styles/theme';
-import usePagesStore from '@/stores/usePagesStore';
 import Icons from '@/components/common/Icons';
 import { css } from '@emotion/react';
 import { Clock, XIcon } from '@/assets/icons';
 import { CALENDAR_CASE } from '@/constants/lunch';
 import { COMMON_ICON_NAMES } from '@/constants/common';
 import { LunchCalendarListItemProps } from '@/types/lunch/calendar';
+import useWriteStore from '@/stores/useWriteStore';
+import useSaveStore from '@/stores/useSaveStore';
 
 function LunchCalendarListItem({
   type,
+  item,
   content,
   category,
   time,
   imageUrl,
-  isChecked,
+  onClick,
 }: LunchCalendarListItemProps) {
-  const { setNextComponent } = usePagesStore();
+  const [isChecked, setIsChecked] = useState(false);
+  const selectedMenu = useWriteStore((state) => state.selectedMenu);
+  const setSelectedMenu = useWriteStore((state) => state.setSelectedMenu);
+  const setRemoveMenu = useWriteStore((state) => state.setRemoveMenu);
+  const deleteKeyword = useSaveStore((state) => state.deleteKeyword);
   const { listItem } = CALENDAR_CASE;
   const { home } = COMMON_ICON_NAMES;
 
-  const onClickHandler = () => {
-    setNextComponent('LunchCalendarMenu');
-  };
+  const onClickListItemHandler = () => {
+    setIsChecked(!isChecked);
+    if (!item) return;
 
-  let fontStyle;
+    if (
+      !isChecked &&
+      !selectedMenu.find((menu) => menu.menuName === item.menuName)
+    ) {
+      setSelectedMenu(item);
+      return;
+    }
+    if (
+      isChecked &&
+      selectedMenu.find((menu) => menu.menuName === item.menuName)
+    ) {
+      setRemoveMenu(item);
+    }
+  };
+  const onClickDeleteHandler = (keyword: string | undefined) => {
+    if (keyword) {
+      deleteKeyword(keyword);
+    }
+  };
 
   switch (type) {
     case listItem.type1:
-      fontStyle = theme.palette.greyscale.grey60;
       return (
-        <button type="button" css={listStyles(type)} onClick={onClickHandler}>
-          <div css={contentStyles(fontStyle)}>
+        <button type="button" css={listStyles(type)}>
+          <div css={contentStyles(type)}>
             <Clock css={iconStles} />
             <p>{content}</p>
           </div>
-          <XIcon />
+          <XIcon onClick={onClickDeleteHandler(content)} />
         </button>
       );
     case listItem.type2:
       return (
-        <button type="button" css={listStyles(type)}>
+        <button type="button" css={listStyles(type)} onClick={onClick}>
           <div css={searchingContentStyles}>
             <div>
               <strong>{content}</strong>
@@ -53,17 +77,20 @@ function LunchCalendarListItem({
               width={56}
               height={56}
               src={imageUrl || '/gift.png'}
-              alt={content}
+              alt={content || '식당썸네일'}
             />
           </div>
         </button>
       );
     case listItem.type3:
-      fontStyle = theme.palette.greyscale.grey70;
       return (
-        <li css={listStyles(type)}>
-          <div css={contentStyles(fontStyle)}>
-            <p>{content}</p>
+        <button
+          type="button"
+          css={listStyles(type)}
+          onClick={onClickListItemHandler}
+        >
+          <div css={contentStyles(type)}>
+            <p>{item?.menuName}</p>
           </div>
           <Icons
             icon={home.check}
@@ -74,7 +101,7 @@ function LunchCalendarListItem({
                 : `${theme.palette.bluescale.blue60}`
             }
           />
-        </li>
+        </button>
       );
     default:
       break;
@@ -90,12 +117,16 @@ const listStyles = (type: string) => css`
   padding: ${type === 'searched' ? `16px 4px` : `20px 4px`};
 `;
 
-const contentStyles = (fontStyle: string) => css`
+const contentStyles = (type: string) => css`
   display: flex;
   align-items: center;
   gap: 6px;
-  font: ${fontStyle};
-  color: ${theme.palette.greyscale.grey60};
+  font: ${type === 'searched'
+    ? `${theme.font.body.body1_400}`
+    : `${theme.font.subTitle.subTitle2_400}`};
+  color: ${type === 'searched'
+    ? `${theme.palette.greyscale.grey60}`
+    : `${theme.palette.greyscale.grey70}`};
 `;
 
 const searchingContentStyles = css`
@@ -124,6 +155,7 @@ const ImageStyles = css`
   width: 56px;
   height: 56px;
   border-radius: 8px;
+  border: 1px solid ${theme.palette.greyscale.grey60}
   overflow: hidden;
 `;
 

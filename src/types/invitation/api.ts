@@ -23,7 +23,7 @@ export interface PostInvitationContents {
   description: string;
   startDate: string;
   endDate: string;
-  visitors: InvitationContents[];
+  visitors: VisitorInfo[];
 }
 
 export interface InvitationContents {
@@ -44,3 +44,30 @@ export interface InvitationCreateStore {
 }
 
 // ********** 초대상 뷰 ********** //
+export interface GetVisitationInfoData {
+  invitationStartDate: string;
+  invitationStartTime: string;
+  invitationEndDate: string;
+  invitationEndTime: string;
+  invitationBuildingName: string;
+  invitationOfficeName: string;
+  buildingRepresentativeImageUrl: string;
+  buildingName: string;
+  buildingAddress: string;
+  buildingParkingCostInformation: string;
+  buildingScale: string;
+  invitationTip: string;
+  hostName: string;
+  hostCompanyName: string;
+  hostContact: string;
+  hostBusinessCardImageUrl: string;
+}
+export interface GetInvitationCarouselData {
+  restaurantCategory: string;
+  restaurantName: string;
+  restaurantImageUrl: string;
+  inBuilding: boolean;
+  takenTime: number;
+  floor: number;
+  url: string;
+}
