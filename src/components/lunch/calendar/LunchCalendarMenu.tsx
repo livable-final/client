@@ -4,59 +4,42 @@ import { CALENDAR_CONTENT } from '@/constants/lunch';
 import COMPONENT_NAME from '@/constants/common/pages';
 import { PlusSmall } from '@/assets/icons';
 import { MenuData } from '@/types/lunch/calendar';
-// import { getRestaurantMenu } from '@/pages/api/lunch/calendarRequests';
+import { getRestaurantMenu } from '@/pages/api/lunch/calendarRequests';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Button from '@/components/common/Button';
+import Modal from '@/components/common/Modal';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchCalendarListItem from '@/components/lunch/calendar/LunchCalendarListItem';
 import useWriteStore from '@/stores/useWriteStore';
 import usePagesStore from '@/stores/usePagesStore';
-// import useFetch from '@/hooks/useFetch';
+import useModalStore from '@/stores/useModalStore';
 
 function LunchCalendarMenu() {
   const [showInput, setShowInput] = useState(false);
   const [addMenu, setAddMenu] = useState('');
-  const [menuData, setMenuData] = useState<MenuData[]>([
-    {
-      menuId: 1,
-      menuName: '제육덮밥',
-    },
-    {
-      menuId: 2,
-      menuName: '된장찌개',
-    },
-    {
-      menuId: 3,
-      menuName: '부추전',
-    },
-  ]);
+  const [menuData, setMenuData] = useState<MenuData[]>([]);
   const { restaurant, selectedMenu } = useWriteStore();
   const { setNextComponent, goBack } = usePagesStore();
+  const { modalState, openModal } = useModalStore();
   const { subTitle, button } = CALENDAR_CONTENT;
   const { calendar } = COMPONENT_NAME.lunch;
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  // useEffect(() => {
-  //   getMenuData();
-  // }, []);
+  useEffect(() => {
+    getMenuData();
+  }, []);
 
-  // const getMenuData = async () => {
-  //   if (restaurant.restaurantId) {
-  //     try {
-  //       const res = await getRestaurantMenu(restaurant.restaurantId);
-  //       setMenuData(res);
-  //       console.log('메뉴', res);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // };
-
-  // const { response } = useFetch({
-  //   fetchFn: getRestaurantMenu,
-  //   arg: restaurant.restaurantId,
-  // });
+  const getMenuData = async () => {
+    if (restaurant.restaurantId) {
+      try {
+        const res = await getRestaurantMenu(restaurant.restaurantId);
+        setMenuData(res);
+      } catch (err) {
+        goBack();
+      }
+    }
+  };
 
   const onClickHaederHandler = () => {
     goBack();
@@ -79,27 +62,29 @@ function LunchCalendarMenu() {
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!addMenu) {
-      return setShowInput(false);
+      setShowInput(false);
     }
 
-    const menuId = menuData.length;
+    const menuId = -menuData.length - 1;
     setMenuData([...menuData, { menuId, menuName: addMenu }]);
     setAddMenu('');
     setShowInput(false);
   };
+
   const onClickBtnHandler = () => {
     if (selectedMenu.length) {
       setNextComponent(calendar.eatOut);
     } else {
-      alert('메뉴를 선택해 주세요');
+      openModal('메뉴 선택', '메뉴 1개 이상 선택해 주세요!');
     }
   };
 
-  console.log('매뉴확인', menuData);
+  console.log('매뉴확인', selectedMenu);
 
   return (
     <section css={pageStyles}>
       <div>
+        {modalState.isOpen && <Modal isAlert />}
         <Header
           title={restaurant.restaurantName}
           onClick={onClickHaederHandler}
@@ -108,11 +93,7 @@ function LunchCalendarMenu() {
           <LunchSubTitle title={subTitle.menu} type="subTitle" />
         </div>
         {menuData.map((item) => (
-          <LunchCalendarListItem
-            key={item.menuId}
-            type="menu"
-            content={item.menuName}
-          />
+          <LunchCalendarListItem key={item.menuId} type="menu" item={item} />
         ))}
         {!showInput ? (
           <button type="button" onClick={onClickAddBtnHandler} css={plusStyles}>
