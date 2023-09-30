@@ -19,7 +19,7 @@ import {
 
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
-  const { setCreateContents } = useInvitationCreateStore();
+  const { createContents, setCreateContents } = useInvitationCreateStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -113,7 +113,10 @@ function InvitationVisitorsContainer() {
           <AddressBook />
         </div>
         <div css={addBtnStyles}>
-          <Add onClick={onClickAddVisitorHandler} />
+          {createContents.purpose === 'interview' &&
+          visitorsList.length === 1 ? null : (
+            <Add onClick={onClickAddVisitorHandler} />
+          )}
         </div>
       </div>
       <div css={visitorsListWrapper(visitorsList)}>

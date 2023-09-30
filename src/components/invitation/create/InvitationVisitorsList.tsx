@@ -3,6 +3,7 @@ import NameTag from '@/components/common/NameTag';
 import BottomSheet from '@/components/common/BottomSheet';
 import useViewStore from '@/stores/usePagesStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import InvitationAddVisitorList from '@/components/invitation/edit/InvitationAddVisitorList';
 import mq from '@/utils/mediaquery';
@@ -20,6 +21,7 @@ function InvitationVisitorsList({
   const { title }: InvitationCreateTexts = CREATE_TEXTS;
   const { nextComponent } = useViewStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const { createContents } = useInvitationCreateStore();
 
   // 방문자 추가 버튼
   const onClickHandler = () => {
@@ -30,10 +32,14 @@ function InvitationVisitorsList({
     <div css={containerStyles}>
       <div css={titleWrapperStyles}>
         <div css={titleStyles}>{title.invitationList}</div>
-        <div css={lengthStyles}>{visitorsList.length}/30</div>
+        <div css={lengthStyles}>
+          {visitorsList.length}/
+          {createContents.purpose === 'interview' ? '1' : '30'}
+        </div>
       </div>
       <div css={listWrapperStyles}>
         {nextComponent !== 'InvitationVisitorsContainer' &&
+          createContents.purpose !== 'interview' &&
           visitorsList.length !== 30 && <Add isBlue onClick={onClickHandler} />}
         {visitorsList.map((list) => (
           <NameTag key={list.name} name={list.name} onClick={onClick} />
