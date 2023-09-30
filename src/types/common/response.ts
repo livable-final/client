@@ -3,7 +3,7 @@ export interface Response<T> {
   status: number;
 }
 
-export type ArgType = number | string | Date | string[];
+export type ArgType = number | string | Date;
 
 export interface FetchFunction<T> {
   (arg?: ArgType): Promise<T>;
