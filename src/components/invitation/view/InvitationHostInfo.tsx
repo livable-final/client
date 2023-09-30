@@ -2,18 +2,11 @@ import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import InvitationHostInfoItem from '@/components/invitation/view/InvitationHostInfoItem';
-import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 import { Profile } from '@/assets/icons';
+import { InvitationHostInfoProps } from '@/types/invitation/view';
+import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 
-// 삭제예정
-const host = {
-  name: '김방문',
-  companyName: '식스센스',
-  contact: '01012341234',
-  businessCardImageUrl: '/명함/김방문.jpg',
-};
-
-function InvitationHostInfo() {
+function InvitationHostInfo({ data }: InvitationHostInfoProps) {
   return (
     <div css={InvitationHostInfoStyles}>
       <Header title={INVITATION_VEIW_INFO_TEXTS.category.host} isBg />
@@ -23,15 +16,15 @@ function InvitationHostInfo() {
       <ul css={InvitationInfoItemContinerStyles}>
         <InvitationHostInfoItem
           label={INVITATION_VEIW_INFO_TEXTS.host.name}
-          content={host.name}
+          content={data.hostName}
         />
         <InvitationHostInfoItem
           label={INVITATION_VEIW_INFO_TEXTS.host.companyName}
-          content={host.companyName}
+          content={data.hostCompanyName}
         />
         <InvitationHostInfoItem
           label={INVITATION_VEIW_INFO_TEXTS.host.contact}
-          content={host.contact}
+          content={data.hostContact}
           isContact
         />
       </ul>
