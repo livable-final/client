@@ -64,7 +64,7 @@ function LunchCalenderEatOut() {
         description,
         menus: selectedMenu,
       };
-      console.log(userData);
+
       const blob = new Blob([JSON.stringify(userData)], {
         type: 'application/json',
       });
@@ -75,7 +75,7 @@ function LunchCalenderEatOut() {
       await postRestaurantReview(formData);
       router.replace('/lunch/calendar');
     } catch (err) {
-      alert('게시글 등록 에러');
+      router.replace('/lunch/calendar');
     }
   };
 
