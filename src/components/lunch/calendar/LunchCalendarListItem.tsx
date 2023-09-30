@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import theme from '@/styles/theme';
-import usePagesStore from '@/stores/usePagesStore';
 import Icons from '@/components/common/Icons';
 import { css } from '@emotion/react';
 import { Clock, XIcon } from '@/assets/icons';
@@ -9,9 +8,11 @@ import { CALENDAR_CASE } from '@/constants/lunch';
 import { COMMON_ICON_NAMES } from '@/constants/common';
 import { LunchCalendarListItemProps } from '@/types/lunch/calendar';
 import useWriteStore from '@/stores/useWriteStore';
+import useSaveStore from '@/stores/useSaveStore';
 
 function LunchCalendarListItem({
   type,
+  item,
   content,
   category,
   time,
@@ -22,18 +23,31 @@ function LunchCalendarListItem({
   const selectedMenu = useWriteStore((state) => state.selectedMenu);
   const setSelectedMenu = useWriteStore((state) => state.setSelectedMenu);
   const setRemoveMenu = useWriteStore((state) => state.setRemoveMenu);
+  const deleteKeyword = useSaveStore((state) => state.deleteKeyword);
   const { listItem } = CALENDAR_CASE;
   const { home } = COMMON_ICON_NAMES;
 
   const onClickListItemHandler = () => {
     setIsChecked(!isChecked);
+    if (!item) return;
 
-    if (!isChecked && !selectedMenu.includes(content)) {
-      setSelectedMenu(content);
+    if (
+      !isChecked &&
+      !selectedMenu.find((menu) => menu.menuName === item.menuName)
+    ) {
+      setSelectedMenu(item);
       return;
     }
-    if (isChecked && selectedMenu.includes(content)) {
-      setRemoveMenu(content);
+    if (
+      isChecked &&
+      selectedMenu.find((menu) => menu.menuName === item.menuName)
+    ) {
+      setRemoveMenu(item);
+    }
+  };
+  const onClickDeleteHandler = (keyword: string | undefined) => {
+    if (keyword) {
+      deleteKeyword(keyword);
     }
   };
 
@@ -45,7 +59,7 @@ function LunchCalendarListItem({
             <Clock css={iconStles} />
             <p>{content}</p>
           </div>
-          <XIcon />
+          <XIcon onClick={onClickDeleteHandler(content)} />
         </button>
       );
     case listItem.type2:
@@ -63,7 +77,7 @@ function LunchCalendarListItem({
               width={56}
               height={56}
               src={imageUrl || '/gift.png'}
-              alt={content}
+              alt={content || '식당썸네일'}
             />
           </div>
         </button>
@@ -76,7 +90,7 @@ function LunchCalendarListItem({
           onClick={onClickListItemHandler}
         >
           <div css={contentStyles(type)}>
-            <p>{content}</p>
+            <p>{item?.menuName}</p>
           </div>
           <Icons
             icon={home.check}
