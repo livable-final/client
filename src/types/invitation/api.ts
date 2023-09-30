@@ -23,7 +23,7 @@ export interface PostInvitationContents {
   description: string;
   startDate: string;
   endDate: string;
-  visitors: InvitationContents[];
+  visitors: VisitorInfo[];
 }
 
 export interface InvitationContents {
