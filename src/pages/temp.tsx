@@ -2,10 +2,9 @@ import Button from '@/components/common/Button';
 import Head from 'next/head';
 import Header from '@/components/common/Header';
 import Toggle from '@/components/common/Toggle';
-import RadioBtn from '@/components/common/RadioBtn';
+import RadioBtn from '@/components/common/RadioBtnBox';
 import InvitationFindRoadBtn from '@/components/invitation/view/InvitationFindRoadBtn';
 import CheckBox from '@/components/common/CheckBox';
-import Roulette from '@/components/Roulette';
 import BottomSheet from '@/components/common/BottomSheet';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import Bnb from '@/components/common/Bnb';
@@ -54,7 +53,6 @@ function Temp() {
       <CheckBox text="테스트 메시지2" />
 
       <Toggle />
-      <Roulette />
       <InvitationFindRoadBtn />
 
       <button type="button" onClick={onClickBottomSheetHandler}>

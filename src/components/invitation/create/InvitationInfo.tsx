@@ -3,74 +3,98 @@ import CheckBox from '@/components/common/CheckBox';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationPlace from '@/components/invitation/create/InvitationPlace';
 import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
-import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useFetch from '@/hooks/useFetch';
+import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
-import { css } from '@emotion/react';
+import { useState, useEffect } from 'react';
 import { Location, Calendar, Clock } from '@/assets/icons';
-import { ChangeEvent, useState } from 'react';
-import { InvitationCreateTexts } from '@/types/invitation/create';
+import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
+import { GetInvitationPlaceData } from '@/types/invitation/api';
+import { InvitationInfoProps } from '@/types/invitation/create';
+import { css } from '@emotion/react';
 
-function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
+function InvitationInfo({
+  tip,
+  onChange,
+  onFocus,
+  onBlur,
+}: InvitationInfoProps) {
+  const { createContents } = useInvitationCreateStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
-  const { title, placeholder, checkbox }: InvitationCreateTexts = CREATE_TEXTS;
-  const [tip, setTip] = useState('');
+  const { title, placeholder, checkbox } = CREATE_TEXTS;
 
+  const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
+
+  // 초대 가능한 장소 호출
+  const { response } = useFetch({
+    fetchFn: getInvitationPlaceList,
+  });
+
+  useEffect(() => {
+    // 초대 가능한 장소 응답 데이터 저장
+    if (response?.data) {
+      setPlaceList(response.data);
+    }
+  }, [response]);
+
+  // 장소 선택 바텀시트 오픈
   const onClickPlaceHandler = () => {
-    openBottomSheet(<InvitationPlace />);
+    if (placeList) {
+      openBottomSheet(<InvitationPlace placeList={placeList} />);
+    }
   };
 
+  // 날짜/시간 선택 바텀시트 오픈
   const onClickDateTimeHandler = () => {
     openBottomSheet(<InvitationDateTime />);
   };
 
-  const onChange = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-  ) => {
-    setTip(e.target.value);
-  };
-
   return (
     <>
-      <div css={containerStyles}>
+      <div css={infoContainerStyles}>
         <div css={titleStyles}>{title.invitationInfo}</div>
         <div css={inputContainerStyles}>
           {/* 장소 선택 */}
           <div css={placeInputStyles}>
-            <div className="icon">
+            <div css={icon}>
               <Location />
             </div>
             <input
               css={inputStyles}
               type="text"
+              defaultValue={placeList?.offices[0].officeName}
+              value={createContents.officeName}
               placeholder={placeholder.place}
-              defaultValue={defaultPlace}
               onClick={onClickPlaceHandler}
               readOnly
             />
           </div>
           {/* 날짜, 시간 선택 */}
           <div css={dateTimeInputStyles}>
-            <div className="date">
-              <div className="icon">
+            <div css={dateTime}>
+              <div css={icon}>
                 <Calendar />
               </div>
               <input
                 css={inputStyles}
                 type="text"
+                value={createContents.startDate}
                 placeholder={placeholder.date}
                 onClick={onClickDateTimeHandler}
                 readOnly
               />
             </div>
-            <div className="time">
-              <div className="icon">
+            <div css={dateTime}>
+              <div css={icon}>
                 <Clock />
               </div>
               <input
                 css={inputStyles}
                 type="text"
+                value={createContents.endDate}
                 placeholder={placeholder.time}
                 onClick={onClickDateTimeHandler}
                 readOnly
@@ -78,7 +102,7 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
             </div>
           </div>
           {/* 꿀팁 작성 */}
-          <div css={textareaStyles}>
+          <div css={textareaStyles} onFocus={onFocus} onBlur={onBlur}>
             <Input
               value={tip}
               onChange={onChange}
@@ -97,7 +121,7 @@ function InvitationInfo({ defaultPlace = '10층 회의실 A' }) {
   );
 }
 
-const containerStyles = css`
+const infoContainerStyles = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -156,23 +180,22 @@ const dateTimeInputStyles = css`
   border-radius: 12px;
   padding: 0 8px 0 16px;
   width: 100%;
+`;
 
-  .date,
-  .time {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
+const dateTime = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+`;
 
-    .icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 24px;
-      height: 24px;
-    }
-  }
+const icon = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 24px;
+  height: 24px;
 `;
 
 const inputStyles = css`

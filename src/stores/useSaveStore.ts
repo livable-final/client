@@ -7,6 +7,7 @@ type Save = {
 
 type SaveStore = {
   isSave: Save;
+  user: string;
   setIsSavePhotoMsg: () => void;
   clearIsSave: () => void;
   setUserToken: (value: string) => void;
@@ -16,10 +17,13 @@ const initialSaveState = {
   PhotoMsg: false,
 };
 
+const initialUserState = '';
+
 const useSaveStore = create<SaveStore>()(
   persist(
     (set) => ({
       isSave: initialSaveState,
+      user: initialUserState,
       setIsSavePhotoMsg: () =>
         set((pre) => ({
           isSave: { ...pre.isSave, PhotoMsg: true },
@@ -27,9 +31,10 @@ const useSaveStore = create<SaveStore>()(
       clearIsSave: () => {
         set({ isSave: initialSaveState });
       },
-      setUserToken: (value: string) => {
-        localStorage.setItem('user', value);
-      },
+      setUserToken: (value: string) =>
+        set({
+          user: value,
+        }),
     }),
     {
       name: 'user-storage',

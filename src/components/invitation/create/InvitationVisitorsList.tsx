@@ -4,6 +4,7 @@ import BottomSheet from '@/components/common/BottomSheet';
 import useViewStore from '@/stores/usePagesStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import InvitationAddVisitorList from '@/components/invitation/edit/InvitationAddVisitorList';
 import mq from '@/utils/mediaquery';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
@@ -20,8 +21,9 @@ function InvitationVisitorsList({
   const { nextComponent } = useViewStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
 
+  // 방문자 추가 버튼
   const onClickHandler = () => {
-    openBottomSheet('방문자 추가 컴포넌트');
+    openBottomSheet(<InvitationAddVisitorList visitorsList={visitorsList} />);
   };
 
   return (
@@ -33,8 +35,8 @@ function InvitationVisitorsList({
       <div css={listWrapperStyles}>
         {nextComponent !== 'InvitationVisitorsContainer' &&
           visitorsList.length !== 30 && <Add isBlue onClick={onClickHandler} />}
-        {visitorsList.map((name: string) => (
-          <NameTag key={name} name={name} onClick={onClick} />
+        {visitorsList.map((list) => (
+          <NameTag key={list.name} name={list.name} onClick={onClick} />
         ))}
       </div>
       {bottomSheetState.isOpen && <BottomSheet />}
@@ -48,6 +50,7 @@ const containerStyles = css`
   gap: 16px;
   width: 100%;
   max-width: 280px;
+  margin-bottom: 100px;
 
   ${mq.md} {
     max-width: 360px;

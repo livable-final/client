@@ -1,77 +1,108 @@
 import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
+import BottomSheet from '@/components/common/BottomSheet';
 import InvitationInfo from '@/components/invitation/create/InvitationInfo';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
-import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useViewStore from '@/stores/usePagesStore';
 import useModalStore from '@/stores/useModalStore';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
+import { VisitorInfo } from '@/types/invitation/api';
 
 function InvitationInfoContainer() {
   const { setNextComponent } = useViewStore();
   const { modalState, openModal, closeModal } = useModalStore();
+  const { bottomSheetState } = useBottomSheetStore();
+  const { createContents, setCreateContents } = useInvitationCreateStore();
   const { button, modal } = CREATE_TEXTS;
+
   const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
+  const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([]);
+  const [tip, setTip] = useState<string>('');
+  const [isFocused, setIsFocused] = useState(false);
 
-  const onClickBtnHandler = () => {
-    openModal(modal.send.title, modal.send.content);
-  };
+  // 이전 컴포넌트에서 등록한 방문자 정보 가져오기
+  useEffect(() => {
+    const convertedVisitors: VisitorInfo[] = createContents.visitors.map(
+      (visitor) => ({
+        name: visitor.name,
+        contact: visitor.contact,
+      }),
+    );
 
-  const onClickModalHandler = () => {
-    setIsConfirmed(!isConfirmed);
-    closeModal();
-  };
+    setVisitorsList(convertedVisitors);
+  }, [createContents]);
 
-  const onClickAddHandler = () => {
-    openModal('테스트', '삭제 기능이 구현될 예정이에요!');
-  };
-
+  // 모달에서 전송을 눌렀을 때 다음 컴포넌트 렌더링
   useEffect(() => {
     if (isConfirmed) {
       setNextComponent('InvitationDoneContainer');
     }
   }, [isConfirmed, setNextComponent]);
 
-  const visitorsList = [
-    '고애신',
-    '유진초이',
-    '김희성',
-    '쿠도히나',
-    '구동매',
-    '임관수',
-    '카일',
-    '도미',
-    '고애신',
-    '유진초이',
-    '김희성',
-    '쿠도히나',
-    '구동매',
-    '임관수',
-    '카일',
-    '도미',
-  ];
+  // 최종 전송 확인 모달 핸들러
+  const onClickModalHandler = () => {
+    setCreateContents('description', tip);
+    setIsConfirmed(!isConfirmed);
+    closeModal();
+  };
+
+  // 초대 목록에서 특정 방문자 삭제
+  const onClickDeleteHandler = () => {
+    openModal('테스트', '삭제 기능이 구현될 예정이에요!');
+  };
+
+  // 방문 팁 작성
+  const onChangeTipHandler = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setTip(e.target.value);
+  };
+
+  // input 포커스될 때 버튼 숨김
+  const onFocusInputHandler = () => {
+    setIsFocused(true);
+  };
+
+  // input 블러될 때 버튼 활성
+  const onBlurInputHandler = () => {
+    setTimeout(() => setIsFocused(false), 300);
+  };
+
+  // 하단 버튼 핸들러
+  const onClickBtnHandler = () => {
+    openModal(modal.send.title, modal.send.content);
+  };
 
   return (
     <div css={containerStyles}>
-      <InvitationInfo />
+      <InvitationInfo
+        tip={tip}
+        onChange={onChangeTipHandler}
+        onFocus={onFocusInputHandler}
+        onBlur={onBlurInputHandler}
+      />
       {visitorsList.length > 0 && (
         <InvitationVisitorsList
           visitorsList={visitorsList}
-          onClick={onClickAddHandler}
+          onClick={onClickDeleteHandler}
         />
       )}
-      {modalState.isOpen && (
-        <Modal content={modal.btn} onClick={onClickModalHandler} />
-      )}
-      <div css={buttonWrapperStyles}>
+      <div css={buttonWrapperStyles(isFocused)}>
         <Button
           content={button.send}
           variant="blue"
           onClick={onClickBtnHandler}
         />
       </div>
+      {modalState.isOpen && (
+        <Modal content={modal.btn} onClick={onClickModalHandler} />
+      )}
+      {bottomSheetState.isOpen && <BottomSheet />}
     </div>
   );
 }
@@ -97,12 +128,14 @@ const containerStyles = css`
   }
 `;
 
-const buttonWrapperStyles = css`
-  position: relative;
+const buttonWrapperStyles = (isFocused: boolean) => css`
+  position: fixed;
+  bottom: 0;
+  display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
   max-width: 360px;
-  padding-bottom: 20px;
+  padding: 0 16px 20px;
 
   ${mq.md} {
     min-width: 361px;
@@ -113,8 +146,6 @@ const buttonWrapperStyles = css`
     max-width: 640px;
   }
   ${mq.tab} {
-    position: fixed;
-    bottom: 0;
     min-width: 641px;
     max-width: 1024px;
   }

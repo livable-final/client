@@ -1,154 +1,131 @@
-import theme from '@/styles/theme';
+import { useEffect, useState } from 'react';
+import { CheckOn, UnCheck } from '@/assets/icons';
 import { RadioBtnProps } from '@/types/common/radioBtn';
 import { css } from '@emotion/react';
-import { useState } from 'react';
-import { Check, UnCheck } from '@/assets/icons';
+import theme from '@/styles/theme';
 
-function RadioBtn({ list, name, placeholder }: RadioBtnProps) {
-  const [selectData, setSelectData] = useState(list[0]);
-  const [etcValue, setEtcValue] = useState('');
-  const [isCheck, setIsCheck] = useState(false);
+function RadioBtn({
+  content,
+  select,
+  isEtc,
+  placeholder,
+  onChange,
+}: RadioBtnProps) {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  const onChangeRadioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
-    setSelectData(event.target.value);
-  };
+  // 선택한 값이 바뀔 때 마다 체크 상태 변경
+  useEffect(() => {
+    if (select === content) {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
+  }, [select]);
 
-  const onFocusHandler = () => {
-    setIsCheck(true);
-    setSelectData(etcValue);
-  };
-
-  const onBlurHandler = () => setIsCheck(false);
-
-  const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
-    setEtcValue(event.target.value);
-    setSelectData(event.target.value);
-  };
-  return (
-    <div css={radioContainerStyles}>
-      {list.map((item) => (
-        <div key={item} css={itemStyles}>
-          <input
-            id={item}
-            type="radio"
-            name={name}
-            value={item}
-            checked={selectData === item}
-            onChange={onChangeRadioHandler}
-            readOnly
-            css={radioInputStyles}
-          />
-          <label htmlFor={item} key={item} css={labelStyles}>
-            <div css={btnImgStyles}>
-              {selectData === item ? <Check /> : <UnCheck />}
-            </div>
-            <div>
-              <p>{item}</p>
-            </div>
-          </label>
-        </div>
-      ))}
-      {/* 직접 입력 */}
-      <div
-        role="presentation"
-        onFocus={onFocusHandler}
-        onBlur={onBlurHandler}
-        css={itemStyles}
-      >
-        <input
-          id={etcValue}
-          type="radio"
-          name={name}
-          value={etcValue}
-          checked={isCheck}
-          readOnly
-          css={radioInputStyles}
-        />
-        <label htmlFor={etcValue} css={labelStyles}>
-          <div css={btnImgStyles}>
-            {isCheck ? (
-              <div css={icon}>
-                <Check />
-              </div>
-            ) : (
-              <div css={icon}>
-                <UnCheck />
-              </div>
-            )}
+  return !isEtc ? (
+    <label css={containerStyles}>
+      <input
+        type="radio"
+        value={content}
+        css={defaultRadioStyles}
+        checked={select === content}
+        readOnly
+      />
+      <div css={iconWrapper}>
+        {isChecked ? (
+          <div css={checkIcon}>
+            <CheckOn />
           </div>
-          <div css={inputWrapper}>
-            <p>기타 (직접입력)</p>
-            <input
-              type="text"
-              placeholder={placeholder}
-              onChange={onChangeInputHandler}
-              css={etcInputStyles}
-            />
+        ) : (
+          <div css={uncheckIcon}>
+            <UnCheck />
           </div>
-        </label>
+        )}
       </div>
-    </div>
+      <div css={contentStyles(isChecked)}>{content}</div>
+    </label>
+  ) : (
+    <label css={containerStyles}>
+      <input
+        type="radio"
+        value={content}
+        css={defaultRadioStyles}
+        checked={select === content}
+        readOnly
+      />
+      <div css={iconWrapper}>
+        {isChecked ? (
+          <div css={checkIcon}>
+            <CheckOn />
+          </div>
+        ) : (
+          <div css={uncheckIcon}>
+            <UnCheck />
+          </div>
+        )}
+      </div>
+      <div css={contentWrapperStyles}>
+        <div css={contentStyles(isChecked)}>{content}</div>
+        <input
+          css={inputTextStyles}
+          type="text"
+          placeholder={placeholder}
+          onChange={onChange}
+        />
+      </div>
+    </label>
   );
 }
 
-export default RadioBtn;
-
-const radioContainerStyles = css`
+const containerStyles = css`
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-
-  span {
-    color: ${theme.palette.greyscale.grey40};
-  }
-  p {
-    line-height: 1.4em;
-  }
+  gap: 8px;
+  cursor: pointer;
 `;
 
-const itemStyles = css`
-  width: 100%;
-`;
-
-const radioInputStyles = css`
+const defaultRadioStyles = css`
   display: none;
+  max-width: 20px;
+  max-height: 20px;
 
-  &:checked + label {
-    color: ${theme.palette.primary};
-    p {
-      color: ${theme.palette.primary};
-    }
-  }
+  /* 기본 라디오 스타일 제거 */
+  vertical-align: middle;
+  appearance: none;
+  border: none;
 `;
 
-const btnImgStyles = css`
+const iconWrapper = css`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 20px;
   height: 20px;
-  flex-grow: 0;
 `;
 
-const icon = css`
+const checkIcon = css`
+  width: 100%;
+  height: 100%;
+  margin: -2px 0 2px -4px;
+`;
+
+const uncheckIcon = css`
   width: 100%;
   height: 100%;
 `;
 
-const labelStyles = css`
+const contentStyles = (isChecked: boolean) => css`
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  font: ${theme.font.subTitle.subTitle1_400};
+  color: ${isChecked ? theme.palette.primary : theme.palette.greyscale.grey90};
 `;
 
-const inputWrapper = css`
+const contentWrapperStyles = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
 `;
-const etcInputStyles = css`
+
+const inputTextStyles = css`
   width: 100%;
 `;
+export default RadioBtn;

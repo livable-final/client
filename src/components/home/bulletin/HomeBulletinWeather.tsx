@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-import getWeather from '@/pages/api/home/homeRequests';
+import { getWeather } from '@/pages/api/home/homeRequests';
 import Icons from '@/components/common/Icons';
 import getWeatherIcon from '@/utils/getWeatherIcon';
 import { useQuery } from '@tanstack/react-query';

@@ -37,6 +37,7 @@ import {
   ServiceParking,
   ServiceReception,
   ServiceTemp,
+  My,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -107,6 +108,8 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Lunch color={color} />;
     case home.check:
       return <Check width={size} height={size} color={color} />;
+    case home.my:
+      return <My />;
     case lunch.smile:
       return <Smile width={size} height={size} />;
     case lunch.confused:

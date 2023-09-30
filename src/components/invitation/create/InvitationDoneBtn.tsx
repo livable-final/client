@@ -5,17 +5,20 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { COMMON_ICON_NAMES } from '@/constants/common';
+import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function InvitationDoneBtn() {
-  const { button } = CREATE_TEXTS;
+  const { button }: InvitationCreateTexts = CREATE_TEXTS;
   const { invitation } = COMMON_ICON_NAMES;
 
   const router = useRouter();
 
+  // 마이 페이지 이동
   const onClickToMypageHandler = () => {
     router.push(`/user/invitation-list`);
   };
 
+  // 메인 홈 이동
   const onClickToHomeHandler = () => {
     router.push(`/`);
   };

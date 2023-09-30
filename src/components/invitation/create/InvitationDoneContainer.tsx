@@ -5,11 +5,9 @@ import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 
 function InvitationDoneContainer() {
-  const visitorsList = ['고애신'];
-
   return (
     <div css={containerStyles}>
-      <InvitationDoneMessage visitorsList={visitorsList} />
+      <InvitationDoneMessage />
       <InvitationDoneBtn />
     </div>
   );

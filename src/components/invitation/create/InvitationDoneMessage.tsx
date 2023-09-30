@@ -1,17 +1,22 @@
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { Send } from '@/assets/icons';
-import { InvitationDoneMessageProps } from '@/types/invitation/create';
 
-function InvitationDoneMessage({ visitorsList }: InvitationDoneMessageProps) {
+function InvitationDoneMessage() {
+  const { createContents } = useInvitationCreateStore();
+  const { visitors } = createContents;
+
+  console.log('최종 초대장 전송 데이터 확인', createContents);
+
   return (
     <div css={containerStyles}>
       <Send />
       <div css={messageStyles}>
-        {visitorsList.length === 1
-          ? `${visitorsList[0]}님께\n초대장을 보냈어요`
-          : `${visitorsList[0]}님 외 ${
-              visitorsList.length - 1
+        {visitors.length === 1
+          ? `${visitors[0].name}님께\n초대장을 보냈어요`
+          : `${visitors[0].name}님 외 ${
+              visitors.length - 1
             }명에게\n초대장을 보냈어요`}
       </div>
     </div>

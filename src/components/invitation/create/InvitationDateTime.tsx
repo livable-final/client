@@ -3,17 +3,18 @@ import ko from 'date-fns/locale/ko';
 import 'react-datepicker/dist/react-datepicker.css';
 import Toggle from '@/components/common/Toggle';
 import Button from '@/components/common/Button';
+import InvitationSelectTime from '@/components/invitation/create/InvitationSelectTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import InvitationSelectTime from '@/components/invitation/create/InvitationSelectTime';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function InvitationDateTime() {
-  const { title, button } = CREATE_TEXTS;
+  const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
   const { closeBottomSheet } = useBottomSheetStore();
 
   const [startDate, setStartDate] = useState(new Date());
@@ -188,6 +189,9 @@ const calendarStyles = css`
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
         opacity: 0.8;
+      }
+      .react-datepicker__day--disabled {
+        color: ${theme.palette.greyscale.grey30};
       }
     }
     .react-datepicker__day {

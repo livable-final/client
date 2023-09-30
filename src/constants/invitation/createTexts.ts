@@ -55,6 +55,7 @@ const CREATE_TEXTS = {
     btn: '전송하기',
   },
   checkbox: '이 메세지를 다음에도 사용',
+  radioBtn: '기타 (직접입력)',
   timeSelector: {
     startHour: 9,
     endHour: 18,

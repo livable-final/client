@@ -1,6 +1,7 @@
-// 방문자 초대장 중 초대장 생성 파트 타입 선언 //
+import { VisitorInfo } from '@/types/invitation/api';
 
-// 텍스트 상수
+// ****************** 텍스트 상수 ****************** //
+// ****************** constants ****************** //
 export interface InvitationCreateTexts {
   header: {
     [key: string]: string;
@@ -25,34 +26,73 @@ export interface InvitationCreateTexts {
       | string;
   };
   checkbox: string;
+  radioBtn: string;
   timeSelector: {
     [key: string]: number;
   };
 }
 
-// 초대 목적 선택
+// ****************** 초대 목적 ****************** //
+// ****************** Purpose ****************** //
+// Invitation Purpose
 export interface CategoryInvitation {
   [key: string]: {
     [key: string]: CommonCategory;
   };
 }
 
+// 카테고리
 export interface CommonCategory {
   icon: string;
   title: string;
 }
 
-// 방문자 리스트
+// ****************** 방문자 ********************* //
+// ****************** Visitor ****************** //
+// Invitation Visitors
 export interface InvitationVisitorsListProps {
-  visitorsList: string[];
+  visitorsList: VisitorInfo[];
   onClick: () => void;
 }
 
-export interface InvitationDoneMessageProps {
-  visitorsList: string[];
+// ****************** 초대 장소 ****************** //
+// ****************** Place ******************** //
+// Invitation Place
+export interface InvitationPlaceProps {
+  placeList: {
+    commonPlaces: CommonPlaces[];
+    offices: Offices[];
+  };
+}
+export interface CommonPlaces {
+  commonPlaceId: number;
+  commonPlaceName: string;
+}
+export interface Offices {
+  officeName: string;
 }
 
-// Time Selector
+export interface PlaceList {
+  officeName?: string;
+  commonPlaceName?: string;
+  commonPlaceId?: number;
+}
+
+// ****************** 초대 정보 ********************** //
+// ****************** Information ****************** //
+// Invitation Info
+export interface InvitationInfoProps {
+  tip: string;
+  onChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => void;
+  onFocus: () => void;
+  onBlur: () => void;
+}
+
+// 타임 셀렉터
 export interface TimeSelectorProps {
   content: string | JSX.Element;
   status: string;
@@ -66,3 +106,6 @@ export interface TimeSelectorColorProps {
 export interface TimeSelectorsColorProps {
   [key: string]: TimeSelectorColorProps;
 }
+
+// ****************** 기타 ********************** //
+// ****************** Etc ********************** //
