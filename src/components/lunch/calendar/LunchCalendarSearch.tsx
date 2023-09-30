@@ -39,7 +39,7 @@ function LunchCalendarSearch() {
       setSearchData(res);
       setShowSearch(true);
     } catch (err) {
-      console.log('검색 오류', err);
+      //  검색 오류 예외 처리
     }
   };
   const onClickBtnHandler = (
