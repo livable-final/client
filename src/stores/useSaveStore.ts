@@ -37,7 +37,6 @@ const initialTokenState = {
   visitor: '',
 };
 // 사용자 토큰 초기값
-const initialUserState = '';
 
 // 초대장 생성 방문tip 초기값
 const initialVisitMsg = {
@@ -51,8 +50,6 @@ const useSaveStore = create<SaveStore>()(
       isSave: initialSaveState,
       user: initialTokenState.user,
       visitor: initialTokenState.visitor,
-
-      user: initialUserState,
       keyword: [],
       visit: initialVisitMsg,
       setIsSavePhotoMsg: () =>
