@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { INVITATION_EDIT_TEXTS } from '@/constants/invitation/editTexts';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import theme from '@/styles/theme';
 import Add from '@/components/common/Add';
 import Button from '@/components/common/Button';
@@ -21,16 +21,6 @@ function InvitationAddVisitorList({
   const [addVisitorList, setAddVisitorList] = useState<VisitorInfo[]>([]);
   const { closeBottomSheet } = useBottomSheetStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
-
-  // 스토어에서 가져온 방문자 정보
-  const [storeVisitorList, setStoreVisitorList] = useState<VisitorInfo[]>(
-    createContents.visitors,
-  );
-
-  // 스토어 방문자 정보가 바뀌면 상태 업데이트
-  // useEffect(() => {
-  //   setStoreVisitorList(createContents.visitors);
-  // }, [createContents.visitors]);
 
   // 방문자 삭제 버튼 핸들러
   const onClickDeleteVisitorHandler = (name: string) => {
