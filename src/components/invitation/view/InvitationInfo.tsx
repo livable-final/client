@@ -10,11 +10,25 @@ export const test = {
   time: '14:30 ~ 16:30',
 };
 
-function InvitationInfo({ value }: InvitationInfoProps) {
+function InvitationInfo({ value, data }: InvitationInfoProps) {
   const { setNextComponent } = usePagesStore();
   const onClickHandler = (event: React.MouseEvent) => {
     setNextComponent((event.target as HTMLButtonElement).id);
   };
+
+  // 시간 포멧 변환
+  const startTime = data.invitationStartTime.substring(0, 5);
+  const endTime = data.invitationEndTime.substring(0, 5);
+
+  // 날짜 포멧 변환
+  const changeDatefometer = (date: string) => {
+    const [year, month, day] = date.split('-');
+    const changedDate = `${year}.${month}.${day}`;
+    return changedDate;
+  };
+  const startDate = changeDatefometer(data.invitationStartDate);
+  const endDate = changeDatefometer(data.invitationEndDate).substring(5, 10);
+
   return (
     <div css={infoContainerStyles}>
       <div css={infoContainerDesignStyles} />
@@ -23,15 +37,19 @@ function InvitationInfo({ value }: InvitationInfoProps) {
           <div css={iconContainerStyles}>
             <LocationFill />
           </div>
-          <div css={textInfoStyles}>{test.place}</div>
+          <div css={textInfoStyles}>{data.invitationOfficeName}</div>
         </div>
         <div css={placeInfoStyles}>
           <div css={iconContainerStyles}>
             <CalendarFill />
           </div>
           <div>
-            <div css={textInfoStyles}>{test.date}</div>
-            <div css={textInfoStyles}>{test.time}</div>
+            <div css={textInfoStyles}>
+              {startDate} ~ {endDate}
+            </div>
+            <div css={textInfoStyles}>
+              {startTime} ~ {endTime}
+            </div>
           </div>
         </div>
       </div>
