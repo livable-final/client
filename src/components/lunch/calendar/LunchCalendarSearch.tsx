@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { css } from '@emotion/react';
 import { SearchIcon } from '@/assets/icons';
 import { CALENDAR_CONTENT, CALENDAR_CASE } from '@/constants/lunch';
@@ -11,20 +11,21 @@ import Input from '@/components/common/Input';
 import LunchCalendarListItem from '@/components/lunch/calendar/LunchCalendarListItem';
 import usePagesStore from '@/stores/usePagesStore';
 import useWriteStore from '@/stores/useWriteStore';
-import useFetch from '@/hooks/useFetch';
+import useSaveStore from '@/stores/useSaveStore';
+import keyDate from '@/utils/key';
 
 function LunchCalendarSearch() {
   const [searchData, setSearchData] = useState<RestaurantsData[]>([]);
-  const [showSearch, setShowSearch] = useState(true);
+  const [showSearch, setShowSearch] = useState(false);
   const [keyword, setKeyword] = useState('');
-  const { nextComponent, setNextComponent, goBack } = usePagesStore();
+  const { setNextComponent, goBack } = usePagesStore();
   const setRestaurant = useWriteStore((state) => state.setRestaurant);
+  const keywordData = useSaveStore((state) => state.keyword);
+  const key = keyDate();
 
   const { calendar } = COMPONENT_NAME.lunch;
   const { title, subTitle } = CALENDAR_CONTENT;
   const { listItem } = CALENDAR_CASE;
-
-  useEffect(() => {}, []);
 
   const onClickHeaderHandler = () => {
     goBack();
@@ -34,16 +35,15 @@ function LunchCalendarSearch() {
     e.preventDefault();
 
     try {
-      console.log('keyword', keyword);
       const res = await getRestaurants(keyword);
       setSearchData(res);
-      console.log('검색 성공', res);
+      setShowSearch(true);
     } catch (err) {
       console.log('검색 오류', err);
     }
   };
   const onClickBtnHandler = (
-    e: MouseEvent,
+    e: React.MouseEvent<HTMLButtonElement>,
     restaurantId: number,
     restaurantName: string,
   ) => {
@@ -61,33 +61,6 @@ function LunchCalendarSearch() {
     setKeyword(e.target.value);
   };
 
-  const searchData1 = [
-    {
-      restaurantId: 1,
-      restaurantName: '김밥천국',
-      restaurantCategory: '분식',
-      inBuilding: false,
-      estimatedTime: 15,
-      foor: 0,
-    },
-    {
-      restaurantId: 2,
-      restaurantName: '할머니순두부',
-      restaurantCategory: '한식',
-      inBuilding: true,
-      estimatedTime: 0,
-      floor: -1, // (지하 1층)
-    },
-    {
-      restaurantId: 3,
-      restaurantName: '제육한상',
-      restaurantCategory: '한식',
-      inBuilding: false,
-      estimatedTime: 3,
-      floor: 0,
-    },
-  ];
-
   return (
     <section>
       <Header title={title.search} onClick={onClickHeaderHandler} />
@@ -102,10 +75,13 @@ function LunchCalendarSearch() {
         <div css={textStyles}>
           <span>{subTitle.recentSearches}</span>
           <div>
-            <LunchCalendarListItem
-              type={listItem.type1}
-              content="최근 검색한 결과 (테스트용)"
-            />
+            {keywordData.map((value) => (
+              <LunchCalendarListItem
+                key={key}
+                type={listItem.type1}
+                content={value}
+              />
+            ))}
           </div>
         </div>
       ) : (
@@ -115,7 +91,7 @@ function LunchCalendarSearch() {
             <span css={colorTextStyles}>3건</span>
           </div>
           <div>
-            {searchData1.map((item) => (
+            {searchData.map((item) => (
               <LunchCalendarListItem
                 key={item.restaurantId}
                 type={listItem.type2}
