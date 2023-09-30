@@ -244,7 +244,8 @@ export const COMMON_TIME_SELECTOR: TimeSelectorsColorProps = {
   },
   enabled: {
     status: 'enabled',
-    background: `${theme.palette.primary}`,
-    color: `${theme.palette.white}`,
+    background: `${theme.palette.bluescale.blue10}`,
+    color: `${theme.palette.bluescale.blue50}`,
+    border: `${theme.palette.bluescale.blue20}`,
   },
 };
