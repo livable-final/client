@@ -15,7 +15,8 @@
     "incremental": true,
     "types": ["@emotion/react/types/css-prop"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "$/*": ["./public/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js"],
