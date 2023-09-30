@@ -51,9 +51,12 @@ function InvitationInfoContainer() {
     closeModal();
   };
 
-  // 초대 목록에서 특정 방문자 삭제
-  const onClickDeleteHandler = () => {
-    openModal('테스트', '삭제 기능이 구현될 예정이에요!');
+  // 방문자 삭제 버튼 핸들러
+  const onClickDeleteVisitorHandler = (name: string) => {
+    const deletedVisitors = visitorsList.filter(
+      (visitor) => visitor.name !== name,
+    );
+    setCreateContents('visitors', deletedVisitors);
   };
 
   // 방문 팁 작성
@@ -89,7 +92,7 @@ function InvitationInfoContainer() {
       {visitorsList.length > 0 && (
         <InvitationVisitorsList
           visitorsList={visitorsList}
-          onClick={onClickDeleteHandler}
+          onClick={onClickDeleteVisitorHandler}
         />
       )}
       <div css={buttonWrapperStyles(isFocused)}>
