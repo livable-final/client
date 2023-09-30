@@ -11,8 +11,9 @@ const COMPONENT_NAME = {
   lunch: {
     calendar: {
       review: 'LunchCalendarReview',
-      menu: 'LunchCalendarMenu',
       search: 'LunchCalendarSearch',
+      menu: 'LunchCalendarMenu',
+      eatOut: 'LunchCalendarEatOut',
       cafeteria: 'LunchCalendarCafeteria',
       lunchBox: 'LunchCalendarLunchBox',
     },

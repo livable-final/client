@@ -18,27 +18,28 @@ export const CALENDAR_CONTENT = {
     photoReview: '10포인트가 적립되었어요',
     point: '월에 받은 포인트',
   },
-  category: {
-    eatOut: {
-      text: '외식',
+  category: [
+    {
+      category: '외식',
       placeholder:
         '가격, 이동 시간, 분위기 등 공유하고 싶은 내용을 입력해주세요.',
-      subCategory: {
-        amount: '음식의 양',
-        speed: '서빙속도',
-        service: '서비스',
-      },
     },
-    cafeteria: {
-      text: '구내식당',
+    {
+      category: '구내식당',
       placeholder: '오늘 드신 점심 식단을 어떠셨나요?',
     },
-    lunchBox: {
-      text: '도시락',
+    {
+      category: '도시락',
       placeholder:
         '도시락 레시피, 도시락 싸는 꿀팁 등 공유하고 싶은 내용을 입력해주세요.',
     },
-  },
+  ],
+  subCategory: [
+    { type: 'taste', title: '맛' },
+    { type: 'amount', title: '음식의 양' },
+    { type: 'speed', title: '서빙속도' },
+    { type: 'service', title: '서비스' },
+  ],
   button: {
     button1: {
       text: `오늘 점심은 무엇을 드셨나요?
@@ -57,10 +58,7 @@ export const CALENDAR_CONTENT = {
       text2: '작성완료',
       text3: '확인',
     },
-    button5: {
-      good: '맛있오',
-      bad: '맛없오',
-    },
+    button5: ['맛있오', '맛없오'],
     button6: {
       text: '만족',
     },
