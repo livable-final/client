@@ -30,7 +30,7 @@ function LunchReview({ ...props }: LunchReviewProps) {
           speed={props.reviewSpeed}
         />
       </div>
-      <LunchReviewPhotos photos={props.reviewImageUrl} isRow={props.isRow} />
+      <LunchReviewPhotos photos={props.reviewImages} isRow={props.isRow} />
     </div>
   );
 }
