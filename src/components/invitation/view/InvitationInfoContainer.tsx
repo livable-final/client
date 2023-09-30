@@ -1,18 +1,18 @@
 import mq from '@/utils/mediaquery';
-import InvitationInfo from '@/components/invitation/view/InvitationInfo';
+// import InvitationInfo from '@/components/invitation/view/InvitationInfo';
 import InvitationInfoCategory from '@/components/invitation/view/InvitationInfoCategory';
 import { css } from '@emotion/react';
 import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
-import { InvitationInfoContainerProps } from '@/types/invitation/view';
+// import { InvitationInfoContainerProps } from '@/types/invitation/view';
 
-function InvitationInfoContainer({ data }: InvitationInfoContainerProps) {
+function InvitationInfoContainer() {
   return (
     <div css={ViewInfoContainerStyles}>
       <div css={ViewInfoStyles}>
-        <InvitationInfo
+        {/* <InvitationInfo
           value={INVITATION_VEIW_INFO_TEXTS.category.code}
           data={data}
-        />
+        /> */}
       </div>
       <div css={InfoCategoryContainerStyles}>
         <InvitationInfoCategory

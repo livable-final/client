@@ -42,7 +42,7 @@ function InvitationViewForm() {
           title={INVITATION_VEIW_INFO_TEXTS.category.main}
           onClick={onClickHandler}
         />
-        <InvitationInfoContainer data={response && response.data} />
+        <InvitationInfoContainer />
         <InvitationCarouselContainer />
         <InvitationViewFooter />
       </div>
