@@ -5,6 +5,7 @@ import InvitationInfo from '@/components/invitation/create/InvitationInfo';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
 import useViewStore from '@/stores/usePagesStore';
 import useModalStore from '@/stores/useModalStore';
+import useSaveStore from '@/stores/useSaveStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
@@ -16,14 +17,15 @@ import { VisitorInfo } from '@/types/invitation/api';
 function InvitationInfoContainer() {
   const { setNextComponent } = useViewStore();
   const { modalState, openModal, closeModal } = useModalStore();
+  const { visit, setVisitMsgText, clearVisitMsg } = useSaveStore();
   const { bottomSheetState } = useBottomSheetStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
   const { button, modal } = CREATE_TEXTS;
 
-  const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
   const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([]);
-  const [tip, setTip] = useState<string>('');
-  const [isFocused, setIsFocused] = useState(false);
+  const [tip, setTip] = useState<string>(visit.visitMsgText);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
 
   // 이전 컴포넌트에서 등록한 방문자 정보 가져오기
   useEffect(() => {
@@ -37,19 +39,18 @@ function InvitationInfoContainer() {
     setVisitorsList(convertedVisitors);
   }, [createContents]);
 
-  // 모달에서 전송을 눌렀을 때 다음 컴포넌트 렌더링
+  // 모달에서 전송을 눌렀을 때 최종 초대장 데이터
   useEffect(() => {
     if (isConfirmed) {
       setNextComponent('InvitationDoneContainer');
+      setCreateContents('description', tip);
     }
-  }, [isConfirmed, setNextComponent]);
-
-  // 최종 전송 확인 모달 핸들러
-  const onClickModalHandler = () => {
-    setCreateContents('description', tip);
-    setIsConfirmed(!isConfirmed);
-    closeModal();
-  };
+    if (visit.visitMsg) {
+      setVisitMsgText(tip);
+    } else {
+      clearVisitMsg();
+    }
+  }, [isConfirmed]);
 
   // 방문자 삭제 버튼 핸들러
   const onClickDeleteVisitorHandler = (name: string) => {
@@ -76,9 +77,15 @@ function InvitationInfoContainer() {
     setTimeout(() => setIsFocused(false), 300);
   };
 
-  // 하단 버튼 핸들러
+  // 하단 버튼 핸들러 (초대장 보내기)
   const onClickBtnHandler = () => {
     openModal(modal.send.title, modal.send.content);
+  };
+
+  // 최종 전송 확인 핸들러 (모달)
+  const onClickModalHandler = () => {
+    setIsConfirmed(!isConfirmed);
+    closeModal();
   };
 
   return (
