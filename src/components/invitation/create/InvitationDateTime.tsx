@@ -3,11 +3,13 @@ import ko from 'date-fns/locale/ko';
 import 'react-datepicker/dist/react-datepicker.css';
 import Toggle from '@/components/common/Toggle';
 import Button from '@/components/common/Button';
+import Alert from '@/components/common/Alert';
 import InvitationSelectTime from '@/components/invitation/create/InvitationSelectTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useAlertStore from '@/stores/useAlertStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
-import useFetch from '@/hooks/useFetch';
+import getFormatDate from '@/utils/getFormatDate';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
@@ -20,31 +22,46 @@ import { GetInvitationTimeListData } from '@/types/invitation/api';
 function InvitationDateTime() {
   const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
   const { closeBottomSheet } = useBottomSheetStore();
+  const { alertState, openAlert } = useAlertStore();
   const { createContents } = useInvitationCreateStore();
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  const [timeList, setTimeList] = useState<GetInvitationTimeListData>();
-  const [placeId, setPlaceId] = useState<number | null>(null);
-
-  const { response } = useFetch({
-    fetchFn: () =>
-      getInvitationTimeList({ commonPlaceId: placeId, date: '2023-10-13' }),
-  });
+  const [, setTimeList] = useState<GetInvitationTimeListData>();
 
   useEffect(() => {
-    setPlaceId(createContents.commonPlaceId);
-  }, [createContents]);
+    const getTimeList = async () => {
+      try {
+        const response = await getInvitationTimeList({
+          commonPlaceId: createContents.commonPlaceId,
+          date: getFormatDate(endDate),
+        });
+        setTimeList(response.data);
+      } catch (error) {
+        openAlert('ERROR!', String(error));
+      }
+    };
+    getTimeList();
+  }, [endDate]);
+
+  // useFetch 버전
+  // const { response } = useFetch({
+  //   fetchFn: () =>
+  //     getInvitationTimeList({
+  //       commonPlaceId: createContents.commonPlaceId,
+  //       date: getFormatDate(startDate),
+  //     }),
+  // });
 
   // useEffect(() => {
-  //   if (response.data) {
+  //   if (response?.data) {
   //     setTimeList(response.data);
   //   }
-  // }, [placeId, response.data]);
+  // }, []);
 
-  console.log(placeId);
-  console.log(response);
+  // console.log(getFormatDate(startDate));
+  // console.log(timeList);
 
   // 달력 선택 핸들러
   const onChange = (dates: [Date, Date]) => {
@@ -53,23 +70,6 @@ function InvitationDateTime() {
     setStartDate(start);
     setEndDate(end);
   };
-
-  // 날짜 포맷팅 함수 (추후 유틸 폴더로 빼기)
-  const formatDate = (originDate) => {
-    const date = new Date(originDate);
-
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-
-    // yyyy-MM-dd (ex. 2023-01-06)
-    return `${year}-${month < 10 ? `0${month}` : `${month}`}-${
-      day < 10 ? `0${day}` : `${day}`
-    }`;
-  };
-
-  console.log('시작일 :', formatDate(startDate));
-  console.log('종료일 :', formatDate(endDate));
 
   return (
     <>
@@ -99,7 +99,7 @@ function InvitationDateTime() {
             {title.invitationTime}
             <Toggle />
           </div>
-          <InvitationSelectTime timeList={timeList} />
+          <InvitationSelectTime />
         </div>
         <div css={buttonWrapperStyles}>
           <Button
@@ -109,6 +109,7 @@ function InvitationDateTime() {
           />
         </div>
       </div>
+      {alertState.isOpen && <Alert />}
     </>
   );
 }
@@ -237,6 +238,7 @@ const calendarStyles = css`
         color: ${theme.palette.white};
       }
       .react-datepicker__day--in-range {
+        // startDate ~ endDate 범위 스타일
         border-radius: 45%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
