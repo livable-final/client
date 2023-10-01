@@ -31,11 +31,12 @@ function LunchCalendarRatingBtn({ title }: LunchCalendarRatingBtnProps) {
     }
   };
 
-  console.log(taste);
   return (
     <button
       type="button"
-      css={buttonStyles}
+      css={buttonStyles(
+        title === `${button.button5[0]}` ? isGoodChecked : isBadChecked,
+      )}
       onClick={
         title === `${button.button5[0]}`
           ? onClickGoodHandler
@@ -56,7 +57,7 @@ function LunchCalendarRatingBtn({ title }: LunchCalendarRatingBtnProps) {
   );
 }
 
-const buttonStyles = css`
+const buttonStyles = (isChecked: boolean) => css`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,22 +66,19 @@ const buttonStyles = css`
   width: 100%;
   padding: 16px 0;
   border-radius: 16px;
-  border: 1px solid ${theme.palette.greyscale.grey10};
-  background-color: ${theme.palette.greyscale.grey5};
-  color: ${theme.palette.greyscale.grey50};
   font: ${theme.font.body.body1_500};
+  border: 2px solid
+    ${!isChecked
+      ? `{theme.palette.greyscale.grey10}`
+      : `${theme.palette.orange}`};
+  background-color: ${!isChecked
+    ? `${theme.palette.greyscale.grey5}`
+    : `${theme.palette.white}`};
 
-  // 추후 애니메이션 수정
-  &:active {
-    border: 2px solid ${theme.palette.orange};
-    background-color: ${theme.palette.white};
-    color: ${theme.palette.orange};
-
-    svg {
-      filter: none;
-      transform: scale(1.2);
-      transition: transform 0.1s ease;
-    }
+  svg {
+    filter: ${isChecked && 'none'};
+    transform: ${isChecked && 'scale(1.2)'};
+    transition: ${isChecked && 'transform 0.1s ease'};
   }
 `;
 
