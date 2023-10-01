@@ -1,107 +1,15 @@
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
-import UserInvitatioListItem from '@/components/user/UserInvitationListItem';
+import useFetch from '@/hooks/useFetch';
 import getTodayDate from '@/utils/getTodayDate';
+import UserInvitatioListItem from '@/components/user/UserInvitationListItem';
+import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import UserInvitationListEdit from '@/components/user/UserInvitationListEdit';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { USER_INVITATIONLIST_TEXT } from '@/constants/user/userInvitationTexts';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import UserInvitationListEdit from '@/components/user/UserInvitationListEdit';
+import { getInvitationList } from '@/pages/api/invitation/editRequests';
 import BottomSheet from '../common/BottomSheet';
-
-// 더미데이터
-export const dataList = {
-  '2023-09-24': [
-    {
-      invitationId: 6,
-      visitorName: '김방문',
-      visitorCount: 1, // 김방문도 포함된 카운트입니다.
-      purpose: '면접',
-      officeName: '그랑서울 B동 123호',
-      startDate: '2023-09-24',
-      startTime: '10:00:00',
-      endTime: '12:30:00',
-    },
-    {
-      invitationId: 7,
-      visitorName: '김점검',
-      visitorCount: 2,
-      purpose: 'AS/점검',
-      officeName: '그랑서울 A동 회의실 101',
-      startDate: '2023-09-24',
-      startTime: '11:00:00',
-      endTime: '11:30:00',
-    },
-  ],
-  '2023-10-27': [
-    {
-      invitationId: 1,
-      visitorName: '김방문',
-      visitorCount: 1, // 김방문도 포함된 카운트입니다.
-      purpose: '면접',
-      officeName: '그랑서울 B동 123호',
-      startDate: '2023-10-27',
-      startTime: '10:00:00',
-      endTime: '12:30:00',
-    },
-    {
-      invitationId: 2,
-      visitorName: '김점검',
-      visitorCount: 2,
-      purpose: 'AS/점검',
-      officeName: '그랑서울 A동 회의실 101',
-      startDate: '2023-10-27',
-      startTime: '11:00:00',
-      endTime: '11:30:00',
-    },
-  ],
-  '2023-10-28': [
-    {
-      invitationId: 3,
-      visitorName: '김방문',
-      visitorCount: 3,
-      purpose: '회의',
-      officeName: '그랑서울 B동 123호',
-      startDate: '2023-10-28',
-      startTime: '10:00:00',
-      endTime: '12:30:00',
-    },
-  ],
-  '2023-10-29': [
-    {
-      invitationId: 8,
-      visitorName: '홍방문',
-      visitorCount: 3,
-      purpose: '회의',
-      officeName: '그랑서울 B동 123호',
-      startDate: '2023-10-29',
-      startTime: '10:30:00',
-      endTime: '11:30:00',
-    },
-  ],
-  '2023-10-30': [
-    {
-      invitationId: 4,
-      visitorName: '김방문',
-      visitorCount: 4,
-      purpose: '회의',
-      officeName: '그랑서울 B동 123호',
-      startDate: '2023-10-30',
-      startTime: '09:00:00',
-      endTime: '12:30:00',
-    },
-    {
-      invitationId: 5,
-      visitorName: '김수일',
-      visitorCount: 2,
-      purpose: '수리',
-      officeName: '그랑서울 A동 회의실 101',
-      startDate: '2023-10-30',
-      startTime: '14:00:00',
-      endTime: '15:00:00',
-    },
-  ],
-};
 
 function UserInvitationList() {
   const { openBottomSheet } = useBottomSheetStore();
@@ -109,12 +17,17 @@ function UserInvitationList() {
   const onClickHandler = () => {
     router.push('/user');
   };
-  const onClickEditHandler = () => {
-    openBottomSheet(<UserInvitationListEdit />);
+  const onClickEditHandler = (e: React.MouseEvent<HTMLElement>) => {
+    openBottomSheet(
+      <UserInvitationListEdit id={e.currentTarget.getAttribute('value')} />,
+    );
   };
+  const { response } = useFetch({
+    fetchFn: getInvitationList,
+  });
 
   // 빋어온 데이터 객체를 다중 배열로 변환
-  const invitationList = Object.values(dataList);
+  const invitationList = response && Object.values(response?.data);
 
   // 오늘 날짜 가져오는 로직
   const currentDate = new Date();
@@ -124,29 +37,31 @@ function UserInvitationList() {
   return (
     <div css={userInvitationListStyles}>
       <Header title={USER_INVITATIONLIST_TEXT.title} onClick={onClickHandler} />
-      {invitationList.map((item) => (
-        <div
-          key={`${item[0].startDate}`}
-          css={invitationListItemContainerStyles}
-        >
-          <div css={startDateStyles}>
-            {`${item[0].startDate}` === `${formattedDate}`
-              ? '오늘'
-              : item[0].startDate}
+      {invitationList &&
+        invitationList.map((item) => (
+          <div
+            key={`${item[0].startDate}${item[0].invitationId}`}
+            css={invitationListItemContainerStyles}
+          >
+            <div css={startDateStyles}>
+              {`${item[0].startDate}` === `${formattedDate}`
+                ? '오늘'
+                : item[0].startDate}
+            </div>
+            {item.map((value) => (
+              <button
+                type="button"
+                key={value.invitationId}
+                value={value.invitationId}
+                onClick={onClickEditHandler}
+              >
+                <div css={invitationListItemStyles}>
+                  <UserInvitatioListItem data={value} />
+                </div>
+              </button>
+            ))}
           </div>
-          {item.map((value) => (
-            <button
-              type="button"
-              key={value.invitationId}
-              onClick={onClickEditHandler}
-            >
-              <div css={invitationListItemStyles}>
-                <UserInvitatioListItem data={value} />
-              </div>
-            </button>
-          ))}
-        </div>
-      ))}
+        ))}
       <BottomSheet />
     </div>
   );
