@@ -13,13 +13,27 @@ import { Right } from '@/assets/icons';
 
 function LunchRanking() {
   const { setNextComponent } = usePagesStore();
-  const { title } = LUNCH_MAIN_CONSTANTS.main.ranking;
-  const { heights } = LUNCH_MAIN_CONSTANTS.main.ranking;
+  const { title, heights, colors, margin } = LUNCH_MAIN_CONSTANTS.main.ranking;
   const top3Menus = [...DUMMMY_MENU_TOP_TEN].slice(0, 3);
   const sortedMenus = [
-    { ...top3Menus[1], height: heights[0] },
-    { ...top3Menus[0], height: heights[1] },
-    { ...top3Menus[2], height: heights[2] },
+    {
+      ...top3Menus[1],
+      height: heights[0],
+      color: colors[0],
+      margin: margin[0],
+    },
+    {
+      ...top3Menus[0],
+      height: heights[1],
+      color: colors[1],
+      margin: margin[1],
+    },
+    {
+      ...top3Menus[2],
+      height: heights[2],
+      color: colors[2],
+      margin: margin[2],
+    },
   ];
   // const { data, isError, error } = useQuery(
   //   ['getRanking'],
@@ -51,6 +65,8 @@ function LunchRanking() {
               count={item.count}
               rank={item.rank}
               height={item.height}
+              color={item.color}
+              margin={item.margin}
             />
           ))}
         </div>

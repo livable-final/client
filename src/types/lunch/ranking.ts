@@ -4,4 +4,6 @@ export interface RankingPodiumProps {
   count: number;
   rank: number;
   height: number;
+  color: string;
+  margin: string;
 }
