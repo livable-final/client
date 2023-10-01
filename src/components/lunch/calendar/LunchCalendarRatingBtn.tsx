@@ -18,7 +18,6 @@ function LunchCalendarRatingBtn({ title }: LunchCalendarRatingBtnProps) {
   const onClickGoodHandler = () => {
     setIsGoodChecked(!isGoodChecked);
     setRatingState({ taste: 'GOOD' });
-    console.log(taste);
   };
 
   const onClickBadHandler = () => {
