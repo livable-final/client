@@ -10,9 +10,13 @@ import { getRestReviewList } from '@/pages/api/lunch/lunchRequests';
 function LunchDetailContents() {
   const { reviewList } = useReviewStore();
   const { detail } = LUNCH_MAIN_CONSTANTS.main;
+  const id = useReviewStore().reviewList.restaurantId;
   const { response } = useFetch({
-    fetchFn: getRestReviewList,
-    arg: useReviewStore().reviewList.restaurantId,
+    fetchFn: () =>
+      getRestReviewList({
+        restaurantId: id,
+        page: 1,
+      }),
   });
 
   return (
