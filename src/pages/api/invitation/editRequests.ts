@@ -15,7 +15,7 @@ export const getInvitationList = async (): Promise<
 
 // 초대장 상세
 export const getInvitationListItem = async (
-  id?: number | string | Date,
+  id?: string | string[] | undefined,
 ): Promise<Response<GetInvitationListItemData>> => {
   const response = await apiInstance.get(`invitation/${id}`);
   return response.data;

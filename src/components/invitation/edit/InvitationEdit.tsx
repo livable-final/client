@@ -24,8 +24,7 @@ function InvitationEdit({ id }: InvitationEditProps) {
   const { openBottomSheet } = useBottomSheetStore();
 
   const { response } = useFetch({
-    fetchFn: getInvitationListItem,
-    arg: id as string,
+    fetchFn: () => getInvitationListItem(id),
   });
 
   const data = response && response?.data;
