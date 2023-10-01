@@ -15,6 +15,17 @@ export interface CommonPlaceData {
   commonPlaceName: string;
 }
 
+// 예약 가능한 시간 리스트
+export interface GetInvitationTimeListContents {
+  commonPlaceId: number | null;
+  date: string;
+}
+
+export interface GetInvitationTimeListData {
+  date: string;
+  availableTimes: string[];
+}
+
 // 초대장 저장(생성)
 export interface PostInvitationContents {
   purpose: string;

@@ -5,6 +5,7 @@ import {
 } from '@/types/invitation/create';
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import theme from '@/styles/theme';
 
 function TimeSelector({ content, status }: TimeSelectorProps) {
   // 토글을 통해 가변할 수 있는 variant state 관리
@@ -44,7 +45,7 @@ const timeSelectorStyles = (variantData: TimeSelectorColorProps) => css`
   height: 48px;
   border-radius: 12px;
   padding: 12px 18px;
-  font-size: 16px;
+  font: ${theme.font.body.body1_400};
   line-height: 24px;
   background: ${variantData.background};
   color: ${variantData.color};

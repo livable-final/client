@@ -39,6 +39,7 @@ import {
   ServiceTemp,
   My,
   Error,
+  ExitSmall,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -121,6 +122,8 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Close />;
     case common.error:
       return <Error width={size} height={size} />;
+    case common.exitSmall:
+      return <ExitSmall />;
     default:
       break;
   }
