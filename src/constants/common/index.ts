@@ -139,6 +139,7 @@ export const COMMON_ICON_NAMES = {
   },
   common: {
     close: 'close',
+    error: 'error',
   },
 };
 
@@ -187,6 +188,7 @@ export const COMMON_TOGGLE_TITLE = '종일';
 export const COMMON_MODAL_BUTTONS = {
   confirm: '확인',
   cancel: '취소',
+  close: '닫기',
 };
 
 // Bottom Navigation Bar 상수

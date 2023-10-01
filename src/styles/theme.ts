@@ -31,7 +31,7 @@ const theme = {
       grey90: '#162637',
     },
     state: {
-      danger: '#F13D2C',
+      danger: '#D32F2F',
       warning: '#F78C35',
     },
     input: {
