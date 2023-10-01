@@ -28,6 +28,7 @@
     "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
     "no-useless-catch": "off", // 불필요한 catch 못쓰게 하는 기능 끔
     "no-nested-ternary": "off", // 중첩 삼항연산자 허용
+    "no-plusplus": "off", // 단항연산자 허용
     "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/no-use-before-define": "off", // 변수 선언 전에 변수가 사용되어도 허용
     "jsx-a11y/label-has-associated-control": [
