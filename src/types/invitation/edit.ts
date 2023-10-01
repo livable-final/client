@@ -7,6 +7,12 @@ export interface NewVisitorsList {
   name: string;
   contact: string;
 }
+export interface UserInvitationListEditProps {
+  id: string | null;
+}
+export interface InvitationEditProps {
+  id: string | string[] | undefined;
+}
 export interface InvitationAddVisitorListProps {
   // 초대장 수정페이지에서 초대자 추가 바텀시트에 접근할때 필요
   isEdit?: boolean;
