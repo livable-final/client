@@ -71,3 +71,48 @@ export interface GetInvitationCarouselData {
   floor: number;
   url: string;
 }
+
+// ********** 초대상 수정 ********** //
+
+// 초대 목록 조회
+export interface InvitationListItem {
+  invitationId: number;
+  visitorName: string;
+  visitorCount: number;
+  purpose: string;
+  officeName: string;
+  startDate: string;
+  startTime: string;
+  endTime: string;
+}
+export interface GetInvitationListData {
+  [date: string]: [
+    {
+      invitationId: number;
+      visitorName: string;
+      visitorCount: number;
+      purpose: string;
+      officeName: string;
+      startDate: string;
+      startTime: string;
+      endTime: string;
+    },
+  ];
+}
+// 초대장 상세 조회
+export interface GetInvitationListItemData {
+  commonPlaceId: null;
+  description: string;
+  endDate: string;
+  endTime: string;
+  officeName: string;
+  purpose: string;
+  startDate: string;
+  startTime: string;
+  visitors: [InvitationListItemVisitor];
+}
+export interface InvitationListItemVisitor {
+  visitorId: number;
+  name: string;
+  contact: string;
+}

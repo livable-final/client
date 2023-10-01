@@ -4,23 +4,29 @@ import {
   USER_INVITATIONLIST_TEXT,
   USER_INVITATIONLIST_BUTTON_TEXT,
 } from '@/constants/user/userInvitationTexts';
+import { UserInvitationListEditProps } from '@/types/invitation/edit';
+import { getInvitationDeleteList } from '@/pages/api/invitation/editRequests';
 import theme from '@/styles/theme';
 import Modal from '@/components/common/Modal';
 import useModalStore from '@/stores/useModalStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 
-function UserInvitationListEdit() {
+function UserInvitationListEdit({ id }: UserInvitationListEditProps) {
+  const router = useRouter();
   const { title, confirm } = USER_INVITATIONLIST_BUTTON_TEXT;
   const { modalState, openModal } = useModalStore();
   const { closeBottomSheet } = useBottomSheetStore();
-  const router = useRouter();
+
+  const onclickModalHandler = () => {
+    getInvitationDeleteList(id as string);
+  };
 
   const onclickdeleteHandler = () => {
     openModal(`${confirm.title}`, `${confirm.message}`);
   };
 
   const onCliskEditHandler = () => {
-    router.push('/invitation/edit');
+    router.push(`/invitation/edit?id=${id}`);
     closeBottomSheet();
   };
 
@@ -44,7 +50,10 @@ function UserInvitationListEdit() {
         </button>
       </div>
       {modalState.isOpen && (
-        <Modal content={USER_INVITATIONLIST_BUTTON_TEXT.title.delete} />
+        <Modal
+          content={USER_INVITATIONLIST_BUTTON_TEXT.title.delete}
+          onClick={onclickModalHandler}
+        />
       )}
     </div>
   );

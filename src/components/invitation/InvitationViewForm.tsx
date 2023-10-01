@@ -51,7 +51,7 @@ function InvitationViewForm() {
           title={INVITATION_VEIW_INFO_TEXTS.category.main}
           onClick={onClickHandler}
         />
-        <InvitationInfoContainer />
+        <InvitationInfoContainer data={response?.data} />
         <InvitationCarouselContainer />
         <InvitationViewFooter />
       </div>

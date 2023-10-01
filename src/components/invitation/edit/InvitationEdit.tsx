@@ -1,109 +1,68 @@
 import { css } from '@emotion/react';
-import { useState } from 'react';
-import { NewVisitorsList } from '@/types/invitation/edit';
-import { Clock, Calendar, Location } from '@/assets/icons';
+import { useEffect, useState } from 'react';
 import { INVITATION_EDIT_TEXTS } from '@/constants/invitation/editTexts';
+import { getInvitationListItem } from '@/pages/api/invitation/editRequests';
+import { Clock, Calendar, Location } from '@/assets/icons';
+import { InvitationEditProps, NewVisitorsList } from '@/types/invitation/edit';
 import theme from '@/styles/theme';
+import useFetch from '@/hooks/useFetch';
 import Add from '@/components/common/Add';
 import Input from '@/components/common/Input';
+import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import NameTag from '@/components/common/NameTag';
 import CheckBox from '@/components/common/CheckBox';
+import BottomSheet from '@/components/common/BottomSheet';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import InvitationEditvisitorAdd from '@/components/invitation/edit/InvitationAddVisitorList';
-import BottomSheet from '@/components/common/BottomSheet';
-import Button from '@/components/common/Button';
+import useInvitationEditStore from '@/stores/useInvitationEditStore';
+import { GetInvitationListItemData } from '@/types/invitation/api';
 
-const data = {
-  commonPlaceId: null,
-  officeName: '식스센스 사무실 (A동 10층 1004호)',
-  purpose: '회의',
-  description: '엘리베이터에서 내려서 오른쪽으로 쭉 오시면 있습니다.',
-  startDate: '2023-09-10',
-  endDate: '2023-09-10',
-  startTime: '10:00:00',
-  endTime: '10:30:00',
-  visitors: [
-    {
-      visitorId: 1,
-      name: '홍길동',
-      contact: '01012341234',
-    },
-    {
-      visitorId: 2,
-      name: '김길동',
-      contact: '01012345678',
-    },
-    {
-      visitorId: 3,
-      name: '김길동',
-      contact: '01012345678',
-    },
-    {
-      visitorId: 4,
-      name: '김길동',
-      contact: '01012345678',
-    },
-    {
-      visitorId: 5,
-      name: '김길동',
-      contact: '01012345678',
-    },
-    {
-      visitorId: 6,
-      name: '김길동',
-      contact: '01012345678',
-    },
-    {
-      visitorId: 7,
-      name: '김길동',
-      contact: '01012345678',
-    },
-    {
-      visitorId: 8,
-      name: '김길동',
-      contact: '01012345678',
-    },
-    {
-      visitorId: 9,
-      name: '김길동',
-      contact: '01012345678',
-    },
-    {
-      visitorId: 10,
-      name: '김길동',
-      contact: '01012345678',
-    },
-    {
-      visitorId: 11,
-      name: '김길동',
-      contact: '01012345678',
-    },
-  ],
-};
-function InvitationEdit() {
-  const [editValue, setEditValue] = useState('');
+function InvitationEdit({ id }: InvitationEditProps) {
+  const { editContents, setEditContents } = useInvitationEditStore();
   const [addVisitorList, setAddVisitorList] = useState<NewVisitorsList[]>([]);
   const { openBottomSheet } = useBottomSheetStore();
-  const dateValue = `${data.startDate} ~ ${data.endDate}`;
-  const timeValue = `${data.startTime.substring(
+
+  const { response } = useFetch({
+    fetchFn: () => getInvitationListItem(id),
+  });
+
+  const data = response && response?.data;
+
+  const setInitStateHandler = (initData?: GetInvitationListItemData) => {
+    setEditContents('commonPlaceId', initData?.commonPlaceId);
+    setEditContents('description', initData?.description);
+    setEditContents('startDate', initData?.startDate);
+    setEditContents('endDate', initData?.endDate);
+  };
+  // console.log('b', editContents);
+  useEffect(() => {
+    setInitStateHandler(data);
+    // console.log('b', editContents);
+  }, []);
+
+  // const editedValue = `${data && data?.description}`;
+
+  const dateValue = `${data?.startDate} ~ ${data?.endDate}`;
+  const timeValue = `${data?.startTime.substring(
     0,
     5,
-  )} ~ ${data.endTime.substring(0, 5)}`;
-  const visitorname = data.visitors;
+  )} ~ ${data?.endTime.substring(0, 5)}`;
+  const invitedList = data?.visitors;
+
   const onClickHandler = () => {};
-  const onClickEditTextHandler = (
+  const onChangeEditTextHandler = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    setEditValue(e.target.value);
+    setEditContents('description', e.target.value);
   };
   const onClickVisitorAddHandler = () => {
     openBottomSheet(
       <InvitationEditvisitorAdd
         isEdit
-        visitorsList={addVisitorList}
+        visitorsList={editContents.visitors}
         setVisitorList={setAddVisitorList}
       />,
     );
@@ -123,7 +82,7 @@ function InvitationEdit() {
             <div css={iconStyles}>
               <Location />
             </div>
-            <input type="text" value={data.officeName} readOnly />
+            <input type="text" value={data?.officeName} readOnly />
           </div>
           <div css={dateTimeContainerStyles}>
             <div css={dateTimeStyles}>
@@ -142,8 +101,9 @@ function InvitationEdit() {
           <Input
             textarea
             variant="default"
-            value={editValue}
-            onChange={onClickEditTextHandler}
+            maxLength={299}
+            value={editContents.description as string}
+            onChange={onChangeEditTextHandler}
           />
           <CheckBox text="이 메세지를 다음에도 사용" />
         </div>
@@ -159,14 +119,15 @@ function InvitationEdit() {
             ))}
           </div>
           <div css={ivitedVisitorListContainerStyles}>
-            {visitorname.map((item) => (
-              <NameTag
-                key={item.visitorId}
-                name={item.name}
-                onClick={onClickHandler}
-                isInvited
-              />
-            ))}
+            {invitedList &&
+              invitedList.map((item) => (
+                <NameTag
+                  key={item.visitorId}
+                  name={item.name}
+                  onClick={onClickHandler}
+                  isInvited
+                />
+              ))}
           </div>
         </div>
       </div>
