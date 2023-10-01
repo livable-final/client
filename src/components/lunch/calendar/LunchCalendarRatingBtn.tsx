@@ -83,9 +83,9 @@ const buttonStyles = (isChecked: boolean) => css`
 const iconStyles = (isChecked: boolean) => css`
   margin-bottom: 4px;
 
-  svg {
-    filter: ${isChecked ? `saturate(5%)` : `none`};
-  }
+  // svg {
+  //   filter: ${isChecked ? `saturate(5%)` : `none`};
+  // }
 `;
 
 export default LunchCalendarRatingBtn;
