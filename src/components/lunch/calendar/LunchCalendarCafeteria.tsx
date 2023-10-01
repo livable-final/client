@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
+import { postCafeteriaReview } from '@/pages/api/lunch/calendarRequests';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
@@ -13,24 +15,50 @@ import LunchCalendarBottomSheet from '@/components/lunch/calendar/LunchCalendarB
 import usePagesStore from '@/stores/usePagesStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useSaveStore from '@/stores/useSaveStore';
+import useWriteStore from '@/stores/useWriteStore';
 
 function LunchCalendarCafeteria() {
   const [searchText, setSearchText] = useState('');
   const { setNextComponent } = usePagesStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { isSave } = useSaveStore();
-
+  const { ratingState, imageFiles } = useWriteStore();
   const { category, subTitle, button } = CALENDAR_CONTENT;
+
+  const router = useRouter();
 
   const onClickHeaderHandler = () => {
     setNextComponent('LunchCalendarReview');
   };
 
-  const onClickBtnHandler = () => {
-    if (!isSave.PhotoMsg) {
-      openBottomSheet(<LunchCalendarBottomSheet />);
-    } else {
-      // isSave.PhotoMsg가 참일 때, 바로 작성완료 로직
+  const onClickMsgBtnHandler = () => {
+    openBottomSheet(<LunchCalendarBottomSheet />);
+  };
+
+  const onClickBtnHandler = async () => {
+    try {
+      const formData = new FormData();
+
+      const userData = {
+        taste: ratingState.taste,
+        description: searchText,
+      };
+
+      const blob = new Blob([JSON.stringify(userData)], {
+        type: 'application/json',
+      });
+      formData.append('data', blob);
+      for (let i = 0; i < imageFiles.length; i + 1) {
+        formData.append('imageFiles', imageFiles[i]);
+      }
+      await postCafeteriaReview(formData);
+
+      if (imageFiles.length === 0) {
+        router.replace('/lunch/calendar');
+      }
+      router.replace('/lunch/point');
+    } catch (err) {
+      // router.replace('/lunch/calendar');
     }
   };
   const onChangeHandler = (
@@ -42,41 +70,53 @@ function LunchCalendarCafeteria() {
   };
 
   return (
-    <section>
-      <Header title={category.cafeteria.text} onClick={onClickHeaderHandler} />
-      <LunchSubTitle title={subTitle.todayLunch} type="title" />
-      <div css={titleStyles}>
-        <p>테라타워</p>
+    <section css={pageStyles}>
+      <div>
+        <Header title={category[1].category} onClick={onClickHeaderHandler} />
+        <LunchSubTitle title={subTitle.todayLunch} type="title" margin="24px" />
+        <div css={titleStyles}>
+          <p>테라타워</p>
+        </div>
+        <div css={buttonStyles}>
+          {button.button5.map((value) => (
+            <LunchCalendarRatingBtn key={value} title={value} />
+          ))}
+        </div>
+        <div css={inputBoxStyles}>
+          <p>{subTitle.review}</p>
+          <Input
+            variant="search"
+            textarea
+            placeholder={category[1].placeholder}
+            maxLength={299}
+            value={searchText}
+            onChange={onChangeHandler}
+          />
+        </div>
+        <LunchCalendarPhoto />
       </div>
-      <div css={buttonStyles}>
-        <LunchCalendarRatingBtn title={button.button5.good} />
-        <LunchCalendarRatingBtn title={button.button5.bad} />
-      </div>
-      <div css={inputBoxStyles}>
-        <p>{subTitle.review}</p>
-        <Input
-          variant="search"
-          textarea
-          placeholder={category.eatOut.placeholder}
-          maxLength={299}
-          value={searchText}
-          onChange={onChangeHandler}
+      <div css={btnBoxStyles}>
+        <Button
+          variant="blue"
+          content={button.button4.text2}
+          onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
         />
       </div>
-      <LunchCalendarPhoto />
-      <Button
-        variant="blue"
-        content={button.button4.text2}
-        onClick={onClickBtnHandler}
-      />
       {bottomSheetState.isOpen && !isSave.PhotoMsg && <BottomSheet />}
     </section>
   );
 }
+
+const pageStyles = css`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 const titleStyles = css`
   display: flex;
   justify-content: center;
-  margin: 16px 0 12px;
+  margin: 32px 0 12px;
   font: ${theme.font.subTitle.subTitle1_600};
   color: ${theme.palette.title};
 `;
@@ -90,12 +130,16 @@ const buttonStyles = css`
 `;
 
 const inputBoxStyles = css`
-  margin-bottom: 16px;
+  margin: 36px 0 16px;
   p {
-    margin-top: 12px;
+    margin-bottom: 12px;
     font: ${theme.font.subTitle.subTitle2_500};
     color: ${theme.palette.greyscale.grey90};
   }
+`;
+
+const btnBoxStyles = css`
+  margin-bottom: 20px;
 `;
 
 export default LunchCalendarCafeteria;

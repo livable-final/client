@@ -2,7 +2,7 @@ import { FetchProps } from '@/types/common/response';
 import { useEffect, useState, useCallback } from 'react';
 
 // API fetch custom Hook
-const useFetch = <T>({ fetchFn, arg }: FetchProps<T>) => {
+const useFetch = <T>({ fetchFn }: FetchProps<T>) => {
   const [response, setResponse] = useState<T>(null as T);
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState(false);
@@ -11,7 +11,7 @@ const useFetch = <T>({ fetchFn, arg }: FetchProps<T>) => {
     try {
       // TODO: 로딩 처리 정의 해야함
       setLoading(true);
-      const data = await fetchFn(arg);
+      const data = await fetchFn();
       setResponse(data);
       // TODO: 에러 처리 정의 해야함
     } catch (error) {
@@ -19,11 +19,11 @@ const useFetch = <T>({ fetchFn, arg }: FetchProps<T>) => {
     } finally {
       setLoading(false);
     }
-  }, [arg, fetchFn]);
+  }, [fetchFn]);
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   return { response, loading, errors };
 };

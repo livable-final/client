@@ -10,14 +10,35 @@ export interface ReviewData {
   reviewDate: string;
 }
 
-//
+// 식당 검색 데이터
+export interface RestaurantsData {
+  restaurantId: number;
+  restaurantName: string;
+  restaurantCategory: string;
+  inBuilding: boolean;
+  estimatedTime: number;
+  foor: number;
+}
+// 식당 메뉴 데이터
+export interface MenuData {
+  menuId: number;
+  menuName: string;
+}
+
+export interface MenuDataProps {
+  menuData: MenuData[];
+  selectedRest: string;
+}
+
+// 컴포넌트 타입
 export interface LunchCalendarListItemProps {
   type: string;
-  content: string;
+  content?: string;
+  item?: MenuData;
   category?: string;
   time?: number;
   imageUrl?: string;
-  isChecked?: boolean;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface LunchCalendarRatingBtnProps {
@@ -25,16 +46,18 @@ export interface LunchCalendarRatingBtnProps {
 }
 
 export interface LunchCalendarReviewCategoryProps {
+  type: string;
   title: string;
 }
 export interface LunchCalendarSelectBtnProps {
-  text: string;
+  text?: string;
 }
 
 export interface LunchSubTitleProps {
   title: string;
   type: 'title' | 'subTitle' | 'recent' | 'more' | 'roulette';
   userName?: string;
+  margin?: string;
 }
 
 export interface LunchCalendarWriteBtnProps {

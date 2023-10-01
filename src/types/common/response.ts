@@ -4,10 +4,9 @@ export interface Response<T> {
 }
 
 export interface FetchFunction<T> {
-  (arg?: number | string | Date): Promise<T>;
+  (): Promise<T>;
 }
 
 export interface FetchProps<T> {
   fetchFn: FetchFunction<T>;
-  arg?: number | string | Date;
 }

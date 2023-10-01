@@ -3,6 +3,8 @@ export const CALENDAR_CONTENT = {
     main: '오늘 점심',
     review: '리뷰 작성',
     search: '식당 검색',
+    photoReview: '리뷰 작성 완료',
+    point: '내 포인트',
   },
   subTitle: {
     calendar: `님의 점심 달력이에요`,
@@ -13,28 +15,31 @@ export const CALENDAR_CONTENT = {
     searchResults: '검색결과',
     review: '후기 작성',
     bottomSheet: '사진을 등록하면 포인트를 받을 수 있어요',
+    photoReview: '10포인트가 적립되었어요',
+    point: '월에 받은 포인트',
   },
-  category: {
-    eatOut: {
-      text: '외식',
+  category: [
+    {
+      category: '외식',
       placeholder:
         '가격, 이동 시간, 분위기 등 공유하고 싶은 내용을 입력해주세요.',
-      subCategory: {
-        amount: '음식의 양',
-        speed: '서빙속도',
-        service: '서비스',
-      },
     },
-    cafeteria: {
-      text: '구내식당',
+    {
+      category: '구내식당',
       placeholder: '오늘 드신 점심 식단을 어떠셨나요?',
     },
-    lunchBox: {
-      text: '도시락',
+    {
+      category: '도시락',
       placeholder:
         '도시락 레시피, 도시락 싸는 꿀팁 등 공유하고 싶은 내용을 입력해주세요.',
     },
-  },
+  ],
+  subCategory: [
+    { type: 'taste', title: '맛' },
+    { type: 'amount', title: '음식의 양' },
+    { type: 'speed', title: '서빙속도' },
+    { type: 'service', title: '서비스' },
+  ],
   button: {
     button1: {
       text: `오늘 점심은 무엇을 드셨나요?
@@ -51,11 +56,9 @@ export const CALENDAR_CONTENT = {
     button4: {
       text1: '추가',
       text2: '작성완료',
+      text3: '확인',
     },
-    button5: {
-      good: '맛있오',
-      bad: '맛없오',
-    },
+    button5: ['맛있오', '맛없오'],
     button6: {
       text: '만족',
     },
@@ -65,6 +68,9 @@ export const CALENDAR_CONTENT = {
     button8: {
       text1: '작성 완료하기',
       text2: '사진 등록하기',
+    },
+    button9: {
+      text: '내 포인트 지도 보기',
     },
   },
 };
@@ -95,7 +101,8 @@ export const LUNCH_MAIN_CONSTANTS = {
       heights: [32, 47, 25],
     },
     reviews: {
-      title: '최근 테라타워 입주자들의 리뷰',
+      prefix: '최근',
+      suffix: '입주자들의 리뷰',
     },
     detail: {
       title: '의 더 많은 리뷰',
@@ -137,8 +144,17 @@ export const LUNCH_ROULETTE_CONSTANTS = {
       fixed: 3000,
     },
   },
-  title: { roulette: '점심룰렛', review: '맛집을 알려드릴게요!' },
+  title: {
+    roulette: '점심룰렛',
+    review: '맛집을 알려드릴게요!',
+    recent: '근처의',
+  },
   error: {
     response: { menuId: 0, name: '결과가 없습니다.' },
+  },
+  alt: {
+    push: '버튼',
+    bg: '배경',
+    lock: '잠금',
   },
 };

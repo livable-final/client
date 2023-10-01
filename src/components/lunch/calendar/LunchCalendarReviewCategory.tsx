@@ -5,33 +5,51 @@ import { COMMON_ICON_NAMES } from '@/constants/common';
 import { useState } from 'react';
 import { LunchCalendarReviewCategoryProps } from '@/types/lunch/calendar';
 import Icons from '@/components/common/Icons';
+import useWriteStore from '@/stores/useWriteStore';
 
 function LunchCalendarReviewCategory({
+  type,
   title,
 }: LunchCalendarReviewCategoryProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const { button } = CALENDAR_CONTENT;
+  const setRatingState = useWriteStore((state) => state.setRatingState);
+  const { button, subCategory } = CALENDAR_CONTENT;
   const { lunch } = COMMON_ICON_NAMES;
 
-  const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setIsChecked((pre) => !pre);
+  const onClickGoodBtnHandler = () => {
+    if (!isChecked) {
+      setIsChecked(true);
+      if (type === `${subCategory[1].type}`) {
+        setRatingState({ amount: 'GOOD' });
+      } else if (type === `${subCategory[2].type}`) {
+        setRatingState({ speed: 'GOOD' });
+      } else if (type === `${subCategory[3].type}`) {
+        setRatingState({ service: 'GOOD' });
+      }
+    } else if (isChecked) {
+      setIsChecked(false);
+      if (type === `${subCategory[1].type}`) {
+        setRatingState({ amount: 'BAD' });
+      } else if (type === `${subCategory[2].type}`) {
+        setRatingState({ speed: 'BAD' });
+      } else if (type === `${subCategory[3].type}`) {
+        setRatingState({ service: 'BAD' });
+      }
+    }
   };
 
   return (
-    <div css={categoryStyles}>
+    <label css={categoryStyles}>
       <span css={titleStyles}>{title}</span>
       <button
         type="button"
         css={buttonStyles(isChecked)}
-        onClick={onClickHandler}
+        onClick={onClickGoodBtnHandler}
       >
         <span>{button.button6.text}</span>
-        <div css={iconStyles}>
-          <Icons icon={lunch.thumbsUp} size="18" />
-        </div>
+        <Icons icon={lunch.thumbsUp} size="18" />
       </button>
-    </div>
+    </label>
   );
 }
 
@@ -65,14 +83,6 @@ const buttonStyles = (isChecked: boolean) => css`
   color: ${!isChecked
     ? `${theme.palette.greyscale.grey40};`
     : `${theme.palette.orange}`};
-
-  path {
-    fill: ${isChecked && `${theme.palette.orange}`};
-    stroke: ${isChecked && `${theme.palette.orange}`};
-  }
-`;
-const iconStyles = css`
-  margin-bottom: 4px;
 `;
 
 export default LunchCalendarReviewCategory;

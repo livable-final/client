@@ -1,34 +1,56 @@
 import theme from '@/styles/theme';
+import Icons from '@/components/common/Icons';
+import { useState } from 'react';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { COMMON_ICON_NAMES } from '@/constants/common';
 import { LunchCalendarRatingBtnProps } from '@/types/lunch/calendar';
-import { useState } from 'react';
-import Icons from '@/components/common/Icons';
+import useWriteStore from '@/stores/useWriteStore';
 
 function LunchCalendarRatingBtn({ title }: LunchCalendarRatingBtnProps) {
+  const [isGoodChecked, setIsGoodChecked] = useState(false);
+  const [isBadChecked, setIsBadChecked] = useState(false);
+  const taste = useWriteStore((state) => state.ratingState.taste);
+  const setRatingState = useWriteStore((state) => state.setRatingState);
   const { button } = CALENDAR_CONTENT;
   const { lunch } = COMMON_ICON_NAMES;
-  const [isChecked, setIsChecked] = useState(false);
 
-  const onClickHandler = () => {
-    setIsChecked(!isChecked);
+  const onClickGoodHandler = () => {
+    setIsGoodChecked(!isGoodChecked);
+    setRatingState({ taste: 'GOOD' });
+    console.log(taste);
   };
-  let icon;
 
-  switch (title) {
-    case button.button5.good:
-      icon = <Icons icon={lunch.smile} size="44px" />;
-      break;
-    case button.button5.bad:
-      icon = <Icons icon={lunch.confused} size="44px" />;
-      break;
-    default:
-      break;
-  }
+  const onClickBadHandler = () => {
+    if (!isBadChecked) {
+      setIsBadChecked(true);
+      setRatingState({ taste: 'BAD' });
+    } else if (isBadChecked) {
+      setIsBadChecked(false);
+      setRatingState({ taste: 'GOOD' });
+    }
+  };
+
+  console.log(taste);
   return (
-    <button type="button" css={buttonStyles} onClick={onClickHandler}>
-      <div css={iconStyles(isChecked)}>{icon}</div>
+    <button
+      type="button"
+      css={buttonStyles}
+      onClick={
+        title === `${button.button5[0]}`
+          ? onClickGoodHandler
+          : onClickBadHandler
+      }
+    >
+      {title === `${button.button5[0]}` ? (
+        <div css={iconStyles(isGoodChecked)}>
+          <Icons icon={lunch.smile} size="44px" />
+        </div>
+      ) : (
+        <div css={iconStyles(isBadChecked)}>
+          <Icons icon={lunch.confused} size="44px" />
+        </div>
+      )}
       <p>{title}</p>
     </button>
   );
@@ -57,7 +79,7 @@ const buttonStyles = css`
     svg {
       filter: none;
       transform: scale(1.2);
-      transition: transform 0.2s ease;
+      transition: transform 0.1s ease;
     }
   }
 `;

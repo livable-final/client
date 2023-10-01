@@ -1,13 +1,18 @@
 // import Image from 'next/image';
 import theme from '@/styles/theme';
-// import cafeImg from '@/assets/cafe.png';
+import useFetch from '@/hooks/useFetch';
 import { css } from '@emotion/react';
-import { INVITATION_CAROUSEL_TEXTS } from '@/constants/invitation/viewTexts';
+import { getInvitationCarousel } from '@/pages/api/invitation/viewRequests';
 import { InvitationCarouselProps } from '@/types/invitation/view';
+import { INVITATION_CAROUSEL_TEXTS } from '@/constants/invitation/viewTexts';
 
-function InvitaitionCarousel({ datas }: InvitationCarouselProps) {
+function InvitaitionCarousel({ type }: InvitationCarouselProps) {
   const { restaurant, cafe } = INVITATION_CAROUSEL_TEXTS;
-  const type = datas[0].restaurantCategory;
+  const { response } = useFetch({
+    fetchFn: () => getInvitationCarousel(type),
+  });
+
+  const datas = response && response.data;
 
   return (
     <>
@@ -20,29 +25,29 @@ function InvitaitionCarousel({ datas }: InvitationCarouselProps) {
           : '근처 카페를 추천드릴게요'}
       </div>
       <div css={carouselStyles}>
-        {datas.map((data) => (
-          <div key={data.restaurantName} css={carouselItemStyles}>
-            <div css={itemImageStyles}>
-              {/* 이미지 태그에서.. 오류가 발생하는 이슈로 잠깐 주석처리 해두었습니다 */}
-              {/* <Image
-                src={cafeImg}
-                alt="대체 텍스트"
-                layout="fill"
-                sizes="135px"
+        {datas &&
+          datas.map((item) => (
+            <div key={item.restaurantName} css={carouselItemStyles}>
+              <div css={itemImageStyles}>
+                {/* <Image
+                src={item.restaurantImageUrl}
+                width={135}
+                height={80}
+                alt={item.restaurantName}
               /> */}
+              </div>
+              <div css={carouselItemInfoStyles}>
+                <div css={itemInfoNameStyles}>{item.restaurantName}</div>
+                {item.inBuilding ? (
+                  <div css={itemInFloorStyles}>테라타워 {item.floor}층</div>
+                ) : (
+                  <div css={itemInFloorStyles}>
+                    테라타워에서 {item.takenTime}분
+                  </div>
+                )}
+              </div>
             </div>
-            <div css={carouselItemInfoStyles}>
-              <div css={itemInfoNameStyles}>{data.restaurantName}</div>
-              {data.inBuilding ? (
-                <div css={itemInFloorStyles}>테라타워 {data.floor}층</div>
-              ) : (
-                <div css={itemInFloorStyles}>
-                  테라타워에서 {data.takenTime}분
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
     </>
   );

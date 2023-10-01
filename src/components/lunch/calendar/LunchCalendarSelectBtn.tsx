@@ -11,11 +11,11 @@ function LunchCalendarSelectBtn({ text }: LunchCalendarSelectBtnProps) {
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (text === category.eatOut.text) {
+    if (text === category[0].category) {
       setNextComponent('LunchCalendarSearch');
-    } else if (text === category.cafeteria.text) {
+    } else if (text === category[1].category) {
       setNextComponent('LunchCalendarCafeteria');
-    } else if (text === category.lunchBox.text) {
+    } else if (text === category[2].category) {
       setNextComponent('LunchCalendarLunchBox');
     }
   };
@@ -23,13 +23,13 @@ function LunchCalendarSelectBtn({ text }: LunchCalendarSelectBtnProps) {
   let icon;
 
   switch (text) {
-    case category.eatOut.text:
+    case category[0].category:
       icon = <Plate />;
       break;
-    case category.cafeteria.text:
+    case category[1].category:
       icon = <Chef />;
       break;
-    case category.lunchBox.text:
+    case category[2].category:
       icon = <Bento />;
       break;
     default:
