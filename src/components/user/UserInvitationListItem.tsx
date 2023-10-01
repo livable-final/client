@@ -7,6 +7,29 @@ function UserInvitationListItem({ data }: UserInvitationListItemProps) {
   const startTime = data.startTime.substring(0, 5);
   const endTime = data.endTime.substring(0, 5);
 
+  const visitPurpose = (purpose: string) => {
+    if (purpose === 'meeting') {
+      return '회의';
+    }
+    if (purpose === 'interview') {
+      return '면접';
+    }
+    if (purpose === 'fixedTermWork') {
+      return '면접';
+    }
+    if (purpose === 'seminar') {
+      return '세미나';
+    }
+    if (purpose === 'as') {
+      return 'AS/점검';
+    }
+    if (purpose === 'etc') {
+      return '기타';
+    }
+    return `${purpose}`;
+  };
+  const purposes = visitPurpose(data.purpose);
+
   return (
     <div css={itemConstainerStyles}>
       <div css={textInfoStyles}>
@@ -15,7 +38,7 @@ function UserInvitationListItem({ data }: UserInvitationListItemProps) {
             {data.visitorName}
             {visitorCount >= 1 ? ` 외 ${visitorCount}명` : ''}
           </div>
-          <div css={purposeStyles}>{data.purpose}</div>
+          <div css={purposeStyles}>{purposes}</div>
         </div>
         <div css={placeStyles}>{data.officeName}</div>
       </div>
