@@ -1,16 +1,19 @@
 import Input from '@/components/common/Input';
 import CheckBox from '@/components/common/CheckBox';
+import Modal from '@/components/common/Modal';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationPlace from '@/components/invitation/create/InvitationPlace';
 import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useModalStore from '@/stores/useModalStore';
 import useFetch from '@/hooks/useFetch';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Location, Calendar, Clock } from '@/assets/icons';
+import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 import { GetInvitationPlaceData } from '@/types/invitation/api';
 import { InvitationInfoProps } from '@/types/invitation/create';
@@ -24,7 +27,9 @@ function InvitationInfo({
 }: InvitationInfoProps) {
   const { createContents } = useInvitationCreateStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const { modalState, openModal } = useModalStore();
   const { title, placeholder, checkbox } = CREATE_TEXTS;
+  const { noPlace } = COMMON_ERROR_MESSAGE;
 
   const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
 
@@ -48,9 +53,13 @@ function InvitationInfo({
   };
 
   // 날짜/시간 선택 바텀시트 오픈
-  const onClickDateTimeHandler = () => {
-    openBottomSheet(<InvitationDateTime />);
-  };
+  const onClickDateTimeHandler = useCallback(() => {
+    if (createContents.commonPlaceId === 0) {
+      openModal('📢', noPlace);
+    } else {
+      openBottomSheet(<InvitationDateTime />);
+    }
+  }, []);
 
   return (
     <>
@@ -116,6 +125,7 @@ function InvitationInfo({
           </div>
         </div>
       </div>
+      {modalState.isOpen && <Modal isAlert />}
       {bottomSheetState.isOpen && <BottomSheet />}
     </>
   );

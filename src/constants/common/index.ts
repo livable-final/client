@@ -77,6 +77,7 @@ export const COMMON_ERROR_MESSAGE = {
   noName: '이름을 입력해 주세요!',
   noContact: '전화번호를 입력해 주세요!',
   noNameContact: '이름과 전화번호를 입력해 주세요!',
+  noPlace: '장소를 먼저 선택해 주세요!',
   noPage: '페이지를 찾을 수 없어요',
   noServer: '네트워크 연결상태를 확인해주세요',
   back: '이전으로 돌아가기',
