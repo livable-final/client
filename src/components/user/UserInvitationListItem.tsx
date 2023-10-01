@@ -1,4 +1,5 @@
 import theme from '@/styles/theme';
+import changeVisitPurpose from '@/utils/changeVisitPurpose';
 import { css } from '@emotion/react';
 import { UserInvitationListItemProps } from '@/types/user/invitationList';
 
@@ -6,29 +7,7 @@ function UserInvitationListItem({ data }: UserInvitationListItemProps) {
   const visitorCount = data.visitorCount - 1;
   const startTime = data.startTime.substring(0, 5);
   const endTime = data.endTime.substring(0, 5);
-
-  const visitPurpose = (purpose: string) => {
-    if (purpose === 'meeting') {
-      return '회의';
-    }
-    if (purpose === 'interview') {
-      return '면접';
-    }
-    if (purpose === 'fixedTermWork') {
-      return '면접';
-    }
-    if (purpose === 'seminar') {
-      return '세미나';
-    }
-    if (purpose === 'as') {
-      return 'AS/점검';
-    }
-    if (purpose === 'etc') {
-      return '기타';
-    }
-    return `${purpose}`;
-  };
-  const purposes = visitPurpose(data.purpose);
+  const purposes = changeVisitPurpose(data.purpose);
 
   return (
     <div css={itemConstainerStyles}>

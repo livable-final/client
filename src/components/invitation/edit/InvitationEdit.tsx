@@ -1,9 +1,12 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { INVITATION_EDIT_TEXTS } from '@/constants/invitation/editTexts';
-import { getInvitationListItem } from '@/pages/api/invitation/editRequests';
+import {
+  getInvitationEditList,
+  getInvitationListItem,
+} from '@/pages/api/invitation/editRequests';
 import { Clock, Calendar, Location } from '@/assets/icons';
-import { InvitationEditProps, NewVisitorsList } from '@/types/invitation/edit';
+import { InvitationEditProps } from '@/types/invitation/edit';
 import theme from '@/styles/theme';
 import useFetch from '@/hooks/useFetch';
 import Add from '@/components/common/Add';
@@ -13,6 +16,7 @@ import Header from '@/components/common/Header';
 import NameTag from '@/components/common/NameTag';
 import CheckBox from '@/components/common/CheckBox';
 import BottomSheet from '@/components/common/BottomSheet';
+import changeVisitPurpose from '@/utils/changeVisitPurpose';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import InvitationEditvisitorAdd from '@/components/invitation/edit/InvitationAddVisitorList';
 import useInvitationEditStore from '@/stores/useInvitationEditStore';
@@ -20,51 +24,68 @@ import { GetInvitationListItemData } from '@/types/invitation/api';
 
 function InvitationEdit({ id }: InvitationEditProps) {
   const { editContents, setEditContents } = useInvitationEditStore();
-  const [addVisitorList, setAddVisitorList] = useState<NewVisitorsList[]>([]);
   const { openBottomSheet } = useBottomSheetStore();
+  const [descriptionInputValue, setDescriptionInputValue] = useState('');
 
   const { response } = useFetch({
     fetchFn: () => getInvitationListItem(id),
   });
-
   const data = response && response?.data;
 
-  const setInitStateHandler = (initData?: GetInvitationListItemData) => {
+  const setInitStateHandler = (
+    startDate: string,
+    endDate: string,
+    initData?: GetInvitationListItemData,
+  ) => {
     setEditContents('commonPlaceId', initData?.commonPlaceId);
     setEditContents('description', initData?.description);
-    setEditContents('startDate', initData?.startDate);
-    setEditContents('endDate', initData?.endDate);
+    setEditContents('startDate', startDate);
+    setEditContents('endDate', endDate);
   };
-  // console.log('b', editContents);
   useEffect(() => {
-    setInitStateHandler(data);
-    // console.log('b', editContents);
+    setInitStateHandler(startDate, endDate, data);
   }, []);
 
-  // const editedValue = `${data && data?.description}`;
+  // 수정용 일시 데이터로 변환
+  const editStartDateFometer = (date?: string, time?: string) => {
+    return `${date}T${time}`;
+  };
+  const startDate = editStartDateFometer(data?.startDate, data?.startTime);
+  const endDate = editStartDateFometer(data?.endDate, data?.endTime);
 
-  const dateValue = `${data?.startDate} ~ ${data?.endDate}`;
-  const timeValue = `${data?.startTime.substring(
-    0,
-    5,
-  )} ~ ${data?.endTime.substring(0, 5)}`;
+  // 화면 날짜 데이터 변환
+  const dateValueFormeter = (start?: string, end?: string) => {
+    return `${start} ~ ${end}`;
+  };
+  const dateValue = dateValueFormeter(data?.startDate, data?.endDate);
+
+  // 화면 시간 데이터 변환
+  const timeValueFormeter = (start?: string, end?: string) => {
+    return `${start?.substring(0, 5)} ~ ${end?.substring(0, 5)}`;
+  };
+  const timeValue = timeValueFormeter(data?.startTime, data?.endTime);
+
+  // 이미 초대된 방문자 목록
   const invitedList = data?.visitors;
 
-  const onClickHandler = () => {};
+  // 방문 목적 영한 변환
+  const purpose = changeVisitPurpose(data?.purpose);
+
+  const onClickHandler = () => {
+    getInvitationEditList(editContents, id as string);
+  };
   const onChangeEditTextHandler = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
+    setDescriptionInputValue(e.target.value);
     setEditContents('description', e.target.value);
   };
+
   const onClickVisitorAddHandler = () => {
     openBottomSheet(
-      <InvitationEditvisitorAdd
-        isEdit
-        visitorsList={editContents.visitors}
-        setVisitorList={setAddVisitorList}
-      />,
+      <InvitationEditvisitorAdd isEdit visitorsList={data?.visitors} />,
     );
   };
   return (
@@ -73,7 +94,7 @@ function InvitationEdit({ id }: InvitationEditProps) {
         title={INVITATION_EDIT_TEXTS.title}
         onClick={onClickHandler}
         type="text"
-        text="회의"
+        text={purpose}
       />
       <div css={invitationEditContantsContainerStyles}>
         <div css={subTitleStyles}>{INVITATION_EDIT_TEXTS.subTitle}</div>
@@ -89,20 +110,29 @@ function InvitationEdit({ id }: InvitationEditProps) {
               <div css={iconStyles}>
                 <Calendar />
               </div>
-              <input type="text" value={dateValue} readOnly />
+              <input
+                type="text"
+                value={dateValue}
+                readOnly={purpose === '면접' && true}
+              />
             </div>
             <div css={dateTimeStyles}>
               <div css={iconStyles}>
                 <Clock />
               </div>
-              <input type="text" value={timeValue} readOnly />
+              <input
+                type="text"
+                value={timeValue}
+                readOnly={purpose === '면접' && true}
+              />
             </div>
           </div>
           <Input
             textarea
             variant="default"
+            placeholder={data?.description}
             maxLength={299}
-            value={editContents.description as string}
+            value={descriptionInputValue}
             onChange={onChangeEditTextHandler}
           />
           <CheckBox text="이 메세지를 다음에도 사용" />
@@ -110,13 +140,14 @@ function InvitationEdit({ id }: InvitationEditProps) {
         <div css={visitorListContainerStyles}>
           <div css={addVisitorListstyleStyle}>
             <Add isBlue onClick={onClickVisitorAddHandler} />
-            {addVisitorList.map((item) => (
-              <NameTag
-                key={item.contact}
-                name={item.name}
-                onClick={onClickHandler}
-              />
-            ))}
+            {editContents.visitors &&
+              editContents?.visitors.map((item) => (
+                <NameTag
+                  key={item.contact}
+                  name={item.name}
+                  onClick={onClickHandler}
+                />
+              ))}
           </div>
           <div css={ivitedVisitorListContainerStyles}>
             {invitedList &&
@@ -133,7 +164,11 @@ function InvitationEdit({ id }: InvitationEditProps) {
       </div>
       <BottomSheet />
       <div css={invitationEditSubmitBtnStlyes}>
-        <Button content="초대장 다시보내기" variant="blue" />
+        <Button
+          content="초대장 다시보내기"
+          variant="blue"
+          onClick={onClickHandler}
+        />
       </div>
     </div>
   );
