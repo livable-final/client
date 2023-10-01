@@ -1,5 +1,5 @@
-import Modal from '@/components/common/Modal';
-import useModalStore from '@/stores/useModalStore';
+import Alert from '@/components/common/Alert';
+import useAlertStore from '@/stores/useAlertStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { RightSmall } from '@/assets/icons';
@@ -7,11 +7,11 @@ import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { ErrorMessageProps } from '@/types/common/errorMessage';
 
 function AddressBook() {
-  const { modalState, openModal } = useModalStore();
+  const { alertState, openAlert } = useAlertStore();
   const { prepare }: ErrorMessageProps = COMMON_ERROR_MESSAGE;
 
   const onClick = () => {
-    openModal('🔧', prepare);
+    openAlert('🔧', prepare);
   };
 
   return (
@@ -20,7 +20,7 @@ function AddressBook() {
       <div css={iconStyles}>
         <RightSmall />
       </div>
-      {modalState.isOpen && <Modal isAlert />}
+      {alertState.isOpen && <Alert />}
     </button>
   );
 }

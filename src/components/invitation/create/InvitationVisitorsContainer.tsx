@@ -1,11 +1,11 @@
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
-import Modal from '@/components/common/Modal';
+import Alert from '@/components/common/Alert';
 import Add from '@/components/common/Add';
 import AddressBook from '@/components/common/AddressBook';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import useModalStore from '@/stores/useModalStore';
+import useAlertStore from '@/stores/useAlertStore';
 import useViewStore from '@/stores/usePagesStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import theme from '@/styles/theme';
@@ -24,7 +24,7 @@ import {
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
-  const { modalState, openModal } = useModalStore();
+  const { alertState, openAlert } = useAlertStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
   const { noName, noContact, noNameContact }: ErrorMessageProps =
     COMMON_ERROR_MESSAGE;
@@ -58,15 +58,15 @@ function InvitationVisitorsContainer() {
   const onClickAddVisitorHandler = () => {
     // 사용자 입력값 유무에 따른 예외처리
     if (!visitorInfo.name && !visitorInfo.contact) {
-      openModal('📢', noNameContact);
+      openAlert('📢', noNameContact);
       return;
     }
     if (visitorInfo.name && !visitorInfo.contact) {
-      openModal('📢', noContact);
+      openAlert('📢', noContact);
       return;
     }
     if (!visitorInfo.name && visitorInfo.contact) {
-      openModal('📢', noName);
+      openAlert('📢', noName);
       return;
     }
     // 이름/전화번호 모두 유효할 경우
@@ -156,7 +156,7 @@ function InvitationVisitorsContainer() {
           isDisabled={visitorsList.length === 0}
         />
       </div>
-      {modalState.isOpen && <Modal isAlert />}
+      {alertState.isOpen && <Alert />}
     </div>
   );
 }

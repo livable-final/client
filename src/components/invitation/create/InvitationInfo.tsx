@@ -1,12 +1,12 @@
 import Input from '@/components/common/Input';
 import CheckBox from '@/components/common/CheckBox';
-import Modal from '@/components/common/Modal';
+import Alert from '@/components/common/Alert';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationPlace from '@/components/invitation/create/InvitationPlace';
 import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useModalStore from '@/stores/useModalStore';
+import useAlertStore from '@/stores/useAlertStore';
 import useFetch from '@/hooks/useFetch';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
@@ -17,6 +17,7 @@ import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 import { GetInvitationPlaceData } from '@/types/invitation/api';
 import { InvitationInfoProps } from '@/types/invitation/create';
+import { ErrorMessageProps } from '@/types/common/errorMessage';
 import { css } from '@emotion/react';
 
 function InvitationInfo({
@@ -27,9 +28,9 @@ function InvitationInfo({
 }: InvitationInfoProps) {
   const { createContents } = useInvitationCreateStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
-  const { modalState, openModal } = useModalStore();
+  const { alertState, openAlert } = useAlertStore();
   const { title, placeholder, checkbox } = CREATE_TEXTS;
-  const { noPlace } = COMMON_ERROR_MESSAGE;
+  const { noPlace }: ErrorMessageProps = COMMON_ERROR_MESSAGE;
 
   const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
 
@@ -55,7 +56,7 @@ function InvitationInfo({
   // 날짜/시간 선택 바텀시트 오픈
   const onClickDateTimeHandler = useCallback(() => {
     if (createContents.commonPlaceId === 0) {
-      openModal('📢', noPlace);
+      openAlert('📢', noPlace);
     } else {
       openBottomSheet(<InvitationDateTime />);
     }
@@ -125,7 +126,7 @@ function InvitationInfo({
           </div>
         </div>
       </div>
-      {modalState.isOpen && <Modal isAlert />}
+      {alertState.isOpen && <Alert />}
       {bottomSheetState.isOpen && <BottomSheet />}
     </>
   );
