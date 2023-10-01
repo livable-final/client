@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
@@ -42,7 +41,7 @@ function LunchCalendarPointCard() {
       await postPoint();
       setPoint({ point500: true });
     } catch (err) {
-      console.log('포인토지급에러', err);
+      // 예외 처리 alert 추가 예정
     }
   };
   const onClickPoint1000Handler = async () => {
@@ -50,7 +49,7 @@ function LunchCalendarPointCard() {
       await postPoint();
       setPoint({ point1000: true });
     } catch (err) {
-      console.log('포인토지급에러', err);
+      // 예외 처리 alert 추가 예정
     }
   };
   const onClickPoint1500Handler = async () => {
@@ -58,7 +57,7 @@ function LunchCalendarPointCard() {
       await postPoint();
       setPoint({ point1500: true });
     } catch (err) {
-      console.log('포인토지급에러', err);
+      // 예외 처리 alert 추가 예정
     }
   };
   return (
