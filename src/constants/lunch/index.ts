@@ -158,3 +158,11 @@ export const LUNCH_ROULETTE_CONSTANTS = {
     lock: '잠금',
   },
 };
+
+export const POINT_CONSTANTS = {
+  card: {
+    text1: '포인트 제공 안내',
+    text2: '·제공되는 포인트는 오피스너 제휴사에서만 사용 가능합니다.',
+    text3: '·포인트 사용 제휴사는 공지사항을 통해 확인해주세요.',
+  },
+};

@@ -36,7 +36,7 @@ function LunchCalendarReview() {
     default:
       return (
         <section>
-          <Header title={title.review} onClick={onClickHeaderHandler} />
+          <Header title={title.review} onClickBack={onClickHeaderHandler} />
           <LunchSubTitle
             title={subTitle.mealStyle}
             type="subTitle"

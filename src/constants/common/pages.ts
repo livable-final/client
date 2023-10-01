@@ -16,6 +16,8 @@ const COMPONENT_NAME = {
       eatOut: 'LunchCalendarEatOut',
       cafeteria: 'LunchCalendarCafeteria',
       lunchBox: 'LunchCalendarLunchBox',
+      slide: 'LunchCalendarDetailsSlide',
+      Inform: 'LunchCalendarPointInform',
     },
     detail: {
       detail: 'LunchDetail',

@@ -6,4 +6,5 @@ export interface HeaderProps {
   isCloseOnly?: boolean;
   isSticky?: boolean;
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onClickBack?: () => void;
 }

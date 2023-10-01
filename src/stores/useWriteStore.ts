@@ -34,7 +34,7 @@ type WriteStore = {
   setRatingState: (data: SetRatingData) => void;
   setDescription: (data: string | '') => void;
   setImageFiles: (files: File[]) => void;
-  setIsChecked: (data: boolean) => void;
+  setIsChecked: () => void;
   clearRestaurant: () => void;
   resetSelectedMenu: () => void;
 };
@@ -73,7 +73,7 @@ const useWriteStore = create<WriteStore>()((set) => ({
     set((pre) => ({ ratingState: { ...pre.ratingState, ...data } })),
   setDescription: (data) => set({ description: data }),
   setImageFiles: (selectedFiles) => set({ imageFiles: selectedFiles }),
-  setIsChecked: (data) => set({ isChecked: !data }),
+  setIsChecked: () => set((pre) => ({ isChecked: !pre.isChecked })),
   clearRestaurant: () => set({ restaurant: initialState }),
   resetSelectedMenu: () => {
     set({
