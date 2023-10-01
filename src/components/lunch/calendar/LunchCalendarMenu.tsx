@@ -31,7 +31,7 @@ function LunchCalendarMenu() {
       if (restaurant.restaurantId) {
         try {
           const res = await getRestaurantMenu(restaurant.restaurantId);
-          setMenuData(res);
+          setMenuData(res.data);
         } catch (err) {
           goBack();
         }
@@ -89,9 +89,10 @@ function LunchCalendarMenu() {
         <div css={subTitleStyles}>
           <LunchSubTitle title={subTitle.menu} type="subTitle" />
         </div>
-        {menuData.map((item) => (
-          <LunchCalendarListItem key={item.menuId} type="menu" item={item} />
-        ))}
+        {menuData &&
+          menuData?.map((item) => (
+            <LunchCalendarListItem key={item.menuId} type="menu" item={item} />
+          ))}
         {!showInput ? (
           <button type="button" onClick={onClickAddBtnHandler} css={plusStyles}>
             <span>추가</span>
