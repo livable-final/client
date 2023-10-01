@@ -1,7 +1,3 @@
-export interface GetRankingData {
-  buildingId: number;
-}
-
 export interface GetMenuReviewsData {
   memberName: string;
   memberProfileImage: string;
@@ -37,4 +33,13 @@ export interface GetRestListData {
   isBuilding: boolean;
   estimatedTime: number;
   review: string;
+}
+
+export interface GetRankingData {
+  date: string;
+  count: number;
+  rank: number;
+  menuId: number;
+  menuName: string;
+  menuImage: string;
 }
