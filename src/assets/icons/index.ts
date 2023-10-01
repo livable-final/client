@@ -16,7 +16,7 @@ import Right from '@/assets/icons/Right.svg';
 import Seminar from '@/assets/icons/seminar.svg';
 import Up from '@/assets/icons/Up.svg';
 import Info from '@/assets/icons/Info.svg';
-import ErrorIcon from '@/assets/icons/icon.svg';
+import ErrorIcon from '@/assets/icons/erroricon.svg';
 import PlusBig from '@/assets/icons/Plus=big.svg';
 import PlusSmall from '@/assets/icons/Plus=small.svg';
 import ExitSmall from '@/assets/icons/Exit=small.svg';
