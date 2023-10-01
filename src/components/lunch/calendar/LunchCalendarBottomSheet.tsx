@@ -96,7 +96,7 @@ function LunchCalendarBottomSheet() {
         <button
           type="button"
           onClick={(e) => onClicBtnHandler(e, 'photo')}
-          css={btnStyles}
+          css={[btnStyles, btncolorStyles]}
         >
           <span>{button.button8.text2}</span>
         </button>
@@ -141,6 +141,13 @@ const btnBoxStyles = css`
 
 const btnStyles = css`
   padding: 16px 0;
+  &:active {
+    border-radius: 8px;
+    background-color: ${theme.palette.greyscale.grey5};
+  }
+`;
+
+const btncolorStyles = css`
   color: ${theme.palette.primary};
 `;
 

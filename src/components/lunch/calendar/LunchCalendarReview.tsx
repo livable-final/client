@@ -37,7 +37,11 @@ function LunchCalendarReview() {
       return (
         <section>
           <Header title={title.review} onClick={onClickHeaderHandler} />
-          <LunchSubTitle title={subTitle.mealStyle} type="subTitle" />
+          <LunchSubTitle
+            title={subTitle.mealStyle}
+            type="subTitle"
+            margin="24px"
+          />
           <div css={buttonListStyles}>
             <LunchCalendarSelectBtn text={category[0].category} />
             <LunchCalendarSelectBtn text={category[1].category} />

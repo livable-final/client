@@ -86,7 +86,7 @@ function LunchCalendarMenu() {
           title={restaurant.restaurantName}
           onClick={onClickHaederHandler}
         />
-        <div css={{ paddingTop: '24px', paddingBottom: '24px' }}>
+        <div css={subTitleStyles}>
           <LunchSubTitle title={subTitle.menu} type="subTitle" />
         </div>
         {menuData.map((item) => (
@@ -126,6 +126,10 @@ const pageStyles = css`
   justify-content: space-between;
 `;
 
+const subTitleStyles = css`
+  margin: 24px 0;
+`;
+
 const plusStyles = css`
   width: 100%;
   display: flex;
@@ -139,7 +143,6 @@ const plusStyles = css`
 `;
 
 const inputStyles = css`
-  text-align: center;
   width: 100%;
   height: 100%;
   outline: none;
