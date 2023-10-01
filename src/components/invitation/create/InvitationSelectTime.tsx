@@ -4,11 +4,11 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 // import { GetInvitationTimeListData } from '@/types/invitation/api';
 
-// interface InvitationSelectTimeProps {
-//   timeList: GetInvitationTimeListData | undefined;
-// }
+interface InvitationSelectTimeProps {
+  commonTimes: string[];
+}
 
-function InvitationSelectTime() {
+function InvitationSelectTime({ commonTimes }: InvitationSelectTimeProps) {
   // 예상 더미 데이터 (ISO 8601 Date 형식)
   const data = {
     startTime: '2023-08-27T12:30:00Z',
@@ -17,7 +17,7 @@ function InvitationSelectTime() {
 
   const timeSlot = createTimeSlots(data.startTime, data.endTime);
 
-  // console.log(timeList);
+  console.log(commonTimes);
 
   return (
     <div css={containerStyles}>
