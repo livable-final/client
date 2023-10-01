@@ -73,8 +73,8 @@ export interface GetInvitationCarouselData {
 }
 
 // ********** 초대상 수정 ********** //
-// 초대 목록
 
+// 초대 목록 조회
 export interface InvitationListItem {
   invitationId: number;
   visitorName: string;
@@ -98,4 +98,21 @@ export interface GetInvitationListData {
       endTime: string;
     },
   ];
+}
+// 초대장 상세 조회
+export interface GetInvitationListItemData {
+  commonPlaceId: null;
+  description: string;
+  endDate: string;
+  endTime: string;
+  officeName: string;
+  purpose: string;
+  startDate: string;
+  startTime: string;
+  visitors: [InvitationListItemVisitor];
+}
+export interface InvitationListItemVisitor {
+  visitorId: number;
+  name: string;
+  contact: string;
 }

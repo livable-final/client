@@ -1,6 +1,9 @@
 import { apiInstance } from '@/pages/api/axios';
 import { Response } from '@/types/common/response';
-import { GetInvitationListData } from '@/types/invitation/api';
+import {
+  GetInvitationListData,
+  GetInvitationListItemData,
+} from '@/types/invitation/api';
 
 // 초대 목록
 export const getInvitationList = async (): Promise<
@@ -13,7 +16,7 @@ export const getInvitationList = async (): Promise<
 // 초대장 상세
 export const getInvitationListItem = async (
   id?: number | string | Date,
-): Promise<Response<GetInvitationListData[]>> => {
+): Promise<Response<GetInvitationListItemData>> => {
   const response = await apiInstance.get(`invitation/${id}`);
   return response.data;
 };
