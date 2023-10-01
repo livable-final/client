@@ -1,5 +1,6 @@
 import Bnb from '@/components/common/Bnb';
 import Title from '@/components/common/Title';
+import ToWrite from '@/components/common/ToWrite';
 import LunchDetail from '@/components/lunch/detail';
 import LunchMainContents from '@/components/lunch/LunchMainContents';
 import LunchReviewsByRanking from '@/components/lunch/review/LunchReviewsByRanking';
@@ -28,6 +29,7 @@ function LunchHome() {
           <div css={containerStyles}>
             <LunchMainContents />
           </div>
+          <ToWrite hasBnb />
           <Bnb />
         </>
       );
