@@ -1,16 +1,32 @@
-import { COMMON_TOGGLE_TITLE } from '@/constants/common';
 import theme from '@/styles/theme';
+import useToggleStore from '@/stores/useToggleStore';
+import { COMMON_TOGGLE_TITLE } from '@/constants/common';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 
 function Toggle() {
   const [isActive, setIsActive] = useState(false);
-  const onClick = () => {
-    setIsActive((prev) => !prev);
+  const { isOn, onToggle, offToggle } = useToggleStore();
+
+  // Toggle On
+  const onClickOnToggle = () => {
+    setIsActive(true);
+    onToggle();
   };
+
+  // Toggle Off
+  const onClickOffToggle = () => {
+    setIsActive(false);
+    offToggle();
+  };
+
   return (
     <label css={toggleSwitchStyles(isActive)}>
-      <input type="checkbox" onClick={onClick} css={checkboxStyles} />
+      <input
+        type="checkbox"
+        onClick={isOn && isActive ? onClickOffToggle : onClickOnToggle}
+        css={checkboxStyles}
+      />
       <span css={toggleButtonStyles(isActive)} />
       <span css={contentStyles(isActive)}>{COMMON_TOGGLE_TITLE}</span>
     </label>
