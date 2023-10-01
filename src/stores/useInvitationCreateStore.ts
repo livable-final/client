@@ -6,7 +6,7 @@ import {
 
 const initialCreateState: PostInvitationContents = {
   purpose: '',
-  commonPlaceId: null,
+  commonPlaceId: 0,
   officeName: '',
   description: '',
   startDate: '',
