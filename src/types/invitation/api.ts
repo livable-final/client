@@ -18,7 +18,8 @@ export interface CommonPlaceData {
 // 예약 가능한 시간 리스트
 export interface GetInvitationTimeListContents {
   commonPlaceId: number | null;
-  date: string;
+  startDate: string;
+  endDate: string;
 }
 
 export interface GetInvitationTimeListData {
