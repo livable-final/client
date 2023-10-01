@@ -166,6 +166,8 @@ const visitorAddInputStyles = css`
   border-bottom: 2px solid ${theme.palette.greyscale.grey10};
 `;
 const visitorcontactaddBtnStyles = css`
+  display: flex;
+  justify-content: flex-end;
   text-align: right;
 `;
 const visitorListContainerStyles = css`
