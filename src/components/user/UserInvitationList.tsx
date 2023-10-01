@@ -1,7 +1,7 @@
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import useFetch from '@/hooks/useFetch';
-import getTodayDate from '@/utils/getTodayDate';
+import createHyphenDate from '@/utils/createHyphenDate';
 import UserInvitatioListItem from '@/components/user/UserInvitationListItem';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import UserInvitationListEdit from '@/components/user/UserInvitationListEdit';
@@ -32,7 +32,7 @@ function UserInvitationList() {
   // 오늘 날짜 가져오는 로직
   const currentDate = new Date();
   // 데이터상 날짜 비교를 위한 포켓 변환
-  const formattedDate = getTodayDate(currentDate);
+  const formattedDate = createHyphenDate(currentDate);
 
   return (
     <div css={userInvitationListStyles}>
