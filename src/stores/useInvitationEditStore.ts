@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-import { PatchInvitationContents } from '@/types/invitation/edit';
-import { VisitorInfo } from '@/types/invitation/api';
+import { VisitorInfo, PatchInvitationContents } from '@/types/invitation/api';
 
 interface InvitationEditStore {
   editContents: PatchInvitationContents;

@@ -127,3 +127,10 @@ export interface InvitationListItemVisitor {
   name: string;
   contact: string;
 }
+export interface PatchInvitationContents {
+  commonPlaceId?: number | null;
+  description?: string;
+  startDate?: Date | string;
+  endDate?: Date | string;
+  visitors?: VisitorInfo[];
+}
