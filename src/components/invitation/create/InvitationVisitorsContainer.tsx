@@ -12,8 +12,10 @@ import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { ChangeEvent, useState } from 'react';
+import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 import { VisitorInfo } from '@/types/invitation/api';
+import { ErrorMessageProps } from '@/types/common/errorMessage';
 import {
   checkValidationName,
   checkValidationContact,
@@ -24,6 +26,8 @@ function InvitationVisitorsContainer() {
   const { createContents, setCreateContents } = useInvitationCreateStore();
   const { modalState, openModal } = useModalStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
+  const { noName, noContact, noNameContact }: ErrorMessageProps =
+    COMMON_ERROR_MESSAGE;
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [visitorInfo, setVisitorInfo] = useState<VisitorInfo>({
@@ -54,15 +58,15 @@ function InvitationVisitorsContainer() {
   const onClickAddVisitorHandler = () => {
     // 사용자 입력값 유무에 따른 예외처리
     if (!visitorInfo.name && !visitorInfo.contact) {
-      openModal('📢', '이름과 전화번호를 입력해 주세요!');
+      openModal('📢', noNameContact);
       return;
     }
     if (visitorInfo.name && !visitorInfo.contact) {
-      openModal('📢', '전화번호를 입력해 주세요!');
+      openModal('📢', noContact);
       return;
     }
     if (!visitorInfo.name && visitorInfo.contact) {
-      openModal('📢', '이름을 입력해 주세요!');
+      openModal('📢', noName);
       return;
     }
     // 이름/전화번호 모두 유효할 경우
@@ -127,7 +131,9 @@ function InvitationVisitorsContainer() {
               name="contact"
             />
           </div>
-          <AddressBook />
+          <div css={addressBookWrapperStyles}>
+            <AddressBook />
+          </div>
         </div>
         <div css={addBtnStyles}>
           {createContents.purpose === 'interview' &&
@@ -208,6 +214,12 @@ const inputContainerStyles = css`
   display: flex;
   flex-direction: column;
   gap: 21px;
+  width: 100%;
+`;
+
+const addressBookWrapperStyles = css`
+  display: flex;
+  justify-content: flex-end;
   width: 100%;
 `;
 
