@@ -10,7 +10,12 @@ function ToWrite({ hasBnb }: { hasBnb?: boolean }) {
   };
   return (
     <div css={wrapperStyles(hasBnb)}>
-      <button type="button" css={topButtonStyles} onClick={onClickHandler}>
+      <button
+        type="button"
+        aria-label="toWriteButton"
+        css={topButtonStyles}
+        onClick={onClickHandler}
+      >
         <Write />
       </button>
     </div>

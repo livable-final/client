@@ -17,7 +17,7 @@ function Title({ title, isMain, part }: TitleProps) {
         );
       case 'lunch':
         return (
-          <Link href="/lunch/calendar">
+          <Link aria-label="toCalendar" href="/lunch/calendar">
             <LunchCalendar />
           </Link>
         );
