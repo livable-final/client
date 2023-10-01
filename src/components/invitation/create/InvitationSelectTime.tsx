@@ -2,13 +2,13 @@ import TimeSelector from '@/components/common/TimeSelector';
 import createTimeSlots from '@/utils/createTimeSlots';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
-import { GetInvitationTimeListData } from '@/types/invitation/api';
+// import { GetInvitationTimeListData } from '@/types/invitation/api';
 
-interface InvitationSelectTimeProps {
-  timeList: GetInvitationTimeListData | undefined;
-}
+// interface InvitationSelectTimeProps {
+//   timeList: GetInvitationTimeListData | undefined;
+// }
 
-function InvitationSelectTime({ timeList }: InvitationSelectTimeProps) {
+function InvitationSelectTime() {
   // 예상 더미 데이터 (ISO 8601 Date 형식)
   const data = {
     startTime: '2023-08-27T12:30:00Z',
@@ -17,7 +17,7 @@ function InvitationSelectTime({ timeList }: InvitationSelectTimeProps) {
 
   const timeSlot = createTimeSlots(data.startTime, data.endTime);
 
-  console.log(timeList);
+  // console.log(timeList);
 
   return (
     <div css={containerStyles}>
