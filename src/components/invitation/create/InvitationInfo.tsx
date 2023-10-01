@@ -54,13 +54,13 @@ function InvitationInfo({
   };
 
   // 날짜/시간 선택 바텀시트 오픈
-  const onClickDateTimeHandler = useCallback(() => {
+  const onClickDateTimeHandler = () => {
     if (createContents.commonPlaceId === 0) {
       openAlert('📢', noPlace);
     } else {
       openBottomSheet(<InvitationDateTime />);
     }
-  }, []);
+  };
 
   return (
     <>
