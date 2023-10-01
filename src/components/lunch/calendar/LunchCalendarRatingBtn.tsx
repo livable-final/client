@@ -10,7 +10,6 @@ import useWriteStore from '@/stores/useWriteStore';
 function LunchCalendarRatingBtn({ title }: LunchCalendarRatingBtnProps) {
   const [isGoodChecked, setIsGoodChecked] = useState(false);
   const [isBadChecked, setIsBadChecked] = useState(false);
-  const taste = useWriteStore((state) => state.ratingState.taste);
   const setRatingState = useWriteStore((state) => state.setRatingState);
   const { button } = CALENDAR_CONTENT;
   const { lunch } = COMMON_ICON_NAMES;
