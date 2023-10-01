@@ -86,6 +86,9 @@ import ServiceTemp from '@/assets/icons/ServiceTemp.svg';
 import ProfileWithBg from '@/assets/icons/ProfileWithBg.svg';
 import Error from '@/assets/icons/Error.svg';
 import My from '@/assets/icons/My.svg';
+import Write from '@/assets/icons/Write.svg';
+import Popup from '@/assets/icons/Popup.svg';
+import PopupActive from '@/assets/icons/PopupActive.svg';
 
 export {
   As,
@@ -176,4 +179,7 @@ export {
   ProfileWithBg,
   Error,
   My,
+  Write,
+  Popup,
+  PopupActive,
 };

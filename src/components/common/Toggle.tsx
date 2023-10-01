@@ -5,46 +5,30 @@ import { useState } from 'react';
 
 function Toggle() {
   const [isActive, setIsActive] = useState(false);
-
+  const onClick = () => {
+    setIsActive((prev) => !prev);
+  };
   return (
-    <label
-      htmlFor="toggle"
-      className={`toggleSwitch ${isActive && 'active'}`}
-      css={toggleSwitchStyles}
-    >
-      <span css={contentStyles(isActive)}>{COMMON_TOGGLE_TITLE}</span>
-      <input
-        type="checkbox"
-        id="toggle"
-        onClick={() => setIsActive(!isActive)}
-        css={checkboxStyles}
-      />
+    <label css={toggleSwitchStyles(isActive)}>
+      <input type="checkbox" onClick={onClick} css={checkboxStyles} />
       <span css={toggleButtonStyles(isActive)} />
+      <span css={contentStyles(isActive)}>{COMMON_TOGGLE_TITLE}</span>
     </label>
   );
 }
 
-const toggleSwitchStyles = css`
+const toggleSwitchStyles = (isActive: boolean) => css`
   width: 72px;
   padding: 3px;
   height: 32px;
-  display: block;
+  display: flex;
   position: relative;
   border-radius: 30px;
   border: 1px solid ${theme.palette.white};
-  background-color: ${theme.palette.greyscale.grey10};
+  background-color: ${isActive
+    ? `${theme.palette.bluescale.blue10}`
+    : ` ${theme.palette.greyscale.grey10}`};
   cursor: pointer;
-
-  &.active {
-    background: ${theme.palette.bluescale.blue10};
-
-    .toggleButton {
-      left: calc(100% - 40px);
-    }
-  }
-  .toggleButton {
-    background: #fff;
-  }
 `;
 
 const checkboxStyles = css`
@@ -52,23 +36,24 @@ const checkboxStyles = css`
 `;
 
 const contentStyles = (isActive: boolean) => css`
-  position: absolute;
-  top: 25%;
-  right: ${isActive ? 'calc(100% - 36px)' : '12px'};
+  display: flex;
+  position: relative;
+  right: ${isActive ? 'calc(100% - 44px)' : '-6px'};
+  top: 4px;
   font: ${theme.font.body.body3_400};
   color: ${isActive ? theme.palette.primary : theme.palette.greyscale.grey50};
   transition: right 0.4s;
 `;
 
 const toggleButtonStyles = (isActive: boolean) => css`
+  display: flex;
   width: 26px;
   height: 26px;
   padding: 4px 8px;
-  position: absolute;
-  top: 50%;
-  left: ${isActive ? 'calc(100% - 28px)' : '2px'};
-  transform: translateY(-50%);
-  border-radius: 50%;
+  position: relative;
+  left: ${isActive ? 'calc(100% - 28px)' : '0px'};
+  bottom: 1px;
+  border-radius: 100%;
   background: ${theme.palette.white};
   transition: left 0.6s;
 `;

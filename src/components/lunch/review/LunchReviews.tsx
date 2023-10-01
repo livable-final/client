@@ -16,9 +16,9 @@ function LunchReviews() {
   const { setReviewList } = useReviewStore();
   const { buildingName } = useBuildingStore();
   const { prefix, suffix } = LUNCH_MAIN_CONSTANTS.main.reviews;
+
   const { response } = useFetch({
-    fetchFn: getReviewList,
-    arg: 1,
+    fetchFn: () => getReviewList({ buildingId: 1, page: 1 }),
   });
 
   const onClickHandler = (item: ReviewList) => {

@@ -6,6 +6,7 @@ import useReviewStore from '@/stores/useReviewStore';
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
+import ToWrite from '@/components/common/ToWrite';
 
 function LunchDetail() {
   const { title } = LUNCH_MAIN_CONSTANTS.review;
@@ -23,6 +24,7 @@ function LunchDetail() {
       </div>
       <div css={dividerStyles} />
       <LunchDetailContents />
+      <ToWrite />
     </section>
   );
 }

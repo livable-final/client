@@ -36,7 +36,6 @@ const initialTokenState = {
   user: '',
   visitor: '',
 };
-// 사용자 토큰 초기값
 
 // 초대장 생성 방문tip 초기값
 const initialVisitMsg = {
