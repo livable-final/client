@@ -15,6 +15,7 @@ function Header({
   isCloseOnly = false,
   isSticky = false,
   onClick,
+  onClickBack,
 }: HeaderProps) {
   const { goBack, backComponents } = usePagesStore();
   const { typeCase } = COMMON_HEADER;
@@ -43,7 +44,11 @@ function Header({
 
   return (
     <header css={headerStyles(isBg, isCloseOnly, isSticky)}>
-      {isCloseOnly ? <div /> : <Back onClick={onBackClickHandler} />}
+      {isCloseOnly ? (
+        <div />
+      ) : (
+        <Back onClick={onClickBack || onBackClickHandler} />
+      )}
       <div css={titleStyles}>
         <span>{title}</span>
       </div>
