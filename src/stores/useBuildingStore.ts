@@ -3,7 +3,7 @@ import { create } from 'zustand';
 
 const useBuildingStore = create(() => ({
   buildingId: 1,
-  buildingName: '현대테라타워DIMC',
+  buildingName: '',
   hasCafeteria: false,
 }));
 
