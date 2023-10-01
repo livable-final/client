@@ -38,6 +38,7 @@ import {
   ServiceReception,
   ServiceTemp,
   My,
+  Error,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -118,6 +119,8 @@ function Icons({ icon, color, size }: IconsProps) {
       return <ThumbsUp color={color} width={size} height={size} />;
     case common.close:
       return <Close />;
+    case common.error:
+      return <Error width={size} height={size} />;
     default:
       break;
   }

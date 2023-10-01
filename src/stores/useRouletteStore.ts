@@ -9,6 +9,7 @@ const useRouletteStore = create(() => ({
   isOperated: true, // 가동 완료 여부 state
   isPressed: false, // 버튼 클릭 state
   isAgain: false, // 재선택 여부 state
+  isSelected: false, // 메뉴 결정 여부 state
 }));
 
 export default useRouletteStore;

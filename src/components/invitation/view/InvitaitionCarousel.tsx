@@ -9,8 +9,7 @@ import { INVITATION_CAROUSEL_TEXTS } from '@/constants/invitation/viewTexts';
 function InvitaitionCarousel({ type }: InvitationCarouselProps) {
   const { restaurant, cafe } = INVITATION_CAROUSEL_TEXTS;
   const { response } = useFetch({
-    fetchFn: getInvitationCarousel,
-    arg: type,
+    fetchFn: () => getInvitationCarousel(type),
   });
 
   const datas = response && response.data;
