@@ -8,8 +8,10 @@ import InvitationSelectTime from '@/components/invitation/create/InvitationSelec
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useAlertStore from '@/stores/useAlertStore';
+import useToggleStore from '@/stores/useToggleStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import getFormatDate from '@/utils/getFormatDate';
+import getCommonTimes from '@/utils/getCommonTimeList';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
@@ -17,51 +19,56 @@ import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 import { getInvitationTimeList } from '@/pages/api/invitation/createRequests';
-import { GetInvitationTimeListData } from '@/types/invitation/api';
 
 function InvitationDateTime() {
   const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
   const { closeBottomSheet } = useBottomSheetStore();
   const { alertState, openAlert } = useAlertStore();
+  const { isOn } = useToggleStore();
   const { createContents } = useInvitationCreateStore();
 
+  // Thu Oct 26 2023 00:00:00 GMT+0900 (한국 표준시)
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(startDate);
 
-  const [, setTimeList] = useState<GetInvitationTimeListData>();
+  // API 호출 초기 데이터 [{…}, {…}]
+  // { date: '2023-10-20', availableTimes: ['12:30:00', '15:00:00', '17:30:00'] }
+  const [fetchData, setFetchData] = useState([]);
+  const [commonTimes, setCommonTimes] = useState<string[]>([]);
 
   useEffect(() => {
-    const getTimeList = async () => {
+    const fetchGetTimeList = async () => {
       try {
         const response = await getInvitationTimeList({
           commonPlaceId: createContents.commonPlaceId,
-          date: getFormatDate(endDate),
+          startDate: getFormatDate(startDate), // yyyy-mm-dd
+          endDate: getFormatDate(endDate), // yyyy-mm-dd
         });
-        setTimeList(response.data);
+        console.log(response.data);
+        setFetchData(response.data);
       } catch (error) {
-        openAlert('ERROR!', String(error));
+        openAlert('ERROR!', '예약 가능 시간 API에 문제가 생겼습니다.');
       }
     };
-    getTimeList();
-  }, [endDate]);
+    fetchGetTimeList();
+  }, [createContents.commonPlaceId, startDate, endDate, openAlert]);
 
-  // useFetch 버전
-  // const { response } = useFetch({
-  //   fetchFn: () =>
-  //     getInvitationTimeList({
-  //       commonPlaceId: createContents.commonPlaceId,
-  //       date: getFormatDate(startDate),
-  //     }),
-  // });
+  useEffect(() => {
+    // 기존 fetchData 데이터를 날짜순으로 정렬
+    // sorted : [{…}, {…}]
+    // { date: '2023-10-20', availableTimes: ['12:30:00', '15:00:00', '17:30:00'] }
+    if (fetchData[0]) {
+      // const sorted = [...fetchData].sort(
+      //   (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+      // );
+      // console.log(sorted);
 
-  // useEffect(() => {
-  //   if (response?.data) {
-  //     setTimeList(response.data);
-  //   }
-  // }, []);
-
-  // console.log(getFormatDate(startDate));
-  // console.log(timeList);
+      // 기존 fetchData 중에서 공통된 시간만 출력
+      // ['15:00:00', '15:30:00', '17:00:00', '17:30:00']
+      const common = getCommonTimes(fetchData);
+      setCommonTimes(common);
+    }
+  }, [fetchData]);
 
   // 달력 선택 핸들러
   const onChange = (dates: [Date, Date]) => {
@@ -72,45 +79,42 @@ function InvitationDateTime() {
   };
 
   return (
-    <>
-      {/* <Toggle /> */}
-      <div css={containerStyles}>
-        <div css={dateContainerStyles}>
-          <div css={titleStyles}>{title.invitationDate}</div>
-          <div css={calendarStyles}>
-            <DatePicker
-              locale={ko}
-              dateFormat="yyyy-mm-dd"
-              dateFormatCalendar="yyyy.MM"
-              calendarClassName="calendar"
-              onChange={onChange}
-              minDate={new Date()}
-              maxDate={addMonths(new Date(), 2)} // 현재일부터 두달 뒤까지 선택 가능
-              startDate={startDate}
-              endDate={endDate}
-              selectsRange
-              inline
-              showDisabledMonthNavigation
-            />
-          </div>
-        </div>
-        <div css={timeContainerStyles}>
-          <div css={titleStyles}>
-            {title.invitationTime}
-            <Toggle />
-          </div>
-          <InvitationSelectTime />
-        </div>
-        <div css={buttonWrapperStyles}>
-          <Button
-            content={button.done}
-            variant="blue"
-            onClick={() => closeBottomSheet()}
+    <div css={containerStyles}>
+      <div css={dateContainerStyles}>
+        <div css={titleStyles}>{title.invitationDate}</div>
+        <div css={calendarStyles}>
+          <DatePicker
+            locale={ko}
+            dateFormat="yyyy-mm-dd"
+            dateFormatCalendar="yyyy.MM"
+            calendarClassName="calendar"
+            onChange={onChange}
+            minDate={new Date()}
+            maxDate={addMonths(new Date(), 2)} // 현재일부터 두달 뒤까지 선택 가능
+            startDate={startDate}
+            endDate={endDate}
+            selectsRange
+            inline
+            showDisabledMonthNavigation
           />
         </div>
       </div>
+      <div css={timeContainerStyles}>
+        <div css={titleStyles}>
+          {title.invitationTime}
+          <Toggle />
+        </div>
+        {!isOn && <InvitationSelectTime commonTimes={commonTimes} />}
+      </div>
+      <div css={buttonWrapperStyles}>
+        <Button
+          content={button.done}
+          variant="blue"
+          onClick={() => closeBottomSheet()}
+        />
+      </div>
       {alertState.isOpen && <Alert />}
-    </>
+    </div>
   );
 }
 
@@ -133,6 +137,7 @@ const dateContainerStyles = css`
 const timeContainerStyles = css`
   display: flex;
   flex-direction: column;
+  width: 100%;
   margin-bottom: 100px;
 `;
 
