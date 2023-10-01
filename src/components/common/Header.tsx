@@ -65,11 +65,12 @@ const headerStyles = (
   grid-template-columns: ${isCloseOnly ? '1fr auto 1fr' : '1fr auto 1fr'};
   align-items: center;
   width: 100%;
-  min-width: 280px;
+  min-width: 248px;
   max-width: 360px;
   height: 56px;
   padding: 16px 0;
   background-color: ${isBg ? 'transparent' : theme.palette.white};
+  z-index: 5;
 
   ${mq.md} {
     max-width: 480px;

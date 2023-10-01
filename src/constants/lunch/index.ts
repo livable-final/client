@@ -101,7 +101,8 @@ export const LUNCH_MAIN_CONSTANTS = {
       heights: [32, 47, 25],
     },
     reviews: {
-      title: '최근 테라타워 입주자들의 리뷰',
+      prefix: '최근',
+      suffix: '입주자들의 리뷰',
     },
     detail: {
       title: '의 더 많은 리뷰',
@@ -143,8 +144,17 @@ export const LUNCH_ROULETTE_CONSTANTS = {
       fixed: 3000,
     },
   },
-  title: { roulette: '점심룰렛', review: '맛집을 알려드릴게요!' },
+  title: {
+    roulette: '점심룰렛',
+    review: '맛집을 알려드릴게요!',
+    recent: '근처의',
+  },
   error: {
     response: { menuId: 0, name: '결과가 없습니다.' },
+  },
+  alt: {
+    push: '버튼',
+    bg: '배경',
+    lock: '잠금',
   },
 };

@@ -1,5 +1,6 @@
 import AuthForm from '@/components/auth/AuthForm';
 import Title from '@/components/common/Title';
+import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import useSaveStore from '@/stores/useSaveStore';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
@@ -19,7 +20,7 @@ function Login() {
 
   return (
     <div css={containerStyles}>
-      <Title title="로그인" part="login" />
+      <Title title={HOME_TEXTS.title.login} part="login" />
       <AuthForm />
     </div>
   );

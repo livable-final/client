@@ -1,5 +1,5 @@
 export interface NameTagProps {
   name: string;
-  onClick: () => void;
+  onClick: (item: string) => void;
   isInvited?: boolean;
 }

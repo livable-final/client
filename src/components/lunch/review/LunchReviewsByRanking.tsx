@@ -4,10 +4,14 @@ import { DUMMMY_MENU_TOP_TEN } from '@/constants/lunch/dummy';
 import usePagesStore from '@/stores/usePagesStore';
 import LunchRankings from '@/components/lunch/ranking/LunchRankings';
 import ToTop from '@/components/common/ToTop';
+// import useFetch from '@/hooks/useFetch';
 
 function LunchReviewsByRanking() {
   const { setNextComponent } = usePagesStore();
   const { title, palette } = LUNCH_MAIN_CONSTANTS.ranking;
+  // const { response } = useFetch({
+  //   fetchFn: getRanking
+  // });
   const queryData = DUMMMY_MENU_TOP_TEN.map((item, idx) => ({
     ...item,
     color: palette[idx],

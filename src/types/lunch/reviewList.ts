@@ -1,15 +1,15 @@
 export interface ReviewList {
   restaurantName: string;
-  restaurantId: string;
+  restaurantId: number;
   memberName: string;
-  profileImageUrl: string;
+  memberProfileImage: string;
   reviewId: number;
   reviewTaste: string;
   reviewAmount: string;
   reviewService: string;
   reviewSpeed: string;
   reviewCreatedAt: string;
-  reviewImageUrl: string[];
+  reviewImages: string[];
   reviewDescription: string;
 }
 

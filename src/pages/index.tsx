@@ -4,19 +4,18 @@ import Title from '@/components/common/Title';
 import HomeContents from '@/components/home/HomeContents';
 import useFetch from '@/hooks/useFetch';
 import { getHome } from '@/pages/api/home/homeRequests';
-import useIdStore from '@/stores/useIdStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import usePagesStore from '@/stores/usePagesStore';
 import useSaveStore from '@/stores/useSaveStore';
 import { useRouter } from 'next/router';
+import useBuildingStore from '@/stores/useBuildingStore';
 
 function Home() {
   const router = useRouter();
   const { reset } = usePagesStore();
-  const { idList, setIdList } = useIdStore();
-
+  const { setState } = useBuildingStore;
   const { response } = useFetch({
     fetchFn: getHome,
   });
@@ -27,9 +26,9 @@ function Home() {
     }
     reset();
     if (response?.data.buildingId) {
-      setIdList({ ...idList, buildingId: response?.data.buildingId });
+      setState({ ...response?.data });
     }
-  }, [response?.data.buildingId, setIdList, reset]);
+  }, [response?.data.buildingId, reset]);
 
   return (
     <>

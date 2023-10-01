@@ -2,6 +2,7 @@ export const HOME_TEXTS = {
   title: {
     lunch: '오늘 점심',
     user: '마이페이지',
+    login: '로그인',
   },
   toCalendar: {
     title: '오늘 점심 달력 작성하기',

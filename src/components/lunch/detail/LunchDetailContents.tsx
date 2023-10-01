@@ -3,12 +3,17 @@ import LunchReview from '@/components/lunch/review/LunchReview';
 import useReviewStore from '@/stores/useReviewStore';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import { DUMMY_DATA } from '@/constants/lunch/dummy';
 import theme from '@/styles/theme';
+import useFetch from '@/hooks/useFetch';
+import { getRestReviewList } from '@/pages/api/lunch/lunchRequests';
 
 function LunchDetailContents() {
   const { reviewList } = useReviewStore();
   const { detail } = LUNCH_MAIN_CONSTANTS.main;
+  const { response } = useFetch({
+    fetchFn: getRestReviewList,
+    arg: useReviewStore().reviewList.restaurantId,
+  });
 
   return (
     <div css={wrapperStyles}>
@@ -17,7 +22,7 @@ function LunchDetailContents() {
         type="more"
       />
       <div css={reviewStyles}>
-        {DUMMY_DATA.map((item) => (
+        {response?.data.map((item) => (
           <LunchReview key={item.reviewId} {...item} noPad />
         ))}
       </div>

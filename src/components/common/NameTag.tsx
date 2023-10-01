@@ -4,10 +4,19 @@ import { css } from '@emotion/react';
 import { NameTagProps } from '@/types/common/nameTag';
 
 function NameTag({ isInvited = false, name, onClick }: NameTagProps) {
+  // 해당 네임태그 방문자 삭제
+  const onClickDeleteVisitorHandler = () => {
+    onClick(name);
+  };
+
   return (
     <div css={nameTagContainerStyles(name, isInvited)}>
       <div css={textStyles}>{name}</div>
-      <button type="button" css={iconStyles} onClick={onClick}>
+      <button
+        type="button"
+        css={iconStyles}
+        onClick={onClickDeleteVisitorHandler}
+      >
         <ExitSmall />
       </button>
     </div>
