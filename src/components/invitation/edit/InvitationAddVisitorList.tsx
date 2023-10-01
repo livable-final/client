@@ -8,19 +8,19 @@ import NameTag from '@/components/common/NameTag';
 import AddressBook from '@/components/common/AddressBook';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import useInvitationEditStore from '@/stores/useInvitationEditStore';
 import { InvitationAddVisitorListProps } from '@/types/invitation/edit';
-import { VisitorInfo } from '@/types/invitation/api';
+// import { VisitorInfo } from '@/types/invitation/api';
 
 function InvitationAddVisitorList({
-  setVisitorList,
-  visitorsList,
-  isEdit = false,
+  visitorsList, // isEdit = false,
 }: InvitationAddVisitorListProps) {
   const [addVisitorName, setAddVisitorName] = useState('');
   const [addVisitorContact, setAddVisitorContact] = useState('');
-  const [addVisitorList, setAddVisitorList] = useState<VisitorInfo[]>([]);
+  // const [addVisitorList, setAddVisitorList] = useState<VisitorInfo[]>([]);
   const { closeBottomSheet } = useBottomSheetStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
+  const { editContents, setEditContents } = useInvitationEditStore();
 
   // 방문자 삭제 버튼 핸들러
   const onClickDeleteVisitorHandler = (name: string) => {
@@ -48,11 +48,10 @@ function InvitationAddVisitorList({
       contact,
     };
     // 수정에서 바텀시트로 들어왔을때 로직
-    if (isEdit) {
-      setAddVisitorList([...addVisitorList, newVisitorInfo]);
+    if (editContents.visitors) {
+      setEditContents('visitors', [...editContents.visitors, newVisitorInfo]);
     }
     if (visitorsList) {
-      // setAddVisitorList([...addVisitorList, newVisitorInfo]);
       setCreateContents('visitors', [
         ...createContents.visitors,
         newVisitorInfo,
@@ -68,21 +67,22 @@ function InvitationAddVisitorList({
     newVisitorList(addVisitorName, addVisitorContact);
   };
 
-  const addVisitorListHandler = (
-    setNewList: React.Dispatch<React.SetStateAction<VisitorInfo[]>>,
-    newList: VisitorInfo[],
-  ) => {
-    // props로 받아온 기존 visitorList에 새로운 visitor 추가
-    setNewList(newList);
-    // 바텀시트 close
-    closeBottomSheet();
-  };
+  // const addVisitorListHandler = (
+  //   setNewList: React.Dispatch<React.SetStateAction<VisitorInfo[]>>,
+  //   newList: VisitorInfo[],
+  // ) => {
+  //   // props로 받아온 기존 visitorList에 새로운 visitor 추가
+  //   setNewList(newList);
+  //   // 바텀시트 close
+  //   closeBottomSheet();
+  // };
 
   // 완료 버튼
   const onclickDoneBtnHandler = () => {
-    if (setVisitorList) {
-      addVisitorListHandler(setVisitorList, addVisitorList);
-    } else closeBottomSheet();
+    // if (setVisitorList) {
+    //   addVisitorListHandler(setVisitorList, addVisitorList);
+    // } else
+    closeBottomSheet();
   };
 
   return (
@@ -111,7 +111,7 @@ function InvitationAddVisitorList({
             <Add onClick={onClickAddHandler} />
           </div>
           <div css={newVisitorListStyles}>
-            {/* props로 가져온 기존 visitorList */}
+            {/* 기존 visitorList */}
             {createContents.visitors &&
               createContents.visitors?.map((item) => (
                 <NameTag
@@ -121,14 +121,14 @@ function InvitationAddVisitorList({
                 />
               ))}
             {/* 새롭게 추가한 visitorList */}
-            {isEdit &&
+            {/* {isEdit &&
               addVisitorList.map((item) => (
                 <NameTag
                   key={item.name}
                   name={item.name}
                   onClick={onClickDeleteVisitorHandler}
                 />
-              ))}
+              ))} */}
           </div>
         </div>
       </div>
