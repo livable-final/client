@@ -145,6 +145,7 @@ export const COMMON_ICON_NAMES = {
   common: {
     close: 'close',
     error: 'error',
+    exitSmall: 'exitSmall',
   },
 };
 
