@@ -176,6 +176,7 @@ const calendarStyles = css`
 
   .calendar {
     width: 90vw;
+    max-width: 990px;
     border: transparent;
     font-family: var(--pretendard);
     color: ${theme.palette.greyscale.grey70};
