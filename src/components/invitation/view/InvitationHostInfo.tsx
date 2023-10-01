@@ -16,15 +16,15 @@ function InvitationHostInfo({ data }: InvitationHostInfoProps) {
       <ul css={InvitationInfoItemContinerStyles}>
         <InvitationHostInfoItem
           label={INVITATION_VEIW_INFO_TEXTS.host.name}
-          content={data.hostName}
+          content={data?.hostName}
         />
         <InvitationHostInfoItem
           label={INVITATION_VEIW_INFO_TEXTS.host.companyName}
-          content={data.hostCompanyName}
+          content={data?.hostCompanyName}
         />
         <InvitationHostInfoItem
           label={INVITATION_VEIW_INFO_TEXTS.host.contact}
-          content={data.hostContact}
+          content={data?.hostContact}
           isContact
         />
       </ul>
