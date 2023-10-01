@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { CALENDAR_CASE } from '@/constants/lunch';
 import { LunchSubTitleProps } from '@/types/lunch/calendar';
 
-function LunchSubTitle({ title, type, userName }: LunchSubTitleProps) {
+function LunchSubTitle({ title, type, userName, margin }: LunchSubTitleProps) {
   const { subTitle, review, roulette } = CALENDAR_CASE;
   let fontStyle;
   let fontSize;
@@ -37,7 +37,7 @@ function LunchSubTitle({ title, type, userName }: LunchSubTitleProps) {
     default:
   }
   return (
-    <div css={titleStyles(fontStyle, fontSize, lineHeight)}>
+    <div css={titleStyles(fontStyle, fontSize, lineHeight, margin)}>
       {userName ? `${userName}${title}` : `${title}`}
     </div>
   );
@@ -47,10 +47,12 @@ const titleStyles = (
   fontStyle: string | undefined,
   fontSize: string | undefined,
   lineHeight?: string,
+  margin?: string,
 ) => css`
   font: ${fontStyle};
   font-size: ${fontSize};
   line-height: ${lineHeight};
+  margin-top: ${margin};
 `;
 
 export default LunchSubTitle;

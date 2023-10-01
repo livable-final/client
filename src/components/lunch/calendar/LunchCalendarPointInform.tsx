@@ -1,9 +1,11 @@
+import Image from 'next/image';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Button from '@/components/common/Button';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { RightSmall } from '@/assets/icons';
+import { coin } from '@/assets/images';
 
 function LunchCalendarPointInform() {
   const { title, subTitle, button } = CALENDAR_CONTENT;
@@ -14,7 +16,8 @@ function LunchCalendarPointInform() {
   return (
     <section css={pageStyles}>
       <Header title="" onClick={onClickHeaderHandler} />
-      <div>
+      <div css={contentStyles}>
+        <Image src={coin} alt="코인.webp" width={90} height={90} />
         <div css={textStyles}>
           <h1>{title.photoReview}</h1>
           <p>{subTitle.photoReview}</p>
@@ -35,7 +38,15 @@ const pageStyles = css`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
+`;
+
+const contentStyles = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
 `;
 
 const textStyles = css`
@@ -56,6 +67,7 @@ const btnBoxStyles = css`
   flex-direction: column;
   align-items: center;
   margin: 0 0 20px;
+  width: 100%;
 `;
 
 const btnStyles = css`

@@ -27,7 +27,6 @@ function LunchCalenderEatOut() {
     selectedMenu,
     resetSelectedMenu,
     ratingState,
-    description,
     imageFiles,
   } = useWriteStore();
   const { isSave } = useSaveStore();
@@ -61,7 +60,7 @@ function LunchCalenderEatOut() {
         amount: ratingState.amount,
         speed: ratingState.speed,
         service: ratingState.service,
-        description,
+        description: searchText,
         menus: selectedMenu,
       };
 
@@ -73,7 +72,10 @@ function LunchCalenderEatOut() {
         formData.append('imageFiles', imageFiles[i]);
       }
       await postRestaurantReview(formData);
-      router.replace('/lunch/calendar');
+      if (imageFiles.length === 0) {
+        router.replace('/lunch/calendar');
+      }
+      router.replace('/lunch/point');
     } catch (err) {
       router.replace('/lunch/calendar');
     }
@@ -83,13 +85,16 @@ function LunchCalenderEatOut() {
     <section css={pageStyles}>
       <div>
         <Header title={category[0].category} onClick={onClickHeaderHandler} />
-        <LunchSubTitle title={subTitle.todayLunch} type="title" />
+        <LunchSubTitle title={subTitle.todayLunch} type="title" margin="24px" />
         <div css={reviewStyles}>
           <div css={textStyles}>
             <strong>{restaurant.restaurantName}</strong>
             <div>
               {selectedMenu.map((value, i) => (
-                <span key={`메뉴${i * 12}`}>{value.menuName}</span>
+                <>
+                  <span key={`메뉴${i * 12}`}>{value.menuName}</span>
+                  {i !== selectedMenu.length - 1 && <span>, </span>}
+                </>
               ))}
             </div>
           </div>

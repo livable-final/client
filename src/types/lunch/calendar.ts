@@ -57,6 +57,7 @@ export interface LunchSubTitleProps {
   title: string;
   type: 'title' | 'subTitle' | 'recent' | 'more' | 'roulette';
   userName?: string;
+  margin?: string;
 }
 
 export interface LunchCalendarWriteBtnProps {
