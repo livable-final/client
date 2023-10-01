@@ -26,6 +26,7 @@ const addressTextStyles = css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  width: 110px;
   cursor: pointer;
 
   div {
