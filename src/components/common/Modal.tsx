@@ -44,7 +44,7 @@ const backgroundStyles = css`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1;
+  z-index: 10;
 `;
 
 const modalContainerStyles = css`
@@ -57,7 +57,7 @@ const modalContainerStyles = css`
   height: 176px;
   border-radius: 16px;
   background-color: ${theme.palette.white};
-  z-index: 2;
+  /* z-index: 1 */
 `;
 
 const modalTitleStyles = css`
