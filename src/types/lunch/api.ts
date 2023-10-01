@@ -43,3 +43,10 @@ export interface GetRankingData {
   menuName: string;
   menuImage: string;
 }
+
+// * POST 룰렛 메뉴 선택 완료 request body
+export interface PostMenuContent {
+  buildingId: number;
+  menuId: number;
+  date: string;
+}

@@ -33,6 +33,7 @@ function LunchRoulette() {
     if (isLocked && isAgain) {
       const menuInterval = setInterval(() => {
         const menus = findRandomMenus(categoryState, response.data); // 랜덤하게 메뉴를 선정
+        console.log(response);
         const { name, menuId } = menus; // 랜덤 메뉴의 ID와 메뉴명
         setState({ menuState: name });
         setState({ menuIdState: menuId });
@@ -42,6 +43,7 @@ function LunchRoulette() {
         clearInterval(menuInterval);
         setState({ isOperated: true }); // 가동 완료!
         setState({ isPressed: false }); // 버튼 원상 복귀!
+        setState({ isSelected: false }); // 선택 완료 초기화!
       }, time.duration.fixed); // 모든 선택이 완료되는 시간 인터벌 (3000ms)
 
       // *** 카테고리 미 고정 시! ***
@@ -74,6 +76,7 @@ function LunchRoulette() {
         setState({ isAgain: true }); // 반복 선택 !
         setState({ isOperated: true }); // 가동 완료!
         setState({ isPressed: false }); // 버튼 원상 복귀!
+        setState({ isSelected: false }); // 선택 완료 초기화!
       }, time.duration.category + time.duration.menu); // 모든 선택이 완료되는 시간 인터벌 (500ms + 3500ms = 4000ms)
     }
   };
