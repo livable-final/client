@@ -5,6 +5,10 @@ type Save = {
   PhotoMsg: boolean;
 };
 
+interface PointData {
+  [key: string]: boolean;
+}
+
 type Visit = {
   visitMsg: boolean;
   visitMsgText: string;
@@ -16,7 +20,9 @@ type SaveStore = {
   visitor: string;
   keyword: string[];
   visit: Visit;
+  point: PointData;
   setIsSavePhotoMsg: () => void;
+  setPoint: (data: PointData) => void;
   setKeyword: (data: string) => void;
   deleteKeyword: (data: string) => void;
   clearIsSave: () => void;
@@ -30,6 +36,12 @@ type SaveStore = {
 // 오늘점심 초기값
 const initialSaveState = {
   PhotoMsg: false,
+};
+
+const initialPoint = {
+  point500: false,
+  point1000: false,
+  point1500: false,
 };
 
 const initialTokenState = {
@@ -51,10 +63,12 @@ const useSaveStore = create<SaveStore>()(
       visitor: initialTokenState.visitor,
       keyword: [],
       visit: initialVisitMsg,
+      point: initialPoint,
       setIsSavePhotoMsg: () =>
         set((pre) => ({
           isSave: { ...pre.isSave, PhotoMsg: true },
         })),
+      setPoint: (data) => set((pre) => ({ point: { ...pre.point, ...data } })),
       setKeyword: (data) =>
         set((pre) => ({
           keyword: [...pre.keyword, data],
