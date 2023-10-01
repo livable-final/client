@@ -36,7 +36,7 @@ function LunchCalendarSearch() {
 
     try {
       const res = await getRestaurants(keyword);
-      setSearchData(res);
+      setSearchData(res.data);
       setShowSearch(true);
     } catch (err) {
       //  검색 오류 예외 처리
@@ -88,22 +88,23 @@ function LunchCalendarSearch() {
         <div>
           <div>
             <span css={textStyles}>{subTitle.searchResults}</span>
-            <span css={colorTextStyles}>3건</span>
+            <span css={colorTextStyles}>{searchData.length || 0}건</span>
           </div>
           <div>
-            {searchData.map((item) => (
-              <LunchCalendarListItem
-                key={item.restaurantId}
-                type={listItem.type2}
-                content={item.restaurantName}
-                category={item.restaurantCategory}
-                time={item.estimatedTime}
-                imageUrl="/ruppy.png"
-                onClick={(e) =>
-                  onClickBtnHandler(e, item.restaurantId, item.restaurantName)
-                }
-              />
-            ))}
+            {searchData.length > 0 &&
+              searchData?.map((item) => (
+                <LunchCalendarListItem
+                  key={item.restaurantId}
+                  type={listItem.type2}
+                  content={item.restaurantName}
+                  category={item.restaurantCategory}
+                  time={item.estimatedTime}
+                  imageUrl="/ruppy.png"
+                  onClick={(e) =>
+                    onClickBtnHandler(e, item.restaurantId, item.restaurantName)
+                  }
+                />
+              ))}
           </div>
         </div>
       )}
