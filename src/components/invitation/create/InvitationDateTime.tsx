@@ -12,6 +12,7 @@ import useToggleStore from '@/stores/useToggleStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import getFormatDate from '@/utils/getFormatDate';
 import getCommonTimes from '@/utils/getCommonTimeList';
+import parseDate from '@/utils/parseDate';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
@@ -19,56 +20,72 @@ import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 import { getInvitationTimeList } from '@/pages/api/invitation/createRequests';
+import { GetInvitationTimeListData } from '@/types/invitation/api';
+import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
 
 function InvitationDateTime() {
   const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
   const { closeBottomSheet } = useBottomSheetStore();
   const { alertState, openAlert } = useAlertStore();
-  const { isOn } = useToggleStore();
-  const { createContents } = useInvitationCreateStore();
+  const { isOn, onToggle, offToggle } = useToggleStore();
+  const { selectTime } = useTimeSelectorStore();
+  const { createContents, setCreateContents } = useInvitationCreateStore();
 
   // Thu Oct 26 2023 00:00:00 GMT+0900 (한국 표준시)
+  // 임시로 12일로 설정해둔 상태 -> 추후 new Date()로 변경
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(startDate);
+  const [endDate, setEndDate] = useState(new Date());
+  const [isUpdated, setIsUpdated] = useState<boolean>(false);
 
   // API 호출 초기 데이터 [{…}, {…}]
   // { date: '2023-10-20', availableTimes: ['12:30:00', '15:00:00', '17:30:00'] }
-  const [fetchData, setFetchData] = useState([]);
+  const [fetchData, setFetchData] = useState<GetInvitationTimeListData[]>();
   const [commonTimes, setCommonTimes] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchGetTimeList = async () => {
       try {
-        const response = await getInvitationTimeList({
-          commonPlaceId: createContents.commonPlaceId,
-          startDate: getFormatDate(startDate), // yyyy-mm-dd
-          endDate: getFormatDate(endDate), // yyyy-mm-dd
-        });
-        console.log(response.data);
-        setFetchData(response.data);
+        onToggle();
+        if (isUpdated) {
+          const response = await getInvitationTimeList({
+            commonPlaceId: createContents.commonPlaceId,
+            startDate: getFormatDate(startDate), // yyyy-mm-dd
+            endDate: getFormatDate(endDate), // yyyy-mm-dd
+          });
+          console.log('최초 API 응답 데이터', response.data);
+          setFetchData(response?.data);
+        }
       } catch (error) {
         openAlert('ERROR!', '예약 가능 시간 API에 문제가 생겼습니다.');
       }
     };
+
     fetchGetTimeList();
-  }, [createContents.commonPlaceId, startDate, endDate, openAlert]);
+  }, [
+    createContents.commonPlaceId,
+    startDate,
+    endDate,
+    openAlert,
+    isUpdated,
+    offToggle,
+    onToggle,
+  ]);
 
   useEffect(() => {
-    // 기존 fetchData 데이터를 날짜순으로 정렬
-    // sorted : [{…}, {…}]
-    // { date: '2023-10-20', availableTimes: ['12:30:00', '15:00:00', '17:30:00'] }
-    if (fetchData[0]) {
-      // const sorted = [...fetchData].sort(
-      //   (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-      // );
-      // console.log(sorted);
-
+    if (fetchData) {
       // 기존 fetchData 중에서 공통된 시간만 출력
       // ['15:00:00', '15:30:00', '17:00:00', '17:30:00']
       const common = getCommonTimes(fetchData);
-      setCommonTimes(common);
+      setCommonTimes([...common]);
     }
   }, [fetchData]);
+
+  // startDate나 endDate가 변경될 때 isUpdated === true
+  useEffect(() => {
+    if (startDate && endDate) {
+      setIsUpdated(true);
+    }
+  }, [startDate, endDate]);
 
   // 달력 선택 핸들러
   const onChange = (dates: [Date, Date]) => {
@@ -76,6 +93,28 @@ function InvitationDateTime() {
 
     setStartDate(start);
     setEndDate(end);
+    setIsUpdated(false);
+  };
+
+  // 완료 버튼 눌렀을 때 날짜, 시간 저장
+  const onClick = () => {
+    if (isOn) {
+      // 토글 버튼 활성화 = 종일 상태일 때
+      setCreateContents('startDate', `${getFormatDate(startDate)}T09:00:00`);
+      setCreateContents('endDate', `${getFormatDate(endDate)}T18:00:00`);
+    } else {
+      // 토글 버튼 비활성화 = 시간 선택했을 때
+      setCreateContents(
+        'startDate',
+        `${getFormatDate(startDate)}T${selectTime}:00`,
+      );
+      setCreateContents(
+        'endDate',
+        `${getFormatDate(endDate)}T${parseDate(selectTime)}:00`,
+      );
+    }
+
+    closeBottomSheet();
   };
 
   return (
@@ -104,14 +143,10 @@ function InvitationDateTime() {
           {title.invitationTime}
           <Toggle />
         </div>
-        {!isOn && <InvitationSelectTime commonTimes={commonTimes} />}
+        <InvitationSelectTime commonTimes={commonTimes} />
       </div>
       <div css={buttonWrapperStyles}>
-        <Button
-          content={button.done}
-          variant="blue"
-          onClick={() => closeBottomSheet()}
-        />
+        <Button content={button.done} variant="blue" onClick={onClick} />
       </div>
       {alertState.isOpen && <Alert />}
     </div>
