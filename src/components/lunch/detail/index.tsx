@@ -19,9 +19,11 @@ function LunchDetail() {
   return (
     <section>
       <Header title={title} onClick={onClickHandler} />
-      <div css={wrapperStyles}>
-        <LunchReview {...reviewList} />
-      </div>
+      {reviewList.hasReview && (
+        <div css={wrapperStyles}>
+          <LunchReview {...reviewList} />
+        </div>
+      )}
       <div css={dividerStyles} />
       <LunchDetailContents />
       <ToWrite />

@@ -109,8 +109,11 @@ export const COMMON_ICON_NAMES = {
   },
   home: {
     home: 'home',
+    homeActive: 'homeActive',
     lunch: 'lunch',
+    lunchActive: 'lunchActive',
     my: 'my',
+    myActive: 'myActive',
     down: 'down',
     check: 'check',
     weather: {
@@ -200,9 +203,14 @@ export const COMMON_MODAL_BUTTONS = {
 // Bottom Navigation Bar 상수
 export const COMMON_BNB_CONSTANTS = {
   bnb: {
-    home: { name: '홈', url: '/', icon: 'home' },
-    lunch: { name: '오늘 점심', url: '/lunch', icon: 'lunch' },
-    user: { name: 'MY', url: '/user', icon: 'my' },
+    home: { name: '홈', url: '/', default: 'home', active: 'homeActive' },
+    lunch: {
+      name: '오늘 점심',
+      url: '/lunch',
+      default: 'lunch',
+      active: 'lunchActive',
+    },
+    user: { name: 'MY', url: '/user', default: 'my', active: 'myActive' },
   },
   indicator: {
     height: 34,

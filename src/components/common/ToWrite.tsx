@@ -10,7 +10,12 @@ function ToWrite({ hasBnb }: { hasBnb?: boolean }) {
   };
   return (
     <div css={wrapperStyles(hasBnb)}>
-      <button type="button" css={topButtonStyles} onClick={onClickHandler}>
+      <button
+        type="button"
+        aria-label="toWriteButton"
+        css={topButtonStyles}
+        onClick={onClickHandler}
+      >
         <Write />
       </button>
     </div>
@@ -22,7 +27,7 @@ const wrapperStyles = (hasBnb?: boolean) => css`
   justify-content: end;
   position: sticky;
   width: 100%;
-  bottom: ${hasBnb ? '64px' : '16px'};
+  bottom: ${hasBnb ? 'calc(64px + env(safe-area-inset-bottom))' : '16px'};
 `;
 
 const topButtonStyles = css`

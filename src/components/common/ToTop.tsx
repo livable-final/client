@@ -8,7 +8,12 @@ function ToTop() {
   };
   return (
     <div css={wrapperStyles}>
-      <button type="button" css={topButtonStyles} onClick={onClickHandler}>
+      <button
+        type="button"
+        aria-label="toTopButton"
+        css={topButtonStyles}
+        onClick={onClickHandler}
+      >
         <Top />
       </button>
     </div>

@@ -99,6 +99,12 @@ export const LUNCH_MAIN_CONSTANTS = {
     ranking: {
       title: '지난주 점심 메뉴 TOP 10',
       heights: [32, 47, 25],
+      colors: [
+        'linear-gradient(180deg, #B0B6EE 0%, rgba(158, 198, 241, 0.71) 86.17%, rgba(133, 178, 246, 0.30) 100%)',
+        'linear-gradient(180deg, #FFC46D 0%, rgba(255, 206, 69, 0.68) 86.25%, rgba(255, 176, 22, 0.30) 100%)',
+        'linear-gradient(180deg, #FAAA91 0%, rgba(252, 96, 89, 0.70) 81.56%, rgba(255, 0, 15, 0.30) 100%)',
+      ],
+      margin: ['4px 0 7px', '5px 0 21px', '0'],
     },
     reviews: {
       prefix: '최근',

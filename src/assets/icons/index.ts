@@ -98,6 +98,9 @@ import Point1500 from '@/assets/icons/point1500.svg';
 import Present500 from '@/assets/icons/present500.svg';
 import Present1000 from '@/assets/icons/present1000.svg';
 import Present1500 from '@/assets/icons/present.1500.svg';
+import HomeActive from '@/assets/icons/HomeActive.svg';
+import LunchActive from '@/assets/icons/LunchActive.svg';
+import MyActive from '@/assets/icons/MyActive.svg';
 
 export {
   As,
@@ -200,4 +203,7 @@ export {
   Present500,
   Present1000,
   Present1500,
+  HomeActive,
+  LunchActive,
+  MyActive,
 };

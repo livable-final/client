@@ -7,7 +7,7 @@ import useRouletteStore from '@/stores/useRouletteStore';
 import { css } from '@emotion/react';
 
 function Roulette() {
-  const { isOperated, isAgain } = useRouletteStore();
+  const { isOperated, isAgain, isSelected } = useRouletteStore();
   const { title } = LUNCH_ROULETTE_CONSTANTS;
   return (
     <>
@@ -15,7 +15,7 @@ function Roulette() {
       <section css={sectionStyle}>
         <LunchRoulette />
         <LunchRoulettePopup />
-        {isOperated && isAgain && <LunchReviewsByRest />}
+        {isOperated && isAgain && isSelected && <LunchReviewsByRest />}
       </section>
     </>
   );
