@@ -1,51 +1,70 @@
 import TimeSelector from '@/components/common/TimeSelector';
 import createTimeSlots from '@/utils/createTimeSlots';
+import useToggleStore from '@/stores/useToggleStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
+import { useState, useEffect } from 'react';
 // import { GetInvitationTimeListData } from '@/types/invitation/api';
 
 interface InvitationSelectTimeProps {
   commonTimes: string[];
 }
 
+interface Test {
+  time: string;
+  status: string;
+}
+
 function InvitationSelectTime({ commonTimes }: InvitationSelectTimeProps) {
-  // 예상 더미 데이터 (ISO 8601 Date 형식)
-  const data = {
-    startTime: '2023-08-27T12:30:00Z',
-    endTime: '2023-08-27T17:30:00Z',
-  };
+  // props 들어오는지 확인 ['15:00', '15:30', '17:00', '17:30']
 
-  const timeSlot = createTimeSlots(data.startTime, data.endTime);
+  const [timeSlot, setTimeSlot] = useState<Test[][]>([[], []]);
 
-  console.log(commonTimes);
+  const { isOn } = useToggleStore();
+
+  useEffect(() => {
+    const res = createTimeSlots(JSON.parse(JSON.stringify(commonTimes)));
+    console.log('res res res', res);
+    setTimeSlot(res);
+  }, [commonTimes]);
+
+  useEffect(() => {
+    console.log('commonTimes commonTimes commonTimes', commonTimes);
+  }, []);
+
+  useEffect(() => {
+    console.log('timeslot timeslot!!!!!!!!!!!', timeSlot);
+  }, [timeSlot]);
 
   return (
-    <div css={containerStyles}>
-      <div css={wrapperStyles}>
-        <span css={bodyStyles}>오전</span>
-        <div css={selectorStyles}>
-          {timeSlot[0].map((value) => (
-            <TimeSelector
-              key={value.time}
-              content={value.time}
-              status={value.status}
-            />
-          ))}
+    !isOn && (
+      <div css={containerStyles}>
+        <div css={wrapperStyles}>
+          <span css={bodyStyles}>오전</span>
+          <div css={selectorStyles}>
+            {timeSlot[0].map((value) => (
+              <TimeSelector
+                key={value.time}
+                content={value.time}
+                status={value.status}
+              />
+            ))}
+          </div>
+        </div>
+        <div css={wrapperStyles}>
+          <span css={bodyStyles}>오후</span>
+          <div css={selectorStyles}>
+            {timeSlot[1].map((value) => (
+              <TimeSelector
+                key={value.time}
+                content={value.time}
+                status={value.status}
+              />
+            ))}
+          </div>
         </div>
       </div>
-      <div css={wrapperStyles}>
-        <span css={bodyStyles}>오후</span>
-        <div css={selectorStyles}>
-          {timeSlot[1].map((value) => (
-            <TimeSelector
-              key={value.time}
-              content={value.time}
-              status={value.status}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
+    )
   );
 }
 
