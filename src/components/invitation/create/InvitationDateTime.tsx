@@ -53,7 +53,6 @@ function InvitationDateTime() {
             startDate: getFormatDate(startDate), // yyyy-mm-dd
             endDate: getFormatDate(endDate), // yyyy-mm-dd
           });
-          console.log('최초 API 응답 데이터', response.data);
           setFetchData(response?.data);
         }
       } catch (error) {
@@ -100,7 +99,7 @@ function InvitationDateTime() {
   // 완료 버튼 눌렀을 때 날짜, 시간 저장
   const onClick = () => {
     if (isOn) {
-      // 토글 버튼 활성화 = 종일 상태일 때
+      // 토글 버튼 활성화 = 종일 상태일 때 (09:00 ~ 18:00 고정)
       setCreateContents('startDate', `${getFormatDate(startDate)}T09:00:00`);
       setCreateContents('endDate', `${getFormatDate(endDate)}T18:00:00`);
     } else {
@@ -111,7 +110,7 @@ function InvitationDateTime() {
       );
       setCreateContents(
         'endDate',
-        `${getFormatDate(endDate)}T${parseDate(selectTime)}:00`,
+        `${getFormatDate(endDate)}T${selectTime}:00`,
       );
     }
 
