@@ -163,6 +163,7 @@ export const LUNCH_ROULETTE_CONSTANTS = {
     bg: '배경',
     lock: '잠금',
   },
+  popup: `이 메뉴로 결정! \n 맛집 보러가기`,
 };
 
 export const POINT_CONSTANTS = {
