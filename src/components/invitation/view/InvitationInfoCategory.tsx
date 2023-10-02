@@ -4,8 +4,9 @@ import mq from '@/utils/mediaquery';
 // import { InfoCategory } from '@/assets/icons';
 import { InvitationInfoCategoryProps } from '@/types/invitation/view';
 import usePagesStore from '@/stores/usePagesStore';
+import Icons from '@/components/common/Icons';
 
-function InvitationInfoCategory({ value }: InvitationInfoCategoryProps) {
+function InvitationInfoCategory({ value, icon }: InvitationInfoCategoryProps) {
   const { setNextComponent } = usePagesStore();
 
   const onClickHandler = (event: React.MouseEvent) => {
@@ -16,7 +17,7 @@ function InvitationInfoCategory({ value }: InvitationInfoCategoryProps) {
     <div css={InvitationInfoCategoryStyles}>
       <button type="button" id={value} onClick={onClickHandler}>
         <div id={value} css={CategoryContainerStyles}>
-          {/* <InfoCategory id={value} /> */}
+          <Icons icon={icon} />
         </div>
         <span id={value}>{value}</span>
       </button>
@@ -50,11 +51,7 @@ const InvitationInfoCategoryStyles = css`
 `;
 
 const CategoryContainerStyles = css`
-  width: 55px;
-  height: 55px;
-  border-radius: 100%;
-  box-shadow: 2px 5px 20px #92afff56;
-  margin: 0 auto 16px;
+  margin: 0 auto;
 `;
 
 export default InvitationInfoCategory;

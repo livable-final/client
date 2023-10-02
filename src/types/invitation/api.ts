@@ -73,6 +73,7 @@ export interface GetVisitationInfoData {
   hostContact: string;
   hostBusinessCardImageUrl: string;
 }
+// 주변 식당 응답 데이터
 export interface GetInvitationCarouselData {
   restaurantCategory: string;
   restaurantName: string;
@@ -81,6 +82,10 @@ export interface GetInvitationCarouselData {
   takenTime: number;
   floor: number;
   url: string;
+}
+// 큐알 발급 응답 데이터
+export interface GetVisitationQrData {
+  qr: string;
 }
 
 // ********** 초대상 수정 ********** //
@@ -96,6 +101,7 @@ export interface InvitationListItem {
   startTime: string;
   endTime: string;
 }
+
 export interface GetInvitationListData {
   [date: string]: [
     {
@@ -110,6 +116,7 @@ export interface GetInvitationListData {
     },
   ];
 }
+
 // 초대장 상세 조회
 export interface GetInvitationListItemData {
   commonPlaceId: null;
@@ -122,11 +129,15 @@ export interface GetInvitationListItemData {
   startTime: string;
   visitors: [InvitationListItemVisitor];
 }
+
+// 초대잘 상세 방문객 정보
 export interface InvitationListItemVisitor {
   visitorId: number;
   name: string;
   contact: string;
 }
+
+// 초대장 수정 폼 스토어
 export interface PatchInvitationContents {
   commonPlaceId?: number | null;
   description?: string;

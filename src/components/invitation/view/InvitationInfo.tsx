@@ -3,18 +3,19 @@ import { css } from '@emotion/react';
 import { LocationFill, CalendarFill } from '@/assets/icons';
 import { InvitationInfoProps } from '@/types/invitation/view';
 import usePagesStore from '@/stores/usePagesStore';
-
-export const test = {
-  place: '그랑서울 10층 1004호 식스센스 사무실',
-  date: '2023.08.21~ 08.23',
-  time: '14:30 ~ 16:30',
-};
+import useFetch from '@/hooks/useFetch';
+import Image from 'next/image';
+import { getVisitationQr } from '@/pages/api/invitation/viewRequests';
 
 function InvitationInfo({ value, data }: InvitationInfoProps) {
   const { setNextComponent } = usePagesStore();
   const onClickHandler = (event: React.MouseEvent) => {
     setNextComponent((event.target as HTMLButtonElement).id);
   };
+  const { response } = useFetch({
+    fetchFn: getVisitationQr,
+  });
+  const qr = response?.data;
 
   // 시간 포멧 변환
   const startTime = data.invitationStartTime.substring(0, 5);
@@ -58,7 +59,12 @@ function InvitationInfo({ value, data }: InvitationInfoProps) {
         <button type="button" id={value} onClick={onClickHandler}>
           <div id={value}>임시출입증</div>
           <div className="test" id={value}>
-            큐알
+            <Image
+              src={`data:image/png;base64,${qr?.qr}`}
+              alt="zbdkf"
+              width={40}
+              height={40}
+            />
           </div>
           크게보기
         </button>

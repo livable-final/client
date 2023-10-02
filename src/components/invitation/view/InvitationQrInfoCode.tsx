@@ -1,13 +1,27 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 import React from 'react';
+import useFetch from '@/hooks/useFetch';
+import Image from 'next/image';
+import { getVisitationQr } from '@/pages/api/invitation/viewRequests';
 
 function InvitationQrInfoCode() {
+  const { response } = useFetch({
+    fetchFn: getVisitationQr,
+  });
+  const qr = response?.data;
+
   return (
     <div css={invitationQrInfoCodeContinerStyle}>
       <div css={codeLabelStyles}>임시출입증</div>
-      {/* 큐알 코드  임시 css 적용 */}
-      <div css={qrStyles} />
+      <div css={qrStyles}>
+        <Image
+          src={`data:image/png;base64,${qr?.qr}`}
+          alt="zbdkf"
+          width={163}
+          height={163}
+        />
+      </div>
       <div css={alertStyles}>
         초대 시간 전후로 <br /> 1시간 사용할수 있습니다
       </div>
@@ -30,7 +44,6 @@ const qrStyles = css`
   margin: 18px auto;
   width: 163px;
   height: 163px;
-  background-color: #fff;
 `;
 const alertStyles = css`
   width: 182px;

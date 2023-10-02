@@ -1,5 +1,6 @@
 import { IconsProps } from '@/types/common/icon';
 import { COMMON_ICON_NAMES } from '@/constants/common';
+
 import {
   Meeting,
   Interview,
@@ -40,6 +41,10 @@ import {
   My,
   Error,
   ExitSmall,
+  InfoBuilding,
+  InfoPlace,
+  InfoHost,
+  InfoParking,
   HomeActive,
   LunchActive,
   MyActive,
@@ -71,6 +76,14 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Back color={color} />;
     case invitation.plusSmall:
       return <PlusSmall color={color} />;
+    case invitation.building:
+      return <InfoBuilding color={color} />;
+    case invitation.place:
+      return <InfoPlace color={color} />;
+    case invitation.host:
+      return <InfoHost color={color} />;
+    case invitation.parking:
+      return <InfoParking color={color} />;
     case home.home:
       return <Home />;
     case home.homeActive:
