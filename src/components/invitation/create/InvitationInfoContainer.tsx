@@ -7,6 +7,7 @@ import InvitationVisitorsList from '@/components/invitation/create/InvitationVis
 import useViewStore from '@/stores/usePagesStore';
 import useModalStore from '@/stores/useModalStore';
 import useSaveStore from '@/stores/useSaveStore';
+import useAlertStore from '@/stores/useAlertStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useInvitationCreateStore, {
   initialCreateState,
@@ -17,7 +18,7 @@ import { css } from '@emotion/react';
 import { useEffect, useState, ChangeEvent } from 'react';
 import { VisitorInfo } from '@/types/invitation/api';
 import { postInvitation } from '@/pages/api/invitation/createRequests';
-import useAlertStore from '@/stores/useAlertStore';
+import { ErrorProps } from '@/types/common/response';
 
 function InvitationInfoContainer() {
   const { setNextComponent } = useViewStore();
@@ -49,19 +50,18 @@ function InvitationInfoContainer() {
   useEffect(() => {
     if (isConfirmed) {
       setCreateContents('description', tip);
-      console.log('최종 데이터 확인', createContents);
 
       const postData = async () => {
         try {
           const response = await postInvitation(createContents);
-          console.log(response);
 
           // 성공했을 때에만 다음 컴포넌트 연결
           if (response.status === 201) {
             setNextComponent('InvitationDoneContainer');
           }
-        } catch (error: unknown) {
-          openAlert('🚨', error.message);
+        } catch (err: unknown) {
+          const error = err as ErrorProps;
+          openAlert('🚨', error.response?.error);
         }
       };
       postData();
