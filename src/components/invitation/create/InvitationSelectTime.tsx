@@ -4,37 +4,19 @@ import useToggleStore from '@/stores/useToggleStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
-// import { GetInvitationTimeListData } from '@/types/invitation/api';
-
-interface InvitationSelectTimeProps {
-  commonTimes: string[];
-}
-
-interface Test {
-  time: string;
-  status: string;
-}
+import { InvitationSelectTimeProps, TimeSlot } from '@/types/invitation/create';
 
 function InvitationSelectTime({ commonTimes }: InvitationSelectTimeProps) {
-  // props 들어오는지 확인 ['15:00', '15:30', '17:00', '17:30']
+  // commonTimes ['15:00', '15:30', '17:00', '17:30']
 
-  const [timeSlot, setTimeSlot] = useState<Test[][]>([[], []]);
+  const [timeSlot, setTimeSlot] = useState<TimeSlot[][]>([[], []]);
 
   const { isOn } = useToggleStore();
 
   useEffect(() => {
     const res = createTimeSlots(JSON.parse(JSON.stringify(commonTimes)));
-    console.log('res res res', res);
     setTimeSlot(res);
   }, [commonTimes]);
-
-  useEffect(() => {
-    console.log('commonTimes commonTimes commonTimes', commonTimes);
-  }, []);
-
-  useEffect(() => {
-    console.log('timeslot timeslot!!!!!!!!!!!', timeSlot);
-  }, [timeSlot]);
 
   return (
     !isOn && (

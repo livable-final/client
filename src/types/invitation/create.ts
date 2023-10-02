@@ -92,6 +92,14 @@ export interface InvitationInfoProps {
   onBlur: () => void;
 }
 
+export interface InvitationSelectTimeProps {
+  commonTimes: string[];
+}
+
+export interface TimeSlot {
+  time: string;
+  status: string;
+}
 // 타임 셀렉터
 export interface TimeSelectorProps {
   content: string | JSX.Element;
