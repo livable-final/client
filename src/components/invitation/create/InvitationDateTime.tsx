@@ -12,7 +12,6 @@ import useToggleStore from '@/stores/useToggleStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import getFormatDate from '@/utils/getFormatDate';
 import getCommonTimes from '@/utils/getCommonTimeList';
-import parseDate from '@/utils/parseDate';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
