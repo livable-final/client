@@ -8,6 +8,13 @@ export const getReviewData = async (year: number, month: number) => {
   return res.data;
 };
 
+export const getReviewDetailsData = async (year: number, month: number) => {
+  const res = await apiInstance.get(
+    `/reviews/detail/members?year=${year}&month=${month}`,
+  );
+  return res.data;
+};
+
 // 리뷰 작성 - 외식
 export const getRestaurants = async (keyword: string) => {
   const res = await apiInstance.get(`/restaurants/search?query=${keyword}`);
