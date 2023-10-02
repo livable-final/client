@@ -109,7 +109,7 @@ function InvitationInfoContainer() {
       setIsConfirmed(!isConfirmed);
       closeModal();
     } else {
-      console.error('초대장 보내는 데이터 값에 이상 있음');
+      openAlert('📢', '초대장 정보를 다시 확인해 주세요!');
       closeModal();
     }
   };

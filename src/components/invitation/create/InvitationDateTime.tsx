@@ -21,6 +21,7 @@ import { InvitationCreateTexts } from '@/types/invitation/create';
 import { getInvitationTimeList } from '@/pages/api/invitation/createRequests';
 import { GetInvitationTimeListData } from '@/types/invitation/api';
 import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
+import parseDate from '@/utils/parseDate';
 
 function InvitationDateTime() {
   const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
@@ -109,7 +110,7 @@ function InvitationDateTime() {
       );
       setCreateContents(
         'endDate',
-        `${getFormatDate(endDate)}T${selectTime}:00`,
+        `${getFormatDate(endDate)}T${parseDate(selectTime as string)}:00`,
       );
     }
 
