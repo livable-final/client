@@ -46,7 +46,8 @@ function InvitationDateTime() {
     const fetchGetTimeList = async () => {
       try {
         onToggle();
-        if (isUpdated) {
+        // 스토어에 저장된 장소ID가 true이고, startDate, endDate가 바뀌었을 때 API 호출
+        if (createContents.commonPlaceId && isUpdated) {
           const response = await getInvitationTimeList({
             commonPlaceId: createContents.commonPlaceId,
             startDate: getFormatDate(startDate), // yyyy-mm-dd
