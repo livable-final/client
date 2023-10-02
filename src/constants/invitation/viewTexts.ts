@@ -8,6 +8,12 @@ export const INVITATION_VEIW_INFO_TEXTS = {
     parking: '주차 정보',
     code: '식스센스 출입증',
   },
+  icon: {
+    building: 'InfoBuilding',
+    place: 'InfoPlace',
+    host: 'InfoHost',
+    parking: 'InfoParking',
+  },
   host: {
     name: '이름',
     companyName: '회사',
@@ -20,10 +26,12 @@ export const INVITATION_CAROUSEL_TEXTS = {
   restaurant: {
     title: '식당',
     subtitle: '점심메뉴 고민,',
+    body: '테라타워 근처 맛집 추천!',
   },
   cafe: {
     title: '카페',
     subtitle: '조금 빨리 도착하셨나요?',
+    body: '근처 카페를 추천드릴게요',
   },
 };
 

@@ -2,12 +2,10 @@ import { GetVisitationInfoData } from '@/types/invitation/api';
 
 export interface InvitationInfoCategoryProps {
   value: string;
+  icon: string;
 }
 export interface InvitationInfoProps {
   value: string;
-  data: GetVisitationInfoData;
-}
-export interface InvitationHostInfoProps {
   data: GetVisitationInfoData;
 }
 export interface InvitationInfoContainerProps {
@@ -39,5 +37,5 @@ export interface InvitationBuildingPublicTransportItemProps {
 }
 
 export interface InvitationQrInfoTextProps {
-  textInfo: { place: string; date: string; time: string };
+  data: GetVisitationInfoData;
 }
