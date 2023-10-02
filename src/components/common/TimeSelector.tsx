@@ -15,7 +15,7 @@ function TimeSelector({ content, status }: TimeSelectorProps) {
 
   const variantData = COMMON_TIME_SELECTOR[varientState];
 
-  const { selectTime, setSelectTime, clearSelectTime } = useTimeSelectorStore();
+  const { setSelectTime, clearSelectTime } = useTimeSelectorStore();
   const { abled, enabled, disabled } = COMMON_TIME_SELECTOR;
 
   const onClickHandler = () => {
