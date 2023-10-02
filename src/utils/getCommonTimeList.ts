@@ -16,7 +16,7 @@ const getCommonTimes = (timeList: GetInvitationTimeListData[]) => {
     (time) => timeCounts[time] === timeList.length,
   );
 
-  return commonTimes;
+  return commonTimes.map((time) => time.slice(0, 5));
 };
 
 export default getCommonTimes;
