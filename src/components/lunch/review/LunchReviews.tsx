@@ -14,16 +14,15 @@ import useBuildingStore from '@/stores/useBuildingStore';
 function LunchReviews() {
   const { setNextComponent } = usePagesStore();
   const { setReviewList } = useReviewStore();
-  const { buildingName } = useBuildingStore();
+  const { buildingName, buildingId } = useBuildingStore();
   const { prefix, suffix } = LUNCH_MAIN_CONSTANTS.main.reviews;
-
   const { response } = useFetch({
-    fetchFn: () => getReviewList({ buildingId: 1, page: 1 }),
+    fetchFn: () => getReviewList({ buildingId }),
   });
 
   const onClickHandler = (item: ReviewList) => {
     setNextComponent('LunchDetail'); // LunchDetail.tsx로 이동
-    setReviewList(item); // 클릭 한 리뷰 내용 store에 저장
+    setReviewList({ ...item, hasReview: true }); // 클릭 한 리뷰 내용 store에 저장
     window.scrollTo({ top: 0 }); // 페이지 top: 0으로 이동
   };
 
