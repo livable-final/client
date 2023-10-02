@@ -20,9 +20,14 @@ const yeongdeok = localFont({
   variable: '--yeongdeok',
 });
 
+const yeongdeokBlueroad = localFont({
+  src: '../assets/fonts/YeongdeokBlueroad.ttf',
+  variable: '--yeongdeokBlueroad',
+});
+
 const dnfBitBit = localFont({
   src: '../assets/fonts/DNFBitBit.ttf',
   variable: '--dnfBitBit',
 });
 
-export { pretendard, godo, gwPower, yeongdeok, dnfBitBit };
+export { pretendard, godo, gwPower, yeongdeok, yeongdeokBlueroad, dnfBitBit };

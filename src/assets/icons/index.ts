@@ -101,9 +101,13 @@ import InfoBuilding from '@/assets/icons/InfoBuliding.svg';
 import InfoPlace from '@/assets/icons/InfoPlace.svg';
 import InfoHost from '@/assets/icons/InfoHost.svg';
 import InfoParking from '@/assets/icons/InfoParking.svg';
+import FoodNoPhoto from '@/assets/icons/foodNoPhoto.svg';
+import FoodCafe from '@/assets/icons/foodCafe.svg';
+import FoodLunchBox from '@/assets/icons/foodLunchBox.svg';
 import HomeActive from '@/assets/icons/HomeActive.svg';
 import LunchActive from '@/assets/icons/LunchActive.svg';
 import MyActive from '@/assets/icons/MyActive.svg';
+import PlateSmall from '@/assets/icons/plateSmall.svg';
 
 export {
   As,
@@ -209,7 +213,11 @@ export {
   InfoPlace,
   InfoHost,
   InfoParking,
+  FoodNoPhoto,
+  FoodCafe,
+  FoodLunchBox,
   HomeActive,
   LunchActive,
   MyActive,
+  PlateSmall,
 };
