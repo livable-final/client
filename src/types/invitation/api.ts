@@ -53,6 +53,7 @@ export interface InvitationCreateStore {
     key: string,
     content: string | number | null | undefined | VisitorInfo[],
   ) => void;
+  clearCreateContents: () => void;
 }
 
 // ********** 초대상 뷰 ********** //

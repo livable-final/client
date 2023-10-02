@@ -6,8 +6,8 @@ import {
 
 export const initialCreateState: PostInvitationContents = {
   purpose: '',
-  commonPlaceId: 0,
-  officeName: '',
+  commonPlaceId: null,
+  officeName: '5층 공용 라운지 (5층 509호)',
   description: '',
   startDate: '',
   endDate: '',
@@ -23,6 +23,9 @@ const useInvitationCreateStore = create<InvitationCreateStore>((set) => ({
         [key]: content,
       },
     }));
+  },
+  clearCreateContents: () => {
+    set({ createContents: initialCreateState });
   },
 }));
 
