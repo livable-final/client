@@ -148,6 +148,7 @@ export const COMMON_ICON_NAMES = {
     smile: 'smile',
     confused: 'confused',
     thumbsUp: 'thumbsUp',
+    popup: 'popup',
   },
   common: {
     close: 'close',
