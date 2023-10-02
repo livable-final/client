@@ -3,8 +3,7 @@ import CREATE_TEXTS from '@/constants/invitation/createTexts';
 
 // 09:00 ~ 18:00의 건물 운영 시간 타임 슬롯을 담는 유틸 함수 (우선 모두 disabled)
 const createTimeSlots = (commonTimes: string[]) => {
-  // props 확인
-  console.log('params 확인', commonTimes);
+  // commonTimes
   // ['12:30:00', '15:00:00', '17:30:00']
 
   const { timeSelector } = CREATE_TEXTS;
