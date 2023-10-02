@@ -1,11 +1,12 @@
 import Image from 'next/image';
-import { lockPressed, unLock } from '@/assets/images';
-import { css } from '@emotion/react';
 import mq from '@/utils/mediaquery';
+import { css } from '@emotion/react';
+import { lockPressed, unLock } from '@/assets/images';
+import useRouletteStore from '@/stores/useRouletteStore';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
 import { RouletteButtonProps } from '@/types/lunch/roulette';
-import useRouletteStore from '@/stores/useRouletteStore';
 
+// 룰렛 잠금 버튼 렌딩 컴포넌트
 function LunchRouletteLockBtn({ onClick }: RouletteButtonProps) {
   const { alt } = LUNCH_ROULETTE_CONSTANTS;
   const { isLocked, isAgain, isOperated } = useRouletteStore();

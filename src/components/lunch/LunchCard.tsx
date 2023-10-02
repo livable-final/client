@@ -1,8 +1,8 @@
 import theme from '@/styles/theme';
-import { LunchCardProps } from '@/types/lunch/card';
 import { css } from '@emotion/react';
-import React from 'react';
+import { LunchCardProps } from '@/types/lunch/card';
 
+// '오늘 점심' CARD
 function LunchCard({ children, col, padding, nopad }: LunchCardProps) {
   return <div css={cardStyles(col, padding, nopad)}>{children}</div>;
 }

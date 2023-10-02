@@ -7,23 +7,19 @@ import theme from '@/styles/theme';
 import useFetch from '@/hooks/useFetch';
 import { getRestReviewList } from '@/pages/api/lunch/lunchRequests';
 
+// 리뷰 상세 내부 컨텐츠 컴포넌트
 function LunchDetailContents() {
-  const page = 0;
   const { reviewList } = useReviewStore();
-  const { detail } = LUNCH_MAIN_CONSTANTS.main;
-  const id = useReviewStore().reviewList.restaurantId;
+  const { title } = LUNCH_MAIN_CONSTANTS.main.detail; // '의 더 많은 리뷰'
+  const { restaurantId } = useReviewStore().reviewList;
   const { response } = useFetch({
-    fetchFn: () =>
-      getRestReviewList({
-        restaurantId: id,
-        page,
-      }),
+    fetchFn: () => getRestReviewList(restaurantId),
   });
 
   return (
     <div css={wrapperStyles}>
       <LunchSubTitle
-        title={`${reviewList.restaurantName}${detail.title}`}
+        title={`${reviewList.restaurantName}${title}`}
         type="more"
       />
       <div css={reviewStyles}>

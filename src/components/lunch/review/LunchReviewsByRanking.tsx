@@ -1,18 +1,19 @@
-import Header from '@/components/common/Header';
-import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import usePagesStore from '@/stores/usePagesStore';
-import LunchRankings from '@/components/lunch/ranking/LunchRankings';
-import ToTop from '@/components/common/ToTop';
 import useFetch from '@/hooks/useFetch';
-import { getRanking } from '@/pages/api/lunch/lunchRequests';
+import ToTop from '@/components/common/ToTop';
+import Header from '@/components/common/Header';
+import usePagesStore from '@/stores/usePagesStore';
+import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
 import useBuildingStore from '@/stores/useBuildingStore';
+import { getRanking } from '@/pages/api/lunch/lunchRequests';
+import LunchRankings from '@/components/lunch/ranking/LunchRankings';
 
+// 랭킹별 리뷰 컨테이너 컴포넌트
 function LunchReviewsByRanking() {
   const { setNextComponent } = usePagesStore();
   const { title, palette } = LUNCH_MAIN_CONSTANTS.ranking;
   const { buildingId } = useBuildingStore();
   const { response } = useFetch({
-    fetchFn: () => getRanking({ buildingId }),
+    fetchFn: () => getRanking(buildingId),
   });
 
   const rankData = response?.data.map((item, idx) => ({
@@ -20,6 +21,7 @@ function LunchReviewsByRanking() {
     color: palette[idx],
   }));
 
+  // 뒤로 가기
   const onClickHandler = () => {
     setNextComponent('');
   };

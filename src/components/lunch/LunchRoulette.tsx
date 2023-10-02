@@ -1,21 +1,22 @@
+import theme from '@/styles/theme';
+import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
+import useFetch from '@/hooks/useFetch';
+import useRouletteStore from '@/stores/useRouletteStore';
+import { getMenus } from '@/pages/api/lunch/lunchRequests';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
+import LunchRouletteBg from '@/components/lunch/roulette/LunchRouletteBg';
+import LunchRoulettePushBtn from '@/components/lunch/roulette/LunchRoulettePushBtn';
+import LunchRouletteLockBtn from '@/components/lunch/roulette/LunchRouletteLockBtn';
 import {
   findRandomMenus,
   selectRandomCategory,
   selectRandomMenus,
 } from '@/utils/selectRandomItem';
-import theme from '@/styles/theme';
-import useFetch from '@/hooks/useFetch';
-import { getMenus } from '@/pages/api/lunch/lunchRequests';
-import mq from '@/utils/mediaquery';
-import LunchRoulettePushBtn from '@/components/lunch/roulette/LunchRoulettePushBtn';
-import LunchRouletteLockBtn from '@/components/lunch/roulette/LunchRouletteLockBtn';
-import LunchRouletteBg from '@/components/lunch/roulette/LunchRouletteBg';
-import useRouletteStore from '@/stores/useRouletteStore';
 
+// 오늘 점심 룰렛 컴포넌트
 function LunchRoulette() {
-  const { time } = LUNCH_ROULETTE_CONSTANTS;
+  const { time } = LUNCH_ROULETTE_CONSTANTS; // 시간 상수
   const { categoryState, menuState, isLocked, isOperated, isPressed, isAgain } =
     useRouletteStore();
   const { setState } = useRouletteStore;
@@ -33,7 +34,6 @@ function LunchRoulette() {
     if (isLocked && isAgain) {
       const menuInterval = setInterval(() => {
         const menus = findRandomMenus(categoryState, response.data); // 랜덤하게 메뉴를 선정
-        console.log(response);
         const { name, menuId } = menus; // 랜덤 메뉴의 ID와 메뉴명
         setState({ menuState: name });
         setState({ menuIdState: menuId });
