@@ -63,14 +63,15 @@ const titleContentWrapperStyles = css`
 
 const alertTitleStyles = css`
   color: ${theme.palette.input.enabled};
-  font: ${theme.font.subTitle.subTitle1_600};
+  font: ${theme.font.etc.rankingNumber};
+  font-size: 3rem;
 `;
 
 const alertContentStyles = css`
   display: flex;
   align-items: center;
-  color: ${theme.palette.white};
-  font: ${theme.font.body.body2_400};
+  color: ${theme.palette.greyscale.grey10};
+  font: ${theme.font.title.title1_godo};
   white-space: pre-wrap;
 `;
 
@@ -81,6 +82,7 @@ const btnWrapperStyles = css`
 
 const defaultBtnStyles = css`
   color: ${theme.palette.white};
+  font: ${theme.font.body.body2_400};
   cursor: pointer;
   font-size: 24px;
   padding: 0 16px 48px 0;
