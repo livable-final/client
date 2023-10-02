@@ -32,7 +32,7 @@ const theme = {
     },
     state: {
       danger: '#D32F2F',
-      warning: '#F78C35',
+      warning: '#F13D2C',
     },
     input: {
       unabled: '#96A2AC',
