@@ -3,14 +3,12 @@ import { push, pushPressed, again, againPressed } from '@/assets/images';
 import { css } from '@emotion/react';
 import mq from '@/utils/mediaquery';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
-import { RoulettePushProps } from '@/types/lunch/roulette';
+import { RouletteButtonProps } from '@/types/lunch/roulette';
+import useRouletteStore from '@/stores/useRouletteStore';
 
-function LunchRoulettePushBtn({
-  isPressed,
-  isAgain,
-  onClick,
-}: RoulettePushProps) {
+function LunchRoulettePushBtn({ onClick }: RouletteButtonProps) {
   const { alt } = LUNCH_ROULETTE_CONSTANTS;
+  const { isPressed, isAgain } = useRouletteStore();
 
   const renderBtn = () => {
     if (isAgain) {

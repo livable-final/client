@@ -86,14 +86,8 @@ function LunchRoulette() {
       <div css={layoutStyles}>
         <div css={bgStyles}>
           <LunchRouletteBg isOperated={isOperated} />
-          <LunchRoulettePushBtn
-            isPressed={isPressed}
-            isAgain={isAgain}
-            onClick={onClickBtnHandler}
-          />
+          <LunchRoulettePushBtn onClick={onClickBtnHandler} />
           <LunchRouletteLockBtn
-            isAgain={isAgain}
-            isLocked={isLocked}
             onClick={() => setState({ isLocked: !isLocked })}
           />
         </div>
