@@ -27,7 +27,7 @@ const wrapperStyles = (hasBnb?: boolean) => css`
   justify-content: end;
   position: sticky;
   width: 100%;
-  bottom: ${hasBnb ? '64px' : '16px'};
+  bottom: ${hasBnb ? 'calc(64px + env(safe-area-inset-bottom))' : '16px'};
 `;
 
 const topButtonStyles = css`
