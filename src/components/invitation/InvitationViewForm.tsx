@@ -37,7 +37,7 @@ function InvitationViewForm() {
     return <InvitationOfficeInfo />;
   }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.code}`) {
-    return <InvitationQrInfo />;
+    return <InvitationQrInfo data={response && response.data} />;
   }
 
   const onClickHandler = () => {

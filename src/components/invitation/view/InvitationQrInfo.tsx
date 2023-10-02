@@ -3,9 +3,9 @@ import Header from '@/components/common/Header';
 import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 import InvitationQrInfoText from '@/components/invitation/view/InvitationQrInfoText';
 import InvitationQrInfoCode from '@/components/invitation/view/InvitationQrInfoCode';
-import { test } from '@/components/invitation/view/InvitationInfo';
+import { InvitationInfoContainerProps } from '@/types/invitation/view';
 
-function InvitationQrInfo() {
+function InvitationQrInfo({ data }: InvitationInfoContainerProps) {
   const { category } = INVITATION_VEIW_INFO_TEXTS;
 
   return (
@@ -13,7 +13,7 @@ function InvitationQrInfo() {
       <Header title={category.code} />
       <div css={queryStyles}>
         <div css={invitationQrContainer}>
-          <InvitationQrInfoText textInfo={test} />
+          <InvitationQrInfoText data={data} />
           <div css={invitationQrticket}>
             <div css={leftPuchingStyles} />
             <div css={dashLineStlyes} />

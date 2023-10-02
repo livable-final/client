@@ -3,19 +3,35 @@ import { css } from '@emotion/react';
 import { InvitationQrInfoTextProps } from '@/types/invitation/view';
 import { LocationFill, CalendarFill } from '@/assets/icons';
 
-function InvitationQrInfoText({ textInfo }: InvitationQrInfoTextProps) {
+function InvitationQrInfoText({ data }: InvitationQrInfoTextProps) {
+  // 시간 포멧 변환
+  const startTime = data?.invitationStartTime.substring(0, 5);
+  const endTime = data?.invitationEndTime.substring(0, 5);
+
+  // 날짜 포멧 변환
+  const changeDatefometer = (date: string) => {
+    const [year, month, day] = data && date.split('-');
+    const changedDate = `${year}.${month}.${day}`;
+    return changedDate;
+  };
+  const startDate = changeDatefometer(data.invitationStartDate);
+  const endDate = changeDatefometer(data.invitationEndDate).substring(5, 10);
   return (
     <div>
       <div css={qrInfoContainerStyles}>
         <div css={iconStyles} /> <LocationFill />
-        <div>{textInfo.place}</div>
+        <div>{data.invitationOfficeName}</div>
       </div>
       <div css={qrInfoContainerStyles}>
         <div css={iconStyles} />
         <CalendarFill />
         <div>
-          <div>{textInfo.date}</div>
-          <div css={qrInfoTimeStyles}>{textInfo.time}</div>
+          <div>
+            {startDate} ~ {endDate}
+          </div>
+          <div css={qrInfoTimeStyles}>
+            {startTime} ~ {endTime}
+          </div>
         </div>
       </div>
     </div>
