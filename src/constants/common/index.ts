@@ -106,6 +106,10 @@ export const COMMON_ICON_NAMES = {
     copy: 'copy',
     list: 'list',
     plusSmall: 'plusSmall',
+    building: 'InfoBuilding',
+    place: 'InfoPlace',
+    host: 'InfoHost',
+    parking: 'InfoParking',
   },
   home: {
     home: 'home',
