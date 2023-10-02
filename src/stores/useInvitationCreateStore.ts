@@ -4,7 +4,7 @@ import {
   InvitationCreateStore,
 } from '@/types/invitation/api';
 
-const initialCreateState: PostInvitationContents = {
+export const initialCreateState: PostInvitationContents = {
   purpose: '',
   commonPlaceId: 0,
   officeName: '',

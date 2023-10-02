@@ -97,6 +97,7 @@ export interface TimeSelectorProps {
   content: string | JSX.Element;
   status: string;
 }
+
 export interface TimeSelectorColorProps {
   status: string;
   background: string;
