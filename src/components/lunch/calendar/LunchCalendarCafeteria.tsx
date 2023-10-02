@@ -16,6 +16,8 @@ import usePagesStore from '@/stores/usePagesStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useWriteStore from '@/stores/useWriteStore';
+import useBuildingStore from '@/stores/useBuildingStore';
+import COMPONENT_NAME from '@/constants/common/pages';
 
 function LunchCalendarCafeteria() {
   const [searchText, setSearchText] = useState('');
@@ -23,13 +25,11 @@ function LunchCalendarCafeteria() {
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { isSave } = useSaveStore();
   const { ratingState, imageFiles } = useWriteStore();
+  const { buildingName } = useBuildingStore();
   const { category, subTitle, button } = CALENDAR_CONTENT;
+  const { calendar } = COMPONENT_NAME.lunch;
 
   const router = useRouter();
-
-  const onClickHeaderHandler = () => {
-    setNextComponent('LunchCalendarReview');
-  };
 
   const onClickMsgBtnHandler = () => {
     openBottomSheet(<LunchCalendarBottomSheet />);
@@ -56,7 +56,7 @@ function LunchCalendarCafeteria() {
       if (imageFiles.length === 0) {
         router.replace('/lunch/calendar');
       }
-      router.replace('/lunch/point');
+      setNextComponent(calendar.Inform);
     } catch (err) {
       // router.replace('/lunch/calendar');
     }
@@ -72,10 +72,10 @@ function LunchCalendarCafeteria() {
   return (
     <section css={pageStyles}>
       <div>
-        <Header title={category[1].category} onClick={onClickHeaderHandler} />
+        <Header title={category[1].category} />
         <LunchSubTitle title={subTitle.todayLunch} type="title" margin="24px" />
         <div css={titleStyles}>
-          <p>테라타워</p>
+          <p>{buildingName}</p>
         </div>
         <div css={buttonStyles}>
           {button.button5.map((value) => (

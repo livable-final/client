@@ -18,6 +18,7 @@ export interface RestaurantsData {
   inBuilding: boolean;
   estimatedTime: number;
   foor: number;
+  thumbnailImageUrl: string;
 }
 // 식당 메뉴 데이터
 export interface MenuData {

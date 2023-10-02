@@ -8,6 +8,7 @@ import useFetch from '@/hooks/useFetch';
 import { getRestReviewList } from '@/pages/api/lunch/lunchRequests';
 
 function LunchDetailContents() {
+  const page = 0;
   const { reviewList } = useReviewStore();
   const { detail } = LUNCH_MAIN_CONSTANTS.main;
   const id = useReviewStore().reviewList.restaurantId;
@@ -15,7 +16,7 @@ function LunchDetailContents() {
     fetchFn: () =>
       getRestReviewList({
         restaurantId: id,
-        page: 1,
+        page,
       }),
   });
 

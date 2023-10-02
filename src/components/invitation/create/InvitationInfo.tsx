@@ -1,19 +1,23 @@
 import Input from '@/components/common/Input';
 import CheckBox from '@/components/common/CheckBox';
+import Alert from '@/components/common/Alert';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationPlace from '@/components/invitation/create/InvitationPlace';
 import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useAlertStore from '@/stores/useAlertStore';
 import useFetch from '@/hooks/useFetch';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { useState, useEffect } from 'react';
 import { Location, Calendar, Clock } from '@/assets/icons';
+import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 import { GetInvitationPlaceData } from '@/types/invitation/api';
 import { InvitationInfoProps } from '@/types/invitation/create';
+import { ErrorMessageProps } from '@/types/common/errorMessage';
 import { css } from '@emotion/react';
 
 function InvitationInfo({
@@ -24,7 +28,9 @@ function InvitationInfo({
 }: InvitationInfoProps) {
   const { createContents } = useInvitationCreateStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const { alertState, openAlert } = useAlertStore();
   const { title, placeholder, checkbox } = CREATE_TEXTS;
+  const { noPlace }: ErrorMessageProps = COMMON_ERROR_MESSAGE;
 
   const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
 
@@ -49,7 +55,11 @@ function InvitationInfo({
 
   // 날짜/시간 선택 바텀시트 오픈
   const onClickDateTimeHandler = () => {
-    openBottomSheet(<InvitationDateTime />);
+    if (createContents.commonPlaceId === 0) {
+      openAlert('📢', noPlace);
+    } else {
+      openBottomSheet(<InvitationDateTime />);
+    }
   };
 
   return (
@@ -116,6 +126,7 @@ function InvitationInfo({
           </div>
         </div>
       </div>
+      {alertState.isOpen && <Alert />}
       {bottomSheetState.isOpen && <BottomSheet />}
     </>
   );

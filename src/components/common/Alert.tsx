@@ -8,14 +8,20 @@ function Alert() {
 
   return (
     <div css={backgroundStyles}>
-      <div css={modalContainerStyles}>
-        <div css={modalTitleStyles}>
-          <Icons icon="error" size="72" />
+      <div css={alertContainerStyles}>
+        <div css={titleContentWrapperStyles}>
+          <div css={alertTitleStyles}>
+            {alertState.title ? (
+              alertState.title
+            ) : (
+              <Icons icon="error" size="72" />
+            )}
+          </div>
+          <div css={alertContentStyles}>{alertState.content}</div>
         </div>
-        <div css={modalContentStyles}>{alertState.content}</div>
         <div css={btnWrapperStyles}>
           <button type="button" css={defaultBtnStyles} onClick={closeAlert}>
-            X
+            <Icons icon="exitSmall" />
           </button>
         </div>
       </div>
@@ -33,52 +39,44 @@ const backgroundStyles = css`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1;
+  z-index: 10;
 `;
 
-const modalContainerStyles = css`
+const alertContainerStyles = css`
+  position: relative;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
   width: 90%;
+  max-width: 500px;
   height: 96px;
+  padding-left: 20px;
   border-radius: 16px;
   background-color: ${theme.palette.state.danger};
-  z-index: 2;
-  justify-content: space-between;
+  z-index: 11;
 `;
 
-const modalTitleStyles = css`
-  padding: 20px 0 20px;
+const titleContentWrapperStyles = css`
+  display: flex;
+  gap: 14px;
+`;
+
+const alertTitleStyles = css`
   color: ${theme.palette.input.enabled};
   font: ${theme.font.subTitle.subTitle1_600};
-  justify-content: flex-start;
-
-  > svg {
-  }
 `;
 
-const modalContentStyles = css`
-  height: 34px;
-  white-space: pre-wrap;
-  justify-content: center;
-  align-items: center;
+const alertContentStyles = css`
   display: flex;
+  align-items: center;
   color: ${theme.palette.white};
-  font: ${theme.font.body.body1_400};
-  line-height: 24px;
-  width: 280px;
+  font: ${theme.font.body.body2_400};
+  white-space: pre-wrap;
 `;
 
 const btnWrapperStyles = css`
-  display: flex;
-  height: 64px;
-  font: ${theme.font.body.body1_500};
-  height: 100%;
-  line-height: 24px;
-  width: 112px;
-  justify-content: flex-end;
+  position: absolute;
+  right: 0;
 `;
 
 const defaultBtnStyles = css`

@@ -18,7 +18,7 @@ function LunchRankingReviews({ menuId }: { menuId: number }) {
   const { setReviewList } = useReviewStore();
   const { detail } = COMPONENT_NAME.lunch.detail; // 오늘 점심 리뷰 상세
   const { response } = useFetch({
-    fetchFn: () => getMenuReviews({ menuId }),
+    fetchFn: () => getMenuReviews(menuId),
   });
 
   // useQuery로 API 호출

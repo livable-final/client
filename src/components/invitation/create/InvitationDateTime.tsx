@@ -3,64 +3,114 @@ import ko from 'date-fns/locale/ko';
 import 'react-datepicker/dist/react-datepicker.css';
 import Toggle from '@/components/common/Toggle';
 import Button from '@/components/common/Button';
+import Alert from '@/components/common/Alert';
 import InvitationSelectTime from '@/components/invitation/create/InvitationSelectTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useAlertStore from '@/stores/useAlertStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import getFormatDate from '@/utils/getFormatDate';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
+import { getInvitationTimeList } from '@/pages/api/invitation/createRequests';
+import { GetInvitationTimeListData } from '@/types/invitation/api';
 
 function InvitationDateTime() {
   const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
   const { closeBottomSheet } = useBottomSheetStore();
+  const { alertState, openAlert } = useAlertStore();
+  const { createContents } = useInvitationCreateStore();
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  const [, setTimeList] = useState<GetInvitationTimeListData>();
+
+  useEffect(() => {
+    const getTimeList = async () => {
+      try {
+        const response = await getInvitationTimeList({
+          commonPlaceId: createContents.commonPlaceId,
+          date: getFormatDate(endDate),
+        });
+        setTimeList(response.data);
+      } catch (error) {
+        openAlert('ERROR!', String(error));
+      }
+    };
+    getTimeList();
+  }, [endDate]);
+
+  // useFetch 버전
+  // const { response } = useFetch({
+  //   fetchFn: () =>
+  //     getInvitationTimeList({
+  //       commonPlaceId: createContents.commonPlaceId,
+  //       date: getFormatDate(startDate),
+  //     }),
+  // });
+
+  // useEffect(() => {
+  //   if (response?.data) {
+  //     setTimeList(response.data);
+  //   }
+  // }, []);
+
+  // console.log(getFormatDate(startDate));
+  // console.log(timeList);
+
+  // 달력 선택 핸들러
   const onChange = (dates: [Date, Date]) => {
     const [start, end] = dates;
+
     setStartDate(start);
     setEndDate(end);
   };
 
   return (
-    <div css={containerStyles}>
-      <div css={dateContainerStyles}>
-        <div css={titleStyles}>{title.invitationDate}</div>
-        <div css={calendarStyles}>
-          <DatePicker
-            locale={ko}
-            dateFormat="yyyy-mm-dd"
-            calendarClassName="calendar"
-            onChange={onChange}
-            minDate={new Date()}
-            maxDate={addMonths(new Date(), 5)}
-            startDate={startDate}
-            endDate={endDate}
-            selectsRange
-            inline
-            showDisabledMonthNavigation
+    <>
+      {/* <Toggle /> */}
+      <div css={containerStyles}>
+        <div css={dateContainerStyles}>
+          <div css={titleStyles}>{title.invitationDate}</div>
+          <div css={calendarStyles}>
+            <DatePicker
+              locale={ko}
+              dateFormat="yyyy-mm-dd"
+              dateFormatCalendar="yyyy.MM"
+              calendarClassName="calendar"
+              onChange={onChange}
+              minDate={new Date()}
+              maxDate={addMonths(new Date(), 2)} // 현재일부터 두달 뒤까지 선택 가능
+              startDate={startDate}
+              endDate={endDate}
+              selectsRange
+              inline
+              showDisabledMonthNavigation
+            />
+          </div>
+        </div>
+        <div css={timeContainerStyles}>
+          <div css={titleStyles}>
+            {title.invitationTime}
+            <Toggle />
+          </div>
+          <InvitationSelectTime />
+        </div>
+        <div css={buttonWrapperStyles}>
+          <Button
+            content={button.done}
+            variant="blue"
+            onClick={() => closeBottomSheet()}
           />
         </div>
       </div>
-      <div css={timeContainerStyles}>
-        <div css={titleStyles}>
-          {title.invitationTime}
-          <Toggle />
-        </div>
-        <InvitationSelectTime />
-      </div>
-      <div css={buttonWrapperStyles}>
-        <Button
-          content={button.next}
-          variant="blue"
-          onClick={() => closeBottomSheet()}
-        />
-      </div>
-    </div>
+      {alertState.isOpen && <Alert />}
+    </>
   );
 }
 
@@ -122,8 +172,12 @@ const buttonWrapperStyles = css`
 
 // 기본 캘린더 디자인 커스텀
 const calendarStyles = css`
+  display: flex;
+  justify-content: center;
+
   .calendar {
-    width: 100%;
+    width: 90vw;
+    max-width: 990px;
     border: transparent;
     font-family: var(--pretendard);
     color: ${theme.palette.greyscale.grey70};
@@ -137,6 +191,7 @@ const calendarStyles = css`
     .react-datepicker__header {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       gap: 10px;
       width: 100%;
       padding-bottom: 16px;
@@ -145,6 +200,9 @@ const calendarStyles = css`
       background-color: ${theme.palette.white};
 
       .react-datepicker__current-month {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: ${theme.palette.greyscale.grey90};
         font: ${theme.font.title.title2_600};
         line-height: 29px;
@@ -154,6 +212,13 @@ const calendarStyles = css`
         justify-content: space-around;
       }
     }
+
+    // 좌우 화살표
+    .react-datepicker__navigation {
+      position: absolute;
+      top: 8px;
+    }
+
     // 날짜 선택 컨테이너
     .react-datepicker__month {
       display: flex;
@@ -166,16 +231,22 @@ const calendarStyles = css`
       justify-content: space-around;
       gap: 12px;
 
-      .react-datepicker__day--in-range {
+      .react-datepicker__day--keyboard-selected {
+        // endDate + 각 달의 같은 날짜
         border-radius: 45%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
       }
-      .react-datepicker__day--keyboard-selected {
-        // 현재일 기준으로 각 달의 같은 날짜 스타일
+      .react-datepicker__day--in-range {
+        // startDate ~ endDate 범위 스타일
         border-radius: 45%;
-        /* background-color: ${theme.palette.white};
-        color: ${theme.palette.greyscale.grey70}; */
+        background-color: ${theme.palette.primary};
+        color: ${theme.palette.white};
+      }
+      .react-datepicker__day--in-selecting-range {
+        background-color: ${theme.palette.primary};
+        color: ${theme.palette.white};
+        border-radius: 45%;
       }
       .react-datepicker__day--in-selecting-range:not(
           .react-datepicker__day--in-range,
@@ -206,8 +277,15 @@ const calendarStyles = css`
         border-radius: 45%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
-        opacity: 0.3;
+        /* opacity: 0.3; */
       }
+    }
+    // 날짜를 선택했을 때 현재일 스타일 (선택 전에는 적용X)
+    .react-datepicker__day--today {
+      color: ${theme.palette.primary};
+    }
+    .react-datepicker__month-text--today {
+      color: ${theme.palette.primary};
     }
   }
 `;

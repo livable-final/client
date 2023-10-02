@@ -9,6 +9,8 @@ function LunchRankingPodium({
   count,
   rank,
   height,
+  color,
+  margin,
 }: RankingPodiumProps) {
   return (
     <div css={containerStyles}>
@@ -23,8 +25,8 @@ function LunchRankingPodium({
         <span css={menuNameStyles}>{menuName}</span>
         <span css={countStyles}>{count}명</span>
       </div>
-      <div css={rankStyles(height)}>
-        <span css={spanStyles}>{rank}</span>
+      <div css={rankStyles(height, color)}>
+        <span css={spanStyles(margin)}>{rank}</span>
       </div>
     </div>
   );
@@ -62,22 +64,23 @@ const countStyles = css`
   line-height: 16px;
 `;
 
-const rankStyles = (height: number) => css`
+const rankStyles = (height: number, color: string) => css`
   display: flex;
-  background: ${theme.palette.orange};
+  background: ${color};
   width: 67px;
   height: 32px;
   flex-shrink: 0;
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 16px 16px 0px 0px;
   justify-content: center;
   align-items: end;
   height: ${height}px;
 `;
 
-const spanStyles = css`
+const spanStyles = (margin: string) => css`
   font: ${theme.font.etc.rankingNumber};
   color: ${theme.palette.white};
   line-height: 21px;
+  margin: ${margin};
 `;
 
 export default LunchRankingPodium;

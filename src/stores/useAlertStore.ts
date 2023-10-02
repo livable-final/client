@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { AlertStoreTypes } from '@/types/common/alert';
 
-// 모달 초기값
+// 알럿 초기값
 const initialAlertState = {
   isOpen: false,
   title: null,

@@ -1,7 +1,7 @@
-import LunchCalendarPointInform from '@/components/lunch/calendar/LunchCalendarPointInform';
+import LunchCalendarPointCard from '@/components/lunch/calendar/LunchCalendarPointCard';
 
 function Point() {
-  return <LunchCalendarPointInform />;
+  return <LunchCalendarPointCard />;
 }
 
 export default Point;

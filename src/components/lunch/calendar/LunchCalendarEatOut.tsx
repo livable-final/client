@@ -17,10 +17,11 @@ import usePagesStore from '@/stores/usePagesStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useWriteStore from '@/stores/useWriteStore';
+import COMPONENT_NAME from '@/constants/common/pages';
 
 function LunchCalenderEatOut() {
   const [searchText, setSearchText] = useState('');
-  const { goBack } = usePagesStore();
+  const { setNextComponent, goBack } = usePagesStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const {
     restaurant,
@@ -31,6 +32,7 @@ function LunchCalenderEatOut() {
   } = useWriteStore();
   const { isSave } = useSaveStore();
   const { subTitle, category, subCategory, button } = CALENDAR_CONTENT;
+  const { calendar } = COMPONENT_NAME.lunch;
 
   const router = useRouter();
 
@@ -38,6 +40,7 @@ function LunchCalenderEatOut() {
     goBack();
     resetSelectedMenu();
   };
+
   const onChangeHandler = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -75,7 +78,7 @@ function LunchCalenderEatOut() {
       if (imageFiles.length === 0) {
         router.replace('/lunch/calendar');
       }
-      router.replace('/lunch/point');
+      setNextComponent(calendar.Inform);
     } catch (err) {
       router.replace('/lunch/calendar');
     }
@@ -84,7 +87,10 @@ function LunchCalenderEatOut() {
   return (
     <section css={pageStyles}>
       <div>
-        <Header title={category[0].category} onClick={onClickHeaderHandler} />
+        <Header
+          title={category[0].category}
+          onClickBack={onClickHeaderHandler}
+        />
         <LunchSubTitle title={subTitle.todayLunch} type="title" margin="24px" />
         <div css={reviewStyles}>
           <div css={textStyles}>

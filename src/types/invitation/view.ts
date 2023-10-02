@@ -11,9 +11,8 @@ export interface InvitationHostInfoProps {
   data: GetVisitationInfoData;
 }
 export interface InvitationInfoContainerProps {
-  data?: GetVisitationInfoData;
+  data: GetVisitationInfoData;
 }
-
 export interface InvitationCarouselProps {
   type: string;
 }

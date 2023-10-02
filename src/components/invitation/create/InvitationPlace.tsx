@@ -99,7 +99,7 @@ function InvitationPlace({ placeList }: InvitationPlaceProps) {
       <div css={buttonWrapperStyles}>
         <Button
           variant="blue"
-          content={button.next}
+          content={button.done}
           onClick={onClickBtnHandler}
         />
       </div>

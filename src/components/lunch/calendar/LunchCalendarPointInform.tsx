@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
@@ -8,9 +9,18 @@ import { RightSmall } from '@/assets/icons';
 import { coin } from '@/assets/images';
 
 function LunchCalendarPointInform() {
+  const router = useRouter();
   const { title, subTitle, button } = CALENDAR_CONTENT;
   const onClickHeaderHandler = (e: React.MouseEvent) => {
     e.preventDefault();
+  };
+
+  const onClickPointBtnHandler = () => {
+    router.replace('/lunch/point');
+  };
+
+  const onClickBtnHandler = () => {
+    router.replace('/lunch/calendar');
   };
 
   return (
@@ -24,11 +34,15 @@ function LunchCalendarPointInform() {
         </div>
       </div>
       <div css={btnBoxStyles}>
-        <button type="button" css={btnStyles}>
+        <button type="button" css={btnStyles} onClick={onClickPointBtnHandler}>
           <span>{button.button9.text}</span>
           <RightSmall />
         </button>
-        <Button content={button.button4.text3} variant="blue" />
+        <Button
+          content={button.button4.text3}
+          variant="blue"
+          onClick={onClickBtnHandler}
+        />
       </div>
     </section>
   );

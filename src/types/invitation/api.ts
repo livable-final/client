@@ -15,6 +15,17 @@ export interface CommonPlaceData {
   commonPlaceName: string;
 }
 
+// 예약 가능한 시간 리스트
+export interface GetInvitationTimeListContents {
+  commonPlaceId: number | null;
+  date: string;
+}
+
+export interface GetInvitationTimeListData {
+  date: string;
+  availableTimes: string[];
+}
+
 // 초대장 저장(생성)
 export interface PostInvitationContents {
   purpose: string;
@@ -70,4 +81,56 @@ export interface GetInvitationCarouselData {
   takenTime: number;
   floor: number;
   url: string;
+}
+
+// ********** 초대상 수정 ********** //
+
+// 초대 목록 조회
+export interface InvitationListItem {
+  invitationId: number;
+  visitorName: string;
+  visitorCount: number;
+  purpose: string;
+  officeName: string;
+  startDate: string;
+  startTime: string;
+  endTime: string;
+}
+export interface GetInvitationListData {
+  [date: string]: [
+    {
+      invitationId: number;
+      visitorName: string;
+      visitorCount: number;
+      purpose: string;
+      officeName: string;
+      startDate: string;
+      startTime: string;
+      endTime: string;
+    },
+  ];
+}
+// 초대장 상세 조회
+export interface GetInvitationListItemData {
+  commonPlaceId: null;
+  description: string;
+  endDate: string;
+  endTime: string;
+  officeName: string;
+  purpose: string;
+  startDate: string;
+  startTime: string;
+  visitors: [InvitationListItemVisitor];
+}
+export interface InvitationListItemVisitor {
+  visitorId: number;
+  name: string;
+  contact: string;
+}
+export interface PatchInvitationContents {
+  commonPlaceId?: number | null;
+  description?: string;
+  startDate?: Date | string;
+  endDate?: Date | string;
+  visitors?: VisitorInfo[];
 }

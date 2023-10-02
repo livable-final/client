@@ -1,17 +1,21 @@
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
+import Alert from '@/components/common/Alert';
 import Add from '@/components/common/Add';
 import AddressBook from '@/components/common/AddressBook';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import useAlertStore from '@/stores/useAlertStore';
 import useViewStore from '@/stores/usePagesStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { ChangeEvent, useState } from 'react';
+import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 import { VisitorInfo } from '@/types/invitation/api';
+import { ErrorMessageProps } from '@/types/common/errorMessage';
 import {
   checkValidationName,
   checkValidationContact,
@@ -20,7 +24,10 @@ import {
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
+  const { alertState, openAlert } = useAlertStore();
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
+  const { noName, noContact, noNameContact }: ErrorMessageProps =
+    COMMON_ERROR_MESSAGE;
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [visitorInfo, setVisitorInfo] = useState<VisitorInfo>({
@@ -49,6 +56,20 @@ function InvitationVisitorsContainer() {
 
   // 방문자 추가 버튼 핸들러
   const onClickAddVisitorHandler = () => {
+    // 사용자 입력값 유무에 따른 예외처리
+    if (!visitorInfo.name && !visitorInfo.contact) {
+      openAlert('📢', noNameContact);
+      return;
+    }
+    if (visitorInfo.name && !visitorInfo.contact) {
+      openAlert('📢', noContact);
+      return;
+    }
+    if (!visitorInfo.name && visitorInfo.contact) {
+      openAlert('📢', noName);
+      return;
+    }
+    // 이름/전화번호 모두 유효할 경우
     setVisitorsList([...visitorsList, visitorInfo]);
     // input 초기화
     setVisitorInfo({
@@ -110,7 +131,9 @@ function InvitationVisitorsContainer() {
               name="contact"
             />
           </div>
-          <AddressBook />
+          <div css={addressBookWrapperStyles}>
+            <AddressBook />
+          </div>
         </div>
         <div css={addBtnStyles}>
           {createContents.purpose === 'interview' &&
@@ -133,6 +156,7 @@ function InvitationVisitorsContainer() {
           isDisabled={visitorsList.length === 0}
         />
       </div>
+      {alertState.isOpen && <Alert />}
     </div>
   );
 }
@@ -190,6 +214,12 @@ const inputContainerStyles = css`
   display: flex;
   flex-direction: column;
   gap: 21px;
+  width: 100%;
+`;
+
+const addressBookWrapperStyles = css`
+  display: flex;
+  justify-content: flex-end;
   width: 100%;
 `;
 

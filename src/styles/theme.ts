@@ -77,7 +77,7 @@ const theme = {
     etc: {
       findRoad: '500 normal 12px var(--pretendard)',
       userPoint: '500 normal 13px var(--pretendard)',
-      rankingNumber: '400 normal 14px var(--gwPower)',
+      rankingNumber: '400 normal 20px var(--dnfBitBit)',
       reviewDesc: '400 normal 15px var(--yeongdeok)',
       rouletteTitle: '400 normal 24px var(--dnfBitBit)',
       rouletteContent: '400 normal 20px var(--dnfBitBit)',

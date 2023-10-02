@@ -1,15 +1,27 @@
+import Alert from '@/components/common/Alert';
+import useAlertStore from '@/stores/useAlertStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { RightSmall } from '@/assets/icons';
+import { COMMON_ERROR_MESSAGE } from '@/constants/common';
+import { ErrorMessageProps } from '@/types/common/errorMessage';
 
 function AddressBook() {
+  const { alertState, openAlert } = useAlertStore();
+  const { prepare }: ErrorMessageProps = COMMON_ERROR_MESSAGE;
+
+  const onClick = () => {
+    openAlert('🔧', prepare);
+  };
+
   return (
-    <div css={addressTextStyles}>
+    <button type="button" css={addressTextStyles} onClick={onClick}>
       <div>주소록에서 찾기</div>
-      <button type="button" css={iconStyles}>
+      <div css={iconStyles}>
         <RightSmall />
-      </button>
-    </div>
+      </div>
+      {alertState.isOpen && <Alert />}
+    </button>
   );
 }
 
@@ -17,7 +29,9 @@ const addressTextStyles = css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  width: 110px;
   cursor: pointer;
+
   div {
     font: ${theme.font.body.body3_500};
     color: ${theme.palette.input.unabled};

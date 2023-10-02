@@ -3,14 +3,13 @@ import { lockPressed, unLock } from '@/assets/images';
 import { css } from '@emotion/react';
 import mq from '@/utils/mediaquery';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
-import { RouletteLockProps } from '@/types/lunch/roulette';
+import { RouletteButtonProps } from '@/types/lunch/roulette';
+import useRouletteStore from '@/stores/useRouletteStore';
 
-function LunchRouletteLockBtn({
-  isLocked,
-  isAgain,
-  onClick,
-}: RouletteLockProps) {
+function LunchRouletteLockBtn({ onClick }: RouletteButtonProps) {
   const { alt } = LUNCH_ROULETTE_CONSTANTS;
+  const { isLocked, isAgain, isOperated } = useRouletteStore();
+
   const renderBtn = () => {
     // 최초 룰렛 가동이 아닌 재가동일 경우
     if (isAgain) {
@@ -30,7 +29,7 @@ function LunchRouletteLockBtn({
         type="button"
         onClick={onClick}
         css={pushBtnStyles}
-        disabled={!isAgain}
+        disabled={!isAgain || !isOperated}
       >
         &nbsp;
       </button>

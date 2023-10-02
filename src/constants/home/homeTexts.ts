@@ -36,13 +36,13 @@ export const HOME_TEXTS = {
     menu: [
       {
         icon: 'serviceReception',
-        title: '캘린더',
-        href: '/lunch/calendar',
+        title: '불편 접수',
+        href: '',
       },
       {
         icon: 'serviceCalendar',
-        title: '방문증 보기',
-        href: '/invitation/view',
+        title: '시설 예약',
+        href: '',
       },
       {
         icon: 'serviceInvitation',

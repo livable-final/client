@@ -25,7 +25,7 @@ export interface GetMenuData {
 
 export interface GetRestListData {
   restaurantId: number;
-  name: string;
+  restaurantName: string;
   tastePercentage: number;
   representativeImageUrl: string;
   address: string;
@@ -42,4 +42,11 @@ export interface GetRankingData {
   menuId: number;
   menuName: string;
   menuImage: string;
+}
+
+// * POST 룰렛 메뉴 선택 완료 request body
+export interface PostMenuContent {
+  buildingId: number;
+  menuId: number;
+  date: string;
 }

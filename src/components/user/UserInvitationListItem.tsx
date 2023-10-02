@@ -1,4 +1,5 @@
 import theme from '@/styles/theme';
+import changeVisitPurpose from '@/utils/changeVisitPurpose';
 import { css } from '@emotion/react';
 import { UserInvitationListItemProps } from '@/types/user/invitationList';
 
@@ -6,6 +7,7 @@ function UserInvitationListItem({ data }: UserInvitationListItemProps) {
   const visitorCount = data.visitorCount - 1;
   const startTime = data.startTime.substring(0, 5);
   const endTime = data.endTime.substring(0, 5);
+  const purposes = changeVisitPurpose(data.purpose);
 
   return (
     <div css={itemConstainerStyles}>
@@ -15,7 +17,7 @@ function UserInvitationListItem({ data }: UserInvitationListItemProps) {
             {data.visitorName}
             {visitorCount >= 1 ? ` 외 ${visitorCount}명` : ''}
           </div>
-          <div css={purposeStyles}>{data.purpose}</div>
+          <div css={purposeStyles}>{purposes}</div>
         </div>
         <div css={placeStyles}>{data.officeName}</div>
       </div>

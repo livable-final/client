@@ -16,7 +16,7 @@ import Right from '@/assets/icons/Right.svg';
 import Seminar from '@/assets/icons/seminar.svg';
 import Up from '@/assets/icons/Up.svg';
 import Info from '@/assets/icons/Info.svg';
-import ErrorIcon from '@/assets/icons/icon.svg';
+import ErrorIcon from '@/assets/icons/erroricon.svg';
 import PlusBig from '@/assets/icons/Plus=big.svg';
 import PlusSmall from '@/assets/icons/Plus=small.svg';
 import ExitSmall from '@/assets/icons/Exit=small.svg';
@@ -89,6 +89,18 @@ import My from '@/assets/icons/My.svg';
 import Write from '@/assets/icons/Write.svg';
 import Popup from '@/assets/icons/Popup.svg';
 import PopupActive from '@/assets/icons/PopupActive.svg';
+import Present from '@/assets/icons/present.svg';
+import Point10 from '@/assets/icons/point10.svg';
+import Point500 from '@/assets/icons/point500.svg';
+import Point10Pink from '@/assets/icons/point10pink.svg';
+import Point1000 from '@/assets/icons/point1000.svg';
+import Point1500 from '@/assets/icons/point1500.svg';
+import Present500 from '@/assets/icons/present500.svg';
+import Present1000 from '@/assets/icons/present1000.svg';
+import Present1500 from '@/assets/icons/present.1500.svg';
+import HomeActive from '@/assets/icons/HomeActive.svg';
+import LunchActive from '@/assets/icons/LunchActive.svg';
+import MyActive from '@/assets/icons/MyActive.svg';
 
 export {
   As,
@@ -182,4 +194,16 @@ export {
   Write,
   Popup,
   PopupActive,
+  Present,
+  Point10,
+  Point500,
+  Point10Pink,
+  Point1000,
+  Point1500,
+  Present500,
+  Present1000,
+  Present1500,
+  HomeActive,
+  LunchActive,
+  MyActive,
 };

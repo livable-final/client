@@ -1,5 +1,5 @@
 import theme from '@/styles/theme';
-import { ExitSmall } from '@/assets/icons';
+import Icons from '@/components/common/Icons';
 import { css } from '@emotion/react';
 import { NameTagProps } from '@/types/common/nameTag';
 
@@ -17,7 +17,7 @@ function NameTag({ isInvited = false, name, onClick }: NameTagProps) {
         css={iconStyles}
         onClick={onClickDeleteVisitorHandler}
       >
-        <ExitSmall />
+        <Icons icon="exitSmall" />
       </button>
     </div>
   );
@@ -47,6 +47,7 @@ const iconStyles = css`
   justify-content: center;
   align-items: center;
   margin-bottom: 2px;
+  color: ${theme.palette.greyscale.grey40};
   cursor: pointer;
 `;
 
