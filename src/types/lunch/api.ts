@@ -25,7 +25,7 @@ export interface GetMenuData {
 
 export interface GetRestListData {
   restaurantId: number;
-  name: string;
+  restaurantName: string;
   tastePercentage: number;
   representativeImageUrl: string;
   address: string;
