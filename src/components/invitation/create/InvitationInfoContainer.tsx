@@ -1,5 +1,6 @@
 import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
+import Alert from '@/components/common/Alert';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationInfo from '@/components/invitation/create/InvitationInfo';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
@@ -7,16 +8,21 @@ import useViewStore from '@/stores/usePagesStore';
 import useModalStore from '@/stores/useModalStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import useInvitationCreateStore, {
+  initialCreateState,
+} from '@/stores/useInvitationCreateStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { useEffect, useState, ChangeEvent } from 'react';
 import { VisitorInfo } from '@/types/invitation/api';
+import { postInvitation } from '@/pages/api/invitation/createRequests';
+import useAlertStore from '@/stores/useAlertStore';
 
 function InvitationInfoContainer() {
   const { setNextComponent } = useViewStore();
   const { modalState, openModal, closeModal } = useModalStore();
+  const { alertState, openAlert } = useAlertStore();
   const { visit, setVisitMsgText, clearVisitMsg } = useSaveStore();
   const { bottomSheetState } = useBottomSheetStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
@@ -42,8 +48,23 @@ function InvitationInfoContainer() {
   // 모달에서 전송을 눌렀을 때 최종 초대장 데이터
   useEffect(() => {
     if (isConfirmed) {
-      setNextComponent('InvitationDoneContainer');
       setCreateContents('description', tip);
+      console.log('최종 데이터 확인', createContents);
+
+      const postData = async () => {
+        try {
+          const response = await postInvitation(createContents);
+          console.log(response);
+
+          // 성공했을 때에만 다음 컴포넌트 연결
+          if (response.status === 201) {
+            setNextComponent('InvitationDoneContainer');
+          }
+        } catch (error: unknown) {
+          openAlert('🚨', error.message);
+        }
+      };
+      postData();
     }
     if (visit.visitMsg) {
       setVisitMsgText(tip);
@@ -84,8 +105,13 @@ function InvitationInfoContainer() {
 
   // 최종 전송 확인 핸들러 (모달)
   const onClickModalHandler = () => {
-    setIsConfirmed(!isConfirmed);
-    closeModal();
+    if (initialCreateState !== createContents) {
+      setIsConfirmed(!isConfirmed);
+      closeModal();
+    } else {
+      console.error('초대장 보내는 데이터 값에 이상 있음');
+      closeModal();
+    }
   };
 
   return (
@@ -110,6 +136,7 @@ function InvitationInfoContainer() {
       {modalState.isOpen && (
         <Modal content={modal.btn} onClick={onClickModalHandler} />
       )}
+      {alertState.isOpen && <Alert />}
       {bottomSheetState.isOpen && <BottomSheet />}
     </div>
   );
