@@ -21,7 +21,7 @@ export const getInvitationTimeList = async ({
   startDate, // yyyy-MM-dd
   endDate, // yyyy-MM-dd
 }: GetInvitationTimeListContents): Promise<
-  Response<GetInvitationTimeListData>
+  Response<GetInvitationTimeListData[]>
 > => {
   const response = await apiInstance.get(
     `reservation/places/${commonPlaceId}?startDate=${startDate}&endDate=${endDate}`,
@@ -34,5 +34,5 @@ export const postInvitation = async (
   invitationContents: PostInvitationContents,
 ) => {
   const response = await apiInstance.post('invitation', invitationContents);
-  return response.data;
+  return response;
 };
