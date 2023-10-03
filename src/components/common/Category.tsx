@@ -2,6 +2,7 @@ import { COMMON_CATEGORY_COLORS } from '@/constants/common';
 import { CategoryProps, CategoryColorProps } from '@/types/common/category';
 import { css } from '@emotion/react';
 import Icons from '@/components/common/Icons';
+import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 
 function Category({ icon, title, variant }: CategoryProps) {
@@ -56,10 +57,7 @@ const IconContainer = css`
 
 const CategoryTitle = (variantData: CategoryColorProps) => css`
   color: ${variantData.color};
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px;
+  font: ${theme.font.body.body1_600};
 `;
 
 export default Category;
