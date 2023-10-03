@@ -17,7 +17,7 @@ const useFetch = <T>({ fetchFn }: FetchProps<T>) => {
       // TODO: 에러 처리 정의 해야함
     } catch (err: unknown) {
       const error = err as ErrorProps;
-      openAlert('에러메시지:', error.response?.error);
+      openAlert('📢', error.message);
     } finally {
       setLoading(false);
     }
