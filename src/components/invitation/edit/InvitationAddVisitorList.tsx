@@ -25,10 +25,18 @@ function InvitationAddVisitorList({
 
   // 방문자 삭제 버튼 핸들러
   const onClickDeleteVisitorHandler = (name: string) => {
-    const deletedVisitors = createContents.visitors?.filter(
-      (visitor) => visitor.name !== name,
-    );
-    setCreateContents('visitors', deletedVisitors);
+    if (createContents.visitors) {
+      const deletedVisitors = createContents.visitors?.filter(
+        (visitor) => visitor.name !== name,
+      );
+      setCreateContents('visitors', deletedVisitors);
+    }
+    if (editContents.visitors) {
+      const deletedVisitors = editContents.visitors?.filter(
+        (visitor) => visitor.name !== name,
+      );
+      setEditContents('visitors', deletedVisitors);
+    }
   };
 
   // 추가 사용자 이름 input handler
