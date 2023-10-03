@@ -40,7 +40,7 @@ function Input({
               disabled={isDisabled}
               maxLength={maxLength}
             />
-            <div>
+            <div css={maxLengthStyles}>
               {value.length}/{maxLength + 1}
             </div>
           </div>
@@ -139,6 +139,10 @@ const inputTextareaStyles = (variantData: InputColorProps) => css`
   font: ${variantData.font};
   font-size: 1rem;
   resize: none;
+`;
+
+const maxLengthStyles = css`
+  color: ${theme.palette.greyscale.grey30};
 `;
 
 export default Input;
