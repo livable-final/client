@@ -23,14 +23,15 @@ const CategoryContainer = (variantData: CategoryColorProps) => css`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  width: 110px;
+  min-width: 115px;
+  max-width: 140px;
   height: 110px;
   border: ${variantData.border};
   border-radius: 16px;
   background-color: ${variantData.backgroundColor};
   cursor: pointer;
 
-  ${mq.tab} {
+  ${mq.lg} {
     width: 140px;
   }
 `;
