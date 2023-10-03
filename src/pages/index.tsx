@@ -9,12 +9,12 @@ import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import usePagesStore from '@/stores/usePagesStore';
 import useSaveStore from '@/stores/useSaveStore';
-import { useRouter } from 'next/router';
 import useUserStore from '@/stores/useUserStore';
 import Alert from '@/components/common/Alert';
 
 function Home() {
-  const router = useRouter();
+  const MEMBER_TOKEN = process.env.MEMBER_TOKEN as string;
+  const { setUserToken } = useSaveStore();
   const { reset } = usePagesStore();
   const { setState } = useUserStore;
   const { response, alertState } = useFetch({
@@ -22,9 +22,8 @@ function Home() {
   });
 
   useEffect(() => {
-    if (!useSaveStore.getState().user) {
-      router.push('/login');
-    }
+    setUserToken(MEMBER_TOKEN);
+
     reset();
     if (response?.data.buildingId) {
       setState({ ...response?.data });
