@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import InvitationEdit from '@/components/invitation/edit/InvitationEdit';
+import InvitaitonEditForm from '@/components/invitation/InvitaitonEditForm';
 
 function Edit() {
   const router = useRouter();
   const { id } = router.query;
-  return <InvitationEdit id={id} />;
+  return <InvitaitonEditForm id={id} />;
 }
 
 export default Edit;
