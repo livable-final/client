@@ -7,9 +7,21 @@ function LunchRouletteBg({ isOperated }: { isOperated: boolean }) {
   const { alt } = LUNCH_ROULETTE_CONSTANTS;
 
   return isOperated ? (
-    <Image src={roulette} alt={alt.bg} fill priority sizes="100vw" />
+    <Image
+      src={roulette}
+      alt={alt.bg}
+      priority
+      fill
+      sizes="(min-width: 360px) 100vw"
+    />
   ) : (
-    <Image src={rouletteActive} alt={alt.bg} fill priority sizes="100vw" />
+    <Image
+      src={rouletteActive}
+      alt={alt.bg}
+      priority
+      fill
+      sizes="(min-width: 360px) 100vw"
+    />
   );
 }
 
