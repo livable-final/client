@@ -47,10 +47,14 @@ const menusStyles = css`
   padding: 0px 16px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 12px;
 
-  ${mq.tab} {
+  @media (min-width: 320px) {
+    gap: 4px;
+  }
+
+  ${mq.md} {
     justify-content: center;
     width: 100%;
   }

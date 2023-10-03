@@ -9,21 +9,17 @@ function Alert() {
   return (
     <div css={backgroundStyles}>
       <div css={alertContainerStyles}>
-        <div css={titleContentWrapperStyles}>
-          <div css={alertTitleStyles}>
-            {alertState.title ? (
-              alertState.title
-            ) : (
-              <Icons icon="error" size="72" />
-            )}
-          </div>
-          <div css={alertContentStyles}>{alertState.content}</div>
+        <div css={alertTitleStyles}>
+          {alertState.title ? (
+            alertState.title
+          ) : (
+            <Icons icon="error" size="72" />
+          )}
         </div>
-        <div css={btnWrapperStyles}>
-          <button type="button" css={defaultBtnStyles} onClick={closeAlert}>
-            <Icons icon="exitSmall" />
-          </button>
-        </div>
+        <div css={alertContentStyles}>{alertState.content}</div>
+        <button type="button" css={defaultBtnStyles} onClick={closeAlert}>
+          <Icons icon="exitSmall" />
+        </button>
       </div>
     </div>
   );
@@ -45,47 +41,43 @@ const backgroundStyles = css`
 const alertContainerStyles = css`
   position: relative;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: space-between;
   width: 90%;
   max-width: 500px;
   height: 96px;
-  padding-left: 20px;
   border-radius: 16px;
   background-color: ${theme.palette.state.danger};
   z-index: 11;
-`;
-
-const titleContentWrapperStyles = css`
-  display: flex;
-  gap: 14px;
+  padding: 0 8px;
+  gap: 8px;
 `;
 
 const alertTitleStyles = css`
+  width: 20px;
+  display: flex;
+  align-items: center;
   color: ${theme.palette.input.enabled};
   font: ${theme.font.etc.rankingNumber};
-  font-size: 36px;
+  font-size: 16px;
 `;
 
 const alertContentStyles = css`
   display: flex;
   align-items: center;
+  justify-content: center;
   color: ${theme.palette.greyscale.grey10};
-  font: ${theme.font.title.title1_godo};
+  font: ${theme.font.etc.alert};
   white-space: pre-wrap;
-`;
-
-const btnWrapperStyles = css`
-  position: absolute;
-  right: 0;
+  width: 100%;
 `;
 
 const defaultBtnStyles = css`
+  display: flex;
+  align-items: flex-start;
   color: ${theme.palette.white};
   font: ${theme.font.body.body2_400};
   cursor: pointer;
-  font-size: 24px;
-  padding: 0 16px 48px 0;
+  padding-top: 8px;
 `;
 
 export default Alert;

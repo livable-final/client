@@ -166,7 +166,7 @@ export const LUNCH_ROULETTE_CONSTANTS = {
   popup: `이 메뉴로 결정! \n 맛집 보러가기`,
   menu: {
     min: 0,
-    max: 68,
+    max: 41,
   },
 };
 

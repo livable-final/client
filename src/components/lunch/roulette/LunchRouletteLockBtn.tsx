@@ -15,13 +15,30 @@ function LunchRouletteLockBtn({ onClick }: RouletteButtonProps) {
     // 최초 룰렛 가동이 아닌 재가동일 경우
     if (isAgain) {
       return isLocked ? ( // 카테고리가 고정인 경우
-        <Image src={lockPressed} alt={alt.lock} fill sizes="100vw" />
+        <Image
+          src={lockPressed}
+          alt={alt.lock}
+          sizes="(min-width: 360px) 100vw"
+          fill
+        />
       ) : (
-        <Image src={unLock} alt={alt.lock} fill sizes="100vw" />
+        <Image
+          src={unLock}
+          alt={alt.lock}
+          sizes="(min-width: 360px) 100vw"
+          fill
+        />
       );
     }
     // 카테고리가 고정이면서 재가동일 경우
-    return <Image src={unLock} alt={alt.lock} fill sizes="100vw" />;
+    return (
+      <Image
+        src={unLock}
+        alt={alt.lock}
+        sizes="(min-width: 360px) 100vw"
+        fill
+      />
+    );
   };
 
   return (

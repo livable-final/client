@@ -19,7 +19,7 @@ function LunchRoulettePushBtn({ onClick }: RouletteButtonProps) {
           src={againPressed}
           alt={alt.push}
           fill
-          sizes="100vw"
+          sizes="(min-width: 360px) 100vw"
         />
       ) : (
         <Image
@@ -27,7 +27,7 @@ function LunchRoulettePushBtn({ onClick }: RouletteButtonProps) {
           src={again}
           alt={alt.push}
           fill
-          sizes="100vw"
+          sizes="(min-width: 360px) 100vw"
         />
       );
     }
@@ -37,10 +37,16 @@ function LunchRoulettePushBtn({ onClick }: RouletteButtonProps) {
         src={pushPressed}
         alt={alt.push}
         fill
-        sizes="100vw"
+        sizes="(min-width: 360px) 100vw"
       />
     ) : (
-      <Image onClick={onClick} src={push} alt={alt.push} fill sizes="100vw" />
+      <Image
+        onClick={onClick}
+        src={push}
+        alt={alt.push}
+        fill
+        sizes="(min-width: 360px) 100vw"
+      />
     );
   };
   return (

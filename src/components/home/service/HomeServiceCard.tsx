@@ -18,20 +18,37 @@ const containerStyles = css`
   display: flex;
   height: 87px;
   padding: 12px auto;
-  width: 72px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 8px;
   border-radius: 12px;
+  max-width: 72px;
+  width: 100%;
+
+  > svg {
+    height: 32px;
+  }
 
   &:active {
     border-radius: 12px;
     background: ${theme.palette.greyscale.grey5};
   }
 
+  @media (min-width: 320px) {
+    max-width: 72px;
+  }
+
   ${mq.md} {
-    width: 91px;
+    max-width: 84px;
+  }
+
+  @media (min-width: 440px) {
+    max-width: 96px;
+  }
+
+  ${mq.lg} {
+    max-width: 120px;
   }
 `;
 
@@ -39,6 +56,9 @@ const titleStyles = css`
   font: ${theme.font.body.body2_400};
   color: ${theme.palette.greyscale.grey60};
   line-height: 22px;
+
+  ${mq.md} {
+  }
 `;
 
 export default HomeServiceCard;

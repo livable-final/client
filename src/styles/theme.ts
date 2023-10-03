@@ -20,7 +20,7 @@ const theme = {
     greyscale: {
       grey5: '#F9FAFB',
       grey10: '#F0F1F3',
-      grey20: '#D7DCE3',
+      grey20: '#E9EBED',
       grey30: '#C3C6CC',
       grey40: '#96A2AC',
       grey45: '#D3D3D3',
@@ -87,6 +87,7 @@ const theme = {
       rouletteTitle: '400 normal 24px var(--dnfBitBit)',
       rouletteContent: '400 normal 20px var(--dnfBitBit)',
       roulettePopup: '400 normal 24px var(--dnfBitBit)',
+      alert: '400 normal 16px var(--godoM)',
     },
   },
 };
