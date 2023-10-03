@@ -287,20 +287,20 @@ const calendarStyles = css`
 
       .react-datepicker__day--keyboard-selected {
         // endDate + 각 달의 같은 날짜
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
       }
       .react-datepicker__day--in-range {
         // startDate ~ endDate 범위 스타일
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
       }
       .react-datepicker__day--in-selecting-range {
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
-        border-radius: 45%;
       }
       .react-datepicker__day--in-selecting-range:not(
           .react-datepicker__day--in-range,
@@ -310,7 +310,7 @@ const calendarStyles = css`
 
         ) {
         // startDate 선택 후 endDate까지의 range 스타일
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
         opacity: 0.8;
@@ -323,15 +323,14 @@ const calendarStyles = css`
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 49px;
+      width: 32px;
       height: 32px;
       color: ${theme.palette.greyscale.grey70};
 
       &:hover {
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
-        /* opacity: 0.3; */
       }
     }
     // 날짜를 선택했을 때 현재일 스타일 (선택 전에는 적용X)
