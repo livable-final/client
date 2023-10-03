@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { Rice } from '@/assets/icons';
 import { getReviewDetailsData } from '@/pages/api/lunch/calendarRequests';
+import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Alert from '@/components/common/Alert';
 import LunchCalendarWriteBtn from '@/components/lunch/calendar/LunchCalendarWriteBtn';
@@ -53,7 +54,7 @@ function LunchCalendarMain() {
   };
 
   return (
-    <section>
+    <section css={pageStyles}>
       {alertState.isOpen && <Alert />}
       {isChecked && <LunchCalendarDetailsSlide />}
       <Header title={title.main} onClick={onClickHeaderHandler} />
@@ -70,11 +71,17 @@ function LunchCalendarMain() {
   );
 }
 
+const pageStyles = css`
+  height: 100vh;
+  background-color: ${theme.palette.greyscale.grey5};
+`;
+
 const subTitleStyles = css`
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 20px 16px;
+  background-color: ${theme.palette.white};
 `;
 
 export default LunchCalendarMain;

@@ -70,26 +70,29 @@ function LunchCalendarForm() {
 }
 
 const CalendarStyles = css`
-  margin: 12px 0 20px;
+  padding: 12px 0 20px;
 
-  .react-calendar {
-    width: 350px;
+  &.react-calendar {
     max-width: 100%;
-    background: white;
+    background-color: ${theme.palette.white};
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.03); 
   }
 
   .react-calendar--doubleView {
     width: 700px;
+
   }
 
   .react-calendar--doubleView .react-calendar__viewContainer {
     display: flex;
     margin: -0.5em;
+
   }
 
   .react-calendar--doubleView .react-calendar__viewContainer > * {
     width: 50%;
     margin: 0.5em;
+
   }
 
   .react-calendar,
@@ -99,6 +102,7 @@ const CalendarStyles = css`
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    background-color: ${theme.palette.white};
   }
 
   .react-calendar button {

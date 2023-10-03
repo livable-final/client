@@ -13,18 +13,22 @@ type Visit = {
   visitMsg: boolean;
   visitMsgText: string;
 };
+interface Keyword {
+  id: number;
+  text: string;
+}
 
 type SaveStore = {
   isSave: Save;
   user: string;
   visitor: string;
-  keyword: string[];
+  keywordList: Keyword[];
   visit: Visit;
   point: PointData;
   setIsSavePhotoMsg: () => void;
   setPoint: (data: PointData) => void;
-  setKeyword: (data: string) => void;
-  deleteKeyword: (data: string) => void;
+  setKeywordList: (data: Keyword) => void;
+  deleteKeywordList: (data: number) => void;
   clearIsSave: () => void;
   setUserToken: (value: string) => void;
   setVisitorToken: (value: string) => void;
@@ -61,7 +65,7 @@ const useSaveStore = create<SaveStore>()(
       isSave: initialSaveState,
       user: initialTokenState.user,
       visitor: initialTokenState.visitor,
-      keyword: [],
+      keywordList: [],
       visit: initialVisitMsg,
       point: initialPoint,
       setIsSavePhotoMsg: () =>
@@ -69,13 +73,15 @@ const useSaveStore = create<SaveStore>()(
           isSave: { ...pre.isSave, PhotoMsg: true },
         })),
       setPoint: (data) => set((pre) => ({ point: { ...pre.point, ...data } })),
-      setKeyword: (data) =>
+      setKeywordList: (data) =>
         set((pre) => ({
-          keyword: [...pre.keyword, data],
+          keywordList: [...pre.keywordList, data],
         })),
-      deleteKeyword: (data) =>
+      deleteKeywordList: (keywordId) =>
         set((pre) => ({
-          keyword: [...pre.keyword.filter((value) => value !== data)],
+          keywordList: [
+            ...pre.keywordList.filter((value) => value.id === keywordId),
+          ],
         })),
       clearIsSave: () => {
         set({ isSave: initialSaveState });

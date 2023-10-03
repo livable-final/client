@@ -13,14 +13,21 @@ import usePagesStore from '@/stores/usePagesStore';
 import useWriteStore from '@/stores/useWriteStore';
 import useSaveStore from '@/stores/useSaveStore';
 import keyDate from '@/utils/key';
+import Alert from '@/components/common/Alert';
+import useAlertStore from '@/stores/useAlertStore';
+import { ErrorProps } from '@/types/common/response';
 
 function LunchCalendarSearch() {
   const [searchData, setSearchData] = useState<RestaurantsData[]>([]);
   const [showSearch, setShowSearch] = useState(false);
   const [keyword, setKeyword] = useState('');
   const { setNextComponent, goBack } = usePagesStore();
+  const { alertState, openAlert } = useAlertStore();
   const setRestaurant = useWriteStore((state) => state.setRestaurant);
-  const keywordData = useSaveStore((state) => state.keyword);
+  // const keywordList = useSaveStore((state) => state.keywordList);
+  // const setKeywordList = useSaveStore((state) => state.setKeywordList);
+  const { keywordList, setKeywordList } = useSaveStore();
+
   const key = keyDate();
 
   const { calendar } = COMPONENT_NAME.lunch;
@@ -38,8 +45,10 @@ function LunchCalendarSearch() {
       const res = await getRestaurants(keyword);
       setSearchData(res.data);
       setShowSearch(true);
+      setKeywordList({ id: key, text: keyword });
     } catch (err) {
-      //  검색 오류 예외 처리
+      const error = err as ErrorProps;
+      openAlert('📢', error.message || '검색 오류');
     }
   };
   const onClickBtnHandler = (
@@ -63,6 +72,7 @@ function LunchCalendarSearch() {
 
   return (
     <section>
+      {alertState.isOpen && <Alert />}
       <Header title={title.search} onClick={onClickHeaderHandler} />
       <form css={inputStyles} onSubmit={onSubmitHandler}>
         <Input variant="search" value={keyword} onChange={onChangeHandler} />
@@ -75,11 +85,12 @@ function LunchCalendarSearch() {
         <div css={textStyles}>
           <span>{subTitle.recentSearches}</span>
           <div>
-            {keywordData.map((value) => (
+            {keywordList.map((value) => (
               <LunchCalendarListItem
                 key={key}
+                keywordId={value.id}
                 type={listItem.type1}
-                content={value}
+                content={value.text}
               />
             ))}
           </div>
