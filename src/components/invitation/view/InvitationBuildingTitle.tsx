@@ -21,7 +21,7 @@ function InvitationBuildingTitle({
         },
       });
     } catch (error) {
-      toast('주소가 복사를 실패했습니다.');
+      toast('주소복사를 실패했습니다.');
     }
   };
 
