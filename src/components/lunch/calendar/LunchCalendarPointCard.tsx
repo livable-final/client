@@ -77,10 +77,10 @@ function LunchCalendarPointCard() {
         type="title"
         margin="24px"
       />
-      <div css={pageStyles}>
+      <div>
         <ul css={pointBoxStyles}>
           {numbersArray.map((value, idx) => (
-            <li key={value}>
+            <li key={value} css={liStyles}>
               {count > 0 &&
               idx + 1 <= 13 &&
               idx + 1 <= count &&
@@ -131,48 +131,17 @@ function LunchCalendarPointCard() {
     </section>
   );
 }
-const pageStyles = css``;
 
 const pointBoxStyles = css`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(11, 1fr);
-
-  // display: flex;
-  // justify-content: space-between;
-  // flex-wrap: wrap;
   margin: 32px 0 40px;
+`;
 
-  // li:nth-child(4) {
-  //   grid-column: 2;
-  // }
-  // li:nth-child(6) {
-  //   grid-column: 2;
-  // }
-  // li:nth-child(9) {
-  //   grid-column: 2;
-  // }
-  // li:nth-child(11) {
-  //   grid-column: 2;
-  // }
-  // li:nth-child(14) {
-  //   grid-column: 2;
-  // }
-  // li:nth-child(16) {
-  //   grid-column: 2;
-  // }
-  // li:nth-child(19) {
-  //   grid-column: 2;
-  // }
-  // li:nth-child(21) {
-  //   grid-column: 2;
-  // }
-  // li:nth-child(24) {
-  //   grid-column: 2;
-  // }
-  // li:nth-child(26) {
-  //   grid-column: 2;
-  // }
+const liStyles = css`
+  display: flex;
+  justify-content: center;
 `;
 
 const circleStyles = css`
@@ -187,6 +156,7 @@ const circleStyles = css`
 `;
 
 const textStyles = css`
+  font: ${theme.font.title.title2_500};
   color: ${theme.palette.greyscale.grey40};
 `;
 
