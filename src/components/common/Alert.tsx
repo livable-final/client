@@ -64,7 +64,7 @@ const titleContentWrapperStyles = css`
 const alertTitleStyles = css`
   color: ${theme.palette.input.enabled};
   font: ${theme.font.etc.rankingNumber};
-  font-size: 3rem;
+  font-size: 36px;
 `;
 
 const alertContentStyles = css`
