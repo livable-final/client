@@ -23,7 +23,7 @@ const CategoryContainer = (variantData: CategoryColorProps) => css`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  min-width: 115px;
+  min-width: 110px;
   max-width: 140px;
   height: 110px;
   border: ${variantData.border};
