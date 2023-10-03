@@ -21,7 +21,7 @@ import Alert from '@/components/common/Alert';
 
 function LunchCalendarLunchBox() {
   const [searchText, setSearchText] = useState('');
-  const { setNextComponent } = usePagesStore();
+  const { setNextComponent, reset } = usePagesStore();
   const { bottomSheetState, openBottomSheet, closeBottomSheet } =
     useBottomSheetStore();
   const { isSave } = useSaveStore();
@@ -51,8 +51,10 @@ function LunchCalendarLunchBox() {
 
       if (imageFiles.length === 0) {
         router.replace('/lunch/calendar');
+        reset();
+      } else {
+        setNextComponent(calendar.Inform);
       }
-      setNextComponent(calendar.Inform);
     } catch (err) {
       const error = err as ErrorProps;
       openAlert('📢', error.message || '리뷰 등록 오류');
