@@ -9,6 +9,7 @@ import rouletteActive from '$/roulette/rouletteActive.webp';
 import unLock from '$/roulette/unLock.webp';
 import unLockPressed from '$/roulette/unLockPressed.webp';
 import coin from '$/point/coin.webp';
+import point10 from '$/point/point10.webp';
 
 export {
   again,
@@ -22,4 +23,5 @@ export {
   unLock,
   unLockPressed,
   coin,
+  point10,
 };

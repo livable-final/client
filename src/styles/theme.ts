@@ -32,7 +32,7 @@ const theme = {
     },
     state: {
       danger: '#D32F2F',
-      warning: '#F78C35',
+      warning: '#F13D2C',
     },
     input: {
       unabled: '#96A2AC',
@@ -79,6 +79,7 @@ const theme = {
       userPoint: '500 normal 13px var(--pretendard)',
       rankingNumber: '400 normal 20px var(--dnfBitBit)',
       reviewDesc: '400 normal 15px var(--yeongdeok)',
+      review: '400 normal 16px var(--yeongdeokBlueroad)',
       rouletteTitle: '400 normal 24px var(--dnfBitBit)',
       rouletteContent: '400 normal 20px var(--dnfBitBit)',
     },

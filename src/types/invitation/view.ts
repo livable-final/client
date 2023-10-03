@@ -1,14 +1,33 @@
 import { GetVisitationInfoData } from '@/types/invitation/api';
 
+export interface ThemelStoreTypes {
+  themeState: ThemeStateTypes;
+  setThemeState: (key: string, content: string | number) => void;
+}
+
+export interface ThemeStateTypes {
+  clickCount: number;
+  theme: string;
+}
+
 export interface InvitationInfoCategoryProps {
   value: string;
+  icon: string;
 }
 export interface InvitationInfoProps {
   value: string;
   data: GetVisitationInfoData;
 }
-export interface InvitationHostInfoProps {
-  data: GetVisitationInfoData;
+export interface InvitationInfoThemesProps {
+  [key: string]: InvitationInfoThemeProps;
+}
+export interface InvitationInfoThemeProps {
+  backgroundImage: string;
+  shadow: string;
+  boxShadow: string;
+  side: string;
+  sideRight: string;
+  icon: string;
 }
 export interface InvitationInfoContainerProps {
   data: GetVisitationInfoData;
@@ -39,5 +58,5 @@ export interface InvitationBuildingPublicTransportItemProps {
 }
 
 export interface InvitationQrInfoTextProps {
-  textInfo: { place: string; date: string; time: string };
+  data: GetVisitationInfoData;
 }

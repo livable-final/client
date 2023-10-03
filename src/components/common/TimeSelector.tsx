@@ -5,15 +5,22 @@ import {
 } from '@/types/invitation/create';
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
 import theme from '@/styles/theme';
 
 function TimeSelector({ content, status }: TimeSelectorProps) {
   // 토글을 통해 가변할 수 있는 variant state 관리
   const [varientState, setVarientState] = useState(status);
+  const [time] = useState(content);
+
   const variantData = COMMON_TIME_SELECTOR[varientState];
+
+  const { setSelectTime, clearSelectTime } = useTimeSelectorStore();
   const { abled, enabled, disabled } = COMMON_TIME_SELECTOR;
 
   const onClickHandler = () => {
+    clearSelectTime();
+    // 선택시 버튼 상태 변경
     if (varientState === abled.status) {
       setVarientState(enabled.status);
     } else if (varientState === enabled.status) {
@@ -21,16 +28,18 @@ function TimeSelector({ content, status }: TimeSelectorProps) {
     } else {
       setVarientState(status);
     }
+    // 선택 시간 저장
+    setSelectTime(time);
   };
 
   return (
     <button
       type="button"
-      disabled={status === disabled.status}
+      disabled={varientState === disabled.status}
       css={timeSelectorStyles(variantData)}
       onClick={onClickHandler}
     >
-      {content}
+      {time}
     </button>
   );
 }
@@ -61,4 +70,5 @@ const timeSelectorStyles = (variantData: TimeSelectorColorProps) => css`
     transform: scale(0.95);
   }
 `;
+
 export default TimeSelector;

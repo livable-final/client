@@ -1,4 +1,6 @@
-const getFormatDate = (originDate: Date) => {
+type OriginDateType = string | Date;
+
+const getFormatDate = (originDate: OriginDateType) => {
   const date = new Date(originDate);
 
   const year = date.getFullYear();

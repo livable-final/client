@@ -1,13 +1,17 @@
 // 달력 리뷰 데이터
 export interface DateDishPhotoProps {
-  reviewData: ReviewData[];
+  dayReviewData: ReviewData[];
 }
 
 export interface ReviewData {
   reviewId: number;
-  type: string;
-  reviewImageUrl: string;
-  reviewDate: string;
+  reviewTitle: string;
+  reviewTaste?: string;
+  reviewDescription?: string;
+  reviewCreatedAt: string;
+  location?: string;
+  images?: string[];
+  reviewType: string;
 }
 
 // 식당 검색 데이터

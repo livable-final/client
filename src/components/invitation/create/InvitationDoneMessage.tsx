@@ -7,8 +7,6 @@ function InvitationDoneMessage() {
   const { createContents } = useInvitationCreateStore();
   const { visitors } = createContents;
 
-  // console.log('최종 초대장 전송 데이터 확인', createContents);
-
   return (
     <div css={containerStyles}>
       <Send />

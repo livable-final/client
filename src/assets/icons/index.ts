@@ -54,7 +54,6 @@ import Line from '@/assets/icons/Line.svg';
 import Roulette from '@/assets/icons/Roulette.svg';
 import Rights from '@/assets/icons/Rights.svg';
 import Sunny from '@/assets/icons/Sunny.svg';
-import InfoCategory from '@/assets/icons/InfoCategory.svg';
 import Location20 from '@/assets/icons/Location20.svg';
 import Delicious from '@/assets/icons/Delicious.svg';
 import ClearDay from '@/assets/icons/weather/ClearDay.svg';
@@ -98,9 +97,17 @@ import Point1500 from '@/assets/icons/point1500.svg';
 import Present500 from '@/assets/icons/present500.svg';
 import Present1000 from '@/assets/icons/present1000.svg';
 import Present1500 from '@/assets/icons/present.1500.svg';
+import InfoBuilding from '@/assets/icons/InfoBuliding.svg';
+import InfoPlace from '@/assets/icons/InfoPlace.svg';
+import InfoHost from '@/assets/icons/InfoHost.svg';
+import InfoParking from '@/assets/icons/InfoParking.svg';
+import FoodNoPhoto from '@/assets/icons/foodNoPhoto.svg';
+import FoodCafe from '@/assets/icons/foodCafe.svg';
+import FoodLunchBox from '@/assets/icons/foodLunchBox.svg';
 import HomeActive from '@/assets/icons/HomeActive.svg';
 import LunchActive from '@/assets/icons/LunchActive.svg';
 import MyActive from '@/assets/icons/MyActive.svg';
+import PlateSmall from '@/assets/icons/plateSmall.svg';
 
 export {
   As,
@@ -159,7 +166,6 @@ export {
   Roulette,
   Rights,
   Sunny,
-  InfoCategory,
   Location20,
   Delicious,
   ClearDay,
@@ -203,7 +209,15 @@ export {
   Present500,
   Present1000,
   Present1500,
+  InfoBuilding,
+  InfoPlace,
+  InfoHost,
+  InfoParking,
+  FoodNoPhoto,
+  FoodCafe,
+  FoodLunchBox,
   HomeActive,
   LunchActive,
   MyActive,
+  PlateSmall,
 };

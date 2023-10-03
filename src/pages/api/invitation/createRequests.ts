@@ -18,12 +18,13 @@ export const getInvitationPlaceList = async (): Promise<
 // 예약 가능한 시간 리스트 응답
 export const getInvitationTimeList = async ({
   commonPlaceId,
-  date, // yyyy-MM-dd
+  startDate, // yyyy-MM-dd
+  endDate, // yyyy-MM-dd
 }: GetInvitationTimeListContents): Promise<
-  Response<GetInvitationTimeListData>
+  Response<GetInvitationTimeListData[]>
 > => {
   const response = await apiInstance.get(
-    `reservation/places/${commonPlaceId}?date=${date}`,
+    `reservation/places/${commonPlaceId}?startDate=${startDate}&endDate=${endDate}`,
   );
   return response.data;
 };
@@ -33,5 +34,5 @@ export const postInvitation = async (
   invitationContents: PostInvitationContents,
 ) => {
   const response = await apiInstance.post('invitation', invitationContents);
-  return response.data;
+  return response;
 };

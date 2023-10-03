@@ -35,12 +35,7 @@ function InvitationVisitorsContainer() {
     contact: '',
   });
   // 흐름 확인을 위한 예비 데이터 (최종 배포시 삭제)
-  const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([
-    {
-      name: '김방문',
-      contact: '01012345678',
-    },
-  ]);
+  const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([]);
 
   // 이름/연락처 입력
   const onChangeInfoHandler = (

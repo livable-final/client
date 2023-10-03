@@ -1,7 +1,7 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
-import { Plate, Chef, Bento } from '@/assets/icons';
+import { Chef, Bento, PlateSmall } from '@/assets/icons';
 import { LunchCalendarSelectBtnProps } from '@/types/lunch/calendar';
 import usePagesStore from '@/stores/usePagesStore';
 
@@ -24,7 +24,7 @@ function LunchCalendarSelectBtn({ text }: LunchCalendarSelectBtnProps) {
 
   switch (text) {
     case category[0].category:
-      icon = <Plate />;
+      icon = <PlateSmall />;
       break;
     case category[1].category:
       icon = <Chef />;

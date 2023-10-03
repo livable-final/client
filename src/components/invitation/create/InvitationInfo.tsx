@@ -34,6 +34,9 @@ function InvitationInfo({
 
   const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
 
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+
   // 초대 가능한 장소 호출
   const { response } = useFetch({
     fetchFn: getInvitationPlaceList,
@@ -45,6 +48,26 @@ function InvitationInfo({
       setPlaceList(response.data);
     }
   }, [response]);
+
+  useEffect(() => {
+    if (createContents.startDate) {
+      setDate(
+        `${createContents.startDate.split('T')[0]} ~ ${
+          createContents.endDate.split('T')[0]
+        }`,
+      );
+      setTime(
+        `${createContents.startDate
+          .split('T')[1]
+          ?.slice(0, 5)} ~ ${createContents.endDate
+          .split('T')[1]
+          ?.slice(0, 5)}`,
+      );
+    } else {
+      setDate('');
+      setTime('');
+    }
+  }, [createContents]);
 
   // 장소 선택 바텀시트 오픈
   const onClickPlaceHandler = () => {
@@ -91,7 +114,7 @@ function InvitationInfo({
               <input
                 css={inputStyles}
                 type="text"
-                value={createContents.startDate}
+                value={date}
                 placeholder={placeholder.date}
                 onClick={onClickDateTimeHandler}
                 readOnly
@@ -104,7 +127,7 @@ function InvitationInfo({
               <input
                 css={inputStyles}
                 type="text"
-                value={createContents.endDate}
+                value={time}
                 placeholder={placeholder.time}
                 onClick={onClickDateTimeHandler}
                 readOnly

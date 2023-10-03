@@ -19,9 +19,14 @@ apiInstance.interceptors.request.use(
     const storage = localStorage.getItem('user-storage');
     const userKey = storage ? JSON.parse(storage) : null;
     const token = userKey?.state?.user;
+    const visitorToken = userKey?.state?.visitor;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    }
+    // 방문증 페이지 들어가면 visitor token 발급됨
+    if (visitorToken) {
+      config.headers.Authorization = `Bearer ${visitorToken}`;
     }
 
     return Promise.resolve(config);

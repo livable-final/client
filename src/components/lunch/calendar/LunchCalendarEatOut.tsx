@@ -18,11 +18,15 @@ import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useWriteStore from '@/stores/useWriteStore';
 import COMPONENT_NAME from '@/constants/common/pages';
+import useAlertStore from '@/stores/useAlertStore';
+import { ErrorProps } from '@/types/common/response';
+import Alert from '@/components/common/Alert';
 
 function LunchCalenderEatOut() {
   const [searchText, setSearchText] = useState('');
   const { setNextComponent, goBack } = usePagesStore();
-  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const { bottomSheetState, openBottomSheet, closeBottomSheet } =
+    useBottomSheetStore();
   const {
     restaurant,
     selectedMenu,
@@ -33,6 +37,7 @@ function LunchCalenderEatOut() {
   const { isSave } = useSaveStore();
   const { subTitle, category, subCategory, button } = CALENDAR_CONTENT;
   const { calendar } = COMPONENT_NAME.lunch;
+  const { alertState, openAlert } = useAlertStore();
 
   const router = useRouter();
 
@@ -47,10 +52,6 @@ function LunchCalenderEatOut() {
       | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setSearchText(e.target.value);
-  };
-
-  const onClickMsgBtnHandler = () => {
-    openBottomSheet(<LunchCalendarBottomSheet />);
   };
 
   const onClickBtnHandler = async () => {
@@ -70,22 +71,36 @@ function LunchCalenderEatOut() {
       const blob = new Blob([JSON.stringify(userData)], {
         type: 'application/json',
       });
+
       formData.append('data', blob);
-      for (let i = 0; i < imageFiles.length; i + 1) {
+      for (let i = 0; i < imageFiles.length; i += 1) {
         formData.append('imageFiles', imageFiles[i]);
       }
       await postRestaurantReview(formData);
+
       if (imageFiles.length === 0) {
         router.replace('/lunch/calendar');
       }
       setNextComponent(calendar.Inform);
     } catch (err) {
-      router.replace('/lunch/calendar');
+      const error = err as ErrorProps;
+      openAlert('📢', error.message || '리뷰 등록 오류');
+    } finally {
+      if (!isSave.PhotoMsg) {
+        closeBottomSheet();
+      }
     }
+  };
+
+  const onClickMsgBtnHandler = () => {
+    openBottomSheet(
+      <LunchCalendarBottomSheet onClickSubmit={onClickBtnHandler} />,
+    );
   };
 
   return (
     <section css={pageStyles}>
+      {alertState.isOpen && <Alert />}
       <div>
         <Header
           title={category[0].category}
