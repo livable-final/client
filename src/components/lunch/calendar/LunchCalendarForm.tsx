@@ -76,9 +76,6 @@ const CalendarStyles = css`
     width: 350px;
     max-width: 100%;
     background: white;
-    border: 1px solid #a0a096;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.125em;
   }
 
   .react-calendar--doubleView {
@@ -126,13 +123,12 @@ const CalendarStyles = css`
   }
 
   .react-calendar__navigation button:disabled {
-    // background-color: #f0f0f0;
-    // pointer-events: none;
+
   }
 
   .react-calendar__navigation button:enabled:hover,
   .react-calendar__navigation button:enabled:focus {
-    // background-color: #e6e6e6;
+
   }
 
   // 요일 section
@@ -200,21 +196,19 @@ const CalendarStyles = css`
 
   .react-calendar__tile:disabled {
       color: ${theme.palette.greyscale.grey40};
-      // pointer-events: none;
   }
 
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus {
-    // background-color: #e6e6e6;
+
   }
   // 오늘 날짜
   .react-calendar__tile--now {
-    color: ${theme.palette.bluescale.blue50};
   }
 
   .react-calendar__tile--now:enabled:hover,
   .react-calendar__tile--now:enabled:focus {
-    // background: #ffffa9;
+
   }
 
   .react-calendar__tile--hasActive {
@@ -223,23 +217,23 @@ const CalendarStyles = css`
 
   .react-calendar__tile--hasActive:enabled:hover,
   .react-calendar__tile--hasActive:enabled:focus {
-    // background: #a9d4ff;
+
   }
   // 선택한 날짜
   .react-calendar__tile--active {
 
   .react-calendar__tile--active:enabled:hover,
   .react-calendar__tile--active:enabled:focus {
-    // background: #1087ff;
+
   }
 
   .react-calendar--selectRange .react-calendar__tile--hover {
-    // background-color: #e6e6e6;
+
   }
 
   // 네비게이션 레이블 - button 태그
   .react-calendar__navigation__label {
-    // pointer-events: none;
+
   }
   // 네비게이션 레이블 - span 태그
   .react-calendar__navigation__label__labelText.react-calendar__navigation__label__labelText--from {
