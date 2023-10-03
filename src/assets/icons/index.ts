@@ -108,6 +108,8 @@ import LunchActive from '@/assets/icons/LunchActive.svg';
 import MyActive from '@/assets/icons/MyActive.svg';
 import PlateSmall from '@/assets/icons/plateSmall.svg';
 import ErrorIcon from '@/assets/icons/Erroricon.svg';
+import BoxGrey from '@/assets/icons/BoxGrey.svg';
+import BoxWhite from '@/assets/icons/BoxWhite.svg';
 
 export {
   As,
@@ -220,4 +222,6 @@ export {
   MyActive,
   PlateSmall,
   ErrorIcon,
+  BoxGrey,
+  BoxWhite,
 };
