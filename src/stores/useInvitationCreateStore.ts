@@ -7,7 +7,7 @@ import {
 export const initialCreateState: PostInvitationContents = {
   purpose: '',
   commonPlaceId: null,
-  officeName: '5층 공용 라운지 (5층 509호)',
+  officeName: '식스센스 10층 사무실 (10층 1004호)',
   description: '',
   startDate: '',
   endDate: '',
