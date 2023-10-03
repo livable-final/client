@@ -57,7 +57,7 @@ const IconContainer = css`
 
 const CategoryTitle = (variantData: CategoryColorProps) => css`
   color: ${variantData.color};
-  font: ${theme.font.body.body1_600};
+  font: ${theme.font.body.body1_500};
 `;
 
 export default Category;
