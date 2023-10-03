@@ -18,6 +18,7 @@ function Input({
   value,
   onChange,
   name,
+  type,
 }: InputProps) {
   const variantData = COMMON_INPUT_COLORS[variant];
 
@@ -36,7 +37,7 @@ function Input({
               onChange={onChange}
               cols={30}
               rows={row}
-              css={inputTextareaStyles(variantData)}
+              css={inputTextareaStyles(variantData, type)}
               disabled={isDisabled}
               maxLength={maxLength}
             />
@@ -132,8 +133,12 @@ const inputStyles = () => css`
   font: ${theme.font.subTitle.subTitle2_400};
 `;
 
-const inputTextareaStyles = (variantData: InputColorProps) => css`
-  margin: 17px 16px;
+const inputTextareaStyles = (
+  variantData: InputColorProps,
+  type: string | undefined,
+) => css`
+  height: ${type === 'review' ? '96px' : 'none'};
+  margin: ${type === 'review' ? '12px 16px' : '16px'};
   border: none;
   background-color: ${variantData.backgroundColor};
   font: ${variantData.font};
