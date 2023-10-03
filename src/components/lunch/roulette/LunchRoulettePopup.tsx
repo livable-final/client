@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { css } from '@emotion/react';
 import useRouletteStore from '@/stores/useRouletteStore';
 import { postMenu } from '@/pages/api/lunch/lunchRequests';
@@ -7,8 +7,8 @@ import { ErrorProps } from '@/types/common/response';
 import useAlertStore from '@/stores/useAlertStore';
 import Alert from '@/components/common/Alert';
 import theme from '@/styles/theme';
-import Icons from '@/components/common/Icons';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
+import { Popup, PopupActive } from '@/assets/icons';
 
 // 룰렛 팝업 렌딩 컴포넌트
 function LunchRoulettePopup() {
@@ -17,6 +17,7 @@ function LunchRoulettePopup() {
   const { setState } = useRouletteStore;
   const { menuIdState } = useRouletteStore();
   const { alertState, openAlert } = useAlertStore();
+  const [isActive, setIsActive] = useState(false);
 
   // 클릭 시 POST API CALL
   const onClickHandler = useCallback(async () => {
@@ -31,19 +32,35 @@ function LunchRoulettePopup() {
     }
   }, [menuIdState, openAlert, setState]);
 
+  // 마우스 클릭 버튼을 누를 때 이벤트 핸들러
+  const onPressHandler = () => {
+    setIsActive((prev) => !prev);
+  };
+
+  // 마우스 클릭 버튼을 뗄 때 이벤트 핸들러
+  const onReleaseHandler = () => {
+    setIsActive((prev) => !prev);
+  };
+
   return (
     <section css={containerStyles}>
-      <button type="button" onClick={onClickHandler} css={popupStyles}>
+      <button
+        type="button"
+        onMouseDown={onPressHandler}
+        onMouseUpCapture={onReleaseHandler}
+        onClick={onClickHandler}
+        css={popupStyles}
+      >
         {alertState.isOpen && <Alert />}
         {isOperated && isAgain && (
-          <div css={wrapperStyles}>
-            <span css={spanStyles}>{popup}</span>
-          </div>
+          <>
+            <div css={wrapperStyles}>
+              <span css={spanStyles}>{popup}</span>
+            </div>
+            <div css={iconStyles}>{isActive ? <PopupActive /> : <Popup />}</div>
+          </>
         )}
       </button>
-      <div css={iconStyles}>
-        <Icons icon="popup" color="#FFAC6F" />
-      </div>
     </section>
   );
 }
@@ -56,7 +73,9 @@ const containerStyles = css`
 
 const popupStyles = css`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 `;
 
 const wrapperStyles = css`
@@ -64,7 +83,6 @@ const wrapperStyles = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
   border-radius: 100px;
   border: 2px solid ${theme.palette.orange};
   background: ${theme.palette.white};
