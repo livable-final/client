@@ -19,7 +19,8 @@ function HomeBulletinWeather() {
 
   // TOFIXED: 에러용 단순 모달 필요
   if (isError) return <div>{error?.toString()}</div>;
-  if (isLoading) return <BeatLoader color={theme.palette.primary} />;
+  if (isLoading)
+    return <BeatLoader color={theme.palette.greyscale.grey90} size={12} />;
 
   const weatherId = data?.weather[0].icon;
   const weatherTemp = data?.main.temp;
