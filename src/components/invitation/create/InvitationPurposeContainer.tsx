@@ -34,10 +34,11 @@ function InvitationPurposeContainer() {
   const [etcPurpose, setEtcPurpose] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  // 최초 렌더링 시 기존값 초기화
+  // 최초 렌더링 시 타이틀/초대장데이터 초기화
   useEffect(() => {
+    setHeaderTitle('방문자 초대');
     clearCreateContents();
-  }, [clearCreateContents]);
+  }, [clearCreateContents, setHeaderTitle]);
 
   // 방문 목적 카테고리 선택
   const onClickCategoryHandler = (item: CommonCategory) => {
@@ -100,7 +101,7 @@ function InvitationPurposeContainer() {
           <div>{description[selectedCategory]}</div>
         </div>
         <div
-          css={inputWrapperStyles}
+          css={inputWrapperStyles(isFocused)}
           onFocus={onFocusInputHandler}
           onBlur={onBlurInputHandler}
         >
@@ -236,8 +237,9 @@ const iconWrapperStyles = css`
   padding-top: 4px;
 `;
 
-const inputWrapperStyles = css`
+const inputWrapperStyles = (isFocused: boolean) => css`
   max-width: 280px;
+  margin-bottom: ${isFocused ? '30px' : '0'};
 
   ${mq.md} {
     min-width: 360px;
