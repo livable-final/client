@@ -12,17 +12,23 @@ function InvitationOfficeInfo({ data }: InvitationOfficeInfoProps) {
     <div css={OfficeInfoStyles}>
       <Header title={INVITATION_VIEW_TEXTS.header.office} />
 
-      <InvitationOfficeLocation />
+      <div css={containerStyles}>
+        <InvitationOfficeLocation
+          invitationOfficeName={data.invitationOfficeName}
+          hostCompanyName={data.hostCompanyName}
+        />
 
-      <InvitationOfficeMap placeType={data.placeType} />
+        <InvitationOfficeMap placeType={data.placeType} />
 
-      <InvitationVisitTip invitationTip={data.invitationTip} />
+        <InvitationVisitTip invitationTip={data.invitationTip} />
+      </div>
     </div>
   );
 }
 
 const OfficeInfoStyles = css`
   margin: 0 auto;
+
   ${mq.md} {
     max-width: 360px;
   }
@@ -36,6 +42,13 @@ const OfficeInfoStyles = css`
   & > div {
     margin-bottom: 40px;
   }
+`;
+
+const containerStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-top: 20px;
 `;
 
 export default InvitationOfficeInfo;

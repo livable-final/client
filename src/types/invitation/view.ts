@@ -77,3 +77,8 @@ export interface InvitationVisitTipProps {
 export interface InvitationOfficeMapProps {
   placeType: string;
 }
+
+export interface InvitationOfficeLocationProps {
+  invitationOfficeName: string;
+  hostCompanyName: string;
+}

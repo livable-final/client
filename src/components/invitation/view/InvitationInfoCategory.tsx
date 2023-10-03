@@ -13,8 +13,8 @@ function InvitationInfoCategory({ value, icon }: InvitationInfoCategoryProps) {
 
   const variantData = INVITATION_VIEW_TICKET_THEME[themeState.theme];
 
-  const onClickHandler = (event: React.MouseEvent) => {
-    setNextComponent((event.target as HTMLButtonElement).id);
+  const onClickHandler = () => {
+    setNextComponent(value);
   };
 
   return (
