@@ -7,7 +7,7 @@ import useReviewStore from '@/stores/useReviewStore';
 import COMPONENT_NAME from '@/constants/common/pages';
 import { ReviewList } from '@/types/lunch/reviewList';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import useBuildingStore from '@/stores/useBuildingStore';
+import useUserStore from '@/stores/useUserStore';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import { getReviewList } from '@/pages/api/lunch/lunchRequests';
 import LunchReview from '@/components/lunch/review/LunchReview';
@@ -16,7 +16,7 @@ import LunchReview from '@/components/lunch/review/LunchReview';
 function LunchReviews() {
   const { setReviewList } = useReviewStore();
   const { setNextComponent } = usePagesStore();
-  const { buildingId, buildingName } = useBuildingStore();
+  const { buildingId, buildingName } = useUserStore();
   const { prefix, suffix } = LUNCH_MAIN_CONSTANTS.main.reviews;
   const { response } = useFetch({
     fetchFn: () => getReviewList(buildingId),

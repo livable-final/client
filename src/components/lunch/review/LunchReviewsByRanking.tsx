@@ -3,7 +3,7 @@ import ToTop from '@/components/common/ToTop';
 import Header from '@/components/common/Header';
 import usePagesStore from '@/stores/usePagesStore';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import useBuildingStore from '@/stores/useBuildingStore';
+import useUserStore from '@/stores/useUserStore';
 import { getRanking } from '@/pages/api/lunch/lunchRequests';
 import LunchRankings from '@/components/lunch/ranking/LunchRankings';
 
@@ -11,7 +11,7 @@ import LunchRankings from '@/components/lunch/ranking/LunchRankings';
 function LunchReviewsByRanking() {
   const { setNextComponent } = usePagesStore();
   const { title, palette } = LUNCH_MAIN_CONSTANTS.ranking;
-  const { buildingId } = useBuildingStore();
+  const { buildingId } = useUserStore();
   const { response } = useFetch({
     fetchFn: () => getRanking(buildingId),
   });
