@@ -125,7 +125,7 @@ const listStyles = (type: string) => css`
 const contentStyles = () => css`
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 `;
 
 const searchedStyles = css`
