@@ -100,6 +100,7 @@ function LunchCalendarCafeteria() {
         <div css={inputBoxStyles}>
           <p>{subTitle.review}</p>
           <Input
+            type="review"
             variant="search"
             textarea
             placeholder={category[1].placeholder}

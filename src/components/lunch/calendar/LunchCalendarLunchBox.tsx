@@ -87,6 +87,7 @@ function LunchCalendarLunchBox() {
         <LunchSubTitle title={subTitle.todayLunch} type="title" margin="24px" />
         <div css={inputBoxStyles}>
           <Input
+            type="review"
             variant="search"
             textarea
             placeholder={category[2].placeholder}
