@@ -15,7 +15,6 @@ export interface FetchProps<T> {
   fetchFn: FetchFunction<T>;
 }
 
-// 에러 타입
 export interface ErrorProps extends Error {
   response: { error: string; path: string; status: number; timestamp: string };
 }

@@ -1,8 +1,9 @@
-import Icons from '@/components/common/Icons';
 import theme from '@/styles/theme';
-import { RatingsProps } from '@/types/lunch/ratings';
 import { css } from '@emotion/react';
+import Icons from '@/components/common/Icons';
+import { RatingsProps } from '@/types/lunch/ratings';
 
+// '오늘 점심' 리뷰 평가에 따른 평점 컴포넌트
 function LunchReviewRatings({ taste, amount, service, speed }: RatingsProps) {
   // 평가가 GOOD인 항목의 개수 선언
   const count = [amount, service, speed].filter(

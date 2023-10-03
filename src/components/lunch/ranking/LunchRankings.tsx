@@ -1,11 +1,11 @@
-import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
 import theme from '@/styles/theme';
-import { MenuTopTen } from '@/types/lunch/menuTopTen';
 import { css } from '@emotion/react';
-import LunchRankingReviews from '@/components/lunch/ranking/LunchRankingReviews';
+import { MenuTopTen } from '@/types/lunch/menuTopTen';
+import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
 import { useCallback, useEffect, useState } from 'react';
-// import LunchReview from '@/components/lunch/review/LunchReview';
+import LunchRankingReviews from '@/components/lunch/ranking/LunchRankingReviews';
 
+// 1위부터 10위까지의 랭킹을 상세히 나열하는 컴포넌트
 function LunchRankings({ ...props }: MenuTopTen) {
   const { rank, count } = LUNCH_MAIN_CONSTANTS.ranking;
   const [isOpen, setIsOpen] = useState(false);

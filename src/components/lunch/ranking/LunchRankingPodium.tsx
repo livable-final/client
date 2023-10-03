@@ -1,32 +1,25 @@
-import theme from '@/styles/theme';
-import { RankingPodiumProps } from '@/types/lunch/ranking';
-import { css } from '@emotion/react';
 import Image from 'next/image';
+import theme from '@/styles/theme';
+import { css } from '@emotion/react';
+import { RankingPodiumProps } from '@/types/lunch/ranking';
 
-function LunchRankingPodium({
-  menuImage,
-  menuName,
-  count,
-  rank,
-  height,
-  color,
-  margin,
-}: RankingPodiumProps) {
+// '오늘 점심' 홈 랭킹 파트 단상 컴포넌트
+function LunchRankingPodium({ ...props }: RankingPodiumProps) {
   return (
     <div css={containerStyles}>
       <Image
         css={menuImageStyles}
-        src={menuImage}
-        alt="음식"
+        src={props.menuImage}
+        alt={props.menuName}
         width={44}
         height={44}
       />
       <div css={wrapperStyles}>
-        <span css={menuNameStyles}>{menuName}</span>
-        <span css={countStyles}>{count}명</span>
+        <span css={menuNameStyles}>{props.menuName}</span>
+        <span css={countStyles}>{props.count}명</span>
       </div>
-      <div css={rankStyles(height, color)}>
-        <span css={spanStyles(margin)}>{rank}</span>
+      <div css={rankStyles(props.height, props.color)}>
+        <span css={spanStyles(props.margin)}>{props.rank}</span>
       </div>
     </div>
   );

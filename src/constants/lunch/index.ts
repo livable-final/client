@@ -153,7 +153,7 @@ export const LUNCH_ROULETTE_CONSTANTS = {
   title: {
     roulette: '점심룰렛',
     review: '맛집을 알려드릴게요!',
-    recent: '근처의',
+    recent: '님께 추천하는 식당',
   },
   error: {
     response: { menuId: 0, name: '결과가 없습니다.' },
@@ -162,6 +162,11 @@ export const LUNCH_ROULETTE_CONSTANTS = {
     push: '버튼',
     bg: '배경',
     lock: '잠금',
+  },
+  popup: `이 메뉴로 결정! \n 맛집 보러가기`,
+  menu: {
+    min: 0,
+    max: 68,
   },
 };
 
