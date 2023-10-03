@@ -139,6 +139,8 @@ const inputTextareaStyles = (variantData: InputColorProps) => css`
   font: ${variantData.font};
   font-size: 1rem;
   resize: none;
+  letter-spacing: 0;
+  line-height: 24px;
 `;
 
 const maxLengthStyles = css`
