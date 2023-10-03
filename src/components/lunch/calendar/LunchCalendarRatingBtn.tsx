@@ -64,7 +64,6 @@ const buttonStyles = (isChecked: boolean) => css`
   width: 100%;
   padding: 16px 0;
   border-radius: 16px;
-  font: ${theme.font.body.body1_500};
   border: 2px solid
     ${!isChecked
       ? `{theme.palette.greyscale.grey10}`
@@ -72,6 +71,13 @@ const buttonStyles = (isChecked: boolean) => css`
   background-color: ${!isChecked
     ? `${theme.palette.greyscale.grey5}`
     : `${theme.palette.white}`};
+
+  p {
+    font: ${theme.font.body.body1_500};
+    color: ${!isChecked
+      ? `${theme.palette.greyscale.grey50}`
+      : `${theme.palette.orange}`};
+  }
 
   svg {
     filter: ${isChecked && 'none'};

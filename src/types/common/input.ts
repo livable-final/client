@@ -15,6 +15,7 @@ export interface InputProps {
       | React.ChangeEvent<HTMLTextAreaElement>,
   ) => void;
   name?: string;
+  type?: string;
 }
 
 export interface InputColorProps {

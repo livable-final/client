@@ -55,7 +55,7 @@ function LunchCalendarDetailsSlide() {
               <div>
                 <div css={titleStyles}>
                   <div>
-                    <strong>{value.reviewTitle}</strong>
+                    <p>{value.reviewTitle}</p>
                     {value.reviewType === 'restaurant' && (
                       <div css={locationStyles}>
                         <Location20 />
@@ -80,8 +80,7 @@ function LunchCalendarDetailsSlide() {
                       <SwiperSlide key={img}>
                         <div css={ImageBoxStyles}>
                           <Image
-                            width={290}
-                            height={193}
+                            fill
                             src={img}
                             alt={`이미지${i}`}
                             css={ImageStyles}
@@ -131,6 +130,7 @@ const slideModalStyles = css`
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
   --swiper-navigation-color: ${theme.palette.greyscale.grey5};
+  --swiper-navigation-size: 20px;
 `;
 
 const slideStyles = (type: boolean) => css`
@@ -143,7 +143,7 @@ const slideStyles = (type: boolean) => css`
   left: 0;
   right: 0;
   margin: auto;
-  width: 250px;
+  width: 290px;
   max-height: ${type ? '350px' : '281px'};
   padding: 20px 0;
   box-sizing: content-box;
@@ -152,14 +152,19 @@ const slideStyles = (type: boolean) => css`
   background-color: ${theme.palette.white};
 
   .swiper.swiper-initialized.swiper-horizontal {
+    position: relative;
     .swiper-pagination {
+      position: absolute;
+      bottom: 24px;
+      left: 80%;
       background: rgba(0, 0, 0, 0.25);
-      margin-left: 200px;
-      margin-bottom: 20px;
       width: 40px;
       border-radius: 10px;
       font: ${theme.font.body.body3_500};
       color: ${theme.palette.white};
+      @media (min-width: 480px) {
+        left: 88%;
+      }
     }
   }
 
@@ -168,6 +173,14 @@ const slideStyles = (type: boolean) => css`
     width: 20px;
     height: 20px;
   }
+
+  @media (max-width: 280px) {
+    width: 280px;
+  }
+
+  @media (min-width: 480px) {
+    width: 480px;
+  }
 `;
 
 const titleStyles = css`
@@ -175,7 +188,7 @@ const titleStyles = css`
   justify-content: space-between;
   padding: 0 20px;
 
-  strong {
+  p {
     margin-left: 4px;
     display: block;
     max-width: 160px;
@@ -200,11 +213,15 @@ const locationStyles = css`
 const ImageBoxStyles = css`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 193px;
   dispaly: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px 0;
+  margin: 16px 0;
+
+  @media (min-width: 480px) {
+    height: 220px;
+  }
 `;
 
 const ImageStyles = css`

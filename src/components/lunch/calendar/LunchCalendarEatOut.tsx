@@ -147,6 +147,7 @@ function LunchCalenderEatOut() {
         <div css={textReviewStyles}>
           <p>{subTitle.review}</p>
           <Input
+            type="review"
             variant="search"
             textarea
             placeholder={category[0].placeholder}

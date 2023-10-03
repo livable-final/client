@@ -74,14 +74,18 @@ const buttonStyles = (isChecked: boolean) => css`
   cursor: pointer;
   border-radius: 100px;
   background-color: ${theme.palette.white};
-  font: ${theme.font.body.body3_500};
+  span {
+    font: ${theme.font.body.body3_500};
+    color: ${theme.palette.greyscale.grey30};
+  }
+
   border: 1px solid
     ${!isChecked
       ? `${theme.palette.greyscale.grey20}`
       : `${theme.palette.orange}`};
 
   color: ${!isChecked
-    ? `${theme.palette.greyscale.grey40};`
+    ? `${theme.palette.greyscale.grey30};`
     : `${theme.palette.orange}`};
 `;
 
