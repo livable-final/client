@@ -16,7 +16,6 @@ import Right from '@/assets/icons/Right.svg';
 import Seminar from '@/assets/icons/seminar.svg';
 import Up from '@/assets/icons/Up.svg';
 import Info from '@/assets/icons/Info.svg';
-import ErrorIcon from '@/assets/icons/Erroricon.svg';
 import PlusBig from '@/assets/icons/Plus=big.svg';
 import PlusSmall from '@/assets/icons/Plus=small.svg';
 import ExitSmall from '@/assets/icons/Exit=small.svg';
@@ -108,6 +107,7 @@ import HomeActive from '@/assets/icons/HomeActive.svg';
 import LunchActive from '@/assets/icons/LunchActive.svg';
 import MyActive from '@/assets/icons/MyActive.svg';
 import PlateSmall from '@/assets/icons/plateSmall.svg';
+import ErrorIcon from '@/assets/icons/Erroricon.svg';
 
 export {
   As,
@@ -128,7 +128,6 @@ export {
   Send,
   Up,
   Info,
-  ErrorIcon,
   PlusBig,
   PlusSmall,
   ExitSmall,
@@ -220,4 +219,5 @@ export {
   LunchActive,
   MyActive,
   PlateSmall,
+  ErrorIcon,
 };
