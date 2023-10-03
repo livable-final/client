@@ -6,7 +6,6 @@ import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import InvitationAddVisitorList from '@/components/invitation/edit/InvitationAddVisitorList';
-import mq from '@/utils/mediaquery';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import {
@@ -72,18 +71,9 @@ const containerStyles = css`
   flex-direction: column;
   gap: 16px;
   width: 100%;
-  max-width: 280px;
+  min-width: 280px;
+  max-width: 640px;
   margin-bottom: 100px;
-
-  ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
-    max-width: 480px;
-  }
-  ${mq.tab} {
-    max-width: 640px;
-  }
 `;
 
 const titleWrapperStyles = css`

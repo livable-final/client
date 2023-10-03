@@ -7,9 +7,11 @@ import Button from '@/components/common/Button';
 import NameTag from '@/components/common/NameTag';
 import AddressBook from '@/components/common/AddressBook';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useAlertStore from '@/stores/useAlertStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import useInvitationEditStore from '@/stores/useInvitationEditStore';
 import { InvitationAddVisitorListProps } from '@/types/invitation/edit';
+import Alert from '@/components/common/Alert';
 
 function InvitationAddVisitorList({
   visitorsList,
@@ -17,6 +19,7 @@ function InvitationAddVisitorList({
   const [addVisitorName, setAddVisitorName] = useState('');
   const [addVisitorContact, setAddVisitorContact] = useState('');
   const { closeBottomSheet } = useBottomSheetStore();
+  const { alertState, openAlert } = useAlertStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
   const { editContents, setEditContents } = useInvitationEditStore();
 
@@ -64,7 +67,11 @@ function InvitationAddVisitorList({
 
   // + 버튼 클릭시 newVisotorList에 input값 추가
   const onClickAddHandler = () => {
-    newVisitorList(addVisitorName, addVisitorContact);
+    if (addVisitorName !== '' && addVisitorContact !== '') {
+      newVisitorList(addVisitorName, addVisitorContact);
+    } else {
+      openAlert('📢', '이름과 연락처를 모두 입력해 주세요.');
+    }
   };
 
   // 완료 버튼
@@ -115,6 +122,7 @@ function InvitationAddVisitorList({
         variant="blue"
         onClick={onclickDoneBtnHandler}
       />
+      {alertState.isOpen && <Alert />}
     </div>
   );
 }
@@ -141,7 +149,8 @@ const visitorAddInputContainerStyles = css`
 const visitorAddInputStyles = css`
   display: flex;
   border: none;
-  border-bottom: 2px solid ${theme.palette.greyscale.grey10};
+  border-radius: 0;
+  border-bottom: 1px solid ${theme.palette.greyscale.grey10};
 `;
 const visitorcontactaddBtnStyles = css`
   display: flex;
@@ -162,7 +171,7 @@ const newVisitorListStyles = css`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 0 8px;
+  gap: 9px;
   margin-bottom: 16px;
 `;
 export default InvitationAddVisitorList;

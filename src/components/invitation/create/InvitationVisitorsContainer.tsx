@@ -9,7 +9,6 @@ import useAlertStore from '@/stores/useAlertStore';
 import useViewStore from '@/stores/usePagesStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import theme from '@/styles/theme';
-import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { ChangeEvent, useState } from 'react';
 import { COMMON_ERROR_MESSAGE } from '@/constants/common';
@@ -162,19 +161,10 @@ const containerStyles = css`
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  width: 100%;
   min-width: 280px;
-  max-width: 360px;
+  max-width: 640px;
   overflow: scroll;
-
-  ${mq.md} {
-    min-width: 361px;
-  }
-  ${mq.lg} {
-    min-width: 481px;
-  }
-  ${mq.tab} {
-    min-width: 641px;
-  }
 `;
 
 const titleStyles = css`
@@ -192,16 +182,6 @@ const titleStyles = css`
     font: ${theme.font.title.title2_500};
     line-height: 28px;
     text-align: left;
-  }
-
-  ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
-    max-width: 480px;
-  }
-  ${mq.tab} {
-    max-width: 640px;
   }
 `;
 
@@ -244,26 +224,13 @@ const buttonWrapperStyles = (isFocused: boolean) => css`
   display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
-  max-width: 360px;
+  max-width: 1024px;
   padding: 0 16px 20px;
   background-image: linear-gradient(
     to top,
     ${theme.palette.white} 70%,
     transparent 30%
   );
-
-  ${mq.md} {
-    min-width: 361px;
-    max-width: 480px;
-  }
-  ${mq.lg} {
-    min-width: 481px;
-    max-width: 640px;
-  }
-  ${mq.tab} {
-    min-width: 641px;
-    max-width: 1024px;
-  }
 `;
 
 export default InvitationVisitorsContainer;

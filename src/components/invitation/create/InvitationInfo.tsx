@@ -11,7 +11,7 @@ import useFetch from '@/hooks/useFetch';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
 import { useState, useEffect } from 'react';
-import { Location, Calendar, Clock } from '@/assets/icons';
+import { LocationLine, Calendar, Clock } from '@/assets/icons';
 import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 import { GetInvitationPlaceData } from '@/types/invitation/api';
@@ -92,7 +92,7 @@ function InvitationInfo({
           {/* 장소 선택 */}
           <div css={placeInputStyles}>
             <div css={icon}>
-              <Location />
+              <LocationLine />
             </div>
             <input
               css={inputStyles}
