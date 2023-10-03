@@ -14,7 +14,6 @@ function InvitationBuildingInfo({ data }: InvitationBuildingInfoProps) {
   const { goBack } = usePagesStore();
 
   const { buildingRepresentativeImageUrl } = data;
-  console.log(data.buildingRepresentativeImageUrl);
 
   // 스크롤 추적을 위한 state, onScrollHandler
   const [isScrollBottom, setIsScrollBottom] = useState(false);
