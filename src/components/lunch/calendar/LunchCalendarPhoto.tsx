@@ -61,7 +61,7 @@ function LunchCalendarPhoto() {
     <section css={photoListStyles}>
       <button type="button" onClick={onClickBtnHandler} css={photoStyles}>
         <Camera />
-        <p>0/5</p>
+        <p>{previews.length}/5</p>
       </button>
       <input
         multiple
@@ -98,6 +98,9 @@ const photoListStyles = css`
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  p {
+    font: ${theme.font.body.body4};
+  }
 
   li {
     position: relative;
