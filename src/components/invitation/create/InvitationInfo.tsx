@@ -33,6 +33,7 @@ function InvitationInfo({
 
   const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
 
+  // 날짜/시간 input value
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
@@ -41,13 +42,14 @@ function InvitationInfo({
     fetchFn: getInvitationPlaceList,
   });
 
+  // 초대 가능한 장소 응답 데이터 저장
   useEffect(() => {
-    // 초대 가능한 장소 응답 데이터 저장
     if (response?.data) {
       setPlaceList(response.data);
     }
   }, [response]);
 
+  // 초대장 스토어 데이터가 변할 때 startDate, endDate 설정
   useEffect(() => {
     if (createContents.startDate) {
       setDate(
