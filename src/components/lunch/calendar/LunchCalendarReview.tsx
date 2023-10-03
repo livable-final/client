@@ -9,6 +9,7 @@ import LunchCalendarSearch from '@/components/lunch/calendar/LunchCalendarSearch
 import LunchCalendarEatOut from '@/components/lunch/calendar/LunchCalendarEatOut';
 import LunchCalendarLunchBox from '@/components/lunch/calendar/LunchCalendarLunchBox';
 import LunchCalendarCafeteria from '@/components/lunch/calendar/LunchCalendarCafeteria';
+import LunchCalendarPointInform from '@/components/lunch/calendar/LunchCalendarPointInform';
 import COMPONENT_NAME from '@/constants/common/pages';
 import LunchCalendarMenu from './LunchCalendarMenu';
 
@@ -33,6 +34,8 @@ function LunchCalendarReview() {
       return <LunchCalendarCafeteria />;
     case calendar.lunchBox:
       return <LunchCalendarLunchBox />;
+    case calendar.Inform:
+      return <LunchCalendarPointInform />;
     default:
       return (
         <section>
