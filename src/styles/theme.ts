@@ -83,7 +83,7 @@ const theme = {
       userPoint: '500 normal 13px var(--pretendard)',
       rankingNumber: '400 normal 20px var(--dnfBitBit)',
       reviewDesc: '400 normal 15px var(--yeongdeok)',
-      review: '400 normal 16px var(--yeongdeokBlueroad)',
+      review: '400 normal 16px var(--yeongdeok)',
       rouletteTitle: '400 normal 24px var(--dnfBitBit)',
       rouletteContent: '400 normal 20px var(--dnfBitBit)',
       roulettePopup: '400 normal 24px var(--dnfBitBit)',
