@@ -72,18 +72,9 @@ const containerStyles = css`
   flex-direction: column;
   gap: 16px;
   width: 100%;
-  max-width: 280px;
+  min-width: 280px;
+  max-width: 640px;
   margin-bottom: 100px;
-
-  ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
-    max-width: 480px;
-  }
-  ${mq.tab} {
-    max-width: 640px;
-  }
 `;
 
 const titleWrapperStyles = css`
