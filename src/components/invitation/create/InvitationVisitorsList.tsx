@@ -6,7 +6,6 @@ import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import InvitationAddVisitorList from '@/components/invitation/edit/InvitationAddVisitorList';
-import mq from '@/utils/mediaquery';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import {

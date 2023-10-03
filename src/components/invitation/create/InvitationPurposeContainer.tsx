@@ -1,5 +1,4 @@
 import theme from '@/styles/theme';
-import mq from '@/utils/mediaquery';
 import Input from '@/components/common/Input';
 import Icons from '@/components/common/Icons';
 import Category from '@/components/common/Category';
