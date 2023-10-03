@@ -59,7 +59,6 @@ function InvitationDateTime() {
         openAlert('ERROR!', '예약 가능 시간 API에 문제가 생겼습니다.');
       }
     };
-
     fetchGetTimeList();
   }, [
     createContents.commonPlaceId,
@@ -71,14 +70,22 @@ function InvitationDateTime() {
     onToggle,
   ]);
 
+  // API호출 응답값인 fetchData가 바뀔 때마다 공통된 시간 출력
+  // commonTimes ['15:00', '15:30', '17:00', '17:30']
   useEffect(() => {
     if (fetchData) {
-      // 기존 fetchData 중에서 공통된 시간만 출력
-      // ['15:00:00', '15:30:00', '17:00:00', '17:30:00']
       const common = getCommonTimes(fetchData);
       setCommonTimes([...common]);
     }
   }, [fetchData]);
+
+  // commonTimes.Length(가능한 시간)에 따라 종일 활성화 여부
+  // 가능한 시간이 18개(09~18시)가 아닌 경우에는 토글 off하여 시간 선택 유도
+  useEffect(() => {
+    if (commonTimes.length !== 18) {
+      offToggle();
+    }
+  }, [commonTimes, offToggle]);
 
   // startDate나 endDate가 변경될 때 isUpdated === true
   useEffect(() => {
@@ -106,11 +113,13 @@ function InvitationDateTime() {
       // 토글 버튼 비활성화 = 시간 선택했을 때
       setCreateContents(
         'startDate',
-        `${getFormatDate(startDate)}T${selectTime}:00`,
+        `${getFormatDate(startDate)}T${selectTime[0]}:00`,
       );
       setCreateContents(
         'endDate',
-        `${getFormatDate(endDate)}T${parseDate(selectTime as string)}:00`,
+        `${getFormatDate(endDate)}T${parseDate(
+          selectTime[selectTime.length - 1] as string,
+        )}:00`,
       );
     }
 
