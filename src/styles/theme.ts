@@ -41,7 +41,11 @@ const theme = {
     },
     background: {
       white: '#FFFFFF',
-      home: 'linear-gradient(180deg, #FFF 0.31%, #FFF 8.73%, #F8F8F8 21.76%)',
+      home: 'linear-gradient(180deg, #FFF 0%, #FFF 5.59%, #F8F8F8 21.52%);',
+    },
+    popup: {
+      orange:
+        'linear-gradient(105deg, #ffac6f 0%, #ff9141 52.33%, #ff6b6b 88.25%, #ff9ab3 100%);',
     },
   },
   // 폰트 스케일
@@ -82,6 +86,7 @@ const theme = {
       review: '400 normal 16px var(--yeongdeokBlueroad)',
       rouletteTitle: '400 normal 24px var(--dnfBitBit)',
       rouletteContent: '400 normal 20px var(--dnfBitBit)',
+      roulettePopup: '400 normal 24px var(--dnfBitBit)',
     },
   },
 };

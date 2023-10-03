@@ -1,9 +1,9 @@
-import React from 'react';
-import Banner from '@/components/common/Banner';
 import { css } from '@emotion/react';
+import Banner from '@/components/common/Banner';
 import LunchRanking from '@/components/lunch/ranking';
 import LunchReviews from '@/components/lunch/review/LunchReviews';
 
+// 오늘 점심 홈 컨텐츠
 function LunchMainContents() {
   return (
     <div css={containerStyles}>

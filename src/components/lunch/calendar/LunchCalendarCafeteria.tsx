@@ -16,7 +16,7 @@ import usePagesStore from '@/stores/usePagesStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useWriteStore from '@/stores/useWriteStore';
-import useBuildingStore from '@/stores/useBuildingStore';
+import useUserStore from '@/stores/useUserStore';
 import COMPONENT_NAME from '@/constants/common/pages';
 import useAlertStore from '@/stores/useAlertStore';
 import { ErrorProps } from '@/types/common/response';
@@ -29,7 +29,7 @@ function LunchCalendarCafeteria() {
     useBottomSheetStore();
   const { isSave } = useSaveStore();
   const { ratingState, imageFiles } = useWriteStore();
-  const { buildingName } = useBuildingStore();
+  const { buildingName } = useUserStore();
   const { category, subTitle, button } = CALENDAR_CONTENT;
   const { calendar } = COMPONENT_NAME.lunch;
   const { alertState, openAlert } = useAlertStore();

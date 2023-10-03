@@ -1,12 +1,13 @@
-import { Reviewer } from '@/assets/icons';
 import theme from '@/styles/theme';
-import { LunchReviewProps } from '@/types/lunch/reviewList';
-import getTimeDiff from '@/utils/getTimeDiff';
-import { css } from '@emotion/react';
-import LunchReviewRatings from '@/components/lunch/review/LunchReviewRatings';
-import LunchReviewPhotos from '@/components/lunch/review/LunchReviewPhotos';
 import mq from '@/utils/mediaquery';
+import { css } from '@emotion/react';
+import { Reviewer } from '@/assets/icons';
+import getTimeDiff from '@/utils/getTimeDiff';
+import { LunchReviewProps } from '@/types/lunch/reviewList';
+import LunchReviewPhotos from '@/components/lunch/review/LunchReviewPhotos';
+import LunchReviewRatings from '@/components/lunch/review/LunchReviewRatings';
 
+// '오늘 점심' 리뷰 글에 대한 레이아웃
 function LunchReview({ ...props }: LunchReviewProps) {
   return (
     <div css={containerStyles(props?.isRow, props?.noPad)}>

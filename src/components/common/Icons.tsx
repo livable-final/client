@@ -48,6 +48,7 @@ import {
   HomeActive,
   LunchActive,
   MyActive,
+  Popup,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -140,6 +141,8 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Confused width={size} height={size} />;
     case lunch.thumbsUp:
       return <ThumbsUp color={color} width={size} height={size} />;
+    case lunch.popup:
+      return <Popup color={color} size={size} />;
     case common.close:
       return <Close />;
     case common.error:

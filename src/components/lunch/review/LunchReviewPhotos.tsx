@@ -1,22 +1,21 @@
-import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import theme from '@/styles/theme';
-import { ReviewPhotosProps } from '@/types/lunch/reviewPhotos';
-import { css } from '@emotion/react';
 import Image from 'next/image';
+import theme from '@/styles/theme';
+import { css } from '@emotion/react';
+import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
+import { ReviewPhotosProps } from '@/types/lunch/reviewPhotos';
 
+// '오늘 점심' 리뷰에 대한 사진을 담는 컨테이너
 function LunchReviewPhotos({ photos, isRow }: ReviewPhotosProps) {
   const { review, ranking } = LUNCH_MAIN_CONSTANTS;
-  if (!photos) {
-    return <div>photo 빈배열 테스트중</div>;
-  }
+
   return (
     <div css={containerStyles(isRow)}>
       <div css={wrapperStyles}>
-        {photos.map((item, i) => (
+        {photos.map((item, idx) => (
           <Image
             key={item}
             src={item}
-            alt={`이미지${i}`}
+            alt={`이미지${idx}`}
             width={isRow ? ranking.photoWidth : review.photoWidth}
             height={isRow ? ranking.photoHeight : review.photoHeight}
           />
