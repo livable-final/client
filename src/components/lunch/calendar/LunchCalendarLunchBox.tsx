@@ -15,21 +15,22 @@ import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useWriteStore from '@/stores/useWriteStore';
 import COMPONENT_NAME from '@/constants/common/pages';
+import useAlertStore from '@/stores/useAlertStore';
+import { ErrorProps } from '@/types/common/response';
+import Alert from '@/components/common/Alert';
 
 function LunchCalendarLunchBox() {
   const [searchText, setSearchText] = useState('');
   const { setNextComponent } = usePagesStore();
-  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const { bottomSheetState, openBottomSheet, closeBottomSheet } =
+    useBottomSheetStore();
   const { isSave } = useSaveStore();
   const { imageFiles } = useWriteStore();
   const { category, subTitle, button } = CALENDAR_CONTENT;
   const { calendar } = COMPONENT_NAME.lunch;
+  const { alertState, openAlert } = useAlertStore();
 
   const router = useRouter();
-
-  const onClickMsgBtnHandler = () => {
-    openBottomSheet(<LunchCalendarBottomSheet />);
-  };
 
   const onClickBtnHandler = async () => {
     try {
@@ -43,16 +44,22 @@ function LunchCalendarLunchBox() {
         type: 'application/json',
       });
       formData.append('data', blob);
-      for (let i = 0; i < imageFiles.length; i + 1) {
+      for (let i = 0; i < imageFiles.length; i += 1) {
         formData.append('imageFiles', imageFiles[i]);
       }
       await postLunchBoxReview(formData);
+
       if (imageFiles.length === 0) {
         router.replace('/lunch/calendar');
       }
       setNextComponent(calendar.Inform);
     } catch (err) {
-      // router.replace('/lunch/calendar');
+      const error = err as ErrorProps;
+      openAlert('📢', error.message || '리뷰 등록 오류');
+    } finally {
+      if (!isSave.PhotoMsg) {
+        closeBottomSheet();
+      }
     }
   };
 
@@ -64,8 +71,15 @@ function LunchCalendarLunchBox() {
     setSearchText(e.target.value);
   };
 
+  const onClickMsgBtnHandler = () => {
+    openBottomSheet(
+      <LunchCalendarBottomSheet onClickSubmit={onClickBtnHandler} />,
+    );
+  };
+
   return (
     <section css={pageStyles}>
+      {alertState.isOpen && <Alert />}
       <div>
         <Header title={category[2].category} />
         <LunchSubTitle title={subTitle.todayLunch} type="title" margin="24px" />

@@ -18,10 +18,14 @@ import {
   Present1500,
 } from '@/assets/icons';
 import useSaveStore from '@/stores/useSaveStore';
+import useAlertStore from '@/stores/useAlertStore';
+import { ErrorProps } from '@/types/common/response';
+import Alert from '@/components/common/Alert';
 
 function LunchCalendarPointCard() {
   const point = useSaveStore((state) => state.point);
   const setPoint = useSaveStore((state) => state.setPoint);
+  const { alertState, openAlert } = useAlertStore();
   const router = useRouter();
   const { title, subTitle } = CALENDAR_CONTENT;
   const { card } = POINT_CONSTANTS;
@@ -39,9 +43,10 @@ function LunchCalendarPointCard() {
   const onClickPoint500Handler = async () => {
     try {
       await postPoint();
-      setPoint({ point500: true });
+      setPoint({ point500: false });
     } catch (err) {
-      // 예외 처리 alert 추가 예정
+      const error = err as ErrorProps;
+      openAlert('📢', error.message);
     }
   };
   const onClickPoint1000Handler = async () => {
@@ -49,7 +54,8 @@ function LunchCalendarPointCard() {
       await postPoint();
       setPoint({ point1000: true });
     } catch (err) {
-      // 예외 처리 alert 추가 예정
+      const error = err as ErrorProps;
+      openAlert('📢', error.message);
     }
   };
   const onClickPoint1500Handler = async () => {
@@ -57,11 +63,14 @@ function LunchCalendarPointCard() {
       await postPoint();
       setPoint({ point1500: true });
     } catch (err) {
-      // 예외 처리 alert 추가 예정
+      const error = err as ErrorProps;
+      openAlert('📢', error.message);
     }
   };
+
   return (
     <section>
+      {alertState.isOpen && <Alert />}
       <Header title={title.point} onClickBack={onClickBackHandler} />
       <LunchSubTitle
         title={`10${subTitle.point} ${10 * count}p`}
