@@ -13,7 +13,8 @@ import InvitationBuildingPublicTransportItem from './InvitationBuildingPublicTra
 function InvitationBuildingInfo({ data }: InvitationBuildingInfoProps) {
   const { goBack } = usePagesStore();
 
-  console.log(data);
+  const { buildingRepresentativeImageUrl } = data;
+  console.log(data.buildingRepresentativeImageUrl);
 
   // 스크롤 추적을 위한 state, onScrollHandler
   const [isScrollBottom, setIsScrollBottom] = useState(false);
@@ -45,7 +46,7 @@ function InvitationBuildingInfo({ data }: InvitationBuildingInfoProps) {
   ];
   return (
     <div css={ContainerStyles}>
-      <div css={BuildingImgStyles}>
+      <div css={BuildingImgStyles({ buildingRepresentativeImageUrl })}>
         <Back onClick={onBackClickHandler} />
       </div>
 
@@ -104,8 +105,12 @@ const ContainerStyles = css`
   }
 `;
 
-const BuildingImgStyles = css`
-  background-color: #b4b4b4;
+const BuildingImgStyles = (props: {
+  buildingRepresentativeImageUrl: string;
+}) => css`
+  background-image: url(${props.buildingRepresentativeImageUrl});
+  background-size: cover;
+  background-position: 0 20%;
   height: 500px;
   margin: 0 -16px;
   padding: 16px 16px;
