@@ -11,6 +11,7 @@ import useWriteStore from '@/stores/useWriteStore';
 import useSaveStore from '@/stores/useSaveStore';
 
 function LunchCalendarListItem({
+  keywordId,
   type,
   item,
   content,
@@ -23,7 +24,7 @@ function LunchCalendarListItem({
   const selectedMenu = useWriteStore((state) => state.selectedMenu);
   const setSelectedMenu = useWriteStore((state) => state.setSelectedMenu);
   const setRemoveMenu = useWriteStore((state) => state.setRemoveMenu);
-  const deleteKeyword = useSaveStore((state) => state.deleteKeyword);
+  const deleteKeywordList = useSaveStore((state) => state.deleteKeywordList);
   const { listItem } = CALENDAR_CASE;
   const { home } = COMMON_ICON_NAMES;
 
@@ -45,9 +46,9 @@ function LunchCalendarListItem({
       setRemoveMenu(item);
     }
   };
-  const onClickDeleteHandler = (keyword: string | undefined) => {
-    if (keyword) {
-      deleteKeyword(keyword);
+  const onClickDeleteHandler = () => {
+    if (keywordId) {
+      deleteKeywordList(keywordId);
     }
   };
 
@@ -59,7 +60,7 @@ function LunchCalendarListItem({
             <Clock css={iconStles} />
             <p>{content}</p>
           </div>
-          <XIcon onClick={onClickDeleteHandler(content)} />
+          <XIcon onClick={onClickDeleteHandler} />
         </button>
       );
     case listItem.type2:

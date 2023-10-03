@@ -37,6 +37,7 @@ export interface MenuDataProps {
 
 // 컴포넌트 타입
 export interface LunchCalendarListItemProps {
+  keywordId?: number;
   type: string;
   content?: string;
   item?: MenuData;
