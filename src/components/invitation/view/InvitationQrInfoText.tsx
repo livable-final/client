@@ -51,6 +51,7 @@ const qrInfoContainerStyles = css`
 `;
 const qrInfoTimeStyles = css`
   position: absolute;
+  justify-content: flex-start;
 `;
 const iconStyles = css`
   display: flex;

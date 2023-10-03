@@ -1,13 +1,17 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
-// import { InfoCategory } from '@/assets/icons';
 import { InvitationInfoCategoryProps } from '@/types/invitation/view';
 import usePagesStore from '@/stores/usePagesStore';
 import Icons from '@/components/common/Icons';
+import useThemeStore from '@/stores/useThemeStore';
+import { INVITATION_VIEW_TICKET_THEME } from '@/constants/invitation/viewTexts';
 
 function InvitationInfoCategory({ value, icon }: InvitationInfoCategoryProps) {
   const { setNextComponent } = usePagesStore();
+  const { themeState } = useThemeStore();
+
+  const variantData = INVITATION_VIEW_TICKET_THEME[themeState.theme];
 
   const onClickHandler = (event: React.MouseEvent) => {
     setNextComponent((event.target as HTMLButtonElement).id);
@@ -17,7 +21,7 @@ function InvitationInfoCategory({ value, icon }: InvitationInfoCategoryProps) {
     <div css={InvitationInfoCategoryStyles}>
       <button type="button" id={value} onClick={onClickHandler}>
         <div id={value} css={CategoryContainerStyles}>
-          <Icons icon={icon} />
+          <Icons icon={icon} color={`${variantData.icon}`} />
         </div>
         <span id={value}>{value}</span>
       </button>
@@ -36,8 +40,11 @@ const InvitationInfoCategoryStyles = css`
   height: 100%;
   color: ${theme.palette.greyscale.grey50};
   font: ${theme.font.body.body3_500};
-  button: {
+  button {
     height: 100%;
+  }
+  span {
+    color: ${theme.palette.greyscale.grey50};
   }
 
   ${mq.md} {

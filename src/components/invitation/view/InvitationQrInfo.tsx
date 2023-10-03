@@ -1,72 +1,96 @@
 import { css } from '@emotion/react';
 import Header from '@/components/common/Header';
-import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
+import {
+  INVITATION_VEIW_INFO_TEXTS,
+  INVITATION_VIEW_TICKET_THEME,
+} from '@/constants/invitation/viewTexts';
 import InvitationQrInfoText from '@/components/invitation/view/InvitationQrInfoText';
 import InvitationQrInfoCode from '@/components/invitation/view/InvitationQrInfoCode';
-import { InvitationInfoContainerProps } from '@/types/invitation/view';
+import useThemeStore from '@/stores/useThemeStore';
+import {
+  InvitationInfoContainerProps,
+  InvitationInfoThemeProps,
+} from '@/types/invitation/view';
 
 function InvitationQrInfo({ data }: InvitationInfoContainerProps) {
+  const { themeState, setThemeState } = useThemeStore();
   const { category } = INVITATION_VEIW_INFO_TEXTS;
+  const onClickSetThemeHandler = () => {
+    // 클릭 시마다 클릭 횟수 증가
+    setThemeState('clickCount', themeState.clickCount + 1);
+    if (themeState.clickCount === 4) {
+      setThemeState('clickCount', 0);
+    }
+    switch (themeState.clickCount) {
+      case 0:
+        return setThemeState('theme', 'default');
+      case 1:
+        return setThemeState('theme', 'pink');
+      case 2:
+        return setThemeState('theme', 'green');
+      case 3:
+        return setThemeState('theme', 'orange');
+      case 4:
+        return setThemeState('theme', 'skyblue');
+      default:
+        break;
+    }
+    return null;
+  };
+  const variantData = INVITATION_VIEW_TICKET_THEME[themeState.theme];
 
   return (
     <div>
       <Header title={category.code} />
-      <div css={queryStyles}>
-        <div css={invitationQrContainer}>
+      <button type="button" onClick={onClickSetThemeHandler} css={queryStyles}>
+        <div css={invitationQrContainer(variantData)}>
           <InvitationQrInfoText data={data} />
           <div css={invitationQrticket}>
-            <div css={leftPuchingStyles} />
+            <div css={leftPuchingStyles(variantData)} />
             <div css={dashLineStlyes} />
-            <div css={rightPuchingStyles} />
+            <div css={rightPuchingStyles(variantData)} />
           </div>
           <InvitationQrInfoCode />
         </div>
-      </div>
+      </button>
     </div>
   );
 }
 const queryStyles = css`
   overflow-x: scroll;
 `;
-const invitationQrContainer = css`
+const invitationQrContainer = (variantData: InvitationInfoThemeProps) => css`
   position: relative;
   width: 350px;
   height: 482px;
   margin: 23px auto 50px;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0px 32px 30px -20px rgba(130, 169, 255, 0.87);
-  background-image: linear-gradient(
-    140.72deg,
-    #2563eb 11.61%,
-    #457ffe 22.34%,
-    #2563eb 40.09%,
-    #5c8fff 71.66%,
-    #2563eb 80.29%
-  );
+  box-shadow: ${variantData.shadow};
+  background-image: ${variantData.backgroundImage};
 `;
 const invitationQrticket = css`
   display: flex;
   justify-content: space-between;
   margin-top: 32px;
 `;
-const leftPuchingStyles = css`
+const leftPuchingStyles = (variantData: InvitationInfoThemeProps) => css`
   position: absolute;
   background-color: #fff;
   width: 22px;
   height: 44px;
   left: -1px;
   border-radius: 0 22px 22px 0;
-  background-image: linear-gradient(to left, #98abffaf, #d6deffde, #ffffff);
+  background-image: ${variantData.side};
 `;
-const rightPuchingStyles = css`
+const rightPuchingStyles = (variantData: InvitationInfoThemeProps) => css`
   position: absolute;
   background-color: #fff;
   width: 22px;
   height: 44px;
   right: -1px;
   border-radius: 22px 0 0 22px;
-  background-image: linear-gradient(to right, #98abffdf, #d6deffde, #ffffff);
+  background-image: ${variantData.sideRight};
 `;
 const dashLineStlyes = css`
   width: 100%;
