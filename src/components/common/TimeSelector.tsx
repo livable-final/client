@@ -9,6 +9,8 @@ import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
 import theme from '@/styles/theme';
 
 function TimeSelector({ content, status }: TimeSelectorProps) {
+  // content "00:00" 문자열
+
   // 토글을 통해 가변할 수 있는 variant state 관리
   const [varientState, setVarientState] = useState(status);
   const [time] = useState(content);
