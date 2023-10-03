@@ -120,6 +120,10 @@ const CalendarStyles = css`
     height: 44px;
     margin-bottom: 1em;
   }
+  .react-calendar__navigation__label__labelText {
+font: ${theme.font.subTitle.subTitle2_500};
+color: ${theme.palette.greyscale.grey60};
+  }
 
   .react-calendar__navigation button {
     min-width: 44px;
@@ -183,17 +187,19 @@ const CalendarStyles = css`
     line-height: 21px;
     font: ${theme.font.body.body3_400};
     // 사진이 있을 때 글자색 white로 설정하기
-    color: ${theme.palette.greyscale.grey50};
+
     abbr {
+      z-index: 1;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       cursor: pointer;
-
+      pointer-events: none; /* 이벤트를 이미지 아래로 전달 */
+      color: ${theme.palette.greyscale.grey50};
       @media (max-width: 320px) {
         //사진이 없을 때만 설정하기
-        margin-left: 4px;
+        margin-left: 3px;
       }
     }
   }

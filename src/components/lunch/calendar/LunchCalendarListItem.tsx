@@ -9,6 +9,7 @@ import { COMMON_ICON_NAMES } from '@/constants/common';
 import { LunchCalendarListItemProps } from '@/types/lunch/calendar';
 import useWriteStore from '@/stores/useWriteStore';
 import useSaveStore from '@/stores/useSaveStore';
+import useUserStore from '@/stores/useUserStore';
 
 function LunchCalendarListItem({
   keywordId,
@@ -25,6 +26,7 @@ function LunchCalendarListItem({
   const setSelectedMenu = useWriteStore((state) => state.setSelectedMenu);
   const setRemoveMenu = useWriteStore((state) => state.setRemoveMenu);
   const deleteKeywordList = useSaveStore((state) => state.deleteKeywordList);
+  const buildingName = useUserStore((state) => state.buildingName);
   const { listItem } = CALENDAR_CASE;
   const { home } = COMMON_ICON_NAMES;
 
@@ -56,9 +58,9 @@ function LunchCalendarListItem({
     case listItem.type1:
       return (
         <button type="button" css={listStyles(type)}>
-          <div css={contentStyles(type)}>
+          <div css={contentStyles}>
             <Clock css={iconStles} />
-            <p>{content}</p>
+            <p css={searchedStyles}>{content}</p>
           </div>
           <XIcon onClick={onClickDeleteHandler} />
         </button>
@@ -71,7 +73,9 @@ function LunchCalendarListItem({
               <strong>{content}</strong>
               <span>{category}</span>
             </div>
-            <p>테리타워에서 {time}분</p>
+            <p>
+              {buildingName}에서 {time}분
+            </p>
           </div>
           <div css={ImageStyles}>
             <Image
@@ -90,8 +94,8 @@ function LunchCalendarListItem({
           css={listStyles(type)}
           onClick={onClickListItemHandler}
         >
-          <div css={contentStyles(type)}>
-            <p>{item?.menuName}</p>
+          <div css={contentStyles}>
+            <p css={menuStyles}>{item?.menuName}</p>
           </div>
           <Icons
             icon={home.check}
@@ -118,16 +122,20 @@ const listStyles = (type: string) => css`
   padding: ${type === 'searched' ? `16px 4px` : `20px 4px`};
 `;
 
-const contentStyles = (type: string) => css`
+const contentStyles = () => css`
   display: flex;
   align-items: center;
   gap: 6px;
-  font: ${type === 'searched'
-    ? `${theme.font.body.body1_400}`
-    : `${theme.font.subTitle.subTitle2_400}`};
-  color: ${type === 'searched'
-    ? `${theme.palette.greyscale.grey60}`
-    : `${theme.palette.greyscale.grey70}`};
+`;
+
+const searchedStyles = css`
+  font: ${theme.font.body.body1_400};
+  color: ${theme.palette.greyscale.grey60};
+`;
+
+const menuStyles = css`
+  font: ${theme.font.subTitle.subTitle2_400};
+  color: ${theme.palette.greyscale.grey70};
 `;
 
 const searchingContentStyles = css`
