@@ -17,13 +17,12 @@ function Home() {
   const { setUserToken } = useSaveStore();
   const { reset } = usePagesStore();
   const { setState } = useUserStore;
-  const { response, alertState } = useFetch({
+  const { response, alertState, loading } = useFetch({
     fetchFn: getHome,
   });
 
   useEffect(() => {
     setUserToken(MEMBER_TOKEN);
-
     reset();
     if (response?.data.buildingId) {
       setState({ ...response?.data });
@@ -33,7 +32,12 @@ function Home() {
   return (
     <>
       {alertState.isOpen && <Alert />}
-      <Title title={response?.data.buildingName} part="main" isMain />
+      <Title
+        title={response?.data.buildingName}
+        loading={loading}
+        part="main"
+        isMain
+      />
       <div css={containerStyles}>
         <HomeContents hasCafeteria={response?.data.hasCafeteria} />
       </div>
