@@ -1,18 +1,19 @@
 import { create } from 'zustand';
 
+type SelectTimeType = string | JSX.Element;
 interface TimeSelectorStoreTypes {
-  selectTime: string | JSX.Element;
-  setSelectTime: (time: string | JSX.Element) => void;
+  selectTime: SelectTimeType[];
+  setSelectTime: (time: SelectTimeType) => void;
   clearSelectTime: () => void;
 }
 
 const useTimeSelectorStore = create<TimeSelectorStoreTypes>()((set) => ({
-  selectTime: '',
-  setSelectTime: (time: string | JSX.Element) => {
-    set({ selectTime: time });
+  selectTime: [],
+  setSelectTime: (time: SelectTimeType) => {
+    set((prev) => ({ selectTime: [...prev.selectTime, time] }));
   },
   clearSelectTime: () => {
-    set({ selectTime: '' });
+    set({ selectTime: [] });
   },
 }));
 
