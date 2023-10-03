@@ -24,7 +24,7 @@ import Alert from '@/components/common/Alert';
 
 function LunchCalenderEatOut() {
   const [searchText, setSearchText] = useState('');
-  const { setNextComponent, goBack } = usePagesStore();
+  const { setNextComponent, goBack, reset } = usePagesStore();
   const { bottomSheetState, openBottomSheet, closeBottomSheet } =
     useBottomSheetStore();
   const {
@@ -80,8 +80,10 @@ function LunchCalenderEatOut() {
 
       if (imageFiles.length === 0) {
         router.replace('/lunch/calendar');
+        reset();
+      } else {
+        setNextComponent(calendar.Inform);
       }
-      setNextComponent(calendar.Inform);
     } catch (err) {
       const error = err as ErrorProps;
       openAlert('📢', error.message || '리뷰 등록 오류');
