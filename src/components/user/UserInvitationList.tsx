@@ -28,6 +28,7 @@ function UserInvitationList() {
   const { response } = useFetch({
     fetchFn: getInvitationList,
   });
+
   useEffect(() => {
     setEditContents('commonPlaceId', '');
     setEditContents('description', '');
@@ -76,6 +77,7 @@ function UserInvitationList() {
     </div>
   );
 }
+
 const userInvitationListStyles = css`
   display: flex;
   flex-direction: column;

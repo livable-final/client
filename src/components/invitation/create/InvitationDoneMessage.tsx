@@ -9,7 +9,7 @@ function InvitationDoneMessage() {
   const { editContents } = useInvitationEditStore();
   const resendVisitors = editContents.visitors;
   const createVisitors = createContents.visitors;
-  console.log(createVisitors, resendVisitors);
+
   return (
     <div css={containerStyles}>
       <Send />
