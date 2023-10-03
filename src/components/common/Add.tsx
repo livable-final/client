@@ -65,8 +65,8 @@ const iconStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   margin-bottom: 2px;
 `;
 

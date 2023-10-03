@@ -1,9 +1,9 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { InputColorProps, InputProps } from '@/types/common/input';
 import { COMMON_INPUT_COLORS } from '@/constants/common';
 import { Location } from '@/assets/icons';
 import ErrorMessage from '@/components/common/ErrorMessage';
+import theme from '@/styles/theme';
 
 function Input({
   inputIcon,
@@ -40,7 +40,7 @@ function Input({
               disabled={isDisabled}
               maxLength={maxLength}
             />
-            <div>
+            <div css={maxLengthStyles}>
               {value.length}/{maxLength + 1}
             </div>
           </div>
@@ -129,7 +129,7 @@ const inputStyles = () => css`
   border-radius: 12px;
   height: 58px;
   min-width: 100px;
-  font-size: 1rem;
+  font: ${theme.font.subTitle.subTitle2_400};
 `;
 
 const inputTextareaStyles = (variantData: InputColorProps) => css`
@@ -139,6 +139,10 @@ const inputTextareaStyles = (variantData: InputColorProps) => css`
   font: ${variantData.font};
   font-size: 1rem;
   resize: none;
+`;
+
+const maxLengthStyles = css`
+  color: ${theme.palette.greyscale.grey30};
 `;
 
 export default Input;
