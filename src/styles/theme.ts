@@ -41,7 +41,7 @@ const theme = {
     },
     background: {
       white: '#FFFFFF',
-      home: 'linear-gradient(180deg, #FFF 0.31%, #FFF 8.73%, #F8F8F8 21.76%)',
+      home: 'linear-gradient(180deg, #FFF 0%, #FFF 5.59%, #F8F8F8 21.52%);',
     },
     popup: {
       orange:
