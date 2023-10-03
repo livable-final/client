@@ -11,6 +11,7 @@ export interface ReviewList {
   reviewCreatedAt: string;
   reviewImages: string[];
   reviewDescription: string;
+  hasReview?: boolean;
 }
 
 export interface ReviewListStore {

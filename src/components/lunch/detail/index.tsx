@@ -1,16 +1,18 @@
-import Header from '@/components/common/Header';
-import usePagesStore from '@/stores/usePagesStore';
-import LunchDetailContents from '@/components/lunch/detail/LunchDetailContents';
-import LunchReview from '@/components/lunch/review/LunchReview';
-import useReviewStore from '@/stores/useReviewStore';
-import { css } from '@emotion/react';
 import theme from '@/styles/theme';
+import { css } from '@emotion/react';
+import Header from '@/components/common/Header';
+import ToWrite from '@/components/common/ToWrite';
+import usePagesStore from '@/stores/usePagesStore';
+import useReviewStore from '@/stores/useReviewStore';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
+import LunchReview from '@/components/lunch/review/LunchReview';
+import LunchDetailContents from '@/components/lunch/detail/LunchDetailContents';
 
+//  리뷰 상세 컴포넌트
 function LunchDetail() {
-  const { title } = LUNCH_MAIN_CONSTANTS.review;
-  const { setNextComponent } = usePagesStore();
-  const { reviewList } = useReviewStore();
+  const { title } = LUNCH_MAIN_CONSTANTS.review; // '리뷰'
+  const { reviewList } = useReviewStore(); // ReviewStore에 저장된 리뷰 리스트
+  const { setNextComponent } = usePagesStore(); //
   const onClickHandler = () => {
     setNextComponent('');
   };
@@ -18,11 +20,14 @@ function LunchDetail() {
   return (
     <section>
       <Header title={title} onClick={onClickHandler} />
-      <div css={wrapperStyles}>
-        <LunchReview {...reviewList} />
-      </div>
+      {reviewList.hasReview && (
+        <div css={wrapperStyles}>
+          <LunchReview {...reviewList} />
+        </div>
+      )}
       <div css={dividerStyles} />
       <LunchDetailContents />
+      <ToWrite />
     </section>
   );
 }

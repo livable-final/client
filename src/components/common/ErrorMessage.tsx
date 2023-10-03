@@ -16,28 +16,38 @@ function ErrorMessage({ errorType }: ErrorMessageProps) {
 
   return (
     <div css={errorContainerStyles}>
-      <ErrorIcon color={theme.palette.state.warning} />
+      <div css={iconWrapperStyles}>
+        <ErrorIcon color={theme.palette.state.warning} />
+      </div>
       {errorMessage(errorType)}
     </div>
   );
 }
 
-const errorContainerStyles = () => css`
+const errorContainerStyles = css`
   display: flex;
   justify-content: left;
   align-items: center;
+  gap: 4px;
   width: 100%;
   margin-top: 12px;
-  color: ${theme.palette.state.warning};
 `;
 
-const errorTextStyles = () => css`
+const iconWrapperStyles = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+`;
+
+const errorTextStyles = css`
   display: flex;
   justify-content: left;
   text-align: center;
   align-items: center;
-  margin-left: 4px;
   color: ${theme.palette.state.warning};
+  font: ${theme.font.body.body3_400};
 `;
 
 export default ErrorMessage;

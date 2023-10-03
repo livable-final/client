@@ -4,12 +4,25 @@ import { HOME_TEXTS } from '@/constants/home/homeTexts';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { Rights } from '@/assets/icons';
+import useFetch from '@/hooks/useFetch';
+import { getMyData } from '@/pages/api/home/homeRequests';
+import useUserStore from '@/stores/useUserStore';
+import { useEffect } from 'react';
 
 function HomeReception() {
   const { reception } = HOME_TEXTS;
   const { progress } = HOME_TEXTS.reception;
+  const { setState } = useUserStore;
+  const { response } = useFetch({
+    fetchFn: getMyData,
+  });
+
   const progressArray = [];
   const count = progress.quantity.length;
+
+  useEffect(() => {
+    setState({ ...response?.data });
+  }, [response?.data, setState]);
 
   // Progress 컴포넌트와 Rights를 번갈아 push
   for (let i = 0; i < count; i += 1) {

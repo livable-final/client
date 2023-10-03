@@ -1,21 +1,22 @@
+import theme from '@/styles/theme';
+import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
+import useFetch from '@/hooks/useFetch';
+import useRouletteStore from '@/stores/useRouletteStore';
+import { getMenus } from '@/pages/api/lunch/lunchRequests';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
+import LunchRouletteBg from '@/components/lunch/roulette/LunchRouletteBg';
+import LunchRoulettePushBtn from '@/components/lunch/roulette/LunchRoulettePushBtn';
+import LunchRouletteLockBtn from '@/components/lunch/roulette/LunchRouletteLockBtn';
 import {
   findRandomMenus,
   selectRandomCategory,
   selectRandomMenus,
 } from '@/utils/selectRandomItem';
-import theme from '@/styles/theme';
-import useFetch from '@/hooks/useFetch';
-import { getMenus } from '@/pages/api/lunch/lunchRequests';
-import mq from '@/utils/mediaquery';
-import LunchRoulettePushBtn from '@/components/lunch/roulette/LunchRoulettePushBtn';
-import LunchRouletteLockBtn from '@/components/lunch/roulette/LunchRouletteLockBtn';
-import LunchRouletteBg from '@/components/lunch/roulette/LunchRouletteBg';
-import useRouletteStore from '@/stores/useRouletteStore';
 
+// 오늘 점심 룰렛 컴포넌트
 function LunchRoulette() {
-  const { time } = LUNCH_ROULETTE_CONSTANTS;
+  const { time } = LUNCH_ROULETTE_CONSTANTS; // 시간 상수
   const { categoryState, menuState, isLocked, isOperated, isPressed, isAgain } =
     useRouletteStore();
   const { setState } = useRouletteStore;
@@ -42,6 +43,7 @@ function LunchRoulette() {
         clearInterval(menuInterval);
         setState({ isOperated: true }); // 가동 완료!
         setState({ isPressed: false }); // 버튼 원상 복귀!
+        setState({ isSelected: false }); // 선택 완료 초기화!
       }, time.duration.fixed); // 모든 선택이 완료되는 시간 인터벌 (3000ms)
 
       // *** 카테고리 미 고정 시! ***
@@ -74,6 +76,7 @@ function LunchRoulette() {
         setState({ isAgain: true }); // 반복 선택 !
         setState({ isOperated: true }); // 가동 완료!
         setState({ isPressed: false }); // 버튼 원상 복귀!
+        setState({ isSelected: false }); // 선택 완료 초기화!
       }, time.duration.category + time.duration.menu); // 모든 선택이 완료되는 시간 인터벌 (500ms + 3500ms = 4000ms)
     }
   };
@@ -83,14 +86,8 @@ function LunchRoulette() {
       <div css={layoutStyles}>
         <div css={bgStyles}>
           <LunchRouletteBg isOperated={isOperated} />
-          <LunchRoulettePushBtn
-            isPressed={isPressed}
-            isAgain={isAgain}
-            onClick={onClickBtnHandler}
-          />
+          <LunchRoulettePushBtn onClick={onClickBtnHandler} />
           <LunchRouletteLockBtn
-            isAgain={isAgain}
-            isLocked={isLocked}
             onClick={() => setState({ isLocked: !isLocked })}
           />
         </div>

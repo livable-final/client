@@ -1,30 +1,25 @@
-import theme from '@/styles/theme';
-import { RankingPodiumProps } from '@/types/lunch/ranking';
-import { css } from '@emotion/react';
 import Image from 'next/image';
+import theme from '@/styles/theme';
+import { css } from '@emotion/react';
+import { RankingPodiumProps } from '@/types/lunch/ranking';
 
-function LunchRankingPodium({
-  menuImage,
-  menuName,
-  count,
-  rank,
-  height,
-}: RankingPodiumProps) {
+// '오늘 점심' 홈 랭킹 파트 단상 컴포넌트
+function LunchRankingPodium({ ...props }: RankingPodiumProps) {
   return (
     <div css={containerStyles}>
       <Image
         css={menuImageStyles}
-        src={menuImage}
-        alt="음식"
+        src={props.menuImage}
+        alt={props.menuName}
         width={44}
         height={44}
       />
       <div css={wrapperStyles}>
-        <span css={menuNameStyles}>{menuName}</span>
-        <span css={countStyles}>{count}명</span>
+        <span css={menuNameStyles}>{props.menuName}</span>
+        <span css={countStyles}>{props.count}명</span>
       </div>
-      <div css={rankStyles(height)}>
-        <span css={spanStyles}>{rank}</span>
+      <div css={rankStyles(props.height, props.color)}>
+        <span css={spanStyles(props.margin)}>{props.rank}</span>
       </div>
     </div>
   );
@@ -62,22 +57,23 @@ const countStyles = css`
   line-height: 16px;
 `;
 
-const rankStyles = (height: number) => css`
+const rankStyles = (height: number, color: string) => css`
   display: flex;
-  background: ${theme.palette.orange};
+  background: ${color};
   width: 67px;
   height: 32px;
   flex-shrink: 0;
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 16px 16px 0px 0px;
   justify-content: center;
   align-items: end;
   height: ${height}px;
 `;
 
-const spanStyles = css`
+const spanStyles = (margin: string) => css`
   font: ${theme.font.etc.rankingNumber};
   color: ${theme.palette.white};
   line-height: 21px;
+  margin: ${margin};
 `;
 
 export default LunchRankingPodium;

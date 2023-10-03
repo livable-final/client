@@ -1,5 +1,6 @@
 // import Image from 'next/image';
 import theme from '@/styles/theme';
+import Image from 'next/image';
 import useFetch from '@/hooks/useFetch';
 import { css } from '@emotion/react';
 import { getInvitationCarousel } from '@/pages/api/invitation/viewRequests';
@@ -9,8 +10,7 @@ import { INVITATION_CAROUSEL_TEXTS } from '@/constants/invitation/viewTexts';
 function InvitaitionCarousel({ type }: InvitationCarouselProps) {
   const { restaurant, cafe } = INVITATION_CAROUSEL_TEXTS;
   const { response } = useFetch({
-    fetchFn: getInvitationCarousel,
-    arg: type,
+    fetchFn: () => getInvitationCarousel(type),
   });
 
   const datas = response && response.data;
@@ -21,21 +21,19 @@ function InvitaitionCarousel({ type }: InvitationCarouselProps) {
         {type === 'restaurant' ? `${restaurant.subtitle}` : `${cafe.subtitle}`}
       </div>
       <div css={carouselTitleStyles}>
-        {type === 'restaurant'
-          ? '테라타워 근처 맛집 추천!'
-          : '근처 카페를 추천드릴게요'}
+        {type === 'restaurant' ? `${restaurant.body}` : `${cafe.body}`}
       </div>
       <div css={carouselStyles}>
         {datas &&
           datas.map((item) => (
             <div key={item.restaurantName} css={carouselItemStyles}>
               <div css={itemImageStyles}>
-                {/* <Image
-                src={item.restaurantImageUrl}
-                width={135}
-                height={80}
-                alt={item.restaurantName}
-              /> */}
+                <Image
+                  src="/defaultImage.jpg"
+                  width={135}
+                  height={80}
+                  alt={item.restaurantName}
+                />
               </div>
               <div css={carouselItemInfoStyles}>
                 <div css={itemInfoNameStyles}>{item.restaurantName}</div>

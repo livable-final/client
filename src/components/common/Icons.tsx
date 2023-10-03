@@ -1,5 +1,6 @@
 import { IconsProps } from '@/types/common/icon';
 import { COMMON_ICON_NAMES } from '@/constants/common';
+
 import {
   Meeting,
   Interview,
@@ -38,6 +39,16 @@ import {
   ServiceReception,
   ServiceTemp,
   My,
+  Error,
+  ExitSmall,
+  InfoBuilding,
+  InfoPlace,
+  InfoHost,
+  InfoParking,
+  HomeActive,
+  LunchActive,
+  MyActive,
+  Popup,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -66,8 +77,18 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Back color={color} />;
     case invitation.plusSmall:
       return <PlusSmall color={color} />;
+    case invitation.building:
+      return <InfoBuilding color={color} />;
+    case invitation.place:
+      return <InfoPlace color={color} />;
+    case invitation.host:
+      return <InfoHost color={color} />;
+    case invitation.parking:
+      return <InfoParking color={color} />;
     case home.home:
-      return <Home color={color} />;
+      return <Home />;
+    case home.homeActive:
+      return <HomeActive />;
     case user.coin:
       return <Coin width={size} height={size} />;
     case home.down:
@@ -105,19 +126,29 @@ function Icons({ icon, color, size }: IconsProps) {
     case home.service.serviceTemp:
       return <ServiceTemp />;
     case home.lunch:
-      return <Lunch color={color} />;
+      return <Lunch />;
+    case home.lunchActive:
+      return <LunchActive />;
     case home.check:
       return <Check width={size} height={size} color={color} />;
     case home.my:
       return <My />;
+    case home.myActive:
+      return <MyActive />;
     case lunch.smile:
       return <Smile width={size} height={size} />;
     case lunch.confused:
       return <Confused width={size} height={size} />;
     case lunch.thumbsUp:
       return <ThumbsUp color={color} width={size} height={size} />;
+    case lunch.popup:
+      return <Popup color={color} size={size} />;
     case common.close:
       return <Close />;
+    case common.error:
+      return <Error width={size} height={size} />;
+    case common.exitSmall:
+      return <ExitSmall />;
     default:
       break;
   }

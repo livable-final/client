@@ -4,11 +4,18 @@ import UserPoint from '@/components/user/UserPoint';
 import { ProfileWithBg } from '@/assets/icons';
 import useFetch from '@/hooks/useFetch';
 import { getMyData } from '@/pages/api/home/homeRequests';
+import { useEffect } from 'react';
+import useUserStore from '@/stores/useUserStore';
 
 function UserInfo() {
+  const { setState } = useUserStore;
   const { response } = useFetch({
     fetchFn: getMyData,
   });
+
+  useEffect(() => {
+    setState({ ...response?.data });
+  }, [response?.data, setState]);
 
   return (
     <div css={containerStyles}>

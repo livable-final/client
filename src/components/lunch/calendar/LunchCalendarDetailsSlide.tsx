@@ -1,9 +1,17 @@
 import Image from 'next/image';
 import theme from '@/styles/theme';
 import dayjs from 'dayjs';
-import usePagesStore from '@/stores/usePagesStore';
+import useWriteStore from '@/stores/useWriteStore';
+import useCalendarStore from '@/stores/useCalendarStore';
 import { css } from '@emotion/react';
-import { Delicious, Location20 } from '@/assets/icons';
+import {
+  Location20,
+  FoodNoPhoto,
+  FoodLunchBox,
+  FoodCafe,
+} from '@/assets/icons';
+import Icons from '@/components/common/Icons';
+import { COMMON_ICON_NAMES } from '@/constants/common';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -11,7 +19,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 function LunchCalendarDetailsSlide() {
-  const { setNextComponent } = usePagesStore();
+  const setIsChecked = useWriteStore((state) => state.setIsChecked);
+  const reviewDetails = useCalendarStore((state) => state.reviewDetails);
+  const { lunch } = COMMON_ICON_NAMES;
 
   const onClickHandler = (
     event:
@@ -22,45 +32,8 @@ function LunchCalendarDetailsSlide() {
 
     const target = event.target as HTMLInputElement;
     // click 이벤트 발생할 때, e.target과 e.currentTarget이 달라서 비교 조건 사용 불가
-    if (target.className === 'swiper-slide swiper-slide-active')
-      setNextComponent('');
+    if (target.className === 'swiper-slide swiper-slide-active') setIsChecked();
   };
-
-  const reviewData = [
-    {
-      reviewTitle: '부대찌개',
-      reviewTaste: 'GOOD',
-      reviewDescription: '역시 부대찌개는 놀부지!',
-      reviewCreatedAt: '2023-09-13T11:12:00',
-      reviewImg: [
-        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
-        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95%ED%83%95.jpg',
-      ],
-      location: '놀부부대찌개',
-    },
-    {
-      reviewTitle: '감자 스테이크 샐러드, 스테이크',
-      reviewTaste: 'GOOD',
-      reviewDescription: '음식이 친절하고, 사장님이 맛있어요',
-      reviewCreatedAt: '2023-09-13T11:12:00',
-      reviewImg: [
-        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
-        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95%ED%83%95.jpg',
-      ],
-      location: '현수네스테이크하우스',
-    },
-    {
-      reviewTitle: '김밥천국',
-      reviewTaste: 'BAD',
-      reviewDescription: '김밥지옥입니다',
-      reviewCreatedAt: '2023-09-13T11:12:00',
-      reviewImg: [
-        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95.jpg',
-        'https://livable-final.s3.ap-northeast-2.amazonaws.com/%EB%A7%88%EB%9D%BC%ED%83%95%ED%83%95.jpg',
-      ],
-      location: '김밥천국',
-    },
-  ];
 
   return (
     <div
@@ -76,50 +49,71 @@ function LunchCalendarDetailsSlide() {
         slidesPerView={1}
         modules={[Navigation]}
       >
-        {reviewData.map((value) => (
+        {reviewDetails.map((value) => (
           <SwiperSlide key={value.reviewCreatedAt}>
-            <section css={slideStyles}>
-              <div css={titleStyles}>
-                <div>
-                  <strong>{value.reviewTitle}</strong>
-                  <div css={locationStyles}>
-                    <Location20 />
-                    <span>{value.location}</span>
+            <section css={slideStyles(value.images.length > 0)}>
+              <div>
+                <div css={titleStyles}>
+                  <div>
+                    <strong>{value.reviewTitle}</strong>
+                    {value.reviewType === 'restaurant' && (
+                      <div css={locationStyles}>
+                        <Location20 />
+                        <span>{value.location}</span>
+                      </div>
+                    )}
                   </div>
+                  {value.reviewTaste === 'GOOD' ? (
+                    <Icons icon={lunch.smile} size="22px" />
+                  ) : null}
                 </div>
-                {value.reviewTaste === 'GOOD' ? <Delicious /> : null}
-              </div>
-              <Swiper
-                loop
-                slidesPerView={1}
-                pagination={{
-                  type: 'fraction',
-                }}
-                modules={[Pagination]}
-                // api 별도 호출 시 사용하기 위해 주석처리
-                // onSlideChange={() => console.log('slide change')}
-                // onSwiper={(swiper) => console.log(swiper)}
-              >
-                {value.reviewImg.map((img, i) => (
-                  <SwiperSlide key={img}>
-                    <div css={ImageBoxStyles}>
-                      <Image
-                        width={290}
-                        height={193}
-                        src={img}
-                        alt={`이미지${i}`}
-                        css={ImageStyles}
-                      />
+                <Swiper
+                  loop
+                  slidesPerView={1}
+                  pagination={{
+                    type: 'fraction',
+                  }}
+                  modules={[Pagination]}
+                >
+                  {value.images.length > 0 ? (
+                    value.images.map((img, i) => (
+                      <SwiperSlide key={img}>
+                        <div css={ImageBoxStyles}>
+                          <Image
+                            width={290}
+                            height={193}
+                            src={img}
+                            alt={`이미지${i}`}
+                            css={ImageStyles}
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))
+                  ) : (
+                    <div
+                      css={css`
+                        display: flex;
+                        justify-content: center;
+                        padding: 34px 0;
+                      `}
+                    >
+                      {value.reviewType === 'restaurant' ? (
+                        <FoodNoPhoto />
+                      ) : value.reviewType === 'lunchBox' ? (
+                        <FoodLunchBox />
+                      ) : (
+                        <FoodCafe />
+                      )}
                     </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              <div css={textBoxStyles}>
-                <p css={descriptionStyles}>{value.reviewDescription}</p>
-                <p css={dateStyles}>
-                  {dayjs(value.reviewCreatedAt).format('YYYY년 MM월 DD일')}
-                </p>
+                  )}
+                </Swiper>
+                <div css={textBoxStyles}>
+                  <p css={descriptionStyles}>{value.reviewDescription}</p>
+                </div>
               </div>
+              <p css={dateStyles}>
+                {dayjs(value.reviewCreatedAt).format('YYYY년 MM월 DD일')}
+              </p>
             </section>
           </SwiperSlide>
         ))}
@@ -139,16 +133,20 @@ const slideModalStyles = css`
   --swiper-navigation-color: ${theme.palette.greyscale.grey5};
 `;
 
-const slideStyles = css`
+const slideStyles = (type: boolean) => css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
-  max-width: 290px;
-  max-height: 356px;
+  width: 250px;
+  max-height: ${type ? '350px' : '281px'};
   padding: 20px 0;
+  box-sizing: content-box;
   border-radius: 16px;
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.18);
   background-color: ${theme.palette.white};
@@ -156,23 +154,34 @@ const slideStyles = css`
   .swiper.swiper-initialized.swiper-horizontal {
     .swiper-pagination {
       background: rgba(0, 0, 0, 0.25);
-      margin-left: 234px;
-      margin-bottom: 10px;
+      margin-left: 200px;
+      margin-bottom: 20px;
       width: 40px;
       border-radius: 10px;
       font: ${theme.font.body.body3_500};
       color: ${theme.palette.white};
     }
   }
+
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const titleStyles = css`
   display: flex;
   justify-content: space-between;
-  padding: 0 20px 16px;
+  padding: 0 20px;
 
   strong {
     margin-left: 4px;
+    display: block;
+    max-width: 160px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font: ${theme.font.body.body1_600};
     color: ${theme.palette.greyscale.grey90};
   }
@@ -183,7 +192,7 @@ const locationStyles = css`
   align-items: center;
   gap: 2px;
   span {
-    font: ${theme.font.body.body4};
+    font: ${theme.font.body.body3_400};
     color: ${theme.palette.greyscale.grey50};
   }
 `;
@@ -195,6 +204,7 @@ const ImageBoxStyles = css`
   dispaly: flex;
   justify-content: center;
   align-items: center;
+  padding: 16px 0;
 `;
 
 const ImageStyles = css`
@@ -204,17 +214,16 @@ const ImageStyles = css`
 `;
 
 const textBoxStyles = css`
-  display: flex;
-  flex-direction: column;
-  margin: 16px 20px 0;
+  margin: 0 20px 0;
 `;
 
 const descriptionStyles = css`
-  font: ${theme.font.body.body1_600};
+  font: ${theme.font.etc.review};
   color: ${theme.palette.greyscale.grey90};
 `;
 const dateStyles = css`
-  margin-top: 10px;
+  margin: 0 20px 0;
+  // margin-top: 10px;
   text-align: end;
   font: ${theme.font.body.body4};
   color: ${theme.palette.greyscale.grey40};

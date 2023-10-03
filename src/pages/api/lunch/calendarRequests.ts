@@ -1,9 +1,10 @@
 import { apiInstance } from '@/pages/api/axios';
 
 // 달력
-export const getReviewData = async (year: number, month: number) => {
+
+export const getReviewDetailsData = async (year: number, month: number) => {
   const res = await apiInstance.get(
-    `/reviews/members?year=${year}&month=${month}`,
+    `/reviews/detail/members?year=${year}&month=${month}`,
   );
   return res.data;
 };

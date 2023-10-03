@@ -1,7 +1,3 @@
-export interface GetRankingData {
-  buildingId: number;
-}
-
 export interface GetMenuReviewsData {
   memberName: string;
   memberProfileImage: string;
@@ -29,7 +25,7 @@ export interface GetMenuData {
 
 export interface GetRestListData {
   restaurantId: number;
-  name: string;
+  restaurantName: string;
   tastePercentage: number;
   representativeImageUrl: string;
   address: string;
@@ -37,4 +33,19 @@ export interface GetRestListData {
   isBuilding: boolean;
   estimatedTime: number;
   review: string;
+}
+
+export interface GetRankingData {
+  date: string;
+  count: number;
+  rank: number;
+  menuId: number;
+  menuName: string;
+  menuImage: string;
+}
+
+// * POST 룰렛 메뉴 선택 완료 request body
+export interface PostMenuContent {
+  menuId: number;
+  date: string;
 }

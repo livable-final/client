@@ -1,34 +1,36 @@
-import LunchCard from '@/components/lunch/LunchCard';
-import LunchReview from '@/components/lunch/review/LunchReview';
-import LunchSubTitle from '@/components/lunch/LunchSubTitle';
-import { css } from '@emotion/react';
-import usePagesStore from '@/stores/usePagesStore';
-import useReviewStore from '@/stores/useReviewStore';
-import { ReviewList } from '@/types/lunch/reviewList';
 import theme from '@/styles/theme';
+import { css } from '@emotion/react';
 import useFetch from '@/hooks/useFetch';
-import { getReviewList } from '@/pages/api/lunch/lunchRequests';
+import usePagesStore from '@/stores/usePagesStore';
+import LunchCard from '@/components/lunch/LunchCard';
+import useReviewStore from '@/stores/useReviewStore';
+import COMPONENT_NAME from '@/constants/common/pages';
+import { ReviewList } from '@/types/lunch/reviewList';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import useBuildingStore from '@/stores/useBuildingStore';
+import useUserStore from '@/stores/useUserStore';
+import LunchSubTitle from '@/components/lunch/LunchSubTitle';
+import { getReviewList } from '@/pages/api/lunch/lunchRequests';
+import LunchReview from '@/components/lunch/review/LunchReview';
 
+//
 function LunchReviews() {
-  const { setNextComponent } = usePagesStore();
   const { setReviewList } = useReviewStore();
-  const { buildingName } = useBuildingStore();
+  const { setNextComponent } = usePagesStore();
+  const { buildingId, buildingName } = useUserStore();
   const { prefix, suffix } = LUNCH_MAIN_CONSTANTS.main.reviews;
   const { response } = useFetch({
-    fetchFn: getReviewList,
-    arg: 1,
+    fetchFn: () => getReviewList(buildingId),
   });
 
   const onClickHandler = (item: ReviewList) => {
-    setNextComponent('LunchDetail'); // LunchDetail.tsx로 이동
-    setReviewList(item); // 클릭 한 리뷰 내용 store에 저장
+    setNextComponent(COMPONENT_NAME.lunch.detail.detail); // LunchDetail.tsx로 이동
+    setReviewList({ ...item, hasReview: true }); // 클릭 한 리뷰 내용 store에 저장
     window.scrollTo({ top: 0 }); // 페이지 top: 0으로 이동
   };
 
   return (
     <LunchCard col>
+      {/* 최근 OO빌딩 입주자들의 리뷰 */}
       <LunchSubTitle
         title={`${prefix} ${buildingName} ${suffix}`}
         type="recent"

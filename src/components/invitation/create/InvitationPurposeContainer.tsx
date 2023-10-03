@@ -8,7 +8,7 @@ import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useViewStore from '@/stores/usePagesStore';
 import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { COMMON_CATEGORIES } from '@/constants/common';
 import {
@@ -20,7 +20,7 @@ import {
 function InvitationPurposeContainer() {
   const { setNextComponent } = useViewStore();
   const { setHeaderTitle } = useInvitationHeaderTitleStore();
-  const { setCreateContents } = useInvitationCreateStore();
+  const { setCreateContents, clearCreateContents } = useInvitationCreateStore();
   const { invitation }: CategoryInvitation = COMMON_CATEGORIES;
   const {
     header,
@@ -33,6 +33,12 @@ function InvitationPurposeContainer() {
   const [selectedCategory, setSelectedCategory] = useState<string>('meeting');
   const [etcPurpose, setEtcPurpose] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  // 최초 렌더링 시 타이틀/초대장데이터 초기화
+  useEffect(() => {
+    setHeaderTitle('방문자 초대');
+    clearCreateContents();
+  }, [clearCreateContents, setHeaderTitle]);
 
   // 방문 목적 카테고리 선택
   const onClickCategoryHandler = (item: CommonCategory) => {
@@ -95,7 +101,7 @@ function InvitationPurposeContainer() {
           <div>{description[selectedCategory]}</div>
         </div>
         <div
-          css={inputWrapperStyles}
+          css={inputWrapperStyles(isFocused)}
           onFocus={onFocusInputHandler}
           onBlur={onBlurInputHandler}
         >
@@ -231,8 +237,9 @@ const iconWrapperStyles = css`
   padding-top: 4px;
 `;
 
-const inputWrapperStyles = css`
+const inputWrapperStyles = (isFocused: boolean) => css`
   max-width: 280px;
+  margin-bottom: ${isFocused ? '30px' : '0'};
 
   ${mq.md} {
     min-width: 360px;

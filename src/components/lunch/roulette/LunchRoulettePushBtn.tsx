@@ -1,16 +1,15 @@
 import Image from 'next/image';
-import { push, pushPressed, again, againPressed } from '@/assets/images';
-import { css } from '@emotion/react';
 import mq from '@/utils/mediaquery';
+import { css } from '@emotion/react';
+import useRouletteStore from '@/stores/useRouletteStore';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
-import { RoulettePushProps } from '@/types/lunch/roulette';
+import { RouletteButtonProps } from '@/types/lunch/roulette';
+import { push, pushPressed, again, againPressed } from '@/assets/images';
 
-function LunchRoulettePushBtn({
-  isPressed,
-  isAgain,
-  onClick,
-}: RoulettePushProps) {
+// 룰렛 PUSH & AGAIN 버튼 렌딩 컴포넌트
+function LunchRoulettePushBtn({ onClick }: RouletteButtonProps) {
   const { alt } = LUNCH_ROULETTE_CONSTANTS;
+  const { isPressed, isAgain } = useRouletteStore();
 
   const renderBtn = () => {
     if (isAgain) {

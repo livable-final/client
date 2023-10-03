@@ -1,32 +1,31 @@
 import mq from '@/utils/mediaquery';
-// import InvitationInfo from '@/components/invitation/view/InvitationInfo';
+import InvitationInfo from '@/components/invitation/view/InvitationInfo';
 import InvitationInfoCategory from '@/components/invitation/view/InvitationInfoCategory';
 import { css } from '@emotion/react';
 import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
-// import { InvitationInfoContainerProps } from '@/types/invitation/view';
+import { InvitationInfoContainerProps } from '@/types/invitation/view';
 
-function InvitationInfoContainer() {
+function InvitationInfoContainer({ data }: InvitationInfoContainerProps) {
+  const { category, icon } = INVITATION_VEIW_INFO_TEXTS;
+
   return (
     <div css={ViewInfoContainerStyles}>
       <div css={ViewInfoStyles}>
-        {/* <InvitationInfo
-          value={INVITATION_VEIW_INFO_TEXTS.category.code}
-          data={data}
-        /> */}
+        {data && (
+          <InvitationInfo
+            value={INVITATION_VEIW_INFO_TEXTS.category.code}
+            data={data}
+          />
+        )}
       </div>
       <div css={InfoCategoryContainerStyles}>
         <InvitationInfoCategory
-          value={INVITATION_VEIW_INFO_TEXTS.category.building}
+          value={category.building}
+          icon={icon.building}
         />
-        <InvitationInfoCategory
-          value={INVITATION_VEIW_INFO_TEXTS.category.place}
-        />
-        <InvitationInfoCategory
-          value={INVITATION_VEIW_INFO_TEXTS.category.host}
-        />
-        <InvitationInfoCategory
-          value={INVITATION_VEIW_INFO_TEXTS.category.parking}
-        />
+        <InvitationInfoCategory value={category.place} icon={icon.place} />
+        <InvitationInfoCategory value={category.host} icon={icon.host} />
+        <InvitationInfoCategory value={category.parking} icon={icon.parking} />
       </div>
     </div>
   );

@@ -1,74 +1,71 @@
-import { COMMON_TOGGLE_TITLE } from '@/constants/common';
 import theme from '@/styles/theme';
+import useToggleStore from '@/stores/useToggleStore';
+import { COMMON_TOGGLE_TITLE } from '@/constants/common';
 import { css } from '@emotion/react';
-import { useState } from 'react';
 
 function Toggle() {
-  const [isActive, setIsActive] = useState(false);
+  const { isOn, onToggle, offToggle } = useToggleStore();
+
+  // Toggle On
+  const onClickOnToggle = () => {
+    onToggle();
+  };
+
+  // Toggle Off
+  const onClickOffToggle = () => {
+    offToggle();
+  };
 
   return (
-    <label
-      htmlFor="toggle"
-      className={`toggleSwitch ${isActive && 'active'}`}
-      css={toggleSwitchStyles}
-    >
-      <span css={contentStyles(isActive)}>{COMMON_TOGGLE_TITLE}</span>
+    <label css={toggleSwitchStyles(isOn)}>
       <input
         type="checkbox"
-        id="toggle"
-        onClick={() => setIsActive(!isActive)}
+        onClick={isOn ? onClickOffToggle : onClickOnToggle}
         css={checkboxStyles}
       />
-      <span css={toggleButtonStyles(isActive)} />
+      <span css={toggleButtonStyles(isOn)} />
+      <span css={contentStyles(isOn)}>{COMMON_TOGGLE_TITLE}</span>
     </label>
   );
 }
 
-const toggleSwitchStyles = css`
+const toggleSwitchStyles = (isOn: boolean) => css`
   width: 72px;
   padding: 3px;
   height: 32px;
-  display: block;
+  display: flex;
   position: relative;
   border-radius: 30px;
   border: 1px solid ${theme.palette.white};
-  background-color: ${theme.palette.greyscale.grey10};
+  background-color: ${isOn
+    ? `${theme.palette.bluescale.blue10}`
+    : ` ${theme.palette.greyscale.grey10}`};
   cursor: pointer;
-
-  &.active {
-    background: ${theme.palette.bluescale.blue10};
-
-    .toggleButton {
-      left: calc(100% - 40px);
-    }
-  }
-  .toggleButton {
-    background: #fff;
-  }
 `;
 
 const checkboxStyles = css`
   display: none;
 `;
 
-const contentStyles = (isActive: boolean) => css`
-  position: absolute;
-  top: 25%;
-  right: ${isActive ? 'calc(100% - 36px)' : '12px'};
+const contentStyles = (isOn: boolean) => css`
+  display: flex;
+  position: relative;
+  right: ${isOn ? 'calc(100% - 44px)' : '-6px'};
+  top: 4px;
   font: ${theme.font.body.body3_400};
-  color: ${isActive ? theme.palette.primary : theme.palette.greyscale.grey50};
+  color: ${isOn ? theme.palette.primary : theme.palette.greyscale.grey50};
   transition: right 0.4s;
 `;
 
-const toggleButtonStyles = (isActive: boolean) => css`
+const toggleButtonStyles = (isOn: boolean) => css`
+  display: flex;
   width: 26px;
   height: 26px;
   padding: 4px 8px;
-  position: absolute;
-  top: 50%;
-  left: ${isActive ? 'calc(100% - 28px)' : '2px'};
-  transform: translateY(-50%);
-  border-radius: 50%;
+  position: relative;
+  left: ${isOn ? 'calc(100% - 28px)' : '0px'};
+  bottom: 1px;
+  border-radius: 100%;
   background: ${theme.palette.white};
   transition: left 0.6s;
 `;

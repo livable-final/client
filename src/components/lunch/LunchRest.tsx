@@ -1,23 +1,25 @@
-import { CALENDAR_CONTENT } from '@/constants/lunch';
-import theme from '@/styles/theme';
-import { GetRestListData } from '@/types/lunch/api';
-import { css } from '@emotion/react';
+import menu from '$/menu.png';
 import Image from 'next/image';
+import theme from '@/styles/theme';
+import { css } from '@emotion/react';
+import { GetRestListData } from '@/types/lunch/api';
+import { CALENDAR_CONTENT } from '@/constants/lunch';
 
+// 오늘 점심 식당 목록 컴포넌트
 function LunchRest({ ...item }: GetRestListData) {
   const { button5 } = CALENDAR_CONTENT.button;
   return (
     <section css={sectionStyles}>
       <Image
         css={menuImageStyles}
-        src={item.representativeImageUrl}
+        src={menu}
         alt="음식"
         width={52}
         height={52}
       />
       <div css={wrapperStyles}>
         <div>
-          <p css={nameStyles}>{item.name}</p>
+          <p css={nameStyles}>{item.restaurantName}</p>
           <p css={addressStyles}>{item.address}</p>
         </div>
         <div css={badgeStyles}>
@@ -71,12 +73,14 @@ const nameStyles = css`
   font: ${theme.font.body.body1_600};
   color: ${theme.palette.title};
   line-height: 24px;
+  text-align: left;
 `;
 
 const addressStyles = css`
   font: ${theme.font.body.body3_500};
   color: ${theme.palette.greyscale.grey50};
   line-height: 24px;
+  text-align: left;
 `;
 
 export default LunchRest;

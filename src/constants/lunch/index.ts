@@ -99,6 +99,12 @@ export const LUNCH_MAIN_CONSTANTS = {
     ranking: {
       title: '지난주 점심 메뉴 TOP 10',
       heights: [32, 47, 25],
+      colors: [
+        'linear-gradient(180deg, #B0B6EE 0%, rgba(158, 198, 241, 0.71) 86.17%, rgba(133, 178, 246, 0.30) 100%)',
+        'linear-gradient(180deg, #FFC46D 0%, rgba(255, 206, 69, 0.68) 86.25%, rgba(255, 176, 22, 0.30) 100%)',
+        'linear-gradient(180deg, #FAAA91 0%, rgba(252, 96, 89, 0.70) 81.56%, rgba(255, 0, 15, 0.30) 100%)',
+      ],
+      margin: ['4px 0 7px', '5px 0 21px', '0'],
     },
     reviews: {
       prefix: '최근',
@@ -147,7 +153,7 @@ export const LUNCH_ROULETTE_CONSTANTS = {
   title: {
     roulette: '점심룰렛',
     review: '맛집을 알려드릴게요!',
-    recent: '근처의',
+    recent: '님께 추천하는 식당',
   },
   error: {
     response: { menuId: 0, name: '결과가 없습니다.' },
@@ -156,5 +162,18 @@ export const LUNCH_ROULETTE_CONSTANTS = {
     push: '버튼',
     bg: '배경',
     lock: '잠금',
+  },
+  popup: `이 메뉴로 결정! \n 맛집 보러가기`,
+  menu: {
+    min: 0,
+    max: 68,
+  },
+};
+
+export const POINT_CONSTANTS = {
+  card: {
+    text1: '포인트 제공 안내',
+    text2: '·제공되는 포인트는 오피스너 제휴사에서만 사용 가능합니다.',
+    text3: '·포인트 사용 제휴사는 공지사항을 통해 확인해주세요.',
   },
 };

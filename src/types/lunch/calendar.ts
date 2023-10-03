@@ -1,13 +1,17 @@
 // 달력 리뷰 데이터
 export interface DateDishPhotoProps {
-  reviewData: ReviewData[];
+  dayReviewData: ReviewData[];
 }
 
 export interface ReviewData {
   reviewId: number;
-  type: string;
-  reviewImageUrl: string;
-  reviewDate: string;
+  reviewTitle: string;
+  reviewTaste?: string;
+  reviewDescription?: string;
+  reviewCreatedAt: string;
+  location?: string;
+  images?: string[];
+  reviewType: string;
 }
 
 // 식당 검색 데이터
@@ -18,6 +22,7 @@ export interface RestaurantsData {
   inBuilding: boolean;
   estimatedTime: number;
   foor: number;
+  thumbnailImageUrl: string;
 }
 // 식당 메뉴 데이터
 export interface MenuData {
@@ -32,6 +37,7 @@ export interface MenuDataProps {
 
 // 컴포넌트 타입
 export interface LunchCalendarListItemProps {
+  keywordId?: number;
   type: string;
   content?: string;
   item?: MenuData;
@@ -57,6 +63,7 @@ export interface LunchSubTitleProps {
   title: string;
   type: 'title' | 'subTitle' | 'recent' | 'more' | 'roulette';
   userName?: string;
+  margin?: string;
 }
 
 export interface LunchCalendarWriteBtnProps {

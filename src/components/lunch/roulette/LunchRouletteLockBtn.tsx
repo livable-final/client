@@ -1,16 +1,16 @@
 import Image from 'next/image';
-import { lockPressed, unLock } from '@/assets/images';
-import { css } from '@emotion/react';
 import mq from '@/utils/mediaquery';
+import { css } from '@emotion/react';
+import { lockPressed, unLock } from '@/assets/images';
+import useRouletteStore from '@/stores/useRouletteStore';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
-import { RouletteLockProps } from '@/types/lunch/roulette';
+import { RouletteButtonProps } from '@/types/lunch/roulette';
 
-function LunchRouletteLockBtn({
-  isLocked,
-  isAgain,
-  onClick,
-}: RouletteLockProps) {
+// 룰렛 잠금 버튼 렌딩 컴포넌트
+function LunchRouletteLockBtn({ onClick }: RouletteButtonProps) {
   const { alt } = LUNCH_ROULETTE_CONSTANTS;
+  const { isLocked, isAgain, isOperated } = useRouletteStore();
+
   const renderBtn = () => {
     // 최초 룰렛 가동이 아닌 재가동일 경우
     if (isAgain) {
@@ -30,7 +30,7 @@ function LunchRouletteLockBtn({
         type="button"
         onClick={onClick}
         css={pushBtnStyles}
-        disabled={!isAgain}
+        disabled={!isAgain || !isOperated}
       >
         &nbsp;
       </button>

@@ -1,5 +1,7 @@
+import LunchCalendarPointCard from '@/components/lunch/calendar/LunchCalendarPointCard';
+
 function Point() {
-  return <div>Point</div>;
+  return <LunchCalendarPointCard />;
 }
 
 export default Point;

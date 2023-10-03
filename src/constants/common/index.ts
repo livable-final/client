@@ -74,9 +74,14 @@ export const COMMON_ERROR_MESSAGE = {
   default: '오류가 발생했습니다',
   name: '이름 형식이 올바르지 않아요',
   contact: '전화번호 형식이 올바르지 않아요',
+  noName: '이름을 입력해 주세요!',
+  noContact: '전화번호를 입력해 주세요!',
+  noNameContact: '이름과 전화번호를 입력해 주세요!',
+  noPlace: '장소를 먼저 선택해 주세요!',
   noPage: '페이지를 찾을 수 없어요',
   noServer: '네트워크 연결상태를 확인해주세요',
   back: '이전으로 돌아가기',
+  prepare: '기능 준비 중입니다.',
 };
 
 // Header
@@ -101,11 +106,18 @@ export const COMMON_ICON_NAMES = {
     copy: 'copy',
     list: 'list',
     plusSmall: 'plusSmall',
+    building: 'InfoBuilding',
+    place: 'InfoPlace',
+    host: 'InfoHost',
+    parking: 'InfoParking',
   },
   home: {
     home: 'home',
+    homeActive: 'homeActive',
     lunch: 'lunch',
+    lunchActive: 'lunchActive',
     my: 'my',
+    myActive: 'myActive',
     down: 'down',
     check: 'check',
     weather: {
@@ -136,9 +148,12 @@ export const COMMON_ICON_NAMES = {
     smile: 'smile',
     confused: 'confused',
     thumbsUp: 'thumbsUp',
+    popup: 'popup',
   },
   common: {
     close: 'close',
+    error: 'error',
+    exitSmall: 'exitSmall',
   },
 };
 
@@ -187,14 +202,20 @@ export const COMMON_TOGGLE_TITLE = '종일';
 export const COMMON_MODAL_BUTTONS = {
   confirm: '확인',
   cancel: '취소',
+  close: '닫기',
 };
 
 // Bottom Navigation Bar 상수
 export const COMMON_BNB_CONSTANTS = {
   bnb: {
-    home: { name: '홈', url: '/', icon: 'home' },
-    lunch: { name: '오늘 점심', url: '/lunch', icon: 'lunch' },
-    user: { name: 'MY', url: '/user', icon: 'my' },
+    home: { name: '홈', url: '/', default: 'home', active: 'homeActive' },
+    lunch: {
+      name: '오늘 점심',
+      url: '/lunch',
+      default: 'lunch',
+      active: 'lunchActive',
+    },
+    user: { name: 'MY', url: '/user', default: 'my', active: 'myActive' },
   },
   indicator: {
     height: 34,
@@ -242,7 +263,8 @@ export const COMMON_TIME_SELECTOR: TimeSelectorsColorProps = {
   },
   enabled: {
     status: 'enabled',
-    background: `${theme.palette.primary}`,
-    color: `${theme.palette.white}`,
+    background: `${theme.palette.bluescale.blue10}`,
+    color: `${theme.palette.bluescale.blue50}`,
+    border: `${theme.palette.bluescale.blue20}`,
   },
 };

@@ -3,10 +3,10 @@ import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import InvitationHostInfoItem from '@/components/invitation/view/InvitationHostInfoItem';
 import { Profile } from '@/assets/icons';
-import { InvitationHostInfoProps } from '@/types/invitation/view';
+import { InvitationInfoContainerProps } from '@/types/invitation/view';
 import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 
-function InvitationHostInfo({ data }: InvitationHostInfoProps) {
+function InvitationHostInfo({ data }: InvitationInfoContainerProps) {
   return (
     <div css={InvitationHostInfoStyles}>
       <Header title={INVITATION_VEIW_INFO_TEXTS.category.host} isBg />
@@ -16,15 +16,15 @@ function InvitationHostInfo({ data }: InvitationHostInfoProps) {
       <ul css={InvitationInfoItemContinerStyles}>
         <InvitationHostInfoItem
           label={INVITATION_VEIW_INFO_TEXTS.host.name}
-          content={data.hostName}
+          content={data?.hostName}
         />
         <InvitationHostInfoItem
           label={INVITATION_VEIW_INFO_TEXTS.host.companyName}
-          content={data.hostCompanyName}
+          content={data?.hostCompanyName}
         />
         <InvitationHostInfoItem
           label={INVITATION_VEIW_INFO_TEXTS.host.contact}
-          content={data.hostContact}
+          content={data?.hostContact}
           isContact
         />
       </ul>

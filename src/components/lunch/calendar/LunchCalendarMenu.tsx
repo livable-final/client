@@ -31,7 +31,7 @@ function LunchCalendarMenu() {
       if (restaurant.restaurantId) {
         try {
           const res = await getRestaurantMenu(restaurant.restaurantId);
-          setMenuData(res);
+          setMenuData(res.data);
         } catch (err) {
           goBack();
         }
@@ -86,12 +86,13 @@ function LunchCalendarMenu() {
           title={restaurant.restaurantName}
           onClick={onClickHaederHandler}
         />
-        <div css={{ paddingTop: '24px', paddingBottom: '24px' }}>
+        <div css={subTitleStyles}>
           <LunchSubTitle title={subTitle.menu} type="subTitle" />
         </div>
-        {menuData.map((item) => (
-          <LunchCalendarListItem key={item.menuId} type="menu" item={item} />
-        ))}
+        {menuData &&
+          menuData?.map((item) => (
+            <LunchCalendarListItem key={item.menuId} type="menu" item={item} />
+          ))}
         {!showInput ? (
           <button type="button" onClick={onClickAddBtnHandler} css={plusStyles}>
             <span>추가</span>
@@ -126,6 +127,10 @@ const pageStyles = css`
   justify-content: space-between;
 `;
 
+const subTitleStyles = css`
+  margin: 24px 0;
+`;
+
 const plusStyles = css`
   width: 100%;
   display: flex;
@@ -139,7 +144,6 @@ const plusStyles = css`
 `;
 
 const inputStyles = css`
-  text-align: center;
   width: 100%;
   height: 100%;
   outline: none;

@@ -1,13 +1,15 @@
-import again from '../../../public/roulette/again.webp';
-import againPressed from '../../../public/roulette/againPressed.webp';
-import lock from '../../../public/roulette/lock.webp';
-import lockPressed from '../../../public/roulette/lockPressed.webp';
-import push from '../../../public/roulette/push.webp';
-import pushPressed from '../../../public/roulette/pushPressed.webp';
-import roulette from '../../../public/roulette/roulette.png';
-import rouletteActive from '../../../public/roulette/rouletteActive.webp';
-import unLock from '../../../public/roulette/unLock.webp';
-import unLockPressed from '../../../public/roulette/unLockPressed.webp';
+import again from '$/roulette/again.webp';
+import againPressed from '$/roulette/againPressed.webp';
+import lock from '$/roulette/lock.webp';
+import lockPressed from '$/roulette/lockPressed.webp';
+import push from '$/roulette/push.webp';
+import pushPressed from '$/roulette/pushPressed.webp';
+import roulette from '$/roulette/roulette.png';
+import rouletteActive from '$/roulette/rouletteActive.webp';
+import unLock from '$/roulette/unLock.webp';
+import unLockPressed from '$/roulette/unLockPressed.webp';
+import coin from '$/point/coin.webp';
+import point10 from '$/point/point10.webp';
 
 export {
   again,
@@ -20,4 +22,6 @@ export {
   rouletteActive,
   unLock,
   unLockPressed,
+  coin,
+  point10,
 };

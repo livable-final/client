@@ -1,15 +1,20 @@
 export interface Response<T> {
+  map(
+    arg0: (item: unknown) => import('react').JSX.Element,
+  ): import('react').ReactNode;
   data: T;
   status: number;
+  statusText: string;
 }
 
-export type ArgType = number | string | Date;
-
 export interface FetchFunction<T> {
-  (arg?: ArgType): Promise<T>;
+  (): Promise<T>;
 }
 
 export interface FetchProps<T> {
   fetchFn: FetchFunction<T>;
-  arg?: ArgType;
+}
+
+export interface ErrorProps extends Error {
+  response: { error: string; path: string; status: number; timestamp: string };
 }

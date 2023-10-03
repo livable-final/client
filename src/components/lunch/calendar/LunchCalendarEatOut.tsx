@@ -17,21 +17,27 @@ import usePagesStore from '@/stores/usePagesStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useWriteStore from '@/stores/useWriteStore';
+import COMPONENT_NAME from '@/constants/common/pages';
+import useAlertStore from '@/stores/useAlertStore';
+import { ErrorProps } from '@/types/common/response';
+import Alert from '@/components/common/Alert';
 
 function LunchCalenderEatOut() {
   const [searchText, setSearchText] = useState('');
-  const { goBack } = usePagesStore();
-  const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
+  const { setNextComponent, goBack, reset } = usePagesStore();
+  const { bottomSheetState, openBottomSheet, closeBottomSheet } =
+    useBottomSheetStore();
   const {
     restaurant,
     selectedMenu,
     resetSelectedMenu,
     ratingState,
-    description,
     imageFiles,
   } = useWriteStore();
   const { isSave } = useSaveStore();
   const { subTitle, category, subCategory, button } = CALENDAR_CONTENT;
+  const { calendar } = COMPONENT_NAME.lunch;
+  const { alertState, openAlert } = useAlertStore();
 
   const router = useRouter();
 
@@ -39,16 +45,13 @@ function LunchCalenderEatOut() {
     goBack();
     resetSelectedMenu();
   };
+
   const onChangeHandler = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setSearchText(e.target.value);
-  };
-
-  const onClickMsgBtnHandler = () => {
-    openBottomSheet(<LunchCalendarBottomSheet />);
   };
 
   const onClickBtnHandler = async () => {
@@ -61,35 +64,60 @@ function LunchCalenderEatOut() {
         amount: ratingState.amount,
         speed: ratingState.speed,
         service: ratingState.service,
-        description,
+        description: searchText,
         menus: selectedMenu,
       };
 
       const blob = new Blob([JSON.stringify(userData)], {
         type: 'application/json',
       });
+
       formData.append('data', blob);
-      for (let i = 0; i < imageFiles.length; i + 1) {
+      for (let i = 0; i < imageFiles.length; i += 1) {
         formData.append('imageFiles', imageFiles[i]);
       }
       await postRestaurantReview(formData);
-      router.replace('/lunch/calendar');
+
+      if (imageFiles.length === 0) {
+        router.replace('/lunch/calendar');
+        reset();
+      } else {
+        setNextComponent(calendar.Inform);
+      }
     } catch (err) {
-      router.replace('/lunch/calendar');
+      const error = err as ErrorProps;
+      openAlert('📢', error.message || '리뷰 등록 오류');
+    } finally {
+      if (!isSave.PhotoMsg) {
+        closeBottomSheet();
+      }
     }
+  };
+
+  const onClickMsgBtnHandler = () => {
+    openBottomSheet(
+      <LunchCalendarBottomSheet onClickSubmit={onClickBtnHandler} />,
+    );
   };
 
   return (
     <section css={pageStyles}>
+      {alertState.isOpen && <Alert />}
       <div>
-        <Header title={category[0].category} onClick={onClickHeaderHandler} />
-        <LunchSubTitle title={subTitle.todayLunch} type="title" />
+        <Header
+          title={category[0].category}
+          onClickBack={onClickHeaderHandler}
+        />
+        <LunchSubTitle title={subTitle.todayLunch} type="title" margin="24px" />
         <div css={reviewStyles}>
           <div css={textStyles}>
             <strong>{restaurant.restaurantName}</strong>
             <div>
               {selectedMenu.map((value, i) => (
-                <span key={`메뉴${i * 12}`}>{value.menuName}</span>
+                <>
+                  <span key={`메뉴${i * 12}`}>{value.menuName}</span>
+                  {i !== selectedMenu.length - 1 && <span>, </span>}
+                </>
               ))}
             </div>
           </div>

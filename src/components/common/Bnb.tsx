@@ -8,7 +8,6 @@ import Icons from '@/components/common/Icons';
 
 function Bnb() {
   const router = useRouter();
-  const { greyscale } = theme.palette;
   const { bnb } = COMMON_BNB_CONSTANTS;
 
   // 현재 URL과 비교하는 함수
@@ -16,27 +15,25 @@ function Bnb() {
 
   const renderIcon = (icon: string, isActive: boolean) => {
     switch (icon) {
-      case bnb.home.icon:
-        return (
-          <Icons
-            icon={bnb.home.icon}
-            color={isActive ? greyscale.grey60 : greyscale.grey30}
-          />
+      case bnb.home.default:
+        return isActive ? (
+          <Icons icon={bnb.home.active} />
+        ) : (
+          <Icons icon={bnb.home.default} />
         );
-      case bnb.lunch.icon:
-        return (
-          <Icons
-            color={isActive ? greyscale.grey60 : greyscale.grey30}
-            icon={bnb.lunch.icon}
-          />
+      case bnb.lunch.default:
+        return isActive ? (
+          <Icons icon={bnb.lunch.active} />
+        ) : (
+          <Icons icon={bnb.lunch.default} />
         );
-      case bnb.user.icon:
-        return (
-          <Icons
-            color={isActive ? greyscale.grey60 : greyscale.grey30}
-            icon={bnb.user.icon}
-          />
+      case bnb.user.default:
+        return isActive ? (
+          <Icons icon={bnb.user.active} />
+        ) : (
+          <Icons icon={bnb.user.default} />
         );
+
       default:
         return null;
     }
@@ -47,7 +44,7 @@ function Bnb() {
       {Object.values(bnb).map((item) => (
         <li key={item.name} css={wrapperStyles}>
           <Link css={linkStyles} href={item.url}>
-            {renderIcon(item.icon, isCurrent(item.url))}
+            {renderIcon(item.default, isCurrent(item.url))}
             <span css={spanStyles(isCurrent(item.url))}>{item.name}</span>
           </Link>
         </li>
@@ -90,6 +87,11 @@ const linkStyles = css`
   align-items: center;
   display: flex;
   flex-direction: column;
+
+  > svg {
+    display: flex;
+    height: 24px;
+  }
 `;
 
 const spanStyles = (isCurrent: boolean) => css`

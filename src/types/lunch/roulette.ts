@@ -11,14 +11,6 @@ export interface RouletteStore {
   setRouletteState: (item: Roulette) => void;
 }
 
-export interface RoulettePushProps {
-  isPressed: boolean;
-  isAgain: boolean;
-  onClick: () => void;
-}
-
-export interface RouletteLockProps {
-  isLocked: boolean;
-  isAgain: boolean;
+export interface RouletteButtonProps {
   onClick: () => void;
 }

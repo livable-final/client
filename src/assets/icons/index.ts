@@ -16,7 +16,6 @@ import Right from '@/assets/icons/Right.svg';
 import Seminar from '@/assets/icons/seminar.svg';
 import Up from '@/assets/icons/Up.svg';
 import Info from '@/assets/icons/Info.svg';
-import ErrorIcon from '@/assets/icons/icon.svg';
 import PlusBig from '@/assets/icons/Plus=big.svg';
 import PlusSmall from '@/assets/icons/Plus=small.svg';
 import ExitSmall from '@/assets/icons/Exit=small.svg';
@@ -54,7 +53,6 @@ import Line from '@/assets/icons/Line.svg';
 import Roulette from '@/assets/icons/Roulette.svg';
 import Rights from '@/assets/icons/Rights.svg';
 import Sunny from '@/assets/icons/Sunny.svg';
-import InfoCategory from '@/assets/icons/InfoCategory.svg';
 import Location20 from '@/assets/icons/Location20.svg';
 import Delicious from '@/assets/icons/Delicious.svg';
 import ClearDay from '@/assets/icons/weather/ClearDay.svg';
@@ -86,6 +84,33 @@ import ServiceTemp from '@/assets/icons/ServiceTemp.svg';
 import ProfileWithBg from '@/assets/icons/ProfileWithBg.svg';
 import Error from '@/assets/icons/Error.svg';
 import My from '@/assets/icons/My.svg';
+import Write from '@/assets/icons/Write.svg';
+import Popup from '@/assets/icons/Popup.svg';
+import PopupActive from '@/assets/icons/PopupActive.svg';
+import Present from '@/assets/icons/present.svg';
+import Point10 from '@/assets/icons/point10.svg';
+import Point500 from '@/assets/icons/point500.svg';
+import Point10Pink from '@/assets/icons/point10pink.svg';
+import Point1000 from '@/assets/icons/point1000.svg';
+import Point1500 from '@/assets/icons/point1500.svg';
+import Present500 from '@/assets/icons/present500.svg';
+import Present1000 from '@/assets/icons/present1000.svg';
+import Present1500 from '@/assets/icons/present.1500.svg';
+import InfoBuilding from '@/assets/icons/InfoBuliding.svg';
+import InfoPlace from '@/assets/icons/InfoPlace.svg';
+import InfoHost from '@/assets/icons/InfoHost.svg';
+import InfoParking from '@/assets/icons/InfoParking.svg';
+import FoodNoPhoto from '@/assets/icons/foodNoPhoto.svg';
+import FoodCafe from '@/assets/icons/foodCafe.svg';
+import FoodLunchBox from '@/assets/icons/foodLunchBox.svg';
+import HomeActive from '@/assets/icons/HomeActive.svg';
+import LunchActive from '@/assets/icons/LunchActive.svg';
+import MyActive from '@/assets/icons/MyActive.svg';
+import PlateSmall from '@/assets/icons/plateSmall.svg';
+import BoxGrey from '@/assets/icons/BoxGrey.svg';
+import BoxWhite from '@/assets/icons/BoxWhite.svg';
+// 빌드 에러 지점
+import ErrorIcon from '@/assets/icons/ErrorIcon.svg';
 
 export {
   As,
@@ -106,7 +131,6 @@ export {
   Send,
   Up,
   Info,
-  ErrorIcon,
   PlusBig,
   PlusSmall,
   ExitSmall,
@@ -144,7 +168,6 @@ export {
   Roulette,
   Rights,
   Sunny,
-  InfoCategory,
   Location20,
   Delicious,
   ClearDay,
@@ -176,4 +199,30 @@ export {
   ProfileWithBg,
   Error,
   My,
+  Write,
+  Popup,
+  PopupActive,
+  Present,
+  Point10,
+  Point500,
+  Point10Pink,
+  Point1000,
+  Point1500,
+  Present500,
+  Present1000,
+  Present1500,
+  InfoBuilding,
+  InfoPlace,
+  InfoHost,
+  InfoParking,
+  FoodNoPhoto,
+  FoodCafe,
+  FoodLunchBox,
+  HomeActive,
+  LunchActive,
+  MyActive,
+  PlateSmall,
+  BoxGrey,
+  BoxWhite,
+  ErrorIcon,
 };

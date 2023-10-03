@@ -1,25 +1,25 @@
-import LunchReview from '@/components/lunch/review/LunchReview';
+import { useState } from 'react';
+import theme from '@/styles/theme';
+import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
-import { ReviewList } from '@/types/lunch/reviewList';
+import useFetch from '@/hooks/useFetch';
+import Icons from '@/components/common/Icons';
 import usePagesStore from '@/stores/usePagesStore';
 import useReviewStore from '@/stores/useReviewStore';
-import theme from '@/styles/theme';
-import Icons from '@/components/common/Icons';
-import { useState } from 'react';
-import mq from '@/utils/mediaquery';
 import COMPONENT_NAME from '@/constants/common/pages';
-import useFetch from '@/hooks/useFetch';
+import { ReviewList } from '@/types/lunch/reviewList';
+import LunchReview from '@/components/lunch/review/LunchReview';
 import { getMenuReviews } from '@/pages/api/lunch/lunchRequests';
 // import { getMenuReviews } from '@/pages/api/lunch/lunchRequests';
 
+// '오늘 점심' 랭킹별 리뷰 컴포넌트
 function LunchRankingReviews({ menuId }: { menuId: number }) {
-  const [isMore, setIsMore] = useState(false);
+  const [isMore, setIsMore] = useState(false); // 더보기 버튼 클릭 여부
   const { setNextComponent } = usePagesStore();
   const { setReviewList } = useReviewStore();
   const { detail } = COMPONENT_NAME.lunch.detail; // 오늘 점심 리뷰 상세
   const { response } = useFetch({
-    fetchFn: getMenuReviews,
-    arg: menuId,
+    fetchFn: () => getMenuReviews(menuId),
   });
 
   // useQuery로 API 호출
@@ -27,13 +27,14 @@ function LunchRankingReviews({ menuId }: { menuId: number }) {
   //   getMenuReviews({ menuId: 1, page }),
   // );
 
+  // 클릭 시 리뷰 상세로 이동하는 핸들러
   const onClickDetailHandler = (item: ReviewList) => {
     setNextComponent(detail); // LunchDetail.tsx로 이동
     setReviewList(item); // 클릭 한 리뷰 내용 store에 저장
     window.scrollTo({ top: 0 }); // 페이지 top: 0으로 이동
   };
 
-  // Icon 클릭 (더보기 이벤트)시 page number를 증가시키면서 query data 호출
+  // Icon 클릭 (더보기 이벤트)시 나머지 데이터 호출
   const onClickMoreHandler = () => {
     setIsMore(true);
   };
