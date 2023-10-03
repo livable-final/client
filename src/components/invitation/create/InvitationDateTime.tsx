@@ -204,6 +204,11 @@ const buttonWrapperStyles = css`
   max-width: 360px;
   padding: 0 20px 20px;
   margin: 0 -6px 0;
+  background-image: linear-gradient(
+    to top,
+    ${theme.palette.white} 70%,
+    transparent 30%
+  );
 
   ${mq.md} {
     min-width: 361px;
