@@ -74,6 +74,7 @@ export interface GetVisitationInfoData {
   hostCompanyName: string;
   hostContact: string;
   hostBusinessCardImageUrl: string;
+  placeType: string;
 }
 // 주변 식당 응답 데이터
 export interface GetInvitationCarouselData {

@@ -2,12 +2,19 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import mq from '@/utils/mediaquery';
+import { Back } from '@/assets/icons';
+import usePagesStore from '@/stores/usePagesStore';
+import { InvitationBuildingInfoProps } from '@/types/invitation/view';
 import InvitationBuildingInfoItem from './InvitationBuildingInfoItem';
 import InvitationBuildingMap from './InvitationBuildingMap';
 import InvitationBuildingTitle from './InvitationBuildingTitle';
 import InvitationBuildingPublicTransportItem from './InvitationBuildingPublicTransportItem';
 
-function InvitationBuildingInfo() {
+function InvitationBuildingInfo({ data }: InvitationBuildingInfoProps) {
+  const { goBack } = usePagesStore();
+
+  console.log(data);
+
   // 스크롤 추적을 위한 state, onScrollHandler
   const [isScrollBottom, setIsScrollBottom] = useState(false);
   const onScrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
@@ -22,6 +29,10 @@ function InvitationBuildingInfo() {
     }
   };
 
+  const onBackClickHandler = () => {
+    goBack();
+  };
+
   const publicTransport = [
     {
       platform: 'subway',
@@ -34,15 +45,17 @@ function InvitationBuildingInfo() {
   ];
   return (
     <div css={ContainerStyles}>
-      <div css={BuildingImgStyles} />
+      <div css={BuildingImgStyles}>
+        <Back onClick={onBackClickHandler} />
+      </div>
 
       <div
         css={BuildingInfoStyles({ isScrollBottom })}
         onScroll={(e) => onScrollHandler(e)}
       >
         <InvitationBuildingTitle
-          title="테라타워"
-          address="경기도 남양주시 다산지금로 202 테라테라 테라타워"
+          title={data.buildingName}
+          address={data.buildingAddress}
         />
 
         <div css={UnderLineStyles} />
@@ -53,11 +66,11 @@ function InvitationBuildingInfo() {
         />
         <InvitationBuildingInfoItem
           item="주차요금"
-          content="10분마다 1,000원"
+          content={data.buildingParkingCostInformation}
         />
         <InvitationBuildingInfoItem
           item="건축규모"
-          content="지하 7층~지상 24층"
+          content={data.buildingScale}
         />
 
         <InvitationBuildingMap />
@@ -95,6 +108,7 @@ const BuildingImgStyles = css`
   background-color: #b4b4b4;
   height: 500px;
   margin: 0 -16px;
+  padding: 16px 16px;
 `;
 
 const BuildingInfoStyles = (props: { isScrollBottom: boolean }) => css`

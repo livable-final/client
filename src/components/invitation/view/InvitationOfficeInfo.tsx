@@ -2,20 +2,21 @@ import Header from '@/components/common/Header';
 import { INVITATION_VIEW_TEXTS } from '@/constants/invitation/viewTexts';
 import { css } from '@emotion/react';
 import mq from '@/utils/mediaquery';
+import { InvitationOfficeInfoProps } from '@/types/invitation/view';
 import InvitationVisitTip from './InvitationOfficeVisitTip';
 import InvitationOfficeMap from './InvitationOfficeMap';
 import InvitationOfficeLocation from './InvitationOfficeLocation';
 
-function InvitationOfficeInfo() {
+function InvitationOfficeInfo({ data }: InvitationOfficeInfoProps) {
   return (
     <div css={OfficeInfoStyles}>
       <Header title={INVITATION_VIEW_TEXTS.header.office} />
 
       <InvitationOfficeLocation />
 
-      <InvitationOfficeMap />
+      <InvitationOfficeMap placeType={data.placeType} />
 
-      <InvitationVisitTip />
+      <InvitationVisitTip invitationTip={data.invitationTip} />
     </div>
   );
 }

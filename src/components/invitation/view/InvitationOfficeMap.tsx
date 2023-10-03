@@ -1,10 +1,20 @@
-import { TestMap } from '@/assets/testImg';
+import { InvitationOfficeMapProps } from '@/types/invitation/view';
 import { css } from '@emotion/react';
+import Image from 'next/image';
 
-function InvitationOfficeMap() {
+function InvitationOfficeMap({ placeType }: InvitationOfficeMapProps) {
+  let imgUrl = '';
+  if (placeType === 'COMPANY ') {
+    imgUrl =
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/Livable_Company_Map.png';
+  }
+  if (placeType === 'COMMON_PLACE ') {
+    imgUrl =
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com/Livable_Common_Place_Map.png';
+  }
   return (
     <div css={MapStyles}>
-      <TestMap />
+      <Image src={imgUrl} alt="초대 장소 지도" />
     </div>
   );
 }

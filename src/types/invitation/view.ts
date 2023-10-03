@@ -29,6 +29,15 @@ export interface InvitationInfoThemeProps {
   sideRight: string;
   icon: string;
 }
+
+export interface InvitationBuildingInfoProps {
+  data: GetVisitationInfoData;
+}
+
+export interface InvitationOfficeInfoProps {
+  data: GetVisitationInfoData;
+}
+
 export interface InvitationInfoContainerProps {
   data: GetVisitationInfoData;
 }
@@ -59,4 +68,12 @@ export interface InvitationBuildingPublicTransportItemProps {
 
 export interface InvitationQrInfoTextProps {
   data: GetVisitationInfoData;
+}
+
+export interface InvitationVisitTipProps {
+  invitationTip: string;
+}
+
+export interface InvitationOfficeMapProps {
+  placeType: string;
 }
