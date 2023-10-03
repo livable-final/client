@@ -9,11 +9,10 @@ import useModalStore from '@/stores/useModalStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useAlertStore from '@/stores/useAlertStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useInvitationCreateStore, {
   initialCreateState,
 } from '@/stores/useInvitationCreateStore';
-import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { useEffect, useState, ChangeEvent } from 'react';
 import { VisitorInfo } from '@/types/invitation/api';
