@@ -3,10 +3,10 @@ import Image from 'next/image';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Button from '@/components/common/Button';
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { RightSmall } from '@/assets/icons';
-import { coin } from '@/assets/images';
+import { coin, point10 } from '@/assets/images';
 import usePagesStore from '@/stores/usePagesStore';
 
 function LunchCalendarPointInform() {
@@ -31,7 +31,16 @@ function LunchCalendarPointInform() {
     <section css={pageStyles}>
       <Header title="" onClick={onClickHeaderHandler} />
       <div css={contentStyles}>
-        <Image src={coin} alt="코인.webp" width={90} height={90} />
+        <div css={imageStyles}>
+          <Image
+            src={point10}
+            alt="포인트.webp"
+            width={55}
+            height={25}
+            css={fadeInStyles}
+          />
+          <Image src={coin} alt="코인.webp" width={90} height={90} />
+        </div>
         <div css={textStyles}>
           <h1>{title.photoReview}</h1>
           <p>{subTitle.photoReview}</p>
@@ -52,6 +61,27 @@ function LunchCalendarPointInform() {
   );
 }
 
+const fadeIn = keyframes`
+0%{
+  opacity: 0;
+  transform: translateY(16px);
+}
+50% {
+  opacity: 1;
+}
+80% {
+  opacity: 1;
+}
+100% {
+  opacity: .6;
+
+}
+`;
+const fadeInStyles = css`
+  opacity: 0;
+  animation: ${fadeIn} 0.6s 1s ease-in-out;
+`;
+
 const pageStyles = css`
   height: 100vh;
   display: flex;
@@ -65,6 +95,13 @@ const contentStyles = css`
   flex-direction: column;
   align-items: center;
   gap: 32px;
+`;
+
+const imageStyles = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 `;
 
 const textStyles = css`
