@@ -4,7 +4,6 @@ import { DateDishNoPhoto } from '@/assets/icons';
 import { DateDishPhotoProps } from '@/types/lunch/calendar';
 import useCalendarStore from '@/stores/useCalendarStore';
 import useWriteStore from '@/stores/useWriteStore';
-import theme from '@/styles/theme';
 
 function LunchCalendarDateContent({ dayReviewData }: DateDishPhotoProps) {
   const setIsChecked = useWriteStore((state) => state.setIsChecked);
