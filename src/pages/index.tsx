@@ -10,13 +10,13 @@ import { useEffect } from 'react';
 import usePagesStore from '@/stores/usePagesStore';
 import useSaveStore from '@/stores/useSaveStore';
 import { useRouter } from 'next/router';
-import useBuildingStore from '@/stores/useBuildingStore';
+import useUserStore from '@/stores/useUserStore';
 import Alert from '@/components/common/Alert';
 
 function Home() {
   const router = useRouter();
   const { reset } = usePagesStore();
-  const { setState } = useBuildingStore;
+  const { setState } = useUserStore;
   const { response, alertState } = useFetch({
     fetchFn: getHome,
   });
