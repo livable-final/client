@@ -80,6 +80,7 @@ const addressStyles = css`
   font: ${theme.font.body.body3_500};
   color: ${theme.palette.greyscale.grey50};
   line-height: 24px;
+  text-align: left;
 `;
 
 export default LunchRest;
