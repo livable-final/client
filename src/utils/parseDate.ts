@@ -1,5 +1,7 @@
 // 선택한 값에 30분을 더한 시간 출력
 const parseDate = (startTime: string) => {
+  // startTime "00:00"
+
   const [hour, minute] = startTime.split(':');
 
   const hourInt = parseInt(hour, 10);
