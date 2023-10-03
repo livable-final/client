@@ -89,8 +89,10 @@ const headerStyles = (
 `;
 
 const titleStyles = css`
-  font: ${theme.font.subTitle.subTitle1_600};
   justify-self: center;
+  span {
+    font: ${theme.font.subTitle.subTitle1_600};
+  }
 `;
 
 const iconStyles = (type: string) => css`

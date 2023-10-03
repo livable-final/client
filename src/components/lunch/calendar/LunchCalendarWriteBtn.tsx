@@ -44,7 +44,6 @@ const buttonStyles = css`
   padding: 28px 0;
   white-space: pre-line;
   background-color: ${theme.palette.white};
-  font: ${theme.font.body.body1_600};
   cursor: pointer;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.03);
 `;
@@ -56,6 +55,7 @@ const contentStyles = (isCompleted: boolean) => css`
 
 const textStyles = css`
   text-align: left;
+  font: ${theme.font.body.body1_600};
   color: ${theme.palette.greyscale.grey50};
 `;
 
