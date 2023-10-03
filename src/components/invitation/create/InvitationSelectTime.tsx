@@ -1,6 +1,7 @@
 import TimeSelector from '@/components/common/TimeSelector';
 import createTimeSlots from '@/utils/createTimeSlots';
 import useToggleStore from '@/stores/useToggleStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
@@ -8,14 +9,22 @@ import { InvitationSelectTimeProps, TimeSlot } from '@/types/invitation/create';
 import { BoxGrey, BoxWhite } from '@/assets/icons';
 
 function InvitationSelectTime({ commonTimes }: InvitationSelectTimeProps) {
-  // commonTimes ['15:00', '15:30', '17:00', '17:30']
+  // commonTimes
+  // ['15:00', '15:30', '17:00', '17:30']
 
+  // [{...오전}, {...오후}]
   const [timeSlot, setTimeSlot] = useState<TimeSlot[][]>([[], []]);
 
   const { isOn } = useToggleStore();
+  const { createContents } = useInvitationCreateStore();
+  const { commonPlaceId } = createContents;
+  // console.log(commonPlaceId);
 
   useEffect(() => {
-    const res = createTimeSlots(JSON.parse(JSON.stringify(commonTimes)));
+    const res = createTimeSlots(
+      JSON.parse(JSON.stringify(commonTimes)),
+      commonPlaceId,
+    );
     setTimeSlot(res);
   }, [commonTimes]);
 
