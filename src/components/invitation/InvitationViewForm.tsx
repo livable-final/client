@@ -28,13 +28,13 @@ function InvitationViewForm() {
   }, [VISITOR_TOKEN, setVisitorToken]);
 
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.building}`) {
-    return <InvitationBuildingInfo />;
+    return <InvitationBuildingInfo data={response && response.data} />;
   }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.host}`) {
     return <InvitationHostInfo data={response && response.data} />;
   }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.place}`) {
-    return <InvitationOfficeInfo />;
+    return <InvitationOfficeInfo data={response && response.data} />;
   }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.code}`) {
     return <InvitationQrInfo data={response && response.data} />;
