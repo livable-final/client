@@ -160,17 +160,8 @@ const infoContainerStyles = css`
   flex-direction: column;
   gap: 16px;
   width: 100%;
-  max-width: 280px;
-
-  ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
-    max-width: 480px;
-  }
-  ${mq.tab} {
-    max-width: 640px;
-  }
+  min-width: 280px;
+  max-width: 640px;
 `;
 
 const titleStyles = css`
@@ -183,6 +174,7 @@ const inputContainerStyles = css`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
 `;
 
 const placeInputStyles = css`
@@ -190,6 +182,7 @@ const placeInputStyles = css`
   justify-content: center;
   align-items: center;
   gap: 12px;
+  width: 100%;
   border: 1px solid ${theme.palette.greyscale.grey10};
   border-radius: 12px;
   padding: 0 8px 0 16px;
@@ -210,6 +203,7 @@ const dateTimeInputStyles = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   border: 1px solid ${theme.palette.greyscale.grey10};
   border-radius: 12px;
   padding: 0 8px 0 16px;
@@ -237,18 +231,9 @@ const inputStyles = css`
   border-radius: 12px;
   padding: 0;
   min-width: 200px;
+  width: 100%;
   font: ${theme.font.subTitle.subTitle2_400};
   color: ${theme.palette.input.default};
-
-  ${mq.md} {
-    max-width: 100%;
-  }
-  ${mq.lg} {
-    max-width: 100%;
-  }
-  ${mq.tab} {
-    max-width: 100%;
-  }
 `;
 
 const textareaStyles = css`

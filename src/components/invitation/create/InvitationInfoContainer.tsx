@@ -150,17 +150,7 @@ const containerStyles = css`
   gap: 40px;
   width: 100%;
   min-width: 280px;
-  max-width: 360px;
-
-  ${mq.md} {
-    max-width: 480px;
-  }
-  ${mq.lg} {
-    max-width: 640px;
-  }
-  ${mq.tab} {
-    max-width: 1024px;
-  }
+  max-width: 1024px;
 `;
 
 const buttonWrapperStyles = (isFocused: boolean) => css`
@@ -169,21 +159,8 @@ const buttonWrapperStyles = (isFocused: boolean) => css`
   display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
-  max-width: 360px;
+  max-width: 1024px;
   padding: 0 16px 20px;
-
-  ${mq.md} {
-    min-width: 361px;
-    max-width: 480px;
-  }
-  ${mq.lg} {
-    min-width: 481px;
-    max-width: 640px;
-  }
-  ${mq.tab} {
-    min-width: 641px;
-    max-width: 1024px;
-  }
 `;
 
 export default InvitationInfoContainer;
