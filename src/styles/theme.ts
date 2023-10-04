@@ -79,6 +79,10 @@ const theme = {
     input: {
       default: '400 normal 10px var(--pretendard)',
     },
+    alert: {
+      pretendard: '400 normal 15px var(--pretendard)',
+      godo: '400 normal 16px var(--godoM)',
+    },
     etc: {
       findRoad: '500 normal 12px var(--pretendard)',
       userPoint: '500 normal 13px var(--pretendard)',
@@ -88,7 +92,6 @@ const theme = {
       rouletteTitle: '400 normal 24px var(--dnfBitBit)',
       rouletteContent: '400 normal 20px var(--dnfBitBit)',
       roulettePopup: '400 normal 24px var(--dnfBitBit)',
-      alert: '400 normal 16px var(--godoM)',
     },
   },
 };

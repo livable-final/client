@@ -1,22 +1,25 @@
 import { css } from '@emotion/react';
+import { AlertProps } from '@/types/common/alert';
 import theme from '@/styles/theme';
 import useAlertStore from '@/stores/useAlertStore';
 import Icons from '@/components/common/Icons';
 
-function Alert() {
+function Alert({ isSans = false }: AlertProps) {
   const { alertState, closeAlert } = useAlertStore();
 
   return (
     <div css={backgroundStyles}>
       <div css={alertContainerStyles}>
-        <div css={alertTitleStyles}>
-          {alertState.title ? (
-            alertState.title
-          ) : (
-            <Icons icon="error" size="72" />
-          )}
+        <div css={contentsWrapperStyles}>
+          <div css={alertTitleStyles(isSans)}>
+            {alertState.title ? (
+              alertState.title
+            ) : (
+              <Icons icon="error" size="72" />
+            )}
+          </div>
+          <div css={alertContentStyles(isSans)}>{alertState.content}</div>
         </div>
-        <div css={alertContentStyles}>{alertState.content}</div>
         <button type="button" css={defaultBtnStyles} onClick={closeAlert}>
           <Icons icon="exitSmall" />
         </button>
@@ -41,43 +44,47 @@ const backgroundStyles = css`
 const alertContainerStyles = css`
   position: relative;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   width: 90%;
   max-width: 500px;
   height: 96px;
   border-radius: 16px;
   background-color: ${theme.palette.state.danger};
   z-index: 11;
-  padding: 0 8px;
+  padding-left: 16px;
   gap: 8px;
 `;
 
-const alertTitleStyles = css`
+const contentsWrapperStyles = css`
+  display: flex;
+  gap: 10px;
+`;
+
+const alertTitleStyles = (isSans: boolean) => css`
   width: 20px;
   display: flex;
   align-items: center;
   color: ${theme.palette.input.enabled};
-  font: ${theme.font.etc.rankingNumber};
-  font-size: 16px;
+  font: ${isSans ? theme.font.alert.pretendard : theme.font.alert.godo};
 `;
 
-const alertContentStyles = css`
+const alertContentStyles = (isSans: boolean) => css`
   display: flex;
   align-items: center;
-  justify-content: center;
   color: ${theme.palette.greyscale.grey10};
-  font: ${theme.font.etc.alert};
+  font: ${isSans ? theme.font.alert.pretendard : theme.font.alert.godo};
   white-space: pre-wrap;
-  width: 100%;
 `;
 
 const defaultBtnStyles = css`
+  position: absolute;
+  top: 12px;
+  right: 12px;
   display: flex;
   align-items: flex-start;
   color: ${theme.palette.white};
-  font: ${theme.font.body.body2_400};
   cursor: pointer;
-  padding-top: 8px;
 `;
 
 export default Alert;

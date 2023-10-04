@@ -58,7 +58,7 @@ function InvitationInfoContainer() {
           }
         } catch (err: unknown) {
           const error = err as ErrorProps;
-          openAlert('🚨', error.response?.error);
+          openAlert('🚨', error.message);
         }
       };
       postData();
@@ -135,7 +135,7 @@ function InvitationInfoContainer() {
       {modalState.isOpen && (
         <Modal content={modal.btn} onClick={onClickModalHandler} />
       )}
-      {alertState.isOpen && <Alert />}
+      {alertState.isOpen && <Alert isSans />}
       {bottomSheetState.isOpen && <BottomSheet />}
     </div>
   );
