@@ -24,7 +24,7 @@ function InvitationPreview({ onClick }: InvitationPreviewProps) {
           <Icons icon={common.exitMedium} color={theme.palette.white} />
         </div>
         <Image
-          src="/invitation/preview.png"
+          src="/invitation/invitationPreview.png"
           width={400}
           height={720}
           alt="오피스너 초대장 예시"
