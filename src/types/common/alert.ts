@@ -13,7 +13,5 @@ export interface AlertStateTypes {
 
 // Alert.tsx
 export interface AlertProps {
-  isAlert?: boolean;
-  content?: string;
-  onClick?: () => void;
+  isSans?: boolean;
 }
