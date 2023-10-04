@@ -52,6 +52,7 @@ function InvitationViewForm() {
     <div>
       <div css={invitationViewFormStyles}>
         <Header
+          isCloseOnly
           title={INVITATION_VEIW_INFO_TEXTS.category.main}
           onClick={onClickHandler}
         />
