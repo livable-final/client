@@ -24,6 +24,8 @@ import Alert from '@/components/common/Alert';
 
 function LunchCalendarCafeteria() {
   const [searchText, setSearchText] = useState('');
+  const [isBad, setIsBad] = useState(1);
+  const [isGood, setIsGood] = useState(1);
   const { setNextComponent, reset } = usePagesStore();
   const { bottomSheetState, openBottomSheet, closeBottomSheet } =
     useBottomSheetStore();
@@ -62,7 +64,7 @@ function LunchCalendarCafeteria() {
       }
     } catch (err) {
       const error = err as ErrorProps;
-      openAlert('📢', error.message || '리뷰 등록 오류');
+      openAlert('📢', error.message || '');
     } finally {
       if (!isSave.PhotoMsg) {
         closeBottomSheet();
@@ -93,9 +95,20 @@ function LunchCalendarCafeteria() {
           <p>{buildingName}</p>
         </div>
         <div css={buttonStyles}>
-          {button.button5.map((value) => (
-            <LunchCalendarRatingBtn key={value} title={value} />
-          ))}
+          <LunchCalendarRatingBtn
+            title={button.button5[0]}
+            isGood={isGood}
+            isBad={isBad}
+            setIsGood={setIsGood}
+            setIsBad={setIsBad}
+          />
+          <LunchCalendarRatingBtn
+            title={button.button5[1]}
+            isBad={isBad}
+            isGood={isGood}
+            setIsGood={setIsGood}
+            setIsBad={setIsBad}
+          />
         </div>
         <div css={inputBoxStyles}>
           <p>{subTitle.review}</p>
@@ -115,6 +128,7 @@ function LunchCalendarCafeteria() {
         <Button
           variant="blue"
           content={button.button4.text2}
+          isDisabled={ratingState.taste === '' || searchText === ''}
           onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
         />
       </div>

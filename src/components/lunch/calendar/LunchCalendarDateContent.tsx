@@ -40,6 +40,7 @@ function LunchCalendarDateContent({ dayReviewData }: DateDishPhotoProps) {
 }
 
 const imageBoxStyles = css`
+  position: relative;
   width: 44px;
   height: 44px;
   border-radius: 100px;

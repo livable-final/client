@@ -102,6 +102,7 @@ function LunchCalendarLunchBox() {
         <Button
           variant="blue"
           content={button.button4.text2}
+          isDisabled={searchText === ''}
           onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
         />
       </div>

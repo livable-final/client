@@ -76,7 +76,9 @@ const buttonStyles = (isChecked: boolean) => css`
   background-color: ${theme.palette.white};
   span {
     font: ${theme.font.body.body3_500};
-    color: ${theme.palette.greyscale.grey30};
+    color: ${!isChecked
+      ? `${theme.palette.greyscale.grey30};`
+      : `${theme.palette.orange}`};
   }
 
   border: 1px solid
