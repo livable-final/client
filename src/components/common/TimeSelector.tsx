@@ -4,7 +4,7 @@ import {
   TimeSelectorColorProps,
 } from '@/types/invitation/create';
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
 import theme from '@/styles/theme';
 
@@ -17,12 +17,12 @@ function TimeSelector({ content, status }: TimeSelectorProps) {
 
   const variantData = COMMON_TIME_SELECTOR[varientState];
 
-  const { setSelectTime, clearSelectTime } = useTimeSelectorStore();
+  const { setSelectTime } = useTimeSelectorStore();
   const { abled, enabled, disabled } = COMMON_TIME_SELECTOR;
 
   const onClickHandler = () => {
-    clearSelectTime();
     // 선택시 버튼 상태 변경
+    // abled 선택 가능 / enabled 선택 / disabled 선택 불가
     if (varientState === abled.status) {
       setVarientState(enabled.status);
     } else if (varientState === enabled.status) {
@@ -73,4 +73,4 @@ const timeSelectorStyles = (variantData: TimeSelectorColorProps) => css`
   }
 `;
 
-export default TimeSelector;
+export default React.memo(TimeSelector);

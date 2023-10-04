@@ -104,6 +104,10 @@ export interface TimeSlot {
 export interface TimeSelectorProps {
   content: string | JSX.Element;
   status: string;
+  // timeSlot: TimeSlot[][];
+  // selectedStartTime: string;
+  // selectedEndTime: string;
+  // onTimeSelectorClick: (time: string, status: string) => void;
 }
 
 export interface TimeSelectorColorProps {
