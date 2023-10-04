@@ -41,6 +41,7 @@ import {
   My,
   Error,
   ExitSmall,
+  ExitMedium,
   InfoBuilding,
   InfoPlace,
   InfoHost,
@@ -149,6 +150,8 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Error width={size} height={size} />;
     case common.exitSmall:
       return <ExitSmall />;
+    case common.exitMedium:
+      return <ExitMedium color={color} />;
     default:
       break;
   }
