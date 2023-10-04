@@ -115,12 +115,14 @@ function InvitationInfoContainer() {
 
   return (
     <div css={containerStyles}>
+      {/* 초대 장소, 날짜, 시간 선택 */}
       <InvitationInfo
         tip={tip}
         onChange={onChangeTipHandler}
         onFocus={onFocusInputHandler}
         onBlur={onBlurInputHandler}
       />
+      {/* 방문자 리스트 */}
       <InvitationVisitorsList
         visitorsList={visitorsList}
         onClick={onClickDeleteVisitorHandler}
