@@ -6,7 +6,7 @@ function InvitationBuildingPublicTransportItem({
   platform,
   location,
 }: InvitationBuildingPublicTransportItemProps) {
-  let icon = null;
+  let icon;
   if (platform === 'subway') {
     icon = <Subway />;
   } else if (platform === 'bus') {

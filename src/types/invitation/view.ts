@@ -23,12 +23,22 @@ export interface InvitationInfoThemesProps {
 }
 export interface InvitationInfoThemeProps {
   backgroundImage: string;
+  backgroundImageBig: string;
   shadow: string;
   boxShadow: string;
   side: string;
   sideRight: string;
   icon: string;
 }
+
+export interface InvitationBuildingInfoProps {
+  data: GetVisitationInfoData;
+}
+
+export interface InvitationOfficeInfoProps {
+  data: GetVisitationInfoData;
+}
+
 export interface InvitationInfoContainerProps {
   data: GetVisitationInfoData;
 }
@@ -59,4 +69,17 @@ export interface InvitationBuildingPublicTransportItemProps {
 
 export interface InvitationQrInfoTextProps {
   data: GetVisitationInfoData;
+}
+
+export interface InvitationVisitTipProps {
+  invitationTip: string;
+}
+
+export interface InvitationOfficeMapProps {
+  placeType: string;
+}
+
+export interface InvitationOfficeLocationProps {
+  invitationOfficeName: string;
+  hostCompanyName: string;
 }

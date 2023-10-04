@@ -13,8 +13,8 @@ function InvitationInfoCategory({ value, icon }: InvitationInfoCategoryProps) {
 
   const variantData = INVITATION_VIEW_TICKET_THEME[themeState.theme];
 
-  const onClickHandler = (event: React.MouseEvent) => {
-    setNextComponent((event.target as HTMLButtonElement).id);
+  const onClickHandler = () => {
+    setNextComponent(value);
   };
 
   return (
@@ -39,12 +39,9 @@ const InvitationInfoCategoryStyles = css`
   width: 75px;
   height: 100%;
   color: ${theme.palette.greyscale.grey50};
-  font: ${theme.font.body.body3_500};
-  button {
-    height: 100%;
-  }
   span {
     color: ${theme.palette.greyscale.grey50};
+    font: ${theme.font.body.body3_500};
   }
 
   ${mq.md} {
@@ -57,8 +54,6 @@ const InvitationInfoCategoryStyles = css`
   }
 `;
 
-const CategoryContainerStyles = css`
-  margin: 0 auto;
-`;
+const CategoryContainerStyles = css``;
 
 export default InvitationInfoCategory;

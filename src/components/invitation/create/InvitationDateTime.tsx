@@ -28,7 +28,7 @@ function InvitationDateTime() {
   const { closeBottomSheet } = useBottomSheetStore();
   const { alertState, openAlert } = useAlertStore();
   const { isOn, onToggle, offToggle } = useToggleStore();
-  const { selectTime } = useTimeSelectorStore();
+  const { selectTime, clearSelectTime } = useTimeSelectorStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
 
   // Thu Oct 26 2023 00:00:00 GMT+0900 (한국 표준시)
@@ -77,6 +77,8 @@ function InvitationDateTime() {
       const common = getCommonTimes(fetchData);
       setCommonTimes([...common]);
     }
+    // 날짜를 다시 지정했으므로 기존 선택했던 시간 배열 초기화
+    clearSelectTime();
   }, [fetchData]);
 
   // commonTimes.Length(가능한 시간)에 따라 종일 활성화 여부
@@ -204,6 +206,11 @@ const buttonWrapperStyles = css`
   max-width: 360px;
   padding: 0 20px 20px;
   margin: 0 -6px 0;
+  background-image: linear-gradient(
+    to top,
+    ${theme.palette.white} 70%,
+    transparent 30%
+  );
 
   ${mq.md} {
     min-width: 361px;
@@ -282,20 +289,20 @@ const calendarStyles = css`
 
       .react-datepicker__day--keyboard-selected {
         // endDate + 각 달의 같은 날짜
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
       }
       .react-datepicker__day--in-range {
         // startDate ~ endDate 범위 스타일
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
       }
       .react-datepicker__day--in-selecting-range {
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
-        border-radius: 45%;
       }
       .react-datepicker__day--in-selecting-range:not(
           .react-datepicker__day--in-range,
@@ -305,7 +312,7 @@ const calendarStyles = css`
 
         ) {
         // startDate 선택 후 endDate까지의 range 스타일
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
         opacity: 0.8;
@@ -318,15 +325,14 @@ const calendarStyles = css`
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 49px;
+      width: 32px;
       height: 32px;
       color: ${theme.palette.greyscale.grey70};
 
       &:hover {
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
-        /* opacity: 0.3; */
       }
     }
     // 날짜를 선택했을 때 현재일 스타일 (선택 전에는 적용X)

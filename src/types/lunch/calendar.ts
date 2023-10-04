@@ -37,6 +37,7 @@ export interface MenuDataProps {
 
 // 컴포넌트 타입
 export interface LunchCalendarListItemProps {
+  keywordId?: number;
   type: string;
   content?: string;
   item?: MenuData;
@@ -48,6 +49,10 @@ export interface LunchCalendarListItemProps {
 
 export interface LunchCalendarRatingBtnProps {
   title: string;
+  isGood: number;
+  isBad: number;
+  setIsGood: React.Dispatch<React.SetStateAction<number>>;
+  setIsBad: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface LunchCalendarReviewCategoryProps {

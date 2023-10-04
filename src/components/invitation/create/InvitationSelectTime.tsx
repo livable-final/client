@@ -1,6 +1,7 @@
 import TimeSelector from '@/components/common/TimeSelector';
 import createTimeSlots from '@/utils/createTimeSlots';
 import useToggleStore from '@/stores/useToggleStore';
+import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
@@ -14,11 +15,13 @@ function InvitationSelectTime({ commonTimes }: InvitationSelectTimeProps) {
 
   // [{...오전}, {...오후}]
   const [timeSlot, setTimeSlot] = useState<TimeSlot[][]>([[], []]);
+  // const [newTimeSlot, setNewTimeSlot] = useState<TimeSlot[][] | null>(null);
+  const [isUpdated, setIsUpdated] = useState<boolean>(false);
 
   const { isOn } = useToggleStore();
+  const { selectTime } = useTimeSelectorStore();
   const { createContents } = useInvitationCreateStore();
   const { commonPlaceId } = createContents;
-  // console.log(commonPlaceId);
 
   useEffect(() => {
     const res = createTimeSlots(
@@ -26,7 +29,38 @@ function InvitationSelectTime({ commonTimes }: InvitationSelectTimeProps) {
       commonPlaceId,
     );
     setTimeSlot(res);
-  }, [commonTimes]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // 시작 시간/종료 시간 선택 시 timeslot 재정의
+  useEffect(() => {
+    setIsUpdated(false);
+    const res = createTimeSlots(
+      JSON.parse(JSON.stringify(commonTimes)),
+      commonPlaceId,
+    );
+    setTimeSlot(res);
+    setIsUpdated(true);
+  }, [commonPlaceId, commonTimes]);
+
+  // 시작 시간 ~ 종료 시간 사이 선택 처리
+  useEffect(() => {
+    if (isUpdated && selectTime.length >= 2) {
+      const amSlot = timeSlot[0].map((slot) => {
+        if (slot.time >= selectTime[0] && slot.time <= selectTime[1]) {
+          slot.status = 'enabled';
+        }
+        return slot;
+      });
+      const pmSlot = timeSlot[1].map((slot) => {
+        if (slot.time >= selectTime[0] && slot.time <= selectTime[1]) {
+          slot.status = 'enabled';
+        }
+        return slot;
+      });
+      setTimeSlot([[...amSlot], [...pmSlot]]);
+    }
+  }, [isUpdated, selectTime, timeSlot]);
 
   return (
     !isOn && (

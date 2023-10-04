@@ -14,11 +14,13 @@ import useBottomSheetStore from '@/stores/useBottomSheetStore';
 function UserInvitationListEdit({ id }: UserInvitationListEditProps) {
   const router = useRouter();
   const { title, confirm } = USER_INVITATIONLIST_BUTTON_TEXT;
-  const { modalState, openModal } = useModalStore();
+  const { modalState, openModal, closeModal } = useModalStore();
   const { closeBottomSheet } = useBottomSheetStore();
 
   const onclickModalHandler = () => {
     getInvitationDeleteList(id as string);
+    closeModal();
+    closeBottomSheet();
   };
 
   const onclickdeleteHandler = () => {

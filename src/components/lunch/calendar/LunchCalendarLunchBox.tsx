@@ -87,6 +87,7 @@ function LunchCalendarLunchBox() {
         <LunchSubTitle title={subTitle.todayLunch} type="title" margin="24px" />
         <div css={inputBoxStyles}>
           <Input
+            type="review"
             variant="search"
             textarea
             placeholder={category[2].placeholder}
@@ -101,6 +102,7 @@ function LunchCalendarLunchBox() {
         <Button
           variant="blue"
           content={button.button4.text2}
+          isDisabled={searchText === ''}
           onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
         />
       </div>

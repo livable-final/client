@@ -1,16 +1,26 @@
 import Header from '@/components/common/Header';
 import InvitationCreateForm from '@/components/invitation/InvitationCreateForm';
+import InvitationPreview from '@/components/invitation/create/InvitationPreview';
 import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
 import useViewStore from '@/stores/usePagesStore';
-import useModalStore from '@/stores/useModalStore';
+// import useModalStore from '@/stores/useModalStore';
 import mq from '@/utils/mediaquery';
+import { useState } from 'react';
 import { css } from '@emotion/react';
-import Modal from '@/components/common/Modal';
+// import Modal from '@/components/common/Modal';
 
 function Create() {
   const { nextComponent } = useViewStore();
   const { headerTitle } = useInvitationHeaderTitleStore();
-  const { modalState, openModal } = useModalStore();
+  // const { modalState, openModal } = useModalStore();
+
+  // 예시 컴포넌트 오픈 상태
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  // 예시 버튼 클릭 핸들러
+  const onClick = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div css={createContainerStyles}>
@@ -19,13 +29,11 @@ function Create() {
           title={headerTitle}
           type={nextComponent === '' ? 'text' : ''}
           text="예시"
-          onClick={() =>
-            openModal('test', '방문증 미리보기가 구현될 예정이에요!')
-          }
+          onClick={onClick}
         />
       </div>
-      {modalState.isOpen && <Modal isAlert />}
       <InvitationCreateForm />
+      {isOpen && <InvitationPreview onClick={onClick} />}
     </div>
   );
 }

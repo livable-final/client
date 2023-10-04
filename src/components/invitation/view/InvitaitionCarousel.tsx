@@ -21,7 +21,15 @@ function InvitaitionCarousel({ type }: InvitationCarouselProps) {
         {type === 'restaurant' ? `${restaurant.subtitle}` : `${cafe.subtitle}`}
       </div>
       <div css={carouselTitleStyles}>
-        {type === 'restaurant' ? `${restaurant.body}` : `${cafe.body}`}
+        {type === 'restaurant' ? (
+          <div>
+            테라타워 근처 <span>{restaurant.contents}</span> 추천!
+          </div>
+        ) : (
+          <div>
+            근처 <span>{cafe.title}</span>를 알려드릴게요
+          </div>
+        )}
       </div>
       <div css={carouselStyles}>
         {datas &&
@@ -61,6 +69,9 @@ const carouselTitleStyles = css`
   margin-bottom: 20px;
   color: ${theme.palette.title};
   font: ${theme.font.subTitle.subTitle2_600};
+  span {
+    color: ${theme.palette.primary};
+  }
 `;
 
 const carouselStyles = css`
@@ -100,8 +111,11 @@ const carouselItemInfoStyles = css`
   align-self: stretch;
   position: absolute;
   bottom: 0;
-  width: 100%;
-  height: auto;
+  width: 135px;
+  height: 52px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   padding: 6px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.85);
@@ -111,7 +125,11 @@ const carouselItemInfoStyles = css`
 const itemInfoNameStyles = css`
   font: ${theme.font.body.body1_500};
   color: ${theme.palette.greyscale.grey80};
+  width: 123px;
   line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const itemInFloorStyles = css`
   font: ${theme.font.body.body4};

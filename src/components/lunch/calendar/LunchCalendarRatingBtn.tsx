@@ -7,7 +7,13 @@ import { COMMON_ICON_NAMES } from '@/constants/common';
 import { LunchCalendarRatingBtnProps } from '@/types/lunch/calendar';
 import useWriteStore from '@/stores/useWriteStore';
 
-function LunchCalendarRatingBtn({ title }: LunchCalendarRatingBtnProps) {
+function LunchCalendarRatingBtn({
+  title,
+  isGood,
+  isBad,
+  setIsGood,
+  setIsBad,
+}: LunchCalendarRatingBtnProps) {
   const [isGoodChecked, setIsGoodChecked] = useState(false);
   const [isBadChecked, setIsBadChecked] = useState(false);
   const setRatingState = useWriteStore((state) => state.setRatingState);
@@ -15,26 +21,37 @@ function LunchCalendarRatingBtn({ title }: LunchCalendarRatingBtnProps) {
   const { lunch } = COMMON_ICON_NAMES;
 
   const onClickGoodHandler = () => {
-    setIsGoodChecked(!isGoodChecked);
-    setRatingState({ taste: 'GOOD' });
+    if (!isGoodChecked) {
+      setIsGoodChecked(true);
+      setIsBad(0);
+      setIsGood(2);
+      setRatingState({ taste: 'GOOD' });
+    } else if (isGoodChecked) {
+      setIsGoodChecked(false);
+      setIsBad(1);
+      setIsGood(1);
+      setRatingState({ taste: '' });
+    }
   };
 
   const onClickBadHandler = () => {
     if (!isBadChecked) {
       setIsBadChecked(true);
+      setIsBad(2);
+      setIsGood(0);
       setRatingState({ taste: 'BAD' });
     } else if (isBadChecked) {
       setIsBadChecked(false);
-      setRatingState({ taste: 'GOOD' });
+      setIsBad(1);
+      setIsGood(1);
+      setRatingState({ taste: '' });
     }
   };
 
   return (
     <button
       type="button"
-      css={buttonStyles(
-        title === `${button.button5[0]}` ? isGoodChecked : isBadChecked,
-      )}
+      css={buttonStyles(title === `${button.button5[0]}` ? isGood : isBad)}
       onClick={
         title === `${button.button5[0]}`
           ? onClickGoodHandler
@@ -42,11 +59,11 @@ function LunchCalendarRatingBtn({ title }: LunchCalendarRatingBtnProps) {
       }
     >
       {title === `${button.button5[0]}` ? (
-        <div css={iconStyles(isGoodChecked)}>
+        <div css={iconStyles}>
           <Icons icon={lunch.smile} size="44px" />
         </div>
       ) : (
-        <div css={iconStyles(isBadChecked)}>
+        <div css={iconStyles}>
           <Icons icon={lunch.confused} size="44px" />
         </div>
       )}
@@ -55,7 +72,7 @@ function LunchCalendarRatingBtn({ title }: LunchCalendarRatingBtnProps) {
   );
 }
 
-const buttonStyles = (isChecked: boolean) => css`
+const buttonStyles = (isChecked: number) => css`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,28 +81,30 @@ const buttonStyles = (isChecked: boolean) => css`
   width: 100%;
   padding: 16px 0;
   border-radius: 16px;
-  font: ${theme.font.body.body1_500};
   border: 2px solid
-    ${!isChecked
-      ? `{theme.palette.greyscale.grey10}`
-      : `${theme.palette.orange}`};
-  background-color: ${!isChecked
-    ? `${theme.palette.greyscale.grey5}`
-    : `${theme.palette.white}`};
+    ${isChecked === 2
+      ? `${theme.palette.orange}`
+      : `{theme.palette.greyscale.grey10}`};
+  background-color: ${isChecked === 2
+    ? `${theme.palette.white}`
+    : `${theme.palette.greyscale.grey5}`};
+
+  p {
+    font: ${theme.font.body.body1_500};
+    color: ${isChecked === 2
+      ? `${theme.palette.orange}`
+      : `${theme.palette.greyscale.grey50}`};
+  }
 
   svg {
-    filter: ${isChecked && 'none'};
-    transform: ${isChecked && 'scale(1.2)'};
-    transition: ${isChecked && 'transform 0.1s ease'};
+    filter: ${isChecked === 0 ? `saturate(5%)` : 'none'};
+    transform: ${isChecked === 2 && 'scale(1.2)'};
+    transition: ${isChecked === 2 && 'transform 0.1s ease'};
   }
 `;
 
-const iconStyles = (isChecked: boolean) => css`
+const iconStyles = () => css`
   margin-bottom: 4px;
-
-  // svg {
-  //   filter: ${isChecked ? `saturate(5%)` : `none`};
-  // }
 `;
 
 export default LunchCalendarRatingBtn;

@@ -7,12 +7,15 @@ import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import UserInvitationListEdit from '@/components/user/UserInvitationListEdit';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { USER_INVITATIONLIST_TEXT } from '@/constants/user/userInvitationTexts';
 import { getInvitationList } from '@/pages/api/invitation/editRequests';
+import useInvitationEditStore from '@/stores/useInvitationEditStore';
 import BottomSheet from '../common/BottomSheet';
 
 function UserInvitationList() {
   const { openBottomSheet } = useBottomSheetStore();
+  const { setEditContents } = useInvitationEditStore();
   const router = useRouter();
   const onClickHandler = () => {
     router.push('/user');
@@ -25,6 +28,14 @@ function UserInvitationList() {
   const { response } = useFetch({
     fetchFn: getInvitationList,
   });
+
+  useEffect(() => {
+    setEditContents('commonPlaceId', '');
+    setEditContents('description', '');
+    setEditContents('startDate', '');
+    setEditContents('endDate', '');
+    setEditContents('visitors', []);
+  }, []);
 
   // 빋어온 데이터 객체를 다중 배열로 변환
   const invitationList = response && Object.values(response?.data);
@@ -66,6 +77,7 @@ function UserInvitationList() {
     </div>
   );
 }
+
 const userInvitationListStyles = css`
   display: flex;
   flex-direction: column;

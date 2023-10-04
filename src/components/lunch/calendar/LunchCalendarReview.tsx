@@ -62,7 +62,7 @@ const buttonListStyles = css`
   margin-top: 32px;
   padding: 0 20px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 479px) {
     display: flex;
     justify-content: space-between;
   }
