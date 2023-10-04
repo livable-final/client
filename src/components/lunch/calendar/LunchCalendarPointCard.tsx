@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
@@ -7,7 +8,6 @@ import { css } from '@emotion/react';
 import { CALENDAR_CONTENT, POINT_CONSTANTS } from '@/constants/lunch';
 import { getPointLogs, postPoint } from '@/pages/api/lunch/calendarRequests';
 import {
-  Present,
   Point10,
   Point1000,
   Point10Pink,
@@ -113,7 +113,13 @@ function LunchCalendarPointCard() {
               ) : (
                 <div css={circleStyles}>
                   {value === 6 || value === 14 || value === 21 ? (
-                    <Present />
+                    // <Present />
+                    <Image
+                      width={40}
+                      height={40}
+                      src="/point/Wrappedgift1.png"
+                      alt="gift"
+                    />
                   ) : (
                     <span css={textStyles}>{value}</span>
                   )}
@@ -125,8 +131,10 @@ function LunchCalendarPointCard() {
       </div>
       <div css={cardStyles}>
         <strong>{card.text1}</strong>
-        <p>{card.text2}</p>
-        <p>{card.text3}</p>
+        <div>
+          <p>{card.text2}</p>
+          <p>{card.text3}</p>
+        </div>
       </div>
     </section>
   );
@@ -161,12 +169,22 @@ const textStyles = css`
 `;
 
 const cardStyles = css`
+  margin: 0 -16px;
   padding: 24px 16px;
   background-color: ${theme.palette.greyscale.grey10};
+  color: ${theme.palette.greyscale.grey50};
 
   strong: {
     display: block;
     margin-bottom: 8px;
+    font: ${theme.font.body.body2_500};
+  }
+
+  > div {
+    margin-top: 8px;
+  }
+  p {
+    font: ${theme.font.body.body3_400};
   }
 `;
 export default LunchCalendarPointCard;
