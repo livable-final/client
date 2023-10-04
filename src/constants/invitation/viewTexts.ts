@@ -118,3 +118,9 @@ export const INVITATION_CAROUSEL_TEXTS = {
     subtitle: '조금 빨리 도착하셨나요?',
   },
 };
+// 오피스 정보 상수(수정 예정)
+export const INVITATION_VIEW_TEXTS = {
+  header: {
+    office: '오피스 정보',
+  },
+};
