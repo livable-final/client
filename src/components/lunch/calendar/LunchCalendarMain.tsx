@@ -58,15 +58,17 @@ function LunchCalendarMain() {
     <section css={pageStyles}>
       {alertState.isOpen && <Alert />}
       {isChecked && <LunchCalendarDetailsSlide />}
-      <Header title={title.main} onClick={onClickHeaderHandler} />
-      <div css={subTitleStyles}>
-        <LunchSubTitle
-          userName={memberName}
-          title={subTitle.calendar}
-          type="title"
-        />
+      <div css={contentStyles}>
+        <Header title={title.main} onClick={onClickHeaderHandler} />
+        <div css={subTitleStyles}>
+          <LunchSubTitle
+            userName={memberName}
+            title={subTitle.calendar}
+            type="title"
+          />
+        </div>
+        <LunchCalendarForm />
       </div>
-      <LunchCalendarForm />
       <LunchCalendarWriteBtn
         isCompleted={isCompleted}
         onClick={!isCompleted ? onClickWriteBtnHandler : onClickPointBtnHandler}
@@ -76,8 +78,15 @@ function LunchCalendarMain() {
 }
 
 const pageStyles = css`
+  margin: 0 -16px;
   height: 100vh;
   background-color: ${theme.palette.greyscale.grey5};
+`;
+
+const contentStyles = css`
+  padding: 0 16px;
+  background-color: ${theme.palette.white};
+  box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.03);
 `;
 
 const subTitleStyles = css`
