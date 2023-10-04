@@ -1,11 +1,11 @@
-import Alert from '@/components/common/Alert';
+// import Alert from '@/components/common/Alert';
 import Header from '@/components/common/Header';
 import {
   INVITATION_CAROUSEL_TEXTS,
   INVITATION_VEIW_INFO_TEXTS,
 } from '@/constants/invitation/viewTexts';
 import { postParking } from '@/pages/api/invitation/viewRequests';
-import useAlertStore from '@/stores/useAlertStore';
+// import useAlertStore from '@/stores/useAlertStore';
 import useInvitationParkingStore from '@/stores/useInvitationParkingStore';
 // import { ErrorProps } from 'next/error';
 import { useState } from 'react';
@@ -36,7 +36,10 @@ function InvitationParking() {
     setCarNumber(event.target.value);
   };
 
-  const onClickParkingCancelHandler = () => {};
+  const onClickParkingCancelHandler = () => {
+    setisDone(false);
+    setCarNumber('');
+  };
   const onClickParkingChangeHandler = () => {};
   return (
     <div css={containerStyles}>
@@ -66,7 +69,7 @@ function InvitationParking() {
             type="text"
             defaultValue={carNumber.carNumber}
             onChange={onChangeHandler}
-            placeholder="123가2123"
+            // placeholder="123가2123"
             css={doneInputStyles}
           />
 
