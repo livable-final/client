@@ -23,6 +23,7 @@ export interface InvitationInfoThemesProps {
 }
 export interface InvitationInfoThemeProps {
   backgroundImage: string;
+  backgroundImageBig: string;
   shadow: string;
   boxShadow: string;
   side: string;

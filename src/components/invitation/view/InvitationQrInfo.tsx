@@ -11,6 +11,7 @@ import {
   InvitationInfoContainerProps,
   InvitationInfoThemeProps,
 } from '@/types/invitation/view';
+import mq from '@/utils/mediaquery';
 
 function InvitationQrInfo({ data }: InvitationInfoContainerProps) {
   const { themeState, setThemeState } = useThemeStore();
@@ -58,6 +59,14 @@ function InvitationQrInfo({ data }: InvitationInfoContainerProps) {
 }
 const queryStyles = css`
   overflow-x: scroll;
+  ${mq.md} {
+  }
+  ${mq.lg} {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto;
+  }
 `;
 const invitationQrContainer = (variantData: InvitationInfoThemeProps) => css`
   position: relative;
@@ -67,7 +76,18 @@ const invitationQrContainer = (variantData: InvitationInfoThemeProps) => css`
   padding: 30px;
   border-radius: 12px;
   box-shadow: ${variantData.shadow};
-  background-image: ${variantData.backgroundImage};
+  background-image: ${variantData.backgroundImageBig};
+  ::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    width: 87%;
+    height: 95%;
+    border-radius: 5%;
+    background: ${variantData.boxShadow};
+    filter: blur(20px);
+    z-index: -1;
+  }
 `;
 const invitationQrticket = css`
   display: flex;
@@ -77,18 +97,18 @@ const invitationQrticket = css`
 const leftPuchingStyles = (variantData: InvitationInfoThemeProps) => css`
   position: absolute;
   background-color: #fff;
-  width: 22px;
+  width: 44px;
   height: 44px;
-  left: -1px;
+  left: -20px;
   border-radius: 0 22px 22px 0;
   background-image: ${variantData.side};
 `;
 const rightPuchingStyles = (variantData: InvitationInfoThemeProps) => css`
   position: absolute;
   background-color: #fff;
-  width: 22px;
+  width: 42px;
   height: 44px;
-  right: -1px;
+  right: -20px;
   border-radius: 22px 0 0 22px;
   background-image: ${variantData.sideRight};
 `;

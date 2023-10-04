@@ -39,9 +39,9 @@ const InvitationInfoCategoryStyles = css`
   width: 75px;
   height: 100%;
   color: ${theme.palette.greyscale.grey50};
-  font: ${theme.font.body.body3_500};
   span {
     color: ${theme.palette.greyscale.grey50};
+    font: ${theme.font.body.body3_500};
   }
 
   ${mq.md} {
