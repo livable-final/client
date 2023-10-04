@@ -50,6 +50,7 @@ import {
   LunchActive,
   MyActive,
   Popup,
+  Reviewer,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -152,6 +153,8 @@ function Icons({ icon, color, size }: IconsProps) {
       return <ExitSmall />;
     case common.exitMedium:
       return <ExitMedium color={color} />;
+    case common.reviewer:
+      return <Reviewer swidth={size} height={size} />;
     default:
       break;
   }
