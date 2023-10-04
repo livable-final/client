@@ -19,6 +19,7 @@ import Info from '@/assets/icons/Info.svg';
 import PlusBig from '@/assets/icons/Plus=big.svg';
 import PlusSmall from '@/assets/icons/Plus=small.svg';
 import ExitSmall from '@/assets/icons/Exit=small.svg';
+import ExitMedium from '@/assets/icons/Exit=medium.svg';
 import RightSmall from '@/assets/icons/Right=small.svg';
 import Direction from '@/assets/icons/Direction.svg';
 import UnCheck from '@/assets/icons/UnCheck.svg';
@@ -136,6 +137,7 @@ export {
   PlusBig,
   PlusSmall,
   ExitSmall,
+  ExitMedium,
   RightSmall,
   Direction,
   Check,
