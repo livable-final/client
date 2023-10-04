@@ -113,7 +113,6 @@ function LunchCalendarPointCard() {
               ) : (
                 <div css={circleStyles}>
                   {value === 6 || value === 14 || value === 21 ? (
-                    // <Present />
                     <Image
                       width={40}
                       height={40}
@@ -169,7 +168,7 @@ const textStyles = css`
 `;
 
 const cardStyles = css`
-  margin: 0 -16px;
+  margin: 0 -16px 20px;
   padding: 24px 16px;
   background-color: ${theme.palette.greyscale.grey10};
   color: ${theme.palette.greyscale.grey50};

@@ -12,7 +12,7 @@ import useSaveStore from '@/stores/useSaveStore';
 import useUserStore from '@/stores/useUserStore';
 
 function LunchCalendarListItem({
-  keywordId,
+  id,
   type,
   item,
   content,
@@ -48,22 +48,23 @@ function LunchCalendarListItem({
       setRemoveMenu(item);
     }
   };
-  const onClickDeleteHandler = () => {
-    if (keywordId) {
-      deleteKeywordList(keywordId);
-    }
+
+  const onClickDeleteHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!id) return;
+    deleteKeywordList(id);
   };
 
   switch (type) {
     case listItem.type1:
       return (
-        <button type="button" css={listStyles(type)}>
-          <div css={contentStyles}>
+        <div css={listStyles(type)}>
+          <button type="button" css={contentStyles} onClick={onClick}>
             <Clock css={iconStles} />
             <p css={searchedStyles}>{content}</p>
-          </div>
+          </button>
           <XIcon onClick={onClickDeleteHandler} />
-        </button>
+        </div>
       );
     case listItem.type2:
       return (
@@ -126,6 +127,7 @@ const contentStyles = () => css`
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 `;
 
 const searchedStyles = css`
