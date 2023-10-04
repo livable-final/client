@@ -19,8 +19,8 @@ function InvitationInfo({ value, data }: InvitationInfoProps) {
   const { ticket } = INVITATION_VEIW_INFO_TEXTS;
   const { themeState, setThemeState } = useThemeStore();
   const { setNextComponent } = usePagesStore();
-  const onClickHandler = (event: React.MouseEvent) => {
-    setNextComponent((event.target as HTMLButtonElement).id);
+  const onClickHandler = () => {
+    setNextComponent(value);
   };
   const { response } = useFetch({
     fetchFn: getVisitationQr,
@@ -127,17 +127,17 @@ const infoContainerStyles = (variantData: InvitationInfoThemeProps) => css`
   height: 178px;
   color: ${theme.palette.white};
   background-image: ${variantData.backgroundImage};
-  box-shadow: ${variantData.shadow};
+
   border-radius: 12px;
   ::before {
     content: '';
     position: absolute;
     left: 20px;
     width: 90%;
-    height: 78%;
+    height: 85%;
     border-radius: 2%;
     background: ${variantData.boxShadow};
-    filter: blur(20px);
+    filter: blur(10px);
     z-index: -1;
   }
 `;
