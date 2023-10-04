@@ -154,7 +154,7 @@ function Icons({ icon, color, size }: IconsProps) {
     case common.exitMedium:
       return <ExitMedium color={color} />;
     case common.reviewer:
-      return <Reviewer swidth={size} height={size} />;
+      return <Reviewer width={size} height={size} />;
     default:
       break;
   }
