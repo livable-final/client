@@ -18,6 +18,7 @@ function LunchReviewPhotos({ photos, isRow }: ReviewPhotosProps) {
             alt={`이미지${idx}`}
             width={isRow ? ranking.photoWidth : review.photoWidth}
             height={isRow ? ranking.photoHeight : review.photoHeight}
+            priority
           />
         ))}
       </div>

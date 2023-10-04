@@ -1,11 +1,11 @@
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
-import { Reviewer } from '@/assets/icons';
 import getTimeDiff from '@/utils/getTimeDiff';
 import { LunchReviewProps } from '@/types/lunch/reviewList';
 import LunchReviewPhotos from '@/components/lunch/review/LunchReviewPhotos';
 import LunchReviewRatings from '@/components/lunch/review/LunchReviewRatings';
+import Icons from '@/components/common/Icons';
 
 // '오늘 점심' 리뷰 글에 대한 레이아웃
 function LunchReview({ ...props }: LunchReviewProps) {
@@ -14,7 +14,7 @@ function LunchReview({ ...props }: LunchReviewProps) {
       <div css={wrapperStyles}>
         <div css={profileStyles}>
           <div css={profileImageStyles}>
-            <Reviewer />
+            <Icons icon="reviewer" size="25" />
           </div>
           <div css={profileDetailStyles}>
             <span>{props.memberName}</span>

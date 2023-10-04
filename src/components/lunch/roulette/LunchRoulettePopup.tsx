@@ -13,7 +13,7 @@ import { Popup, PopupActive } from '@/assets/icons';
 // 룰렛 팝업 렌딩 컴포넌트
 function LunchRoulettePopup() {
   const { popup } = LUNCH_ROULETTE_CONSTANTS;
-  const { isOperated, isAgain } = useRouletteStore();
+  const { isOperated, isAgain, isDecided } = useRouletteStore();
   const { setState } = useRouletteStore;
   const { menuIdState } = useRouletteStore();
   const { alertState, openAlert } = useAlertStore();
@@ -29,6 +29,8 @@ function LunchRoulettePopup() {
     } catch (err: unknown) {
       const error = err as ErrorProps;
       openAlert('📣', error.message);
+    } finally {
+      setState({ isDecided: true }); // 메뉴 결정 완료
     }
   }, [menuIdState, openAlert, setState]);
 
@@ -50,6 +52,7 @@ function LunchRoulettePopup() {
         onMouseUpCapture={onReleaseHandler}
         onClick={onClickHandler}
         css={popupStyles}
+        disabled={isDecided}
       >
         {alertState.isOpen && <Alert />}
         {isOperated && isAgain && (
