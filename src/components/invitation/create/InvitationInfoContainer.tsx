@@ -104,8 +104,8 @@ function InvitationInfoContainer() {
 
   // 최종 전송 확인 핸들러 (모달)
   const onClickModalHandler = () => {
-    if (initialCreateState !== createContents) {
-      setIsConfirmed(!isConfirmed);
+    setIsConfirmed(!isConfirmed);
+    if (isConfirmed && initialCreateState !== createContents) {
       closeModal();
     } else {
       openAlert('📢', '초대장 정보를 다시 확인해 주세요!');
@@ -130,6 +130,11 @@ function InvitationInfoContainer() {
           content={button.send}
           variant="blue"
           onClick={onClickBtnHandler}
+          isDisabled={
+            createContents.visitors.length === 0 ||
+            createContents.startDate === '' ||
+            createContents.endDate === ''
+          }
         />
       </div>
       {modalState.isOpen && (
