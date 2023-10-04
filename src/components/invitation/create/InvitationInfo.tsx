@@ -53,9 +53,13 @@ function InvitationInfo({
   useEffect(() => {
     if (createContents.startDate) {
       setDate(
-        `${createContents.startDate.split('T')[0]} ~ ${
+        createContents.startDate.split('T')[0] ===
           createContents.endDate.split('T')[0]
-        }`,
+          ? `${createContents.startDate.split('T')[0]}
+            `
+          : `${createContents.startDate.split('T')[0]} ~ ${
+              createContents.endDate.split('T')[0]
+            }`,
       );
       setTime(
         `${createContents.startDate
