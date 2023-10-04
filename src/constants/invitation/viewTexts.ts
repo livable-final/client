@@ -7,7 +7,7 @@ export const INVITATION_VEIW_INFO_TEXTS = {
     building: '빌딩 소개',
     place: '초대 장소',
     host: '초대자 정보',
-    parking: '주차 정보',
+    parking: '주차 등록',
     code: '식스센스 출입증',
   },
   icon: {
@@ -25,6 +25,12 @@ export const INVITATION_VEIW_INFO_TEXTS = {
   ticket: {
     headers: '임시출입증',
     zoom: '크게보기',
+  },
+  footer: {
+    title: '주)리버블',
+    call: '고객센터 : 1833-9092',
+    site: '사이트 : https://www.officener.com',
+    btn: '관리실 문의하기',
   },
 };
 
@@ -49,13 +55,13 @@ export const INVITATION_VIEW_TICKET_THEME: InvitationInfoThemesProps = {
   pink: {
     backgroundImage: `linear-gradient(105deg, #FFB2B2 1.1%, #EDB1BC 46.72%, #AED3FF 100.31%);`,
     backgroundImageBig: `linear-gradient(154deg, #FFB2B2 0.46%, #EDB1D5 63.2%, #AED3FF 104.55%);`,
-    shadow: `0px 25px 20px -15px rgba(212, 191, 215, 0.5);`,
+    shadow: `0px 25px 20px -15px rgba(212, 191, 215, 0.1);`,
     boxShadow: `linear-gradient(
       284deg,
       rgba(78, 154, 253, 0.473) 3.48%,
       rgba(212, 191, 215, 0.5) 30.95%,
       rgba(254, 178, 178, 0.69) 59.89%
-    );`,
+    )`,
     side: `linear-gradient(to left, #f5e0f2, #ffffff, #ffffff);`,
     sideRight: `linear-gradient(to right, #ffc4eba1, #eef6ff11, #ffffff);`,
     icon: `rgba(255, 178, 178, 1)`,
@@ -73,7 +79,7 @@ export const INVITATION_VIEW_TICKET_THEME: InvitationInfoThemesProps = {
   );`,
     side: `linear-gradient(to left, #c0d7e7, #eef6ff, #ffffff);`,
     sideRight: `linear-gradient(to right, #3cccd16b, #eef6ff11, #ffffff);`,
-    icon: `rgba(99, 134, 213, 1)`,
+    icon: `rgba(67, 209, 190, 1)`,
   },
   orange: {
     backgroundImage: `linear-gradient(140deg, #FFAC6F 0.63%, #FF9141 53.71%, #FF6B6B 90.91%, #FF9AB3 103.4%);`,

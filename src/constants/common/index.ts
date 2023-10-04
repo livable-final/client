@@ -154,6 +154,7 @@ export const COMMON_ICON_NAMES = {
     close: 'close',
     error: 'error',
     exitSmall: 'exitSmall',
+    reviewer: 'reviewer',
     exitMedium: 'exitMedium',
   },
 };
