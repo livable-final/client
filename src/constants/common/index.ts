@@ -159,33 +159,31 @@ export const COMMON_ICON_NAMES = {
   },
 };
 
-// 카테고리 이름
+// 초대장 생성 - 초대 목적 카테고리
 export const COMMON_CATEGORIES = {
-  invitation: {
-    meeting: {
-      icon: 'meeting',
-      title: '회의',
-    },
-    interview: {
-      icon: 'interview',
-      title: '면접',
-    },
-    fixedTermWork: {
-      icon: 'fixedTermWork',
-      title: '기간 근무',
-    },
-    seminar: {
-      icon: 'seminar',
-      title: '세미나',
-    },
-    as: {
-      icon: 'as',
-      title: 'AS/점검',
-    },
-    etc: {
-      icon: 'etc',
-      title: '기타',
-    },
+  meeting: {
+    icon: 'meeting',
+    title: '회의',
+  },
+  interview: {
+    icon: 'interview',
+    title: '면접',
+  },
+  fixedTermWork: {
+    icon: 'fixedTermWork',
+    title: '기간 근무',
+  },
+  seminar: {
+    icon: 'seminar',
+    title: '세미나',
+  },
+  as: {
+    icon: 'as',
+    title: 'AS/점검',
+  },
+  etc: {
+    icon: 'etc',
+    title: '기타',
   },
 };
 
