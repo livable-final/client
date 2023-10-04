@@ -110,7 +110,11 @@ function InvitationAddVisitorList({
         </div>
         <div css={visitorListContainerStyles}>
           <div css={newVisitorAddBtnStyles}>
-            <Add onClick={onClickAddHandler} />
+            {addVisitorName !== '' && addVisitorContact !== '' ? (
+              <Add onClick={onClickAddHandler} />
+            ) : (
+              <Add onClick={onClickAddHandler} isDisabled />
+            )}
           </div>
           <div css={newVisitorListStyles}>
             {/* 기존 visitorList */}
@@ -134,6 +138,7 @@ function InvitationAddVisitorList({
     </div>
   );
 }
+
 const invitationEditVisitorAddStyles = css`
   display: flex;
   flex-direction: column;
