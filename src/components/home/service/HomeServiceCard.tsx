@@ -48,7 +48,7 @@ const containerStyles = css`
   }
 
   ${mq.lg} {
-    max-width: 120px;
+    max-width: 140px;
   }
 `;
 

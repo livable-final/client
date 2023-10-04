@@ -40,6 +40,7 @@ import {
   My,
   Error,
   ExitSmall,
+  ExitMedium,
   InfoBuilding,
   InfoPlace,
   InfoHost,
@@ -49,6 +50,7 @@ import {
   MyActive,
   Popup,
   Copy,
+  Reviewer,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -149,6 +151,10 @@ function Icons({ icon, color, size }: IconsProps) {
       return <Error width={size} height={size} />;
     case common.exitSmall:
       return <ExitSmall />;
+    case common.exitMedium:
+      return <ExitMedium color={color} />;
+    case common.reviewer:
+      return <Reviewer width={size} height={size} />;
     default:
       break;
   }

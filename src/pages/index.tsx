@@ -47,7 +47,7 @@ function Home() {
 }
 
 const containerStyles = css`
-  margin: 0 -16px 90px;
+  margin: 0 -16px calc(env(safe-area-inset-bottom) + 54px);
   background: ${theme.palette.background.home};
 `;
 

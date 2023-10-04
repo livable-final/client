@@ -14,6 +14,7 @@ import useSaveStore from '@/stores/useSaveStore';
 import { useEffect } from 'react';
 import { getVisitationInfo } from '@/pages/api/invitation/viewRequests';
 import InvitationParking from '@/components/invitation/view/InvitationParking';
+import InvitationParking from './view/InvitationParking';
 
 function InvitationViewForm() {
   const { response } = useFetch({
@@ -52,6 +53,7 @@ function InvitationViewForm() {
     <div>
       <div css={invitationViewFormStyles}>
         <Header
+          isCloseOnly
           title={INVITATION_VEIW_INFO_TEXTS.category.main}
           onClick={onClickHandler}
         />

@@ -22,7 +22,6 @@ const HostInfoItemStyles = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 21px;
   .label {
     min-width: 47px;
     padding: 20px 0;

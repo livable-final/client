@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import Icons from '@/components/common/Icons';
 import { Barcode, Bell, LunchCalendar, Setting } from '@/assets/icons';
 import Link from 'next/link';
-import { BeatLoader } from 'react-spinners';
+import Loading from '@/components/common/Loading';
 
 function Title({ title, isMain, part, loading }: TitleProps) {
   const renderIcons = (type: string) => {
@@ -32,13 +32,7 @@ function Title({ title, isMain, part, loading }: TitleProps) {
   return (
     <div css={containerStyles}>
       <span css={wrapperStyles}>
-        <span css={spanStyles}>
-          {loading ? (
-            <BeatLoader color={theme.palette.greyscale.grey10} size={12} />
-          ) : (
-            title
-          )}
-        </span>
+        <span css={spanStyles}>{loading ? <Loading /> : title}</span>
         {isMain && <Icons icon="down" />}
       </span>
       <div css={iconStyles}>{renderIcons(part)}</div>

@@ -9,10 +9,8 @@ import useModalStore from '@/stores/useModalStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useAlertStore from '@/stores/useAlertStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import useInvitationCreateStore, {
-  initialCreateState,
-} from '@/stores/useInvitationCreateStore';
 import { css } from '@emotion/react';
 import { useEffect, useState, ChangeEvent } from 'react';
 import { VisitorInfo } from '@/types/invitation/api';
@@ -104,23 +102,20 @@ function InvitationInfoContainer() {
 
   // 최종 전송 확인 핸들러 (모달)
   const onClickModalHandler = () => {
-    if (initialCreateState !== createContents) {
-      setIsConfirmed(!isConfirmed);
-      closeModal();
-    } else {
-      openAlert('📢', '초대장 정보를 다시 확인해 주세요!');
-      closeModal();
-    }
+    setIsConfirmed(!isConfirmed);
+    closeModal();
   };
 
   return (
     <div css={containerStyles}>
+      {/* 초대 장소, 날짜, 시간 선택 */}
       <InvitationInfo
         tip={tip}
         onChange={onChangeTipHandler}
         onFocus={onFocusInputHandler}
         onBlur={onBlurInputHandler}
       />
+      {/* 방문자 리스트 */}
       <InvitationVisitorsList
         visitorsList={visitorsList}
         onClick={onClickDeleteVisitorHandler}
@@ -130,6 +125,11 @@ function InvitationInfoContainer() {
           content={button.send}
           variant="blue"
           onClick={onClickBtnHandler}
+          isDisabled={
+            createContents.visitors.length === 0 ||
+            createContents.startDate === '' ||
+            createContents.endDate === ''
+          }
         />
       </div>
       {modalState.isOpen && (
