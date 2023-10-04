@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 import Button from '@/components/common/Button';
+import mq from '@/utils/mediaquery';
 
 function InvitationParking() {
   const { carNumber, setCarNumber } = useInvitationParkingStore();
@@ -104,10 +105,14 @@ const containerStyles = css`
     margin-bottom: 80px;
   }
 `;
-
 const btnDivStyles = css`
   display: flex;
+  flex-direction: column;
   gap: 5px;
+
+  ${mq.md} {
+    flex-direction: row;
+  }
 `;
 
 const buttonStyles = css`
