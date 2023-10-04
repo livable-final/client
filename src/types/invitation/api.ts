@@ -148,3 +148,13 @@ export interface PatchInvitationContents {
   endDate?: Date | string;
   visitors?: VisitorInfo[];
 }
+
+// 주차 등록 스토어
+export interface InvitationParkingStore {
+  carNumber: PostInvitationParkingData;
+  setCarNumber: (carNumber: string) => void;
+}
+
+export interface PostInvitationParkingData {
+  carNumber: string;
+}

@@ -4,6 +4,7 @@ import {
   GetInvitationCarouselData,
   GetVisitationInfoData,
   GetVisitationQrData,
+  PostInvitationParkingData,
 } from '@/types/invitation/api';
 
 // 초대장 근처 식당 정보
@@ -28,4 +29,9 @@ export const getVisitationQr = async (): Promise<
 > => {
   const response = await apiInstance.get('visitation/qr');
   return response.data;
+};
+
+export const postParking = async (carNumber: PostInvitationParkingData) => {
+  const response = await apiInstance.post(`visitation/parking`, carNumber);
+  return response;
 };
