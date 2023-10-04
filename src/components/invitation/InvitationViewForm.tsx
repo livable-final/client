@@ -8,12 +8,12 @@ import InvitationOfficeInfo from '@/components/invitation/view/InvitationOfficeI
 import InvitationViewFooter from '@/components/invitation/view/InvitationViewFooter';
 import InvitationInfoContainer from '@/components/invitation/view/InvitationInfoContainer';
 import InvitationCarouselContainer from '@/components/invitation/view/InvitationCarouselContainer';
+import InvitationParking from '@/components/invitation/view/InvitationParking';
 import { css } from '@emotion/react';
 import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 import useSaveStore from '@/stores/useSaveStore';
 import { useEffect } from 'react';
 import { getVisitationInfo } from '@/pages/api/invitation/viewRequests';
-import InvitationParking from '@/components/invitation/view/InvitationParking';
 
 function InvitationViewForm() {
   const { response } = useFetch({
