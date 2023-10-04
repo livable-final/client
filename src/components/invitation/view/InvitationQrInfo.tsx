@@ -60,6 +60,9 @@ function InvitationQrInfo({ data }: InvitationInfoContainerProps) {
 const queryStyles = css`
   overflow-x: scroll;
   ${mq.md} {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
   }
   ${mq.lg} {
     display: flex;
@@ -84,7 +87,7 @@ const invitationQrContainer = (variantData: InvitationInfoThemeProps) => css`
     width: 87%;
     height: 95%;
     border-radius: 5%;
-    background: ${variantData.boxShadow};
+    background-image: ${variantData.boxShadow};
     filter: blur(20px);
     z-index: -1;
   }
