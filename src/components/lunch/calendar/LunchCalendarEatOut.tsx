@@ -38,6 +38,8 @@ function LunchCalenderEatOut() {
   const { subTitle, category, subCategory, button } = CALENDAR_CONTENT;
   const { calendar } = COMPONENT_NAME.lunch;
   const { alertState, openAlert } = useAlertStore();
+  const [isBad, setIsBad] = useState(1);
+  const [isGood, setIsGood] = useState(1);
 
   const router = useRouter();
 
@@ -122,12 +124,20 @@ function LunchCalenderEatOut() {
             </div>
           </div>
           <div css={ratingStyles}>
-            {button.button5.map((value) => (
-              <Fragment key={value}>
-                <LunchCalendarRatingBtn title={value} />
-                <input type="radio" name="rating" value={value} hidden />
-              </Fragment>
-            ))}
+            <LunchCalendarRatingBtn
+              title={button.button5[0]}
+              isGood={isGood}
+              isBad={isBad}
+              setIsGood={setIsGood}
+              setIsBad={setIsBad}
+            />
+            <LunchCalendarRatingBtn
+              title={button.button5[1]}
+              isBad={isBad}
+              isGood={isGood}
+              setIsGood={setIsGood}
+              setIsBad={setIsBad}
+            />
           </div>
           <div>
             {subCategory.map((item) => {
@@ -162,6 +172,7 @@ function LunchCalenderEatOut() {
         <Button
           content={button.button4.text2}
           variant="blue"
+          isDisabled={ratingState.taste === '' || searchText === ''}
           onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
         />
       </div>
