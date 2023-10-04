@@ -37,7 +37,7 @@ function LunchHome() {
 }
 
 const containerStyles = css`
-  margin: 0 -16px 90px;
+  margin: 0 -16px env(safe-area-inset-bottom);
   background: ${theme.palette.background.home};
 `;
 
