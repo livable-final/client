@@ -4,12 +4,13 @@ import { create } from 'zustand';
 const useRouletteStore = create(() => ({
   categoryState: '카테고리', // 랜덤 카테고리명
   menuState: '메뉴', // 랜덤 메뉴명
-  menuIdState: 1, // 메뉴 ID
+  menuIdState: 5, // 메뉴 ID
   isLocked: false, // 카테고리 잠금 state
   isOperated: true, // 가동 완료 여부 state
   isPressed: false, // 버튼 클릭 state
   isAgain: false, // 재선택 여부 state
-  isSelected: false, // 메뉴 결정 여부 state
+  isSelected: false, // 메뉴 추출 여부 state
+  isDecided: false, // 메뉴로 결정 여부 state
 }));
 
 export default useRouletteStore;
