@@ -98,7 +98,7 @@ const buttonStyles = (isChecked: number) => css`
 
   svg {
     filter: ${isChecked === 0 ? `saturate(5%)` : 'none'};
-    transform: ${isChecked === 2 && 'scale(1.2)'};
+    transform: ${isChecked === 2 && 'scale(1.1)'};
     transition: ${isChecked === 2 && 'transform 0.1s ease'};
   }
 `;
