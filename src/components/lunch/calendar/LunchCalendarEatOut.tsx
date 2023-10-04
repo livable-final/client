@@ -173,7 +173,11 @@ function LunchCalenderEatOut() {
           content={button.button4.text2}
           variant="blue"
           isDisabled={ratingState.taste === '' || searchText === ''}
-          onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
+          onClick={
+            isSave.PhotoMsg || imageFiles.length > 0
+              ? onClickBtnHandler
+              : onClickMsgBtnHandler
+          }
         />
       </div>
       {bottomSheetState.isOpen && !isSave.PhotoMsg && <BottomSheet />}

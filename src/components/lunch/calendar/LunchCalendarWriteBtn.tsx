@@ -41,16 +41,21 @@ const buttonStyles = css`
   align-items: center;
   width: 100%;
   margin-top: 12px;
-  padding: 28px 0;
+  padding: 28px 16px;
   white-space: pre-line;
   background-color: ${theme.palette.white};
   cursor: pointer;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0 4px 4px rgba(0, 0, 0, 0.03),
+    0 -4px 4px rgba(0, 0, 0, 0.03);
 `;
 const contentStyles = (isCompleted: boolean) => css`
   display: flex;
   align-items: center;
   gap: ${!isCompleted ? '12px' : '14px'};
+  svg {
+    flex-shrink: 0;
+  }
 `;
 
 const textStyles = css`

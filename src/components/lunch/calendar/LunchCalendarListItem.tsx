@@ -166,7 +166,6 @@ const ImageStyles = css`
   width: 56px;
   height: 56px;
   border-radius: 8px;
-  border: 1px solid ${theme.palette.greyscale.grey60}
   overflow: hidden;
 `;
 

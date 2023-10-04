@@ -11,7 +11,7 @@ import LunchCalendarLunchBox from '@/components/lunch/calendar/LunchCalendarLunc
 import LunchCalendarCafeteria from '@/components/lunch/calendar/LunchCalendarCafeteria';
 import LunchCalendarPointInform from '@/components/lunch/calendar/LunchCalendarPointInform';
 import COMPONENT_NAME from '@/constants/common/pages';
-import LunchCalendarMenu from './LunchCalendarMenu';
+import LunchCalendarMenu from '@/components/lunch/calendar/LunchCalendarMenu';
 
 function LunchCalendarReview() {
   const { nextComponent } = usePagesStore();
@@ -57,8 +57,8 @@ function LunchCalendarReview() {
 
 const buttonListStyles = css`
   display: flex;
-  gap: 16px;
   flex-wrap: wrap;
+  gap: 22px 16px;
   margin-top: 32px;
   padding: 0 20px;
 

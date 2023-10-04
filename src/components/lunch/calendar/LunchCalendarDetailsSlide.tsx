@@ -32,7 +32,11 @@ function LunchCalendarDetailsSlide() {
 
     const target = event.target as HTMLInputElement;
     // click 이벤트 발생할 때, e.target과 e.currentTarget이 달라서 비교 조건 사용 불가
-    if (target.className === 'swiper-slide swiper-slide-active') setIsChecked();
+    if (
+      target.className === 'swiper-slide swiper-slide-active' ||
+      target.className === 'swiper-slide swiper-slide-active swiper-slide-next'
+    )
+      setIsChecked();
   };
 
   return (

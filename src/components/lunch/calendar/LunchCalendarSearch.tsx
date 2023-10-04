@@ -125,7 +125,7 @@ function LunchCalendarSearch() {
                   content={item.restaurantName}
                   category={item.restaurantCategory}
                   time={item.estimatedTime}
-                  imageUrl="/ruppy.png"
+                  imageUrl={item.thumbnailImageUrl}
                   onClick={(e) =>
                     onClickBtnHandler(e, item.restaurantId, item.restaurantName)
                   }
