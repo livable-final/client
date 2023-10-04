@@ -28,7 +28,7 @@ function InvitationDateTime() {
   const { closeBottomSheet } = useBottomSheetStore();
   const { alertState, openAlert } = useAlertStore();
   const { isOn, onToggle, offToggle } = useToggleStore();
-  const { selectTime } = useTimeSelectorStore();
+  const { selectTime, clearSelectTime } = useTimeSelectorStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
 
   // Thu Oct 26 2023 00:00:00 GMT+0900 (한국 표준시)
@@ -77,6 +77,8 @@ function InvitationDateTime() {
       const common = getCommonTimes(fetchData);
       setCommonTimes([...common]);
     }
+    // 날짜를 다시 지정했으므로 기존 선택했던 시간 배열 초기화
+    clearSelectTime();
   }, [fetchData]);
 
   // commonTimes.Length(가능한 시간)에 따라 종일 활성화 여부

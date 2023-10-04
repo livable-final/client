@@ -17,11 +17,10 @@ function TimeSelector({ content, status }: TimeSelectorProps) {
 
   const variantData = COMMON_TIME_SELECTOR[varientState];
 
-  const { setSelectTime, clearSelectTime } = useTimeSelectorStore();
+  const { setSelectTime } = useTimeSelectorStore();
   const { abled, enabled, disabled } = COMMON_TIME_SELECTOR;
 
   const onClickHandler = () => {
-    clearSelectTime();
     // 선택시 버튼 상태 변경
     if (varientState === abled.status) {
       setVarientState(enabled.status);
