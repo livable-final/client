@@ -64,8 +64,4 @@ const iconStyles = css`
   height: 20px;
 `;
 
-const imageStyles = css`
-  width: 95%;
-`;
-
 export default InvitationPreview;
