@@ -112,9 +112,8 @@ import BoxGrey from '@/assets/icons/BoxGrey.svg';
 import BoxWhite from '@/assets/icons/BoxWhite.svg';
 import LocationLine from '@/assets/icons/LocationLine.svg';
 import RightZoom from '@/assets/icons/RightZoom.svg';
-
-import Call from '@/assets/icons/Call.svg';
 import Destination from '@/assets/icons/Destination.svg';
+import Call from '@/assets/icons/Call.svg';
 
 // 빌드 에러 지점
 import ErrorIcon from '@/assets/icons/ErrorIcon.svg';
