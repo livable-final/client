@@ -29,10 +29,9 @@ function InvitationBuildingTitle({
     <div>
       <p css={TitleStyles}>{title}</p>
       <div css={AddressStyles}>
-        <p>{address}</p>
+        <span>{address} </span>
         <button type="button" css={CopyStyles} onClick={handleCopyClipBoard}>
-          <span>주소복사</span>
-          <Icons icon="copy" color="blue" />
+          <Icons icon="copy" color={theme.palette.greyscale.grey20} />
         </button>
         <Toaster position="bottom-center" />
       </div>
@@ -46,28 +45,14 @@ const TitleStyles = css`
 `;
 
 const AddressStyles = css`
-  display: flex;
-
-  gap: 16px;
-  align-items: center;
-  p {
+  span {
     color: ${theme.palette.greyscale.grey50};
     line-height: 24px;
   }
 `;
 
 const CopyStyles = css`
-  display: flex;
-  align-items: center;
-  padding: 4px 0;
-
-  span {
-    white-space: nowrap;
-    margin-right: 4px;
-    font: ${theme.font.body.body3_400};
-    color: ${theme.palette.bluescale.blue50};
-    line-height: 21px;
-  }
+  transform: translate(0, 20%);
 `;
 
 export default InvitationBuildingTitle;

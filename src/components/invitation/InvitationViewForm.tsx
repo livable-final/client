@@ -13,7 +13,7 @@ import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 import useSaveStore from '@/stores/useSaveStore';
 import { useEffect } from 'react';
 import { getVisitationInfo } from '@/pages/api/invitation/viewRequests';
-import InvitationParking from './view/InvitationParking';
+import InvitationParking from '@/components/invitation/view/InvitationParking';
 
 function InvitationViewForm() {
   const { response } = useFetch({

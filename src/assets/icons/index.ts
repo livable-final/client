@@ -111,6 +111,7 @@ import BoxGrey from '@/assets/icons/BoxGrey.svg';
 import BoxWhite from '@/assets/icons/BoxWhite.svg';
 import LocationLine from '@/assets/icons/LocationLine.svg';
 import RightZoom from '@/assets/icons/RightZoom.svg';
+import Destination from '@/assets/icons/Destination.svg';
 // 빌드 에러 지점
 import ErrorIcon from '@/assets/icons/ErrorIcon.svg';
 
@@ -229,4 +230,5 @@ export {
   ErrorIcon,
   LocationLine,
   RightZoom,
+  Destination,
 };

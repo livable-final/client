@@ -10,7 +10,6 @@ import {
   Etc,
   Info,
   Direction,
-  CopyBlue,
   Home,
   Back,
   Coin,
@@ -49,6 +48,7 @@ import {
   LunchActive,
   MyActive,
   Popup,
+  Copy,
 } from '@/assets/icons';
 
 function Icons({ icon, color, size }: IconsProps) {
@@ -72,7 +72,7 @@ function Icons({ icon, color, size }: IconsProps) {
     case invitation.direction:
       return <Direction color={color} />;
     case invitation.copy:
-      return <CopyBlue color={color} />;
+      return <Copy color={color} />;
     case invitation.list:
       return <Back color={color} />;
     case invitation.plusSmall:
