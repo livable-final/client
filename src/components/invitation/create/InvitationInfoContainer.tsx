@@ -9,10 +9,8 @@ import useModalStore from '@/stores/useModalStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useAlertStore from '@/stores/useAlertStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import useInvitationCreateStore, {
-  initialCreateState,
-} from '@/stores/useInvitationCreateStore';
 import { css } from '@emotion/react';
 import { useEffect, useState, ChangeEvent } from 'react';
 import { VisitorInfo } from '@/types/invitation/api';
@@ -105,12 +103,7 @@ function InvitationInfoContainer() {
   // 최종 전송 확인 핸들러 (모달)
   const onClickModalHandler = () => {
     setIsConfirmed(!isConfirmed);
-    if (isConfirmed && initialCreateState !== createContents) {
-      closeModal();
-    } else {
-      openAlert('📢', '초대장 정보를 다시 확인해 주세요!');
-      closeModal();
-    }
+    closeModal();
   };
 
   return (
