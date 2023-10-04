@@ -1,4 +1,7 @@
-// import Image from 'next/image';
+import Image from 'next/image';
+import Icons from '@/components/common/Icons';
+import theme from '@/styles/theme';
+import { COMMON_ICON_NAMES } from '@/constants/common';
 import { css } from '@emotion/react';
 
 interface InvitationPreviewProps {
@@ -6,6 +9,8 @@ interface InvitationPreviewProps {
 }
 
 function InvitationPreview({ onClick }: InvitationPreviewProps) {
+  const { common } = COMMON_ICON_NAMES;
+
   return (
     <div
       css={backgroundStyles}
@@ -15,17 +20,15 @@ function InvitationPreview({ onClick }: InvitationPreviewProps) {
       tabIndex={0}
     >
       <div css={previewContainerStyles}>
-        <img
+        <div css={iconStyles}>
+          <Icons icon={common.exitMedium} color={theme.palette.white} />
+        </div>
+        <Image
           src="/invitation/preview.png"
+          width={400}
+          height={720}
           alt="오피스너 초대장 예시"
-          css={imageStyles}
         />
-        {/* <Image
-          src="/invitation/preview.png"
-          width={380}
-          height={702}
-          alt="오피스너 초대장 예시"
-        /> */}
       </div>
     </div>
   );
@@ -39,15 +42,26 @@ const backgroundStyles = css`
   bottom: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.75);
   z-index: 10;
 `;
 
 const previewContainerStyles = css`
-  position: absolute;
-  bottom: -24px;
+  position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+  /* width: 90%; */
+  /* z-index: 11; */
+`;
+
+const iconStyles = css`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
 `;
 
 const imageStyles = css`
