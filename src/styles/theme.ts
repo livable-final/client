@@ -73,6 +73,7 @@ const theme = {
       body2_400: '400 normal 15px var(--pretendard)',
       body3_500: '500 normal 14px var(--pretendard)',
       body3_400: '400 normal 14px var(--pretendard)',
+      body3_300: '300 normal 11px var(--pretendard)',
       body4: '400 normal 12px var(--pretendard)',
     },
     input: {

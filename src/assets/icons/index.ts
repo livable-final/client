@@ -19,6 +19,7 @@ import Info from '@/assets/icons/Info.svg';
 import PlusBig from '@/assets/icons/Plus=big.svg';
 import PlusSmall from '@/assets/icons/Plus=small.svg';
 import ExitSmall from '@/assets/icons/Exit=small.svg';
+import ExitMedium from '@/assets/icons/Exit=medium.svg';
 import RightSmall from '@/assets/icons/Right=small.svg';
 import Direction from '@/assets/icons/Direction.svg';
 import UnCheck from '@/assets/icons/UnCheck.svg';
@@ -111,7 +112,10 @@ import BoxGrey from '@/assets/icons/BoxGrey.svg';
 import BoxWhite from '@/assets/icons/BoxWhite.svg';
 import LocationLine from '@/assets/icons/LocationLine.svg';
 import RightZoom from '@/assets/icons/RightZoom.svg';
+
+import Call from '@/assets/icons/Call.svg';
 import Destination from '@/assets/icons/Destination.svg';
+
 // 빌드 에러 지점
 import ErrorIcon from '@/assets/icons/ErrorIcon.svg';
 
@@ -137,6 +141,7 @@ export {
   PlusBig,
   PlusSmall,
   ExitSmall,
+  ExitMedium,
   RightSmall,
   Direction,
   Check,
@@ -230,5 +235,6 @@ export {
   ErrorIcon,
   LocationLine,
   RightZoom,
+  Call,
   Destination,
 };

@@ -30,8 +30,8 @@ const buttonStyles = (variantData: ButtonColorProps) => css`
   background: ${variantData.background};
   color: ${variantData.color};
   font: ${theme.font.subTitle.subTitle1_500};
-
   cursor: pointer;
+  transition: ease 1300ms;
 
   &:disabled {
     pointer-events: none;
@@ -39,8 +39,12 @@ const buttonStyles = (variantData: ButtonColorProps) => css`
   }
 
   &:active {
-    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    transform: scale(0.95);
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.2) 100%
+      ),
+      ${theme.palette.primary};
   }
 `;
 

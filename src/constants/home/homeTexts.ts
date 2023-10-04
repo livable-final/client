@@ -19,8 +19,8 @@ export const HOME_TEXTS = {
     href: '/lunch/roulette',
   },
   bulletin: [
-    { title: '공지', content: '엘리베이터 정기 점검 안내(8/23)' },
-    { title: '이벤트', content: '테라빌딩 커피 무료 나눔 이벤트(9/17)' },
+    { title: '공지', content: '엘리베이터 정기 점검 안내(10/10)' },
+    { title: '이벤트', content: '테라타워 커피 무료 나눔 이벤트(10/6)' },
   ],
   cafeteria: {
     title: '구내식당',
