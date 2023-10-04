@@ -32,7 +32,6 @@ function InvitationDateTime() {
   const { createContents, setCreateContents } = useInvitationCreateStore();
 
   // Thu Oct 26 2023 00:00:00 GMT+0900 (한국 표준시)
-  // 임시로 12일로 설정해둔 상태 -> 추후 new Date()로 변경
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [isUpdated, setIsUpdated] = useState<boolean>(false);
