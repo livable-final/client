@@ -1,5 +1,5 @@
 import Header from '@/components/common/Header';
-import { INVITATION_VIEW_TEXTS } from '@/constants/invitation/viewTexts';
+import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 import { css } from '@emotion/react';
 import mq from '@/utils/mediaquery';
 import { InvitationOfficeInfoProps } from '@/types/invitation/view';
@@ -10,7 +10,7 @@ import InvitationOfficeLocation from './InvitationOfficeLocation';
 function InvitationOfficeInfo({ data }: InvitationOfficeInfoProps) {
   return (
     <div css={OfficeInfoStyles}>
-      <Header title={INVITATION_VIEW_TEXTS.header.office} />
+      <Header title={INVITATION_VEIW_INFO_TEXTS.category.place} />
 
       <div css={containerStyles}>
         <InvitationOfficeLocation

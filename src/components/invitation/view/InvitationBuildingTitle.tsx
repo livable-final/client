@@ -31,7 +31,7 @@ function InvitationBuildingTitle({
       <div css={AddressStyles}>
         <p>{address}</p>
         <button type="button" css={CopyStyles} onClick={handleCopyClipBoard}>
-          <p>주소복사</p>
+          <span>주소복사</span>
           <Icons icon="copy" color="blue" />
         </button>
         <Toaster position="bottom-center" />
@@ -47,8 +47,9 @@ const TitleStyles = css`
 
 const AddressStyles = css`
   display: flex;
+
   gap: 16px;
-  align-items: start;
+  align-items: center;
   p {
     color: ${theme.palette.greyscale.grey50};
     line-height: 24px;
@@ -60,7 +61,7 @@ const CopyStyles = css`
   align-items: center;
   padding: 4px 0;
 
-  p {
+  span {
     white-space: nowrap;
     margin-right: 4px;
     font: ${theme.font.body.body3_400};

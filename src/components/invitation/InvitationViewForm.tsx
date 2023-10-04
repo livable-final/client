@@ -13,6 +13,7 @@ import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 import useSaveStore from '@/stores/useSaveStore';
 import { useEffect } from 'react';
 import { getVisitationInfo } from '@/pages/api/invitation/viewRequests';
+import InvitationParking from './view/InvitationParking';
 
 function InvitationViewForm() {
   const { response } = useFetch({
@@ -38,6 +39,9 @@ function InvitationViewForm() {
   }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.code}`) {
     return <InvitationQrInfo data={response && response.data} />;
+  }
+  if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.parking}`) {
+    return <InvitationParking />;
   }
 
   const onClickHandler = () => {

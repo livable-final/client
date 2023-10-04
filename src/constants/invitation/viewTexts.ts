@@ -117,10 +117,8 @@ export const INVITATION_CAROUSEL_TEXTS = {
     title: '카페',
     subtitle: '조금 빨리 도착하셨나요?',
   },
-};
-// 오피스 정보 상수(수정 예정)
-export const INVITATION_VIEW_TEXTS = {
-  header: {
-    office: '오피스 정보',
+  parking: {
+    upParking: '방문 시 주차를 원하시면 차량 정보를 등록해주세요',
+    doneParking: '차량번호를 등록했어요',
   },
 };
