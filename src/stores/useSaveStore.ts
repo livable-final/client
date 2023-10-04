@@ -28,7 +28,7 @@ type SaveStore = {
   setIsSavePhotoMsg: () => void;
   setPoint: (data: PointData) => void;
   setKeywordList: (data: Keyword) => void;
-  deleteKeywordList: (data: number) => void;
+  deleteKeywordList: (id: number) => void;
   clearIsSave: () => void;
   setUserToken: (value: string) => void;
   setVisitorToken: (value: string) => void;
@@ -77,11 +77,9 @@ const useSaveStore = create<SaveStore>()(
         set((pre) => ({
           keywordList: [...pre.keywordList, data],
         })),
-      deleteKeywordList: (keywordId) =>
-        set((pre) => ({
-          keywordList: [
-            ...pre.keywordList.filter((value) => value.id === keywordId),
-          ],
+      deleteKeywordList: (id) =>
+        set((state) => ({
+          keywordList: state.keywordList.filter((value) => value.id !== id),
         })),
       clearIsSave: () => {
         set({ isSave: initialSaveState });

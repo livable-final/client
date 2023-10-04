@@ -24,9 +24,8 @@ function LunchCalendarSearch() {
   const { setNextComponent, goBack } = usePagesStore();
   const { alertState, openAlert } = useAlertStore();
   const setRestaurant = useWriteStore((state) => state.setRestaurant);
-  // const keywordList = useSaveStore((state) => state.keywordList);
-  // const setKeywordList = useSaveStore((state) => state.setKeywordList);
-  const { keywordList, setKeywordList } = useSaveStore();
+  const keywordList = useSaveStore((state) => state.keywordList);
+  const setKeywordList = useSaveStore((state) => state.setKeywordList);
 
   const key = keyDate();
 
@@ -70,6 +69,21 @@ function LunchCalendarSearch() {
     setKeyword(e.target.value);
   };
 
+  const onClickKeywordHandler = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    text: string,
+  ) => {
+    e.preventDefault();
+    try {
+      const res = await getRestaurants(text);
+      setSearchData(res.data);
+      setShowSearch(true);
+    } catch (err) {
+      const error = err as ErrorProps;
+      openAlert('📢', error.message || '검색 오류');
+    }
+  };
+
   return (
     <section>
       {alertState.isOpen && <Alert />}
@@ -87,10 +101,11 @@ function LunchCalendarSearch() {
           <div>
             {keywordList.map((value) => (
               <LunchCalendarListItem
-                key={key}
-                keywordId={value.id}
+                key={value.id}
+                id={value.id}
                 type={listItem.type1}
                 content={value.text}
+                onClick={(e) => onClickKeywordHandler(e, value.text)}
               />
             ))}
           </div>
