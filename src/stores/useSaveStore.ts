@@ -35,6 +35,7 @@ type SaveStore = {
   setIsSaveVisitMsg: (state: boolean) => void;
   setVisitMsgText: (text: string) => void;
   clearVisitMsg: () => void;
+  clearToken: () => void;
 };
 
 // 오늘점심 초기값
@@ -104,6 +105,11 @@ const useSaveStore = create<SaveStore>()(
       clearVisitMsg: () => {
         set({ visit: initialVisitMsg });
       },
+      clearToken: () =>
+        set({
+          user: initialTokenState.user,
+          visitor: initialTokenState.visitor,
+        }),
     }),
     {
       name: 'user-storage',
