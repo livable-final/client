@@ -49,6 +49,10 @@ export interface LunchCalendarListItemProps {
 
 export interface LunchCalendarRatingBtnProps {
   title: string;
+  isGood: number;
+  isBad: number;
+  setIsGood: React.Dispatch<React.SetStateAction<number>>;
+  setIsBad: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface LunchCalendarReviewCategoryProps {
