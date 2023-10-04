@@ -103,7 +103,11 @@ function LunchCalendarLunchBox() {
           variant="blue"
           content={button.button4.text2}
           isDisabled={searchText === ''}
-          onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
+          onClick={
+            isSave.PhotoMsg || imageFiles.length > 0
+              ? onClickBtnHandler
+              : onClickMsgBtnHandler
+          }
         />
       </div>
       {bottomSheetState.isOpen && !isSave.PhotoMsg && <BottomSheet />}

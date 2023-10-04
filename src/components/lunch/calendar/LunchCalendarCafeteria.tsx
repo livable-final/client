@@ -129,7 +129,11 @@ function LunchCalendarCafeteria() {
           variant="blue"
           content={button.button4.text2}
           isDisabled={ratingState.taste === '' || searchText === ''}
-          onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
+          onClick={
+            isSave.PhotoMsg || imageFiles.length > 0
+              ? onClickBtnHandler
+              : onClickMsgBtnHandler
+          }
         />
       </div>
       {bottomSheetState.isOpen && !isSave.PhotoMsg && <BottomSheet />}
