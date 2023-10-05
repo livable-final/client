@@ -41,7 +41,7 @@ function InvitationPurposeContainer() {
   useEffect(() => {
     setHeaderTitle(header.default);
     clearCreateContents();
-  }, [clearCreateContents, setHeaderTitle]);
+  }, [clearCreateContents, header.default, setHeaderTitle]);
 
   // 초대 목적 카테고리 선택
   const onClickCategoryHandler = (item: CommonCategory) => {
