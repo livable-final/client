@@ -4,14 +4,14 @@ import Alert from '@/components/common/Alert';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationInfo from '@/components/invitation/create/InvitationInfo';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
+import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import COMPONENT_NAME from '@/constants/common/pages';
 import useViewStore from '@/stores/usePagesStore';
 import useModalStore from '@/stores/useModalStore';
 import useSaveStore from '@/stores/useSaveStore';
 import useAlertStore from '@/stores/useAlertStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
-import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import COMPONENT_NAME from '@/constants/common/pages';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { postInvitation } from '@/pages/api/invitation/createRequests';
@@ -51,10 +51,12 @@ function InvitationInfoContainer() {
   // 모달에서 전송을 눌렀을 때 최종 초대장 데이터
   useEffect(() => {
     if (isConfirmed) {
+      // 모달에서 전송하기 버튼 눌렀을 때 스토어에 tip 저장
       setCreateContents('description', tip);
 
       const postData = async () => {
         try {
+          // 스토어에 저장된 초대장 데이터로 초대장 API 호출
           const response = await postInvitation(createContents);
 
           // 초대장 생성 성공했을 때에만 다음 컴포넌트 연결
@@ -69,6 +71,8 @@ function InvitationInfoContainer() {
       };
       postData();
     }
+    // '다음에도 이 메세지를 사용'을 선택했을 때 작성 tip 스토어 저장
+    // 해제했을 때 스토어에 저장된 값 삭제
     if (visit.visitMsg) {
       setVisitMsgText(tip);
     } else {
@@ -133,6 +137,7 @@ function InvitationInfoContainer() {
           content={button.send}
           variant="blue"
           onClick={onClickBtnHandler}
+          // 방문자 리스트가 없거나, 초대 날짜가 입력되지 않으면 버튼 비활성화
           isDisabled={
             createContents.visitors.length === 0 ||
             createContents.startDate === '' ||
