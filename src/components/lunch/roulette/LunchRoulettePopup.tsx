@@ -36,12 +36,12 @@ function LunchRoulettePopup() {
 
   // 마우스 클릭 버튼을 누를 때 이벤트 핸들러
   const onPressHandler = () => {
-    setIsActive((prev) => !prev);
+    setIsActive(true);
   };
 
   // 마우스 클릭 버튼을 뗄 때 이벤트 핸들러
   const onReleaseHandler = () => {
-    setIsActive((prev) => !prev);
+    setIsActive(false);
   };
 
   return (

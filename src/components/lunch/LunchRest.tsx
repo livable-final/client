@@ -24,7 +24,7 @@ function LunchRest({ ...item }: GetRestListData) {
         <div css={badgeStyles}>
           {button5[0]}
           &nbsp;
-          {item.tastePercentage}%
+          {item.tastePercentage || 100}%
         </div>
       </div>
     </section>
@@ -76,9 +76,13 @@ const nameStyles = css`
   line-height: 24px;
   text-align: left;
   overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
   width: 128px;
+  text-overflow: ellipsis;
+
+  @media (min-width: 400px) {
+    overflow: visible;
+  }
 `;
 
 const addressStyles = css`
@@ -90,6 +94,10 @@ const addressStyles = css`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  @media (min-width: 400px) {
+    overflow: visible;
+  }
 `;
 
 export default LunchRest;

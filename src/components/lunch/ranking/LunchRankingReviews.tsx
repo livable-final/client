@@ -10,7 +10,6 @@ import COMPONENT_NAME from '@/constants/common/pages';
 import { ReviewList } from '@/types/lunch/reviewList';
 import LunchReview from '@/components/lunch/review/LunchReview';
 import { getMenuReviews } from '@/pages/api/lunch/lunchRequests';
-// import { getMenuReviews } from '@/pages/api/lunch/lunchRequests';
 
 // '오늘 점심' 랭킹별 리뷰 컴포넌트
 function LunchRankingReviews({ menuId }: { menuId: number }) {
@@ -21,11 +20,6 @@ function LunchRankingReviews({ menuId }: { menuId: number }) {
   const { response } = useFetch({
     fetchFn: () => getMenuReviews(menuId),
   });
-
-  // useQuery로 API 호출
-  // const { data } = useQuery(['menuReviews', page], () =>
-  //   getMenuReviews({ menuId: 1, page }),
-  // );
 
   // 클릭 시 리뷰 상세로 이동하는 핸들러
   const onClickDetailHandler = (item: ReviewList) => {

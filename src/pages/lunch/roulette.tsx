@@ -16,7 +16,7 @@ function Roulette() {
       <section css={sectionStyle}>
         <LunchRoulette />
         <LunchRoulettePopup />
-        {(isOperated && isAgain && <LunchReviewsByRest />) ||
+        {(isOperated && <LunchReviewsByRest />) ||
           (!isAgain && <LunchReviewsByRest />)}
       </section>
     </>
