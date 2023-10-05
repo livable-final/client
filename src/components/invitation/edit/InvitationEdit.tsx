@@ -43,6 +43,13 @@ function InvitationEdit({ id }: InvitationEditProps) {
   });
   const data = response && response?.data;
 
+  useEffect(() => {
+    const initInvitedListHandler = () => {
+      setInvitedList(data && data?.visitors);
+    };
+    initInvitedListHandler();
+  }, [data?.visitors]);
+
   const setInitStateHandler = (
     startDate: string,
     endDate: string,
@@ -80,9 +87,6 @@ function InvitationEdit({ id }: InvitationEditProps) {
   const purpose = changeVisitPurpose(data?.purpose);
 
   // 발송 완료 방문자 목록
-  useEffect(() => {
-    setInvitedList(data?.visitors);
-  }, []);
   const resendList = invitedList?.map((item) => {
     const { visitorId, ...newItem } = item;
     return newItem;
@@ -121,7 +125,8 @@ function InvitationEdit({ id }: InvitationEditProps) {
       <InvitationEditvisitorAdd isEdit visitorsList={data?.visitors} />,
     );
   };
-  const onClickDeleteHandler = (name: string) => {
+  // 태그 삭제 버튼 클릭시
+  const onClickDeleteHandler = async (name: string) => {
     if (editContents) {
       const deletedVisitors = editContents.visitors?.filter(
         (visitor) => visitor.name !== name,
