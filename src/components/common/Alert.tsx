@@ -59,6 +59,7 @@ const alertContainerStyles = css`
 const contentsWrapperStyles = css`
   display: flex;
   gap: 10px;
+  width: 100%;
   height: 100%;
 `;
 
@@ -73,6 +74,7 @@ const alertTitleStyles = (isSans: boolean) => css`
 const alertContentStyles = (isSans: boolean) => css`
   display: flex;
   align-items: center;
+  width: 100%;
   color: ${theme.palette.greyscale.grey10};
   font: ${isSans ? theme.font.alert.pretendard : theme.font.alert.godo};
   white-space: pre-wrap;
