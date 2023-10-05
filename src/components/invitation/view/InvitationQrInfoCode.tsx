@@ -20,6 +20,7 @@ function InvitationQrInfoCode() {
           alt="zbdkf"
           width={163}
           height={163}
+          css={blurStyles}
         />
       </div>
       <div css={alertStyles}>
@@ -44,6 +45,9 @@ const qrStyles = css`
   margin: 18px auto;
   width: 163px;
   height: 163px;
+`;
+const blurStyles = css`
+  filter: blur(3px);
 `;
 const alertStyles = css`
   width: 182px;

@@ -1,12 +1,15 @@
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { INVITATION_EDIT_TEXTS } from '@/constants/invitation/editTexts';
 import {
   getInvitationEditList,
   getInvitationListItem,
 } from '@/pages/api/invitation/editRequests';
 import { InvitationEditProps } from '@/types/invitation/edit';
-import { GetInvitationListItemData } from '@/types/invitation/api';
+import {
+  GetInvitationListItemData,
+  InvitationListItemVisitor,
+} from '@/types/invitation/api';
 import { Clock, Calendar, Location } from '@/assets/icons';
 import theme from '@/styles/theme';
 import useFetch from '@/hooks/useFetch';
@@ -31,6 +34,9 @@ function InvitationEdit({ id }: InvitationEditProps) {
   const { editContents, setEditContents } = useInvitationEditStore();
   const { openBottomSheet } = useBottomSheetStore();
   const [newDate, setNewDAte] = useState('');
+  const [invitedList, setInvitedList] = useState<InvitationListItemVisitor[]>(
+    [],
+  );
 
   const { response } = useFetch({
     fetchFn: () => getInvitationListItem(id),
@@ -74,7 +80,9 @@ function InvitationEdit({ id }: InvitationEditProps) {
   const purpose = changeVisitPurpose(data?.purpose);
 
   // 발송 완료 방문자 목록
-  const invitedList = data?.visitors;
+  useEffect(() => {
+    setInvitedList(data?.visitors);
+  }, []);
   const resendList = invitedList?.map((item) => {
     const { visitorId, ...newItem } = item;
     return newItem;
@@ -114,10 +122,18 @@ function InvitationEdit({ id }: InvitationEditProps) {
     );
   };
   const onClickDeleteHandler = (name: string) => {
-    const deletedVisitors = editContents.visitors?.filter(
-      (visitor) => visitor.name !== name,
-    );
-    setEditContents('visitors', deletedVisitors);
+    if (editContents) {
+      const deletedVisitors = editContents.visitors?.filter(
+        (visitor) => visitor.name !== name,
+      );
+      setEditContents('visitors', deletedVisitors);
+    }
+    if (invitedList) {
+      const deleteinvitedVisitList = invitedList?.filter(
+        (visitor) => visitor.name !== name,
+      );
+      setInvitedList(deleteinvitedVisitList);
+    }
   };
 
   return (
@@ -193,7 +209,7 @@ function InvitationEdit({ id }: InvitationEditProps) {
                 <NameTag
                   key={item.visitorId}
                   name={item.name}
-                  onClick={onClickHandler}
+                  onClick={onClickDeleteHandler}
                   isInvited
                 />
               ))}
@@ -237,7 +253,7 @@ const officeInfoContainerStyles = css`
   display: flex;
   align-items: center;
   padding: 0 16px;
-  border: 2px solid ${theme.palette.greyscale.grey10};
+  border: 1px solid ${theme.palette.greyscale.grey10};
   border-radius: 12px;
   color: ${theme.palette.greyscale.grey30};
   input {
@@ -247,7 +263,7 @@ const officeInfoContainerStyles = css`
 const dateTimeContainerStyles = css`
   display: flex;
   flex-direction: column;
-  border: 2px solid ${theme.palette.greyscale.grey10};
+  border: 1px solid ${theme.palette.greyscale.grey10};
   border-radius: 12px;
   padding: 0 16px;
   input {
