@@ -55,7 +55,12 @@ function InvitationInfo({
 
   // 초대장 스토어 데이터가 변할 때 startDate, endDate 설정
   useEffect(() => {
-    if (createContents.startDate) {
+    if (createContents.startDate.includes('undefined')) {
+      // 시간을 선택하지 않거나 유효한 예약 시간이 아닐 경우
+      openAlert('', '예약 가능한 시간을 다시 확인해 주세요!');
+      setDate('');
+      setTime('');
+    } else if (createContents.startDate) {
       setDate(
         // startDate와 endDate가 같을 경우: yyyy-mm-dd
         // 다를 경우: yyyy-mm-dd ~ yyyy-mm-dd 표기
@@ -74,9 +79,6 @@ function InvitationInfo({
           .split('T')[1]
           ?.slice(0, 5)}`,
       );
-    } else {
-      setDate('');
-      setTime('');
     }
   }, [createContents]);
 
