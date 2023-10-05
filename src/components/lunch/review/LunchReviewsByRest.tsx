@@ -21,20 +21,23 @@ function LunchReviewsByRest() {
   const { memberName } = useUserStore();
   const { setNextComponent } = usePagesStore();
   const { setReviewList, reviewList } = useReviewStore();
-  const { menuState, isAgain, isOperated, menuIdState } = useRouletteStore();
-  const { response } = useFetch({
-    fetchFn: () => getRestList(menuIdState),
-  });
+  const { isAgain, isOperated, menuIdState } = useRouletteStore();
 
   const renderTitle = () => {
+    // "메뉴 이름" 맛집을 알려드릴게요.
     if (isAgain && isOperated) {
-      return `"${menuState}" ${title.review} `;
+      return `"${menuIdState}" ${title.review} `;
     }
+    // "멤버 이름"께 추천하는 식당.
     if (isOperated) {
       return `${memberName}${title.recent}`;
     }
     return '';
   };
+
+  const { response } = useFetch({
+    fetchFn: () => getRestList(menuIdState),
+  });
 
   const onClickHandler = (item: GetRestListData) => {
     router.push('/lunch');

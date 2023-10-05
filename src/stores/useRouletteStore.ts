@@ -11,6 +11,7 @@ const useRouletteStore = create(() => ({
   isAgain: false, // 재선택 여부 state
   isSelected: false, // 메뉴 추출 여부 state
   isDecided: false, // 메뉴로 결정 여부 state
+  isCompleted: false,
 }));
 
 export default useRouletteStore;
