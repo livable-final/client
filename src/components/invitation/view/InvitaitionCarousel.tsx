@@ -37,10 +37,11 @@ function InvitaitionCarousel({ type }: InvitationCarouselProps) {
             <div key={item.restaurantName} css={carouselItemStyles}>
               <div css={itemImageStyles}>
                 <Image
-                  src="/defaultImage.jpg"
+                  src={item.restaurantImageUrl}
                   width={135}
                   height={80}
                   alt={item.restaurantName}
+                  css={itemImageStyles}
                 />
               </div>
               <div css={carouselItemInfoStyles}>
@@ -98,11 +99,11 @@ const carouselItemStyles = css`
   border-radius: 8px;
 `;
 const itemImageStyles = css`
-  border-radius: 8px;
   width: 135px;
   height: 80px;
   position: relative;
   background-color: aliceblue;
+  border-radius: 8px;
 `;
 const carouselItemInfoStyles = css`
   display: flex;
