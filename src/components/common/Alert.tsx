@@ -19,10 +19,10 @@ function Alert({ isSans = false }: AlertProps) {
             )}
           </div>
           <div css={alertContentStyles(isSans)}>{alertState.content}</div>
+          <button type="button" css={defaultBtnStyles} onClick={closeAlert}>
+            <Icons icon="exitSmall" />
+          </button>
         </div>
-        <button type="button" css={defaultBtnStyles} onClick={closeAlert}>
-          <Icons icon="exitSmall" />
-        </button>
       </div>
     </div>
   );
@@ -52,13 +52,14 @@ const alertContainerStyles = css`
   border-radius: 16px;
   background-color: ${theme.palette.state.danger};
   z-index: 11;
-  padding-left: 16px;
+  padding: 0 16px;
   gap: 8px;
 `;
 
 const contentsWrapperStyles = css`
   display: flex;
   gap: 10px;
+  height: 100%;
 `;
 
 const alertTitleStyles = (isSans: boolean) => css`
@@ -78,13 +79,13 @@ const alertContentStyles = (isSans: boolean) => css`
 `;
 
 const defaultBtnStyles = css`
-  position: absolute;
   top: 12px;
   right: 12px;
   display: flex;
   align-items: flex-start;
   color: ${theme.palette.white};
   cursor: pointer;
+  padding-top: 16px;
 `;
 
 export default Alert;
