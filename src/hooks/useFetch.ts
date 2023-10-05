@@ -10,11 +10,9 @@ const useFetch = <T>({ fetchFn }: FetchProps<T>) => {
 
   const fetchData = useCallback(async () => {
     try {
-      // TODO: 로딩 처리 정의 해야함
       setLoading(true);
       const data = await fetchFn();
       setResponse(data);
-      // TODO: 에러 처리 정의 해야함
     } catch (err: unknown) {
       const error = err as ErrorProps;
       openAlert('📢', error.message);

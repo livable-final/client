@@ -13,6 +13,7 @@ import {
   selectRandomCategory,
   selectRandomMenus,
 } from '@/utils/selectRandomItem';
+// import { useMemo, useState } from 'react';
 
 // 오늘 점심 룰렛 컴포넌트
 function LunchRoulette() {
@@ -20,16 +21,19 @@ function LunchRoulette() {
   const { categoryState, menuState, isLocked, isOperated, isPressed, isAgain } =
     useRouletteStore();
   const { setState } = useRouletteStore;
-
   const { response } = useFetch({
     fetchFn: getMenus,
   });
+
+  // const [nameOfMenu, setNameOfMenu] = useState('');
+  // const [idOfMenu, setIdOfMenu] = useState(0);
 
   // Push or Again  클릭 시 카테고리와 메뉴를 셔플하는 함수
   const onClickBtnHandler = () => {
     setState({ isOperated: !isOperated }); // 가동 중!
     setState({ isPressed: !isPressed }); // 버튼 눌림!
     setState({ isDecided: false }); // 결정하지 못함
+    setState({ isCompleted: false });
 
     // *** 카테고리 고정 시! ***
     if (isLocked && isAgain) {
@@ -63,9 +67,9 @@ function LunchRoulette() {
 
           // 메뉴 셔플 속도 (100ms)
         }, time.interval);
-
         setTimeout(() => {
           clearInterval(menuInterval);
+          setState({ isAgain: true });
         }, time.duration.menu); // 카테고리 선택 완료 후 메뉴 선택까지의 시간 인터벌 (500ms)
       }, time.interval); // 카테고리 셔플 속도 (100ms)
 
@@ -78,6 +82,7 @@ function LunchRoulette() {
         setState({ isOperated: true }); // 가동 완료!
         setState({ isPressed: false }); // 버튼 원상 복귀!
         setState({ isSelected: false }); // 선택 완료 초기화!
+        setState({ isCompleted: true });
       }, time.duration.category + time.duration.menu); // 모든 선택이 완료되는 시간 인터벌 (500ms + 3500ms = 4000ms)
     }
   };
