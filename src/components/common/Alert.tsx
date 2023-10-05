@@ -1,25 +1,28 @@
 import { css } from '@emotion/react';
-import { AlertProps } from '@/types/common/alert';
 import theme from '@/styles/theme';
 import useAlertStore from '@/stores/useAlertStore';
 import Icons from '@/components/common/Icons';
 
-function Alert({ isSans = false }: AlertProps) {
+function Alert() {
   const { alertState, closeAlert } = useAlertStore();
 
   return (
     <div css={backgroundStyles}>
       <div css={alertContainerStyles}>
         <div css={contentsWrapperStyles}>
-          <div css={alertTitleStyles(isSans)}>
+          <div css={alertTitleStyles}>
             {alertState.title ? (
               alertState.title
             ) : (
               <Icons icon="error" size="72" />
             )}
           </div>
-          <div css={alertContentStyles(isSans)}>{alertState.content}</div>
-          <button type="button" css={defaultBtnStyles} onClick={closeAlert}>
+          <div css={alertContentStyles}>{alertState.content}</div>
+          <button
+            type="button"
+            css={defaultBtnStyles}
+            onClick={() => closeAlert(alertState.onClick)}
+          >
             <Icons icon="exitSmall" />
           </button>
         </div>
@@ -63,20 +66,20 @@ const contentsWrapperStyles = css`
   height: 100%;
 `;
 
-const alertTitleStyles = (isSans: boolean) => css`
+const alertTitleStyles = css`
   width: 20px;
   display: flex;
   align-items: center;
   color: ${theme.palette.input.enabled};
-  font: ${isSans ? theme.font.alert.pretendard : theme.font.alert.godo};
+  font: ${theme.font.alert.pretendard};
 `;
 
-const alertContentStyles = (isSans: boolean) => css`
+const alertContentStyles = css`
   display: flex;
   align-items: center;
   width: 100%;
   color: ${theme.palette.greyscale.grey10};
-  font: ${isSans ? theme.font.alert.pretendard : theme.font.alert.godo};
+  font: ${theme.font.alert.pretendard};
   white-space: pre-wrap;
 `;
 
