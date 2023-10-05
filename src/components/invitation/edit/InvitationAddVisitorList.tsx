@@ -10,6 +10,7 @@ import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useAlertStore from '@/stores/useAlertStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import useInvitationEditStore from '@/stores/useInvitationEditStore';
+import usePagesStore from '@/stores/usePagesStore';
 import { InvitationAddVisitorListProps } from '@/types/invitation/edit';
 import Alert from '@/components/common/Alert';
 
@@ -22,6 +23,7 @@ function InvitationAddVisitorList({
   const { alertState, openAlert } = useAlertStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
   const { editContents, setEditContents } = useInvitationEditStore();
+  const { nextComponent } = usePagesStore();
 
   // 방문자 삭제 버튼 핸들러
   const onClickDeleteVisitorHandler = (name: string) => {
@@ -43,6 +45,7 @@ function InvitationAddVisitorList({
   const onChangeInputNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddVisitorName(e.target.value);
   };
+
   // 추가 사용자 연락처 input handler
   const onChangeInputContactHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -57,16 +60,19 @@ function InvitationAddVisitorList({
       name,
       contact,
     };
-    // 수정 페이지
-    if (editContents.visitors) {
-      setEditContents('visitors', [...editContents.visitors, newVisitorInfo]);
-    }
-    // 생성 페이지
-    if (visitorsList) {
-      setCreateContents('visitors', [
-        ...createContents.visitors,
-        newVisitorInfo,
-      ]);
+
+    if (nextComponent === 'InvitationInfoContainer') {
+      // 생성 페이지
+      if (visitorsList) {
+        setCreateContents('visitors', [
+          ...createContents.visitors,
+          newVisitorInfo,
+        ]);
+      }
+    } else if (nextComponent !== 'InvitationInfoContainer') {
+      if (editContents.visitors) {
+        setEditContents('visitors', [...editContents.visitors, newVisitorInfo]);
+      }
     }
     // input창 clear
     setAddVisitorName('');
@@ -120,6 +126,15 @@ function InvitationAddVisitorList({
             {/* 기존 visitorList */}
             {createContents.visitors &&
               createContents.visitors?.map((item) => (
+                <NameTag
+                  key={item.name}
+                  name={item.name}
+                  onClick={onClickDeleteVisitorHandler}
+                />
+              ))}
+            {nextComponent !== 'InvitationInfoContainer' &&
+              editContents.visitors &&
+              editContents.visitors?.map((item) => (
                 <NameTag
                   key={item.name}
                   name={item.name}
