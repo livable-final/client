@@ -9,9 +9,11 @@ import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useAlertStore from '@/stores/useAlertStore';
 import useToggleStore from '@/stores/useToggleStore';
+import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import getFormatDate from '@/utils/getFormatDate';
 import getCommonTimes from '@/utils/getCommonTimeList';
+import parseDate from '@/utils/parseDate';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
@@ -20,11 +22,9 @@ import { useState, useEffect } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 import { getInvitationTimeList } from '@/pages/api/invitation/createRequests';
 import { GetInvitationTimeListData } from '@/types/invitation/api';
-import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
-import parseDate from '@/utils/parseDate';
 
 function InvitationDateTime() {
-  const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
+  const { title, button, error }: InvitationCreateTexts = CREATE_TEXTS;
   const { closeBottomSheet } = useBottomSheetStore();
   const { alertState, openAlert } = useAlertStore();
   const { isOn, onToggle, offToggle } = useToggleStore();
@@ -54,8 +54,8 @@ function InvitationDateTime() {
           });
           setFetchData(response?.data);
         }
-      } catch (error) {
-        openAlert('ERROR!', '예약 가능 시간 API에 문제가 생겼습니다.');
+      } catch (err: unknown) {
+        openAlert('🚨', error.timeAPI);
       }
     };
     fetchGetTimeList();
@@ -65,8 +65,8 @@ function InvitationDateTime() {
     endDate,
     openAlert,
     isUpdated,
-    offToggle,
     onToggle,
+    error.timeAPI,
   ]);
 
   // API호출 응답값인 fetchData가 바뀔 때마다 공통된 시간 출력
@@ -78,7 +78,7 @@ function InvitationDateTime() {
     }
     // 날짜를 다시 지정했으므로 기존 선택했던 시간 배열 초기화
     clearSelectTime();
-  }, [fetchData]);
+  }, [fetchData, clearSelectTime]);
 
   // commonTimes.Length(가능한 시간)에 따라 종일 활성화 여부
   // 가능한 시간이 18개(09~18시)가 아닌 경우에는 토글 off하여 시간 선택 유도
@@ -135,7 +135,7 @@ function InvitationDateTime() {
           <DatePicker
             locale={ko}
             dateFormat="yyyy-mm-dd"
-            dateFormatCalendar="yyyy.MM"
+            dateFormatCalendar="yyyy.MM" // 데이트픽커 현재달 표기 포맷 (2023.10)
             calendarClassName="calendar"
             onChange={onChange}
             minDate={new Date()}
