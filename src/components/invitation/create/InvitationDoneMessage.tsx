@@ -3,17 +3,21 @@ import useInvitationEditStore from '@/stores/useInvitationEditStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { Send } from '@/assets/icons';
+import usePagesStore from '@/stores/usePagesStore';
 
 function InvitationDoneMessage() {
+  const { backComponents } = usePagesStore();
   const { createContents } = useInvitationCreateStore();
   const { editContents } = useInvitationEditStore();
   const resendVisitors = editContents.visitors;
   const createVisitors = createContents.visitors;
+  console.log(resendVisitors);
 
   return (
     <div css={containerStyles}>
       <Send />
-      {resendVisitors?.length === 0 ? (
+      {backComponents[backComponents.length - 1] ===
+      'InvitationInfoContainer' ? (
         <div css={messageStyles}>
           {createVisitors?.length === 1
             ? `${createVisitors[0]?.name}님께\n초대장을 보냈어요`

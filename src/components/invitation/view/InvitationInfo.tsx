@@ -27,6 +27,14 @@ function InvitationInfo({ value, data }: InvitationInfoProps) {
   });
   const qr = response?.data;
 
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0'); // 시
+  const minutes = now.getMinutes().toString().padStart(2, '0'); // 분
+  const seconds = now.getSeconds().toString().padStart(2, '0'); // 초
+
+  const currentTime = `${hours}:${minutes}:${seconds}`;
+  console.log(currentTime);
+
   // 시간 포멧 변환
   const startTime = data.invitationStartTime.substring(0, 5);
   const endTime = data.invitationEndTime.substring(0, 5);
@@ -103,6 +111,8 @@ function InvitationInfo({ value, data }: InvitationInfoProps) {
               alt={ticket.headers}
               width={46}
               height={46}
+              // 시연용 임시 속성
+              css={currentTime !== data.invitationStartTime && blurStyles}
             />
           </div>
           <div css={zoomBtnStyles}>
@@ -195,9 +205,13 @@ const infoQRContainerStyles = css`
   }
 `;
 const qrStyles = css`
+  position: relative;
   margin: 10px auto;
   width: 46px;
   height: 46px;
+`;
+const blurStyles = css`
+  filter: blur(2.5px);
 `;
 const zoomBtnStyles = css`
   display: flex;
