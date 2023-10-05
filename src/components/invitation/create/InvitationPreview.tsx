@@ -1,12 +1,9 @@
 import Image from 'next/image';
 import Icons from '@/components/common/Icons';
 import theme from '@/styles/theme';
-import { COMMON_ICON_NAMES } from '@/constants/common';
 import { css } from '@emotion/react';
-
-interface InvitationPreviewProps {
-  onClick: () => void;
-}
+import { COMMON_ICON_NAMES } from '@/constants/common';
+import { InvitationPreviewProps } from '@/types/invitation/create';
 
 function InvitationPreview({ onClick }: InvitationPreviewProps) {
   const { common } = COMMON_ICON_NAMES;
@@ -52,8 +49,6 @@ const previewContainerStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 90%; */
-  /* z-index: 11; */
 `;
 
 const iconStyles = css`
