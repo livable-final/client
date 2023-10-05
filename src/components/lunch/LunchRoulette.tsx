@@ -29,6 +29,7 @@ function LunchRoulette() {
   const onClickBtnHandler = () => {
     setState({ isOperated: !isOperated }); // 가동 중!
     setState({ isPressed: !isPressed }); // 버튼 눌림!
+    setState({ isDecided: false }); // 결정하지 못함
 
     // *** 카테고리 고정 시! ***
     if (isLocked && isAgain) {

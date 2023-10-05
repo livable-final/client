@@ -1,4 +1,3 @@
-import menu from '$/menu.png';
 import Image from 'next/image';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
@@ -12,7 +11,7 @@ function LunchRest({ ...item }: GetRestListData) {
     <section css={sectionStyles}>
       <Image
         css={menuImageStyles}
-        src={menu}
+        src={item.representativeImageUrl}
         alt="음식"
         width={52}
         height={52}
@@ -67,6 +66,8 @@ const badgeStyles = css`
   font: ${theme.font.body.body4};
   color: ${theme.palette.greyscale.grey70};
   line-height: 16px;
+  white-space: nowrap;
+  min-width: 82px;
 `;
 
 const nameStyles = css`
@@ -74,6 +75,10 @@ const nameStyles = css`
   color: ${theme.palette.title};
   line-height: 24px;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 128px;
 `;
 
 const addressStyles = css`
@@ -81,6 +86,10 @@ const addressStyles = css`
   color: ${theme.palette.greyscale.grey50};
   line-height: 24px;
   text-align: left;
+  width: 128px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export default LunchRest;

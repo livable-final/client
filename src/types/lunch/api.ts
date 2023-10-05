@@ -30,7 +30,7 @@ export interface GetRestListData {
   representativeImageUrl: string;
   address: string;
   floor: number;
-  isBuilding: boolean;
+  inBuilding: boolean;
   estimatedTime: number;
   review: string;
 }

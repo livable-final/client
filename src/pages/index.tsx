@@ -14,7 +14,7 @@ import Alert from '@/components/common/Alert';
 
 function Home() {
   const MEMBER_TOKEN = process.env.MEMBER_TOKEN as string;
-  const { setUserToken } = useSaveStore();
+  const { setUserToken, clearToken } = useSaveStore();
   const { reset } = usePagesStore();
   const { setState } = useUserStore;
   const { response, alertState, loading } = useFetch({
@@ -22,6 +22,7 @@ function Home() {
   });
 
   useEffect(() => {
+    clearToken();
     setUserToken(MEMBER_TOKEN);
     reset();
     if (response?.data.buildingId) {

@@ -12,8 +12,9 @@ import useReviewStore from '@/stores/useReviewStore';
 import { GetRestListData } from '@/types/lunch/api';
 import COMPONENT_NAME from '@/constants/common/pages';
 import useUserStore from '@/stores/useUserStore';
+import DUMMY_DATA from '@/constants/lunch/dummy';
 
-function LunchReviewsByRest({ menuId }: { menuId?: number }) {
+function LunchReviewsByRest() {
   const router = useRouter();
   const { title } = LUNCH_ROULETTE_CONSTANTS;
   const { detail } = COMPONENT_NAME.lunch.detail;
@@ -22,13 +23,17 @@ function LunchReviewsByRest({ menuId }: { menuId?: number }) {
   const { setReviewList, reviewList } = useReviewStore();
   const { menuState, isAgain, isOperated, menuIdState } = useRouletteStore();
   const { response } = useFetch({
-    fetchFn: () => getRestList(menuId || menuIdState),
+    fetchFn: () => getRestList(menuIdState),
   });
 
   const renderTitle = () => {
-    return isAgain && isOperated
-      ? `"${menuState}" ${title.review} `
-      : `${memberName}${title.recent}`;
+    if (isAgain && isOperated) {
+      return `"${menuState}" ${title.review} `;
+    }
+    if (isOperated) {
+      return `${memberName}${title.recent}`;
+    }
+    return '';
   };
 
   const onClickHandler = (item: GetRestListData) => {
@@ -43,12 +48,9 @@ function LunchReviewsByRest({ menuId }: { menuId?: number }) {
     window.scrollTo({ top: 0 }); // 페이지 top: 0으로 이동
   };
 
-  return (
-    <div css={wrapperStyles}>
-      <div css={stickyStyles}>
-        <LunchSubTitle title={`${renderTitle()}`} type="title" />
-      </div>
-      {response?.data.map((item) => (
+  const renderRestList = () => {
+    if (isAgain && isOperated) {
+      return response?.data.map((item) => (
         <button
           type="button"
           key={item.restaurantId}
@@ -56,7 +58,28 @@ function LunchReviewsByRest({ menuId }: { menuId?: number }) {
         >
           <LunchRest key={item.restaurantId} {...item} />
         </button>
-      ))}
+      ));
+    }
+    if (isOperated) {
+      return DUMMY_DATA.map((item) => (
+        <button
+          type="button"
+          key={item.restaurantId}
+          onClick={() => onClickHandler(item)}
+        >
+          <LunchRest key={item.restaurantId} {...item} />
+        </button>
+      ));
+    }
+    return null;
+  };
+
+  return (
+    <div css={wrapperStyles}>
+      <div css={stickyStyles}>
+        <LunchSubTitle title={`${renderTitle()}`} type="title" />
+      </div>
+      {renderRestList()}
     </div>
   );
 }
