@@ -5,17 +5,17 @@ import { LocationFill, CalendarFill } from '@/assets/icons';
 
 function InvitationQrInfoText({ data }: InvitationQrInfoTextProps) {
   // 시간 포멧 변환
-  const startTime = data?.invitationStartTime.substring(0, 5);
-  const endTime = data?.invitationEndTime.substring(0, 5);
+  // const startTime = data?.invitationStartTime.substring(0, 5);
+  // const endTime = data?.invitationEndTime.substring(0, 5);
 
   // 날짜 포멧 변환
-  const changeDatefometer = (date: string) => {
-    const [year, month, day] = data && date.split('-');
-    const changedDate = `${year}.${month}.${day}`;
-    return changedDate;
-  };
-  const startDate = changeDatefometer(data.invitationStartDate);
-  const endDate = changeDatefometer(data.invitationEndDate).substring(5, 10);
+  // const changeDatefometer = (date: string) => {
+  //   const [year, month, day] = data && date.split('-');
+  //   const changedDate = `${year}.${month}.${day}`;
+  //   return changedDate;
+  // };
+  // const startDate = changeDatefometer(data.invitationStartDate);
+  // const endDate = changeDatefometer(data.invitationEndDate).substring(5, 10);
   return (
     <div>
       <div css={qrInfoContainerStyles}>
@@ -27,10 +27,12 @@ function InvitationQrInfoText({ data }: InvitationQrInfoTextProps) {
         <CalendarFill />
         <div>
           <div>
-            {startDate} ~ {endDate}
+            {/* {startDate} ~ {endDate} */}
+            2023.10.10
           </div>
           <div css={qrInfoTimeStyles}>
-            {startTime} ~ {endTime}
+            {/* {startTime} ~ {endTime} */}
+            10:00 ~ 12:00
           </div>
         </div>
       </div>

@@ -36,17 +36,17 @@ function InvitationInfo({ value, data }: InvitationInfoProps) {
   console.log(currentTime);
 
   // 시간 포멧 변환
-  const startTime = data.invitationStartTime.substring(0, 5);
-  const endTime = data.invitationEndTime.substring(0, 5);
+  // const startTime = data.invitationStartTime.substring(0, 5);
+  // const endTime = data.invitationEndTime.substring(0, 5);
 
   // 날짜 포멧 변환
-  const changeDatefometer = (date: string) => {
-    const [year, month, day] = date.split('-');
-    const changedDate = `${year}.${month}.${day}`;
-    return changedDate;
-  };
-  const startDate = changeDatefometer(data.invitationStartDate);
-  const endDate = changeDatefometer(data.invitationEndDate).substring(5, 10);
+  // const changeDatefometer = (date: string) => {
+  //   const [year, month, day] = date.split('-');
+  //   const changedDate = `${year}.${month}.${day}`;
+  //   return changedDate;
+  // };
+  // const startDate = changeDatefometer(data.invitationStartDate);
+  // const endDate = changeDatefometer(data.invitationEndDate).substring(5, 10);
 
   // 테마 커스텀 > 어떤 화면에서 커스텀 할지 추후 수정이라 두페이지 모두에 남겨두었습니다
   const onClickSetThemeHandler = () => {
@@ -94,10 +94,10 @@ function InvitationInfo({ value, data }: InvitationInfoProps) {
           </div>
           <div>
             <div css={textInfoStyles}>
-              {startDate} ~ {endDate}
+              {/* {startDate} ~ {endDate} */}2023.10.10
             </div>
             <div css={textInfoStyles}>
-              {startTime} ~ {endTime}
+              {/* {startTime} ~ {endTime} */}10:00 ~ 12:00
             </div>
           </div>
         </div>
