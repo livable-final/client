@@ -10,14 +10,17 @@ import useAlertStore from '@/stores/useAlertStore';
 import useFetch from '@/hooks/useFetch';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
+import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import { LocationLine, Calendar, Clock } from '@/assets/icons';
 import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 import { GetInvitationPlaceData } from '@/types/invitation/api';
-import { InvitationInfoProps } from '@/types/invitation/create';
 import { ErrorMessageProps } from '@/types/common/errorMessage';
-import { css } from '@emotion/react';
+import {
+  InvitationCreateTexts,
+  InvitationInfoProps,
+} from '@/types/invitation/create';
 
 function InvitationInfo({
   tip,
@@ -28,7 +31,8 @@ function InvitationInfo({
   const { createContents } = useInvitationCreateStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { alertState, openAlert } = useAlertStore();
-  const { title, placeholder, checkbox } = CREATE_TEXTS;
+
+  const { title, placeholder, checkbox }: InvitationCreateTexts = CREATE_TEXTS;
   const { noPlace }: ErrorMessageProps = COMMON_ERROR_MESSAGE;
 
   const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
@@ -53,6 +57,8 @@ function InvitationInfo({
   useEffect(() => {
     if (createContents.startDate) {
       setDate(
+        // startDate와 endDate가 같을 경우: yyyy-mm-dd
+        // 다를 경우: yyyy-mm-dd ~ yyyy-mm-dd 표기
         createContents.startDate.split('T')[0] ===
           createContents.endDate.split('T')[0]
           ? `${createContents.startDate.split('T')[0]}
@@ -154,7 +160,7 @@ function InvitationInfo({
           </div>
         </div>
       </div>
-      {alertState.isOpen && <Alert />}
+      {alertState.isOpen && <Alert isSans />}
       {bottomSheetState.isOpen && <BottomSheet />}
     </>
   );
