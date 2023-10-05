@@ -8,7 +8,7 @@ export const INVITATION_EDIT_TEXTS = {
     btn: '완료',
   },
   modal: {
-    title: `초대장 대전송`,
+    title: `초대장 재전송`,
     content: `초대장을 이대로 수정하고 전송할까요?`,
   },
 };

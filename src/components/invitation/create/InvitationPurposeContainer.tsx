@@ -4,14 +4,15 @@ import Icons from '@/components/common/Icons';
 import Category from '@/components/common/Category';
 import Button from '@/components/common/Button';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import COMPONENT_NAME from '@/constants/common/pages';
 import useViewStore from '@/stores/usePagesStore';
 import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { COMMON_CATEGORIES } from '@/constants/common';
+import { ComponentName } from '@/types/common/pages';
 import {
-  CategoryInvitation,
   CommonCategory,
   InvitationCreateTexts,
 } from '@/types/invitation/create';
@@ -20,7 +21,8 @@ function InvitationPurposeContainer() {
   const { setNextComponent } = useViewStore();
   const { setHeaderTitle } = useInvitationHeaderTitleStore();
   const { setCreateContents, clearCreateContents } = useInvitationCreateStore();
-  const { invitation }: CategoryInvitation = COMMON_CATEGORIES;
+
+  const { invitation }: ComponentName = COMPONENT_NAME;
   const {
     header,
     title,
@@ -28,42 +30,49 @@ function InvitationPurposeContainer() {
     placeholder,
     button,
   }: InvitationCreateTexts = CREATE_TEXTS;
-  const categories: CommonCategory[] = Object.values(invitation);
+
+  const categories: CommonCategory[] = Object.values(COMMON_CATEGORIES);
+
   const [selectedCategory, setSelectedCategory] = useState<string>('meeting');
   const [etcPurpose, setEtcPurpose] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  // 최초 렌더링 시 타이틀/초대장데이터 초기화
+  // 최초 렌더링 시 타이틀 & 초대장 데이터 초기화
   useEffect(() => {
-    setHeaderTitle('방문자 초대');
+    setHeaderTitle(header.default);
     clearCreateContents();
   }, [clearCreateContents, setHeaderTitle]);
 
-  // 방문 목적 카테고리 선택
+  // 초대 목적 카테고리 선택
   const onClickCategoryHandler = (item: CommonCategory) => {
     setSelectedCategory(item.icon);
   };
 
-  // 기타 선택 시 방문 목적 작성
+  // 초대 목적 - 기타 선택 시 방문 목적 작성
   const onChange = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setEtcPurpose(e.target.value);
   };
 
-  // input 포커스될 때 버튼 숨김
+  // input 포커스될 때 '다음' 버튼 숨김
   const onFocusInputHandler = () => {
     setIsFocused(true);
   };
 
-  // input 블러될 때 버튼 활성
+  // input 블러될 때 '다음' 버튼 활성
   const onBlurInputHandler = () => {
     setTimeout(() => setIsFocused(false), 300);
   };
 
-  // 하단 버튼 클릭 핸들러
+  // 하단 '다음' 버튼 클릭 핸들러
   const onClickBtnHandler = () => {
-    setNextComponent('InvitationVisitorsContainer');
+    // 다음 렌더링 컴포넌트: 방문자 정보
+    // 타이틀 스토어에 초대 목적 저장
+    // 초대장 생성 스토어에  초대 목적 저장 (기타일 경우 사용자 입력값 저장)
+    setNextComponent(invitation.create.visiors);
     setHeaderTitle(header[selectedCategory]);
     setCreateContents(
       'purpose',
@@ -119,6 +128,7 @@ function InvitationPurposeContainer() {
             content={button.next}
             variant="blue"
             onClick={onClickBtnHandler}
+            // 초대 목적 - 기타를 선택할 경우, 사용자 입력값이 없으면 버튼 비활성화
             isDisabled={selectedCategory === 'etc' && !etcPurpose.length}
           />
         </div>

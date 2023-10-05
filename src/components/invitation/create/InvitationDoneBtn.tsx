@@ -8,10 +8,10 @@ import { COMMON_ICON_NAMES } from '@/constants/common';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function InvitationDoneBtn() {
+  const router = useRouter();
+
   const { button }: InvitationCreateTexts = CREATE_TEXTS;
   const { invitation } = COMMON_ICON_NAMES;
-
-  const router = useRouter();
 
   // 마이 페이지 이동
   const onClickToMypageHandler = () => {

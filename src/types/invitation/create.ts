@@ -19,11 +19,16 @@ export interface InvitationCreateTexts {
     [key: string]: string;
   };
   modal: {
-    [key: string]:
-      | {
-          [key: string]: string;
-        }
-      | string;
+    send: {
+      [key: string]: string;
+    };
+    resend: {
+      [key: string]: string;
+    };
+    btn: string;
+  };
+  error: {
+    [key: string]: string;
   };
   checkbox: string;
   radioBtn: string;
@@ -35,10 +40,8 @@ export interface InvitationCreateTexts {
 // ****************** 초대 목적 ****************** //
 // ****************** Purpose ****************** //
 // Invitation Purpose
-export interface CategoryInvitation {
-  [key: string]: {
-    [key: string]: CommonCategory;
-  };
+export interface InvitationCategory {
+  [key: string]: CommonCategory;
 }
 
 // 카테고리

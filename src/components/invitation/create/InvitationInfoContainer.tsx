@@ -11,11 +11,14 @@ import useAlertStore from '@/stores/useAlertStore';
 import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
+import COMPONENT_NAME from '@/constants/common/pages';
 import { css } from '@emotion/react';
-import { useEffect, useState, ChangeEvent } from 'react';
-import { VisitorInfo } from '@/types/invitation/api';
+import { useEffect, useState } from 'react';
 import { postInvitation } from '@/pages/api/invitation/createRequests';
+import { ComponentName } from '@/types/common/pages';
 import { ErrorProps } from '@/types/common/response';
+import { VisitorInfo } from '@/types/invitation/api';
+import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function InvitationInfoContainer() {
   const { setNextComponent } = useViewStore();
@@ -24,7 +27,9 @@ function InvitationInfoContainer() {
   const { visit, setVisitMsgText, clearVisitMsg } = useSaveStore();
   const { bottomSheetState } = useBottomSheetStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
-  const { button, modal } = CREATE_TEXTS;
+
+  const { button, modal }: InvitationCreateTexts = CREATE_TEXTS;
+  const { invitation }: ComponentName = COMPONENT_NAME;
 
   const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([]);
   const [tip, setTip] = useState<string>(visit.visitMsgText);
@@ -52,9 +57,10 @@ function InvitationInfoContainer() {
         try {
           const response = await postInvitation(createContents);
 
-          // 성공했을 때에만 다음 컴포넌트 연결
+          // 초대장 생성 성공했을 때에만 다음 컴포넌트 연결
+          // 다음 렌더링 컴포넌트: 초대 완료
           if (response.status === 201) {
-            setNextComponent('InvitationDoneContainer');
+            setNextComponent(invitation.create.done);
           }
         } catch (err: unknown) {
           const error = err as ErrorProps;
@@ -78,24 +84,26 @@ function InvitationInfoContainer() {
     setCreateContents('visitors', deletedVisitors);
   };
 
-  // 방문 팁 작성
+  // 방문 팁 작성 핸들러
   const onChangeTipHandler = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setTip(e.target.value);
   };
 
-  // input 포커스될 때 버튼 숨김
+  // input 포커스될 때 '초대장 보내기' 버튼 숨김
   const onFocusInputHandler = () => {
     setIsFocused(true);
   };
 
-  // input 블러될 때 버튼 활성
+  // input 블러될 때 '초대장 보내기' 버튼 활성
   const onBlurInputHandler = () => {
     setTimeout(() => setIsFocused(false), 300);
   };
 
-  // 하단 버튼 핸들러 (초대장 보내기)
+  // 하단 버튼 '초대장 보내기' 핸들러
   const onClickBtnHandler = () => {
     openModal(modal.send.title, modal.send.content);
   };
@@ -133,6 +141,7 @@ function InvitationInfoContainer() {
         />
       </div>
       {modalState.isOpen && (
+        // btn : 전송하기
         <Modal content={modal.btn} onClick={onClickModalHandler} />
       )}
       {alertState.isOpen && <Alert isSans />}
