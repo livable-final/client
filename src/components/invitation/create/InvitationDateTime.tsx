@@ -109,7 +109,7 @@ function InvitationDateTime() {
       // 토글 버튼 비활성화 = 시간 선택했을 때
       setCreateContents(
         'startDate',
-        `${getFormatDate(startDate)}T${selectTime[0]}:00`, // TimeSelector를 순서대로 누르지 않았을 경우 대비 정렬
+        `${getFormatDate(startDate)}T${selectTime[0]}:00`,
       );
       setCreateContents(
         'endDate',
