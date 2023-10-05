@@ -1,3 +1,5 @@
+import { GetRestListData } from '@/types/lunch/api';
+
 export interface ReviewList {
   restaurantName: string;
   restaurantId: number;
@@ -22,4 +24,8 @@ export interface ReviewListStore {
 export interface LunchReviewProps extends ReviewList {
   isRow?: boolean;
   noPad?: boolean;
+}
+
+export interface LunchRestListProps {
+  onClick: (item: GetRestListData) => void;
 }
