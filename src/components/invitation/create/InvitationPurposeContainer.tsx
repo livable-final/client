@@ -72,7 +72,7 @@ function InvitationPurposeContainer() {
     // 다음 렌더링 컴포넌트: 방문자 정보
     // 타이틀 스토어에 초대 목적 저장
     // 초대장 생성 스토어에  초대 목적 저장 (기타일 경우 사용자 입력값 저장)
-    setNextComponent(invitation.create.visiors);
+    setNextComponent(invitation.create.visitors);
     setHeaderTitle(header[selectedCategory]);
     setCreateContents(
       'purpose',
