@@ -59,34 +59,29 @@ function InvitationDateTime() {
       }
     };
     fetchGetTimeList();
-  }, [
-    createContents.commonPlaceId,
-    startDate,
-    endDate,
-    openAlert,
-    isUpdated,
-    onToggle,
-    error.timeAPI,
-  ]);
+  }, [createContents.commonPlaceId, startDate, endDate, isUpdated]);
 
   // API호출 응답값인 fetchData가 바뀔 때마다 공통된 시간 출력
   // commonTimes ['15:00', '15:30', '17:00', '17:30']
   useEffect(() => {
     if (fetchData) {
-      const common = getCommonTimes(fetchData);
+      const common = getCommonTimes(startDate, endDate, fetchData);
       setCommonTimes([...common]);
     }
     // 날짜를 다시 지정했으므로 기존 선택했던 시간 배열 초기화
     clearSelectTime();
-  }, [fetchData, clearSelectTime]);
+  }, [fetchData]);
 
   // commonTimes.Length(가능한 시간)에 따라 종일 활성화 여부
   // 가능한 시간이 18개(09~18시)가 아닌 경우에는 토글 off하여 시간 선택 유도
   useEffect(() => {
     if (commonTimes.length !== 18) {
-      offToggle();
+      // 타임 셀렉터 렌더링 이슈로 임시 setTimeout 함수 지정
+      setTimeout(() => offToggle(), 200);
+    } else {
+      onToggle();
     }
-  }, [commonTimes, offToggle]);
+  }, [commonTimes]);
 
   // startDate나 endDate가 변경될 때 isUpdated === true
   useEffect(() => {
@@ -114,7 +109,7 @@ function InvitationDateTime() {
       // 토글 버튼 비활성화 = 시간 선택했을 때
       setCreateContents(
         'startDate',
-        `${getFormatDate(startDate)}T${selectTime[0]}:00`,
+        `${getFormatDate(startDate)}T${selectTime[0]}:00`, // TimeSelector를 순서대로 누르지 않았을 경우 대비 정렬
       );
       setCreateContents(
         'endDate',
