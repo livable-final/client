@@ -1,11 +1,8 @@
 import { css } from '@emotion/react';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
-import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchRest from '@/components/lunch/LunchRest';
 import theme from '@/styles/theme';
 import useRouletteStore from '@/stores/useRouletteStore';
-import { getRestList } from '@/pages/api/lunch/lunchRequests';
-import useFetch from '@/hooks/useFetch';
 import usePagesStore from '@/stores/usePagesStore';
 import { useRouter } from 'next/router';
 import useReviewStore from '@/stores/useReviewStore';
@@ -13,31 +10,17 @@ import { GetRestListData } from '@/types/lunch/api';
 import COMPONENT_NAME from '@/constants/common/pages';
 import useUserStore from '@/stores/useUserStore';
 import DUMMY_DATA from '@/constants/lunch/dummy';
+import LunchSubTitle from '@/components/lunch/LunchSubTitle';
+import LunchReviewRestList from '@/components/lunch/review/LunchReviewRestList';
 
-function LunchReviewsByRest() {
+function LunchRouletteReviews() {
   const router = useRouter();
   const { title } = LUNCH_ROULETTE_CONSTANTS;
   const { detail } = COMPONENT_NAME.lunch.detail;
   const { memberName } = useUserStore();
   const { setNextComponent } = usePagesStore();
   const { setReviewList, reviewList } = useReviewStore();
-  const { isAgain, isOperated, menuIdState } = useRouletteStore();
-
-  const renderTitle = () => {
-    // "메뉴 이름" 맛집을 알려드릴게요.
-    if (isAgain && isOperated) {
-      return `"${menuIdState}" ${title.review} `;
-    }
-    // "멤버 이름"께 추천하는 식당.
-    if (isOperated) {
-      return `${memberName}${title.recent}`;
-    }
-    return '';
-  };
-
-  const { response } = useFetch({
-    fetchFn: () => getRestList(menuIdState),
-  });
+  const { isAgain, menuState, isDecided, isOperated } = useRouletteStore();
 
   const onClickHandler = (item: GetRestListData) => {
     router.push('/lunch');
@@ -51,19 +34,27 @@ function LunchReviewsByRest() {
     window.scrollTo({ top: 0 }); // 페이지 top: 0으로 이동
   };
 
+  // 타이틀 렌더 함수
+  const renderTitle = () => {
+    // '이걸로 결정' 버튼을 눌렀을 경우
+    if (isDecided) return `"${menuState}" ${title.review}`;
+
+    // 최초 동작 완료 전일 경우
+    if (isOperated && !isAgain) return `${memberName}${title.recent}`;
+
+    // 그 이외에는 아무 내용도 보이지 않는다.
+    return '';
+  };
+
+  // 식당 리스트 렌더 함수
   const renderRestList = () => {
-    if (isAgain && isOperated) {
-      return response?.data.map((item) => (
-        <button
-          type="button"
-          key={item.restaurantId}
-          onClick={() => onClickHandler(item)}
-        >
-          <LunchRest key={item.restaurantId} {...item} />
-        </button>
-      ));
+    // '이걸로 결정' 버튼을 눌렀을 경우
+    if (isDecided) {
+      return <LunchReviewRestList onClick={onClickHandler} />;
     }
-    if (isOperated) {
+
+    // 최초 동작 완료 전일 경우
+    if (isOperated && !isAgain) {
       return DUMMY_DATA.map((item) => (
         <button
           type="button"
@@ -74,13 +65,15 @@ function LunchReviewsByRest() {
         </button>
       ));
     }
-    return null;
+
+    // 그 이외에는 아무 내용도 보이지 않는다.
+    return '';
   };
 
   return (
     <div css={wrapperStyles}>
       <div css={stickyStyles}>
-        <LunchSubTitle title={`${renderTitle()}`} type="title" />
+        <LunchSubTitle title={renderTitle()} type="title" />
       </div>
       {renderRestList()}
     </div>
@@ -102,4 +95,4 @@ const stickyStyles = css`
   background-color: ${theme.palette.white};
 `;
 
-export default LunchReviewsByRest;
+export default LunchRouletteReviews;
