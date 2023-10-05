@@ -45,26 +45,33 @@ function LunchRoulettePopup() {
   };
 
   return (
-    <section css={containerStyles}>
-      <button
-        type="button"
-        onMouseDown={onPressHandler}
-        onMouseUpCapture={onReleaseHandler}
-        onClick={onClickHandler}
-        css={popupStyles}
-        disabled={isDecided}
-      >
-        {alertState.isOpen && <Alert />}
-        {isOperated && isAgain && (
-          <>
-            <div css={wrapperStyles}>
-              <span css={spanStyles}>{popup}</span>
-            </div>
-            <div css={iconStyles}>{isActive ? <PopupActive /> : <Popup />}</div>
-          </>
-        )}
-      </button>
-    </section>
+    <div>
+      {alertState.isOpen ? (
+        <Alert />
+      ) : (
+        <section css={containerStyles}>
+          <button
+            type="button"
+            onMouseDown={onPressHandler}
+            onMouseUpCapture={onReleaseHandler}
+            onClick={onClickHandler}
+            css={popupStyles}
+            disabled={isDecided}
+          >
+            {isOperated && isAgain && (
+              <>
+                <div css={wrapperStyles}>
+                  <span css={spanStyles}>{popup}</span>
+                </div>
+                <div css={iconStyles}>
+                  {isActive ? <PopupActive /> : <Popup />}
+                </div>
+              </>
+            )}
+          </button>
+        </section>
+      )}
+    </div>
   );
 }
 

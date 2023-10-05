@@ -13,7 +13,6 @@ import {
   selectRandomCategory,
   selectRandomMenus,
 } from '@/utils/selectRandomItem';
-// import { useMemo, useState } from 'react';
 
 // 오늘 점심 룰렛 컴포넌트
 function LunchRoulette() {
@@ -24,9 +23,6 @@ function LunchRoulette() {
   const { response } = useFetch({
     fetchFn: getMenus,
   });
-
-  // const [nameOfMenu, setNameOfMenu] = useState('');
-  // const [idOfMenu, setIdOfMenu] = useState(0);
 
   // Push or Again  클릭 시 카테고리와 메뉴를 셔플하는 함수
   const onClickBtnHandler = () => {
@@ -69,7 +65,6 @@ function LunchRoulette() {
         }, time.interval);
         setTimeout(() => {
           clearInterval(menuInterval);
-          setState({ isAgain: true });
         }, time.duration.menu); // 카테고리 선택 완료 후 메뉴 선택까지의 시간 인터벌 (500ms)
       }, time.interval); // 카테고리 셔플 속도 (100ms)
 
@@ -115,11 +110,11 @@ const layoutStyles = css`
 const bgStyles = css`
   position: relative;
   width: 242px;
-  height: 218px;
+  height: 242px;
 
   ${mq.md} {
     width: 358px;
-    height: 338px;
+    height: 358px;
   }
 `;
 
@@ -131,13 +126,16 @@ const wrapperStyles = css`
   align-items: center;
   z-index: 2;
   height: 218px;
-  gap: 10px;
+  gap: 16px;
+  top: 68px;
+
   left: calc((100% - 150px) / 2);
 
   ${mq.md} {
-    height: 318px;
-    gap: 48px;
+    height: 358px;
+    gap: 52px;
     left: calc((100% - 230px) / 2);
+    top: 46px;
   }
 `;
 

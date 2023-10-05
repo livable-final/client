@@ -1,13 +1,11 @@
 import Header from '@/components/common/Header';
 import LunchRoulette from '@/components/lunch/LunchRoulette';
-import LunchReviewsByRest from '@/components/lunch/review/LunchReviewsByRest';
+import LunchRouletteReviews from '@/components/lunch/roulette/LunchRouletteReviews';
 import LunchRoulettePopup from '@/components/lunch/roulette/LunchRoulettePopup';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
-import useRouletteStore from '@/stores/useRouletteStore';
 import { css } from '@emotion/react';
 
 function Roulette() {
-  const { isOperated, isAgain, isCompleted } = useRouletteStore();
   const { title } = LUNCH_ROULETTE_CONSTANTS;
 
   return (
@@ -16,8 +14,7 @@ function Roulette() {
       <section css={sectionStyle}>
         <LunchRoulette />
         <LunchRoulettePopup />
-        {(isOperated && isAgain && isCompleted && <LunchReviewsByRest />) ||
-          (!isAgain && <LunchReviewsByRest />)}
+        <LunchRouletteReviews />
       </section>
     </>
   );
