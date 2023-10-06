@@ -7,24 +7,23 @@ import { getHome } from '@/pages/api/home/homeRequests';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
-import usePagesStore from '@/stores/usePagesStore';
-import useSaveStore from '@/stores/useSaveStore';
-import { useRouter } from 'next/router';
-import useUserStore from '@/stores/useUserStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useSaveStore from '@/stores/common/useSaveStore';
+import useUserStore from '@/stores/common/useUserStore';
 import Alert from '@/components/common/Alert';
 
 function Home() {
-  const router = useRouter();
+  const MEMBER_TOKEN = process.env.MEMBER_TOKEN as string;
+  const { setUserToken, clearToken } = useSaveStore();
   const { reset } = usePagesStore();
   const { setState } = useUserStore;
-  const { response, alertState } = useFetch({
+  const { response, alertState, loading } = useFetch({
     fetchFn: getHome,
   });
 
   useEffect(() => {
-    if (!useSaveStore.getState().user) {
-      router.push('/login');
-    }
+    clearToken();
+    setUserToken(MEMBER_TOKEN);
     reset();
     if (response?.data.buildingId) {
       setState({ ...response?.data });
@@ -34,7 +33,12 @@ function Home() {
   return (
     <>
       {alertState.isOpen && <Alert />}
-      <Title title={response?.data.buildingName} part="main" isMain />
+      <Title
+        title={response?.data.buildingName}
+        loading={loading}
+        part="main"
+        isMain
+      />
       <div css={containerStyles}>
         <HomeContents hasCafeteria={response?.data.hasCafeteria} />
       </div>
@@ -44,7 +48,7 @@ function Home() {
 }
 
 const containerStyles = css`
-  margin: 0 -16px 90px;
+  margin: 0 -16px calc(env(safe-area-inset-bottom) + 54px);
   background: ${theme.palette.background.home};
 `;
 

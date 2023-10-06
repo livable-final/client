@@ -4,27 +4,27 @@ import React from 'react';
 import useFetch from '@/hooks/useFetch';
 import Image from 'next/image';
 import { getVisitationQr } from '@/pages/api/invitation/viewRequests';
+import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 
 function InvitationQrInfoCode() {
+  const { qr } = INVITATION_VEIW_INFO_TEXTS;
   const { response } = useFetch({
     fetchFn: getVisitationQr,
   });
-  const qr = response?.data;
+  const qrData = response?.data;
 
   return (
     <div css={invitationQrInfoCodeContinerStyle}>
-      <div css={codeLabelStyles}>임시출입증</div>
+      <div css={codeLabelStyles}>{qr.title}</div>
       <div css={qrStyles}>
         <Image
-          src={`data:image/png;base64,${qr?.qr}`}
-          alt="zbdkf"
+          src={`data:image/png;base64,${qrData?.qr}`}
+          alt={qr.title}
           width={163}
           height={163}
         />
       </div>
-      <div css={alertStyles}>
-        초대 시간 전후로 <br /> 1시간 사용할수 있습니다
-      </div>
+      <div css={alertStyles}>{qr.body}</div>
     </div>
   );
 }
@@ -45,6 +45,7 @@ const qrStyles = css`
   width: 163px;
   height: 163px;
 `;
+
 const alertStyles = css`
   width: 182px;
   text-align: center;

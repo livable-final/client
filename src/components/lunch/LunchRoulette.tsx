@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import useFetch from '@/hooks/useFetch';
-import useRouletteStore from '@/stores/useRouletteStore';
+import useLunchRouletteStore from '@/stores/lunch/useLunchRouletteStore';
 import { getMenus } from '@/pages/api/lunch/lunchRequests';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
 import LunchRouletteBg from '@/components/lunch/roulette/LunchRouletteBg';
@@ -18,9 +18,8 @@ import {
 function LunchRoulette() {
   const { time } = LUNCH_ROULETTE_CONSTANTS; // 시간 상수
   const { categoryState, menuState, isLocked, isOperated, isPressed, isAgain } =
-    useRouletteStore();
-  const { setState } = useRouletteStore;
-
+    useLunchRouletteStore();
+  const { setState } = useLunchRouletteStore;
   const { response } = useFetch({
     fetchFn: getMenus,
   });
@@ -29,6 +28,8 @@ function LunchRoulette() {
   const onClickBtnHandler = () => {
     setState({ isOperated: !isOperated }); // 가동 중!
     setState({ isPressed: !isPressed }); // 버튼 눌림!
+    setState({ isDecided: false }); // 결정하지 못함
+    setState({ isCompleted: false });
 
     // *** 카테고리 고정 시! ***
     if (isLocked && isAgain) {
@@ -62,7 +63,6 @@ function LunchRoulette() {
 
           // 메뉴 셔플 속도 (100ms)
         }, time.interval);
-
         setTimeout(() => {
           clearInterval(menuInterval);
         }, time.duration.menu); // 카테고리 선택 완료 후 메뉴 선택까지의 시간 인터벌 (500ms)
@@ -77,6 +77,7 @@ function LunchRoulette() {
         setState({ isOperated: true }); // 가동 완료!
         setState({ isPressed: false }); // 버튼 원상 복귀!
         setState({ isSelected: false }); // 선택 완료 초기화!
+        setState({ isCompleted: true });
       }, time.duration.category + time.duration.menu); // 모든 선택이 완료되는 시간 인터벌 (500ms + 3500ms = 4000ms)
     }
   };
@@ -109,11 +110,11 @@ const layoutStyles = css`
 const bgStyles = css`
   position: relative;
   width: 242px;
-  height: 218px;
+  height: 242px;
 
   ${mq.md} {
     width: 358px;
-    height: 338px;
+    height: 358px;
   }
 `;
 
@@ -125,13 +126,16 @@ const wrapperStyles = css`
   align-items: center;
   z-index: 2;
   height: 218px;
-  gap: 10px;
+  gap: 16px;
+  top: 68px;
+
   left: calc((100% - 150px) / 2);
 
   ${mq.md} {
-    height: 318px;
-    gap: 48px;
+    height: 358px;
+    gap: 52px;
     left: calc((100% - 230px) / 2);
+    top: 46px;
   }
 `;
 

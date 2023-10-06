@@ -6,8 +6,8 @@ import { COMMON_ICON_NAMES } from '@/constants/common';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import theme from '@/styles/theme';
 import Icons from '@/components/common/Icons';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useSaveStore from '@/stores/useSaveStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useSaveStore from '@/stores/common/useSaveStore';
 
 interface BottomSheetProps {
   onClickSubmit: () => void;
@@ -87,6 +87,9 @@ const textStyles = css`
   display: flex;
   flex-direction: column;
   align-self: start;
+  strong {
+    font: ${theme.font.subTitle.subTitle1_600};
+  }
 `;
 
 const textBtnStyles = (isChecked: boolean) => css`
@@ -96,7 +99,10 @@ const textBtnStyles = (isChecked: boolean) => css`
   margin-top: 7px;
   text-align: start;
   cursor: pointer;
-  font: ${theme.font.body.body2_400};
+  span {
+    font: ${theme.font.body.body2_400};
+  }
+
   color: ${!isChecked
     ? `${theme.palette.greyscale.grey40}`
     : `${theme.palette.bluescale.blue50}`};
@@ -114,6 +120,9 @@ const btnStyles = css`
   &:active {
     border-radius: 8px;
     background-color: ${theme.palette.greyscale.grey5};
+  }
+  span {
+    font: ${theme.font.subTitle.subTitle2_600};
   }
 `;
 

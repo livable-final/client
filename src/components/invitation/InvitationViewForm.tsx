@@ -1,6 +1,6 @@
 import Header from '@/components/common/Header';
 import useFetch from '@/hooks/useFetch';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import InvitationQrInfo from '@/components/invitation/view/InvitationQrInfo';
 import InvitationBuildingInfo from '@/components/invitation/view/InvitationBuildingInfo';
 import InvitationHostInfo from '@/components/invitation/view/InvitationHostInfo';
@@ -8,9 +8,10 @@ import InvitationOfficeInfo from '@/components/invitation/view/InvitationOfficeI
 import InvitationViewFooter from '@/components/invitation/view/InvitationViewFooter';
 import InvitationInfoContainer from '@/components/invitation/view/InvitationInfoContainer';
 import InvitationCarouselContainer from '@/components/invitation/view/InvitationCarouselContainer';
+import InvitationParking from '@/components/invitation/view/InvitationParking';
 import { css } from '@emotion/react';
 import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
-import useSaveStore from '@/stores/useSaveStore';
+import useSaveStore from '@/stores/common/useSaveStore';
 import { useEffect } from 'react';
 import { getVisitationInfo } from '@/pages/api/invitation/viewRequests';
 
@@ -28,16 +29,19 @@ function InvitationViewForm() {
   }, [VISITOR_TOKEN, setVisitorToken]);
 
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.building}`) {
-    return <InvitationBuildingInfo />;
+    return <InvitationBuildingInfo data={response && response.data} />;
   }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.host}`) {
     return <InvitationHostInfo data={response && response.data} />;
   }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.place}`) {
-    return <InvitationOfficeInfo />;
+    return <InvitationOfficeInfo data={response && response.data} />;
   }
   if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.code}`) {
     return <InvitationQrInfo data={response && response.data} />;
+  }
+  if (nextComponent === `${INVITATION_VEIW_INFO_TEXTS.category.parking}`) {
+    return <InvitationParking />;
   }
 
   const onClickHandler = () => {
@@ -48,6 +52,7 @@ function InvitationViewForm() {
     <div>
       <div css={invitationViewFormStyles}>
         <Header
+          isCloseOnly
           title={INVITATION_VEIW_INFO_TEXTS.category.main}
           onClick={onClickHandler}
         />

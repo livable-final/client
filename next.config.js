@@ -5,8 +5,12 @@ const nextConfig = {
     emotion: true,
   },
   images: {
-    domains: ['https://livable-final.s3.ap-northeast-2.amazonaws.com'],
-
+    deviceSizes: [361, 480],
+    imageSizes: [242, 358],
+    domains: [
+      'https://livable-final.s3.ap-northeast-2.amazonaws.com',
+      'img1.kakaocdn.net',
+    ],
     remotePatterns: [
       {
         protocol: 'https',

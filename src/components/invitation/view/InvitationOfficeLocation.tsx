@@ -1,16 +1,16 @@
 import theme from '@/styles/theme';
+import { InvitationOfficeLocationProps } from '@/types/invitation/view';
 import { css } from '@emotion/react';
 
-function InvitationOfficeLocation() {
-  const testText = {
-    officeName: '식스센스',
-    officeLocation: '10층 1004호',
-  };
+function InvitationOfficeLocation({
+  invitationOfficeName,
+  hostCompanyName,
+}: InvitationOfficeLocationProps) {
   return (
     <div css={OfficeLocationStyles}>
-      <p>{testText.officeName}사무실은</p>
+      <p>{hostCompanyName}사무실은</p>
       <p>
-        <span>{testText.officeLocation}</span>에 있어요
+        <span>{invitationOfficeName}</span>에 있어요
       </p>
     </div>
   );

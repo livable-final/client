@@ -1,14 +1,14 @@
 import Button from '@/components/common/Button';
 import RadioBtn from '@/components/common/RadioBtn';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useInvitationCreateStore from '@/stores/invitaion/useInvitationCreateStore';
 import getIsCommonData from '@/utils/getIsCommonData';
 import getPlaceId from '@/utils/getPlaceId';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect } from 'react';
 import {
   InvitationCreateTexts,
   InvitationPlaceProps,
@@ -18,6 +18,7 @@ import {
 function InvitationPlace({ placeList }: InvitationPlaceProps) {
   const { closeBottomSheet } = useBottomSheetStore();
   const { setCreateContents } = useInvitationCreateStore();
+
   const { title, button, placeholder, radioBtn }: InvitationCreateTexts =
     CREATE_TEXTS;
 
@@ -46,17 +47,18 @@ function InvitationPlace({ placeList }: InvitationPlaceProps) {
   }, [allPlaceList, selectPlaceName]);
 
   // 라디오버튼 선택
-  const onChangeRadioHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeRadioHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectPlaceName(e.target.value);
   };
 
   // 직접입력
-  const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectPlaceName(e.target.value);
   };
 
-  // 하단 버튼 핸들러
+  // 하단 '완료' 버튼 핸들러
   const onClickBtnHandler = () => {
+    // 초대장 생성 스토어에 초대 장소명, ID 저장
     setCreateContents('officeName', selectPlaceName);
     setCreateContents('commonPlaceId', selectPlaceId);
     closeBottomSheet();

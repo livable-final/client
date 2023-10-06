@@ -1,6 +1,7 @@
 import { COMMON_BUTTON_COLORS } from '@/constants/common';
 import { ButtonColorProps, ButtonProps } from '@/types/common/button';
 import { css } from '@emotion/react';
+import theme from '@/styles/theme';
 
 function Button({ content, variant, isDisabled, onClick }: ButtonProps) {
   const variantData = COMMON_BUTTON_COLORS[variant];
@@ -19,18 +20,18 @@ function Button({ content, variant, isDisabled, onClick }: ButtonProps) {
 
 const buttonStyles = (variantData: ButtonColorProps) => css`
   display: flex;
-  cursor: pointer;
-  font-family: inherit;
   justify-content: center;
   align-items: center;
   width: 100%;
   min-width: 100px;
-  border-radius: 16px;
   padding: 16px 0;
-  font-size: 18px;
+  border: 1px solid ${variantData.color};
+  border-radius: 16px;
   background: ${variantData.background};
   color: ${variantData.color};
-  border: 1px solid ${variantData.color};
+  font: ${theme.font.subTitle.subTitle1_500};
+  cursor: pointer;
+  transition: ease 1300ms;
 
   &:disabled {
     pointer-events: none;
@@ -38,8 +39,12 @@ const buttonStyles = (variantData: ButtonColorProps) => css`
   }
 
   &:active {
-    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    transform: scale(0.95);
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.2) 100%
+      ),
+      ${theme.palette.primary};
   }
 `;
 

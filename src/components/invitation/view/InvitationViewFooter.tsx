@@ -1,16 +1,22 @@
-import theme from '@/styles/theme';
+import { Call } from '@/assets/icons';
 import { css } from '@emotion/react';
+import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
+import theme from '@/styles/theme';
 
 function InvitationViewFooter() {
+  const { footer } = INVITATION_VEIW_INFO_TEXTS;
+  const onClickCallBtnHandler = () => {
+    window.location.href = `tel:${18339092}`;
+  };
   return (
     <div css={invitationViewFooter}>
-      <div css={footerTitleStyles}>(주)리버블</div>
+      <div css={footerTitleStyles}>{footer.title}</div>
       <div css={infoStyles}>
-        <span>고객센터 : 1833-9092</span>
-        <span>사이트 : https://www.officener.com</span>
+        <span>{footer.call}</span>
+        <span>{footer.site}</span>
       </div>
-      <button type="button" css={buttonStyles}>
-        관리실 문의하기
+      <button type="button" onClick={onClickCallBtnHandler} css={buttonStyles}>
+        <div>{footer.btn}</div> <Call />
       </button>
     </div>
   );
@@ -38,7 +44,10 @@ const infoStyles = css`
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 16px;
-  font: ${theme.font.body.body3_400};
+  span {
+    font: ${theme.font.body.body3_400};
+    line-height: 21px;
+  }
 `;
 const buttonStyles = css`
   display: flex;
@@ -47,8 +56,10 @@ const buttonStyles = css`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  gap: 0 4px;
   font: ${theme.font.body.body3_500};
   color: ${theme.palette.white};
   background-color: ${theme.palette.greyscale.grey30};
+  line-height: 21px;
 `;
 export default InvitationViewFooter;

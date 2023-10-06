@@ -1,6 +1,6 @@
+import Icons from '@/components/common/Icons';
 import theme from '@/styles/theme';
-import useSaveStore from '@/stores/useSaveStore';
-import { Check, UnCheck } from '@/assets/icons';
+import useSaveStore from '@/stores/common/useSaveStore';
 import { CheckBoxProps } from '@/types/common/checkBox';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
@@ -27,11 +27,13 @@ function CheckBox({ text }: CheckBoxProps) {
     <div css={checkBoxContainerStyles(isSelect)}>
       <input id={text} type="checkbox" checked={isSelect} onChange={onChange} />
       <label htmlFor={text}>
-        {isSelect ? (
-          <Check css={btnImgStyles} />
-        ) : (
-          <UnCheck css={btnImgStyles} />
-        )}
+        <div css={iconWrapper}>
+          {isSelect ? (
+            <Icons icon="check" color={theme.palette.primary} />
+          ) : (
+            <Icons icon="check" color={theme.palette.greyscale.grey20} />
+          )}
+        </div>
         <p>{text}</p>
       </label>
     </div>
@@ -54,6 +56,7 @@ const checkBoxContainerStyles = (isSelect: boolean) => css`
     align-items: center;
 
     p {
+      font: ${theme.font.body.body1_400};
       color: ${isSelect
         ? theme.palette.primary
         : theme.palette.greyscale.grey40};
@@ -61,12 +64,8 @@ const checkBoxContainerStyles = (isSelect: boolean) => css`
   }
 `;
 
-const btnImgStyles = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const iconWrapper = css`
   width: 20px;
   height: 20px;
   margin-right: 4px;
-  flex-grow: 0;
 `;

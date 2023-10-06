@@ -1,11 +1,11 @@
 import theme from '@/styles/theme';
 import Icons from '@/components/common/Icons';
-import PlusBig from '@/assets/icons/Plus=big.svg';
+import { PlusBig } from '@/assets/icons';
 import { css } from '@emotion/react';
 import { AddBtnProps } from '@/types/common/add';
 import { COMMON_ICON_NAMES } from '@/constants/common';
 
-function Add({ isBlue = false, onClick }: AddBtnProps) {
+function Add({ isDisabled, isBlue = false, onClick }: AddBtnProps) {
   const { invitation } = COMMON_ICON_NAMES;
 
   return (
@@ -13,6 +13,7 @@ function Add({ isBlue = false, onClick }: AddBtnProps) {
       type="button"
       css={isBlue ? addBtnBlueStyles : addBtnGreyStyles}
       onClick={onClick}
+      disabled={isDisabled}
     >
       {isBlue ? (
         <div css={textWrapperStyles}>
@@ -65,8 +66,8 @@ const iconStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   margin-bottom: 2px;
 `;
 

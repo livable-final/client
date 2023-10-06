@@ -6,10 +6,13 @@ import Add from '@/components/common/Add';
 import Button from '@/components/common/Button';
 import NameTag from '@/components/common/NameTag';
 import AddressBook from '@/components/common/AddressBook';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
-import useInvitationEditStore from '@/stores/useInvitationEditStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useAlertStore from '@/stores/common/useAlertStore';
+import useInvitationCreateStore from '@/stores/invitaion/useInvitationCreateStore';
+import useInvitationEditStore from '@/stores/invitaion/useInvitationEditStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import { InvitationAddVisitorListProps } from '@/types/invitation/edit';
+import Alert from '@/components/common/Alert';
 
 function InvitationAddVisitorList({
   visitorsList,
@@ -17,21 +20,32 @@ function InvitationAddVisitorList({
   const [addVisitorName, setAddVisitorName] = useState('');
   const [addVisitorContact, setAddVisitorContact] = useState('');
   const { closeBottomSheet } = useBottomSheetStore();
+  const { alertState, openAlert } = useAlertStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
   const { editContents, setEditContents } = useInvitationEditStore();
+  const { nextComponent } = usePagesStore();
 
   // 방문자 삭제 버튼 핸들러
   const onClickDeleteVisitorHandler = (name: string) => {
-    const deletedVisitors = createContents.visitors?.filter(
-      (visitor) => visitor.name !== name,
-    );
-    setCreateContents('visitors', deletedVisitors);
+    if (createContents.visitors) {
+      const deletedVisitors = createContents.visitors?.filter(
+        (visitor) => visitor.name !== name,
+      );
+      setCreateContents('visitors', deletedVisitors);
+    }
+    if (editContents.visitors) {
+      const deletedVisitors = editContents.visitors?.filter(
+        (visitor) => visitor.name !== name,
+      );
+      setEditContents('visitors', deletedVisitors);
+    }
   };
 
   // 추가 사용자 이름 input handler
   const onChangeInputNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddVisitorName(e.target.value);
   };
+
   // 추가 사용자 연락처 input handler
   const onChangeInputContactHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -46,16 +60,19 @@ function InvitationAddVisitorList({
       name,
       contact,
     };
-    // 수정 페이지
-    if (editContents.visitors) {
-      setEditContents('visitors', [...editContents.visitors, newVisitorInfo]);
-    }
-    // 생성 페이지
-    if (visitorsList) {
-      setCreateContents('visitors', [
-        ...createContents.visitors,
-        newVisitorInfo,
-      ]);
+
+    if (nextComponent === 'InvitationInfoContainer') {
+      // 생성 페이지
+      if (visitorsList) {
+        setCreateContents('visitors', [
+          ...createContents.visitors,
+          newVisitorInfo,
+        ]);
+      }
+    } else if (nextComponent !== 'InvitationInfoContainer') {
+      if (editContents.visitors) {
+        setEditContents('visitors', [...editContents.visitors, newVisitorInfo]);
+      }
     }
     // input창 clear
     setAddVisitorName('');
@@ -64,7 +81,11 @@ function InvitationAddVisitorList({
 
   // + 버튼 클릭시 newVisotorList에 input값 추가
   const onClickAddHandler = () => {
-    newVisitorList(addVisitorName, addVisitorContact);
+    if (addVisitorName !== '' && addVisitorContact !== '') {
+      newVisitorList(addVisitorName, addVisitorContact);
+    } else {
+      openAlert('📢', '이름과 연락처를 모두 입력해 주세요.');
+    }
   };
 
   // 완료 버튼
@@ -95,12 +116,25 @@ function InvitationAddVisitorList({
         </div>
         <div css={visitorListContainerStyles}>
           <div css={newVisitorAddBtnStyles}>
-            <Add onClick={onClickAddHandler} />
+            {addVisitorName !== '' && addVisitorContact !== '' ? (
+              <Add onClick={onClickAddHandler} />
+            ) : (
+              <Add onClick={onClickAddHandler} isDisabled />
+            )}
           </div>
           <div css={newVisitorListStyles}>
             {/* 기존 visitorList */}
             {createContents.visitors &&
               createContents.visitors?.map((item) => (
+                <NameTag
+                  key={item.name}
+                  name={item.name}
+                  onClick={onClickDeleteVisitorHandler}
+                />
+              ))}
+            {nextComponent !== 'InvitationInfoContainer' &&
+              editContents.visitors &&
+              editContents.visitors?.map((item) => (
                 <NameTag
                   key={item.name}
                   name={item.name}
@@ -115,9 +149,11 @@ function InvitationAddVisitorList({
         variant="blue"
         onClick={onclickDoneBtnHandler}
       />
+      {alertState.isOpen && <Alert />}
     </div>
   );
 }
+
 const invitationEditVisitorAddStyles = css`
   display: flex;
   flex-direction: column;
@@ -141,7 +177,8 @@ const visitorAddInputContainerStyles = css`
 const visitorAddInputStyles = css`
   display: flex;
   border: none;
-  border-bottom: 2px solid ${theme.palette.greyscale.grey10};
+  border-radius: 0;
+  border-bottom: 1px solid ${theme.palette.greyscale.grey10};
 `;
 const visitorcontactaddBtnStyles = css`
   display: flex;
@@ -162,7 +199,7 @@ const newVisitorListStyles = css`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 0 8px;
+  gap: 9px;
   margin-bottom: 16px;
 `;
 export default InvitationAddVisitorList;

@@ -4,23 +4,25 @@ import {
   TimeSelectorColorProps,
 } from '@/types/invitation/create';
 import { css } from '@emotion/react';
-import { useState } from 'react';
-import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
+import React, { useState } from 'react';
+import useInvitaionTimeSelectorStore from '@/stores/invitaion/useInvitationTimeSelectorStore';
 import theme from '@/styles/theme';
 
 function TimeSelector({ content, status }: TimeSelectorProps) {
+  // content "00:00" 문자열
+
   // 토글을 통해 가변할 수 있는 variant state 관리
   const [varientState, setVarientState] = useState(status);
   const [time] = useState(content);
 
   const variantData = COMMON_TIME_SELECTOR[varientState];
 
-  const { setSelectTime, clearSelectTime } = useTimeSelectorStore();
+  const { setSelectTime } = useInvitaionTimeSelectorStore();
   const { abled, enabled, disabled } = COMMON_TIME_SELECTOR;
 
   const onClickHandler = () => {
-    clearSelectTime();
     // 선택시 버튼 상태 변경
+    // abled 선택 가능 / enabled 선택 / disabled 선택 불가
     if (varientState === abled.status) {
       setVarientState(enabled.status);
     } else if (varientState === enabled.status) {
@@ -71,4 +73,4 @@ const timeSelectorStyles = (variantData: TimeSelectorColorProps) => css`
   }
 `;
 
-export default TimeSelector;
+export default React.memo(TimeSelector);

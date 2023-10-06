@@ -49,6 +49,7 @@ const titleStyles = (
   lineHeight?: string,
   margin?: string,
 ) => css`
+  background-color: ${theme.palette.white};
   font: ${fontStyle};
   font-size: ${fontSize};
   line-height: ${lineHeight};

@@ -31,9 +31,9 @@ const wrapperStyles = (hasBnb?: boolean) => css`
 `;
 
 const topButtonStyles = css`
-  border: 16px;
-  width: 44px;
-  height: 44px;
+  padding: 15px;
+  width: 54px;
+  height: 54px;
   border-radius: 100px;
   background-color: ${theme.palette.white};
   box-shadow:

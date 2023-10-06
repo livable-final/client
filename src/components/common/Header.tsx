@@ -5,7 +5,7 @@ import { Back } from '@/assets/icons';
 import mq from '@/utils/mediaquery';
 import theme from '@/styles/theme';
 import Icons from '@/components/common/Icons';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 
 function Header({
   title,
@@ -89,8 +89,10 @@ const headerStyles = (
 `;
 
 const titleStyles = css`
-  font: ${theme.font.subTitle.subTitle1_600};
   justify-self: center;
+  span {
+    font: ${theme.font.subTitle.subTitle1_600};
+  }
 `;
 
 const iconStyles = (type: string) => css`

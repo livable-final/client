@@ -1,10 +1,10 @@
 import theme from '@/styles/theme';
+import { InvitationVisitTipProps } from '@/types/invitation/view';
 import { css } from '@emotion/react';
 
-function InvitationVisitTip() {
-  // 추후 API값으로 변경예정
-  const VisitTipText =
-    '1층 우측 계단 앞 엘리베이터를 이용하면 빠르게 올라올 수 있어요!';
+function InvitationVisitTip({ invitationTip }: InvitationVisitTipProps) {
+  const VisitTipText = invitationTip;
+
   return (
     <div>
       <p>방문 TIP</p>

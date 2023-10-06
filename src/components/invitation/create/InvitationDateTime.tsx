@@ -6,12 +6,14 @@ import Button from '@/components/common/Button';
 import Alert from '@/components/common/Alert';
 import InvitationSelectTime from '@/components/invitation/create/InvitationSelectTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useAlertStore from '@/stores/useAlertStore';
-import useToggleStore from '@/stores/useToggleStore';
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useAlertStore from '@/stores/common/useAlertStore';
+import useToggleStore from '@/stores/common/useToggleStore';
+import useInvitaionTimeSelectorStore from '@/stores/invitaion/useInvitationTimeSelectorStore';
+import useInvitationCreateStore from '@/stores/invitaion/useInvitationCreateStore';
 import getFormatDate from '@/utils/getFormatDate';
 import getCommonTimes from '@/utils/getCommonTimeList';
+import parseDate from '@/utils/parseDate';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { addMonths } from 'date-fns';
@@ -20,19 +22,16 @@ import { useState, useEffect } from 'react';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 import { getInvitationTimeList } from '@/pages/api/invitation/createRequests';
 import { GetInvitationTimeListData } from '@/types/invitation/api';
-import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
-import parseDate from '@/utils/parseDate';
 
 function InvitationDateTime() {
-  const { title, button }: InvitationCreateTexts = CREATE_TEXTS;
+  const { title, button, error }: InvitationCreateTexts = CREATE_TEXTS;
   const { closeBottomSheet } = useBottomSheetStore();
   const { alertState, openAlert } = useAlertStore();
   const { isOn, onToggle, offToggle } = useToggleStore();
-  const { selectTime } = useTimeSelectorStore();
+  const { selectTime, clearSelectTime } = useInvitaionTimeSelectorStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
 
   // Thu Oct 26 2023 00:00:00 GMT+0900 (한국 표준시)
-  // 임시로 12일로 설정해둔 상태 -> 추후 new Date()로 변경
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [isUpdated, setIsUpdated] = useState<boolean>(false);
@@ -55,30 +54,34 @@ function InvitationDateTime() {
           });
           setFetchData(response?.data);
         }
-      } catch (error) {
-        openAlert('ERROR!', '예약 가능 시간 API에 문제가 생겼습니다.');
+      } catch (err: unknown) {
+        openAlert('🚨', error.timeAPI);
       }
     };
-
     fetchGetTimeList();
-  }, [
-    createContents.commonPlaceId,
-    startDate,
-    endDate,
-    openAlert,
-    isUpdated,
-    offToggle,
-    onToggle,
-  ]);
+  }, [createContents.commonPlaceId, startDate, endDate, isUpdated]);
 
+  // API호출 응답값인 fetchData가 바뀔 때마다 공통된 시간 출력
+  // commonTimes ['15:00', '15:30', '17:00', '17:30']
   useEffect(() => {
     if (fetchData) {
-      // 기존 fetchData 중에서 공통된 시간만 출력
-      // ['15:00:00', '15:30:00', '17:00:00', '17:30:00']
-      const common = getCommonTimes(fetchData);
+      const common = getCommonTimes(startDate, endDate, fetchData);
       setCommonTimes([...common]);
     }
+    // 날짜를 다시 지정했으므로 기존 선택했던 시간 배열 초기화
+    clearSelectTime();
   }, [fetchData]);
+
+  // commonTimes.Length(가능한 시간)에 따라 종일 활성화 여부
+  // 가능한 시간이 18개(09~18시)가 아닌 경우에는 토글 off하여 시간 선택 유도
+  useEffect(() => {
+    if (commonTimes.length !== 18) {
+      // 타임 셀렉터 렌더링 이슈로 임시 setTimeout 함수 지정
+      setTimeout(() => offToggle(), 200);
+    } else {
+      onToggle();
+    }
+  }, [commonTimes]);
 
   // startDate나 endDate가 변경될 때 isUpdated === true
   useEffect(() => {
@@ -106,11 +109,13 @@ function InvitationDateTime() {
       // 토글 버튼 비활성화 = 시간 선택했을 때
       setCreateContents(
         'startDate',
-        `${getFormatDate(startDate)}T${selectTime}:00`,
+        `${getFormatDate(startDate)}T${selectTime[0]}:00`,
       );
       setCreateContents(
         'endDate',
-        `${getFormatDate(endDate)}T${parseDate(selectTime as string)}:00`,
+        `${getFormatDate(endDate)}T${parseDate(
+          selectTime[selectTime.length - 1] as string,
+        )}:00`,
       );
     }
 
@@ -125,7 +130,7 @@ function InvitationDateTime() {
           <DatePicker
             locale={ko}
             dateFormat="yyyy-mm-dd"
-            dateFormatCalendar="yyyy.MM"
+            dateFormatCalendar="yyyy.MM" // 데이트픽커 현재달 표기 포맷 (2023.10)
             calendarClassName="calendar"
             onChange={onChange}
             minDate={new Date()}
@@ -195,6 +200,11 @@ const buttonWrapperStyles = css`
   max-width: 360px;
   padding: 0 20px 20px;
   margin: 0 -6px 0;
+  background-image: linear-gradient(
+    to top,
+    ${theme.palette.white} 70%,
+    transparent 30%
+  );
 
   ${mq.md} {
     min-width: 361px;
@@ -273,20 +283,20 @@ const calendarStyles = css`
 
       .react-datepicker__day--keyboard-selected {
         // endDate + 각 달의 같은 날짜
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
       }
       .react-datepicker__day--in-range {
         // startDate ~ endDate 범위 스타일
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
       }
       .react-datepicker__day--in-selecting-range {
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
-        border-radius: 45%;
       }
       .react-datepicker__day--in-selecting-range:not(
           .react-datepicker__day--in-range,
@@ -296,7 +306,7 @@ const calendarStyles = css`
 
         ) {
         // startDate 선택 후 endDate까지의 range 스타일
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
         opacity: 0.8;
@@ -309,15 +319,14 @@ const calendarStyles = css`
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 49px;
+      width: 32px;
       height: 32px;
       color: ${theme.palette.greyscale.grey70};
 
       &:hover {
-        border-radius: 45%;
+        border-radius: 50%;
         background-color: ${theme.palette.primary};
         color: ${theme.palette.white};
-        /* opacity: 0.3; */
       }
     }
     // 날짜를 선택했을 때 현재일 스타일 (선택 전에는 적용X)

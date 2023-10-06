@@ -19,11 +19,16 @@ export interface InvitationCreateTexts {
     [key: string]: string;
   };
   modal: {
-    [key: string]:
-      | {
-          [key: string]: string;
-        }
-      | string;
+    send: {
+      [key: string]: string;
+    };
+    resend: {
+      [key: string]: string;
+    };
+    btn: string;
+  };
+  error: {
+    [key: string]: string;
   };
   checkbox: string;
   radioBtn: string;
@@ -35,16 +40,21 @@ export interface InvitationCreateTexts {
 // ****************** 초대 목적 ****************** //
 // ****************** Purpose ****************** //
 // Invitation Purpose
-export interface CategoryInvitation {
-  [key: string]: {
-    [key: string]: CommonCategory;
-  };
+export interface InvitationCategory {
+  [key: string]: CommonCategory;
 }
 
 // 카테고리
 export interface CommonCategory {
   icon: string;
   title: string;
+}
+
+// ****************** 초대 목적 ****************** //
+// ****************** Purpose ****************** //
+// Invitation Preview
+export interface InvitationPreviewProps {
+  onClick: () => void;
 }
 
 // ****************** 방문자 ********************* //
@@ -104,6 +114,10 @@ export interface TimeSlot {
 export interface TimeSelectorProps {
   content: string | JSX.Element;
   status: string;
+  // timeSlot: TimeSlot[][];
+  // selectedStartTime: string;
+  // selectedEndTime: string;
+  // onTimeSelectorClick: (time: string, status: string) => void;
 }
 
 export interface TimeSelectorColorProps {

@@ -1,31 +1,39 @@
 import Header from '@/components/common/Header';
 import InvitationCreateForm from '@/components/invitation/InvitationCreateForm';
-import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
-import useViewStore from '@/stores/usePagesStore';
-import useModalStore from '@/stores/useModalStore';
+import InvitationPreview from '@/components/invitation/create/InvitationPreview';
+import useInvitationHeaderTitleStore from '@/stores/invitaion/useInvitationHeaderTitleStore';
+import useViewStore from '@/stores/common/usePagesStore';
+import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import mq from '@/utils/mediaquery';
+import { useState } from 'react';
 import { css } from '@emotion/react';
-import Modal from '@/components/common/Modal';
+import { InvitationCreateTexts } from '@/types/invitation/create';
 
 function Create() {
   const { nextComponent } = useViewStore();
   const { headerTitle } = useInvitationHeaderTitleStore();
-  const { modalState, openModal } = useModalStore();
+  const { header }: InvitationCreateTexts = CREATE_TEXTS;
+
+  // 예시 컴포넌트 오픈 상태
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  // 예시 버튼 클릭 핸들러
+  const onClick = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div css={createContainerStyles}>
-      <div css={headerContainerStyles}>
+      <div css={headerContainerStyles(nextComponent)}>
         <Header
           title={headerTitle}
           type={nextComponent === '' ? 'text' : ''}
-          text="예시"
-          onClick={() =>
-            openModal('test', '방문증 미리보기가 구현될 예정이에요!')
-          }
+          text={header.preview}
+          onClick={onClick}
         />
       </div>
-      {modalState.isOpen && <Modal isAlert />}
       <InvitationCreateForm />
+      {isOpen && <InvitationPreview onClick={onClick} />}
     </div>
   );
 }
@@ -50,9 +58,12 @@ const createContainerStyles = css`
   }
 `;
 
-const headerContainerStyles = css`
+const headerContainerStyles = (nextComponent: string) => css`
   position: sticky;
   top: 0;
+  display: ${nextComponent === 'InvitationDoneContainer'
+    ? 'none' // 초대장 전송 완료 컴포넌트에서 헤더 미사용
+    : 'block'};
   width: 100%;
   z-index: 1;
 `;

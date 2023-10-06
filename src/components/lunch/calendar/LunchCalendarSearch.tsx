@@ -9,18 +9,24 @@ import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
 import LunchCalendarListItem from '@/components/lunch/calendar/LunchCalendarListItem';
-import usePagesStore from '@/stores/usePagesStore';
-import useWriteStore from '@/stores/useWriteStore';
-import useSaveStore from '@/stores/useSaveStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
+import useSaveStore from '@/stores/common/useSaveStore';
 import keyDate from '@/utils/key';
+import Alert from '@/components/common/Alert';
+import useAlertStore from '@/stores/common/useAlertStore';
+import { ErrorProps } from '@/types/common/response';
 
 function LunchCalendarSearch() {
   const [searchData, setSearchData] = useState<RestaurantsData[]>([]);
   const [showSearch, setShowSearch] = useState(false);
   const [keyword, setKeyword] = useState('');
   const { setNextComponent, goBack } = usePagesStore();
-  const setRestaurant = useWriteStore((state) => state.setRestaurant);
-  const keywordData = useSaveStore((state) => state.keyword);
+  const { alertState, openAlert } = useAlertStore();
+  const setRestaurant = useLunchWriteStore((state) => state.setRestaurant);
+  const keywordList = useSaveStore((state) => state.keywordList);
+  const setKeywordList = useSaveStore((state) => state.setKeywordList);
+
   const key = keyDate();
 
   const { calendar } = COMPONENT_NAME.lunch;
@@ -38,8 +44,10 @@ function LunchCalendarSearch() {
       const res = await getRestaurants(keyword);
       setSearchData(res.data);
       setShowSearch(true);
+      setKeywordList({ id: key, text: keyword });
     } catch (err) {
-      //  검색 오류 예외 처리
+      const error = err as ErrorProps;
+      openAlert('📢', error.message || '검색 오류');
     }
   };
   const onClickBtnHandler = (
@@ -61,8 +69,24 @@ function LunchCalendarSearch() {
     setKeyword(e.target.value);
   };
 
+  const onClickKeywordHandler = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    text: string,
+  ) => {
+    e.preventDefault();
+    try {
+      const res = await getRestaurants(text);
+      setSearchData(res.data);
+      setShowSearch(true);
+    } catch (err) {
+      const error = err as ErrorProps;
+      openAlert('📢', error.message || '검색 오류');
+    }
+  };
+
   return (
     <section>
+      {alertState.isOpen && <Alert />}
       <Header title={title.search} onClick={onClickHeaderHandler} />
       <form css={inputStyles} onSubmit={onSubmitHandler}>
         <Input variant="search" value={keyword} onChange={onChangeHandler} />
@@ -75,11 +99,13 @@ function LunchCalendarSearch() {
         <div css={textStyles}>
           <span>{subTitle.recentSearches}</span>
           <div>
-            {keywordData.map((value) => (
+            {keywordList.map((value) => (
               <LunchCalendarListItem
-                key={key}
+                key={value.id}
+                id={value.id}
                 type={listItem.type1}
-                content={value}
+                content={value.text}
+                onClick={(e) => onClickKeywordHandler(e, value.text)}
               />
             ))}
           </div>
@@ -99,7 +125,7 @@ function LunchCalendarSearch() {
                   content={item.restaurantName}
                   category={item.restaurantCategory}
                   time={item.estimatedTime}
-                  imageUrl="/ruppy.png"
+                  imageUrl={item.thumbnailImageUrl}
                   onClick={(e) =>
                     onClickBtnHandler(e, item.restaurantId, item.restaurantName)
                   }

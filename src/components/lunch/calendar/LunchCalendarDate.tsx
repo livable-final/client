@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 import { DateDish } from '@/assets/icons';
-import useCalendarStore from '@/stores/useCalendarStore';
+import useLunchCalendarStore from '@/stores/lunch/useLunchCalendarStore';
 import LunchCalendarDateContent from '@/components/lunch/calendar/LunchCalendarDateContent';
 
 function CalendarTileContent({ date, view }: { date: Date; view: string }) {
-  const { reviewDetails } = useCalendarStore();
+  const { reviewDetails } = useLunchCalendarStore();
 
   if (
     view === 'month' &&

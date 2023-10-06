@@ -1,9 +1,9 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { InputColorProps, InputProps } from '@/types/common/input';
 import { COMMON_INPUT_COLORS } from '@/constants/common';
 import { Location } from '@/assets/icons';
 import ErrorMessage from '@/components/common/ErrorMessage';
+import theme from '@/styles/theme';
 
 function Input({
   inputIcon,
@@ -18,6 +18,7 @@ function Input({
   value,
   onChange,
   name,
+  type,
 }: InputProps) {
   const variantData = COMMON_INPUT_COLORS[variant];
 
@@ -36,11 +37,11 @@ function Input({
               onChange={onChange}
               cols={30}
               rows={row}
-              css={inputTextareaStyles(variantData)}
+              css={inputTextareaStyles(variantData, type)}
               disabled={isDisabled}
               maxLength={maxLength}
             />
-            <div>
+            <div css={maxLengthStyles}>
               {value.length}/{maxLength + 1}
             </div>
           </div>
@@ -129,16 +130,26 @@ const inputStyles = () => css`
   border-radius: 12px;
   height: 58px;
   min-width: 100px;
-  font-size: 1rem;
+  font: ${theme.font.subTitle.subTitle2_400};
 `;
 
-const inputTextareaStyles = (variantData: InputColorProps) => css`
-  margin: 17px 16px;
+const inputTextareaStyles = (
+  variantData: InputColorProps,
+  type: string | undefined,
+) => css`
+  height: ${type === 'review' ? '96px' : 'none'};
+  margin: ${type === 'review' ? '12px 16px' : '16px'};
   border: none;
   background-color: ${variantData.backgroundColor};
   font: ${variantData.font};
   font-size: 1rem;
   resize: none;
+  letter-spacing: 0;
+  line-height: 24px;
+`;
+
+const maxLengthStyles = css`
+  color: ${theme.palette.greyscale.grey30};
 `;
 
 export default Input;

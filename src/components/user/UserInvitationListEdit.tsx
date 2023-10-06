@@ -8,17 +8,19 @@ import { UserInvitationListEditProps } from '@/types/invitation/edit';
 import { getInvitationDeleteList } from '@/pages/api/invitation/editRequests';
 import theme from '@/styles/theme';
 import Modal from '@/components/common/Modal';
-import useModalStore from '@/stores/useModalStore';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useModalStore from '@/stores/common/useModalStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
 
 function UserInvitationListEdit({ id }: UserInvitationListEditProps) {
   const router = useRouter();
   const { title, confirm } = USER_INVITATIONLIST_BUTTON_TEXT;
-  const { modalState, openModal } = useModalStore();
+  const { modalState, openModal, closeModal } = useModalStore();
   const { closeBottomSheet } = useBottomSheetStore();
 
   const onclickModalHandler = () => {
     getInvitationDeleteList(id as string);
+    closeModal();
+    closeBottomSheet();
   };
 
   const onclickdeleteHandler = () => {

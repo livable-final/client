@@ -5,8 +5,12 @@ import {
   getInvitationEditList,
   getInvitationListItem,
 } from '@/pages/api/invitation/editRequests';
-import { Clock, Calendar, Location } from '@/assets/icons';
 import { InvitationEditProps } from '@/types/invitation/edit';
+import {
+  GetInvitationListItemData,
+  InvitationListItemVisitor,
+} from '@/types/invitation/api';
+import { Clock, Calendar, Location } from '@/assets/icons';
 import theme from '@/styles/theme';
 import useFetch from '@/hooks/useFetch';
 import Add from '@/components/common/Add';
@@ -16,21 +20,35 @@ import Header from '@/components/common/Header';
 import NameTag from '@/components/common/NameTag';
 import CheckBox from '@/components/common/CheckBox';
 import BottomSheet from '@/components/common/BottomSheet';
-import changeVisitPurpose from '@/utils/changeVisitPurpose';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import InvitationEditvisitorAdd from '@/components/invitation/edit/InvitationAddVisitorList';
-import useInvitationEditStore from '@/stores/useInvitationEditStore';
-import { GetInvitationListItemData } from '@/types/invitation/api';
+import changeVisitPurpose from '@/utils/changeVisitPurpose';
+import useViewStore from '@/stores/common/usePagesStore';
+import useModalStore from '@/stores/common/useModalStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useInvitationEditStore from '@/stores/invitaion/useInvitationEditStore';
+import Modal from '@/components/common/Modal';
 
 function InvitationEdit({ id }: InvitationEditProps) {
+  const { setNextComponent } = useViewStore();
+  const { modalState, openModal, closeModal } = useModalStore();
   const { editContents, setEditContents } = useInvitationEditStore();
   const { openBottomSheet } = useBottomSheetStore();
-  const [descriptionInputValue, setDescriptionInputValue] = useState('');
+  const [newDate, setNewDAte] = useState('');
+  const [invitedList, setInvitedList] = useState<InvitationListItemVisitor[]>(
+    [],
+  );
 
   const { response } = useFetch({
     fetchFn: () => getInvitationListItem(id),
   });
   const data = response && response?.data;
+
+  useEffect(() => {
+    const initInvitedListHandler = () => {
+      setInvitedList(data && data?.visitors);
+    };
+    initInvitedListHandler();
+  }, [data?.visitors]);
 
   const setInitStateHandler = (
     startDate: string,
@@ -38,13 +56,13 @@ function InvitationEdit({ id }: InvitationEditProps) {
     initData?: GetInvitationListItemData,
   ) => {
     setEditContents('commonPlaceId', initData?.commonPlaceId);
-    setEditContents('description', initData?.description);
+    setEditContents(
+      'description',
+      editContents.description || initData?.description,
+    );
     setEditContents('startDate', startDate);
     setEditContents('endDate', endDate);
   };
-  useEffect(() => {
-    setInitStateHandler(startDate, endDate, data);
-  }, []);
 
   // 수정용 일시 데이터로 변환
   const editStartDateFometer = (date?: string, time?: string) => {
@@ -65,21 +83,40 @@ function InvitationEdit({ id }: InvitationEditProps) {
   };
   const timeValue = timeValueFormeter(data?.startTime, data?.endTime);
 
-  // 이미 초대된 방문자 목록
-  const invitedList = data?.visitors;
-
   // 방문 목적 영한 변환
   const purpose = changeVisitPurpose(data?.purpose);
 
-  const onClickHandler = () => {
+  // 발송 완료 방문자 목록
+  const resendList = invitedList?.map((item) => {
+    const { visitorId, ...newItem } = item;
+    return newItem;
+  });
+
+  const resendInvitatuion = () => {
+    if (editContents && editContents?.visitors?.length === 0) {
+      setEditContents('visitors', [...editContents.visitors, ...resendList]);
+    }
+  };
+
+  // 초대장 다시 보내기 버튼 클릭시
+  const onClickModalHandler = () => {
     getInvitationEditList(editContents, id as string);
+    resendInvitatuion();
+    closeModal();
+    setNextComponent('InvitationDoneContainer');
+  };
+  const onClickHandler = () => {
+    openModal(
+      `${INVITATION_EDIT_TEXTS.modal.title}`,
+      `${INVITATION_EDIT_TEXTS.modal.content}`,
+    );
+    setInitStateHandler(startDate, endDate, data);
   };
   const onChangeEditTextHandler = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    setDescriptionInputValue(e.target.value);
     setEditContents('description', e.target.value);
   };
 
@@ -88,6 +125,22 @@ function InvitationEdit({ id }: InvitationEditProps) {
       <InvitationEditvisitorAdd isEdit visitorsList={data?.visitors} />,
     );
   };
+  // 태그 삭제 버튼 클릭시
+  const onClickDeleteHandler = async (name: string) => {
+    if (editContents) {
+      const deletedVisitors = editContents.visitors?.filter(
+        (visitor) => visitor.name !== name,
+      );
+      setEditContents('visitors', deletedVisitors);
+    }
+    if (invitedList) {
+      const deleteinvitedVisitList = invitedList?.filter(
+        (visitor) => visitor.name !== name,
+      );
+      setInvitedList(deleteinvitedVisitList);
+    }
+  };
+
   return (
     <div css={invitationEditStyles}>
       <Header
@@ -103,36 +156,42 @@ function InvitationEdit({ id }: InvitationEditProps) {
             <div css={iconStyles}>
               <Location />
             </div>
-            <input type="text" value={data?.officeName} readOnly />
+            <input type="text" defaultValue={data?.officeName} readOnly />
           </div>
           <div css={dateTimeContainerStyles}>
             <div css={dateTimeStyles}>
               <div css={iconStyles}>
                 <Calendar />
               </div>
-              <input
-                type="text"
-                value={dateValue}
-                readOnly={purpose === '면접' && true}
-              />
+              {purpose === '면접' ? (
+                <input
+                  type="text"
+                  value={newDate}
+                  onChange={(e) => {
+                    setNewDAte(e.target.value);
+                  }}
+                />
+              ) : (
+                <input type="text" value={dateValue} readOnly />
+              )}
             </div>
             <div css={dateTimeStyles}>
               <div css={iconStyles}>
                 <Clock />
               </div>
-              <input
-                type="text"
-                value={timeValue}
-                readOnly={purpose === '면접' && true}
-              />
+
+              {purpose === '면접' ? (
+                <input type="text" value={timeValue} />
+              ) : (
+                <input type="text" value={timeValue} readOnly />
+              )}
             </div>
           </div>
           <Input
             textarea
             variant="default"
-            placeholder={data?.description}
             maxLength={299}
-            value={descriptionInputValue}
+            value={editContents.description || data?.description || ''}
             onChange={onChangeEditTextHandler}
           />
           <CheckBox text="이 메세지를 다음에도 사용" />
@@ -145,7 +204,7 @@ function InvitationEdit({ id }: InvitationEditProps) {
                 <NameTag
                   key={item.contact}
                   name={item.name}
-                  onClick={onClickHandler}
+                  onClick={onClickDeleteHandler}
                 />
               ))}
           </div>
@@ -155,7 +214,7 @@ function InvitationEdit({ id }: InvitationEditProps) {
                 <NameTag
                   key={item.visitorId}
                   name={item.name}
-                  onClick={onClickHandler}
+                  onClick={onClickDeleteHandler}
                   isInvited
                 />
               ))}
@@ -170,6 +229,9 @@ function InvitationEdit({ id }: InvitationEditProps) {
           onClick={onClickHandler}
         />
       </div>
+      {modalState.isOpen && (
+        <Modal content="전송하기" onClick={onClickModalHandler} />
+      )}
     </div>
   );
 }
@@ -196,7 +258,7 @@ const officeInfoContainerStyles = css`
   display: flex;
   align-items: center;
   padding: 0 16px;
-  border: 2px solid ${theme.palette.greyscale.grey10};
+  border: 1px solid ${theme.palette.greyscale.grey10};
   border-radius: 12px;
   color: ${theme.palette.greyscale.grey30};
   input {
@@ -206,7 +268,7 @@ const officeInfoContainerStyles = css`
 const dateTimeContainerStyles = css`
   display: flex;
   flex-direction: column;
-  border: 2px solid ${theme.palette.greyscale.grey10};
+  border: 1px solid ${theme.palette.greyscale.grey10};
   border-radius: 12px;
   padding: 0 16px;
   input {

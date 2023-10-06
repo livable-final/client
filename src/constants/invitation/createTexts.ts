@@ -7,6 +7,7 @@ const CREATE_TEXTS = {
     seminar: '세미나 초대',
     as: 'AS/점검 초대',
     etc: '방문자 초대',
+    preview: '예시',
   },
   title: {
     purpose: '방문증을 만드는 이유는 무엇인가요?',
@@ -53,6 +54,9 @@ const CREATE_TEXTS = {
       content: '초대장을 이대로 수정하고 전송할까요?',
     },
     btn: '전송하기',
+  },
+  error: {
+    timeAPI: '예약 가능 시간 API에 문제가 생겼습니다.',
   },
   checkbox: '이 메세지를 다음에도 사용',
   radioBtn: '기타 (직접입력)',

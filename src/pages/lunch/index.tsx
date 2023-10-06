@@ -6,7 +6,7 @@ import LunchMainContents from '@/components/lunch/LunchMainContents';
 import LunchReviewsByRanking from '@/components/lunch/review/LunchReviewsByRanking';
 import COMPONENT_NAME from '@/constants/common/pages';
 import { HOME_TEXTS } from '@/constants/home/homeTexts';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 
@@ -37,7 +37,7 @@ function LunchHome() {
 }
 
 const containerStyles = css`
-  margin: 0 -16px 90px;
+  margin: 0 -16px env(safe-area-inset-bottom);
   background: ${theme.palette.background.home};
 `;
 

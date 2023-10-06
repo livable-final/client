@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
 
 function BottomSheet() {
   const { bottomSheetState, closeBottomSheet } = useBottomSheetStore();
@@ -52,7 +52,7 @@ const containerStyles = (isOpen: boolean) => css`
   border-radius: 20px 20px 0 0;
   width: 100%;
   max-width: 1024px;
-  max-height: 95vh;
+  max-height: 90vh;
   height: auto;
   background-color: ${theme.palette.white};
   animation: ${isOpen

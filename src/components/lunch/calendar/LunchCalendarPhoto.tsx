@@ -3,12 +3,12 @@ import theme from '@/styles/theme';
 import { useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import { Camera, XSBlack } from '@/assets/icons';
-import useWriteStore from '@/stores/useWriteStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
 
 function LunchCalendarPhoto() {
   const [previews, setPreviews] = useState<string[]>([]);
-  const imageFiles = useWriteStore((state) => state.imageFiles);
-  const setImagefiles = useWriteStore((state) => state.setImageFiles);
+  const imageFiles = useLunchWriteStore((state) => state.imageFiles);
+  const setImagefiles = useLunchWriteStore((state) => state.setImageFiles);
   const fileInput = useRef<HTMLInputElement>(null);
 
   // ref 클릭
@@ -61,7 +61,7 @@ function LunchCalendarPhoto() {
     <section css={photoListStyles}>
       <button type="button" onClick={onClickBtnHandler} css={photoStyles}>
         <Camera />
-        <p>0/5</p>
+        <p>{previews.length}/5</p>
       </button>
       <input
         multiple
@@ -98,6 +98,9 @@ const photoListStyles = css`
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  p {
+    font: ${theme.font.body.body4};
+  }
 
   li {
     position: relative;

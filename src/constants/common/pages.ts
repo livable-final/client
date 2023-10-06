@@ -1,10 +1,10 @@
 const COMPONENT_NAME = {
   invitation: {
     create: {
-      visiors: 'InvitationVisitorsContainer',
+      purpose: 'InvitationPurposeContainer',
+      visitors: 'InvitationVisitorsContainer',
       info: 'InvitationInfoContainer',
       done: 'InvitationDoneContainer',
-      purpose: 'InvitationPurposeContainer',
     },
     view: {},
   },

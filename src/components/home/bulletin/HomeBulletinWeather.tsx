@@ -5,7 +5,7 @@ import Icons from '@/components/common/Icons';
 import getWeatherIcon from '@/utils/getWeatherIcon';
 import { useQuery } from '@tanstack/react-query';
 import getCelsius from '@/utils/getCelsius';
-import { BeatLoader } from 'react-spinners';
+import Loading from '@/components/common/Loading';
 
 function HomeBulletinWeather() {
   const { data, isError, error, isLoading } = useQuery(
@@ -19,7 +19,7 @@ function HomeBulletinWeather() {
 
   // TOFIXED: 에러용 단순 모달 필요
   if (isError) return <div>{error?.toString()}</div>;
-  if (isLoading) return <BeatLoader color={theme.palette.primary} />;
+  if (isLoading) return <Loading />;
 
   const weatherId = data?.weather[0].icon;
   const weatherTemp = data?.main.temp;

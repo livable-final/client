@@ -2,26 +2,43 @@ import Image from 'next/image';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import { lockPressed, unLock } from '@/assets/images';
-import useRouletteStore from '@/stores/useRouletteStore';
+import useLunchRouletteStore from '@/stores/lunch/useLunchRouletteStore';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
 import { RouletteButtonProps } from '@/types/lunch/roulette';
 
 // 룰렛 잠금 버튼 렌딩 컴포넌트
 function LunchRouletteLockBtn({ onClick }: RouletteButtonProps) {
   const { alt } = LUNCH_ROULETTE_CONSTANTS;
-  const { isLocked, isAgain, isOperated } = useRouletteStore();
+  const { isLocked, isAgain, isOperated } = useLunchRouletteStore();
 
   const renderBtn = () => {
     // 최초 룰렛 가동이 아닌 재가동일 경우
     if (isAgain) {
       return isLocked ? ( // 카테고리가 고정인 경우
-        <Image src={lockPressed} alt={alt.lock} fill sizes="100vw" />
+        <Image
+          src={lockPressed}
+          alt={alt.lock}
+          sizes="(min-width: 360px) 100vw"
+          fill
+        />
       ) : (
-        <Image src={unLock} alt={alt.lock} fill sizes="100vw" />
+        <Image
+          src={unLock}
+          alt={alt.lock}
+          sizes="(min-width: 360px) 100vw"
+          fill
+        />
       );
     }
     // 카테고리가 고정이면서 재가동일 경우
-    return <Image src={unLock} alt={alt.lock} fill sizes="100vw" />;
+    return (
+      <Image
+        src={unLock}
+        alt={alt.lock}
+        sizes="(min-width: 360px) 100vw"
+        fill
+      />
+    );
   };
 
   return (

@@ -4,8 +4,8 @@ import Calendar from 'react-calendar';
 import dayjs from 'dayjs';
 import { css } from '@emotion/react';
 import { RightSmall, LeftSmall } from '@/assets/icons';
-import useCalendarStore from '@/stores/useCalendarStore';
-import useAlertStore from '@/stores/useAlertStore';
+import useLunchCalendarStore from '@/stores/lunch/useLunchCalendarStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import LunchCalendarDate from '@/components/lunch/calendar/LunchCalendarDate';
 import { getReviewDetailsData } from '@/pages/api/lunch/calendarRequests';
 import { ErrorProps } from '@/types/common/response';
@@ -13,7 +13,7 @@ import { ErrorProps } from '@/types/common/response';
 function LunchCalendarForm() {
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
-  const { setReviewDetails } = useCalendarStore();
+  const { setReviewDetails } = useLunchCalendarStore();
   const { openAlert } = useAlertStore();
 
   useEffect(() => {
@@ -70,26 +70,29 @@ function LunchCalendarForm() {
 }
 
 const CalendarStyles = css`
-  margin: 12px 0 20px;
+  padding: 12px 0 20px;
 
-  .react-calendar {
-    width: 350px;
+  &.react-calendar {
     max-width: 100%;
-    background: white;
+    background-color: ${theme.palette.white};
+
   }
 
   .react-calendar--doubleView {
     width: 700px;
+
   }
 
   .react-calendar--doubleView .react-calendar__viewContainer {
     display: flex;
     margin: -0.5em;
+
   }
 
   .react-calendar--doubleView .react-calendar__viewContainer > * {
     width: 50%;
     margin: 0.5em;
+
   }
 
   .react-calendar,
@@ -99,6 +102,7 @@ const CalendarStyles = css`
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    background-color: ${theme.palette.white};
   }
 
   .react-calendar button {
@@ -115,6 +119,10 @@ const CalendarStyles = css`
     display: flex;
     height: 44px;
     margin-bottom: 1em;
+  }
+  .react-calendar__navigation__label__labelText {
+font: ${theme.font.subTitle.subTitle2_500};
+color: ${theme.palette.greyscale.grey60};
   }
 
   .react-calendar__navigation button {
@@ -179,17 +187,19 @@ const CalendarStyles = css`
     line-height: 21px;
     font: ${theme.font.body.body3_400};
     // 사진이 있을 때 글자색 white로 설정하기
-    color: ${theme.palette.greyscale.grey50};
+
     abbr {
+      z-index: 1;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       cursor: pointer;
-
+      pointer-events: none; /* 이벤트를 이미지 아래로 전달 */
+      color: ${theme.palette.greyscale.grey50};
       @media (max-width: 320px) {
         //사진이 없을 때만 설정하기
-        margin-left: 4px;
+        margin-left: 3px;
       }
     }
   }

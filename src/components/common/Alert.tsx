@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import Icons from '@/components/common/Icons';
 
 function Alert() {
@@ -9,7 +9,7 @@ function Alert() {
   return (
     <div css={backgroundStyles}>
       <div css={alertContainerStyles}>
-        <div css={titleContentWrapperStyles}>
+        <div css={contentsWrapperStyles}>
           <div css={alertTitleStyles}>
             {alertState.title ? (
               alertState.title
@@ -18,9 +18,11 @@ function Alert() {
             )}
           </div>
           <div css={alertContentStyles}>{alertState.content}</div>
-        </div>
-        <div css={btnWrapperStyles}>
-          <button type="button" css={defaultBtnStyles} onClick={closeAlert}>
+          <button
+            type="button"
+            css={defaultBtnStyles}
+            onClick={() => closeAlert(alertState.onClick)}
+          >
             <Icons icon="exitSmall" />
           </button>
         </div>
@@ -45,47 +47,50 @@ const backgroundStyles = css`
 const alertContainerStyles = css`
   position: relative;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   width: 90%;
   max-width: 500px;
   height: 96px;
-  padding-left: 20px;
   border-radius: 16px;
   background-color: ${theme.palette.state.danger};
   z-index: 11;
+  padding: 0 16px;
+  gap: 8px;
 `;
 
-const titleContentWrapperStyles = css`
+const contentsWrapperStyles = css`
   display: flex;
-  gap: 14px;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
 `;
 
 const alertTitleStyles = css`
+  width: 20px;
+  display: flex;
+  align-items: center;
   color: ${theme.palette.input.enabled};
-  font: ${theme.font.etc.rankingNumber};
-  font-size: 36px;
+  font: ${theme.font.alert.pretendard};
 `;
 
 const alertContentStyles = css`
   display: flex;
   align-items: center;
+  width: 100%;
   color: ${theme.palette.greyscale.grey10};
-  font: ${theme.font.title.title1_godo};
+  font: ${theme.font.alert.pretendard};
   white-space: pre-wrap;
 `;
 
-const btnWrapperStyles = css`
-  position: absolute;
-  right: 0;
-`;
-
 const defaultBtnStyles = css`
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: flex-start;
   color: ${theme.palette.white};
-  font: ${theme.font.body.body2_400};
   cursor: pointer;
-  font-size: 24px;
-  padding: 0 16px 48px 0;
+  padding-top: 16px;
 `;
 
 export default Alert;

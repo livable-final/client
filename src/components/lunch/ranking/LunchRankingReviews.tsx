@@ -4,28 +4,22 @@ import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import useFetch from '@/hooks/useFetch';
 import Icons from '@/components/common/Icons';
-import usePagesStore from '@/stores/usePagesStore';
-import useReviewStore from '@/stores/useReviewStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useLunchReviewStore from '@/stores/lunch/useLunchReviewStore';
 import COMPONENT_NAME from '@/constants/common/pages';
 import { ReviewList } from '@/types/lunch/reviewList';
 import LunchReview from '@/components/lunch/review/LunchReview';
 import { getMenuReviews } from '@/pages/api/lunch/lunchRequests';
-// import { getMenuReviews } from '@/pages/api/lunch/lunchRequests';
 
 // '오늘 점심' 랭킹별 리뷰 컴포넌트
 function LunchRankingReviews({ menuId }: { menuId: number }) {
   const [isMore, setIsMore] = useState(false); // 더보기 버튼 클릭 여부
   const { setNextComponent } = usePagesStore();
-  const { setReviewList } = useReviewStore();
+  const { setReviewList } = useLunchReviewStore();
   const { detail } = COMPONENT_NAME.lunch.detail; // 오늘 점심 리뷰 상세
   const { response } = useFetch({
     fetchFn: () => getMenuReviews(menuId),
   });
-
-  // useQuery로 API 호출
-  // const { data } = useQuery(['menuReviews', page], () =>
-  //   getMenuReviews({ menuId: 1, page }),
-  // );
 
   // 클릭 시 리뷰 상세로 이동하는 핸들러
   const onClickDetailHandler = (item: ReviewList) => {

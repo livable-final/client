@@ -21,14 +21,23 @@ const containerStyles = css`
 `;
 
 const titleStyles = css`
-  font: ${theme.font.body.body3_400};
+  font: ${theme.font.body.body3_300};
   color: ${theme.palette.greyscale.grey50};
   line-height: 21px;
+  min-width: 24px;
+
+  @media (min-width: 320px) {
+    font: ${theme.font.body.body3_400};
+  }
 `;
 
 const contentStyles = css`
-  font: ${theme.font.body.body3_400};
+  font: ${theme.font.body.body3_300};
   color: ${theme.palette.greyscale.grey70};
   line-height: 21px;
+
+  @media (min-width: 320px) {
+    font: ${theme.font.body.body3_400};
+  }
 `;
 export default HomeBulletinNotice;

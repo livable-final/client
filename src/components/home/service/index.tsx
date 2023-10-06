@@ -29,7 +29,6 @@ function HomeService() {
 const containerStyles = css`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 16px;
   align-self: stretch;
   flex-wrap: wrap;
@@ -37,9 +36,11 @@ const containerStyles = css`
 `;
 
 const titleStyles = css`
+  display: flex;
   font: ${theme.font.body.body1_600};
   color: ${theme.palette.title};
   line-height: 24px;
+  justify-content: flex-start;
 `;
 
 const menusStyles = css`
@@ -47,8 +48,22 @@ const menusStyles = css`
   padding: 0px 16px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 12px;
+
+  @media (min-width: 320px) {
+    gap: 4px;
+  }
+
+  ${mq.md} {
+    justify-content: center;
+    width: 100%;
+  }
+
+  ${mq.lg} {
+    justify-content: center;
+    width: 100%;
+  }
 
   ${mq.tab} {
     justify-content: center;

@@ -26,7 +26,7 @@ function LunchCalendarWriteBtn({
   }
   return (
     <button type="button" css={buttonStyles} onClick={onClick}>
-      <div css={contentStyles}>
+      <div css={contentStyles(isCompleted)}>
         {icon}
         <span css={textStyles}>{text}</span>
       </div>
@@ -40,20 +40,28 @@ const buttonStyles = css`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 28px 0;
+  margin-top: 12px;
+  padding: 28px 16px;
   white-space: pre-line;
   background-color: ${theme.palette.white};
-  font: ${theme.font.body.body1_600};
   cursor: pointer;
+  box-shadow:
+    0 4px 4px rgba(0, 0, 0, 0.03),
+    0 -4px 4px rgba(0, 0, 0, 0.03);
 `;
-const contentStyles = css`
+const contentStyles = (isCompleted: boolean) => css`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: ${!isCompleted ? '12px' : '14px'};
+  svg {
+    flex-shrink: 0;
+  }
 `;
 
 const textStyles = css`
   text-align: left;
+  font: ${theme.font.body.body1_600};
+  color: ${theme.palette.greyscale.grey50};
 `;
 
 export default LunchCalendarWriteBtn;

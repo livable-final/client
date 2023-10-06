@@ -7,10 +7,12 @@ import { Clock, XIcon } from '@/assets/icons';
 import { CALENDAR_CASE } from '@/constants/lunch';
 import { COMMON_ICON_NAMES } from '@/constants/common';
 import { LunchCalendarListItemProps } from '@/types/lunch/calendar';
-import useWriteStore from '@/stores/useWriteStore';
-import useSaveStore from '@/stores/useSaveStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
+import useSaveStore from '@/stores/common/useSaveStore';
+import useUserStore from '@/stores/common/useUserStore';
 
 function LunchCalendarListItem({
+  id,
   type,
   item,
   content,
@@ -20,10 +22,11 @@ function LunchCalendarListItem({
   onClick,
 }: LunchCalendarListItemProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const selectedMenu = useWriteStore((state) => state.selectedMenu);
-  const setSelectedMenu = useWriteStore((state) => state.setSelectedMenu);
-  const setRemoveMenu = useWriteStore((state) => state.setRemoveMenu);
-  const deleteKeyword = useSaveStore((state) => state.deleteKeyword);
+  const selectedMenu = useLunchWriteStore((state) => state.selectedMenu);
+  const setSelectedMenu = useLunchWriteStore((state) => state.setSelectedMenu);
+  const setRemoveMenu = useLunchWriteStore((state) => state.setRemoveMenu);
+  const deleteKeywordList = useSaveStore((state) => state.deleteKeywordList);
+  const buildingName = useUserStore((state) => state.buildingName);
   const { listItem } = CALENDAR_CASE;
   const { home } = COMMON_ICON_NAMES;
 
@@ -45,22 +48,23 @@ function LunchCalendarListItem({
       setRemoveMenu(item);
     }
   };
-  const onClickDeleteHandler = (keyword: string | undefined) => {
-    if (keyword) {
-      deleteKeyword(keyword);
-    }
+
+  const onClickDeleteHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!id) return;
+    deleteKeywordList(id);
   };
 
   switch (type) {
     case listItem.type1:
       return (
-        <button type="button" css={listStyles(type)}>
-          <div css={contentStyles(type)}>
+        <div css={listStyles(type)}>
+          <button type="button" css={contentStyles} onClick={onClick}>
             <Clock css={iconStles} />
-            <p>{content}</p>
-          </div>
-          <XIcon onClick={onClickDeleteHandler(content)} />
-        </button>
+            <p css={searchedStyles}>{content}</p>
+          </button>
+          <XIcon onClick={onClickDeleteHandler} />
+        </div>
       );
     case listItem.type2:
       return (
@@ -70,7 +74,9 @@ function LunchCalendarListItem({
               <strong>{content}</strong>
               <span>{category}</span>
             </div>
-            <p>테리타워에서 {time}분</p>
+            <p>
+              {buildingName}에서 {time}분
+            </p>
           </div>
           <div css={ImageStyles}>
             <Image
@@ -89,8 +95,8 @@ function LunchCalendarListItem({
           css={listStyles(type)}
           onClick={onClickListItemHandler}
         >
-          <div css={contentStyles(type)}>
-            <p>{item?.menuName}</p>
+          <div css={contentStyles}>
+            <p css={menuStyles}>{item?.menuName}</p>
           </div>
           <Icons
             icon={home.check}
@@ -117,16 +123,21 @@ const listStyles = (type: string) => css`
   padding: ${type === 'searched' ? `16px 4px` : `20px 4px`};
 `;
 
-const contentStyles = (type: string) => css`
+const contentStyles = () => css`
   display: flex;
   align-items: center;
-  gap: 6px;
-  font: ${type === 'searched'
-    ? `${theme.font.body.body1_400}`
-    : `${theme.font.subTitle.subTitle2_400}`};
-  color: ${type === 'searched'
-    ? `${theme.palette.greyscale.grey60}`
-    : `${theme.palette.greyscale.grey70}`};
+  gap: 8px;
+  cursor: pointer;
+`;
+
+const searchedStyles = css`
+  font: ${theme.font.body.body1_400};
+  color: ${theme.palette.greyscale.grey60};
+`;
+
+const menuStyles = css`
+  font: ${theme.font.subTitle.subTitle2_400};
+  color: ${theme.palette.greyscale.grey70};
 `;
 
 const searchingContentStyles = css`
@@ -155,7 +166,6 @@ const ImageStyles = css`
   width: 56px;
   height: 56px;
   border-radius: 8px;
-  border: 1px solid ${theme.palette.greyscale.grey60}
   overflow: hidden;
 `;
 

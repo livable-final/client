@@ -1,5 +1,5 @@
 import theme from '@/styles/theme';
-import useToggleStore from '@/stores/useToggleStore';
+import useToggleStore from '@/stores/common/useToggleStore';
 import { COMMON_TOGGLE_TITLE } from '@/constants/common';
 import { css } from '@emotion/react';
 

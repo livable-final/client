@@ -2,8 +2,8 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import Header from '@/components/common/Header';
 import ToWrite from '@/components/common/ToWrite';
-import usePagesStore from '@/stores/usePagesStore';
-import useReviewStore from '@/stores/useReviewStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useLunchReviewStore from '@/stores/lunch/useLunchReviewStore';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
 import LunchReview from '@/components/lunch/review/LunchReview';
 import LunchDetailContents from '@/components/lunch/detail/LunchDetailContents';
@@ -11,7 +11,7 @@ import LunchDetailContents from '@/components/lunch/detail/LunchDetailContents';
 //  리뷰 상세 컴포넌트
 function LunchDetail() {
   const { title } = LUNCH_MAIN_CONSTANTS.review; // '리뷰'
-  const { reviewList } = useReviewStore(); // ReviewStore에 저장된 리뷰 리스트
+  const { reviewList } = useLunchReviewStore(); // ReviewStore에 저장된 리뷰 리스트
   const { setNextComponent } = usePagesStore(); //
   const onClickHandler = () => {
     setNextComponent('');

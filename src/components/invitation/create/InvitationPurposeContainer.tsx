@@ -1,18 +1,18 @@
 import theme from '@/styles/theme';
-import mq from '@/utils/mediaquery';
 import Input from '@/components/common/Input';
 import Icons from '@/components/common/Icons';
 import Category from '@/components/common/Category';
 import Button from '@/components/common/Button';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import useViewStore from '@/stores/usePagesStore';
-import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
-import { ChangeEvent, useEffect, useState } from 'react';
+import COMPONENT_NAME from '@/constants/common/pages';
+import useViewStore from '@/stores/common/usePagesStore';
+import useInvitationHeaderTitleStore from '@/stores/invitaion/useInvitationHeaderTitleStore';
+import useInvitationCreateStore from '@/stores/invitaion/useInvitationCreateStore';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { COMMON_CATEGORIES } from '@/constants/common';
+import { ComponentName } from '@/types/common/pages';
 import {
-  CategoryInvitation,
   CommonCategory,
   InvitationCreateTexts,
 } from '@/types/invitation/create';
@@ -21,7 +21,8 @@ function InvitationPurposeContainer() {
   const { setNextComponent } = useViewStore();
   const { setHeaderTitle } = useInvitationHeaderTitleStore();
   const { setCreateContents, clearCreateContents } = useInvitationCreateStore();
-  const { invitation }: CategoryInvitation = COMMON_CATEGORIES;
+
+  const { invitation }: ComponentName = COMPONENT_NAME;
   const {
     header,
     title,
@@ -29,41 +30,49 @@ function InvitationPurposeContainer() {
     placeholder,
     button,
   }: InvitationCreateTexts = CREATE_TEXTS;
-  const categories: CommonCategory[] = Object.values(invitation);
+
+  const categories: CommonCategory[] = Object.values(COMMON_CATEGORIES);
+
   const [selectedCategory, setSelectedCategory] = useState<string>('meeting');
   const [etcPurpose, setEtcPurpose] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  // 최초 렌더링 시 기존값 초기화
+  // 최초 렌더링 시 타이틀 & 초대장 데이터 초기화
   useEffect(() => {
+    setHeaderTitle(header.default);
     clearCreateContents();
-  }, [clearCreateContents]);
+  }, [clearCreateContents, header.default, setHeaderTitle]);
 
-  // 방문 목적 카테고리 선택
+  // 초대 목적 카테고리 선택
   const onClickCategoryHandler = (item: CommonCategory) => {
     setSelectedCategory(item.icon);
   };
 
-  // 기타 선택 시 방문 목적 작성
+  // 초대 목적 - 기타 선택 시 방문 목적 작성
   const onChange = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setEtcPurpose(e.target.value);
   };
 
-  // input 포커스될 때 버튼 숨김
+  // input 포커스될 때 '다음' 버튼 숨김
   const onFocusInputHandler = () => {
     setIsFocused(true);
   };
 
-  // input 블러될 때 버튼 활성
+  // input 블러될 때 '다음' 버튼 활성
   const onBlurInputHandler = () => {
     setTimeout(() => setIsFocused(false), 300);
   };
 
-  // 하단 버튼 클릭 핸들러
+  // 하단 '다음' 버튼 클릭 핸들러
   const onClickBtnHandler = () => {
-    setNextComponent('InvitationVisitorsContainer');
+    // 다음 렌더링 컴포넌트: 방문자 정보
+    // 타이틀 스토어에 초대 목적 저장
+    // 초대장 생성 스토어에  초대 목적 저장 (기타일 경우 사용자 입력값 저장)
+    setNextComponent(invitation.create.visitors);
     setHeaderTitle(header[selectedCategory]);
     setCreateContents(
       'purpose',
@@ -97,10 +106,10 @@ function InvitationPurposeContainer() {
           <div css={iconWrapperStyles}>
             <Icons icon="info" color="grey" />
           </div>
-          <div>{description[selectedCategory]}</div>
+          <div css={descriptionStyles}>{description[selectedCategory]}</div>
         </div>
         <div
-          css={inputWrapperStyles}
+          css={inputWrapperStyles(isFocused)}
           onFocus={onFocusInputHandler}
           onBlur={onBlurInputHandler}
         >
@@ -119,6 +128,7 @@ function InvitationPurposeContainer() {
             content={button.next}
             variant="blue"
             onClick={onClickBtnHandler}
+            // 초대 목적 - 기타를 선택할 경우, 사용자 입력값이 없으면 버튼 비활성화
             isDisabled={selectedCategory === 'etc' && !etcPurpose.length}
           />
         </div>
@@ -133,25 +143,17 @@ const purposeContainerStyles = css`
   flex-direction: column;
   align-items: center;
   gap: 32px;
-  min-width: 280px;
-  max-width: 360px;
-
-  ${mq.md} {
-    max-width: 480px;
-  }
-  ${mq.lg} {
-    max-width: 640px;
-  }
-  ${mq.tab} {
-    max-width: 1024px;
-  }
+  width: 100%;
+  min-width: 240px;
+  max-width: 1024px;
 `;
 
 const purposeQuestionStyles = css`
   display: flex;
+  justify-content: flex-start;
   width: 100%;
   min-width: 280px;
-  max-width: 360px;
+  max-width: 450px;
   height: 28px;
   padding-left: 4px;
 
@@ -160,16 +162,6 @@ const purposeQuestionStyles = css`
     font: ${theme.font.title.title2_500};
     line-height: 28px;
     text-align: left;
-  }
-
-  ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
-    max-width: 360px;
-  }
-  ${mq.tab} {
-    max-width: 420px;
   }
 `;
 
@@ -180,6 +172,7 @@ const categoryContainerStyles = css`
   justify-content: center;
   align-items: center;
   gap: 16px;
+  width: 100%;
 `;
 
 const categoryWrapperStyles = css`
@@ -188,19 +181,10 @@ const categoryWrapperStyles = css`
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+  width: 100%;
   min-width: 280px;
-  max-width: 360px;
+  max-width: 450px;
   padding: 0 4px 0;
-
-  ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
-    max-width: 360px;
-  }
-  ${mq.tab} {
-    max-width: 480px;
-  }
 `;
 
 const descriptionWrapperStyles = css`
@@ -208,8 +192,8 @@ const descriptionWrapperStyles = css`
   justify-content: flex-start;
   gap: 4px;
   width: 100%;
-  min-width: 260px;
-  max-width: 280px;
+  min-width: 240px;
+  max-width: 440px;
   height: 44px;
   padding: 0 4px 0;
 
@@ -220,35 +204,26 @@ const descriptionWrapperStyles = css`
     line-height: 22px;
     text-align: left;
   }
+`;
 
-  ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
-    max-width: 360px;
-  }
-  ${mq.tab} {
-    max-width: 440px;
-  }
+const descriptionStyles = css`
+  display: flex;
+  justify-content: flex-start;
+  word-break: break-all;
+  width: 100%;
+  min-width: 200px;
+  max-width: 450px;
 `;
 
 const iconWrapperStyles = css`
   padding-top: 4px;
 `;
 
-const inputWrapperStyles = css`
-  max-width: 280px;
-
-  ${mq.md} {
-    min-width: 360px;
-  }
-  ${mq.lg} {
-    min-width: 360px;
-  }
-  ${mq.tab} {
-    min-width: 440px;
-    max-width: 1024px;
-  }
+const inputWrapperStyles = (isFocused: boolean) => css`
+  width: 100%;
+  min-width: 240px;
+  max-width: 440px;
+  margin-bottom: ${isFocused ? '30px' : '0'};
 `;
 
 const buttonWrapperStyles = (isFocused: boolean) => css`
@@ -257,21 +232,8 @@ const buttonWrapperStyles = (isFocused: boolean) => css`
   display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
-  max-width: 360px;
+  max-width: 1024px;
   padding: 0 16px 20px;
-
-  ${mq.md} {
-    min-width: 361px;
-    max-width: 480px;
-  }
-  ${mq.lg} {
-    min-width: 481px;
-    max-width: 640px;
-  }
-  ${mq.tab} {
-    min-width: 641px;
-    max-width: 1024px;
-  }
 `;
 
 export default InvitationPurposeContainer;

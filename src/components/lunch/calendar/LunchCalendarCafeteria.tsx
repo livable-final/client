@@ -12,23 +12,25 @@ import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchCalendarPhoto from '@/components/lunch/calendar/LunchCalendarPhoto';
 import LunchCalendarRatingBtn from '@/components/lunch/calendar/LunchCalendarRatingBtn';
 import LunchCalendarBottomSheet from '@/components/lunch/calendar/LunchCalendarBottomSheet';
-import usePagesStore from '@/stores/usePagesStore';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useSaveStore from '@/stores/useSaveStore';
-import useWriteStore from '@/stores/useWriteStore';
-import useUserStore from '@/stores/useUserStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useSaveStore from '@/stores/common/useSaveStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
+import useUserStore from '@/stores/common/useUserStore';
 import COMPONENT_NAME from '@/constants/common/pages';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import { ErrorProps } from '@/types/common/response';
 import Alert from '@/components/common/Alert';
 
 function LunchCalendarCafeteria() {
   const [searchText, setSearchText] = useState('');
+  const [isBad, setIsBad] = useState(1);
+  const [isGood, setIsGood] = useState(1);
   const { setNextComponent, reset } = usePagesStore();
   const { bottomSheetState, openBottomSheet, closeBottomSheet } =
     useBottomSheetStore();
   const { isSave } = useSaveStore();
-  const { ratingState, imageFiles } = useWriteStore();
+  const { ratingState, imageFiles } = useLunchWriteStore();
   const { buildingName } = useUserStore();
   const { category, subTitle, button } = CALENDAR_CONTENT;
   const { calendar } = COMPONENT_NAME.lunch;
@@ -62,7 +64,7 @@ function LunchCalendarCafeteria() {
       }
     } catch (err) {
       const error = err as ErrorProps;
-      openAlert('📢', error.message || '리뷰 등록 오류');
+      openAlert('📢', error.message || '');
     } finally {
       if (!isSave.PhotoMsg) {
         closeBottomSheet();
@@ -93,13 +95,25 @@ function LunchCalendarCafeteria() {
           <p>{buildingName}</p>
         </div>
         <div css={buttonStyles}>
-          {button.button5.map((value) => (
-            <LunchCalendarRatingBtn key={value} title={value} />
-          ))}
+          <LunchCalendarRatingBtn
+            title={button.button5[0]}
+            isGood={isGood}
+            isBad={isBad}
+            setIsGood={setIsGood}
+            setIsBad={setIsBad}
+          />
+          <LunchCalendarRatingBtn
+            title={button.button5[1]}
+            isBad={isBad}
+            isGood={isGood}
+            setIsGood={setIsGood}
+            setIsBad={setIsBad}
+          />
         </div>
         <div css={inputBoxStyles}>
           <p>{subTitle.review}</p>
           <Input
+            type="review"
             variant="search"
             textarea
             placeholder={category[1].placeholder}
@@ -114,7 +128,12 @@ function LunchCalendarCafeteria() {
         <Button
           variant="blue"
           content={button.button4.text2}
-          onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
+          isDisabled={ratingState.taste === '' || searchText === ''}
+          onClick={
+            isSave.PhotoMsg || imageFiles.length > 0
+              ? onClickBtnHandler
+              : onClickMsgBtnHandler
+          }
         />
       </div>
       {bottomSheetState.isOpen && !isSave.PhotoMsg && <BottomSheet />}

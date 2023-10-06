@@ -1,23 +1,24 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
-import { LocationFill, CalendarFill } from '@/assets/icons';
+import { LocationFill, CalendarFill, RightZoom } from '@/assets/icons';
 import {
   InvitationInfoProps,
   InvitationInfoThemeProps,
 } from '@/types/invitation/view';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import useFetch from '@/hooks/useFetch';
 import Image from 'next/image';
 import { getVisitationQr } from '@/pages/api/invitation/viewRequests';
-import { INVITATION_VIEW_TICKET_THEME } from '@/constants/invitation/viewTexts';
-import useThemeStore from '@/stores/useThemeStore';
+import {
+  INVITATION_VIEW_TICKET_THEME,
+  INVITATION_VEIW_INFO_TEXTS,
+} from '@/constants/invitation/viewTexts';
+import useInvitationThemeStore from '@/stores/invitaion/useInvitationThemeStore';
 
 function InvitationInfo({ value, data }: InvitationInfoProps) {
-  const { themeState, setThemeState } = useThemeStore();
+  const { ticket } = INVITATION_VEIW_INFO_TEXTS;
+  const { themeState, setThemeState } = useInvitationThemeStore();
   const { setNextComponent } = usePagesStore();
-  const onClickHandler = (event: React.MouseEvent) => {
-    setNextComponent((event.target as HTMLButtonElement).id);
-  };
   const { response } = useFetch({
     fetchFn: getVisitationQr,
   });
@@ -36,10 +37,13 @@ function InvitationInfo({ value, data }: InvitationInfoProps) {
   const startDate = changeDatefometer(data.invitationStartDate);
   const endDate = changeDatefometer(data.invitationEndDate).substring(5, 10);
 
-  // 테마 커스텀 > 어떤 화면에서 커스텀 할지 추후 수정이라 두페이지 모두에 남겨두었습니다
+  const onClickHandler = () => {
+    setNextComponent(value);
+  };
   const onClickSetThemeHandler = () => {
     // 클릭 시마다 클릭 횟수 증가
     setThemeState('clickCount', themeState.clickCount + 1);
+
     if (themeState.clickCount === 4) {
       setThemeState('clickCount', 0);
     }
@@ -63,76 +67,88 @@ function InvitationInfo({ value, data }: InvitationInfoProps) {
   const variantData = INVITATION_VIEW_TICKET_THEME[themeState.theme];
 
   return (
-    <button
-      type="button"
-      onClick={onClickSetThemeHandler}
-      css={infoContainerStyles(variantData)}
-    >
+    <div css={infoContainerStyles(variantData)}>
       <div css={infoContainerDesignStyles(variantData)} />
-      <div css={infoLineStyles}>
-        <div css={placeInfoStyles}>
-          <div css={iconContainerStyles}>
-            <LocationFill />
-          </div>
-          <div css={textInfoStyles}>{data.invitationOfficeName}</div>
-        </div>
-        <div css={placeInfoStyles}>
-          <div css={iconContainerStyles}>
-            <CalendarFill />
-          </div>
-          <div>
-            <div css={textInfoStyles}>
-              {startDate} ~ {endDate}
+      <button
+        type="button"
+        onClick={onClickSetThemeHandler}
+        css={themeBtnStyles}
+      >
+        <div css={themeBtnStyles} />
+        <div css={infoLineStyles}>
+          <div css={placeInfoStyles}>
+            <div css={iconContainerStyles}>
+              <LocationFill />
             </div>
-            <div css={textInfoStyles}>
-              {startTime} ~ {endTime}
+            <div css={textInfoStyles}>{data.invitationOfficeName}</div>
+          </div>
+          <div css={placeInfoStyles}>
+            <div css={iconContainerStyles}>
+              <CalendarFill />
+            </div>
+            <div>
+              <div css={textInfoStyles}>
+                {startDate} ~ {endDate}
+                <div css={textInfoStyles}>
+                  {startTime} ~ {endTime}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </button>
       <div css={infoQRContainerStyles}>
         <button type="button" id={value} onClick={onClickHandler}>
-          <div id={value}>임시출입증</div>
-          <div className="test" id={value}>
+          <div id={value}>{ticket.headers}</div>
+          <div css={qrStyles} id={value}>
             <Image
               src={`data:image/png;base64,${qr?.qr}`}
-              alt="임시출입증"
-              width={40}
-              height={40}
+              alt={ticket.headers}
+              width={46}
+              height={46}
             />
           </div>
-          크게보기
+          <div css={zoomBtnStyles}>
+            {ticket.zoom} <RightZoom />
+          </div>
         </button>
       </div>
-    </button>
+    </div>
   );
 }
 
 const infoContainerStyles = (variantData: InvitationInfoThemeProps) => css`
   display: flex;
   flex-direction: row;
-  text-align: left;
-  justify-content: space-between;
-  align-items: flex-start;
   position: relative;
-  padding: 30px 0 30px 40px;
+  padding: 0 0 0 40px;
   margin: 0 auto 26px;
   width: 358px;
+  height: 178px;
   color: ${theme.palette.white};
   background-image: ${variantData.backgroundImage};
-  box-shadow: ${variantData.shadow};
   border-radius: 12px;
   ::before {
     content: '';
     position: absolute;
-    left: 0px;
-    width: 100%;
-    height: 78%;
-    border-radius: 40%;
+    left: 20px;
+    width: 90%;
+    height: 85%;
+    border-radius: 2%;
     background: ${variantData.boxShadow};
-    filter: blur(20px); /* 그라데이션 설정 */
-    z-index: -1; /* 가상 요소를 실제 요소 뒤로 이동 */
+    filter: blur(10px);
+    z-index: -1;
   }
+`;
+
+const themeBtnStyles = css`
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 34px 0;
+  color: ${theme.palette.white};
 `;
 
 const infoContainerDesignStyles = (
@@ -140,8 +156,8 @@ const infoContainerDesignStyles = (
 ) => css`
   position: absolute;
   top: 36%;
-  left: -2px;
-  width: 26px;
+  left: -20px;
+  width: 48px;
   height: 48px;
   border-radius: 0 100px 100px 0;
   background-image: ${variantData.side};
@@ -159,6 +175,8 @@ const iconContainerStyles = css`
 `;
 const textInfoStyles = css`
   margin-left: 2px;
+  font: ${theme.font.body.body1_400};
+  line-height: 24px;
 `;
 const infoLineStyles = css`
   display: flex;
@@ -180,13 +198,23 @@ const infoQRContainerStyles = css`
     color: ${theme.palette.white};
     cursor: pointer;
   }
-  //삭제예정입니다
-  .test {
-    margin: 15px auto;
-    width: 40px;
-    height: 40px;
-    background-color: aliceblue;
+  div {
+    font: ${theme.font.body.body1_500};
   }
+`;
+const qrStyles = css`
+  position: relative;
+  margin: 10px auto;
+  width: 46px;
+  height: 46px;
+`;
+const zoomBtnStyles = css`
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+  font: ${theme.font.body.body3_500};
 `;
 
 export default InvitationInfo;

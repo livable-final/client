@@ -1,33 +1,34 @@
 import LunchCard from '@/components/lunch/LunchCard';
 import LunchRankingPodium from '@/components/lunch/ranking/LunchRankingPodium';
 import { css } from '@emotion/react';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import theme from '@/styles/theme';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
 import { Right } from '@/assets/icons';
 import useFetch from '@/hooks/useFetch';
 import { getRanking } from '@/pages/api/lunch/lunchRequests';
-import useUserStore from '@/stores/useUserStore';
+import useUserStore from '@/stores/common/useUserStore';
 import COMPONENT_NAME from '@/constants/common/pages';
+import Loading from '@/components/common/Loading';
 
 // '오늘 점심' 홈의 랭킹 파트
 function LunchRanking() {
   const { title, heights, colors, margin } = LUNCH_MAIN_CONSTANTS.main.ranking;
+  const { reviewByRanking } = COMPONENT_NAME.lunch.detail;
   const { setNextComponent } = usePagesStore();
   const { buildingId } = useUserStore();
-  const { response } = useFetch({
+  const { response, loading } = useFetch({
     fetchFn: () => getRanking(buildingId),
   });
   const top3Menus = response?.data.slice(0, 3);
-  let sortedMenus;
 
   const onClickHandler = () => {
-    setNextComponent(COMPONENT_NAME.lunch.detail.reviewByRanking); // 리뷰별 랭킹페이지로 이동
+    setNextComponent(reviewByRanking); // 리뷰별 랭킹페이지로 이동
     window.scrollTo({ top: 0 }); // 페이지 top: 0으로 이동
   };
 
   // 2위 - 1위 - 3위 순으로 정렬.
-
+  let sortedMenus;
   if (response) {
     sortedMenus = [
       {
@@ -59,18 +60,22 @@ function LunchRanking() {
           <Right />
         </div>
         <div css={wrapperStyles}>
-          {sortedMenus?.map((item) => (
-            <LunchRankingPodium
-              key={item.menuName}
-              menuImage={item.menuImage}
-              menuName={item.menuName}
-              count={item.count}
-              rank={item.rank}
-              height={item.height}
-              color={item.color}
-              margin={item.margin}
-            />
-          ))}
+          {loading ? (
+            <Loading />
+          ) : (
+            sortedMenus?.map((item) => (
+              <LunchRankingPodium
+                key={item.menuName}
+                menuImage={item.menuImage}
+                menuName={item.menuName}
+                count={item.count}
+                rank={item.rank}
+                height={item.height}
+                color={item.color}
+                margin={item.margin}
+              />
+            ))
+          )}
         </div>
       </button>
     </LunchCard>

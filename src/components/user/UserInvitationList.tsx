@@ -3,16 +3,21 @@ import Header from '@/components/common/Header';
 import useFetch from '@/hooks/useFetch';
 import createHyphenDate from '@/utils/createHyphenDate';
 import UserInvitatioListItem from '@/components/user/UserInvitationListItem';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
 import UserInvitationListEdit from '@/components/user/UserInvitationListEdit';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { USER_INVITATIONLIST_TEXT } from '@/constants/user/userInvitationTexts';
 import { getInvitationList } from '@/pages/api/invitation/editRequests';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+// import useInvitationListStore from '@/stores/useInvitationListStore';
+import useInvitationEditStore from '@/stores/invitaion/useInvitationEditStore';
 import BottomSheet from '../common/BottomSheet';
 
 function UserInvitationList() {
   const { openBottomSheet } = useBottomSheetStore();
+  const { setEditContents } = useInvitationEditStore();
+  // const { setInvitationListeState } = useInvitationListStore();
   const router = useRouter();
   const onClickHandler = () => {
     router.push('/user');
@@ -26,8 +31,21 @@ function UserInvitationList() {
     fetchFn: getInvitationList,
   });
 
-  // 빋어온 데이터 객체를 다중 배열로 변환
+  useEffect(() => {
+    setEditContents('commonPlaceId', '');
+    setEditContents('description', '');
+    setEditContents('startDate', '');
+    setEditContents('endDate', '');
+    setEditContents('visitors', []);
+  }, []);
+
   const invitationList = response && Object.values(response?.data);
+
+  // 빋어온 데이터 객체를 다중 배열로 변환
+  // const invitationListHandler = () => {
+  //   const invitationList = response && Object.values(response?.data);
+  //   setInvitationListeState(invitationList);
+  // };
 
   // 오늘 날짜 가져오는 로직
   const currentDate = new Date();
@@ -66,6 +84,7 @@ function UserInvitationList() {
     </div>
   );
 }
+
 const userInvitationListStyles = css`
   display: flex;
   flex-direction: column;

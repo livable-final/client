@@ -69,7 +69,7 @@ export const COMMON_INPUT_COLORS: InputColorsProps = {
   },
 };
 
-// 에러메세지 내용은 추후 변경
+// 에러메세지
 export const COMMON_ERROR_MESSAGE = {
   default: '오류가 발생했습니다',
   name: '이름 형식이 올바르지 않아요',
@@ -82,6 +82,8 @@ export const COMMON_ERROR_MESSAGE = {
   noServer: '네트워크 연결상태를 확인해주세요',
   back: '이전으로 돌아가기',
   prepare: '기능 준비 중입니다.',
+  copyFailed: '클립보드 복사 실패',
+  copy: '클립보드 복사 완료',
 };
 
 // Header
@@ -154,36 +156,36 @@ export const COMMON_ICON_NAMES = {
     close: 'close',
     error: 'error',
     exitSmall: 'exitSmall',
+    reviewer: 'reviewer',
+    exitMedium: 'exitMedium',
   },
 };
 
-// 카테고리 이름
+// 초대장 생성 - 초대 목적 카테고리
 export const COMMON_CATEGORIES = {
-  invitation: {
-    meeting: {
-      icon: 'meeting',
-      title: '회의',
-    },
-    interview: {
-      icon: 'interview',
-      title: '면접',
-    },
-    fixedTermWork: {
-      icon: 'fixedTermWork',
-      title: '기간 근무',
-    },
-    seminar: {
-      icon: 'seminar',
-      title: '세미나',
-    },
-    as: {
-      icon: 'as',
-      title: 'AS/점검',
-    },
-    etc: {
-      icon: 'etc',
-      title: '기타',
-    },
+  meeting: {
+    icon: 'meeting',
+    title: '회의',
+  },
+  interview: {
+    icon: 'interview',
+    title: '면접',
+  },
+  fixedTermWork: {
+    icon: 'fixedTermWork',
+    title: '기간 근무',
+  },
+  seminar: {
+    icon: 'seminar',
+    title: '세미나',
+  },
+  as: {
+    icon: 'as',
+    title: 'AS/점검',
+  },
+  etc: {
+    icon: 'etc',
+    title: '기타',
   },
 };
 

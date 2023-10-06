@@ -4,18 +4,19 @@ import Alert from '@/components/common/Alert';
 import Add from '@/components/common/Add';
 import AddressBook from '@/components/common/AddressBook';
 import InvitationVisitorsList from '@/components/invitation/create/InvitationVisitorsList';
+import useAlertStore from '@/stores/common/useAlertStore';
+import useViewStore from '@/stores/common/usePagesStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import useAlertStore from '@/stores/useAlertStore';
-import useViewStore from '@/stores/usePagesStore';
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import COMPONENT_NAME from '@/constants/common/pages';
+import useInvitationCreateStore from '@/stores/invitaion/useInvitationCreateStore';
 import theme from '@/styles/theme';
-import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { InvitationCreateTexts } from '@/types/invitation/create';
 import { VisitorInfo } from '@/types/invitation/api';
 import { ErrorMessageProps } from '@/types/common/errorMessage';
+import { ComponentName } from '@/types/common/pages';
 import {
   checkValidationName,
   checkValidationContact,
@@ -23,23 +24,26 @@ import {
 
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
-  const { createContents, setCreateContents } = useInvitationCreateStore();
   const { alertState, openAlert } = useAlertStore();
+  const { createContents, setCreateContents } = useInvitationCreateStore();
+
+  const { invitation }: ComponentName = COMPONENT_NAME;
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;
   const { noName, noContact, noNameContact }: ErrorMessageProps =
     COMMON_ERROR_MESSAGE;
 
-  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [visitorInfo, setVisitorInfo] = useState<VisitorInfo>({
     name: '',
     contact: '',
   });
-  // 흐름 확인을 위한 예비 데이터 (최종 배포시 삭제)
   const [visitorsList, setVisitorsList] = useState<VisitorInfo[]>([]);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  // 이름/연락처 입력
+  // 이름/전화번호 입력
   const onChangeInfoHandler = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     const { name: infoType, value } = e.target;
 
@@ -90,9 +94,11 @@ function InvitationVisitorsContainer() {
     setTimeout(() => setIsFocused(false), 300);
   };
 
-  // 하단 버튼 클릭 핸들러
+  // 하단 '다음' 버튼 클릭 핸들러
   const onClickBtnHandler = () => {
-    setNextComponent('InvitationInfoContainer');
+    // 다음 렌더링 컴포넌트: 초대 정보
+    // 초대장 생성 스토어에 방문자 정보 저장
+    setNextComponent(invitation.create.info);
     setCreateContents('visitors', visitorsList);
   };
 
@@ -105,25 +111,27 @@ function InvitationVisitorsContainer() {
         <div css={inputWrapperStyles}>
           <div onFocus={onFocusInputHandler} onBlur={onBlurInputHandler}>
             <Input
+              name="name"
               value={visitorInfo.name}
               onChange={onChangeInfoHandler}
               variant="default"
               placeholder={placeholder.name}
+              // 유효성 검사 통과하지 않을 경우 ErrorMessage 출력
               isError={!checkValidationName(visitorInfo.name)}
               errorType="name"
-              name="name"
             />
           </div>
           <div onFocus={onFocusInputHandler} onBlur={onBlurInputHandler}>
             <Input
+              name="contact"
               value={visitorInfo.contact}
               onChange={onChangeInfoHandler}
               variant="default"
               placeholder={placeholder.contact}
               maxLength={11}
+              // 유효성 검사 통과하지 않을 경우 ErrorMessage 출력
               isError={!checkValidationContact(visitorInfo.contact)}
               errorType="contact"
-              name="contact"
             />
           </div>
           <div css={addressBookWrapperStyles}>
@@ -131,6 +139,7 @@ function InvitationVisitorsContainer() {
           </div>
         </div>
         <div css={addBtnStyles}>
+          {/* 초대 목적이 면접이고, 등록한 방문자가 1명이면 '추가' 버튼 비활성화 */}
           {createContents.purpose === 'interview' &&
           visitorsList.length === 1 ? null : (
             <Add onClick={onClickAddVisitorHandler} />
@@ -148,7 +157,7 @@ function InvitationVisitorsContainer() {
           content={button.next}
           variant="blue"
           onClick={onClickBtnHandler}
-          isDisabled={visitorsList.length === 0}
+          isDisabled={visitorsList.length === 0} // 방문자 정보 입력값이 없을 경우 버튼 비활성화
         />
       </div>
       {alertState.isOpen && <Alert />}
@@ -162,19 +171,10 @@ const containerStyles = css`
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  width: 100%;
   min-width: 280px;
-  max-width: 360px;
+  max-width: 640px;
   overflow: scroll;
-
-  ${mq.md} {
-    min-width: 361px;
-  }
-  ${mq.lg} {
-    min-width: 481px;
-  }
-  ${mq.tab} {
-    min-width: 641px;
-  }
 `;
 
 const titleStyles = css`
@@ -192,16 +192,6 @@ const titleStyles = css`
     font: ${theme.font.title.title2_500};
     line-height: 28px;
     text-align: left;
-  }
-
-  ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
-    max-width: 480px;
-  }
-  ${mq.tab} {
-    max-width: 640px;
   }
 `;
 
@@ -244,26 +234,13 @@ const buttonWrapperStyles = (isFocused: boolean) => css`
   display: ${isFocused ? 'none' : 'block'};
   width: 100%;
   min-width: 280px;
-  max-width: 360px;
+  max-width: 1024px;
   padding: 0 16px 20px;
   background-image: linear-gradient(
     to top,
     ${theme.palette.white} 70%,
     transparent 30%
   );
-
-  ${mq.md} {
-    min-width: 361px;
-    max-width: 480px;
-  }
-  ${mq.lg} {
-    min-width: 481px;
-    max-width: 640px;
-  }
-  ${mq.tab} {
-    min-width: 641px;
-    max-width: 1024px;
-  }
 `;
 
 export default InvitationVisitorsContainer;

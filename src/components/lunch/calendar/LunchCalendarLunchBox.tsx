@@ -10,12 +10,12 @@ import BottomSheet from '@/components/common/BottomSheet';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchCalendarPhoto from '@/components/lunch/calendar/LunchCalendarPhoto';
 import LunchCalendarBottomSheet from '@/components/lunch/calendar/LunchCalendarBottomSheet';
-import usePagesStore from '@/stores/usePagesStore';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useSaveStore from '@/stores/useSaveStore';
-import useWriteStore from '@/stores/useWriteStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useSaveStore from '@/stores/common/useSaveStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
 import COMPONENT_NAME from '@/constants/common/pages';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import { ErrorProps } from '@/types/common/response';
 import Alert from '@/components/common/Alert';
 
@@ -25,7 +25,7 @@ function LunchCalendarLunchBox() {
   const { bottomSheetState, openBottomSheet, closeBottomSheet } =
     useBottomSheetStore();
   const { isSave } = useSaveStore();
-  const { imageFiles } = useWriteStore();
+  const { imageFiles } = useLunchWriteStore();
   const { category, subTitle, button } = CALENDAR_CONTENT;
   const { calendar } = COMPONENT_NAME.lunch;
   const { alertState, openAlert } = useAlertStore();
@@ -87,6 +87,7 @@ function LunchCalendarLunchBox() {
         <LunchSubTitle title={subTitle.todayLunch} type="title" margin="24px" />
         <div css={inputBoxStyles}>
           <Input
+            type="review"
             variant="search"
             textarea
             placeholder={category[2].placeholder}
@@ -101,7 +102,12 @@ function LunchCalendarLunchBox() {
         <Button
           variant="blue"
           content={button.button4.text2}
-          onClick={!isSave.PhotoMsg ? onClickMsgBtnHandler : onClickBtnHandler}
+          isDisabled={searchText === ''}
+          onClick={
+            isSave.PhotoMsg || imageFiles.length > 0
+              ? onClickBtnHandler
+              : onClickMsgBtnHandler
+          }
         />
       </div>
       {bottomSheetState.isOpen && !isSave.PhotoMsg && <BottomSheet />}

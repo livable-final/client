@@ -10,6 +10,9 @@ import unLock from '$/roulette/unLock.webp';
 import unLockPressed from '$/roulette/unLockPressed.webp';
 import coin from '$/point/coin.webp';
 import point10 from '$/point/point10.webp';
+import Wrappedgift1 from '$/point/Wrappedgift1.png';
+import invitationPreview from '$/invitation/invitationPreview.png';
+import TestBuildingMap from '$/invitation/TestBuildingMap.png';
 
 export {
   again,
@@ -24,4 +27,7 @@ export {
   unLockPressed,
   coin,
   point10,
+  Wrappedgift1,
+  invitationPreview,
+  TestBuildingMap,
 };

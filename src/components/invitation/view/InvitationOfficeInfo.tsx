@@ -1,27 +1,34 @@
 import Header from '@/components/common/Header';
-import { INVITATION_VIEW_TEXTS } from '@/constants/invitation/viewTexts';
+import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
 import { css } from '@emotion/react';
 import mq from '@/utils/mediaquery';
+import { InvitationOfficeInfoProps } from '@/types/invitation/view';
 import InvitationVisitTip from './InvitationOfficeVisitTip';
 import InvitationOfficeMap from './InvitationOfficeMap';
 import InvitationOfficeLocation from './InvitationOfficeLocation';
 
-function InvitationOfficeInfo() {
+function InvitationOfficeInfo({ data }: InvitationOfficeInfoProps) {
   return (
     <div css={OfficeInfoStyles}>
-      <Header title={INVITATION_VIEW_TEXTS.header.office} />
+      <Header title={INVITATION_VEIW_INFO_TEXTS.category.place} />
 
-      <InvitationOfficeLocation />
+      <div css={containerStyles}>
+        <InvitationOfficeLocation
+          invitationOfficeName={data.invitationOfficeName}
+          hostCompanyName={data.hostCompanyName}
+        />
 
-      <InvitationOfficeMap />
+        <InvitationOfficeMap placeType={data.placeType} />
 
-      <InvitationVisitTip />
+        <InvitationVisitTip invitationTip={data.invitationTip} />
+      </div>
     </div>
   );
 }
 
 const OfficeInfoStyles = css`
   margin: 0 auto;
+
   ${mq.md} {
     max-width: 360px;
   }
@@ -35,6 +42,13 @@ const OfficeInfoStyles = css`
   & > div {
     margin-bottom: 40px;
   }
+`;
+
+const containerStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-top: 20px;
 `;
 
 export default InvitationOfficeInfo;

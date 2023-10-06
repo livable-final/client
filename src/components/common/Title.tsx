@@ -4,8 +4,9 @@ import { css } from '@emotion/react';
 import Icons from '@/components/common/Icons';
 import { Barcode, Bell, LunchCalendar, Setting } from '@/assets/icons';
 import Link from 'next/link';
+import Loading from '@/components/common/Loading';
 
-function Title({ title, isMain, part }: TitleProps) {
+function Title({ title, isMain, part, loading }: TitleProps) {
   const renderIcons = (type: string) => {
     switch (type) {
       case 'main':
@@ -31,7 +32,7 @@ function Title({ title, isMain, part }: TitleProps) {
   return (
     <div css={containerStyles}>
       <span css={wrapperStyles}>
-        <span css={spanStyles}>{title}</span>
+        <span css={spanStyles}>{loading ? <Loading /> : title}</span>
         {isMain && <Icons icon="down" />}
       </span>
       <div css={iconStyles}>{renderIcons(part)}</div>

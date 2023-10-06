@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 import { css } from '@emotion/react';
-import useRouletteStore from '@/stores/useRouletteStore';
+import useLunchRouletteStore from '@/stores/lunch/useLunchRouletteStore';
 import { postMenu } from '@/pages/api/lunch/lunchRequests';
 import createHyphenDate from '@/utils/createHyphenDate';
 import { ErrorProps } from '@/types/common/response';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import Alert from '@/components/common/Alert';
 import theme from '@/styles/theme';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
@@ -13,9 +13,9 @@ import { Popup, PopupActive } from '@/assets/icons';
 // 룰렛 팝업 렌딩 컴포넌트
 function LunchRoulettePopup() {
   const { popup } = LUNCH_ROULETTE_CONSTANTS;
-  const { isOperated, isAgain } = useRouletteStore();
-  const { setState } = useRouletteStore;
-  const { menuIdState } = useRouletteStore();
+  const { isOperated, isAgain, isDecided } = useLunchRouletteStore();
+  const { setState } = useLunchRouletteStore;
+  const { menuIdState } = useLunchRouletteStore();
   const { alertState, openAlert } = useAlertStore();
   const [isActive, setIsActive] = useState(false);
 
@@ -29,39 +29,49 @@ function LunchRoulettePopup() {
     } catch (err: unknown) {
       const error = err as ErrorProps;
       openAlert('📣', error.message);
+    } finally {
+      setState({ isDecided: true }); // 메뉴 결정 완료
     }
   }, [menuIdState, openAlert, setState]);
 
   // 마우스 클릭 버튼을 누를 때 이벤트 핸들러
   const onPressHandler = () => {
-    setIsActive((prev) => !prev);
+    setIsActive(true);
   };
 
   // 마우스 클릭 버튼을 뗄 때 이벤트 핸들러
   const onReleaseHandler = () => {
-    setIsActive((prev) => !prev);
+    setIsActive(false);
   };
 
   return (
-    <section css={containerStyles}>
-      <button
-        type="button"
-        onMouseDown={onPressHandler}
-        onMouseUpCapture={onReleaseHandler}
-        onClick={onClickHandler}
-        css={popupStyles}
-      >
-        {alertState.isOpen && <Alert />}
-        {isOperated && isAgain && (
-          <>
-            <div css={wrapperStyles}>
-              <span css={spanStyles}>{popup}</span>
-            </div>
-            <div css={iconStyles}>{isActive ? <PopupActive /> : <Popup />}</div>
-          </>
-        )}
-      </button>
-    </section>
+    <div>
+      {alertState.isOpen ? (
+        <Alert />
+      ) : (
+        <section css={containerStyles}>
+          <button
+            type="button"
+            onMouseDown={onPressHandler}
+            onMouseUpCapture={onReleaseHandler}
+            onClick={onClickHandler}
+            css={popupStyles}
+            disabled={isDecided}
+          >
+            {isOperated && isAgain && (
+              <>
+                <div css={wrapperStyles}>
+                  <span css={spanStyles}>{popup}</span>
+                </div>
+                <div css={iconStyles}>
+                  {isActive ? <PopupActive /> : <Popup />}
+                </div>
+              </>
+            )}
+          </button>
+        </section>
+      )}
+    </div>
   );
 }
 

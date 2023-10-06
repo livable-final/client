@@ -2,19 +2,19 @@ import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { InvitationInfoCategoryProps } from '@/types/invitation/view';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import Icons from '@/components/common/Icons';
-import useThemeStore from '@/stores/useThemeStore';
+import useInvitationThemeStore from '@/stores/invitaion/useInvitationThemeStore';
 import { INVITATION_VIEW_TICKET_THEME } from '@/constants/invitation/viewTexts';
 
 function InvitationInfoCategory({ value, icon }: InvitationInfoCategoryProps) {
   const { setNextComponent } = usePagesStore();
-  const { themeState } = useThemeStore();
+  const { themeState } = useInvitationThemeStore();
 
   const variantData = INVITATION_VIEW_TICKET_THEME[themeState.theme];
 
-  const onClickHandler = (event: React.MouseEvent) => {
-    setNextComponent((event.target as HTMLButtonElement).id);
+  const onClickHandler = () => {
+    setNextComponent(value);
   };
 
   return (
@@ -39,12 +39,9 @@ const InvitationInfoCategoryStyles = css`
   width: 75px;
   height: 100%;
   color: ${theme.palette.greyscale.grey50};
-  font: ${theme.font.body.body3_500};
-  button {
-    height: 100%;
-  }
   span {
     color: ${theme.palette.greyscale.grey50};
+    font: ${theme.font.body.body3_500};
   }
 
   ${mq.md} {
@@ -57,8 +54,6 @@ const InvitationInfoCategoryStyles = css`
   }
 `;
 
-const CategoryContainerStyles = css`
-  margin: 0 auto;
-`;
+const CategoryContainerStyles = css``;
 
 export default InvitationInfoCategory;

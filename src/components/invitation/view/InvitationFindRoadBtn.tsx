@@ -1,3 +1,4 @@
+import { TestBuildingMap } from '@/assets/images/';
 import Icons from '@/components/common/Icons';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
@@ -5,7 +6,6 @@ import { css } from '@emotion/react';
 function InvitationFindRoadBtn() {
   return (
     <div css={mapStyles}>
-      지도!
       <button type="button" css={buttonStyles}>
         <Icons icon="direction" color="blue" />
         <span css={contentStyles}>길찾기</span>
@@ -19,9 +19,14 @@ const mapStyles = css`
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 268px;
   margin: 25px 0;
-  background-color: ${theme.palette.greyscale.grey30};
+  background: url(${TestBuildingMap.src});
+
+  width: 100%;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 `;
 
 const buttonStyles = css`

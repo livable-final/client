@@ -3,7 +3,7 @@ import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { useRouter } from 'next/router';
 import Header from '@/components/common/Header';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import LunchCalendarSelectBtn from '@/components/lunch/calendar/LunchCalendarSelectBtn';
 import LunchCalendarSearch from '@/components/lunch/calendar/LunchCalendarSearch';
 import LunchCalendarEatOut from '@/components/lunch/calendar/LunchCalendarEatOut';
@@ -11,7 +11,7 @@ import LunchCalendarLunchBox from '@/components/lunch/calendar/LunchCalendarLunc
 import LunchCalendarCafeteria from '@/components/lunch/calendar/LunchCalendarCafeteria';
 import LunchCalendarPointInform from '@/components/lunch/calendar/LunchCalendarPointInform';
 import COMPONENT_NAME from '@/constants/common/pages';
-import LunchCalendarMenu from './LunchCalendarMenu';
+import LunchCalendarMenu from '@/components/lunch/calendar/LunchCalendarMenu';
 
 function LunchCalendarReview() {
   const { nextComponent } = usePagesStore();
@@ -57,12 +57,12 @@ function LunchCalendarReview() {
 
 const buttonListStyles = css`
   display: flex;
-  gap: 16px;
   flex-wrap: wrap;
+  gap: 22px 16px;
   margin-top: 32px;
   padding: 0 20px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 479px) {
     display: flex;
     justify-content: space-between;
   }

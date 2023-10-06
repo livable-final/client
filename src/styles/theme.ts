@@ -20,7 +20,7 @@ const theme = {
     greyscale: {
       grey5: '#F9FAFB',
       grey10: '#F0F1F3',
-      grey20: '#D7DCE3',
+      grey20: '#E9EBED',
       grey30: '#C3C6CC',
       grey40: '#96A2AC',
       grey45: '#D3D3D3',
@@ -73,17 +73,22 @@ const theme = {
       body2_400: '400 normal 15px var(--pretendard)',
       body3_500: '500 normal 14px var(--pretendard)',
       body3_400: '400 normal 14px var(--pretendard)',
+      body3_300: '300 normal 11px var(--pretendard)',
       body4: '400 normal 12px var(--pretendard)',
     },
     input: {
       default: '400 normal 10px var(--pretendard)',
+    },
+    alert: {
+      pretendard: '400 normal 15px var(--pretendard)',
+      godo: '400 normal 16px var(--godoM)',
     },
     etc: {
       findRoad: '500 normal 12px var(--pretendard)',
       userPoint: '500 normal 13px var(--pretendard)',
       rankingNumber: '400 normal 20px var(--dnfBitBit)',
       reviewDesc: '400 normal 15px var(--yeongdeok)',
-      review: '400 normal 16px var(--yeongdeokBlueroad)',
+      review: '400 normal 16px var(--yeongdeok)',
       rouletteTitle: '400 normal 24px var(--dnfBitBit)',
       rouletteContent: '400 normal 20px var(--dnfBitBit)',
       roulettePopup: '400 normal 24px var(--dnfBitBit)',

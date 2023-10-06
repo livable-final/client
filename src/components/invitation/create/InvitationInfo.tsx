@@ -4,21 +4,23 @@ import Alert from '@/components/common/Alert';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationPlace from '@/components/invitation/create/InvitationPlace';
 import InvitationDateTime from '@/components/invitation/create/InvitationDateTime';
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useAlertStore from '@/stores/useAlertStore';
+import useInvitationCreateStore from '@/stores/invitaion/useInvitationCreateStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import useFetch from '@/hooks/useFetch';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
-import mq from '@/utils/mediaquery';
+import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
-import { Location, Calendar, Clock } from '@/assets/icons';
+import { LocationLine, Calendar, Clock } from '@/assets/icons';
 import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 import { GetInvitationPlaceData } from '@/types/invitation/api';
-import { InvitationInfoProps } from '@/types/invitation/create';
 import { ErrorMessageProps } from '@/types/common/errorMessage';
-import { css } from '@emotion/react';
+import {
+  InvitationCreateTexts,
+  InvitationInfoProps,
+} from '@/types/invitation/create';
 
 function InvitationInfo({
   tip,
@@ -29,11 +31,13 @@ function InvitationInfo({
   const { createContents } = useInvitationCreateStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { alertState, openAlert } = useAlertStore();
-  const { title, placeholder, checkbox } = CREATE_TEXTS;
+
+  const { title, placeholder, checkbox }: InvitationCreateTexts = CREATE_TEXTS;
   const { noPlace }: ErrorMessageProps = COMMON_ERROR_MESSAGE;
 
   const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
 
+  // 날짜/시간 input value
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
@@ -42,19 +46,31 @@ function InvitationInfo({
     fetchFn: getInvitationPlaceList,
   });
 
+  // 초대 가능한 장소 응답 데이터 저장
   useEffect(() => {
-    // 초대 가능한 장소 응답 데이터 저장
     if (response?.data) {
       setPlaceList(response.data);
     }
   }, [response]);
 
+  // 초대장 스토어 데이터가 변할 때 startDate, endDate 설정
   useEffect(() => {
-    if (createContents.startDate) {
+    if (createContents.startDate.includes('undefined')) {
+      // 시간을 선택하지 않거나 유효한 예약 시간이 아닐 경우
+      openAlert('', '예약 가능한 시간을 다시 확인해 주세요!');
+      setDate('');
+      setTime('');
+    } else if (createContents.startDate) {
       setDate(
-        `${createContents.startDate.split('T')[0]} ~ ${
+        // startDate와 endDate가 같을 경우: yyyy-mm-dd
+        // 다를 경우: yyyy-mm-dd ~ yyyy-mm-dd 표기
+        createContents.startDate.split('T')[0] ===
           createContents.endDate.split('T')[0]
-        }`,
+          ? `${createContents.startDate.split('T')[0]}
+            `
+          : `${createContents.startDate.split('T')[0]} ~ ${
+              createContents.endDate.split('T')[0]
+            }`,
       );
       setTime(
         `${createContents.startDate
@@ -63,9 +79,6 @@ function InvitationInfo({
           .split('T')[1]
           ?.slice(0, 5)}`,
       );
-    } else {
-      setDate('');
-      setTime('');
     }
   }, [createContents]);
 
@@ -93,7 +106,7 @@ function InvitationInfo({
           {/* 장소 선택 */}
           <div css={placeInputStyles}>
             <div css={icon}>
-              <Location />
+              <LocationLine />
             </div>
             <input
               css={inputStyles}
@@ -160,17 +173,8 @@ const infoContainerStyles = css`
   flex-direction: column;
   gap: 16px;
   width: 100%;
-  max-width: 280px;
-
-  ${mq.md} {
-    max-width: 360px;
-  }
-  ${mq.lg} {
-    max-width: 480px;
-  }
-  ${mq.tab} {
-    max-width: 640px;
-  }
+  min-width: 280px;
+  max-width: 640px;
 `;
 
 const titleStyles = css`
@@ -183,6 +187,7 @@ const inputContainerStyles = css`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
 `;
 
 const placeInputStyles = css`
@@ -190,6 +195,7 @@ const placeInputStyles = css`
   justify-content: center;
   align-items: center;
   gap: 12px;
+  width: 100%;
   border: 1px solid ${theme.palette.greyscale.grey10};
   border-radius: 12px;
   padding: 0 8px 0 16px;
@@ -210,6 +216,7 @@ const dateTimeInputStyles = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   border: 1px solid ${theme.palette.greyscale.grey10};
   border-radius: 12px;
   padding: 0 8px 0 16px;
@@ -237,18 +244,9 @@ const inputStyles = css`
   border-radius: 12px;
   padding: 0;
   min-width: 200px;
+  width: 100%;
   font: ${theme.font.subTitle.subTitle2_400};
   color: ${theme.palette.input.default};
-
-  ${mq.md} {
-    max-width: 100%;
-  }
-  ${mq.lg} {
-    max-width: 100%;
-  }
-  ${mq.tab} {
-    max-width: 100%;
-  }
 `;
 
 const textareaStyles = css`

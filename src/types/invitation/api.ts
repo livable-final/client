@@ -74,6 +74,7 @@ export interface GetVisitationInfoData {
   hostCompanyName: string;
   hostContact: string;
   hostBusinessCardImageUrl: string;
+  placeType: string;
 }
 // 주변 식당 응답 데이터
 export interface GetInvitationCarouselData {
@@ -146,4 +147,14 @@ export interface PatchInvitationContents {
   startDate?: Date | string;
   endDate?: Date | string;
   visitors?: VisitorInfo[];
+}
+
+// 주차 등록 스토어
+export interface InvitationParkingStore {
+  carNumber: PostInvitationParkingData;
+  setCarNumber: (carNumber: string) => void;
+}
+
+export interface PostInvitationParkingData {
+  carNumber: string;
 }
