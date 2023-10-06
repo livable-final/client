@@ -35,15 +35,17 @@ function InvitaitionCarousel({ type }: InvitationCarouselProps) {
         {datas &&
           datas.map((item) => (
             <div key={item.restaurantName} css={carouselItemStyles}>
-              <div css={itemImageStyles}>
+              <div css={itemImageContainerStyles}>
                 <Image
                   src={item.restaurantImageUrl}
                   width={135}
                   height={80}
                   alt={item.restaurantName}
                   css={itemImageStyles}
+                  priority
                 />
               </div>
+
               <div css={carouselItemInfoStyles}>
                 <div css={itemInfoNameStyles}>{item.restaurantName}</div>
                 {item.inBuilding ? (
@@ -101,8 +103,17 @@ const carouselItemStyles = css`
 const itemImageStyles = css`
   width: 135px;
   height: 80px;
+  object-fit: cover;
   position: relative;
   background-color: aliceblue;
+  border-radius: 8px;
+`;
+const itemImageContainerStyles = css`
+  width: 135px;
+  height: 80px;
+  position: relative;
+  background-color: aliceblue;
+  overflow: hidden;
   border-radius: 8px;
 `;
 const carouselItemInfoStyles = css`

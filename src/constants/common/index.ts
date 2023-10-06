@@ -82,6 +82,8 @@ export const COMMON_ERROR_MESSAGE = {
   noServer: '네트워크 연결상태를 확인해주세요',
   back: '이전으로 돌아가기',
   prepare: '기능 준비 중입니다.',
+  copyFailed: '클립보드 복사 실패',
+  copy: '클립보드 복사 완료',
 };
 
 // Header

@@ -16,6 +16,10 @@ export const INVITATION_VEIW_INFO_TEXTS = {
     host: 'InfoHost',
     parking: 'InfoParking',
   },
+  qr: {
+    title: '임시출입증',
+    body: '초대 시간 전후로 \n 1시간 동안 사용할수 있습니다',
+  },
   host: {
     name: '이름',
     companyName: '회사',
