@@ -21,6 +21,7 @@ import useSaveStore from '@/stores/useSaveStore';
 import useAlertStore from '@/stores/useAlertStore';
 import { ErrorProps } from '@/types/common/response';
 import Alert from '@/components/common/Alert';
+import { Wrappedgift1 } from '@/assets/images';
 
 function LunchCalendarPointCard() {
   const point = useSaveStore((state) => state.point);
@@ -116,7 +117,7 @@ function LunchCalendarPointCard() {
                     <Image
                       width={40}
                       height={40}
-                      src="/point/Wrappedgift1.png"
+                      src={Wrappedgift1}
                       alt="gift"
                     />
                   ) : (

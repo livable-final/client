@@ -1,4 +1,4 @@
-import { TestBuildingMap } from '@/assets/testImg';
+import { TestBuildingMap } from '@/assets/images/';
 import Icons from '@/components/common/Icons';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
