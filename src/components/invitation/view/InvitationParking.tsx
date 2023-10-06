@@ -6,7 +6,7 @@ import {
 } from '@/constants/invitation/viewTexts';
 import { postParking } from '@/pages/api/invitation/viewRequests';
 // import useAlertStore from '@/stores/useAlertStore';
-import useInvitationParkingStore from '@/stores/useInvitationParkingStore';
+import useInvitationParkingStore from '@/stores/invitaion/useInvitationParkingStore';
 // import { ErrorProps } from 'next/error';
 import { useState } from 'react';
 import { css } from '@emotion/react';

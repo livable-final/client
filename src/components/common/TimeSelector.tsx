@@ -5,7 +5,7 @@ import {
 } from '@/types/invitation/create';
 import { css } from '@emotion/react';
 import React, { useState } from 'react';
-import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
+import useInvitaionTimeSelectorStore from '@/stores/invitaion/useInvitationTimeSelectorStore';
 import theme from '@/styles/theme';
 
 function TimeSelector({ content, status }: TimeSelectorProps) {
@@ -17,7 +17,7 @@ function TimeSelector({ content, status }: TimeSelectorProps) {
 
   const variantData = COMMON_TIME_SELECTOR[varientState];
 
-  const { setSelectTime } = useTimeSelectorStore();
+  const { setSelectTime } = useInvitaionTimeSelectorStore();
   const { abled, enabled, disabled } = COMMON_TIME_SELECTOR;
 
   const onClickHandler = () => {

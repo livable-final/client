@@ -5,7 +5,7 @@ import {
   InvitationInfoProps,
   InvitationInfoThemeProps,
 } from '@/types/invitation/view';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import useFetch from '@/hooks/useFetch';
 import Image from 'next/image';
 import { getVisitationQr } from '@/pages/api/invitation/viewRequests';
@@ -13,11 +13,11 @@ import {
   INVITATION_VIEW_TICKET_THEME,
   INVITATION_VEIW_INFO_TEXTS,
 } from '@/constants/invitation/viewTexts';
-import useThemeStore from '@/stores/useThemeStore';
+import useInvitationThemeStore from '@/stores/invitaion/useInvitationThemeStore';
 
 function InvitationInfo({ value, data }: InvitationInfoProps) {
   const { ticket } = INVITATION_VEIW_INFO_TEXTS;
-  const { themeState, setThemeState } = useThemeStore();
+  const { themeState, setThemeState } = useInvitationThemeStore();
   const { setNextComponent } = usePagesStore();
   const { response } = useFetch({
     fetchFn: getVisitationQr,

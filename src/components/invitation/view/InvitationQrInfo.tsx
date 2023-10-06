@@ -6,7 +6,7 @@ import {
 } from '@/constants/invitation/viewTexts';
 import InvitationQrInfoText from '@/components/invitation/view/InvitationQrInfoText';
 import InvitationQrInfoCode from '@/components/invitation/view/InvitationQrInfoCode';
-import useThemeStore from '@/stores/useThemeStore';
+import useInvitationThemeStore from '@/stores/invitaion/useInvitationThemeStore';
 import {
   InvitationInfoContainerProps,
   InvitationInfoThemeProps,
@@ -14,7 +14,7 @@ import {
 import mq from '@/utils/mediaquery';
 
 function InvitationQrInfo({ data }: InvitationInfoContainerProps) {
-  const { themeState, setThemeState } = useThemeStore();
+  const { themeState, setThemeState } = useInvitationThemeStore();
   const { category } = INVITATION_VEIW_INFO_TEXTS;
   const onClickSetThemeHandler = () => {
     // 클릭 시마다 클릭 횟수 증가

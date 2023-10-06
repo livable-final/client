@@ -6,11 +6,11 @@ import Add from '@/components/common/Add';
 import Button from '@/components/common/Button';
 import NameTag from '@/components/common/NameTag';
 import AddressBook from '@/components/common/AddressBook';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useAlertStore from '@/stores/useAlertStore';
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
-import useInvitationEditStore from '@/stores/useInvitationEditStore';
-import usePagesStore from '@/stores/usePagesStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useAlertStore from '@/stores/common/useAlertStore';
+import useInvitationCreateStore from '@/stores/invitaion/useInvitationCreateStore';
+import useInvitationEditStore from '@/stores/invitaion/useInvitationEditStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import { InvitationAddVisitorListProps } from '@/types/invitation/edit';
 import Alert from '@/components/common/Alert';
 
