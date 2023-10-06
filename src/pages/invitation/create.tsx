@@ -1,8 +1,8 @@
 import Header from '@/components/common/Header';
 import InvitationCreateForm from '@/components/invitation/InvitationCreateForm';
 import InvitationPreview from '@/components/invitation/create/InvitationPreview';
-import useInvitationHeaderTitleStore from '@/stores/useInvitationHeaderTitleStore';
-import useViewStore from '@/stores/usePagesStore';
+import useInvitationHeaderTitleStore from '@/stores/invitaion/useInvitationHeaderTitleStore';
+import useViewStore from '@/stores/common/usePagesStore';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import mq from '@/utils/mediaquery';
 import { useState } from 'react';

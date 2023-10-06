@@ -5,7 +5,7 @@ import { ProfileWithBg } from '@/assets/icons';
 import useFetch from '@/hooks/useFetch';
 import { getMyData } from '@/pages/api/home/homeRequests';
 import { useEffect } from 'react';
-import useUserStore from '@/stores/useUserStore';
+import useUserStore from '@/stores/common/useUserStore';
 
 function UserInfo() {
   const { setState } = useUserStore;
