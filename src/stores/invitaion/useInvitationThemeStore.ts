@@ -7,7 +7,7 @@ const initialThemeState = {
   theme: 'default',
 };
 
-const useThemeStore = create<ThemelStoreTypes>()((set) => ({
+const useInvitationThemeStore = create<ThemelStoreTypes>()((set) => ({
   themeState: initialThemeState,
   setThemeState: (key, content) => {
     set((state) => ({
@@ -18,4 +18,4 @@ const useThemeStore = create<ThemelStoreTypes>()((set) => ({
     }));
   },
 }));
-export default useThemeStore;
+export default useInvitationThemeStore;
