@@ -144,7 +144,7 @@ function InvitationInfoContainer() {
         // btn : 전송하기
         <Modal content={modal.btn} onClick={onClickModalHandler} />
       )}
-      {alertState.isOpen && <Alert isSans />}
+      {alertState.isOpen && <Alert />}
       {bottomSheetState.isOpen && <BottomSheet />}
     </div>
   );
