@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import Icons from '@/components/common/Icons';
 
 function Alert() {

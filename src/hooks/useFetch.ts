@@ -1,4 +1,4 @@
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import { ErrorProps, FetchProps } from '@/types/common/response';
 import { useEffect, useState, useCallback } from 'react';
 

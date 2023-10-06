@@ -1,4 +1,4 @@
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import InvitationDoneContainer from '@/components/invitation/create/InvitationDoneContainer';
 import InvitationEdit from '@/components/invitation/edit/InvitationEdit';
 import { InvitationEditProps } from '@/types/invitation/edit';

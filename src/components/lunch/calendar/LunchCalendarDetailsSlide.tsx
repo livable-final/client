@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import theme from '@/styles/theme';
 import dayjs from 'dayjs';
-import useWriteStore from '@/stores/useWriteStore';
-import useCalendarStore from '@/stores/useCalendarStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
+import useLunchCalendarStore from '@/stores/lunch/useLunchCalendarStore';
 import { css } from '@emotion/react';
 import {
   Location20,
@@ -19,8 +19,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 function LunchCalendarDetailsSlide() {
-  const setIsChecked = useWriteStore((state) => state.setIsChecked);
-  const reviewDetails = useCalendarStore((state) => state.reviewDetails);
+  const setIsChecked = useLunchWriteStore((state) => state.setIsChecked);
+  const reviewDetails = useLunchCalendarStore((state) => state.reviewDetails);
   const { lunch } = COMMON_ICON_NAMES;
 
   const onClickHandler = (

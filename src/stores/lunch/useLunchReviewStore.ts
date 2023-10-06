@@ -17,11 +17,11 @@ const initialState: ReviewList = {
   reviewDescription: '',
 };
 
-const useReviewStore = create<ReviewListStore>((set) => ({
+const useLunchReviewStore = create<ReviewListStore>((set) => ({
   reviewList: initialState,
   setReviewList: (item: ReviewList) => {
     set({ reviewList: item });
   },
 }));
 
-export default useReviewStore;
+export default useLunchReviewStore;

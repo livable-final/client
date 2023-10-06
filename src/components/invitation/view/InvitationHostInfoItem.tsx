@@ -5,7 +5,7 @@ import { Copy } from '@/assets/icons';
 import { COMMON_ERROR_MESSAGE } from '@/constants/common/index';
 import theme from '@/styles/theme';
 import Alert from '@/components/common/Alert';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 
 function InvitationHostInfoItem({
   label,

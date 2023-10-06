@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import mq from '@/utils/mediaquery';
 import { Back } from '@/assets/icons';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import { InvitationBuildingInfoProps } from '@/types/invitation/view';
 import InvitationBuildingInfoItem from './InvitationBuildingInfoItem';
 import InvitationBuildingMap from './InvitationBuildingMap';

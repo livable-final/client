@@ -6,7 +6,7 @@ import { css } from '@emotion/react';
 import { Rights } from '@/assets/icons';
 import useFetch from '@/hooks/useFetch';
 import { getMyData } from '@/pages/api/home/homeRequests';
-import useUserStore from '@/stores/useUserStore';
+import useUserStore from '@/stores/common/useUserStore';
 import { useEffect } from 'react';
 
 function HomeReception() {

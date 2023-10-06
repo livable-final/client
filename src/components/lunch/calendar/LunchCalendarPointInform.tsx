@@ -7,7 +7,7 @@ import { css, keyframes } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { RightSmall } from '@/assets/icons';
 import { coin, point10 } from '@/assets/images';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 
 function LunchCalendarPointInform() {
   const router = useRouter();

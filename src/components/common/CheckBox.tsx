@@ -1,6 +1,6 @@
 import Icons from '@/components/common/Icons';
 import theme from '@/styles/theme';
-import useSaveStore from '@/stores/useSaveStore';
+import useSaveStore from '@/stores/common/useSaveStore';
 import { CheckBoxProps } from '@/types/common/checkBox';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';

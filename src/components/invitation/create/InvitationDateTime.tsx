@@ -6,11 +6,11 @@ import Button from '@/components/common/Button';
 import Alert from '@/components/common/Alert';
 import InvitationSelectTime from '@/components/invitation/create/InvitationSelectTime';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useAlertStore from '@/stores/useAlertStore';
-import useToggleStore from '@/stores/useToggleStore';
-import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useAlertStore from '@/stores/common/useAlertStore';
+import useToggleStore from '@/stores/common/useToggleStore';
+import useInvitaionTimeSelectorStore from '@/stores/invitaion/useInvitationTimeSelectorStore';
+import useInvitationCreateStore from '@/stores/invitaion/useInvitationCreateStore';
 import getFormatDate from '@/utils/getFormatDate';
 import getCommonTimes from '@/utils/getCommonTimeList';
 import parseDate from '@/utils/parseDate';
@@ -28,7 +28,7 @@ function InvitationDateTime() {
   const { closeBottomSheet } = useBottomSheetStore();
   const { alertState, openAlert } = useAlertStore();
   const { isOn, onToggle, offToggle } = useToggleStore();
-  const { selectTime, clearSelectTime } = useTimeSelectorStore();
+  const { selectTime, clearSelectTime } = useInvitaionTimeSelectorStore();
   const { createContents, setCreateContents } = useInvitationCreateStore();
 
   // Thu Oct 26 2023 00:00:00 GMT+0900 (한국 표준시)

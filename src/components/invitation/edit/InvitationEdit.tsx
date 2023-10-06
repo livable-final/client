@@ -22,10 +22,10 @@ import CheckBox from '@/components/common/CheckBox';
 import BottomSheet from '@/components/common/BottomSheet';
 import InvitationEditvisitorAdd from '@/components/invitation/edit/InvitationAddVisitorList';
 import changeVisitPurpose from '@/utils/changeVisitPurpose';
-import useViewStore from '@/stores/usePagesStore';
-import useModalStore from '@/stores/useModalStore';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useInvitationEditStore from '@/stores/useInvitationEditStore';
+import useViewStore from '@/stores/common/usePagesStore';
+import useModalStore from '@/stores/common/useModalStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useInvitationEditStore from '@/stores/invitaion/useInvitationEditStore';
 import Modal from '@/components/common/Modal';
 
 function InvitationEdit({ id }: InvitationEditProps) {

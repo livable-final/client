@@ -1,8 +1,8 @@
 import TimeSelector from '@/components/common/TimeSelector';
 import createTimeSlots from '@/utils/createTimeSlots';
-import useToggleStore from '@/stores/useToggleStore';
-import useTimeSelectorStore from '@/stores/useTimeSelectorStore';
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
+import useToggleStore from '@/stores/common/useToggleStore';
+import useInvitaionTimeSelectorStore from '@/stores/invitaion/useInvitationTimeSelectorStore';
+import useInvitationCreateStore from '@/stores/invitaion/useInvitationCreateStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
@@ -18,7 +18,7 @@ function InvitationSelectTime({ commonTimes }: InvitationSelectTimeProps) {
   const [isUpdated, setIsUpdated] = useState<boolean>(false);
 
   const { isOn } = useToggleStore();
-  const { selectTime } = useTimeSelectorStore();
+  const { selectTime } = useInvitaionTimeSelectorStore();
   const { createContents } = useInvitationCreateStore();
   const { commonPlaceId } = createContents;
 

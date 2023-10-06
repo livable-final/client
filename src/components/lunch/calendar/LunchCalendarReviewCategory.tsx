@@ -5,14 +5,14 @@ import { COMMON_ICON_NAMES } from '@/constants/common';
 import { useState } from 'react';
 import { LunchCalendarReviewCategoryProps } from '@/types/lunch/calendar';
 import Icons from '@/components/common/Icons';
-import useWriteStore from '@/stores/useWriteStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
 
 function LunchCalendarReviewCategory({
   type,
   title,
 }: LunchCalendarReviewCategoryProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const setRatingState = useWriteStore((state) => state.setRatingState);
+  const setRatingState = useLunchWriteStore((state) => state.setRatingState);
   const { button, subCategory } = CALENDAR_CONTENT;
   const { lunch } = COMMON_ICON_NAMES;
 

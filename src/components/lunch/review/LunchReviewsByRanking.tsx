@@ -1,9 +1,9 @@
 import useFetch from '@/hooks/useFetch';
 import ToTop from '@/components/common/ToTop';
 import Header from '@/components/common/Header';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import useUserStore from '@/stores/useUserStore';
+import useUserStore from '@/stores/common/useUserStore';
 import { getRanking } from '@/pages/api/lunch/lunchRequests';
 import LunchRankings from '@/components/lunch/ranking/LunchRankings';
 

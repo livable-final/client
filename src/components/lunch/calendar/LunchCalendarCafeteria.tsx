@@ -12,13 +12,13 @@ import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchCalendarPhoto from '@/components/lunch/calendar/LunchCalendarPhoto';
 import LunchCalendarRatingBtn from '@/components/lunch/calendar/LunchCalendarRatingBtn';
 import LunchCalendarBottomSheet from '@/components/lunch/calendar/LunchCalendarBottomSheet';
-import usePagesStore from '@/stores/usePagesStore';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useSaveStore from '@/stores/useSaveStore';
-import useWriteStore from '@/stores/useWriteStore';
-import useUserStore from '@/stores/useUserStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useSaveStore from '@/stores/common/useSaveStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
+import useUserStore from '@/stores/common/useUserStore';
 import COMPONENT_NAME from '@/constants/common/pages';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import { ErrorProps } from '@/types/common/response';
 import Alert from '@/components/common/Alert';
 
@@ -30,7 +30,7 @@ function LunchCalendarCafeteria() {
   const { bottomSheetState, openBottomSheet, closeBottomSheet } =
     useBottomSheetStore();
   const { isSave } = useSaveStore();
-  const { ratingState, imageFiles } = useWriteStore();
+  const { ratingState, imageFiles } = useLunchWriteStore();
   const { buildingName } = useUserStore();
   const { category, subTitle, button } = CALENDAR_CONTENT;
   const { calendar } = COMPONENT_NAME.lunch;

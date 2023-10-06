@@ -6,7 +6,7 @@ import RadioBtn from '@/components/common/RadioBtnBox';
 import InvitationFindRoadBtn from '@/components/invitation/view/InvitationFindRoadBtn';
 import CheckBox from '@/components/common/CheckBox';
 import BottomSheet from '@/components/common/BottomSheet';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
 import Bnb from '@/components/common/Bnb';
 
 function Temp() {

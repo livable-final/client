@@ -1,6 +1,6 @@
-import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
-import useInvitationEditStore from '@/stores/useInvitationEditStore';
-import usePagesStore from '@/stores/usePagesStore';
+import useInvitationCreateStore from '@/stores/invitaion/useInvitationCreateStore';
+import useInvitationEditStore from '@/stores/invitaion/useInvitationEditStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { Send } from '@/assets/icons';

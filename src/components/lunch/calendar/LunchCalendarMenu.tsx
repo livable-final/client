@@ -11,15 +11,15 @@ import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchCalendarListItem from '@/components/lunch/calendar/LunchCalendarListItem';
-import useWriteStore from '@/stores/useWriteStore';
-import usePagesStore from '@/stores/usePagesStore';
-import useModalStore from '@/stores/useModalStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useModalStore from '@/stores/common/useModalStore';
 
 function LunchCalendarMenu() {
   const [showInput, setShowInput] = useState(false);
   const [addMenu, setAddMenu] = useState('');
   const [menuData, setMenuData] = useState<MenuData[]>([]);
-  const { restaurant, selectedMenu } = useWriteStore();
+  const { restaurant, selectedMenu } = useLunchWriteStore();
   const { setNextComponent, goBack } = usePagesStore();
   const { modalState, openModal } = useModalStore();
   const { subTitle, button } = CALENDAR_CONTENT;

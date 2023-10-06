@@ -1,6 +1,6 @@
 import Header from '@/components/common/Header';
 import useFetch from '@/hooks/useFetch';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import InvitationQrInfo from '@/components/invitation/view/InvitationQrInfo';
 import InvitationBuildingInfo from '@/components/invitation/view/InvitationBuildingInfo';
 import InvitationHostInfo from '@/components/invitation/view/InvitationHostInfo';
@@ -11,7 +11,7 @@ import InvitationCarouselContainer from '@/components/invitation/view/Invitation
 import InvitationParking from '@/components/invitation/view/InvitationParking';
 import { css } from '@emotion/react';
 import { INVITATION_VEIW_INFO_TEXTS } from '@/constants/invitation/viewTexts';
-import useSaveStore from '@/stores/useSaveStore';
+import useSaveStore from '@/stores/common/useSaveStore';
 import { useEffect } from 'react';
 import { getVisitationInfo } from '@/pages/api/invitation/viewRequests';
 

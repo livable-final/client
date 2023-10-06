@@ -9,9 +9,9 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { USER_INVITATIONLIST_TEXT } from '@/constants/user/userInvitationTexts';
 import { getInvitationList } from '@/pages/api/invitation/editRequests';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
 // import useInvitationListStore from '@/stores/useInvitationListStore';
-import useInvitationEditStore from '@/stores/useInvitationEditStore';
+import useInvitationEditStore from '@/stores/invitaion/useInvitationEditStore';
 import BottomSheet from '../common/BottomSheet';
 
 function UserInvitationList() {

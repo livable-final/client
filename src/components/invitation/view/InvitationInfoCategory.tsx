@@ -2,14 +2,14 @@ import { css } from '@emotion/react';
 import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { InvitationInfoCategoryProps } from '@/types/invitation/view';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import Icons from '@/components/common/Icons';
-import useThemeStore from '@/stores/useThemeStore';
+import useInvitationThemeStore from '@/stores/invitaion/useInvitationThemeStore';
 import { INVITATION_VIEW_TICKET_THEME } from '@/constants/invitation/viewTexts';
 
 function InvitationInfoCategory({ value, icon }: InvitationInfoCategoryProps) {
   const { setNextComponent } = usePagesStore();
-  const { themeState } = useThemeStore();
+  const { themeState } = useInvitationThemeStore();
 
   const variantData = INVITATION_VIEW_TICKET_THEME[themeState.theme];
 
