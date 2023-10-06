@@ -1,7 +1,7 @@
 // 룰렛 가동 시 선택되는 요소들을 관리하는 store
 import { create } from 'zustand';
 
-const useRouletteStore = create(() => ({
+const useLunchRouletteStore = create(() => ({
   categoryState: '카테고리', // 랜덤 카테고리명
   menuState: '메뉴', // 랜덤 메뉴명
   menuIdState: 5, // 메뉴 ID
@@ -14,4 +14,4 @@ const useRouletteStore = create(() => ({
   isCompleted: false,
 }));
 
-export default useRouletteStore;
+export default useLunchRouletteStore;

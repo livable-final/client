@@ -29,7 +29,7 @@ const initialCalendarState = {
   year: new Date().getFullYear(),
   month: new Date().getMonth() + 1,
 };
-const useCalendarStore = create<CalnedarStore>()((set) => ({
+const useLunchCalendarStore = create<CalnedarStore>()((set) => ({
   dateData: initialCalendarState,
   reviewDetails: [],
   setReviewDetails: (data) => set({ reviewDetails: data }),
@@ -44,4 +44,4 @@ const useCalendarStore = create<CalnedarStore>()((set) => ({
   clearDate: () => set({ dateData: initialCalendarState }),
 }));
 
-export default useCalendarStore;
+export default useLunchCalendarStore;

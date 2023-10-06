@@ -53,7 +53,7 @@ const initialRatingState = {
   service: 'BAD',
 };
 
-const useWriteStore = create<WriteStore>()((set) => ({
+const useLunchWriteStore = create<WriteStore>()((set) => ({
   restaurant: initialState,
   selectedMenu: initialArray,
   ratingState: initialRatingState,
@@ -82,4 +82,4 @@ const useWriteStore = create<WriteStore>()((set) => ({
   },
 }));
 
-export default useWriteStore;
+export default useLunchWriteStore;
