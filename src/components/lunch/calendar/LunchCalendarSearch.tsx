@@ -9,12 +9,12 @@ import theme from '@/styles/theme';
 import Header from '@/components/common/Header';
 import Input from '@/components/common/Input';
 import LunchCalendarListItem from '@/components/lunch/calendar/LunchCalendarListItem';
-import usePagesStore from '@/stores/usePagesStore';
-import useWriteStore from '@/stores/useWriteStore';
-import useSaveStore from '@/stores/useSaveStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
+import useSaveStore from '@/stores/common/useSaveStore';
 import keyDate from '@/utils/key';
 import Alert from '@/components/common/Alert';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import { ErrorProps } from '@/types/common/response';
 
 function LunchCalendarSearch() {
@@ -23,7 +23,7 @@ function LunchCalendarSearch() {
   const [keyword, setKeyword] = useState('');
   const { setNextComponent, goBack } = usePagesStore();
   const { alertState, openAlert } = useAlertStore();
-  const setRestaurant = useWriteStore((state) => state.setRestaurant);
+  const setRestaurant = useLunchWriteStore((state) => state.setRestaurant);
   const keywordList = useSaveStore((state) => state.keywordList);
   const setKeywordList = useSaveStore((state) => state.setKeywordList);
 

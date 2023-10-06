@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { COMMON_ICON_NAMES } from '@/constants/common';
 import { LunchCalendarRatingBtnProps } from '@/types/lunch/calendar';
-import useWriteStore from '@/stores/useWriteStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
 
 function LunchCalendarRatingBtn({
   title,
@@ -16,7 +16,7 @@ function LunchCalendarRatingBtn({
 }: LunchCalendarRatingBtnProps) {
   const [isGoodChecked, setIsGoodChecked] = useState(false);
   const [isBadChecked, setIsBadChecked] = useState(false);
-  const setRatingState = useWriteStore((state) => state.setRatingState);
+  const setRatingState = useLunchWriteStore((state) => state.setRatingState);
   const { button } = CALENDAR_CONTENT;
   const { lunch } = COMMON_ICON_NAMES;
 

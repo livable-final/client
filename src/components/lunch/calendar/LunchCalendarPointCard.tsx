@@ -17,8 +17,8 @@ import {
   Present1000,
   Present1500,
 } from '@/assets/icons';
-import useSaveStore from '@/stores/useSaveStore';
-import useAlertStore from '@/stores/useAlertStore';
+import useSaveStore from '@/stores/common/useSaveStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import { ErrorProps } from '@/types/common/response';
 import Alert from '@/components/common/Alert';
 

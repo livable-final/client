@@ -4,8 +4,8 @@ import Calendar from 'react-calendar';
 import dayjs from 'dayjs';
 import { css } from '@emotion/react';
 import { RightSmall, LeftSmall } from '@/assets/icons';
-import useCalendarStore from '@/stores/useCalendarStore';
-import useAlertStore from '@/stores/useAlertStore';
+import useLunchCalendarStore from '@/stores/lunch/useLunchCalendarStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import LunchCalendarDate from '@/components/lunch/calendar/LunchCalendarDate';
 import { getReviewDetailsData } from '@/pages/api/lunch/calendarRequests';
 import { ErrorProps } from '@/types/common/response';
@@ -13,7 +13,7 @@ import { ErrorProps } from '@/types/common/response';
 function LunchCalendarForm() {
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
-  const { setReviewDetails } = useCalendarStore();
+  const { setReviewDetails } = useLunchCalendarStore();
   const { openAlert } = useAlertStore();
 
   useEffect(() => {

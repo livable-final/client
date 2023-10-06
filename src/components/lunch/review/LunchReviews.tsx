@@ -1,20 +1,20 @@
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import useFetch from '@/hooks/useFetch';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import LunchCard from '@/components/lunch/LunchCard';
-import useReviewStore from '@/stores/useReviewStore';
+import useLunchReviewStore from '@/stores/lunch/useLunchReviewStore';
 import COMPONENT_NAME from '@/constants/common/pages';
 import { ReviewList } from '@/types/lunch/reviewList';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
-import useUserStore from '@/stores/useUserStore';
+import useUserStore from '@/stores/common/useUserStore';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import { getReviewList } from '@/pages/api/lunch/lunchRequests';
 import LunchReview from '@/components/lunch/review/LunchReview';
 
 //
 function LunchReviews() {
-  const { setReviewList } = useReviewStore();
+  const { setReviewList } = useLunchReviewStore();
   const { setNextComponent } = usePagesStore();
   const { buildingId, buildingName } = useUserStore();
   const { prefix, suffix } = LUNCH_MAIN_CONSTANTS.main.reviews;

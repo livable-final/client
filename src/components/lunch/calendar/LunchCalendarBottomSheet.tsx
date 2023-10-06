@@ -6,8 +6,8 @@ import { COMMON_ICON_NAMES } from '@/constants/common';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import theme from '@/styles/theme';
 import Icons from '@/components/common/Icons';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useSaveStore from '@/stores/useSaveStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useSaveStore from '@/stores/common/useSaveStore';
 
 interface BottomSheetProps {
   onClickSubmit: () => void;

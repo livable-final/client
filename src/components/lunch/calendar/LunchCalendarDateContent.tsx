@@ -2,12 +2,12 @@ import Image from 'next/image';
 import { css } from '@emotion/react';
 import { DateDishNoPhoto } from '@/assets/icons';
 import { DateDishPhotoProps } from '@/types/lunch/calendar';
-import useCalendarStore from '@/stores/useCalendarStore';
-import useWriteStore from '@/stores/useWriteStore';
+import useLunchCalendarStore from '@/stores/lunch/useLunchCalendarStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
 
 function LunchCalendarDateContent({ dayReviewData }: DateDishPhotoProps) {
-  const setIsChecked = useWriteStore((state) => state.setIsChecked);
-  const { reviewDetails, setReviewDetails } = useCalendarStore();
+  const setIsChecked = useLunchWriteStore((state) => state.setIsChecked);
+  const { reviewDetails, setReviewDetails } = useLunchCalendarStore();
   const allReviews = [...reviewDetails];
   const dayReview = [...dayReviewData];
 

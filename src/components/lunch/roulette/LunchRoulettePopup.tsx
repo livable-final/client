@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 import { css } from '@emotion/react';
-import useRouletteStore from '@/stores/useRouletteStore';
+import useLunchRouletteStore from '@/stores/lunch/useLunchRouletteStore';
 import { postMenu } from '@/pages/api/lunch/lunchRequests';
 import createHyphenDate from '@/utils/createHyphenDate';
 import { ErrorProps } from '@/types/common/response';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import Alert from '@/components/common/Alert';
 import theme from '@/styles/theme';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
@@ -13,9 +13,9 @@ import { Popup, PopupActive } from '@/assets/icons';
 // 룰렛 팝업 렌딩 컴포넌트
 function LunchRoulettePopup() {
   const { popup } = LUNCH_ROULETTE_CONSTANTS;
-  const { isOperated, isAgain, isDecided } = useRouletteStore();
-  const { setState } = useRouletteStore;
-  const { menuIdState } = useRouletteStore();
+  const { isOperated, isAgain, isDecided } = useLunchRouletteStore();
+  const { setState } = useLunchRouletteStore;
+  const { menuIdState } = useLunchRouletteStore();
   const { alertState, openAlert } = useAlertStore();
   const [isActive, setIsActive] = useState(false);
 

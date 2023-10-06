@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
 import { Chef, Bento, PlateSmall } from '@/assets/icons';
 import { LunchCalendarSelectBtnProps } from '@/types/lunch/calendar';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 
 function LunchCalendarSelectBtn({ text }: LunchCalendarSelectBtnProps) {
   const { setNextComponent } = usePagesStore();

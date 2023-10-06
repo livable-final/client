@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
 import useFetch from '@/hooks/useFetch';
-import useRouletteStore from '@/stores/useRouletteStore';
+import useLunchRouletteStore from '@/stores/lunch/useLunchRouletteStore';
 import { getMenus } from '@/pages/api/lunch/lunchRequests';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
 import LunchRouletteBg from '@/components/lunch/roulette/LunchRouletteBg';
@@ -18,8 +18,8 @@ import {
 function LunchRoulette() {
   const { time } = LUNCH_ROULETTE_CONSTANTS; // 시간 상수
   const { categoryState, menuState, isLocked, isOperated, isPressed, isAgain } =
-    useRouletteStore();
-  const { setState } = useRouletteStore;
+    useLunchRouletteStore();
+  const { setState } = useLunchRouletteStore;
   const { response } = useFetch({
     fetchFn: getMenus,
   });

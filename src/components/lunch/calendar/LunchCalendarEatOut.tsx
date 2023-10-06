@@ -13,12 +13,12 @@ import LunchCalendarReviewCategory from '@/components/lunch/calendar/LunchCalend
 import LunchCalendarPhoto from '@/components/lunch/calendar/LunchCalendarPhoto';
 import LunchCalendarRatingBtn from '@/components/lunch/calendar/LunchCalendarRatingBtn';
 import LunchCalendarBottomSheet from '@/components/lunch/calendar/LunchCalendarBottomSheet';
-import usePagesStore from '@/stores/usePagesStore';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
-import useSaveStore from '@/stores/useSaveStore';
-import useWriteStore from '@/stores/useWriteStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import useSaveStore from '@/stores/common/useSaveStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
 import COMPONENT_NAME from '@/constants/common/pages';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import { ErrorProps } from '@/types/common/response';
 import Alert from '@/components/common/Alert';
 
@@ -33,7 +33,7 @@ function LunchCalenderEatOut() {
     resetSelectedMenu,
     ratingState,
     imageFiles,
-  } = useWriteStore();
+  } = useLunchWriteStore();
   const { isSave } = useSaveStore();
   const { subTitle, category, subCategory, button } = CALENDAR_CONTENT;
   const { calendar } = COMPONENT_NAME.lunch;

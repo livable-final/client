@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import mq from '@/utils/mediaquery';
 import { css } from '@emotion/react';
-import useRouletteStore from '@/stores/useRouletteStore';
+import useLunchRouletteStore from '@/stores/lunch/useLunchRouletteStore';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
 import { RouletteButtonProps } from '@/types/lunch/roulette';
 import { push, pushPressed, again, againPressed } from '@/assets/images';
@@ -9,7 +9,7 @@ import { push, pushPressed, again, againPressed } from '@/assets/images';
 // 룰렛 PUSH & AGAIN 버튼 렌딩 컴포넌트
 function LunchRoulettePushBtn({ onClick }: RouletteButtonProps) {
   const { alt } = LUNCH_ROULETTE_CONSTANTS;
-  const { isPressed, isAgain } = useRouletteStore();
+  const { isPressed, isAgain } = useLunchRouletteStore();
 
   const renderBtn = () => {
     if (isAgain) {

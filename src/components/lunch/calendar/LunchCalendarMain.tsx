@@ -10,15 +10,15 @@ import LunchCalendarWriteBtn from '@/components/lunch/calendar/LunchCalendarWrit
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchCalendarForm from '@/components/lunch/calendar/LunchCalendarForm';
 import LunchCalendarDetailsSlide from '@/components/lunch/calendar/LunchCalendarDetailsSlide';
-import useWriteStore from '@/stores/useWriteStore';
-import useAlertStore from '@/stores/useAlertStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import { ErrorProps } from '@/types/common/response';
 import checkTodayReview from '@/utils/checkTodayReview';
-import useUserStore from '@/stores/useUserStore';
+import useUserStore from '@/stores/common/useUserStore';
 
 function LunchCalendarMain() {
   const [isCompleted, setIsCompleted] = useState(false);
-  const isChecked = useWriteStore((state) => state.isChecked);
+  const isChecked = useLunchWriteStore((state) => state.isChecked);
   const { alertState, openAlert } = useAlertStore();
   const memberName = useUserStore((state) => state.memberName);
 

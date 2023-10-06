@@ -7,9 +7,9 @@ import { Clock, XIcon } from '@/assets/icons';
 import { CALENDAR_CASE } from '@/constants/lunch';
 import { COMMON_ICON_NAMES } from '@/constants/common';
 import { LunchCalendarListItemProps } from '@/types/lunch/calendar';
-import useWriteStore from '@/stores/useWriteStore';
-import useSaveStore from '@/stores/useSaveStore';
-import useUserStore from '@/stores/useUserStore';
+import useLunchWriteStore from '@/stores/lunch/useLunchWriteStore';
+import useSaveStore from '@/stores/common/useSaveStore';
+import useUserStore from '@/stores/common/useUserStore';
 
 function LunchCalendarListItem({
   id,
@@ -22,9 +22,9 @@ function LunchCalendarListItem({
   onClick,
 }: LunchCalendarListItemProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const selectedMenu = useWriteStore((state) => state.selectedMenu);
-  const setSelectedMenu = useWriteStore((state) => state.setSelectedMenu);
-  const setRemoveMenu = useWriteStore((state) => state.setRemoveMenu);
+  const selectedMenu = useLunchWriteStore((state) => state.selectedMenu);
+  const setSelectedMenu = useLunchWriteStore((state) => state.setSelectedMenu);
+  const setRemoveMenu = useLunchWriteStore((state) => state.setRemoveMenu);
   const deleteKeywordList = useSaveStore((state) => state.deleteKeywordList);
   const buildingName = useUserStore((state) => state.buildingName);
   const { listItem } = CALENDAR_CASE;

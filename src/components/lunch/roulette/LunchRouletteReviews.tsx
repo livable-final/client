@@ -2,13 +2,13 @@ import { css } from '@emotion/react';
 import { LUNCH_ROULETTE_CONSTANTS } from '@/constants/lunch';
 import LunchRest from '@/components/lunch/LunchRest';
 import theme from '@/styles/theme';
-import useRouletteStore from '@/stores/useRouletteStore';
-import usePagesStore from '@/stores/usePagesStore';
+import useLunchRouletteStore from '@/stores/lunch/useLunchRouletteStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import { useRouter } from 'next/router';
-import useReviewStore from '@/stores/useReviewStore';
+import useLunchReviewStore from '@/stores/lunch/useLunchReviewStore';
 import { GetRestListData } from '@/types/lunch/api';
 import COMPONENT_NAME from '@/constants/common/pages';
-import useUserStore from '@/stores/useUserStore';
+import useUserStore from '@/stores/common/useUserStore';
 import DUMMY_DATA from '@/constants/lunch/dummy';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchReviewRestList from '@/components/lunch/review/LunchReviewRestList';
@@ -19,8 +19,8 @@ function LunchRouletteReviews() {
   const { detail } = COMPONENT_NAME.lunch.detail;
   const { memberName } = useUserStore();
   const { setNextComponent } = usePagesStore();
-  const { setReviewList, reviewList } = useReviewStore();
-  const { isAgain, menuState, isDecided, isOperated } = useRouletteStore();
+  const { setReviewList, reviewList } = useLunchReviewStore();
+  const { isAgain, menuState, isDecided, isOperated } = useLunchRouletteStore();
 
   const onClickHandler = (item: GetRestListData) => {
     router.push('/lunch');

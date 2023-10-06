@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import LunchReview from '@/components/lunch/review/LunchReview';
-import useReviewStore from '@/stores/useReviewStore';
+import useLunchReviewStore from '@/stores/lunch/useLunchReviewStore';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
 import theme from '@/styles/theme';
@@ -9,9 +9,9 @@ import { getRestReviewList } from '@/pages/api/lunch/lunchRequests';
 
 // 리뷰 상세 내부 컨텐츠 컴포넌트
 function LunchDetailContents() {
-  const { reviewList } = useReviewStore();
+  const { reviewList } = useLunchReviewStore();
   const { title } = LUNCH_MAIN_CONSTANTS.main.detail; // '의 더 많은 리뷰'
-  const { restaurantId } = useReviewStore().reviewList;
+  const { restaurantId } = useLunchReviewStore().reviewList;
   const { response } = useFetch({
     fetchFn: () => getRestReviewList(restaurantId),
   });
