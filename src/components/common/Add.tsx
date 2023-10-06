@@ -1,6 +1,6 @@
 import theme from '@/styles/theme';
 import Icons from '@/components/common/Icons';
-import PlusBig from '@/assets/icons/Plus=big.svg';
+import { PlusBig } from '@/assets/icons';
 import { css } from '@emotion/react';
 import { AddBtnProps } from '@/types/common/add';
 import { COMMON_ICON_NAMES } from '@/constants/common';

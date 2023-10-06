@@ -4,6 +4,7 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { COMMON_ICON_NAMES } from '@/constants/common';
 import { InvitationPreviewProps } from '@/types/invitation/create';
+import { invitationPreview } from '@/assets/images';
 
 function InvitationPreview({ onClick }: InvitationPreviewProps) {
   const { common } = COMMON_ICON_NAMES;
@@ -21,7 +22,7 @@ function InvitationPreview({ onClick }: InvitationPreviewProps) {
           <Icons icon={common.exitMedium} color={theme.palette.white} />
         </div>
         <Image
-          src="/invitation/invitationPreview.png"
+          src={invitationPreview}
           width={400}
           height={720}
           alt="오피스너 초대장 예시"

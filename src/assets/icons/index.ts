@@ -1,61 +1,6 @@
-import As from '@/assets/icons/As.svg';
-import Back from '@/assets/icons/Back.svg';
-import Calendar from '@/assets/icons/Calendar.svg';
-import CalendarFill from '@/assets/icons/Calender-Fill.svg';
-import Check from '@/assets/icons/Check.svg';
-import CheckOn from '@/assets/icons/check=on.svg';
-import Clock from '@/assets/icons/Clock.svg';
-import Down from '@/assets/icons/Down.svg';
-import Etc from '@/assets/icons/Etc.svg';
-import FixedtermWork from '@/assets/icons/FixedtermWork.svg';
-import Interview from '@/assets/icons/Interview.svg';
-import Location from '@/assets/icons/Location.svg';
-import LocationFill from '@/assets/icons/Location-fill.svg';
-import Meeting from '@/assets/icons/meeting.svg';
-import Right from '@/assets/icons/Right.svg';
-import Seminar from '@/assets/icons/seminar.svg';
-import Up from '@/assets/icons/Up.svg';
-import Info from '@/assets/icons/Info.svg';
-import PlusBig from '@/assets/icons/Plus=big.svg';
-import PlusSmall from '@/assets/icons/Plus=small.svg';
-import ExitSmall from '@/assets/icons/Exit=small.svg';
-import ExitMedium from '@/assets/icons/Exit=medium.svg';
-import RightSmall from '@/assets/icons/Right=small.svg';
-import Direction from '@/assets/icons/Direction.svg';
-import UnCheck from '@/assets/icons/UnCheck.svg';
-import SearchIcon from '@/assets/icons/Search.svg';
-import XIcon from '@/assets/icons/XS_1.5.svg';
-import Gift from '@/assets/icons/Gift.svg';
-import Plate from '@/assets/icons/Plate.svg';
-import Bento from '@/assets/icons/Bento.svg';
-import Smile from '@/assets/icons/Smile.svg';
-import Confused from '@/assets/icons/Confused.svg';
-import Chef from '@/assets/icons/Chef.svg';
-import Rice from '@/assets/icons/Rice.svg';
-import ThumbsUp from '@/assets/icons/ThumbsUp.svg';
-import Camera from '@/assets/icons/Camera.svg';
-import XSBlack from '@/assets/icons/XS_black.svg';
-import Profile from '@/assets/icons/profile.svg';
-import Copy from '@/assets/icons/Copy_light.svg';
-import CopyBlue from '@/assets/icons/Copy.svg';
-import Subway from '@/assets/icons/Subway.svg';
-import Bus from '@/assets/icons/Bus.svg';
-import Home from '@/assets/icons/Home.svg';
-import Send from '@/assets/icons/Send.svg';
-import LeftSmall from '@/assets/icons/LeftSmall.svg';
-import DateDish from '@/assets/icons/DateDish.svg';
-import DateDishNoPhoto from '@/assets/icons/DateDishNoPhoto.svg';
-import Setting from '@/assets/icons/Setting.svg';
-import Coin from '@/assets/icons/Coin.svg';
-import TearOffCalendar from '@/assets/icons/TearOffCalendar.svg';
-import Barcode from '@/assets/icons/Barcode.svg';
-import Bell from '@/assets/icons/Bell.svg';
-import Line from '@/assets/icons/Line.svg';
-import Roulette from '@/assets/icons/Roulette.svg';
-import Rights from '@/assets/icons/Rights.svg';
-import Sunny from '@/assets/icons/Sunny.svg';
-import Location20 from '@/assets/icons/Location20.svg';
-import Delicious from '@/assets/icons/Delicious.svg';
+/* eslint-disable sort-imports */
+
+// ** Weather **
 import ClearDay from '@/assets/icons/weather/ClearDay.svg';
 import ClearNight from '@/assets/icons/weather/ClearNight.svg';
 import FewClouds from '@/assets/icons/weather/FewClouds.svg';
@@ -66,117 +11,119 @@ import Rain from '@/assets/icons/weather/Rain.svg';
 import ThunderStorm from '@/assets/icons/weather/ThunderStorm.svg';
 import Snow from '@/assets/icons/weather/Snow.svg';
 import Mist from '@/assets/icons/weather/Mist.svg';
-import LunchCalendar from '@/assets/icons/LunchCalendar.svg';
-import Lunch from '@/assets/icons/Lunch.svg';
-import Rank1 from '@/assets/icons/Rank1.svg';
-import Rank2 from '@/assets/icons/Rank2.svg';
-import Rank3 from '@/assets/icons/Rank3.svg';
-import Reviewer from '@/assets/icons/Reviewer.svg';
-import Close from '@/assets/icons/Close.svg';
-import Top from '@/assets/icons/Top.svg';
-import CameraFlash from '@/assets/icons/CameraFlash.svg';
-import Servey from '@/assets/icons/Servey.svg';
-import ServiceCafeteria from '@/assets/icons/ServiceCafeteria.svg';
-import ServiceCalendar from '@/assets/icons/ServiceCalendar.svg';
-import ServiceInvitation from '@/assets/icons/ServiceInvitation.svg';
-import ServiceParking from '@/assets/icons/ServiceParking.svg';
-import ServiceReception from '@/assets/icons/ServiceReception.svg';
-import ServiceTemp from '@/assets/icons/ServiceTemp.svg';
-import ProfileWithBg from '@/assets/icons/ProfileWithBg.svg';
-import Error from '@/assets/icons/Error.svg';
-import My from '@/assets/icons/My.svg';
-import Write from '@/assets/icons/Write.svg';
-import Popup from '@/assets/icons/Popup.svg';
-import PopupActive from '@/assets/icons/PopupActive.svg';
-import Present from '@/assets/icons/present.svg';
-import Point10 from '@/assets/icons/point10.svg';
-import Point500 from '@/assets/icons/point500.svg';
-import Point10Pink from '@/assets/icons/point10pink.svg';
-import Point1000 from '@/assets/icons/point1000.svg';
-import Point1500 from '@/assets/icons/point1500.svg';
-import Present500 from '@/assets/icons/present500.svg';
-import Present1000 from '@/assets/icons/present1000.svg';
-import Present1500 from '@/assets/icons/present.1500.svg';
-import InfoBuilding from '@/assets/icons/InfoBuliding.svg';
-import InfoPlace from '@/assets/icons/InfoPlace.svg';
-import InfoHost from '@/assets/icons/InfoHost.svg';
-import InfoParking from '@/assets/icons/InfoParking.svg';
-import FoodNoPhoto from '@/assets/icons/foodNoPhoto.svg';
-import FoodCafe from '@/assets/icons/foodCafe.svg';
-import FoodLunchBox from '@/assets/icons/foodLunchBox.svg';
-import HomeActive from '@/assets/icons/HomeActive.svg';
-import LunchActive from '@/assets/icons/LunchActive.svg';
-import MyActive from '@/assets/icons/MyActive.svg';
-import PlateSmall from '@/assets/icons/plateSmall.svg';
-import BoxGrey from '@/assets/icons/BoxGrey.svg';
-import BoxWhite from '@/assets/icons/BoxWhite.svg';
-import LocationLine from '@/assets/icons/LocationLine.svg';
-import RightZoom from '@/assets/icons/RightZoom.svg';
-import Destination from '@/assets/icons/Destination.svg';
-import Call from '@/assets/icons/Call.svg';
 
-// 빌드 에러 지점
-import ErrorIcon from '@/assets/icons/ErrorIcon.svg';
+// ** Common
+import Back from '@/assets/icons/common/Back.svg';
+import Check from '@/assets/icons/common/Check.svg';
+import CheckOn from '@/assets/icons/common/Check=on.svg';
+import Close from '@/assets/icons/common/Close.svg';
+import Error from '@/assets/icons/common/Error.svg';
+import PlusBig from '@/assets/icons/common/Plus=big.svg';
+import PlusSmall from '@/assets/icons/common/Plus=small.svg';
+import ExitSmall from '@/assets/icons/common/Exit=small.svg';
+import ExitMedium from '@/assets/icons/common/Exit=medium.svg';
+import LeftSmall from '@/assets/icons/common/LeftSmall.svg';
+import Profile from '@/assets/icons/common/Profile.svg';
+import ProfileWithBg from '@/assets/icons/common/ProfileWithBg.svg';
+import Right from '@/assets/icons/common/Right.svg';
+import Rights from '@/assets/icons/common/Rights.svg';
+import RightSmall from '@/assets/icons/common/Right=small.svg';
+import UnCheck from '@/assets/icons/common/UnCheck.svg';
+import Up from '@/assets/icons/common/Up.svg';
+import XIcon from '@/assets/icons/common/XS_1.5.svg';
+import XSBlack from '@/assets/icons/common/XS_black.svg';
+
+// ** Home
+import Barcode from '@/assets/icons/home/Barcode.svg';
+import Bell from '@/assets/icons/home/Bell.svg';
+import Destination from '@/assets/icons/home/Destination.svg';
+import Down from '@/assets/icons/home/Down.svg';
+import Home from '@/assets/icons/home/Home.svg';
+import HomeActive from '@/assets/icons/home/HomeActive.svg';
+import Line from '@/assets/icons/home/Line.svg';
+import Lunch from '@/assets/icons/home/Lunch.svg';
+import LunchActive from '@/assets/icons/home/LunchActive.svg';
+import LunchCalendar from '@/assets/icons/home/LunchCalendar.svg';
+import My from '@/assets/icons/home/My.svg';
+import MyActive from '@/assets/icons/home/MyActive.svg';
+import Roulette from '@/assets/icons/home/Roulette.svg';
+import Servey from '@/assets/icons/home/Servey.svg';
+import ServiceCafeteria from '@/assets/icons/home/ServiceCafeteria.svg';
+import ServiceCalendar from '@/assets/icons/home/ServiceCalendar.svg';
+import ServiceInvitation from '@/assets/icons/home/ServiceInvitation.svg';
+import ServiceParking from '@/assets/icons/home/ServiceParking.svg';
+import ServiceReception from '@/assets/icons/home/ServiceReception.svg';
+import ServiceTemp from '@/assets/icons/home/ServiceTemp.svg';
+import Setting from '@/assets/icons/home/Setting.svg';
+import TearOffCalendar from '@/assets/icons/home/TearOffCalendar.svg';
+import Top from '@/assets/icons/home/Top.svg';
+import Write from '@/assets/icons/home/Write.svg';
+
+// ** Invitation
+import As from '@/assets/icons/invitation/As.svg';
+import BoxGrey from '@/assets/icons/invitation/BoxGrey.svg';
+import BoxWhite from '@/assets/icons/invitation/BoxWhite.svg';
+import Bus from '@/assets/icons/invitation/Bus.svg';
+import Calendar from '@/assets/icons/invitation/Calendar.svg';
+import CalendarFill from '@/assets/icons/invitation/Calender-Fill.svg';
+import Call from '@/assets/icons/invitation/Call.svg';
+import CopyBlue from '@/assets/icons/invitation/Copy.svg';
+import Copy from '@/assets/icons/invitation/Copy_light.svg';
+import Direction from '@/assets/icons/invitation/Direction.svg';
+import ErrorIcon from '@/assets/icons/invitation/ErrorIcon.svg';
+import Etc from '@/assets/icons/invitation/Etc.svg';
+import FixedtermWork from '@/assets/icons/invitation/FixedtermWork.svg';
+import Info from '@/assets/icons/invitation/Info.svg';
+import InfoBuilding from '@/assets/icons/invitation/InfoBuliding.svg';
+import InfoHost from '@/assets/icons/invitation/InfoHost.svg';
+import InfoParking from '@/assets/icons/invitation/InfoParking.svg';
+import InfoPlace from '@/assets/icons/invitation/InfoPlace.svg';
+import Interview from '@/assets/icons/invitation/Interview.svg';
+import LocationFill from '@/assets/icons/invitation/Location-fill.svg';
+import Location from '@/assets/icons/invitation/Location.svg';
+import Location20 from '@/assets/icons/invitation/Location20.svg';
+import LocationLine from '@/assets/icons/invitation/LocationLine.svg';
+import Meeting from '@/assets/icons/invitation/Meeting.svg';
+import RightZoom from '@/assets/icons/invitation/RightZoom.svg';
+import Seminar from '@/assets/icons/invitation/Seminar.svg';
+import Subway from '@/assets/icons/invitation/Subway.svg';
+
+// ** Lunch
+import Bento from '@/assets/icons/lunch/Bento.svg';
+import Camera from '@/assets/icons/lunch/Camera.svg';
+import CameraFlash from '@/assets/icons/lunch/CameraFlash.svg';
+import Chef from '@/assets/icons/lunch/Chef.svg';
+import Clock from '@/assets/icons/lunch/Clock.svg';
+import Coin from '@/assets/icons/lunch/Coin.svg';
+import Confused from '@/assets/icons/lunch/Confused.svg';
+import DateDish from '@/assets/icons/lunch/DateDish.svg';
+import DateDishNoPhoto from '@/assets/icons/lunch/DateDishNoPhoto.svg';
+import Delicious from '@/assets/icons/lunch/Delicious.svg';
+import FoodCafe from '@/assets/icons/lunch/FoodCafe.svg';
+import FoodLunchBox from '@/assets/icons/lunch/FoodLunchBox.svg';
+import FoodNoPhoto from '@/assets/icons/lunch/FoodNoPhoto.svg';
+import Gift from '@/assets/icons/lunch/Gift.svg';
+import Plate from '@/assets/icons/lunch/Plate.svg';
+import PlateSmall from '@/assets/icons/lunch/PlateSmall.svg';
+import Point10 from '@/assets/icons/lunch/Point10.svg';
+import Point500 from '@/assets/icons/lunch/Point500.svg';
+import Point10Pink from '@/assets/icons/lunch/Point10pink.svg';
+import Point1000 from '@/assets/icons/lunch/Point1000.svg';
+import Point1500 from '@/assets/icons/lunch/Point1500.svg';
+import Present500 from '@/assets/icons/lunch/Present500.svg';
+import Present1000 from '@/assets/icons/lunch/Present1000.svg';
+import Present1500 from '@/assets/icons/lunch/Present.1500.svg';
+import Popup from '@/assets/icons/lunch/Popup.svg';
+import PopupActive from '@/assets/icons/lunch/PopupActive.svg';
+import Present from '@/assets/icons/lunch/Present.svg';
+import Reviewer from '@/assets/icons/lunch/Reviewer.svg';
+import Rice from '@/assets/icons/lunch/Rice.svg';
+import SearchIcon from '@/assets/icons/lunch/Search.svg';
+import Send from '@/assets/icons/lunch/Send.svg';
+import Smile from '@/assets/icons/lunch/Smile.svg';
+import ThumbsUp from '@/assets/icons/lunch/ThumbsUp.svg';
 
 export {
-  As,
-  Back,
-  Calendar,
-  CalendarFill,
-  CheckOn,
-  Clock,
-  Down,
-  Etc,
-  FixedtermWork,
-  Interview,
-  Location,
-  LocationFill,
-  Meeting,
-  Right,
-  Seminar,
-  Send,
-  Up,
-  Info,
-  PlusBig,
-  PlusSmall,
-  ExitSmall,
-  ExitMedium,
-  RightSmall,
-  Direction,
-  Check,
-  UnCheck,
-  SearchIcon,
-  XIcon,
-  Gift,
-  Plate,
-  Chef,
-  Bento,
-  Smile,
-  Confused,
-  Rice,
-  ThumbsUp,
-  Camera,
-  XSBlack,
-  Profile,
-  Copy,
-  CopyBlue,
-  Subway,
-  Bus,
-  Home,
-  LeftSmall,
-  DateDish,
-  DateDishNoPhoto,
-  Setting,
-  Coin,
-  TearOffCalendar,
-  Barcode,
-  Bell,
-  Line,
-  Roulette,
-  Rights,
-  Sunny,
-  Location20,
-  Delicious,
   ClearDay,
   ClearNight,
   FewClouds,
@@ -187,15 +134,38 @@ export {
   ThunderStorm,
   Snow,
   Mist,
-  LunchCalendar,
-  Lunch,
-  Rank1,
-  Rank2,
-  Rank3,
-  Reviewer,
+  Back,
+  Check,
+  CheckOn,
   Close,
-  Top,
-  CameraFlash,
+  Error,
+  PlusBig,
+  PlusSmall,
+  ExitSmall,
+  ExitMedium,
+  LeftSmall,
+  Profile,
+  ProfileWithBg,
+  Right,
+  Rights,
+  RightSmall,
+  UnCheck,
+  Up,
+  XIcon,
+  XSBlack,
+  Barcode,
+  Bell,
+  Destination,
+  Down,
+  Home,
+  HomeActive,
+  Line,
+  Lunch,
+  LunchActive,
+  LunchCalendar,
+  My,
+  MyActive,
+  Roulette,
   Servey,
   ServiceCafeteria,
   ServiceCalendar,
@@ -203,13 +173,53 @@ export {
   ServiceParking,
   ServiceReception,
   ServiceTemp,
-  ProfileWithBg,
-  Error,
-  My,
+  Setting,
+  TearOffCalendar,
+  Top,
   Write,
-  Popup,
-  PopupActive,
-  Present,
+  As,
+  BoxGrey,
+  BoxWhite,
+  Bus,
+  Calendar,
+  CalendarFill,
+  Call,
+  CopyBlue,
+  Copy,
+  Direction,
+  ErrorIcon,
+  Etc,
+  FixedtermWork,
+  Info,
+  InfoBuilding,
+  InfoHost,
+  InfoParking,
+  InfoPlace,
+  Interview,
+  LocationFill,
+  Location,
+  Location20,
+  LocationLine,
+  Meeting,
+  RightZoom,
+  Seminar,
+  Subway,
+  Bento,
+  Camera,
+  CameraFlash,
+  Chef,
+  Clock,
+  Coin,
+  Confused,
+  DateDish,
+  DateDishNoPhoto,
+  Delicious,
+  FoodCafe,
+  FoodLunchBox,
+  FoodNoPhoto,
+  Gift,
+  Plate,
+  PlateSmall,
   Point10,
   Point500,
   Point10Pink,
@@ -218,22 +228,13 @@ export {
   Present500,
   Present1000,
   Present1500,
-  InfoBuilding,
-  InfoPlace,
-  InfoHost,
-  InfoParking,
-  FoodNoPhoto,
-  FoodCafe,
-  FoodLunchBox,
-  HomeActive,
-  LunchActive,
-  MyActive,
-  PlateSmall,
-  BoxGrey,
-  BoxWhite,
-  ErrorIcon,
-  LocationLine,
-  RightZoom,
-  Call,
-  Destination,
+  Popup,
+  PopupActive,
+  Present,
+  Reviewer,
+  Rice,
+  SearchIcon,
+  Send,
+  Smile,
+  ThumbsUp,
 };
