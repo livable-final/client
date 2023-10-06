@@ -13,7 +13,7 @@
 
 ## 🗓️ 프로젝트 소개
 
-> **주 제** : 빌딩 내 입주자 활성화를 위한 서비스 기획/개발 <br/> > **목 표** : 유저 그로스 기획/개발을 통해 핵심 지표인 '유저 가입자 수'와 'WAU' 높이기 <br/> > **개발 기간** : 2023. 08. 16 ~ 2023. 10. 06 (2개월) <br/>
+> **주 제** : 빌딩 내 입주자 활성화를 위한 서비스 기획/개발 <br/> > **목 표** : 유저 그로스 기획/개발을 통해 핵심 지표인 '유저 가입자 수'와 'WAU' 높이기 <br/> **개발 기간** : 2023. 08. 16 ~ 2023. 10. 06 (2개월) <br/>
 
 <br>
 
@@ -118,19 +118,19 @@
 
 |                                                       홈 리디자인                                                       |                                                   마이페이지 리디자인                                                   |
 | :---------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/livable-final/client/assets/116873887/560c0002-5666-4c56-aa8a-c3c499a07824" width="250" /> | <img src="https://github.com/livable-final/client/assets/116873887/63b59842-29fb-4ccd-bc16-7e46d467c69e" width="250" /> |
+| <img src="https://github.com/livable-final/client/assets/116873887/560c0002-5666-4c56-aa8a-c3c499a07824" width="300" /> | <img src="https://github.com/livable-final/client/assets/116873887/63b59842-29fb-4ccd-bc16-7e46d467c69e" width="300" /> |
 |                                                   방문자 초대장 생성                                                    |                                                    방문자 초대장 뷰                                                     |
-| <img src="https://github.com/livable-final/client/assets/116873887/337c7119-7342-47e2-8148-3f573b79de2b" width="250" /> | <img src="https://github.com/livable-final/client/assets/116873887/7a295327-80ad-4137-a9ab-c28c8746d99a" width="250" /> |
+| <img src="https://github.com/livable-final/client/assets/116873887/337c7119-7342-47e2-8148-3f573b79de2b" width="300" /> | <img src="https://github.com/livable-final/client/assets/116873887/7a295327-80ad-4137-a9ab-c28c8746d99a" width="300" /> |
 |                                                      초대장 리스트                                                      |                                                        빌딩 정보                                                        |
-| <img src="https://github.com/livable-final/client/assets/116873887/eecf4b91-6c37-4f2e-94e7-42d5503a3a6a" width="250" /> | <img src="https://github.com/livable-final/client/assets/116873887/6cb79048-5b48-44b8-9179-96b95662aeb9" width="250" /> |
+| <img src="https://github.com/livable-final/client/assets/116873887/eecf4b91-6c37-4f2e-94e7-42d5503a3a6a" width="300" /> | <img src="https://github.com/livable-final/client/assets/116873887/6cb79048-5b48-44b8-9179-96b95662aeb9" width="300" /> |
 |                                                     초대 장소 확인                                                      |                                                        주차 등록                                                        |
-| <img src="https://github.com/livable-final/client/assets/116873887/a4538ff5-ed3b-4219-91f1-8c598576aadc" width="250" /> | <img src="https://github.com/livable-final/client/assets/116873887/cdf1ad37-924f-42f1-bc41-25d039ba83e3" width="250" /> |
+| <img src="https://github.com/livable-final/client/assets/116873887/a4538ff5-ed3b-4219-91f1-8c598576aadc" width="300" /> | <img src="https://github.com/livable-final/client/assets/116873887/cdf1ad37-924f-42f1-bc41-25d039ba83e3" width="300" /> |
 |                                                     오늘 점심 룰렛                                                      |                                                     오늘 점심 메인                                                      |
-| <img src="https://github.com/livable-final/client/assets/116873887/4afee3d4-902c-46f7-b027-5661bcef5dd0" width="250" /> | <img src="https://github.com/livable-final/client/assets/116873887/4c756265-c7fb-462b-bc7a-d424a771e852" width="250" /> |
+| <img src="https://github.com/livable-final/client/assets/116873887/4afee3d4-902c-46f7-b027-5661bcef5dd0" width="300" /> | <img src="https://github.com/livable-final/client/assets/116873887/4c756265-c7fb-462b-bc7a-d424a771e852" width="300" /> |
 |                                                   오늘 점심 리뷰 작성                                                   |                                                   오늘 점심 리뷰 작성                                                   |
-| <img src="https://github.com/livable-final/client/assets/116873887/b5529fb2-1fc0-487b-99d3-c2e2c2a218d0" width="250" /> | <img src="https://github.com/livable-final/client/assets/116873887/9ad4c2c7-feb2-420c-b638-759275431f4d" width="250" /> |
+| <img src="https://github.com/livable-final/client/assets/116873887/b5529fb2-1fc0-487b-99d3-c2e2c2a218d0" width="300" /> | <img src="https://github.com/livable-final/client/assets/116873887/9ad4c2c7-feb2-420c-b638-759275431f4d" width="300" /> |
 |                                                     오늘 점심 달력                                                      |                                                  오늘 점심 랭킹별 리뷰                                                  |
-| <img src="https://github.com/livable-final/client/assets/116873887/19a17c11-ca08-4262-9875-b781b4a0e48a" width="250" /> | <img src="https://github.com/livable-final/client/assets/116873887/ebe37978-aa71-44aa-8db2-7023e8998ff2" width="250" /> |
+| <img src="https://github.com/livable-final/client/assets/116873887/19a17c11-ca08-4262-9875-b781b4a0e48a" width="300" /> | <img src="https://github.com/livable-final/client/assets/116873887/ebe37978-aa71-44aa-8db2-7023e8998ff2" width="300" /> |
 
 <br></br>
 
