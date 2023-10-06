@@ -1,5 +1,5 @@
 import Alert from '@/components/common/Alert';
-import useAlertStore from '@/stores/useAlertStore';
+import useAlertStore from '@/stores/common/useAlertStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { RightSmall } from '@/assets/icons';

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import theme from '@/styles/theme';
-import useBottomSheetStore from '@/stores/useBottomSheetStore';
+import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
 
 function BottomSheet() {
   const { bottomSheetState, closeBottomSheet } = useBottomSheetStore();

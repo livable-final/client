@@ -7,9 +7,9 @@ import { getHome } from '@/pages/api/home/homeRequests';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
-import usePagesStore from '@/stores/usePagesStore';
-import useSaveStore from '@/stores/useSaveStore';
-import useUserStore from '@/stores/useUserStore';
+import usePagesStore from '@/stores/common/usePagesStore';
+import useSaveStore from '@/stores/common/useSaveStore';
+import useUserStore from '@/stores/common/useUserStore';
 import Alert from '@/components/common/Alert';
 
 function Home() {

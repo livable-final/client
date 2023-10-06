@@ -1,13 +1,13 @@
 import LunchCard from '@/components/lunch/LunchCard';
 import LunchRankingPodium from '@/components/lunch/ranking/LunchRankingPodium';
 import { css } from '@emotion/react';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import theme from '@/styles/theme';
 import { LUNCH_MAIN_CONSTANTS } from '@/constants/lunch';
 import { Right } from '@/assets/icons';
 import useFetch from '@/hooks/useFetch';
 import { getRanking } from '@/pages/api/lunch/lunchRequests';
-import useUserStore from '@/stores/useUserStore';
+import useUserStore from '@/stores/common/useUserStore';
 import COMPONENT_NAME from '@/constants/common/pages';
 import Loading from '@/components/common/Loading';
 

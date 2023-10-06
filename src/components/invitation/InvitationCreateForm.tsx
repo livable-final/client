@@ -3,7 +3,7 @@ import InvitationVisitorsContainer from '@/components/invitation/create/Invitati
 import InvitationInfoContainer from '@/components/invitation/create/InvitationInfoContainer';
 import InvitationDoneContainer from '@/components/invitation/create/InvitationDoneContainer';
 import COMPONENT_NAME from '@/constants/common/pages';
-import usePagesStore from '@/stores/usePagesStore';
+import usePagesStore from '@/stores/common/usePagesStore';
 import { ComponentName } from '@/types/common/pages';
 
 function InvitationCreateForm() {

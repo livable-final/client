@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ModalProps } from '@/types/common/modal';
 import theme from '@/styles/theme';
-import useModalStore from '@/stores/useModalStore';
+import useModalStore from '@/stores/common/useModalStore';
 import { COMMON_MODAL_BUTTONS } from '@/constants/common';
 
 function Modal({ isAlert, content, onClick }: ModalProps) {
