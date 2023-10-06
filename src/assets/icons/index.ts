@@ -1,5 +1,4 @@
-// ** import/order
-import ThumbsUp from '@/assets/icons/lunch/ThumbsUp.svg';
+/* eslint-disable sort-imports */
 
 // ** Weather **
 import ClearDay from '@/assets/icons/weather/ClearDay.svg';
@@ -122,6 +121,7 @@ import Rice from '@/assets/icons/lunch/Rice.svg';
 import SearchIcon from '@/assets/icons/lunch/Search.svg';
 import Send from '@/assets/icons/lunch/Send.svg';
 import Smile from '@/assets/icons/lunch/Smile.svg';
+import ThumbsUp from '@/assets/icons/lunch/ThumbsUp.svg';
 
 export {
   ClearDay,
