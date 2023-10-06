@@ -48,7 +48,15 @@ const containerStyles = css`
   }
 
   ${mq.lg} {
-    max-width: 140px;
+    max-width: 120px;
+  }
+
+  ${mq.tab} {
+    max-width: 176px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 232px;
   }
 `;
 

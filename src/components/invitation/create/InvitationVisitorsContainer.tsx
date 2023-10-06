@@ -160,7 +160,7 @@ function InvitationVisitorsContainer() {
           isDisabled={visitorsList.length === 0} // 방문자 정보 입력값이 없을 경우 버튼 비활성화
         />
       </div>
-      {alertState.isOpen && <Alert isSans />}
+      {alertState.isOpen && <Alert />}
     </div>
   );
 }

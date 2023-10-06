@@ -13,6 +13,7 @@ export interface FetchFunction<T> {
 
 export interface FetchProps<T> {
   fetchFn: FetchFunction<T>;
+  onClick?: () => void;
 }
 
 export interface ErrorProps extends Error {

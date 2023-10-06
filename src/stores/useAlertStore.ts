@@ -6,15 +6,16 @@ const initialAlertState = {
   isOpen: false,
   title: null,
   content: null,
+  onClick: () => {},
 };
 
 const useAlertStore = create<AlertStoreTypes>()((set) => ({
   alertState: initialAlertState,
-  openAlert: (title, content) => {
-    set({ alertState: { isOpen: true, title, content } });
+  openAlert: (title, content, onClick) => {
+    set({ alertState: { isOpen: true, title, content, onClick } });
   },
-  closeAlert: () => {
-    set({ alertState: initialAlertState });
+  closeAlert: (onClick) => {
+    set({ alertState: { ...initialAlertState, onClick } });
   },
 }));
 

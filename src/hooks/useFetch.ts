@@ -3,21 +3,22 @@ import { ErrorProps, FetchProps } from '@/types/common/response';
 import { useEffect, useState, useCallback } from 'react';
 
 // API fetch custom Hook
-const useFetch = <T>({ fetchFn }: FetchProps<T>) => {
+const useFetch = <T>({ fetchFn, onClick }: FetchProps<T>) => {
   const [response, setResponse] = useState<T>(null as T);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const { alertState, openAlert } = useAlertStore();
 
   const fetchData = useCallback(async () => {
     try {
-      // TODO: 로딩 처리 정의 해야함
       setLoading(true);
+      setIsError(false);
       const data = await fetchFn();
       setResponse(data);
-      // TODO: 에러 처리 정의 해야함
     } catch (err: unknown) {
       const error = err as ErrorProps;
-      openAlert('📢', error.message);
+      setIsError(true);
+      openAlert('📢', error.message, onClick);
     } finally {
       setLoading(false);
     }
@@ -27,7 +28,7 @@ const useFetch = <T>({ fetchFn }: FetchProps<T>) => {
     fetchData();
   }, []);
 
-  return { response, loading, alertState };
+  return { response, loading, alertState, isError };
 };
 
 export default useFetch;
