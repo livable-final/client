@@ -162,7 +162,7 @@ function InvitationInfo({
           </div>
         </div>
       </div>
-      {alertState.isOpen && <Alert isSans />}
+      {alertState.isOpen && <Alert />}
       {bottomSheetState.isOpen && <BottomSheet />}
     </>
   );
