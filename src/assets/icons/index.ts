@@ -1,3 +1,6 @@
+// ** import/order
+import ThumbsUp from '@/assets/icons/lunch/ThumbsUp.svg';
+
 // ** Weather **
 import ClearDay from '@/assets/icons/weather/ClearDay.svg';
 import ClearNight from '@/assets/icons/weather/ClearNight.svg';
@@ -119,7 +122,6 @@ import Rice from '@/assets/icons/lunch/Rice.svg';
 import SearchIcon from '@/assets/icons/lunch/Search.svg';
 import Send from '@/assets/icons/lunch/Send.svg';
 import Smile from '@/assets/icons/lunch/Smile.svg';
-import ThumbsUp from '@/assets/icons/lunch/ThumbsUp.svg';
 
 export {
   ClearDay,
