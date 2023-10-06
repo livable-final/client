@@ -1,8 +1,8 @@
 import theme from '@/styles/theme';
-import { RadioBtnBoxProps } from '@/types/common/radioBtn';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { CheckOn, UnCheck } from '@/assets/icons';
+import { RadioBtnBoxProps } from '@/types/common/radioBtn';
 
 function RadioBtnBox({ list, name, placeholder }: RadioBtnBoxProps) {
   const [selectData, setSelectData] = useState(list[0]);
@@ -28,7 +28,6 @@ function RadioBtnBox({ list, name, placeholder }: RadioBtnBoxProps) {
   return (
     <div css={radioContainerStyles}>
       {list.map((item) => {
-        // console.log(selectData === item);
         return (
           <div key={item} css={itemStyles}>
             <label css={labelStyles}>

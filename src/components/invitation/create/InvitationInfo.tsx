@@ -10,14 +10,17 @@ import useAlertStore from '@/stores/useAlertStore';
 import useFetch from '@/hooks/useFetch';
 import CREATE_TEXTS from '@/constants/invitation/createTexts';
 import theme from '@/styles/theme';
+import { css } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import { LocationLine, Calendar, Clock } from '@/assets/icons';
 import { COMMON_ERROR_MESSAGE } from '@/constants/common';
 import { getInvitationPlaceList } from '@/pages/api/invitation/createRequests';
 import { GetInvitationPlaceData } from '@/types/invitation/api';
-import { InvitationInfoProps } from '@/types/invitation/create';
 import { ErrorMessageProps } from '@/types/common/errorMessage';
-import { css } from '@emotion/react';
+import {
+  InvitationCreateTexts,
+  InvitationInfoProps,
+} from '@/types/invitation/create';
 
 function InvitationInfo({
   tip,
@@ -28,7 +31,8 @@ function InvitationInfo({
   const { createContents } = useInvitationCreateStore();
   const { bottomSheetState, openBottomSheet } = useBottomSheetStore();
   const { alertState, openAlert } = useAlertStore();
-  const { title, placeholder, checkbox } = CREATE_TEXTS;
+
+  const { title, placeholder, checkbox }: InvitationCreateTexts = CREATE_TEXTS;
   const { noPlace }: ErrorMessageProps = COMMON_ERROR_MESSAGE;
 
   const [placeList, setPlaceList] = useState<GetInvitationPlaceData>();
@@ -51,8 +55,15 @@ function InvitationInfo({
 
   // 초대장 스토어 데이터가 변할 때 startDate, endDate 설정
   useEffect(() => {
-    if (createContents.startDate) {
+    if (createContents.startDate.includes('undefined')) {
+      // 시간을 선택하지 않거나 유효한 예약 시간이 아닐 경우
+      openAlert('', '예약 가능한 시간을 다시 확인해 주세요!');
+      setDate('');
+      setTime('');
+    } else if (createContents.startDate) {
       setDate(
+        // startDate와 endDate가 같을 경우: yyyy-mm-dd
+        // 다를 경우: yyyy-mm-dd ~ yyyy-mm-dd 표기
         createContents.startDate.split('T')[0] ===
           createContents.endDate.split('T')[0]
           ? `${createContents.startDate.split('T')[0]}
@@ -68,9 +79,6 @@ function InvitationInfo({
           .split('T')[1]
           ?.slice(0, 5)}`,
       );
-    } else {
-      setDate('');
-      setTime('');
     }
   }, [createContents]);
 

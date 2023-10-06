@@ -50,6 +50,13 @@ export interface CommonCategory {
   title: string;
 }
 
+// ****************** 초대 목적 ****************** //
+// ****************** Purpose ****************** //
+// Invitation Preview
+export interface InvitationPreviewProps {
+  onClick: () => void;
+}
+
 // ****************** 방문자 ********************* //
 // ****************** Visitor ****************** //
 // Invitation Visitors

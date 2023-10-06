@@ -24,8 +24,8 @@ import {
 
 function InvitationVisitorsContainer() {
   const { setNextComponent } = useViewStore();
-  const { createContents, setCreateContents } = useInvitationCreateStore();
   const { alertState, openAlert } = useAlertStore();
+  const { createContents, setCreateContents } = useInvitationCreateStore();
 
   const { invitation }: ComponentName = COMPONENT_NAME;
   const { title, button, placeholder }: InvitationCreateTexts = CREATE_TEXTS;

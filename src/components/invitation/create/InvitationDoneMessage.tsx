@@ -1,9 +1,9 @@
 import useInvitationCreateStore from '@/stores/useInvitationCreateStore';
 import useInvitationEditStore from '@/stores/useInvitationEditStore';
+import usePagesStore from '@/stores/usePagesStore';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { Send } from '@/assets/icons';
-import usePagesStore from '@/stores/usePagesStore';
 
 function InvitationDoneMessage() {
   const { backComponents } = usePagesStore();
@@ -11,11 +11,11 @@ function InvitationDoneMessage() {
   const { editContents } = useInvitationEditStore();
   const resendVisitors = editContents.visitors;
   const createVisitors = createContents.visitors;
-  console.log(resendVisitors);
 
   return (
     <div css={containerStyles}>
       <Send />
+      {/* 초대장 생성 플로우 - 이전 컴포넌트가 InvitationInfoContainer일 때 사용 */}
       {backComponents[backComponents.length - 1] ===
       'InvitationInfoContainer' ? (
         <div css={messageStyles}>
@@ -26,6 +26,7 @@ function InvitationDoneMessage() {
               }명에게\n초대장을 보냈어요`}
         </div>
       ) : (
+        // 초대장 수정 플로우 - 재전송 방문자가 1명 이상 있을 때 사용
         <div css={messageStyles}>
           {resendVisitors && resendVisitors?.length === 1
             ? `${resendVisitors[0]?.name}님께\n초대장을 다시 보냈어요`
