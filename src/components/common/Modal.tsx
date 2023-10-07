@@ -57,7 +57,6 @@ const modalContainerStyles = css`
   height: 176px;
   border-radius: 16px;
   background-color: ${theme.palette.white};
-  /* z-index: 1 */
 `;
 
 const modalTitleStyles = css`
