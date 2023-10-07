@@ -15,8 +15,8 @@ function AddressBook() {
   };
 
   return (
-    <button type="button" css={addressTextStyles} onClick={onClick}>
-      <div>주소록에서 찾기</div>
+    <button type="button" css={addressBtnStyles} onClick={onClick}>
+      <div css={titleStyles}>주소록에서 찾기</div>
       <div css={iconStyles}>
         <RightSmall />
       </div>
@@ -25,23 +25,22 @@ function AddressBook() {
   );
 }
 
-const addressTextStyles = css`
+const addressBtnStyles = css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 110px;
   cursor: pointer;
+`;
 
-  div {
-    font: ${theme.font.body.body3_500};
-    color: ${theme.palette.input.unabled};
-    line-height: 21px;
-  }
+const titleStyles = css`
+  font: ${theme.font.body.body3_500};
+  color: ${theme.palette.input.unabled};
+  line-height: 21px;
 `;
 
 const iconStyles = css`
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   width: 18px;
   height: 18px;
