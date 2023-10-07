@@ -9,18 +9,21 @@ import useLunchReviewStore from '@/stores/lunch/useLunchReviewStore';
 import { GetRestListData } from '@/types/lunch/api';
 import COMPONENT_NAME from '@/constants/common/pages';
 import useUserStore from '@/stores/common/useUserStore';
-import DUMMY_DATA from '@/constants/lunch/dummy';
 import LunchSubTitle from '@/components/lunch/LunchSubTitle';
 import LunchReviewRestList from '@/components/lunch/review/LunchReviewRestList';
+import useFetch from '@/hooks/useFetch';
+import { getNearRest } from '@/pages/api/lunch/lunchRequests';
 
 function LunchRouletteReviews() {
   const router = useRouter();
   const { title } = LUNCH_ROULETTE_CONSTANTS;
   const { detail } = COMPONENT_NAME.lunch.detail;
-  const { memberName } = useUserStore();
+  const { memberName, buildingId } = useUserStore();
   const { setNextComponent } = usePagesStore();
   const { setReviewList, reviewList } = useLunchReviewStore();
   const { isAgain, menuState, isDecided, isOperated } = useLunchRouletteStore();
+
+  const { response } = useFetch({ fetchFn: () => getNearRest(buildingId) });
 
   const onClickHandler = (item: GetRestListData) => {
     router.push('/lunch');
@@ -55,7 +58,7 @@ function LunchRouletteReviews() {
 
     // 최초 동작 완료 전일 경우
     if (isOperated && !isAgain) {
-      return DUMMY_DATA.map((item) => (
+      return response?.data.map((item) => (
         <button
           type="button"
           key={item.restaurantId}
