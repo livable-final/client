@@ -1,6 +1,6 @@
-import { css } from '@emotion/react';
-import theme from '@/styles/theme';
 import useBottomSheetStore from '@/stores/common/useBottomSheetStore';
+import theme from '@/styles/theme';
+import { css } from '@emotion/react';
 
 function BottomSheet() {
   const { bottomSheetState, closeBottomSheet } = useBottomSheetStore();
@@ -52,8 +52,8 @@ const containerStyles = (isOpen: boolean) => css`
   border-radius: 20px 20px 0 0;
   width: 100%;
   max-width: 1024px;
-  max-height: 90vh;
   height: auto;
+  max-height: 90vh;
   background-color: ${theme.palette.white};
   animation: ${isOpen
     ? `bottomSheetUp 800ms ease-out`
