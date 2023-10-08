@@ -3,6 +3,8 @@ import theme from '@/styles/theme';
 import { css } from '@emotion/react';
 import { GetRestListData } from '@/types/lunch/api';
 import { CALENDAR_CONTENT } from '@/constants/lunch';
+import processAddress from '@/utils/processAddress';
+import mq from '@/utils/mediaquery';
 
 // 오늘 점심 식당 목록 컴포넌트
 function LunchRest({ ...item }: GetRestListData) {
@@ -19,7 +21,7 @@ function LunchRest({ ...item }: GetRestListData) {
       <div css={wrapperStyles}>
         <div>
           <p css={nameStyles}>{item.restaurantName}</p>
-          <p css={addressStyles}>{item.address}</p>
+          <p css={addressStyles}>{processAddress(item.address)}</p>
         </div>
         <div css={badgeStyles}>
           {button5[0]}
@@ -77,11 +79,19 @@ const nameStyles = css`
   text-align: left;
   overflow: hidden;
   white-space: nowrap;
-  width: 128px;
+  max-width: 96px;
   text-overflow: ellipsis;
+
+  ${mq.md} {
+    max-width: 128px;
+  }
 
   @media (min-width: 400px) {
     overflow: visible;
+  }
+
+  ${mq.lg} {
+    max-width: none;
   }
 `;
 
@@ -90,13 +100,21 @@ const addressStyles = css`
   color: ${theme.palette.greyscale.grey50};
   line-height: 24px;
   text-align: left;
-  width: 128px;
+  max-width: 96px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 
+  ${mq.md} {
+    max-width: 128px;
+  }
+
   @media (min-width: 400px) {
     overflow: visible;
+  }
+
+  ${mq.lg} {
+    max-width: none;
   }
 `;
 
