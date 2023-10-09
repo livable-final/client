@@ -62,3 +62,13 @@ export const postMenu = async (content: PostMenuContent) => {
   const response = await apiInstance.post(`menus/choices`, content);
   return response.data;
 };
+
+// * GET 빌딩 근처 식당 목록 응답
+export const getNearRest = async (
+  buildingId: number,
+): Promise<Response<GetRestListData[]>> => {
+  const response = await apiInstance.get(
+    `restaurants/near?buildingId=${buildingId}`,
+  );
+  return response.data;
+};

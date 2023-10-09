@@ -47,7 +47,7 @@ const createTimeSlots = (
       }
     }
 
-    // 30분씩 증가
+    // openTime을 30분씩 증가
     openTime.setMinutes(openTime.getMinutes() + timeSelector.interval);
   }
 
