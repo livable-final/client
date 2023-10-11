@@ -1,8 +1,6 @@
 # 🏢 오피스너 (officener)
 
-<div align="center" style="font-size: 24px; font-weight: bold;">
-🥇 패스트캠퍼스 개발 부트캠프 5기 : 우수 프로젝트 선정 🥇
-</div>
+### 🥇 패스트캠퍼스 개발 부트캠프 5기 : 우수 프로젝트 선정
 
 <br />
 
