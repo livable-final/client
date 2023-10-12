@@ -1,5 +1,9 @@
 # 🏢 오피스너 (officener)
 
+### 🥇 패스트캠퍼스 개발 부트캠프 5기 : 우수 프로젝트 선정 🥇
+
+<br />
+
 <img src="https://github.com/livable-final/client/assets/116873887/0f3704a8-5348-4f51-bc2c-15c4c2484fb4" width="" />
 
 <br /><br />
@@ -8,8 +12,8 @@
 
 > **유저 활성화**는 '오피스너'가 최종적으로 나아가야 하는 방향의 핵심 요소입니다.<br />
 > 기존 '오피스너' 서비스는 **관리자 이외 일반 사용자의 신규 가입과 이용 동기가 부족**한 상태였습니다.<br />
-> 저희 팀은 유저가 **매일 사용할 수 있는 콘텐츠와 기능**을 개발하여 **'유저들에게 가치를 제공하고 만족도를 높이는 것**'을 목표로 삼고,<br />
-> 다양한 아이디어를 현실적인 시나리오에 적용시켜, 우리가 **직면할 수 있는 상황들에 대비**하는 능력 향상을 통해 함께 성장하고자 합니다.
+> 저희 팀은 **매일 사용할 수 있는 콘텐츠와 기능**을 개발하여 **'유저들에게 가치를 제공하고 만족도를 높이는 것**'을 목표로 삼고,<br />
+> 다양한 아이디어를 현실적인 시나리오에 적용시켜, 우리가 **직면할 수 있는 상황들에 대비**하는 능력 향상을 통해 함께 성장했습니다.
 
 ### 입주 경험은 높이고, 관리 소요는 낮추고!<br />스마트 오피스 빌딩 통합 플랫폼 <span style="color: #2563EB">[오피스너]</span>
 
@@ -30,11 +34,11 @@
 
 ## 👫 개발팀 소개
 
-|                                                                김준희                                                                 |                                                               김진우                                                               |                                                                    이시우                                                                    |                                                          유희태 (팀장)                                                          |                                                                조은상                                                                 |
+|                                               [김준희](https://github.com/dev-junehee)                                                |                                               [김진우](https://github.com/jinu6262)                                                |                                               [이시우](https://github.com/cuconveniencestore)                                                |                                           [유희태](https://github.com/1017yu) (팀장)                                            |                                               [조은상](https://github.com/ChoEun-Sang)                                                |
 | :-----------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: |
 | <a href="https://github.com/dev-junehee"><img src="https://avatars.githubusercontent.com/u/116873887?v=4" width=200px alt="김준희" /> | <a href="https://github.com/jinu6262"><img src="https://avatars.githubusercontent.com/u/105920346?v=4" width=200px alt="김진우" /> | <a href="https://github.com/cuconveniencestore"><img src="https://avatars.githubusercontent.com/u/125563995?v=4" width=200px alt="이시우" /> | <a href="https://github.com/1017yu"><img src="https://avatars.githubusercontent.com/u/83483378?v=4" width=200px alt="유희태" /> | <a href="https://github.com/ChoEun-Sang"><img src="https://avatars.githubusercontent.com/u/128155681?v=4" width=200px alt="조은상" /> |
 |                                                               Front-end                                                               |                                                             Front-end                                                              |                                                                  Front-end                                                                   |                                                            Front-end                                                            |                                                               Front-end                                                               |
-|                                                              초대장 생성                                                              |                                                       초대장 뷰<br />관리자                                                        |                                                          초대장 뷰<br />초대장 수정                                                          |                                                   홈 리디자인<br />오늘 점심                                                    |                                                               오늘 점심                                                               |
+|                                                              초대장 생성                                                              |                                                       초대장 뷰<br />관리자                                                        |                                                          초대장 뷰<br />초대장 수정                                                          |                                                     리디자인<br />오늘 점심                                                     |                                                               오늘 점심                                                               |
 
 <br /><br />
 
@@ -204,7 +208,7 @@
 
 ```bash
 $ git clone git@github.com:livable-final/client.git
-$ got clone git@github.com:livable-final/admin.git
+$ git clone git@github.com:livable-final/admin.git
 ```
 
 ### go to project
