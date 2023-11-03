@@ -1,6 +1,6 @@
 # 🏢 오피스너 (officener)
 
-### 🥇 패스트캠퍼스 개발 부트캠프 5기 : 우수 프로젝트 선정 🥇
+### 🥇 패스트캠퍼스 개발 부트캠프 5기 : 최우수 프로젝트 선정 🥇
 
 <br />
 
@@ -14,6 +14,7 @@
 > 기존 '오피스너' 서비스는 **관리자 이외 일반 사용자의 신규 가입과 이용 동기가 부족**한 상태였습니다.<br />
 > 저희 팀은 **매일 사용할 수 있는 콘텐츠와 기능**을 개발하여 **'유저들에게 가치를 제공하고 만족도를 높이는 것**'을 목표로 삼고,<br />
 > 다양한 아이디어를 현실적인 시나리오에 적용시켜, 우리가 **직면할 수 있는 상황들에 대비**하는 능력 향상을 통해 함께 성장했습니다.
+
 ### 입주 경험은 높이고, 관리 소요는 낮추고!<br />스마트 오피스 빌딩 통합 플랫폼 <span style="color: #2563EB">[오피스너]</span>
 
 <br />
@@ -25,6 +26,7 @@
 > 프로젝트 기간 : 2023. 08. 16 ~ 2023. 10. 10 (2개월)<br />
 > 개발 진행 기간 : 2023. 09. 04 ~ 2023. 10. 10 (1개월)<br />
 > 개발팀 Repo : [Client](https://github.com/livable-final/client) [Admin](https://github.com/livable-final/admin) [Server](https://github.com/livable-final/server)
+
 - 📱 <a href="https://officener.vercel.app/">클라이언트 DEMO</a>
 - ⚙️ <a href="https://officener-admin.vercel.app/">어드민 DEMO</a>
 
@@ -89,6 +91,9 @@
 
 ### 1. 방문자 초대장
 
+- 방문자 초대하기
+- 초대장 목록 확인
+- 초대장 수정/삭제
 - 실내 지도 확인
 - 방문할 빌딩 근처 시설 안내
 - 방문증 알림톡
@@ -104,6 +109,19 @@
 - 주차 사전 정산 (prototype)
 
 <br />
+
+### 3. 오늘 점심
+
+- 메뉴 랭킹
+- 메뉴 랭킹별 리뷰
+- 점심 메뉴 추천 룰렛
+- 룰렛 결과 메뉴 리뷰 확인
+- 리뷰 작성
+- 나만의 점심 달력 만들기
+
+<br />
+
+### 4. 기타
 
 - 홈 화면 리디자인
 - 마이 페이지 리디자인
@@ -184,6 +202,8 @@
 
 <br></br>
 
+## 💻 프로젝트 테스트
+
 ### clone project
 
 ```bash
@@ -192,16 +212,22 @@ $ git clone git@github.com:livable-final/admin.git
 ```
 
 ### go to project
+
 ```bash
 $ cd client
 $ cd admin
 ```
+
 ### install npm
+
 ```bash
 $ npm install
 ```
+
 ### start project
+
 ```bash
 $ npm run dev
 ```
+
 <br />
